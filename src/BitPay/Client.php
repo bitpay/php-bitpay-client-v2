@@ -5,8 +5,10 @@ namespace Bitpay;
 
 
 use BitPay\Exceptions\BitPayException;
+use Bitpay\Model\Invoice\Invoice;
 use BitPayKeyUtils\KeyHelper\PrivateKey;
 use BitPayKeyUtils\Storage\EncryptedFilesystemStorage;
+use BitPayKeyUtils\Util\Util;
 
 /**
  * Class Client
@@ -16,6 +18,10 @@ class Client
 {
     protected $_configuration;
     protected $_env;
+
+    /**
+     * @var Tokens
+     */
     protected $_tokenCache; // {facade, token}
     protected $_configFilePath;
     protected $_baseUrl;
@@ -85,6 +91,33 @@ class Client
         } catch (\Exception $e) {
             throw new BitPayException("Error - failed to initialize BitPay Client (Config) : ".$e->getMessage());
         }
+    }
+
+    /**
+     * Create a BitPay invoice.
+     *
+     * @param $invoice     Invoice An Invoice object with request parameters defined.
+     * @param $facade      string The facade used to create it.
+     * @param $signRequest bool Signed request.
+     * @return $invoice Invoice A BitPay generated Invoice object.
+     * @throws BitPayException BitPayException class
+     */
+    public function createInvoice(Invoice $invoice, string $facade, bool $signRequest) : Invoice {
+        try {
+            $invoice->setToken($this->_tokenCache->getTokenByFacade($facade));
+            $invoice->setGuid(Util::guid());
+            $json = json_encode($invoice);
+        } catch (\Exception $e) {
+            throw new BitPayException("Error - failed to serialize Invoice object : ".$e->getMessage());
+        }
+
+        try {
+//            $invoice = mapper.readerForUpdating($invoice).readValue($this->responseToJsonString(response));
+        } catch (\Exception $e) {
+            throw new BitPayException("Error - failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+        }
+
+        return $invoice;
     }
 
     /**
@@ -193,6 +226,23 @@ class Client
                 $request->getQuery()->set($parameters);
             }
 
+            if ($signatureRequired) {
+                $fullURL = $request->getUrl();
+                $request->addHeader('x-signature', $this->_ecKey->sign($fullURL));
+                $request->addHeader('x-identity', $this->_identity);
+            }
+
+            return $this->_httpClient->send($request);
+        } catch (\Exception $e) {
+            throw new BitPayException("Error - GET failed : ".$e->getMessage());
+        }
+    }
+
+    public function post($uri, string $json = null, $signatureRequired = true) {
+        try {
+            $fullURL = $this->_baseUrl.$uri;
+            $request = $this->_httpClient->get($fullURL);
+------------
             if ($signatureRequired) {
                 $fullURL = $request->getUrl();
                 $request->addHeader('x-signature', $this->_ecKey->sign($fullURL));
