@@ -3,9 +3,9 @@
 namespace BitPay\Test;
 
 
-use BitPayKeyUtils\KeyHelper\PrivateKey;
-use PHPUnit\Framework\TestCase;
 use Bitpay;
+use Bitpay\Model\Invoice\Invoice;
+use PHPUnit\Framework\TestCase;
 
 class BitPayTest extends TestCase
 {
@@ -17,23 +17,28 @@ class BitPayTest extends TestCase
         $this->clientMock = $this->createMock(Bitpay\Client::class);
         $this->clientMock->withData(
             Bitpay\Env::Test,
-            __DIR__ . "/../../bitpay_private_test.key",
-            new Bitpay\Tokens("2smKkjA1ACPKWUGN7wUEEqdWi3rhXYhDX6AKgG4njKvj"),
+            __DIR__."/../../bitpay_private_test.key",
+            new Bitpay\Tokens("7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ"),
             "YourMasterPassword"
         );
 
         $this->client = Bitpay\Client::create()->withData(
             Bitpay\Env::Test,
-            __DIR__ . "/../../bitpay_private_test.key",
-            new Bitpay\Tokens("2smKkjA1ACPKWUGN7wUEEqdWi3rhXYhDX6AKgG4njKvj"),
+            __DIR__."/../../bitpay_private_test.key",
+            new Bitpay\Tokens("7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ"),
             "YourMasterPassword");
         $this->assertNotNull($this->client);
     }
 
-    public function testGetIdentity()
+    public function testShouldGetInvoiceId()
     {
-        $this->clientMock->method('getIdentity')->willReturn(null);
-        $identity = $this->clientMock->getIdentity();
-        $this->assertNotNull($identity);
+        $invoice = new Invoice("37.16", "eur");
+        try {
+            $basicInvoice = $this->client->createInvoice($invoice);
+        } catch (BitPayException $e) {
+            $e->getTraceAsString();
+            self::fail($e.getMessage());
+        }
+        $this->assertNotNull($basicInvoice->getId());
     }
 }

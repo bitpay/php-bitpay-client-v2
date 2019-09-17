@@ -8,12 +8,12 @@ class Currency
 {
 
     // Crypto
-    const BCH = "BCH";
-    const BTC = "BTC";
-    const ETH = "ETH";
+    const BCH  = "BCH";
+    const BTC  = "BTC";
+    const ETH  = "ETH";
     const USDC = "USDC";
     const GUSD = "GUSD";
-    const PAX = "PAX";
+    const PAX  = "PAX";
 
     // FIAT
     const AED = "AED";
@@ -185,12 +185,12 @@ class Currency
     const ZMW = "ZMW";
     const ZWL = "ZWL";
 
-    public function isValid($value) {
+    public static function isValid($value)
+    {
         try {
-            if (defined($value)) {
-                return true;
-            }
-            return false;
+            $reflect = new \ReflectionClass(Currency::class);
+
+            return array_key_exists($value, $reflect->getConstants());
         } catch (\Exception $e) {
             return false;
         }
