@@ -16,7 +16,7 @@ class JsonMapper_Exception extends \Exception
     public function __construct($message = "")
     {
 
-        $message = $this->bitPayCode.$this->bitPayMessage.$message;
+        $message = $this->bitPayCode.$this->bitPayMessage."-> ".$message;
 
         parent::__construct($message, 101);
     }

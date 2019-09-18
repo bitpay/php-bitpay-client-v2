@@ -5,6 +5,8 @@ namespace Bitpay;
 
 
 use BitPay\Exceptions\BitPayException;
+use BitPay\Exceptions\InvoiceQueryException;
+use BitPay\Exceptions\InvoiceCreationException;
 use Bitpay\Model\Facade;
 use Bitpay\Model\Invoice\Invoice;
 use Bitpay\Util\JsonMapper\JsonMapper;
@@ -73,8 +75,124 @@ class Client
 
             return $this;
         } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to initialize BitPay Client (Config) : ".$e->getMessage());
+            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
         }
+    }
+
+    /**
+     * Create a BitPay invoice.
+     *
+     * @param $invoice     Invoice An Invoice object with request parameters defined.
+     * @param $facade      string The facade used to create it.
+     * @param $signRequest bool Signed request.
+     * @return $invoice Invoice A BitPay generated Invoice object.
+     * @throws BitPayException BitPayException class
+     */
+    public function createInvoice(
+        Invoice $invoice,
+        string $facade = Facade::Merchant,
+        bool $signRequest = true
+    ): Invoice {
+        try {
+            $invoice->setToken($this->_tokenCache->getTokenByFacade($facade));
+            $invoice->setGuid(Util::guid());
+
+            $response = $this->post("invoices", $invoice->toArray(), $signRequest);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new InvoiceCreationException("failed to serialize Invoice object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $invoice = $mapper->map(
+                json_decode($jsonString),
+                new Invoice()
+            );
+
+        } catch (\Exception $e) {
+            throw new InvoiceCreationException("failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+        }
+
+        return $invoice;
+    }
+
+    /**
+     * Retrieve a BitPay invoice by invoice id using the specified facade.  The client must have been previously authorized for the specified facade (the public facade requires no authorization).
+     *
+     * @param $invoiceId   string The id of the invoice to retrieve.
+     * @param $facade      string The facade used to create it.
+     * @param $signRequest bool Signed request.
+     * @return Invoice A BitPay Invoice object.
+     * @throws BitPayException BitPayException class
+     */
+    public function getInvoice(
+        string $invoiceId,
+        string $facade = Facade::Merchant,
+        bool $signRequest = true
+    ): Invoice
+    {
+        $invoice = new Invoice();
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
+            $response = $this->get("invoices/".$invoiceId, $params, $signRequest);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $invoice = $mapper->map(
+                json_decode($jsonString),
+                new Invoice()
+            );
+
+        } catch (\Exception $e) {
+            throw new InvoiceQueryException("failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+        }
+
+        return $invoice;
+    }
+
+    /**
+     * Retrieve a collection of BitPay invoices.
+     *
+     * @param $dateStart string The first date for the query filter.
+     * @param $dateEnd   string The last date for the query filter.
+     * @return array A list of BitPay Invoice objects.
+     * @throws BitPayException BitPayException class
+     */
+    public function getInvoices(string $dateStart, string $dateEnd): array {
+        $invoices = array();
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["dateStart"] = $dateStart;
+            $params["dateEnd"] = $dateEnd;
+            $response = $this->get("invoices", $params);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $invoices = $mapper->mapArray(
+                json_decode($jsonString),
+                array(),
+                'Bitpay\Model\Invoice\Invoice'
+            );
+
+        } catch (\Exception $e) {
+            throw new InvoiceQueryException("failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+        }
+
+        return $invoices;
     }
 
     /**
@@ -102,7 +220,7 @@ class Client
 
             $this->_configuration->setEnvConfig($envConfig);
         } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to build configuration : ".$e->getMessage());
+            throw new BitPayException("failed to build configuration : ".$e->getMessage());
         }
     }
 
@@ -121,7 +239,7 @@ class Client
             $storageEngine = new EncryptedFilesystemStorage($privateKeySecret);
             $this->_ecKey = $storageEngine->load($privateKeyPath);
         } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to build configuration : ".$e->getMessage());
+            throw new BitPayException("failed to build configuration : ".$e->getMessage());
         }
     }
 
@@ -146,7 +264,7 @@ class Client
             ]);
             $this->LoadAccessTokens();
         } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to build configuration : ".$e->getMessage());
+            throw new BitPayException("failed to build configuration : ".$e->getMessage());
         }
     }
 
@@ -160,7 +278,7 @@ class Client
             // Identity in this implementation is defined to be the SIN.
             $this->_identity = $this->_ecKey->getPublicKey()->__toString();
         } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to get SIN from private key : ".$e->getMessage());
+            throw new BitPayException("failed to get SIN from private key : ".$e->getMessage());
         }
     }
 
@@ -176,7 +294,7 @@ class Client
 
             $this->_tokenCache = $this->_configuration->getEnvConfig()[$this->_env]["ApiTokens"];
         } catch (\Exception $e) {
-            throw new BitPayException("Error - When trying to load the tokens : ".$e->getMessage());
+            throw new BitPayException("When trying to load the tokens : ".$e->getMessage());
         }
     }
 
@@ -202,7 +320,7 @@ class Client
 
             return $this;
         } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to initialize BitPay Client (Config) : ".$e->getMessage());
+            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
         }
     }
 
@@ -223,47 +341,8 @@ class Client
             $this->_env = $this->_configuration->getEnvironment();
             $this->_configuration->setEnvConfig($jsonData["BitPayConfiguration"]["EnvConfig"][$this->_env]);
         } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to initialize BitPay Client (Config) : ".$e->getMessage());
+            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
         }
-    }
-
-    /**
-     * Create a BitPay invoice.
-     *
-     * @param $invoice     Invoice An Invoice object with request parameters defined.
-     * @param $facade      string The facade used to create it.
-     * @param $signRequest bool Signed request.
-     * @return $invoice Invoice A BitPay generated Invoice object.
-     * @throws BitPayException BitPayException class
-     */
-    public function createInvoice(
-        Invoice $invoice,
-        string $facade = Facade::Merchant,
-        bool $signRequest = true
-    ): Invoice {
-        try {
-            $invoice->setToken($this->_tokenCache->getTokenByFacade($facade));
-            $invoice->setGuid(Util::guid());
-
-            $response = $this->post("invoices", $invoice->toArray(), $signRequest);
-
-            $jsonString = $this->responseToJsonString($response);
-        } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to serialize Invoice object : ".$e->getMessage());
-        }
-
-        try {
-            $mapper = new JsonMapper();
-            $invoice = $mapper->map(
-                json_decode($jsonString),
-                new Invoice()
-            );
-
-        } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
-        }
-
-        return $invoice;
     }
 
     public function post($uri, array $json = [], $signatureRequired = true)
@@ -286,7 +365,35 @@ class Client
 
             return $response;
         } catch (\Exception $e) {
-            throw new BitPayException("Error - GET failed : ".$e->getMessage());
+            throw new BitPayException("GET failed : ".$e->getMessage());
+        }
+    }
+
+    public function get($uri, array $parameters = null, $signatureRequired = true)
+    {
+        try {
+            $fullURL = $this->_baseUrl.$uri;
+            $headers = [
+                'Content-Type' => 'application/json',
+            ];
+
+            if ($parameters) {
+                $fullURL .= '?'.http_build_query($parameters);
+            }
+
+            if ($signatureRequired) {
+                $headers['x-signature'] = $this->_ecKey->sign($fullURL);
+                $headers['x-identity'] = $this->_identity;
+            }
+
+            $response = $this->_httpClient->request('GET', $fullURL, [
+                'headers'   => $headers,
+                'query'     => $parameters,
+            ]);
+
+            return $response;
+        } catch (\Exception $e) {
+            throw new BitPayException("GET failed : ".$e->getMessage());
         }
     }
 
@@ -304,63 +411,14 @@ class Client
             $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
             $error_message = (is_array($error_message)) ? implode("\n", $error_message) : $error_message;
             if (false !== $error_message) {
-                throw new \Bitpay\Client\BitpayException($error_message);
+                throw new BitpayException($error_message);
             }
             $jsonString = json_encode($body['data']);
 
             return $jsonString;
 
         } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to retrieve HTTP response body : ".$e->getMessage());
-        }
-    }
-
-    /**
-     * Retrieve a BitPay invoice by invoice id using the specified facade.  The client must have been previously authorized for the specified facade (the public facade requires no authorization).
-     *
-     * @param $invoiceId   The id of the invoice to retrieve.
-     * @param $facade      The facade used to create it.
-     * @param $signRequest Signed request.
-     * @return A BitPay Invoice object.
-     * @throws BitPayException BitPayException class
-     */
-    public function getInvoice($invoiceId, $facade, $signRequest)
-    {
-
-        $invoiceId = 'asdas';
-        try {
-            $params = [];
-            $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
-            $response = $this->get("invoices/" + $invoiceId, $params);
-
-            $invoice = $this->responseToJsonString($response);
-
-            return $invoice;
-        } catch (\Exception $e) {
-            throw new BitPayException("Error - failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
-        }
-
-        return invoice;
-    }
-
-    public function get($uri, array $parameters = null, $signatureRequired = true)
-    {
-        try {
-            $fullURL = $this->_baseUrl.$uri;
-            $request = $this->_httpClient->createRequest('GET', $fullURL);
-            if ($parameters) {
-                $request->getQuery()->set($parameters);
-            }
-
-            if ($signatureRequired) {
-                $fullURL = $request->getUrl();
-                $request->addHeader('x-signature', $this->_ecKey->sign($fullURL));
-                $request->addHeader('x-identity', $this->_identity->__toString());
-            }
-
-            return $this->_httpClient->send($request);
-        } catch (\Exception $e) {
-            throw new BitPayException("Error - GET failed : ".$e->getMessage());
+            throw new BitPayException("failed to retrieve HTTP response body : ".$e->getMessage());
         }
     }
 }

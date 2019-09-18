@@ -80,69 +80,6 @@ class Invoice
     // API fields
     //
 
-    public function getPaymentDisplayTotals()
-    {
-        return $this->_paymentDisplayTotals;
-    }
-
-    public function setPaymentDisplayTotals($paymentDisplayTotals)
-    {
-        $this->_paymentDisplayTotals = $paymentDisplayTotals;
-    }
-
-    public function toArray()
-    {
-        $elements = [
-            'currency'                       => $this->getCurrency(),
-            'guid'                           => $this->getGuid(),
-            'token'                          => $this->getToken(),
-            'price'                          => $this->getPrice(),
-            'posData'                        => $this->getPosData(),
-            'notificationURL'                => $this->getNotificationURL(),
-            'transactionSpeed'               => $this->getTransactionSpeed(),
-            'fullNotifications'              => $this->getFullNotifications(),
-            'notificationEmail'              => $this->getNotificationEmail(),
-            'redirectURL'                    => $this->getRedirectURL(),
-            'orderId'                        => $this->getOrderId(),
-            'itemDesc'                       => $this->getItemDesc(),
-            'itemCode'                       => $this->getItemCode(),
-            'physical'                       => $this->getPhysical(),
-            'paymentCurrencies'              => $this->getPaymentCurrencies(),
-            'acceptanceWindow'               => $this->getAcceptanceWindow(),
-            'buyer'                          => $this->getBuyer()->toArray(),
-            'id'                             => $this->getId(),
-            'url'                            => $this->getUrl(),
-            'status'                         => $this->getStatus(),
-            'lowFeeDetected'                 => $this->getLowFeeDetected(),
-            'invoiceTime'                    => $this->getInvoiceTime(),
-            'expirationTime'                 => $this->getExpirationTime(),
-            'currentTime'                    => $this->getCurrentTime(),
-            'transactions'                   => $this->getTransactions(),
-            'exceptionStatus'                => $this->getExceptionStatus(),
-            'refundAddressRequestPending'    => $this->getRefundAddressRequestPending(),
-            'invoiceBuyerProvidedInfo'       => $this->getInvoiceBuyerProvidedInfo()->toArray(),
-            'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()->toArray(),
-            'minerFees'                      => $this->getMinerFees()->toArray(),
-            'paymentCodes'                   => $this->getPaymentCodes()->toArray(),
-            'extendedNotifications'          => $this->getExtendedNotifications(),
-            'transactionCurrency'            => $this->getTransactionCurrency(),
-            'amountPaid'                     => $this->getAmountPaid(),
-            'exchangeRates'                  => $this->getExchangeRates(),
-            'paymentTotals'                  => $this->getPaymentTotals()->toArray(),
-            'paymentSubtotals'               => $this->getPaymentSubtotals()->toArray(),
-            'paymentDisplayTotals'           => $this->getPaymentDisplaySubTotals()->toArray(),
-            'paymentDisplaySubTotals'        => $this->getPaymentDisplaySubTotals()->toArray(),
-        ];
-
-        foreach ($elements as $key => $value) {
-            if (empty($value)) {
-                unset($elements[$key]);
-            }
-        }
-
-        return $elements;
-    }
-
     public function getCurrency()
     {
         return $this->_currency;
@@ -154,7 +91,7 @@ class Invoice
     public function setCurrency(string $currency)
     {
         if (!Currency::isValid($currency)) {
-            throw new BitPayException("Error: currency code must be a type of Model.Currency");
+            throw new BitPayException("currency code must be a type of Model.Currency");
         }
 
         $this->_currency = $currency;
@@ -537,5 +474,68 @@ class Invoice
     public function setPaymentDisplaySubTotals($paymentDisplaySubTotals)
     {
         $this->_paymentDisplaySubTotals = $paymentDisplaySubTotals;
+    }
+
+    public function getPaymentDisplayTotals()
+    {
+        return $this->_paymentDisplayTotals;
+    }
+
+    public function setPaymentDisplayTotals($paymentDisplayTotals)
+    {
+        $this->_paymentDisplayTotals = $paymentDisplayTotals;
+    }
+
+    public function toArray()
+    {
+        $elements = [
+            'currency'                       => $this->getCurrency(),
+            'guid'                           => $this->getGuid(),
+            'token'                          => $this->getToken(),
+            'price'                          => $this->getPrice(),
+            'posData'                        => $this->getPosData(),
+            'notificationURL'                => $this->getNotificationURL(),
+            'transactionSpeed'               => $this->getTransactionSpeed(),
+            'fullNotifications'              => $this->getFullNotifications(),
+            'notificationEmail'              => $this->getNotificationEmail(),
+            'redirectURL'                    => $this->getRedirectURL(),
+            'orderId'                        => $this->getOrderId(),
+            'itemDesc'                       => $this->getItemDesc(),
+            'itemCode'                       => $this->getItemCode(),
+            'physical'                       => $this->getPhysical(),
+            'paymentCurrencies'              => $this->getPaymentCurrencies(),
+            'acceptanceWindow'               => $this->getAcceptanceWindow(),
+            'buyer'                          => $this->getBuyer()->toArray(),
+            'id'                             => $this->getId(),
+            'url'                            => $this->getUrl(),
+            'status'                         => $this->getStatus(),
+            'lowFeeDetected'                 => $this->getLowFeeDetected(),
+            'invoiceTime'                    => $this->getInvoiceTime(),
+            'expirationTime'                 => $this->getExpirationTime(),
+            'currentTime'                    => $this->getCurrentTime(),
+            'transactions'                   => $this->getTransactions(),
+            'exceptionStatus'                => $this->getExceptionStatus(),
+            'refundAddressRequestPending'    => $this->getRefundAddressRequestPending(),
+            'invoiceBuyerProvidedInfo'       => $this->getInvoiceBuyerProvidedInfo()->toArray(),
+            'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()->toArray(),
+            'minerFees'                      => $this->getMinerFees()->toArray(),
+            'paymentCodes'                   => $this->getPaymentCodes()->toArray(),
+            'extendedNotifications'          => $this->getExtendedNotifications(),
+            'transactionCurrency'            => $this->getTransactionCurrency(),
+            'amountPaid'                     => $this->getAmountPaid(),
+            'exchangeRates'                  => $this->getExchangeRates(),
+            'paymentTotals'                  => $this->getPaymentTotals()->toArray(),
+            'paymentSubtotals'               => $this->getPaymentSubtotals()->toArray(),
+            'paymentDisplayTotals'           => $this->getPaymentDisplaySubTotals()->toArray(),
+            'paymentDisplaySubTotals'        => $this->getPaymentDisplaySubTotals()->toArray(),
+        ];
+
+        foreach ($elements as $key => $value) {
+            if (empty($value)) {
+                unset($elements[$key]);
+            }
+        }
+
+        return $elements;
     }
 }
