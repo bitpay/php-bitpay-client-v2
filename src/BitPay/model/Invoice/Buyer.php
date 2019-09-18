@@ -23,30 +23,6 @@ class Buyer
     {
     }
 
-    public function toArray()
-    {
-        $elements = [
-            'name'       => $this->getName(),
-            'address1'   => $this->getAddress1(),
-            'address2'   => $this->getAddress2(),
-            'locality'   => $this->getLocality(),
-            'region'     => $this->getRegion(),
-            'postalCode' => $this->getPostalCode(),
-            'country'    => $this->getCountry(),
-            'email'      => $this->getEmail(),
-            'phone'      => $this->getPhone(),
-            'notify'     => $this->getNotify(),
-        ];
-
-        foreach ($elements as $key => $value) {
-            if (empty($value)) {
-                unset($elements[$key]);
-            }
-        }
-
-        return $elements;
-    }
-
     public function getName()
     {
         return $this->_name;
@@ -145,5 +121,29 @@ class Buyer
     public function setNotify(bool $notify)
     {
         $this->_notify = $notify;
+    }
+
+    public function toArray()
+    {
+        $elements = [
+            'name'       => $this->getName(),
+            'address1'   => $this->getAddress1(),
+            'address2'   => $this->getAddress2(),
+            'locality'   => $this->getLocality(),
+            'region'     => $this->getRegion(),
+            'postalCode' => $this->getPostalCode(),
+            'country'    => $this->getCountry(),
+            'email'      => $this->getEmail(),
+            'phone'      => $this->getPhone(),
+            'notify'     => $this->getNotify(),
+        ];
+
+        foreach ($elements as $key => $value) {
+            if (empty($value)) {
+                unset($elements[$key]);
+            }
+        }
+
+        return $elements;
     }
 }
