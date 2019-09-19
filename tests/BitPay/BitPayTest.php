@@ -12,6 +12,8 @@ use PHPUnit\Framework\TestCase;
 class BitPayTest extends TestCase
 {
     protected $client;
+    protected $client1;
+    protected $client2;
     protected $clientMock;
 
     protected function setUp(): void
@@ -19,7 +21,7 @@ class BitPayTest extends TestCase
         $this->clientMock = $this->createMock(Bitpay\Client::class);
         $this->clientMock->withData(
             Bitpay\Env::Test,
-            __DIR__."/../../bitpay_private_test.key",
+            __DIR__."/../../examples/bitpay_private_test.key",
             new Bitpay\Tokens(
                 "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
                 "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
@@ -29,13 +31,20 @@ class BitPayTest extends TestCase
 
         $this->client = Bitpay\Client::create()->withData(
             Bitpay\Env::Test,
-            __DIR__."/../../bitpay_private_test.key",
+            __DIR__."/../../examples/bitpay_private_test.key",
             new Bitpay\Tokens(
                 "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
                 "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
             ),
             "YourMasterPassword");
+
+        $this->client1 = Bitpay\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
+        $this->client2 = Bitpay\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
+
+
         $this->assertNotNull($this->client);
+        $this->assertNotNull($this->client1);
+        $this->assertNotNull($this->client2);
     }
 
     public function testShouldGetInvoiceId()
@@ -93,6 +102,42 @@ class BitPayTest extends TestCase
 
         $this->assertNotNull($invoices);
         $this->assertTrue(count($invoices) > 0);
+    }
+
+    public function TestShouldCreateBillUSD() {
+        $items = [];
+        $item = new Bitpay\Model\Bill\Item();
+
+        $item->setPrice(30.0);
+        $item->setQuantity(9);
+        $item->setDescription("product-a");
+        array_push($items, $item);
+
+        $item->setPrice(14.0);
+        $item->setQuantity(16);
+        $item->setDescription("product-b");
+        array_push($items, $item);
+
+        $item->setPrice(3.90);
+        $item->setQuantity(42);
+        $item->setDescription("product-c");
+        array_push($items, $item);
+
+        $item->setPrice(6.99);
+        $item->setQuantity(12);
+        $item->setDescription("product-d");
+        array_push($items, $item);
+
+        $bill = new Bitpay\Model\Bill\Bill("7", Currency::USD, "agallardo@bitpay.com", $items);
+        $basicBill = null;
+        try {
+            $basicBill = $this->client->createBill($bill);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicBill->getId());
     }
 
     public function testShouldSubmitPayoutBatch() {
