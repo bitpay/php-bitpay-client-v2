@@ -156,7 +156,7 @@ class JsonMapper
 
             if (!$hasProperty) {
                 if ($this->bExceptionOnUndefinedProperty) {
-                    throw new JsonMapper_Exception(
+                    throw new JsonMapperException(
                         'JSON property "'.$key.'" does not exist'
                         .' in object of type '.$strClassName
                     );
@@ -179,7 +179,7 @@ class JsonMapper
 
             if ($accessor === null) {
                 if ($this->bExceptionOnUndefinedProperty) {
-                    throw new JsonMapper_Exception(
+                    throw new JsonMapperException(
                         'JSON property "'.$key.'" has no public setter method'
                         .' in object of type '.$strClassName
                     );
@@ -200,7 +200,7 @@ class JsonMapper
                 $type = $this->removeNullable($type);
             } else {
                 if ($jvalue === null) {
-                    throw new JsonMapper_Exception(
+                    throw new JsonMapperException(
                         'JSON property "'.$key.'" in class "'
                         .$strClassName.'" must not be NULL'
                     );
@@ -221,7 +221,7 @@ class JsonMapper
                 } else {
                     if ($this->isSimpleType($type)) {
                         if ($type === 'string' && is_object($jvalue)) {
-                            throw new JsonMapper_Exception(
+                            throw new JsonMapperException(
                                 'JSON property "'.$key.'" in class "'
                                 .$strClassName.'" is an object and'
                                 .' cannot be converted to a string'
@@ -236,7 +236,7 @@ class JsonMapper
 
             //FIXME: check if type exists, give detailed error message if not
             if ($type === '') {
-                throw new JsonMapper_Exception(
+                throw new JsonMapperException(
                     'Empty type at property "'
                     .$strClassName.'::$'.$key.'"'
                 );
@@ -265,7 +265,7 @@ class JsonMapper
 
             if ($array !== null) {
                 if (!is_array($jvalue) && $this->isFlatType(gettype($jvalue))) {
-                    throw new JsonMapper_Exception(
+                    throw new JsonMapperException(
                         'JSON property "'.$key.'" must be an array, '
                         .gettype($jvalue).' given'
                     );
@@ -279,7 +279,7 @@ class JsonMapper
                     //use constructor parameter if we have a class
                     // but only a flat type (i.e. string, int)
                     if ($this->bStrictObjectTypeChecking) {
-                        throw new JsonMapper_Exception(
+                        throw new JsonMapperException(
                             'JSON property "'.$key.'" must be an object, '
                             .gettype($jvalue).' given'
                         );
@@ -741,7 +741,7 @@ class JsonMapper
                         }
                     } else {
                         if ($this->isFlatType($class)) {
-                            throw new JsonMapper_Exception(
+                            throw new JsonMapperException(
                                 'JSON property "'.($parent_key ? $parent_key : '?').'"'
                                 .' is an array of type "'.$class.'"'
                                 .' but contained a value of type'
@@ -774,7 +774,7 @@ class JsonMapper
      * @param object $rc                 Reflection class to check
      *
      * @return void
-     * @throws JsonMapper_Exception
+     * @throws JsonMapperException
      *
      */
     protected function checkMissingData($providedProperties, \ReflectionClass $rc)
@@ -786,7 +786,7 @@ class JsonMapper
             if (isset($annotations['required'])
                 && !isset($providedProperties[$property->name])
             ) {
-                throw new JsonMapper_Exception(
+                throw new JsonMapperException(
                     'Required property "'.$property->name.'" of class '
                     .$rc->getName()
                     .' is missing in JSON data'

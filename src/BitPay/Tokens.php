@@ -34,19 +34,24 @@ class Tokens
 
     /**
      * @param $facade
-     * @return string|null
+     * @return string
      * @throws \Exception
      */
     public function getTokenByFacade($facade)
     {
+        $token = null;
         switch ($facade) {
             case Facade::Merchant:
-                return $this->merchant;
+                $token = $this->merchant;
             case Facade::Payroll:
-                return $this->payroll;
+                $token = $this->payroll;
         }
 
-        throw new \Exception("given facade does not exist");
+        if ($token) {
+            return $token;
+        }
+
+        throw new \Exception("given facade does not exist or no token defined for the given facade");
     }
 
     /**

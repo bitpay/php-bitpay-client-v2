@@ -12,12 +12,13 @@ class InvoiceCreationException extends InvoiceException
      * Construct the InvoiceCreationException.
      *
      * @param string $message [optional] The Exception message to throw.
+     * @param int $code [optional] The Exception code to throw.
      */
-    public function __construct($message = "")
+    public function __construct($message = "", $code = 102)
     {
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
 
-        parent::__construct($message, 101);
+        parent::__construct($message, $code);
     }
 }

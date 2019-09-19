@@ -3,7 +3,7 @@
 namespace Bitpay\Util\JsonMapper;
 
 
-class JsonMapper_Exception extends \Exception
+class JsonMapperException extends \Exception
 {
     private $bitPayMessage = "Unexpected JsonMapper exception. ";
     private $bitPayCode    = "BITPAY-UTIL: ";
