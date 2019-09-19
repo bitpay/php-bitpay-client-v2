@@ -3,18 +3,18 @@
 namespace BitPay\Exceptions;
 
 
-class InvoiceException extends BitPayException
+class PayoutCancellationException extends payoutException
 {
-    private $bitPayMessage = "An unexpected error occured while trying to manage the invoice";
-    private $bitPayCode    = "BITPAY-INVOICE-GENERIC";
+    private $bitPayMessage = "Failed to cancel payout batch";
+    private $bitPayCode    = "BITPAY-PAYOUT-BATCH-CANCEL";
 
     /**
-     * Construct the InvoiceException.
+     * Construct the PayoutCancellationException.
      *
      * @param string $message [optional] The Exception message to throw.
      * @param int $code [optional] The Exception code to throw.
      */
-    public function __construct($message = "", $code = 101)
+    public function __construct($message = "", $code = 124)
     {
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;

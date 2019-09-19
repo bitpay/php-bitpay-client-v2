@@ -12,6 +12,7 @@ class BitPayException extends \Exception
      * Construct the BitPayException.
      *
      * @param string $message [optional] The Exception message to throw.
+     * @param int $code [optional] The Exception code to throw.
      */
     public function __construct($message = "", $code = 100)
     {

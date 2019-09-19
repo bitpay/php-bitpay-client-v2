@@ -5,15 +5,20 @@ namespace Bitpay;
 
 
 use BitPay\Exceptions\BitPayException;
-use BitPay\Exceptions\InvoiceQueryException;
 use BitPay\Exceptions\InvoiceCreationException;
+use BitPay\Exceptions\InvoiceQueryException;
+use BitPay\Exceptions\PayoutCancellationException;
+use BitPay\Exceptions\PayoutCreationException;
+use BitPay\Exceptions\PayoutQueryException;
 use Bitpay\Model\Facade;
 use Bitpay\Model\Invoice\Invoice;
+use Bitpay\Model\Payout\PayoutBatch;
 use Bitpay\Util\JsonMapper\JsonMapper;
 use BitPayKeyUtils\KeyHelper\PrivateKey;
 use BitPayKeyUtils\Storage\EncryptedFilesystemStorage;
 use BitPayKeyUtils\Util\Util;
 use GuzzleHttp;
+use GuzzleHttp\RequestOptions;
 
 /**
  * Class Client
@@ -112,14 +117,16 @@ class Client
             );
 
         } catch (\Exception $e) {
-            throw new InvoiceCreationException("failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+            throw new InvoiceCreationException(
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
         }
 
         return $invoice;
     }
 
     /**
-     * Retrieve a BitPay invoice by invoice id using the specified facade.  The client must have been previously authorized for the specified facade (the public facade requires no authorization).
+     * Retrieve a BitPay invoice by invoice id using the specified facade.  The client must have been previously
+     * authorized for the specified facade (the public facade requires no authorization).
      *
      * @param $invoiceId   string The id of the invoice to retrieve.
      * @param $facade      string The facade used to create it.
@@ -131,8 +138,7 @@ class Client
         string $invoiceId,
         string $facade = Facade::Merchant,
         bool $signRequest = true
-    ): Invoice
-    {
+    ): Invoice {
         $invoice = new Invoice();
         try {
             $params = [];
@@ -152,7 +158,8 @@ class Client
             );
 
         } catch (\Exception $e) {
-            throw new InvoiceQueryException("failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+            throw new InvoiceQueryException(
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
         }
 
         return $invoice;
@@ -166,8 +173,9 @@ class Client
      * @return array A list of BitPay Invoice objects.
      * @throws BitPayException BitPayException class
      */
-    public function getInvoices(string $dateStart, string $dateEnd): array {
-        $invoices = array();
+    public function getInvoices(string $dateStart, string $dateEnd): array
+    {
+        $invoices = [];
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
@@ -184,16 +192,168 @@ class Client
             $mapper = new JsonMapper();
             $invoices = $mapper->mapArray(
                 json_decode($jsonString),
-                array(),
+                [],
                 'Bitpay\Model\Invoice\Invoice'
             );
 
         } catch (\Exception $e) {
-            throw new InvoiceQueryException("failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+            throw new InvoiceQueryException(
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
         }
 
         return $invoices;
     }
+
+    /**
+     * Submit a BitPay Payout batch.
+     *
+     * @param $batch PayoutBatch A PayoutBatch object with request parameters defined.
+     * @return PayoutBatch A PayoutBatch BitPay generated PayoutBatch object.
+     * @throws PayoutCreationException BitPayException class
+     */
+    public function submitPayoutBatch(PayoutBatch $batch): PayoutBatch
+    {
+        try {
+            $batch->setToken($this->_tokenCache->getTokenByFacade(Facade::Payroll));
+            $batch->setGuid(Util::guid());
+
+            $response = $this->post("payouts", $batch->toArray());
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new PayoutCreationException("failed to serialize PayoutBatch object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $batch = $mapper->map(
+                json_decode($jsonString),
+                new PayoutBatch()
+            );
+
+        } catch (\Exception $e) {
+            throw new PayoutCreationException(
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+        }
+
+        return $batch;
+    }
+
+    /**
+     * Retrieve a collection of BitPay payout batches.
+     *
+     * @param $status string The status to filter the Payout Batches.
+     * @return array A list of BitPay PayoutBatch objects.
+     * @throws PayoutQueryException
+     */
+    public function getPayoutBatches(string $status = null): array
+    {
+        $batches = [];
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+            if ($status) {
+                $params["status"] = $status;
+            }
+            $response = $this->get("payouts", $params);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $batches = $mapper->mapArray(
+                json_decode($jsonString),
+                [],
+                'Bitpay\Model\Payout\PayoutBatch'
+            );
+
+        } catch (\Exception $e) {
+            throw new PayoutQueryException(
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+        }
+
+        return $batches;
+    }
+
+    /**
+     * Retrieve a BitPay payout batch by batch id using.  The client must have been previously authorized for the
+     * payroll facade.
+     *
+     * @param $batchId string The id of the batch to retrieve.
+     * @return PayoutBatch A BitPay PayoutBatch object.
+     * @throws PayoutQueryException BitPayException class
+     */
+    public function getPayoutBatch(string $batchId): PayoutBatch
+    {
+        $batch = new PayoutBatch();
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+            $response = $this->get("payouts/".$batchId, $params);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $batch = $mapper->map(
+                json_decode($jsonString),
+                new PayoutBatch()
+            );
+
+        } catch (\Exception $e) {
+            throw new PayoutQueryException(
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+        }
+
+        return $batch;
+    }
+
+    /**
+     * Cancel a BitPay Payout batch.
+     *
+     * @param $batchId string The id of the batch to cancel.
+     * @return PayoutBatch A BitPay generated PayoutBatch object.
+     * @throws PayoutCancellationException BitPayException class
+     */
+    public function cancelPayoutBatch(string $batchId): PayoutBatch
+    {
+        try {
+            $batch = $this->getPayoutBatch($batchId);
+            $params = [];
+            $params["token"] = $batch->getToken();
+            $response = $this->delete("payouts/".$batchId, $params);
+
+            $jsonString = $this->responseToJsonString($response);
+
+            $batch = $this->getPayoutBatch($batchId)->getStatus();
+        } catch (\Exception $e) {
+            throw new PayoutCancellationException("failed to serialize PayoutBatch object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $batch = $mapper->map(
+                json_decode($jsonString),
+                new PayoutBatch()
+            );
+
+        } catch (\Exception $e) {
+            throw new PayoutCancellationException(
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+        }
+
+        return $batch;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * Builds the configuration object
@@ -253,24 +413,21 @@ class Client
         try {
             $this->_baseUrl = $this->_env == Env::Test ? Env::TestUrl : Env::ProdUrl;
             $this->deriveIdentity();
-            $this->_httpClient = new \GuzzleHttp\Client([
-                'base_url' => $this->_baseUrl,
-                'defaults' => [
-                    'headers' => [
-                        "x-accept-version"     => Env::BitpayApiVersion,
-                        'x-bitpay-plugin-info' => Env::BitpayPluginInfo,
+            $this->_httpClient = new \GuzzleHttp\Client(
+                [
+                    'base_url' => $this->_baseUrl,
+                    'defaults' => [
+                        'headers' => [
+                            "x-accept-version"     => Env::BitpayApiVersion,
+                            'x-bitpay-plugin-info' => Env::BitpayPluginInfo,
+                        ],
                     ],
-                ],
-            ]);
+                ]);
             $this->LoadAccessTokens();
         } catch (\Exception $e) {
             throw new BitPayException("failed to build configuration : ".$e->getMessage());
         }
     }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private function deriveIdentity()
     {
@@ -358,10 +515,12 @@ class Client
                 $headers['x-identity'] = $this->_identity;
             }
 
-            $response = $this->_httpClient->request('POST', $fullURL, [
+            $response = $this->_httpClient->requestAsync(
+                'POST', $fullURL, [
+                $options[RequestOptions::SYNCHRONOUS] = false,
                 'headers'                       => $headers,
                 GuzzleHttp\RequestOptions::JSON => $json,
-            ]);
+            ])->wait();
 
             return $response;
         } catch (\Exception $e) {
@@ -386,14 +545,46 @@ class Client
                 $headers['x-identity'] = $this->_identity;
             }
 
-            $response = $this->_httpClient->request('GET', $fullURL, [
-                'headers'   => $headers,
-                'query'     => $parameters,
-            ]);
+            $response = $this->_httpClient->requestAsync(
+                'GET', $fullURL, [
+                $options[RequestOptions::SYNCHRONOUS] = false,
+                'headers' => $headers,
+                'query'   => $parameters,
+            ])->wait();
 
             return $response;
         } catch (\Exception $e) {
             throw new BitPayException("GET failed : ".$e->getMessage());
+        }
+    }
+
+    public function delete($uri, array $parameters = null, $signatureRequired = true)
+    {
+        try {
+            $fullURL = $this->_baseUrl.$uri;
+            $headers = [
+                'Content-Type' => 'application/json',
+            ];
+
+            if ($parameters) {
+                $fullURL .= '?'.http_build_query($parameters);
+            }
+
+            if ($signatureRequired) {
+                $headers['x-signature'] = $this->_ecKey->sign($fullURL);
+                $headers['x-identity'] = $this->_identity;
+            }
+
+            $response = $this->_httpClient->requestAsync(
+                'DELETE', $fullURL, [
+                $options[RequestOptions::SYNCHRONOUS] = false,
+                'headers' => $headers,
+                'query'   => $parameters,
+            ])->wait();
+
+            return $response;
+        } catch (\Exception $e) {
+            throw new BitPayException("DELETE failed : ".$e->getMessage());
         }
     }
 
