@@ -4,12 +4,14 @@
 namespace Bitpay;
 
 
+use BitPay\Exceptions\BillCreationException;
 use BitPay\Exceptions\BitPayException;
 use BitPay\Exceptions\InvoiceCreationException;
 use BitPay\Exceptions\InvoiceQueryException;
 use BitPay\Exceptions\PayoutCancellationException;
 use BitPay\Exceptions\PayoutCreationException;
 use BitPay\Exceptions\PayoutQueryException;
+use Bitpay\Model\Bill\Bill;
 use Bitpay\Model\Facade;
 use Bitpay\Model\Invoice\Invoice;
 use Bitpay\Model\Payout\PayoutBatch;
@@ -19,6 +21,7 @@ use BitPayKeyUtils\Storage\EncryptedFilesystemStorage;
 use BitPayKeyUtils\Util\Util;
 use GuzzleHttp;
 use GuzzleHttp\RequestOptions;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class Client
@@ -75,6 +78,27 @@ class Client
         try {
             $this->_env = $environment;
             $this->BuildConfig($privateKeyPath, $tokens, $privateKeySecret);
+            $this->initKeys();
+            $this->init();
+
+            return $this;
+        } catch (\Exception $e) {
+            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
+        }
+    }
+
+    /**
+     * Constructor for use if the keys and SIN are managed by this library.
+     *
+     * @param $configFilePath  String The path to the configuration file.
+     * @return Client
+     * @throws BitPayException BitPayException class
+     */
+    public function withFile($configFilePath)
+    {
+        try {
+            $this->_configFilePath = $configFilePath;
+            $this->GetConfig();
             $this->initKeys();
             $this->init();
 
@@ -202,6 +226,41 @@ class Client
         }
 
         return $invoices;
+    }
+
+    /**
+     * Create a BitPay Bill.
+     *
+     * @param $bill        string A Bill object with request parameters defined.
+     * @param $facade      string The facade used to create it.
+     * @param $signRequest bool Signed request.
+     * @return Bill A BitPay generated Bill object.
+     * @throws BitPayException BitPayException class
+     */
+    public function createBill(Bill $bill, string $facade, bool $signRequest): Bill {
+        try {
+            $bill->setToken($this->_tokenCache->getTokenByFacade($facade));
+
+            $response = $this->post("bills", $bill->toArray(), $signRequest);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new BillCreationException("failed to serialize Bill object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $bill = $mapper->map(
+                json_decode($jsonString),
+                new Bill()
+            );
+
+        } catch (\Exception $e) {
+            throw new BillCreationException(
+                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+        }
+
+        return $bill;
     }
 
     /**
@@ -385,6 +444,44 @@ class Client
     }
 
     /**
+     * Loads the configuration file (JSON)
+     *
+     * @throws BitPayException BitPayException class
+     */
+    public function GetConfig()
+    {
+        try {
+            $this->_configuration = new Config();
+            if (!file_exists($this->_configFilePath)) {
+                throw new BitPayException("Configuration file not found");
+            }
+            $configData = json_decode(file_get_contents($this->_configFilePath), true);
+
+            if (!$configData) {
+                $configData = Yaml::parseFile($this->_configFilePath);
+            }
+            $this->_configuration->setEnvironment($configData["BitPayConfiguration"]["Environment"]);
+            $this->_env = $this->_configuration->getEnvironment();
+
+
+            $tokens = new Tokens();
+            $tokens->loadFromArray($configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["ApiTokens"]);
+            $privateKeyPath = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeyPath"];
+            $privateKeySecret = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeySecret"];
+
+            $envConfig[$this->_env] = [
+                "PrivateKeyPath"   => $privateKeyPath,
+                "PrivateKeySecret" => $privateKeySecret,
+                "ApiTokens"        => $tokens,
+            ];
+
+            $this->_configuration->setEnvConfig($envConfig);
+        } catch (\Exception $e) {
+            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
+        }
+    }
+
+    /**
      * Initialize the public/private key pair by either loading the existing one or by creating a new one.
      *
      * @throws BitPayException BitPayException class
@@ -458,48 +555,6 @@ class Client
     private function clearAccessTokenCache()
     {
         $this->_tokenCache = new Tokens();
-    }
-
-    /**
-     * Constructor for use if the keys and SIN are managed by this library.
-     *
-     * @param $configFilePath  String The path to the configuration file.
-     * @return Client
-     * @throws BitPayException BitPayException class
-     */
-    public function withFile($configFilePath)
-    {
-        try {
-            $this->_configFilePath = $configFilePath;
-            $this->GetConfig();
-            $this->initKeys();
-            $this->init();
-
-            return $this;
-        } catch (\Exception $e) {
-            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
-        }
-    }
-
-    /**
-     * Loads the configuration file (JSON)
-     *
-     * @throws BitPayException BitPayException class
-     */
-    public function GetConfig()
-    {
-        try {
-            $this->_configuration = new Config();
-            if (!file_exists($this->_configFilePath)) {
-                throw new BitPayException("Configuration file not found");
-            }
-            $jsonData = json_decode(file_get_contents($this->_configFilePath), true);
-            $this->_configuration->setEnvironment($jsonData["BitPayConfiguration"]["Environment"]);
-            $this->_env = $this->_configuration->getEnvironment();
-            $this->_configuration->setEnvConfig($jsonData["BitPayConfiguration"]["EnvConfig"][$this->_env]);
-        } catch (\Exception $e) {
-            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
-        }
     }
 
     public function post($uri, array $json = [], $signatureRequired = true)

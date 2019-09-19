@@ -32,6 +32,12 @@ class Tokens
         $this->payroll = $payroll;
     }
 
+    public function loadFromArray(array $tokens) {
+        foreach($tokens as $facade => $token){
+            $this->{$facade} = $token;
+        }
+    }
+
     /**
      * @param $facade
      * @return string
