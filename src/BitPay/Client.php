@@ -5,6 +5,7 @@ namespace Bitpay;
 
 
 use BitPay\Exceptions\BillCreationException;
+use BitPay\Exceptions\BillQueryException;
 use BitPay\Exceptions\BitPayException;
 use BitPay\Exceptions\InvoiceCreationException;
 use BitPay\Exceptions\InvoiceQueryException;
@@ -263,6 +264,42 @@ class Client
 
         } catch (\Exception $e) {
             throw new BillCreationException(
+                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+        }
+
+        return $bill;
+    }
+
+    /**
+     * Retrieve a BitPay bill by bill id using the specified facade.
+     *
+     * @param $billId string The id of the bill to retrieve.
+     * @param $facade string The facade used to retrieve it.
+     * @param $signRequest bool Signed request.
+     * @return Bill A BitPay Bill object.
+     * @throws BitPayException BitPayException class
+     */
+    public function getBill(string $billId, string $facade = Facade::Merchant, bool $signRequest = true): Bill {
+
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
+            $response = $this->get("bills/".$billId, $params, $signRequest);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $bill = $mapper->map(
+                json_decode($jsonString),
+                new Bill()
+            );
+
+        } catch (\Exception $e) {
+            throw new BillQueryException(
                 "failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
         }
 

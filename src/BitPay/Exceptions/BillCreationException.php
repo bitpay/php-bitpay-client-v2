@@ -14,7 +14,7 @@ class BillCreationException extends BillException
      * @param string $message [optional] The Exception message to throw.
      * @param int $code [optional] The Exception code to throw.
      */
-    public function __construct($message = "", $code = 102)
+    public function __construct($message = "", $code = 112)
     {
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
