@@ -5,6 +5,9 @@ namespace Bitpay;
 
 
 use BitPay\Exceptions\BillCreationException;
+use BitPay\Exceptions\BillDeliveryException;
+use BitPay\Exceptions\BillQueryException;
+use BitPay\Exceptions\BillUpdateException;
 use BitPay\Exceptions\BitPayException;
 use BitPay\Exceptions\InvoiceCreationException;
 use BitPay\Exceptions\InvoiceQueryException;
@@ -69,7 +72,7 @@ class Client
      * @param $environment      String Target environment. Options: Env.Test / Env.Prod
      * @param $privateKeyPath   String Private Key file path.
      * @param $tokens           Tokens containing the available tokens.
-     * @param $privateKeySecret String Private Key encryption password.
+     * @param $privateKeySecret String|null Private Key encryption password.
      * @return Client
      * @throws BitPayException BitPayException class
      */
@@ -163,7 +166,6 @@ class Client
         string $facade = Facade::Merchant,
         bool $signRequest = true
     ): Invoice {
-        $invoice = new Invoice();
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
@@ -192,19 +194,26 @@ class Client
     /**
      * Retrieve a collection of BitPay invoices.
      *
-     * @param $dateStart string The first date for the query filter.
-     * @param $dateEnd   string The last date for the query filter.
-     * @return array A list of BitPay Invoice objects.
+     * @param $dateStart string The start of the date window to query for invoices. Format YYYY-MM-DD.
+     * @param $dateEnd   string The end of the date window to query for invoices. Format YYYY-MM-DD.
+     * @param $status    string|null The invoice status you want to query on.
+     * @param $orderId   string|null The optional order id specified at time of invoice creation.
+     * @param $limit     int|null Maximum results that the query will return (useful for paging results).
+     * @param $offset    int|null Number of results to offset (ex. skip 10 will give you results starting with the 11th result).
+     * @return array     A list of BitPay Invoice objects.
      * @throws BitPayException BitPayException class
      */
-    public function getInvoices(string $dateStart, string $dateEnd): array
+    public function getInvoices(string $dateStart, string $dateEnd, string $status = null, string $orderId = null, int $limit = null, int $offset = null): array
     {
-        $invoices = [];
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
             $params["dateStart"] = $dateStart;
             $params["dateEnd"] = $dateEnd;
+            if ($status) {$params["status"] = $status;}
+            if ($status) {$params["orderId"] = $orderId;}
+            if ($status) {$params["limit"] = $limit;}
+            if ($status) {$params["offset"] = $offset;}
             $response = $this->get("invoices", $params);
 
             $jsonString = $this->responseToJsonString($response);
@@ -237,7 +246,7 @@ class Client
      * @return Bill A BitPay generated Bill object.
      * @throws BitPayException BitPayException class
      */
-    public function createBill(Bill $bill, string $facade, bool $signRequest): Bill {
+    public function createBill(Bill $bill, string $facade = Facade::Merchant, bool $signRequest = true): Bill {
         try {
             $bill->setToken($this->_tokenCache->getTokenByFacade($facade));
 
@@ -261,6 +270,136 @@ class Client
         }
 
         return $bill;
+    }
+
+    /**
+     * Retrieve a BitPay bill by bill id using the specified facade.
+     *
+     * @param $billId string The id of the bill to retrieve.
+     * @param $facade string The facade used to retrieve it.
+     * @param $signRequest bool Signed request.
+     * @return Bill A BitPay Bill object.
+     * @throws BitPayException BitPayException class
+     */
+    public function getBill(string $billId, string $facade = Facade::Merchant, bool $signRequest = true): Bill {
+
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
+            $response = $this->get("bills/".$billId, $params, $signRequest);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $bill = $mapper->map(
+                json_decode($jsonString),
+                new Bill()
+            );
+
+        } catch (\Exception $e) {
+            throw new BillQueryException(
+                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+        }
+
+        return $bill;
+    }
+
+    /**
+     * Retrieve a collection of BitPay bills.
+     *
+     * @param $status string|null The status to filter the bills.
+     * @return array A list of BitPay Bill objects.
+     * @throws BitPayException BitPayException class
+     */
+    public function getBills(string $status = null): array
+    {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            if ($status) {$params["status"] = $status;}
+            $response = $this->get("bills", $params);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $bills = $mapper->mapArray(
+                json_decode($jsonString),
+                [],
+                'Bitpay\Model\Bill\Bill'
+            );
+
+        } catch (\Exception $e) {
+            throw new BillQueryException(
+                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+        }
+
+        return $bills;
+    }
+
+    /**
+     * Update a BitPay Bill.
+     *
+     * @param $bill   Bill A Bill object with the parameters to update defined.
+     * @param $billId string $billIdThe Id of the Bill to update.
+     * @return Bill An updated Bill object.
+     * @throws BitPayException BitPayException class
+     */
+    public function updateBill(Bill $bill, string $billId): Bill {
+        try {
+            $response = $this->update("bills/".$billId, $bill->toArray());
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new BillUpdateException("failed to serialize Bill object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $bill = $mapper->map(
+                json_decode($jsonString),
+                $bill
+            );
+
+        } catch (\Exception $e) {
+            throw new BillUpdateException("failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+        }
+
+        return $bill;
+    }
+
+    /**
+     * Deliver a BitPay Bill.
+     *
+     * @param $billId      string The id of the requested bill.
+     * @param $billToken   string The token of the requested bill.
+     * @param $signRequest bool Allow unsigned request
+     * @throws BitPayException BitPayException class
+     * @return string A response status returned from the API.
+     */
+    public function deliverBill(string $billId, string $billToken, bool $signRequest = true): string {
+        try {
+            $response = $this->post("bills/".$billId."/deliveries", ['token' => $billToken], $signRequest);
+
+            $jsonString = $this->responseToJsonString($response);
+        } catch (\Exception $e) {
+            throw new BillDeliveryException("failed to serialize Bill object : ".$e->getMessage());
+        }
+
+        try {
+            $result = str_replace("\"", "", $jsonString);
+        } catch (\Exception $e) {
+            throw new BillDeliveryException("failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+        }
+
+        return $result;
     }
 
     /**
@@ -307,7 +446,6 @@ class Client
      */
     public function getPayoutBatches(string $status = null): array
     {
-        $batches = [];
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
@@ -347,7 +485,6 @@ class Client
      */
     public function getPayoutBatch(string $batchId): PayoutBatch
     {
-        $batch = new PayoutBatch();
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
@@ -389,8 +526,6 @@ class Client
             $response = $this->delete("payouts/".$batchId, $params);
 
             $jsonString = $this->responseToJsonString($response);
-
-            $batch = $this->getPayoutBatch($batchId)->getStatus();
         } catch (\Exception $e) {
             throw new PayoutCancellationException("failed to serialize PayoutBatch object : ".$e->getMessage());
         }
@@ -463,9 +598,7 @@ class Client
             $this->_configuration->setEnvironment($configData["BitPayConfiguration"]["Environment"]);
             $this->_env = $this->_configuration->getEnvironment();
 
-
-            $tokens = new Tokens();
-            $tokens->loadFromArray($configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["ApiTokens"]);
+            $tokens = Tokens::loadFromArray($configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["ApiTokens"]);
             $privateKeyPath = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeyPath"];
             $privateKeySecret = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeySecret"];
 
@@ -557,7 +690,7 @@ class Client
         $this->_tokenCache = new Tokens();
     }
 
-    public function post($uri, array $json = [], $signatureRequired = true)
+    public function post($uri, array $formData = [], $signatureRequired = true)
     {
         try {
             $fullURL = $this->_baseUrl.$uri;
@@ -566,7 +699,7 @@ class Client
             ];
 
             if ($signatureRequired) {
-                $headers['x-signature'] = $this->_ecKey->sign($fullURL.json_encode($json));
+                $headers['x-signature'] = $this->_ecKey->sign($fullURL.json_encode($formData));
                 $headers['x-identity'] = $this->_identity;
             }
 
@@ -574,12 +707,12 @@ class Client
                 'POST', $fullURL, [
                 $options[RequestOptions::SYNCHRONOUS] = false,
                 'headers'                       => $headers,
-                GuzzleHttp\RequestOptions::JSON => $json,
+                GuzzleHttp\RequestOptions::JSON => $formData,
             ])->wait();
 
             return $response;
         } catch (\Exception $e) {
-            throw new BitPayException("GET failed : ".$e->getMessage());
+            throw new BitPayException("POST failed : ".$e->getMessage());
         }
     }
 
@@ -613,21 +746,18 @@ class Client
         }
     }
 
-    public function delete($uri, array $parameters = null, $signatureRequired = true)
+    public function delete($uri, array $parameters = null)
     {
         try {
             $fullURL = $this->_baseUrl.$uri;
             $headers = [
-                'Content-Type' => 'application/json',
+                'Content-Type'  => 'application/json',
+                'x-signature'   => $this->_ecKey->sign($fullURL),
+                'x-identity'    => $this->_identity
             ];
 
             if ($parameters) {
                 $fullURL .= '?'.http_build_query($parameters);
-            }
-
-            if ($signatureRequired) {
-                $headers['x-signature'] = $this->_ecKey->sign($fullURL);
-                $headers['x-identity'] = $this->_identity;
             }
 
             $response = $this->_httpClient->requestAsync(
@@ -640,6 +770,29 @@ class Client
             return $response;
         } catch (\Exception $e) {
             throw new BitPayException("DELETE failed : ".$e->getMessage());
+        }
+    }
+
+    public function update($uri, array $formData = [])
+    {
+        try {
+            $fullURL = $this->_baseUrl.$uri;
+            $headers = [
+                'Content-Type'  => 'application/json',
+                'x-signature'   => $this->_ecKey->sign($fullURL.json_encode($formData)),
+                'x-identity'    => $this->_identity
+            ];
+
+            $response = $this->_httpClient->requestAsync(
+                'PUT', $fullURL, [
+                $options[RequestOptions::SYNCHRONOUS] = false,
+                'headers'                       => $headers,
+                GuzzleHttp\RequestOptions::JSON => $formData,
+            ])->wait();
+
+            return $response;
+        } catch (\Exception $e) {
+            throw new BitPayException("UPDATE failed : ".$e->getMessage());
         }
     }
 

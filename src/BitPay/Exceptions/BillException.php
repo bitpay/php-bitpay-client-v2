@@ -3,18 +3,18 @@
 namespace BitPay\Exceptions;
 
 
-class InvoiceException extends BitPayException
+class BillException extends BitPayException
 {
-    private $bitPayMessage = "An unexpected error occurred while trying to manage the invoice";
-    private $bitPayCode    = "BITPAY-INVOICE-GENERIC";
+    private $bitPayMessage = "An unexpected error occurred while trying to manage the bill";
+    private $bitPayCode    = "BITPAY-BILL-GENERIC";
 
     /**
-     * Construct the InvoiceException.
+     * Construct the BillException.
      *
      * @param string $message [optional] The Exception message to throw.
      * @param int $code [optional] The Exception code to throw.
      */
-    public function __construct($message = "", $code = 101)
+    public function __construct($message = "", $code = 111)
     {
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;

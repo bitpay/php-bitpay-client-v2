@@ -5,7 +5,7 @@ namespace BitPay\Exceptions;
 
 class PayoutException extends BitPayException
 {
-    private $bitPayMessage = "An unexpected error occured while trying to manage the payout batch";
+    private $bitPayMessage = "An unexpected error occurred while trying to manage the payout batch";
     private $bitPayCode    = "BITPAY-PAYOUT-GENERIC";
 
     /**

@@ -32,10 +32,14 @@ class Tokens
         $this->payroll = $payroll;
     }
 
-    public function loadFromArray(array $tokens) {
+    public static function loadFromArray(array $tokens) {
+        $instance = new self();
+
         foreach($tokens as $facade => $token){
-            $this->{$facade} = $token;
+            $instance->{$facade} = $token;
         }
+
+        return $instance;
     }
 
     /**
@@ -49,8 +53,10 @@ class Tokens
         switch ($facade) {
             case Facade::Merchant:
                 $token = $this->merchant;
+                break;
             case Facade::Payroll:
                 $token = $this->payroll;
+                break;
         }
 
         if ($token) {
