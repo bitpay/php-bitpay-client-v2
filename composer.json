@@ -32,7 +32,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "BitPay\\Test\\": "tests/"
+      "BitPaySDK\\Test\\": "tests/"
     }
   }
 }
