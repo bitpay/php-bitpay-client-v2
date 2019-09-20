@@ -163,7 +163,6 @@ class Client
         string $facade = Facade::Merchant,
         bool $signRequest = true
     ): Invoice {
-        $invoice = new Invoice();
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
@@ -192,19 +191,26 @@ class Client
     /**
      * Retrieve a collection of BitPay invoices.
      *
-     * @param $dateStart string The first date for the query filter.
-     * @param $dateEnd   string The last date for the query filter.
-     * @return array A list of BitPay Invoice objects.
+     * @param $dateStart string The start of the date window to query for invoices. Format YYYY-MM-DD.
+     * @param $dateEnd   string The end of the date window to query for invoices. Format YYYY-MM-DD.
+     * @param $status    string The invoice status you want to query on.
+     * @param $orderId   string The optional order id specified at time of invoice creation.
+     * @param $limit     int Maximum results that the query will return (useful for paging results).
+     * @param $offset    int Number of results to offset (ex. skip 10 will give you results starting with the 11th result).
+     * @return array     A list of BitPay Invoice objects.
      * @throws BitPayException BitPayException class
      */
-    public function getInvoices(string $dateStart, string $dateEnd): array
+    public function getInvoices(string $dateStart, string $dateEnd, string $status = null, string $orderId = null, int $limit = null, int $offset = null): array
     {
-        $invoices = [];
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
             $params["dateStart"] = $dateStart;
             $params["dateEnd"] = $dateEnd;
+            if ($status) {$params["status"] = $status;}
+            if ($status) {$params["orderId"] = $orderId;}
+            if ($status) {$params["limit"] = $limit;}
+            if ($status) {$params["offset"] = $offset;}
             $response = $this->get("invoices", $params);
 
             $jsonString = $this->responseToJsonString($response);
@@ -307,7 +313,6 @@ class Client
      */
     public function getPayoutBatches(string $status = null): array
     {
-        $batches = [];
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
@@ -347,7 +352,6 @@ class Client
      */
     public function getPayoutBatch(string $batchId): PayoutBatch
     {
-        $batch = new PayoutBatch();
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
@@ -389,8 +393,6 @@ class Client
             $response = $this->delete("payouts/".$batchId, $params);
 
             $jsonString = $this->responseToJsonString($response);
-
-            $batch = $this->getPayoutBatch($batchId)->getStatus();
         } catch (\Exception $e) {
             throw new PayoutCancellationException("failed to serialize PayoutBatch object : ".$e->getMessage());
         }
