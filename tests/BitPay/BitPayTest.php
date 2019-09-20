@@ -19,6 +19,9 @@ class BitPayTest extends TestCase
 
     protected function setUp(): void
     {
+/*
+ * You need to generate new tokens first
+ * */
         $this->clientMock = $this->createMock(Bitpay\Client::class);
         $this->clientMock->withData(
             Bitpay\Env::Test,
@@ -39,13 +42,19 @@ class BitPayTest extends TestCase
             ),
             "YourMasterPassword");
 
-        $this->client1 = Bitpay\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
-        $this->client2 = Bitpay\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
+/*
+ * Uncomment only if you wish to test the client with config files
+ * */
+//        $this->client1 = Bitpay\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
+//        $this->client2 = Bitpay\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
 
 
         $this->assertNotNull($this->client);
-        $this->assertNotNull($this->client1);
-        $this->assertNotNull($this->client2);
+/*
+ * Uncomment only if you wish to test the client with config files
+ * */
+//        $this->assertNotNull($this->client1);
+//        $this->assertNotNull($this->client2);
     }
 
     public function testShouldGetInvoiceId()
@@ -129,7 +138,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new Bitpay\Model\Bill\Bill("1001", Currency::USD, "agallardo@bitpay.com", $items);
+        $bill = new Bitpay\Model\Bill\Bill("1001", Currency::USD, "", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -166,7 +175,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new Bitpay\Model\Bill\Bill("1002", Currency::EUR, "agallardo@bitpay.com", $items);
+        $bill = new Bitpay\Model\Bill\Bill("1002", Currency::EUR, "", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -205,7 +214,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new Bitpay\Model\Bill\Bill("1003", Currency::EUR, "agallardo@bitpay.com", $items);
+        $bill = new Bitpay\Model\Bill\Bill("1003", Currency::EUR, "", $items);
         $basicBill = null;
         $retrievedBill = null;
         try {
@@ -218,6 +227,125 @@ class BitPayTest extends TestCase
 
         $this->assertEquals($basicBill->getId(), $retrievedBill->getId());
         $this->assertEquals($basicBill->getItems(), $retrievedBill->getItems());
+    }
+
+    public function testShouldUpdateBill() {
+        $items = [];
+        $item = new Bitpay\Model\Bill\Item();
+
+        $item->setPrice(30.0);
+        $item->setQuantity(9);
+        $item->setDescription("product-a");
+        array_push($items, $item);
+
+        $item->setPrice(14.0);
+        $item->setQuantity(16);
+        $item->setDescription("product-b");
+        array_push($items, $item);
+
+        $item->setPrice(3.90);
+        $item->setQuantity(42);
+        $item->setDescription("product-c");
+        array_push($items, $item);
+
+        $item->setPrice(6.99);
+        $item->setQuantity(12);
+        $item->setDescription("product-d");
+        array_push($items, $item);
+
+        $bill = new Bitpay\Model\Bill\Bill("1004", Currency::EUR, "", $items);
+        $basicBill = null;
+        $retrievedBill = null;
+        $updatedBill = null;
+        try {
+            $basicBill = $this->client->createBill($bill);
+            $retrievedBill = $this->client->getBill($basicBill->getId());
+
+            $items = $retrievedBill->getItems();
+            $item->setPrice(60);
+            $item->setQuantity(7);
+            $item->setDescription("product-added");
+            array_push($items, $item);
+            $retrievedBill->setItems($items);
+            $updatedBill = $this->client->updateBill($retrievedBill, $retrievedBill->getId());
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertEquals($basicBill->getId(), $retrievedBill->getId());
+        $this->assertEquals($basicBill->getItems(), $retrievedBill->getItems());
+        $this->assertEquals(count($retrievedBill->getItems()), 4);
+        $this->assertEquals(count($updatedBill->getItems()), 5);
+        $this->assertEquals(end($updatedBill->getItems())->getDescription(), "product-added");
+    }
+
+    public function testShouldGetBills() {
+        $bills = null;
+        try {
+            $bills = $this->client->getBills();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertTrue(count($bills) > 0);
+    }
+
+    public function testShouldGetBillsByStatus() {
+        $bills = null;
+        try {
+            $bills = $this->client->getBills(BillStatus::New);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertTrue(count($bills) > 0);
+    }
+
+    public function testShouldDeliverBill() {
+        $items = [];
+        $item = new Bitpay\Model\Bill\Item();
+
+        $item->setPrice(30.0);
+        $item->setQuantity(9);
+        $item->setDescription("product-a");
+        array_push($items, $item);
+
+        $item->setPrice(14.0);
+        $item->setQuantity(16);
+        $item->setDescription("product-b");
+        array_push($items, $item);
+
+        $item->setPrice(3.90);
+        $item->setQuantity(42);
+        $item->setDescription("product-c");
+        array_push($items, $item);
+
+        $item->setPrice(6.99);
+        $item->setQuantity(12);
+        $item->setDescription("product-d");
+        array_push($items, $item);
+
+        $bill = new Bitpay\Model\Bill\Bill("1005", Currency::EUR, "", $items);
+        $basicBill = null;
+        $retrievedBill = null;
+        $result = null;
+        try {
+            $basicBill = $this->client->createBill($bill);
+            $result = $this->client->deliverBill($basicBill->getId(), $basicBill->getToken());
+            $retrievedBill = $this->client->getBill($basicBill->getId());
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertEquals($basicBill->getId(), $retrievedBill->getId());
+        $this->assertEquals($basicBill->getItems(), $retrievedBill->getItems());
+        $this->assertEquals("Success", $result);
+        $this->assertNotEquals($basicBill->getStatus(), $retrievedBill->getStatus());
+        $this->assertEquals($retrievedBill->getStatus(), BillStatus::Sent);
     }
 
     public function testShouldSubmitPayoutBatch() {
