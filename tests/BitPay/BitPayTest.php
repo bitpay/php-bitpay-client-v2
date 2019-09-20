@@ -104,7 +104,7 @@ class BitPayTest extends TestCase
         $this->assertTrue(count($invoices) > 0);
     }
 
-    public function TestShouldCreateBillUSD() {
+    public function testShouldCreateBillUSD() {
         $items = [];
         $item = new Bitpay\Model\Bill\Item();
 
@@ -138,6 +138,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($basicBill->getId());
+        $this->assertNotNull($basicBill->getItems()[0]->getId());
     }
 
     public function testShouldSubmitPayoutBatch() {

@@ -243,7 +243,7 @@ class Client
      * @return Bill A BitPay generated Bill object.
      * @throws BitPayException BitPayException class
      */
-    public function createBill(Bill $bill, string $facade, bool $signRequest): Bill {
+    public function createBill(Bill $bill, string $facade = Facade::Merchant, bool $signRequest = true): Bill {
         try {
             $bill->setToken($this->_tokenCache->getTokenByFacade($facade));
 
@@ -465,9 +465,7 @@ class Client
             $this->_configuration->setEnvironment($configData["BitPayConfiguration"]["Environment"]);
             $this->_env = $this->_configuration->getEnvironment();
 
-
-            $tokens = new Tokens();
-            $tokens->loadFromArray($configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["ApiTokens"]);
+            $tokens = Tokens::loadFromArray($configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["ApiTokens"]);
             $privateKeyPath = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeyPath"];
             $privateKeySecret = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeySecret"];
 
@@ -559,7 +557,7 @@ class Client
         $this->_tokenCache = new Tokens();
     }
 
-    public function post($uri, array $json = [], $signatureRequired = true)
+    public function post($uri, array $formData = [], $signatureRequired = true)
     {
         try {
             $fullURL = $this->_baseUrl.$uri;
@@ -568,7 +566,7 @@ class Client
             ];
 
             if ($signatureRequired) {
-                $headers['x-signature'] = $this->_ecKey->sign($fullURL.json_encode($json));
+                $headers['x-signature'] = $this->_ecKey->sign($fullURL.json_encode($formData));
                 $headers['x-identity'] = $this->_identity;
             }
 
@@ -576,7 +574,7 @@ class Client
                 'POST', $fullURL, [
                 $options[RequestOptions::SYNCHRONOUS] = false,
                 'headers'                       => $headers,
-                GuzzleHttp\RequestOptions::JSON => $json,
+                GuzzleHttp\RequestOptions::JSON => $formData,
             ])->wait();
 
             return $response;
