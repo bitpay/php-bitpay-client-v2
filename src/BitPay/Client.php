@@ -5,7 +5,7 @@ namespace Bitpay;
 
 
 use BitPay\Exceptions\BillCreationException;
-use BitPay\Exceptions\BillDeliverException;
+use BitPay\Exceptions\BillDeliveryException;
 use BitPay\Exceptions\BillQueryException;
 use BitPay\Exceptions\BillUpdateException;
 use BitPay\Exceptions\BitPayException;
@@ -390,13 +390,13 @@ class Client
 
             $jsonString = $this->responseToJsonString($response);
         } catch (\Exception $e) {
-            throw new BillDeliverException("failed to serialize Bill object : ".$e->getMessage());
+            throw new BillDeliveryException("failed to serialize Bill object : ".$e->getMessage());
         }
 
         try {
             $result = str_replace("\"", "", $jsonString);
         } catch (\Exception $e) {
-            throw new BillDeliverException("failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+            throw new BillDeliveryException("failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
         }
 
         return $result;

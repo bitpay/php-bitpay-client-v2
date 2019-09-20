@@ -3,18 +3,18 @@
 namespace BitPay\Exceptions;
 
 
-class BillDeliverException extends BillException
+class BillUpdateException extends BillException
 {
-    private $bitPayMessage = "Failed to deliver bill";
-    private $bitPayCode    = "BITPAY-BILL-DELIVER";
+    private $bitPayMessage = "Failed to update bill";
+    private $bitPayCode    = "BITPAY-BILL-UPDATE";
 
     /**
-     * Construct the BillDeliverException.
+     * Construct the BillUpdateException.
      *
      * @param string $message [optional] The Exception message to throw.
      * @param int $code [optional] The Exception code to throw.
      */
-    public function __construct($message = "", $code = 115)
+    public function __construct($message = "", $code = 114)
     {
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
