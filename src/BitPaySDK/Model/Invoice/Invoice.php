@@ -31,6 +31,7 @@ class Invoice
     protected $_paymentCurrencies;
     protected $_acceptanceWindow;
     protected $_buyer;
+    protected $_refundAddresses;
 
     protected $_id;
     protected $_url;
@@ -41,10 +42,15 @@ class Invoice
     protected $_currentTime;
     protected $_transactions;
     protected $_exceptionStatus;
+    protected $_targetConfirmations;
     protected $_refundAddressRequestPending;
-    protected $_invoiceBuyerProvidedInfo;
+    protected $_buyerProvidedEmail;
+    protected $_buyerProvidedInfo;
     protected $_supportedTransactionCurrencies;
     protected $_minerFees;
+    protected $_shopper;
+    protected $_billId;
+    protected $_refundInfo;
     protected $_paymentCodes;
     protected $_extendedNotifications = false;
 
@@ -67,9 +73,11 @@ class Invoice
         $this->_price = $price;
         $this->_currency = $currency;
         $this->_buyer = new Buyer();
-        $this->_invoiceBuyerProvidedInfo = new InvoiceBuyerProvidedInfo();
+        $this->_buyerProvidedInfo = new BuyerProvidedInfo();
         $this->_supportedTransactionCurrencies = new SupportedTransactionCurrencies();
         $this->_minerFees = new MinerFees();
+        $this->_shopper = new Shopper();
+        $this->_refundInfo = new RefundInfo();
         $this->_paymentCodes = new PaymentCodes();
         $this->_paymentTotals = new PaymentTotal();
         $this->_paymentSubtotals = new PaymentTotal();
@@ -258,12 +266,22 @@ class Invoice
         return $this->_buyer;
     }
 
-    // Response fields
-    //
-
     public function setBuyer(Buyer $buyer)
     {
         $this->_buyer = $buyer;
+    }
+
+    // Response fields
+    //
+
+    public function getRefundAddresses()
+    {
+        return $this->_refundAddresses;
+    }
+
+    public function setRefundAddresses(array $refundAddresses)
+    {
+        $this->_refundAddresses = $refundAddresses;
     }
 
     public function getId()
@@ -356,6 +374,16 @@ class Invoice
         $this->_exceptionStatus = $exceptionStatus;
     }
 
+    public function getTargetConfirmations()
+    {
+        return $this->_targetConfirmations;
+    }
+
+    public function setTargetConfirmations($targetConfirmations)
+    {
+        $this->_targetConfirmations = $targetConfirmations;
+    }
+
     public function getRefundAddressRequestPending()
     {
         return $this->_refundAddressRequestPending;
@@ -366,14 +394,24 @@ class Invoice
         $this->_refundAddressRequestPending = $refundAddressRequestPending;
     }
 
-    public function getInvoiceBuyerProvidedInfo()
+    public function getBuyerProvidedEmail()
     {
-        return $this->_invoiceBuyerProvidedInfo;
+        return $this->_buyerProvidedEmail;
     }
 
-    public function setInvoiceBuyerProvidedInfo(InvoiceBuyerProvidedInfo $invoiceBuyerProvidedInfo)
+    public function setBuyerProvidedEmail($buyerProvidedEmail)
     {
-        $this->_invoiceBuyerProvidedInfo = $invoiceBuyerProvidedInfo;
+        $this->_buyerProvidedEmail = $buyerProvidedEmail;
+    }
+
+    public function getBuyerProvidedInfo()
+    {
+        return $this->_buyerProvidedInfo;
+    }
+
+    public function setBuyerProvidedInfo(BuyerProvidedInfo $buyerProvidedInfo)
+    {
+        $this->_buyerProvidedInfo = $buyerProvidedInfo;
     }
 
     public function getSupportedTransactionCurrencies()
@@ -394,6 +432,36 @@ class Invoice
     public function setMinerFees(MinerFees $minerFees)
     {
         $this->_minerFees = $minerFees;
+    }
+
+    public function getShopper()
+    {
+        return $this->_shopper;
+    }
+
+    public function setShopper(Shopper $shopper)
+    {
+        $this->_shopper = $shopper;
+    }
+
+    public function getBillId()
+    {
+        return $this->_billId;
+    }
+
+    public function setBillId($billId)
+    {
+        $this->_billId = $billId;
+    }
+
+    public function getRefundInfo()
+    {
+        return $this->_refundInfo;
+    }
+
+    public function setRefundInfo(RefundInfo $refundInfo)
+    {
+        $this->_refundInfo = $refundInfo;
     }
 
     public function getPaymentCodes()
@@ -506,6 +574,7 @@ class Invoice
             'paymentCurrencies'              => $this->getPaymentCurrencies(),
             'acceptanceWindow'               => $this->getAcceptanceWindow(),
             'buyer'                          => $this->getBuyer()->toArray(),
+            'refundAddresses'                => $this->getRefundAddresses(),
             'id'                             => $this->getId(),
             'url'                            => $this->getUrl(),
             'status'                         => $this->getStatus(),
@@ -515,10 +584,15 @@ class Invoice
             'currentTime'                    => $this->getCurrentTime(),
             'transactions'                   => $this->getTransactions(),
             'exceptionStatus'                => $this->getExceptionStatus(),
+            'targetConfirmations'            => $this->getTargetConfirmations(),
             'refundAddressRequestPending'    => $this->getRefundAddressRequestPending(),
-            'invoiceBuyerProvidedInfo'       => $this->getInvoiceBuyerProvidedInfo()->toArray(),
+            'buyerProvidedEmail'             => $this->getBuyerProvidedEmail(),
+            'buyerProvidedInfo'              => $this->getBuyerProvidedInfo()->toArray(),
             'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()->toArray(),
             'minerFees'                      => $this->getMinerFees()->toArray(),
+            'shopper'                        => $this->getShopper()->toArray(),
+            'billId'                         => $this->getBillId(),
+            'refundInfo'                     => $this->getRefundInfo(),
             'paymentCodes'                   => $this->getPaymentCodes()->toArray(),
             'extendedNotifications'          => $this->getExtendedNotifications(),
             'transactionCurrency'            => $this->getTransactionCurrency(),

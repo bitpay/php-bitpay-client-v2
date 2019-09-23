@@ -138,7 +138,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1001", Currency::USD, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1001", Currency::USD, "agallardo@bitpay.com", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -175,7 +175,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1002", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1002", Currency::EUR, "agallardo@bitpay.com", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -214,7 +214,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1003", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1003", Currency::EUR, "agallardo@bitpay.com", $items);
         $basicBill = null;
         $retrievedBill = null;
         try {
@@ -253,7 +253,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1004", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1004", Currency::EUR, "agallardo@bitpay.com", $items);
         $basicBill = null;
         $retrievedBill = null;
         $updatedBill = null;
@@ -328,7 +328,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1005", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1005", Currency::EUR, "agallardo@bitpay.com", $items);
         $basicBill = null;
         $retrievedBill = null;
         $result = null;
@@ -362,6 +362,7 @@ class BitPayTest extends TestCase
         $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $effectiveDate, $instructions);
         try {
             $batch = $this->client->submitPayoutBatch($batch);
+            $this->client->cancelPayoutBatch($batch->getId());
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());

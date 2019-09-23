@@ -4,28 +4,28 @@
 namespace BitPaySDK\Model\Invoice;
 
 
-class SupportedTransactionCurrency
+class Shopper
 {
-    protected $_enabled;
+    protected $_user;
 
     public function __construct()
     {
     }
 
-    public function setEnabled(bool $enabled)
+    public function getUser()
     {
-        $this->_enabled = $enabled;
+        return $this->_user;
     }
 
-    public function getEnabled()
+    public function setUser(string $user)
     {
-        return $this->_enabled;
+        $this->_user = $user;
     }
 
     public function toArray()
     {
         $elements = [
-            'enabled' => $this->getEnabled(),
+            'user' => $this->getUser(),
         ];
 
         foreach ($elements as $key => $value) {

@@ -53,7 +53,7 @@ class JsonMapper
      *
      * @var boolean
      */
-    public $bEnforceMapType = true;
+    public $bEnforceMapType = false;
     /**
      * Throw an exception when an object is expected but the JSON contains
      * a non-object type.
@@ -267,6 +267,10 @@ class JsonMapper
                         $array = $this->createInstance($type, false, $jvalue);
                     }
                 }
+            }
+
+            if ($key == 'shopper') {
+                $stop = 0;
             }
 
             if ($array !== null) {

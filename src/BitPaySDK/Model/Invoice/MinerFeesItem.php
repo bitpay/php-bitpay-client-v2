@@ -13,22 +13,6 @@ class MinerFeesItem
     {
     }
 
-    public function toArray()
-    {
-        $elements = [
-            'satoshisPerByte' => $this->getSatoshisPerByte(),
-            'totalFee'        => $this->getTotalFee(),
-        ];
-
-        foreach ($elements as $key => $value) {
-            if (empty($value)) {
-                unset($elements[$key]);
-            }
-        }
-
-        return $elements;
-    }
-
     public function getSatoshisPerByte()
     {
         return $this->_satoshisPerByte;
@@ -47,5 +31,21 @@ class MinerFeesItem
     public function setTotalFee(float $totalFee)
     {
         $this->_totalFee = $totalFee;
+    }
+
+    public function toArray()
+    {
+        $elements = [
+            'satoshisPerByte' => $this->getSatoshisPerByte(),
+            'totalFee'        => $this->getTotalFee(),
+        ];
+
+        foreach ($elements as $key => $value) {
+            if (empty($value)) {
+                unset($elements[$key]);
+            }
+        }
+
+        return $elements;
     }
 }

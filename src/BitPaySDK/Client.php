@@ -153,6 +153,9 @@ class Client
             $invoice->setToken($this->_tokenCache->getTokenByFacade($facade));
             $invoice->setGuid(Util::guid());
 
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->post("invoices", $invoice->toArray(), $signRequest);
 
             $jsonString = $this->responseToJsonString($response);
@@ -193,6 +196,10 @@ class Client
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
+
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->get("invoices/".$invoiceId, $params, $signRequest);
 
             $jsonString = $this->responseToJsonString($response);
@@ -253,6 +260,10 @@ class Client
             if ($status) {
                 $params["offset"] = $offset;
             }
+
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->get("invoices", $params);
 
             $jsonString = $this->responseToJsonString($response);
@@ -290,6 +301,9 @@ class Client
         try {
             $bill->setToken($this->_tokenCache->getTokenByFacade($facade));
 
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->post("bills", $bill->toArray(), $signRequest);
 
             $jsonString = $this->responseToJsonString($response);
@@ -327,6 +341,10 @@ class Client
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
+
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->get("bills/".$billId, $params, $signRequest);
 
             $jsonString = $this->responseToJsonString($response);
@@ -364,6 +382,10 @@ class Client
             if ($status) {
                 $params["status"] = $status;
             }
+
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->get("bills", $params);
 
             $jsonString = $this->responseToJsonString($response);
@@ -398,6 +420,10 @@ class Client
     public function updateBill(Bill $bill, string $billId): Bill
     {
         try {
+
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->update("bills/".$billId, $bill->toArray());
 
             $jsonString = $this->responseToJsonString($response);
@@ -431,6 +457,9 @@ class Client
     public function deliverBill(string $billId, string $billToken, bool $signRequest = true): string
     {
         try {
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->post("bills/".$billId."/deliveries", ['token' => $billToken], $signRequest);
 
             $jsonString = $this->responseToJsonString($response);
@@ -460,6 +489,9 @@ class Client
             $batch->setToken($this->_tokenCache->getTokenByFacade(Facade::Payroll));
             $batch->setGuid(Util::guid());
 
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->post("payouts", $batch->toArray());
 
             $jsonString = $this->responseToJsonString($response);
@@ -497,6 +529,10 @@ class Client
             if ($status) {
                 $params["status"] = $status;
             }
+
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->get("payouts", $params);
 
             $jsonString = $this->responseToJsonString($response);
@@ -533,6 +569,10 @@ class Client
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->get("payouts/".$batchId, $params);
 
             $jsonString = $this->responseToJsonString($response);
@@ -568,6 +608,10 @@ class Client
             $batch = $this->getPayoutBatch($batchId);
             $params = [];
             $params["token"] = $batch->getToken();
+
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->delete("payouts/".$batchId, $params);
 
             $jsonString = $this->responseToJsonString($response);
@@ -748,6 +792,9 @@ class Client
                 $headers['x-identity'] = $this->_identity;
             }
 
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->_httpClient->requestAsync(
                 'POST', $fullURL, [
                 $options[RequestOptions::SYNCHRONOUS] = false,
@@ -778,6 +825,9 @@ class Client
                 $headers['x-identity'] = $this->_identity;
             }
 
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->_httpClient->requestAsync(
                 'GET', $fullURL, [
                 $options[RequestOptions::SYNCHRONOUS] = false,
@@ -805,6 +855,9 @@ class Client
                 $fullURL .= '?'.http_build_query($parameters);
             }
 
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->_httpClient->requestAsync(
                 'DELETE', $fullURL, [
                 $options[RequestOptions::SYNCHRONOUS] = false,
@@ -828,6 +881,9 @@ class Client
                 'x-identity'   => $this->_identity,
             ];
 
+            /**
+             * @var GuzzleHttp\Psr7\Response
+             */
             $response = $this->_httpClient->requestAsync(
                 'PUT', $fullURL, [
                 $options[RequestOptions::SYNCHRONOUS] = false,
@@ -841,7 +897,7 @@ class Client
         }
     }
 
-    public function responseToJsonString($response)
+    public function responseToJsonString(GuzzleHttp\Psr7\Response $response)
     {
         if ($response == null) {
             throw new Exception("Error: HTTP response is null");

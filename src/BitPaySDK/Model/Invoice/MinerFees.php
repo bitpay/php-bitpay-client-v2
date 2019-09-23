@@ -15,22 +15,6 @@ class MinerFees
         $this->_bch = new MinerFeesItem();
     }
 
-    public function toArray()
-    {
-        $elements = [
-            'btc' => $this->getBtc()->toArray(),
-            'bch' => $this->getBch()->toArray(),
-        ];
-
-        foreach ($elements as $key => $value) {
-            if (empty($value)) {
-                unset($elements[$key]);
-            }
-        }
-
-        return $elements;
-    }
-
     public function getBtc()
     {
         return $this->_btc;
@@ -49,5 +33,21 @@ class MinerFees
     public function setBch(MinerFeesItem $bch)
     {
         $this->_bch = $bch;
+    }
+
+    public function toArray()
+    {
+        $elements = [
+            'btc' => $this->getBtc()->toArray(),
+            'bch' => $this->getBch()->toArray(),
+        ];
+
+        foreach ($elements as $key => $value) {
+            if (empty($value)) {
+                unset($elements[$key]);
+            }
+        }
+
+        return $elements;
     }
 }
