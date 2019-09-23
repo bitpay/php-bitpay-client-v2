@@ -845,15 +845,15 @@ class Client
     {
         try {
             $fullURL = $this->_baseUrl.$uri;
+            if ($parameters) {
+                $fullURL .= '?'.http_build_query($parameters);
+            }
+
             $headers = [
                 'Content-Type' => 'application/json',
                 'x-signature'  => $this->_ecKey->sign($fullURL),
                 'x-identity'   => $this->_identity,
             ];
-
-            if ($parameters) {
-                $fullURL .= '?'.http_build_query($parameters);
-            }
 
             /**
              * @var GuzzleHttp\Psr7\Response
