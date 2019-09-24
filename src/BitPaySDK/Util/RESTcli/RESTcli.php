@@ -190,7 +190,6 @@ class RESTcli
         }
 
         try {
-
             $body = json_decode($response->getBody()->getContents(), true);
             $error_message = false;
             $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
