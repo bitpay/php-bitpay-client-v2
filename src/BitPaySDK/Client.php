@@ -22,9 +22,9 @@ use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Payout\PayoutBatch;
 use BitPaySDK\Util\JsonMapper\JsonMapper;
+use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
-use GuzzleHttp;
-use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Client as GuzzleHttpClient;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -54,24 +54,14 @@ class Client
     protected $_configFilePath;
 
     /**
-     * @var string
-     */
-    protected $_baseUrl;
-
-    /**
      * @var PrivateKey
      */
     protected $_ecKey;
 
     /**
-     * @var GuzzleHttp\Client
+     * @var RESTcli
      */
-    protected $_httpClient = null;
-
-    /**
-     * Return the identity of this client (i.e. the public key).
-     */
-    protected $_identity;
+    protected $_RESTcli = null;
 
     /**
      * Client constructor.
@@ -153,12 +143,7 @@ class Client
             $invoice->setToken($this->_tokenCache->getTokenByFacade($facade));
             $invoice->setGuid(Util::guid());
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->post("invoices", $invoice->toArray(), $signRequest);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->post("invoices", $invoice->toArray(), $signRequest);
         } catch (Exception $e) {
             throw new InvoiceCreationException("failed to serialize Invoice object : ".$e->getMessage());
         }
@@ -166,7 +151,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $invoice = $mapper->map(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 new Invoice()
             );
 
@@ -197,12 +182,7 @@ class Client
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->get("invoices/".$invoiceId, $params, $signRequest);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->get("invoices/".$invoiceId, $params, $signRequest);
         } catch (Exception $e) {
             throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage());
         }
@@ -210,7 +190,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $invoice = $mapper->map(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 new Invoice()
             );
 
@@ -261,12 +241,7 @@ class Client
                 $params["offset"] = $offset;
             }
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->get("invoices", $params);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->get("invoices", $params);
         } catch (Exception $e) {
             throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage());
         }
@@ -274,7 +249,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $invoices = $mapper->mapArray(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 [],
                 'BitPaySDK\Model\Invoice\Invoice'
             );
@@ -301,12 +276,7 @@ class Client
         try {
             $bill->setToken($this->_tokenCache->getTokenByFacade($facade));
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->post("bills", $bill->toArray(), $signRequest);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->post("bills", $bill->toArray(), $signRequest);
         } catch (Exception $e) {
             throw new BillCreationException("failed to serialize Bill object : ".$e->getMessage());
         }
@@ -314,7 +284,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $bill = $mapper->map(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 new Bill()
             );
 
@@ -342,12 +312,7 @@ class Client
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade($facade);
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->get("bills/".$billId, $params, $signRequest);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->get("bills/".$billId, $params, $signRequest);
         } catch (Exception $e) {
             throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage());
         }
@@ -355,7 +320,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $bill = $mapper->map(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 new Bill()
             );
 
@@ -383,12 +348,7 @@ class Client
                 $params["status"] = $status;
             }
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->get("bills", $params);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->get("bills", $params);
         } catch (Exception $e) {
             throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage());
         }
@@ -396,7 +356,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $bills = $mapper->mapArray(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 [],
                 'BitPaySDK\Model\Bill\Bill'
             );
@@ -421,12 +381,7 @@ class Client
     {
         try {
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->update("bills/".$billId, $bill->toArray());
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->update("bills/".$billId, $bill->toArray());
         } catch (Exception $e) {
             throw new BillUpdateException("failed to serialize Bill object : ".$e->getMessage());
         }
@@ -434,7 +389,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $bill = $mapper->map(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 $bill
             );
 
@@ -457,18 +412,13 @@ class Client
     public function deliverBill(string $billId, string $billToken, bool $signRequest = true): string
     {
         try {
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->post("bills/".$billId."/deliveries", ['token' => $billToken], $signRequest);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->post("bills/".$billId."/deliveries", ['token' => $billToken], $signRequest);
         } catch (Exception $e) {
             throw new BillDeliveryException("failed to serialize Bill object : ".$e->getMessage());
         }
 
         try {
-            $result = str_replace("\"", "", $jsonString);
+            $result = str_replace("\"", "", $responseJson);
         } catch (Exception $e) {
             throw new BillDeliveryException("failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
         }
@@ -489,12 +439,7 @@ class Client
             $batch->setToken($this->_tokenCache->getTokenByFacade(Facade::Payroll));
             $batch->setGuid(Util::guid());
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->post("payouts", $batch->toArray());
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->post("payouts", $batch->toArray());
         } catch (Exception $e) {
             throw new PayoutCreationException("failed to serialize PayoutBatch object : ".$e->getMessage());
         }
@@ -502,7 +447,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $batch = $mapper->map(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 new PayoutBatch()
             );
 
@@ -530,12 +475,7 @@ class Client
                 $params["status"] = $status;
             }
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->get("payouts", $params);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->get("payouts", $params);
         } catch (Exception $e) {
             throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage());
         }
@@ -543,7 +483,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $batches = $mapper->mapArray(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 [],
                 'BitPaySDK\Model\Payout\PayoutBatch'
             );
@@ -570,12 +510,7 @@ class Client
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->get("payouts/".$batchId, $params);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->get("payouts/".$batchId, $params);
         } catch (Exception $e) {
             throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage());
         }
@@ -583,7 +518,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $batch = $mapper->map(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 new PayoutBatch()
             );
 
@@ -609,12 +544,7 @@ class Client
             $params = [];
             $params["token"] = $batch->getToken();
 
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->delete("payouts/".$batchId, $params);
-
-            $jsonString = $this->responseToJsonString($response);
+            $responseJson = $this->_RESTcli->delete("payouts/".$batchId, $params);
         } catch (Exception $e) {
             throw new PayoutCancellationException("failed to serialize PayoutBatch object : ".$e->getMessage());
         }
@@ -622,7 +552,7 @@ class Client
         try {
             $mapper = new JsonMapper();
             $batch = $mapper->map(
-                json_decode($jsonString),
+                json_decode($responseJson),
                 new PayoutBatch()
             );
 
@@ -731,30 +661,10 @@ class Client
     {
         try {
             $this->_baseUrl = $this->_env == Env::Test ? Env::TestUrl : Env::ProdUrl;
-            $this->deriveIdentity();
-            $this->_httpClient = new \GuzzleHttp\Client(
-                [
-                    'base_url' => $this->_baseUrl,
-                    'defaults' => [
-                        'headers' => [
-                            "x-accept-version"     => Env::BitpayApiVersion,
-                            'x-bitpay-plugin-info' => Env::BitpayPluginInfo,
-                        ],
-                    ],
-                ]);
+            $this->_RESTcli = new RESTcli($this->_env, $this->_ecKey);
             $this->loadAccessTokens();
         } catch (Exception $e) {
             throw new BitPayException("failed to build configuration : ".$e->getMessage());
-        }
-    }
-
-    private function deriveIdentity()
-    {
-        try {
-            // Identity in this implementation is defined to be the SIN.
-            $this->_identity = $this->_ecKey->getPublicKey()->__toString();
-        } catch (Exception $e) {
-            throw new BitPayException("failed to get SIN from private key : ".$e->getMessage());
         }
     }
 
@@ -777,148 +687,5 @@ class Client
     private function clearAccessTokenCache()
     {
         $this->_tokenCache = new Tokens();
-    }
-
-    public function post($uri, array $formData = [], $signatureRequired = true)
-    {
-        try {
-            $fullURL = $this->_baseUrl.$uri;
-            $headers = [
-                'Content-Type' => 'application/json',
-            ];
-
-            if ($signatureRequired) {
-                $headers['x-signature'] = $this->_ecKey->sign($fullURL.json_encode($formData));
-                $headers['x-identity'] = $this->_identity;
-            }
-
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->_httpClient->requestAsync(
-                'POST', $fullURL, [
-                $options[RequestOptions::SYNCHRONOUS] = false,
-                'headers'                       => $headers,
-                GuzzleHttp\RequestOptions::JSON => $formData,
-            ])->wait();
-
-            return $response;
-        } catch (Exception $e) {
-            throw new BitPayException("POST failed : ".$e->getMessage());
-        }
-    }
-
-    public function get($uri, array $parameters = null, $signatureRequired = true)
-    {
-        try {
-            $fullURL = $this->_baseUrl.$uri;
-            $headers = [
-                'Content-Type' => 'application/json',
-            ];
-
-            if ($parameters) {
-                $fullURL .= '?'.http_build_query($parameters);
-            }
-
-            if ($signatureRequired) {
-                $headers['x-signature'] = $this->_ecKey->sign($fullURL);
-                $headers['x-identity'] = $this->_identity;
-            }
-
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->_httpClient->requestAsync(
-                'GET', $fullURL, [
-                $options[RequestOptions::SYNCHRONOUS] = false,
-                'headers' => $headers,
-                'query'   => $parameters,
-            ])->wait();
-
-            return $response;
-        } catch (Exception $e) {
-            throw new BitPayException("GET failed : ".$e->getMessage());
-        }
-    }
-
-    public function delete($uri, array $parameters = null)
-    {
-        try {
-            $fullURL = $this->_baseUrl.$uri;
-            if ($parameters) {
-                $fullURL .= '?'.http_build_query($parameters);
-            }
-
-            $headers = [
-                'Content-Type' => 'application/json',
-                'x-signature'  => $this->_ecKey->sign($fullURL),
-                'x-identity'   => $this->_identity,
-            ];
-
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->_httpClient->requestAsync(
-                'DELETE', $fullURL, [
-                $options[RequestOptions::SYNCHRONOUS] = false,
-                'headers' => $headers,
-                'query'   => $parameters,
-            ])->wait();
-
-            return $response;
-        } catch (Exception $e) {
-            throw new BitPayException("DELETE failed : ".$e->getMessage());
-        }
-    }
-
-    public function update($uri, array $formData = [])
-    {
-        try {
-            $fullURL = $this->_baseUrl.$uri;
-            $headers = [
-                'Content-Type' => 'application/json',
-                'x-signature'  => $this->_ecKey->sign($fullURL.json_encode($formData)),
-                'x-identity'   => $this->_identity,
-            ];
-
-            /**
-             * @var GuzzleHttp\Psr7\Response
-             */
-            $response = $this->_httpClient->requestAsync(
-                'PUT', $fullURL, [
-                $options[RequestOptions::SYNCHRONOUS] = false,
-                'headers'                       => $headers,
-                GuzzleHttp\RequestOptions::JSON => $formData,
-            ])->wait();
-
-            return $response;
-        } catch (Exception $e) {
-            throw new BitPayException("UPDATE failed : ".$e->getMessage());
-        }
-    }
-
-    public function responseToJsonString(GuzzleHttp\Psr7\Response $response)
-    {
-        if ($response == null) {
-            throw new Exception("Error: HTTP response is null");
-        }
-
-        try {
-
-            $body = json_decode($response->getBody()->getContents(), true);
-            $error_message = false;
-            $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
-            $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
-            $error_message = (is_array($error_message)) ? implode("\n", $error_message) : $error_message;
-            if (false !== $error_message) {
-                throw new BitpayException($error_message);
-            }
-            $jsonString = json_encode($body['data']);
-
-            return $jsonString;
-
-        } catch (Exception $e) {
-            throw new BitPayException("failed to retrieve HTTP response body : ".$e->getMessage());
-        }
     }
 }
