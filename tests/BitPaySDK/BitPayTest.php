@@ -12,6 +12,9 @@ use PHPUnit\Framework\TestCase;
 
 class BitPayTest extends TestCase
 {
+    /**
+     * @var BitPaySDK\Client
+     */
     protected $client;
     protected $client1;
     protected $client2;
@@ -19,9 +22,9 @@ class BitPayTest extends TestCase
 
     protected function setUp(): void
     {
-/**
- * You need to generate new tokens first
- * */
+        /**
+         * You need to generate new tokens first
+         * */
         $this->clientMock = $this->createMock(BitPaySDK\Client::class);
         $this->clientMock->withData(
             BitPaySDK\Env::Test,
@@ -42,17 +45,17 @@ class BitPayTest extends TestCase
             ),
             "YourMasterPassword");
 
-/**
- * Uncomment only if you wish to test the client with config files
- * */
+        /**
+         * Uncomment only if you wish to test the client with config files
+         * */
 //        $this->client1 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
 //        $this->client2 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
 
 
         $this->assertNotNull($this->client);
-/**
- * Uncomment only if you wish to test the client with config files
- * */
+        /**
+         * Uncomment only if you wish to test the client with config files
+         * */
 //        $this->assertNotNull($this->client1);
 //        $this->assertNotNull($this->client2);
     }
@@ -96,7 +99,8 @@ class BitPayTest extends TestCase
         $this->assertEquals($basicInvoice->getId(), $retrievedInvoice->getId());
     }
 
-    public function testShouldGetInvoices() {
+    public function testShouldGetInvoices()
+    {
         $invoices = null;
         try {
             //check within the last few days
@@ -114,25 +118,29 @@ class BitPayTest extends TestCase
         $this->assertTrue(count($invoices) > 0);
     }
 
-    public function testShouldCreateBillUSD() {
+    public function testShouldCreateBillUSD()
+    {
         $items = [];
-        $item = new BitPaySDK\Model\Bill\Item();
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(30.0);
         $item->setQuantity(9);
         $item->setDescription("product-a");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(14.0);
         $item->setQuantity(16);
         $item->setDescription("product-b");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(3.90);
         $item->setQuantity(42);
         $item->setDescription("product-c");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(6.99);
         $item->setQuantity(12);
         $item->setDescription("product-d");
@@ -151,25 +159,29 @@ class BitPayTest extends TestCase
         $this->assertNotNull($basicBill->getItems()[0]->getId());
     }
 
-    public function testShouldCreateBillEUR() {
+    public function testShouldCreateBillEUR()
+    {
         $items = [];
-        $item = new BitPaySDK\Model\Bill\Item();
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(30.0);
         $item->setQuantity(9);
         $item->setDescription("product-a");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(14.0);
         $item->setQuantity(16);
         $item->setDescription("product-b");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(3.90);
         $item->setQuantity(42);
         $item->setDescription("product-c");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(6.99);
         $item->setQuantity(12);
         $item->setDescription("product-d");
@@ -190,25 +202,29 @@ class BitPayTest extends TestCase
         $this->assertNotNull($basicBill->getItems()[0]->getId());
     }
 
-    public function testShouldGetBill() {
+    public function testShouldGetBill()
+    {
         $items = [];
-        $item = new BitPaySDK\Model\Bill\Item();
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(30.0);
         $item->setQuantity(9);
         $item->setDescription("product-a");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(14.0);
         $item->setQuantity(16);
         $item->setDescription("product-b");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(3.90);
         $item->setQuantity(42);
         $item->setDescription("product-c");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(6.99);
         $item->setQuantity(12);
         $item->setDescription("product-d");
@@ -229,25 +245,29 @@ class BitPayTest extends TestCase
         $this->assertEquals($basicBill->getItems(), $retrievedBill->getItems());
     }
 
-    public function testShouldUpdateBill() {
+    public function testShouldUpdateBill()
+    {
         $items = [];
-        $item = new BitPaySDK\Model\Bill\Item();
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(30.0);
         $item->setQuantity(9);
         $item->setDescription("product-a");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(14.0);
         $item->setQuantity(16);
         $item->setDescription("product-b");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(3.90);
         $item->setQuantity(42);
         $item->setDescription("product-c");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(6.99);
         $item->setQuantity(12);
         $item->setDescription("product-d");
@@ -261,26 +281,32 @@ class BitPayTest extends TestCase
             $basicBill = $this->client->createBill($bill);
             $retrievedBill = $this->client->getBill($basicBill->getId());
 
+            $this->assertEquals($basicBill->getId(), $retrievedBill->getId());
+            $this->assertEquals($basicBill->getItems(), $retrievedBill->getItems());
+            $this->assertEquals(count($retrievedBill->getItems()), 4);
+
             $items = $retrievedBill->getItems();
+
+            $item = new BitPaySDK\Model\Bill\Item();
             $item->setPrice(60);
             $item->setQuantity(7);
             $item->setDescription("product-added");
             array_push($items, $item);
+
             $retrievedBill->setItems($items);
             $updatedBill = $this->client->updateBill($retrievedBill, $retrievedBill->getId());
+            $items = $updatedBill->getItems();
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
         }
 
-        $this->assertEquals($basicBill->getId(), $retrievedBill->getId());
-        $this->assertEquals($basicBill->getItems(), $retrievedBill->getItems());
-        $this->assertEquals(count($retrievedBill->getItems()), 4);
         $this->assertEquals(count($updatedBill->getItems()), 5);
-        $this->assertEquals(end($updatedBill->getItems())->getDescription(), "product-added");
+        $this->assertEquals(end($items)->getDescription(), "product-added");
     }
 
-    public function testShouldGetBills() {
+    public function testShouldGetBills()
+    {
         $bills = null;
         try {
             $bills = $this->client->getBills();
@@ -292,7 +318,8 @@ class BitPayTest extends TestCase
         $this->assertTrue(count($bills) > 0);
     }
 
-    public function testShouldGetBillsByStatus() {
+    public function testShouldGetBillsByStatus()
+    {
         $bills = null;
         try {
             $bills = $this->client->getBills(BillStatus::New);
@@ -304,25 +331,29 @@ class BitPayTest extends TestCase
         $this->assertTrue(count($bills) > 0);
     }
 
-    public function testShouldDeliverBill() {
+    public function testShouldDeliverBill()
+    {
         $items = [];
-        $item = new BitPaySDK\Model\Bill\Item();
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(30.0);
         $item->setQuantity(9);
         $item->setDescription("product-a");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(14.0);
         $item->setQuantity(16);
         $item->setDescription("product-b");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(3.90);
         $item->setQuantity(42);
         $item->setDescription("product-c");
         array_push($items, $item);
 
+        $item = new BitPaySDK\Model\Bill\Item();
         $item->setPrice(6.99);
         $item->setQuantity(12);
         $item->setDescription("product-d");
@@ -348,7 +379,60 @@ class BitPayTest extends TestCase
         $this->assertEquals($retrievedBill->getStatus(), BillStatus::Sent);
     }
 
-    public function testShouldSubmitPayoutBatch() {
+    public function testShouldGetLedgerBtc()
+    {
+        $ledge = null;
+        try {
+            //check within the last few days
+            $date = new \DateTime();
+            $today = $date->format("Y-m-d");
+            $dateBefore = $date->modify('-7 day');
+            $sevenDaysAgo = $dateBefore->format("Y-m-d");
+            $ledger = $this->client->getLedger(Currency::BTC, $sevenDaysAgo, $today);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($ledger);
+        $this->assertTrue(count($ledger->getEntries()) > 0);
+    }
+
+    public function testShouldGetLedgerUsd()
+    {
+        $ledge = null;
+        try {
+            //check within the last few days
+            $date = new \DateTime();
+            $today = $date->format("Y-m-d");
+            $dateBefore = $date->modify('-30 day');
+            $sevenDaysAgo = $dateBefore->format("Y-m-d");
+            $ledger = $this->client->getLedger(Currency::USD, $sevenDaysAgo, $today);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($ledger);
+        $this->assertTrue(count($ledger->getEntries()) > 0);
+    }
+
+    public function testShouldGetLedgers()
+    {
+        $ledgers = null;
+        try {
+            $ledgers = $this->client->getLedgers();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($ledgers);
+        $this->assertTrue(count($ledgers) > 0);
+    }
+
+    public function testShouldSubmitPayoutBatch()
+    {
         $date = new \DateTime();
         $threeDaysFromNow = $date->modify('+3 day');
 
@@ -356,7 +440,7 @@ class BitPayTest extends TestCase
         $currency = Currency::USD;
         $instructions = [
             new BitPaySDK\Model\Payout\PayoutInstruction(100.0, "mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
-            new BitPaySDK\Model\Payout\PayoutInstruction(200.0, "mvR4Xj7MYT7GJcL93xAQbSZ2p4eHJV5F7A")
+            new BitPaySDK\Model\Payout\PayoutInstruction(200.0, "mvR4Xj7MYT7GJcL93xAQbSZ2p4eHJV5F7A"),
         ];
 
         $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $effectiveDate, $instructions);
@@ -372,7 +456,8 @@ class BitPayTest extends TestCase
         $this->assertTrue(count($batch->getInstructions()) == 2);
     }
 
-    public function testShouldGetPayoutBatches() {
+    public function testShouldGetPayoutBatches()
+    {
         try {
             $batches = $this->client->getPayoutBatches();
         } catch (\Exception $e) {
@@ -383,7 +468,8 @@ class BitPayTest extends TestCase
         $this->assertTrue(count($batches) > 0);
     }
 
-    public function testShouldGetPayoutBatchesByStatus() {
+    public function testShouldGetPayoutBatchesByStatus()
+    {
         try {
             $batches = $this->client->getPayoutBatches(PayoutStatus::New);
         } catch (\Exception $e) {
@@ -394,7 +480,8 @@ class BitPayTest extends TestCase
         $this->assertTrue(count($batches) > 0);
     }
 
-    public function testShouldSubmitGetAndDeletePayoutBatch() {
+    public function testShouldSubmitGetAndDeletePayoutBatch()
+    {
         $date = new \DateTime();
         $threeDaysFromNow = $date->modify('+3 day');
 
@@ -402,7 +489,7 @@ class BitPayTest extends TestCase
         $currency = Currency::USD;
         $instructions = [
             new BitPaySDK\Model\Payout\PayoutInstruction(100.0, "mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
-            new BitPaySDK\Model\Payout\PayoutInstruction(200.0, "mvR4Xj7MYT7GJcL93xAQbSZ2p4eHJV5F7A")
+            new BitPaySDK\Model\Payout\PayoutInstruction(200.0, "mvR4Xj7MYT7GJcL93xAQbSZ2p4eHJV5F7A"),
         ];
 
         $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $effectiveDate, $instructions);

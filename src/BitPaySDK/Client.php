@@ -14,17 +14,18 @@ use BitPaySDK\Exceptions\BillUpdateException;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\InvoiceCreationException;
 use BitPaySDK\Exceptions\InvoiceQueryException;
+use BitPaySDK\Exceptions\LedgerQueryException;
 use BitPaySDK\Exceptions\PayoutCancellationException;
 use BitPaySDK\Exceptions\PayoutCreationException;
 use BitPaySDK\Exceptions\PayoutQueryException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
+use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Payout\PayoutBatch;
 use BitPaySDK\Util\JsonMapper\JsonMapper;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
-use GuzzleHttp\Client as GuzzleHttpClient;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -412,7 +413,8 @@ class Client
     public function deliverBill(string $billId, string $billToken, bool $signRequest = true): string
     {
         try {
-            $responseJson = $this->_RESTcli->post("bills/".$billId."/deliveries", ['token' => $billToken], $signRequest);
+            $responseJson = $this->_RESTcli->post(
+                "bills/".$billId."/deliveries", ['token' => $billToken], $signRequest);
         } catch (Exception $e) {
             throw new BillDeliveryException("failed to serialize Bill object : ".$e->getMessage());
         }
@@ -424,6 +426,83 @@ class Client
         }
 
         return $result;
+    }
+
+    /**
+     * Retrieve a list of ledgers by date range using the merchant facade.
+     *
+     * @param $currency  string The three digit currency string for the ledger to retrieve.
+     * @param $startDate string The first date for the query filter.
+     * @param $endDate   string The last date for the query filter.
+     * @return Ledger A Ledger object populated with the BitPay ledger entries list.
+     * @throws BitPayException BitPayException class
+     */
+    public function getLedger(string $currency, string $startDate, string $endDate): Ledger
+    {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            if ($currency) {
+                $params["currency"] = $currency;
+            }
+            if ($currency) {
+                $params["startDate"] = $startDate;
+            }
+            if ($currency) {
+                $params["endDate"] = $endDate;
+            }
+
+            $responseJson = $this->_RESTcli->get("ledgers/".$currency, $params);
+        } catch (Exception $e) {
+            throw new LedgerQueryException("failed to serialize Ledger object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $ledger = $mapper->map(
+                json_decode($responseJson),
+                new Ledger()
+            );
+
+        } catch (Exception $e) {
+            throw new LedgerQueryException(
+                "failed to deserialize BitPay server response (Ledger) : ".$e->getMessage());
+        }
+
+        return $ledger;
+    }
+
+    /**
+     * Retrieve a list of ledgers using the merchant facade.
+     *
+     * @return array A list of Ledger objects populated with the currency and current balance of each one.
+     * @throws BitPayException BitPayException class
+     */
+    public function getLedgers(): array
+    {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+
+            $responseJson = $this->_RESTcli->get("ledgers", $params);
+        } catch (Exception $e) {
+            throw new LedgerQueryException("failed to serialize Ledger object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $ledgers = $mapper->mapArray(
+                json_decode($responseJson),
+                [],
+                'BitPaySDK\Model\Ledger\Ledger'
+            );
+
+        } catch (Exception $e) {
+            throw new LedgerQueryException(
+                "failed to deserialize BitPay server response (Ledger) : ".$e->getMessage());
+        }
+
+        return $ledgers;
     }
 
     /**
