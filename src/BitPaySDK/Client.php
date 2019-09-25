@@ -18,11 +18,13 @@ use BitPaySDK\Exceptions\LedgerQueryException;
 use BitPaySDK\Exceptions\PayoutCancellationException;
 use BitPaySDK\Exceptions\PayoutCreationException;
 use BitPaySDK\Exceptions\PayoutQueryException;
+use BitPaySDK\Exceptions\RateQueryException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Payout\PayoutBatch;
+use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Util\JsonMapper\JsonMapper;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
@@ -426,6 +428,35 @@ class Client
         }
 
         return $result;
+    }
+
+    /**
+     * Retrieve the exchange rate table maintained by BitPay.  See https://bitpay.com/bitcoin-exchange-rates.
+     *
+     * @return Rates A Rates object populated with the BitPay exchange rate table.
+     * @throws BitPayException BitPayException class
+     */
+    public function getRates(): Rates {
+        try {
+            $responseJson = $this->_RESTcli->get("rates", null, false);
+        } catch (Exception $e) {
+            throw new RateQueryException("failed to serialize Rates object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $rates = $mapper->mapArray(
+                json_decode($responseJson),
+                [],
+                'BitPaySDK\Model\Rate\Rate'
+            );
+
+        } catch (Exception $e) {
+            throw new RateQueryException(
+                "failed to deserialize BitPay server response (Rates) : ".$e->getMessage());
+        }
+
+        return new Rates($rates, $this);
     }
 
     /**
