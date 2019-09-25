@@ -146,7 +146,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1001", Currency::USD, "agallardo@bitpay.com", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1001", Currency::USD, "", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -187,7 +187,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1002", Currency::EUR, "agallardo@bitpay.com", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1002", Currency::EUR, "", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -230,7 +230,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1003", Currency::EUR, "agallardo@bitpay.com", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1003", Currency::EUR, "", $items);
         $basicBill = null;
         $retrievedBill = null;
         try {
@@ -273,7 +273,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1004", Currency::EUR, "agallardo@bitpay.com", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1004", Currency::EUR, "", $items);
         $basicBill = null;
         $retrievedBill = null;
         $updatedBill = null;
@@ -359,7 +359,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1005", Currency::EUR, "agallardo@bitpay.com", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1005", Currency::EUR, "", $items);
         $basicBill = null;
         $retrievedBill = null;
         $result = null;
@@ -377,6 +377,64 @@ class BitPayTest extends TestCase
         $this->assertEquals("Success", $result);
         $this->assertNotEquals($basicBill->getStatus(), $retrievedBill->getStatus());
         $this->assertEquals($retrievedBill->getStatus(), BillStatus::Sent);
+    }
+
+    public function testShouldGetExchangeRates()
+    {
+        $ratesList = null;
+        try {
+            $rates = $this->client->getRates();
+            $ratesList = $rates->getRates();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($ratesList);
+    }
+
+    public function testShouldGetEURExchangeRate()
+    {
+        $rate = null;
+        try {
+            $rates = $this->client->getRates();
+            $rate = $rates->getRate(Currency::EUR);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertTrue($rate != 0);
+    }
+
+    public function testShouldGetCNYExchangeRate()
+    {
+        $rate = null;
+        try {
+            $rates = $this->client->getRates();
+            $rate = $rates->getRate(Currency::CNY);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertTrue($rate != 0);
+    }
+
+    public function testShouldUpdateExchangeRates()
+    {
+        $rates = null;
+        $ratesList = null;
+        try {
+            $rates = $this->client->getRates();
+            $rates->update();
+            $ratesList = $rates->getRates();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($ratesList);
     }
 
     public function testShouldGetLedgerBtc()
