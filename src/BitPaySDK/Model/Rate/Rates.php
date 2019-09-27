@@ -41,6 +41,8 @@ class Rates
 
     public function getRate(String $currencyCode)
     {
+        $val = null;
+
         if (!Currency::isValid($currencyCode)) {
             throw new BitPayException("currency code must be a type of Model.Currency");
         }
