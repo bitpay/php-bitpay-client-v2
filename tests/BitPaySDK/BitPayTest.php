@@ -570,4 +570,56 @@ class BitPayTest extends TestCase
         $this->assertEquals($batchRetrieved->getStatus(), PayoutStatus::New);
         $this->assertEquals($batchCancelled->getStatus(), PayoutStatus::Cancelled);
     }
+
+    public function testGetSettlements()
+    {
+        $settlements = null;
+        $firstSettlement = null;
+        $settlement = null;
+        try {
+            //check within the last few days
+            $date = new \DateTime();
+            $today = $date->format("Y-m-d");
+            $dateBefore = $date->modify('-365 day');
+            $oneMonthAgo = $dateBefore->format("Y-m-d");
+
+            $settlements = $this->client->getSettlements(Currency::USD, $oneMonthAgo, $today, null, null, null);
+            $firstSettlement = $settlements[0];
+            $settlement = $this->client->getSettlement($firstSettlement->getId());
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($settlements);
+        $this->assertTrue(count($settlements) > 0);
+        $this->assertNotNull($settlement->getId());
+        $this->assertEquals($firstSettlement->getId(), $settlement->getId());
+    }
+
+    public function testGetSettlementReconciliationReport()
+    {
+        $settlements = null;
+        $firstSettlement = null;
+        $settlement = null;
+        try {
+            //check within the last few days
+            $date = new \DateTime();
+            $today = $date->format("Y-m-d");
+            $dateBefore = $date->modify('-365 day');
+            $oneMonthAgo = $dateBefore->format("Y-m-d");
+
+            $settlements = $this->client->getSettlements(Currency::USD, $oneMonthAgo, $today, null, null, null);
+            $firstSettlement = $settlements[0];
+            $settlement = $this->client->getSettlementReconciliationReport($firstSettlement);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($settlements);
+        $this->assertTrue(count($settlements) > 0);
+        $this->assertNotNull($settlement->getId());
+        $this->assertEquals($firstSettlement->getId(), $settlement->getId());
+    }
 }

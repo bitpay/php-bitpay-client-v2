@@ -19,12 +19,14 @@ use BitPaySDK\Exceptions\PayoutCancellationException;
 use BitPaySDK\Exceptions\PayoutCreationException;
 use BitPaySDK\Exceptions\PayoutQueryException;
 use BitPaySDK\Exceptions\RateQueryException;
+use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Payout\PayoutBatch;
 use BitPaySDK\Model\Rate\Rates;
+use BitPaySDK\Model\Settlement\Settlement;
 use BitPaySDK\Util\JsonMapper\JsonMapper;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
@@ -436,7 +438,8 @@ class Client
      * @return Rates A Rates object populated with the BitPay exchange rate table.
      * @throws BitPayException BitPayException class
      */
-    public function getRates(): Rates {
+    public function getRates(): Rates
+    {
         try {
             $responseJson = $this->_RESTcli->get("rates", null, false);
         } catch (Exception $e) {
@@ -674,6 +677,129 @@ class Client
         return $batch;
     }
 
+    /**
+     * Retrieves settlement reports for the calling merchant filtered by query.
+     * The `limit` and `offset` parameters
+     * specify pages for large query sets.
+     *
+     * @param $currency  string The three digit currency string for the ledger to retrieve.
+     * @param $dateStart string The start date for the query.
+     * @param $dateEnd   string The end date for the query.
+     * @param $status    string Can be `processing`, `completed`, or `failed`.
+     * @param $limit     int Maximum number of settlements to retrieve.
+     * @param $offset    int Offset for paging.
+     * @return array A list of BitPay Settlement objects.
+     * @throws BitPayException BitPayException class
+     */
+    public function getSettlements(
+        string $currency,
+        string $dateStart,
+        string $dateEnd,
+        string $status = null,
+        int $limit = null,
+        int $offset = null
+    ): array {
+        try {
+            $status = $status != null ? $status : "";
+            $limit = $limit != null ? $limit : 100;
+            $offset = $offset != null ? $offset : 0;
+
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["dateStart"] = $dateStart;
+            $params["dateEnd"] = $dateEnd;
+            $params["currency"] = $currency;
+            $params["status"] = $status;
+            $params["limit"] = (string)$limit;
+            $params["offset"] = (string)$offset;
+
+            $responseJson = $this->_RESTcli->get("settlements", $params);
+        } catch (Exception $e) {
+            throw new SettlementQueryException("failed to serialize Settlement object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $settlements = $mapper->mapArray(
+                json_decode($responseJson),
+                [],
+                'BitPaySDK\Model\Settlement\Settlement'
+            );
+
+        } catch (Exception $e) {
+            throw new SettlementQueryException(
+                "failed to deserialize BitPay server response (Settlement) : ".$e->getMessage());
+        }
+
+        return $settlements;
+    }
+
+    /**
+     * Retrieves a summary of the specified settlement.
+     *
+     * @param $settlementId Settlement Id.
+     * @return Settlement A BitPay Settlement object.
+     * @throws BitPayException BitPayException class
+     */
+    public function getSettlement(string $settlementId): Settlement
+    {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+
+            $responseJson = $this->_RESTcli->get("settlements/".$settlementId, $params);
+        } catch (Exception $e) {
+            throw new SettlementQueryException("failed to serialize Settlement object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $settlement = $mapper->map(
+                json_decode($responseJson),
+                new Settlement()
+            );
+
+        } catch (Exception $e) {
+            throw new SettlementQueryException(
+                "failed to deserialize BitPay server response (Settlement) : ".$e->getMessage());
+        }
+
+        return $settlement;
+    }
+
+    /**
+     * Gets a detailed reconciliation report of the activity within the settlement period.
+     *
+     * @param $settlement Settlement to generate report for.
+     * @return Settlement A detailed BitPay Settlement object.
+     * @throws BitPayException BitPayException class
+     */
+    public function getSettlementReconciliationReport(Settlement $settlement): Settlement
+    {
+        try {
+            $params = [];
+            $params["token"] = $settlement->getToken();
+
+            $responseJson = $this->_RESTcli->get("settlements/".$settlement->getId()."/reconciliationReport", $params);
+        } catch (Exception $e) {
+            throw new SettlementQueryException("failed to serialize Reconciliation Report object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $reconciliationReport = $mapper->map(
+                json_decode($responseJson),
+                new Settlement()
+            );
+
+        } catch (Exception $e) {
+            throw new SettlementQueryException(
+                "failed to deserialize BitPay server response (Reconciliation Report) : ".$e->getMessage());
+        }
+
+        return $reconciliationReport;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -770,7 +896,6 @@ class Client
     private function init()
     {
         try {
-            $this->_baseUrl = $this->_env == Env::Test ? Env::TestUrl : Env::ProdUrl;
             $this->_RESTcli = new RESTcli($this->_env, $this->_ecKey);
             $this->loadAccessTokens();
         } catch (Exception $e) {

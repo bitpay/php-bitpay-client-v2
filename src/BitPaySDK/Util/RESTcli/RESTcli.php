@@ -9,7 +9,7 @@ use BitPaySDK\Env;
 use BitPaySDK\Exceptions\BitPayException;
 use Exception;
 use GuzzleHttp\Client as GuzzleHttpClient;
-use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Response as Response;
 use GuzzleHttp\RequestOptions as RequestOptions;
 
 class RESTcli
@@ -71,7 +71,7 @@ class RESTcli
             }
 
             /**
-             * @var GuzzleHttp\Psr7\Response
+             * @var Response
              */
             $response = $this->_client->requestAsync(
                 'POST', $fullURL, [
