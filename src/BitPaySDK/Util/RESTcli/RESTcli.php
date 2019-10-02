@@ -198,9 +198,11 @@ class RESTcli
             if (false !== $error_message) {
                 throw new BitpayException($error_message);
             }
-            $jsonString = json_encode($body['data']);
+            if (!empty($body['success'])) {
+                return json_encode($body);
+            }
 
-            return $jsonString;
+            return json_encode($body['data']);
 
         } catch (Exception $e) {
             throw new BitPayException("failed to retrieve HTTP response body : ".$e->getMessage());

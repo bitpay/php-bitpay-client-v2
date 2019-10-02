@@ -6,7 +6,7 @@ namespace BitPaySDK\Tests;
 use BitPaySDK;
 use BitPaySDK\Model\Bill\BillStatus;
 use BitPaySDK\Model\Currency;
-use BitPaySDK\Model\Invoice\Invoice;
+use BitPaySDK\Model\Invoice\Invoice as Invoice;
 use BitPaySDK\Model\Payout\PayoutStatus;
 use PHPUnit\Framework\TestCase;
 
@@ -116,6 +116,46 @@ class BitPayTest extends TestCase
 
         $this->assertNotNull($invoices);
         $this->assertTrue(count($invoices) > 0);
+    }
+
+    public function testShouldCreateGetCancelRefundRequest()
+    {
+        $invoices = null;
+        $firstInvoice = null;
+        $firstRefund = null;
+        $retrievedRefund = null;
+        $retrievedRefunds = null;
+        $cancelRefund = null;
+        try {
+            $date = new \DateTime();
+            $today = $date->format("Y-m-d");
+            $dateBefore = $date->modify('-30 day');
+            $sevenDaysAgo = $dateBefore->format("Y-m-d");
+            $invoices = $this->client->getInvoices(
+                $sevenDaysAgo, $today, BitPaySDK\Model\Invoice\InvoiceStatus::Complete);
+            /**
+             * var Invoice
+             */
+            $firstInvoice = $invoices[0];
+            $refunded = $this->client->createRefund(
+                $firstInvoice,
+                "",
+                $firstInvoice->getPrice(),
+                $firstInvoice->getCurrency()
+            );
+            $retrievedRefunds = $this->client->getRefunds($firstInvoice);
+            $firstRefund = $retrievedRefunds[0];
+            $retrievedRefund = $this->client->getRefund($firstInvoice, $firstRefund->getId());
+            $cancelRefund = $this->client->cancelRefund($firstInvoice->getId(), $firstRefund);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($invoices);
+        $this->assertNotNull($retrievedRefunds);
+        $this->assertEquals($firstRefund->getId(), $retrievedRefund->getId());
+        $this->assertTrue($cancelRefund);
     }
 
     public function testShouldCreateBillUSD()
