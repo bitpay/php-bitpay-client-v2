@@ -22,6 +22,9 @@ use BitPaySDK\Exceptions\RateQueryException;
 use BitPaySDK\Exceptions\RefundCreationException;
 use BitPaySDK\Exceptions\RefundQueryException;
 use BitPaySDK\Exceptions\SettlementQueryException;
+use BitPaySDK\Exceptions\SubscriptionCreationException;
+use BitPaySDK\Exceptions\SubscriptionQueryException;
+use BitPaySDK\Exceptions\SubscriptionUpdateException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
@@ -30,6 +33,7 @@ use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Payout\PayoutBatch;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Model\Settlement\Settlement;
+use BitPaySDK\Model\Subscription\Subscription;
 use BitPaySDK\Util\JsonMapper\JsonMapper;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
@@ -530,6 +534,8 @@ class Client
     public function updateBill(Bill $bill, string $billId): Bill
     {
         try {
+            $billToken = $this->getBill($bill->getId())->getToken();
+            $bill->setToken($billToken);
 
             $responseJson = $this->_RESTcli->update("bills/".$billId, $bill->toArray());
         } catch (Exception $e) {
@@ -943,6 +949,143 @@ class Client
         }
 
         return $reconciliationReport;
+    }
+
+    /**
+     * Create a BitPay Subscription.
+     *
+     * @param $subscription string A Subscription object with request parameters defined.
+     * @return Subscription A BitPay generated Subscription object.
+     * @throws BitPayException BitPayException class
+     */
+    public function createSubscription(Subscription $subscription): Subscription
+    {
+        try {
+            $subscription->setToken($this->_tokenCache->getTokenByFacade(Facade::Merchant));
+
+            $responseJson = $this->_RESTcli->post("subscriptions", $subscription->toArray());
+        } catch (Exception $e) {
+            throw new SubscriptionCreationException("failed to serialize Subscription object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $subscription = $mapper->map(
+                json_decode($responseJson),
+                new Subscription()
+            );
+
+        } catch (Exception $e) {
+            throw new SubscriptionCreationException(
+                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage());
+        }
+
+        return $subscription;
+    }
+
+    /**
+     * Retrieve a BitPay subscription by subscription id using the specified facade.
+     *
+     * @param $subscriptionId string The id of the subscription to retrieve.
+     * @return Subscription A BitPay Subscription object.
+     * @throws BitPayException BitPayException class
+     */
+    public function getSubscription(string $subscriptionId): Subscription
+    {
+
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+
+            $responseJson = $this->_RESTcli->get("subscriptions/".$subscriptionId, $params);
+        } catch (Exception $e) {
+            throw new SubscriptionQueryException("failed to serialize Subscription object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $subscription = $mapper->map(
+                json_decode($responseJson),
+                new Subscription()
+            );
+
+        } catch (Exception $e) {
+            throw new SubscriptionQueryException(
+                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage());
+        }
+
+        return $subscription;
+    }
+
+    /**
+     * Retrieve a collection of BitPay subscriptions.
+     *
+     * @param $status string|null The status to filter the subscriptions.
+     * @return array A list of BitPay Subscription objects.
+     * @throws BitPayException BitPayException class
+     */
+    public function getSubscriptions(string $status = null): array
+    {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            if ($status) {
+                $params["status"] = $status;
+            }
+
+            $responseJson = $this->_RESTcli->get("subscriptions", $params);
+        } catch (Exception $e) {
+            throw new SubscriptionQueryException("failed to serialize Subscription object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $subscriptions = $mapper->mapArray(
+                json_decode($responseJson),
+                [],
+                'BitPaySDK\Model\Subscription\Subscription'
+            );
+
+        } catch (Exception $e) {
+            throw new SubscriptionQueryException(
+                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage());
+        }
+
+        return $subscriptions;
+    }
+
+    /**
+     * Update a BitPay Subscription.
+     *
+     * @param $subscription   Subscription A Subscription object with the parameters to update defined.
+     * @param $subscriptionId string $subscriptionIdThe Id of the Subscription to update.
+     * @return Subscription An updated Subscription object.
+     * @throws BitPayException BitPayException class
+     */
+    public function updateSubscription(Subscription $subscription, string $subscriptionId): Subscription
+    {
+        try {
+            $subscriptionToken = $this->getSubscription($subscription->getId())->getToken();
+            $subscription->setToken($subscriptionToken);
+
+            $responseJson = $this->_RESTcli->update("subscriptions/".$subscriptionId, $subscription->toArray());
+        } catch (Exception $e) {
+            throw new SubscriptionUpdateException("failed to serialize Subscription object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $subscription = $mapper->map(
+                json_decode($responseJson),
+                $subscription
+            );
+
+        } catch (Exception $e) {
+            throw new SubscriptionUpdateException(
+                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage());
+        }
+
+        return $subscription;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
