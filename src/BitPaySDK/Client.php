@@ -26,7 +26,6 @@ use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Invoice\Refund;
-use BitPaySDK\Model\Invoice\RefundInvoicePair;
 use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Payout\PayoutBatch;
 use BitPaySDK\Model\Rate\Rates;
@@ -271,8 +270,6 @@ class Client
         return $invoices;
     }
 
-//**********************************************************************************************************************
-
     /**
      * Create a BitPay refund.
      *
@@ -294,12 +291,8 @@ class Client
         string $currency
     ): bool {
         try {
-            $refund = new Refund();
-            $refund->setToken($invoice->getToken());
+            $refund = new Refund($refundEmail, $amount, $currency, $invoice->getToken());
             $refund->setGuid(Util::guid());
-            $refund->setAmount($amount);
-            $refund->setRefundEmail($refundEmail);
-            $refund->setCurrency($currency);
 
             $responseJson = $this->_RESTcli->post("invoices/".$invoice->getId()."/refunds", $refund->toArray());
         } catch (Exception $e) {
@@ -409,7 +402,7 @@ class Client
         }
 
         try {
-            $result = str_replace('"', '', $responseJson) == 'success';
+            $result = strtolower(trim($responseJson, '"')) === "success";
 
         } catch (Exception $e) {
             throw new PayoutCancellationException(
@@ -418,8 +411,6 @@ class Client
 
         return $result;
     }
-
-//**********************************************************************************************************************
 
     /**
      * Create a BitPay Bill.
