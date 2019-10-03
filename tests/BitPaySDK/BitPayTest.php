@@ -662,4 +662,218 @@ class BitPayTest extends TestCase
         $this->assertNotNull($settlement->getId());
         $this->assertEquals($firstSettlement->getId(), $settlement->getId());
     }
+
+    public function testShouldCreateSubscription()
+    {
+        $items = [];
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(30.0);
+        $item->setQuantity(9);
+        $item->setDescription("product-a");
+        array_push($items, $item);
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(14.0);
+        $item->setQuantity(16);
+        $item->setDescription("product-b");
+        array_push($items, $item);
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(3.90);
+        $item->setQuantity(42);
+        $item->setDescription("product-c");
+        array_push($items, $item);
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(6.99);
+        $item->setQuantity(12);
+        $item->setDescription("product-d");
+        array_push($items, $item);
+
+        //Stop subscription a few days later
+        $date = new \DateTime();
+        $date->modify('+1 month');
+        $dueDate = $date->format("Y-m-d");
+
+        $billData = new BitPaySDK\Model\Subscription\BillData(
+            Currency::USD,
+            "",
+            $dueDate,
+            $items
+        );
+
+        $subscription = new BitPaySDK\Model\Subscription\Subscription();
+        $subscription->setBillData($billData);
+        $subscription->setSchedule("weekly");
+        $basicSubscription = null;
+        try {
+            $basicSubscription = $this->client->createSubscription($subscription);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicSubscription->getId());
+        $this->assertNotNull($basicSubscription->getBillData()->getItems()[0]);
+    }
+
+    public function testShouldGetSubscription()
+    {
+        $items = [];
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(30.0);
+        $item->setQuantity(9);
+        $item->setDescription("product-a");
+        array_push($items, $item);
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(14.0);
+        $item->setQuantity(16);
+        $item->setDescription("product-b");
+        array_push($items, $item);
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(3.90);
+        $item->setQuantity(42);
+        $item->setDescription("product-c");
+        array_push($items, $item);
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(6.99);
+        $item->setQuantity(12);
+        $item->setDescription("product-d");
+        array_push($items, $item);
+
+        //Stop subscription a few days later
+        $date = new \DateTime();
+        $date->modify('+1 month');
+        $dueDate = $date->format("Y-m-d");
+
+        $billData = new BitPaySDK\Model\Subscription\BillData(
+            Currency::USD,
+            "",
+            $dueDate,
+            $items
+        );
+
+        $subscription = new BitPaySDK\Model\Subscription\Subscription();
+        $subscription->setBillData($billData);
+        $subscription->setSchedule("weekly");
+        $basicSubscription = null;
+        $retrievedSubscription = null;
+        try {
+            $basicSubscription = $this->client->createSubscription($subscription);
+            $retrievedSubscription = $this->client->getSubscription($basicSubscription->getId());
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertEquals($basicSubscription->getId(), $retrievedSubscription->getId());
+        $this->assertEquals($basicSubscription->getItems(), $retrievedSubscription->getBillData()->getItems());
+    }
+
+    public function testShouldUpdateSubscription()
+    {
+        $items = [];
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(30.0);
+        $item->setQuantity(9);
+        $item->setDescription("product-a");
+        array_push($items, $item);
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(14.0);
+        $item->setQuantity(16);
+        $item->setDescription("product-b");
+        array_push($items, $item);
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(3.90);
+        $item->setQuantity(42);
+        $item->setDescription("product-c");
+        array_push($items, $item);
+
+        $item = new BitPaySDK\Model\Subscription\Item();
+        $item->setPrice(6.99);
+        $item->setQuantity(12);
+        $item->setDescription("product-d");
+        array_push($items, $item);
+
+        //Stop subscription a few days later
+        $date = new \DateTime();
+        $date->modify('+1 month');
+        $dueDate = $date->format("Y-m-d");
+
+        $billData = new BitPaySDK\Model\Subscription\BillData(
+            Currency::USD,
+            "",
+            $dueDate,
+            $items
+        );
+
+        $subscription = new BitPaySDK\Model\Subscription\Subscription();
+        $subscription->setBillData($billData);
+        $subscription->setSchedule("weekly");
+        $basicSubscription = null;
+        $retrievedSubscription = null;
+        $updatedSubscription = null;
+        try {
+            $basicSubscription = $this->client->createSubscription($subscription);
+            $retrievedSubscription = $this->client->getSubscription($basicSubscription->getId());
+
+            $this->assertEquals($basicSubscription->getId(), $retrievedSubscription->getId());
+            $this->assertEquals(
+                $basicSubscription->getBillData()->getItems(), $retrievedSubscription->getBillData()->getItems());
+            $this->assertEquals(count($retrievedSubscription->getBillData()->getItems()), 4);
+
+            $items = $retrievedSubscription->getBillData()->getItems();
+
+            $item = new BitPaySDK\Model\Subscription\Item();
+            $item->setPrice(60);
+            $item->setQuantity(7);
+            $item->setDescription("product-added");
+            array_push($items, $item);
+
+            $retrievedSubscription->getBillData()->setItems($items);
+            $updatedSubscription = $this->client->updateSubscription(
+                $retrievedSubscription, $retrievedSubscription->getId());
+            $items = $updatedSubscription->getBillData()->getItems();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertEquals(count($updatedSubscription->getBillData()->getItems()), 5);
+        $this->assertEquals(end($items)->getDescription(), "product-added");
+    }
+
+    public function testShouldGetSubscriptions()
+    {
+        $subscriptions = null;
+        try {
+            $subscriptions = $this->client->getSubscriptions();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertTrue(count($subscriptions) > 0);
+    }
+
+    public function testShouldGetSubscriptionsByStatus()
+    {
+        $subscriptions = null;
+        try {
+            $subscriptions = $this->client->getSubscriptions();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertTrue(count($subscriptions) > 0);
+    }
 }

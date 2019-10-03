@@ -25,6 +25,7 @@ class BillData
     protected $_dueDate;
     protected $_passProcessingFee;
     protected $_items;
+    protected $_merchant;
 
     public function __construct(string $currency, string $email, string $dueDate, array $items)
     {
@@ -188,6 +189,16 @@ class BillData
         $this->_passProcessingFee = $passProcessingFee;
     }
 
+    public function getMerchant()
+    {
+        return $this->_merchant;
+    }
+
+    public function setMerchant(string $merchant)
+    {
+        $this->_merchant = $merchant;
+    }
+
     public function getItems()
     {
         return $this->_items;
@@ -210,17 +221,16 @@ class BillData
 
     public function setItems(array $items)
     {
-        $items = [];
+        $itemsArray = [];
 
-        foreach ($this->_items as $item) {
+        foreach ($items as $item) {
             if ($item instanceof Item) {
-                array_push($items, $item->toArray());
+                array_push($itemsArray, $item);
             } else {
-                array_push($items, $item);
+                array_push($itemsArray, Item::createFromArray((array)$item));
             }
         }
-
-        return $items;
+        $this->_items = $itemsArray;
     }
 
     public function toArray()
@@ -242,6 +252,7 @@ class BillData
             'dueDate'           => $this->getDueDate(),
             'passProcessingFee' => $this->getPassProcessingFee(),
             'items'             => $this->getItemsAsArray(),
+            'merchant'          => $this->getMerchant(),
         ];
 
         foreach ($elements as $key => $value) {

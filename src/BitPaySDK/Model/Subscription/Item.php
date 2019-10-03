@@ -47,6 +47,17 @@ class Item
         $this->_quantity = $quantity;
     }
 
+    public static function createFromArray(array $item)
+    {
+        $instance = new self();
+
+        foreach ($item as $key => $value) {
+            $instance->{'_'.$key} = $value;
+        }
+
+        return $instance;
+    }
+
     public function toArray()
     {
         $elements = [
