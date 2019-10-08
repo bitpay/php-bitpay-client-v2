@@ -12,6 +12,7 @@ use BitPaySDK\Exceptions\BillDeliveryException;
 use BitPaySDK\Exceptions\BillQueryException;
 use BitPaySDK\Exceptions\BillUpdateException;
 use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\CurrencyQueryException;
 use BitPaySDK\Exceptions\InvoiceCreationException;
 use BitPaySDK\Exceptions\InvoiceQueryException;
 use BitPaySDK\Exceptions\LedgerQueryException;
@@ -1086,6 +1087,35 @@ class Client
         }
 
         return $subscription;
+    }
+
+    /**
+     * Fetch the supported currencies.
+     *
+     * @return array     A list of BitPay Invoice objects.
+     * @throws BitPayException BitPayException class
+     */
+    public function getCurrencies(): array {
+        try {
+            $responseJson = $this->_RESTcli->get("currencies", null, false);
+        } catch (Exception $e) {
+            throw new CurrencyQueryException("failed to serialize Currency object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $currencies = $mapper->mapArray(
+                json_decode($responseJson),
+                [],
+                'BitPaySDK\Model\Currency'
+            );
+
+        } catch (Exception $e) {
+            throw new CurrencyQueryException(
+                "failed to deserialize BitPay server response (Currency) : ".$e->getMessage());
+        }
+
+        return $currencies;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

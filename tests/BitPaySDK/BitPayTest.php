@@ -876,4 +876,17 @@ class BitPayTest extends TestCase
 
         $this->assertTrue(count($subscriptions) > 0);
     }
+
+    public function testShouldGetCurrencies()
+    {
+        $currencyList = null;
+        try {
+            $currencyList = $this->client->getCurrencies();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($currencyList);
+    }
 }
