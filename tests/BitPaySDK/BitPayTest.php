@@ -772,7 +772,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertEquals($basicSubscription->getId(), $retrievedSubscription->getId());
-        $this->assertEquals($basicSubscription->getItems(), $retrievedSubscription->getBillData()->getItems());
+        $this->assertEquals($basicSubscription->getBillData()->getItems(), $retrievedSubscription->getBillData()->getItems());
     }
 
     public function testShouldUpdateSubscription()
