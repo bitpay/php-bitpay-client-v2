@@ -1095,7 +1095,8 @@ class Client
      * @return array     A list of BitPay Invoice objects.
      * @throws BitPayException BitPayException class
      */
-    public function getCurrencies(): array {
+    public function getCurrencies(): array
+    {
         try {
             $responseJson = $this->_RESTcli->get("currencies", null, false);
         } catch (Exception $e) {
