@@ -1,11 +1,14 @@
 {
   "name": "bitpay/sdk",
-  "description": "Light version of the PHP library for the new cryptographically secure BitPay API",
+  "description": "Complete version of the PHP library for the new cryptographically secure BitPay API",
   "license": "MIT",
   "minimum-stability": "stable",
   "keywords": [
     "bitpay",
-    "bitcoin"
+    "bitcoin",
+    "cash",
+    "payment",
+    "gateway"
   ],
   "homepage": "https://github.com/bitpay/php-bitpay-client-v2",
   "require": {
