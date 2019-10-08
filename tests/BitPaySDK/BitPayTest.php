@@ -772,7 +772,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertEquals($basicSubscription->getId(), $retrievedSubscription->getId());
-        $this->assertEquals($basicSubscription->getItems(), $retrievedSubscription->getBillData()->getItems());
+        $this->assertEquals($basicSubscription->getBillData()->getItems(), $retrievedSubscription->getBillData()->getItems());
     }
 
     public function testShouldUpdateSubscription()
@@ -875,5 +875,18 @@ class BitPayTest extends TestCase
         }
 
         $this->assertTrue(count($subscriptions) > 0);
+    }
+
+    public function testShouldGetCurrencies()
+    {
+        $currencyList = null;
+        try {
+            $currencyList = $this->client->getCurrencies();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($currencyList);
     }
 }
