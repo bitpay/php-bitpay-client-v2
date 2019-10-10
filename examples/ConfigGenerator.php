@@ -193,7 +193,7 @@ try {
 }
 
 echo "\r\nPlease, copy the above pairing code/s and approve on your BitPay Account at the following link:\r\n";
-echo $baseUrl . "dashboard/merchant/api-tokens\r\n";
+echo $baseUrl . "/dashboard/merchant/api-tokens\r\n";
 echo "\r\nOnce you have this Pairing Code/s approved you can move the generated files to a secure location and start using the Client.\r\n";
 
 /**
