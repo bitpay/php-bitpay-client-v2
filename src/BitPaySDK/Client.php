@@ -43,10 +43,10 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * Class Client
  * @package Bitpay
- * @author Antonio Buedo
+ * @author  Antonio Buedo
  * @version 3.0.1910
  * See bitpay.com/api for more information.
- * date 08.10.2019
+ * date 10.10.2019
  */
 class Client
 {
@@ -101,17 +101,17 @@ class Client
      * Constructor for use if the keys and SIN are managed by this library.
      *
      * @param $environment      String Target environment. Options: Env.Test / Env.Prod
-     * @param $privateKeyPath   String Private Key file path.
+     * @param $privateKey       String Private Key file path or the HEX value.
      * @param $tokens           Tokens containing the available tokens.
      * @param $privateKeySecret String|null Private Key encryption password.
      * @return Client
      * @throws BitPayException BitPayException class
      */
-    public function withData($environment, $privateKeyPath, Tokens $tokens, $privateKeySecret = null)
+    public function withData($environment, $privateKey, Tokens $tokens, $privateKeySecret = null)
     {
         try {
             $this->_env = $environment;
-            $this->buildConfig($privateKeyPath, $tokens, $privateKeySecret);
+            $this->buildConfig($privateKey, $tokens, $privateKeySecret);
             $this->initKeys();
             $this->init();
 
@@ -1130,22 +1130,27 @@ class Client
     /**
      * Builds the configuration object
      *
-     * @param $privateKeyPath   String The full path to the securely located private key.
+     * @param $privateKey       String The full path to the securely located private key or the HEX key value.
      * @param $tokens           Tokens object containing the BitPay's API tokens.
-     * @param $privateKeySecret String Private Key encryption password.
+     * @param $privateKeySecret String Private Key encryption password only for key file.
      * @throws BitPayException BitPayException class
      */
-    private function buildConfig($privateKeyPath, $tokens, $privateKeySecret = null)
+    private function buildConfig($privateKey, $tokens, $privateKeySecret = null)
     {
         try {
-            if (!file_exists($privateKeyPath)) {
-                throw new BitPayException("Private Key file not found");
+            if (!file_exists($privateKey)) {
+                $key = new PrivateKey("plainHex");
+                $key->setHex($privateKey);
+                if (!$key->isValid()) {
+                    throw new BitPayException("Private Key not found/valid");
+                }
+                $this->_ecKey = $key;
             }
             $this->_configuration = new Config();
             $this->_configuration->setEnvironment($this->_env);
 
             $envConfig[$this->_env] = [
-                "PrivateKeyPath"   => $privateKeyPath,
+                "PrivateKeyPath"   => $privateKey,
                 "PrivateKeySecret" => $privateKeySecret,
                 "ApiTokens"        => $tokens,
             ];
@@ -1199,13 +1204,15 @@ class Client
      */
     private function initKeys()
     {
-        $privateKeyPath = $this->_configuration->getEnvConfig()[$this->_env]["PrivateKeyPath"];
+        $privateKey = $this->_configuration->getEnvConfig()[$this->_env]["PrivateKeyPath"];
         $privateKeySecret = $this->_configuration->getEnvConfig()[$this->_env]["PrivateKeySecret"];
 
         try {
-            $this->_ecKey = new PrivateKey($privateKeyPath);
-            $storageEngine = new EncryptedFilesystemStorage($privateKeySecret);
-            $this->_ecKey = $storageEngine->load($privateKeyPath);
+            if (!$this->_ecKey) {
+                $this->_ecKey = new PrivateKey($privateKey);
+                $storageEngine = new EncryptedFilesystemStorage($privateKeySecret);
+                $this->_ecKey = $storageEngine->load($privateKey);
+            }
         } catch (Exception $e) {
             throw new BitPayException("failed to build configuration : ".$e->getMessage());
         }
