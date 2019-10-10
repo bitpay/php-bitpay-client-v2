@@ -147,8 +147,7 @@ $bitpay = BitPaySDK\Client::create()->withData(
     new BitPaySDK\Tokens(
         "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ", //merchant
         "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
-    ),
-    "YourMasterPassword" //used to decrypt your private key, if encrypted
+    )
 );
 ```
 ##
