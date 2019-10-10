@@ -77,7 +77,7 @@ try {
  * The pairing code has to be approved in the BitPay Dashboard
  * THIS is just a cUrl example, which explains how to use the key pair for signing requests
  **/
-$resourceUrl = $isProd ? 'https://bitpay.com/tokens' : 'https://test.bitpay.com/tokens';
+$baseUrl = $isProd ? 'https://bitpay.com' : 'https://test.bitpay.com';
 $env = $isProd ? 'Prod' : 'Test';
 
 
@@ -99,14 +99,14 @@ try {
                 'facade' => $facade,
             ]);
 
-        $curlCli = curl_init($resourceUrl);
+        $curlCli = curl_init($baseUrl . "/tokens");
 
         curl_setopt(
             $curlCli, CURLOPT_HTTPHEADER, [
             'x-accept-version: 2.0.0',
             'Content-Type: application/json',
             'x-identity'  => $publicKey->__toString(),
-            'x-signature' => $privateKey->sign($resourceUrl.$postData),
+            'x-signature' => $privateKey->sign($baseUrl . "/tokens".$postData),
         ]);
 
         curl_setopt($curlCli, CURLOPT_CUSTOMREQUEST, 'POST');
@@ -151,14 +151,14 @@ try {
                 'facade' => $facade,
             ]);
 
-        $curlCli = curl_init($resourceUrl);
+        $curlCli = curl_init($baseUrl . "/tokens");
 
         curl_setopt(
             $curlCli, CURLOPT_HTTPHEADER, [
             'x-accept-version: 2.0.0',
             'Content-Type: application/json',
             'x-identity'  => $publicKey->__toString(),
-            'x-signature' => $privateKey->sign($resourceUrl.$postData),
+            'x-signature' => $privateKey->sign($baseUrl . "/tokens".$postData),
         ]);
 
         curl_setopt($curlCli, CURLOPT_CUSTOMREQUEST, 'POST');
@@ -193,7 +193,7 @@ try {
 }
 
 echo "\r\nPlease, copy the above pairing code/s and approve on your BitPay Account at the following link:\r\n";
-echo $resourceUrl . "dashboard/merchant/api-tokens\r\n";
+echo $baseUrl . "dashboard/merchant/api-tokens\r\n";
 echo "\r\nOnce you have this Pairing Code/s approved you can move the generated files to a secure location and start using the Client.\r\n";
 
 /**
