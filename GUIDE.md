@@ -124,7 +124,8 @@ $bitpay = BitPaySDK\Client::create()->withFile([FULL_PATH_TO_THE_CONFIG_FILE]);
 ```
 
 ```php
-// Initialize with separate variables.
+// Initialize with separate variables 
+// and Private Key stored in file.
 
 $bitpay = BitPaySDK\Client::create()->withData(
     BitPaySDK\Env.Test,
@@ -133,7 +134,21 @@ $bitpay = BitPaySDK\Client::create()->withData(
         "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ", //merchant
         "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
     ),
-    "YourMasterPassword" //used to decrypt your private key
+    "YourMasterPassword" //used to decrypt your private key, if encrypted
+);
+```
+```php
+// Initialize with separate variables 
+// and Private Key as HEX string.
+
+$bitpay = BitPaySDK\Client::create()->withData(
+    BitPaySDK\Env.Test,
+    "[PRIVATE_KEY_AS_HEX_STRING]",
+    new BitPaySDK\Tokens(
+        "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ", //merchant
+        "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
+    ),
+    "YourMasterPassword" //used to decrypt your private key, if encrypted
 );
 ```
 ##
