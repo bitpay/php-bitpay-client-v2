@@ -18,8 +18,9 @@ class BitPayException extends Exception
      */
     public function __construct($message = "", $code = 100)
     {
-
-        $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
+        if (!$message) {
+            $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
+        }
 
         parent::__construct($message, $code);
     }
