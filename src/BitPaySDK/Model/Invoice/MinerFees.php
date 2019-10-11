@@ -8,38 +8,51 @@ class MinerFees
 {
     protected $_btc;
     protected $_bch;
+    protected $_eth;
 
     public function __construct()
     {
         $this->_btc = new MinerFeesItem();
         $this->_bch = new MinerFeesItem();
+        $this->_eth = new MinerFeesItem();
     }
 
-    public function getBtc()
+    public function getBTH()
     {
         return $this->_btc;
     }
 
-    public function setBtc(MinerFeesItem $btc)
+    public function setBTH(MinerFeesItem $btc)
     {
         $this->_btc = $btc;
     }
 
-    public function getBch()
+    public function getBCH()
     {
         return $this->_bch;
     }
 
-    public function setBch(MinerFeesItem $bch)
+    public function setBCH(MinerFeesItem $bch)
     {
         $this->_bch = $bch;
+    }
+
+    public function getETH()
+    {
+        return $this->_bch;
+    }
+
+    public function setETH(MinerFeesItem $eth)
+    {
+        $this->_eth = $eth;
     }
 
     public function toArray()
     {
         $elements = [
-            'btc' => $this->getBtc()->toArray(),
-            'bch' => $this->getBch()->toArray(),
+            'btc' => $this->getBTH()->toArray(),
+            'bch' => $this->getBCH()->toArray(),
+            'eth' => $this->getETH()->toArray(),
         ];
 
         foreach ($elements as $key => $value) {

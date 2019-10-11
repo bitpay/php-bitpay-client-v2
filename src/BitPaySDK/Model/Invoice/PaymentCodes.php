@@ -8,18 +8,21 @@ class PaymentCodes
 {
     protected $_btc;
     protected $_bch;
+    protected $_eth;
 
     public function __construct()
     {
         $this->_btc = new PaymentCode();
         $this->_bch = new PaymentCode();
+        $this->_eth = new PaymentCode();
     }
 
     public function toArray()
     {
         $elements = [
-            'btc' => $this->getBtc()->toArray(),
-            'bch' => $this->getBch()->toArray(),
+            'BTC' => $this->getBTC()->toArray(),
+            'BCH' => $this->getBCH()->toArray(),
+            'ETH' => $this->getETH()->toArray(),
         ];
 
         foreach ($elements as $key => $value) {
@@ -31,23 +34,33 @@ class PaymentCodes
         return $elements;
     }
 
-    public function getBtc()
+    public function getBTC()
     {
         return $this->_btc;
     }
 
-    public function setBtc(PaymentCode $btc)
+    public function setBTC(PaymentCode $btc)
     {
         $this->_btc = $btc;
     }
 
-    public function getBch()
+    public function getBCH()
     {
         return $this->_bch;
     }
 
-    public function setBch(PaymentCode $bch)
+    public function setBCH(PaymentCode $bch)
     {
         $this->_bch = $bch;
+    }
+
+    public function getETH()
+    {
+        return $this->_eth;
+    }
+
+    public function setETH(PaymentCode $eth)
+    {
+        $this->_eth = $eth;
     }
 }

@@ -62,7 +62,7 @@ class BitPayTest extends TestCase
 
     public function testShouldGetInvoiceId()
     {
-        $invoice = new Invoice("2.16", "eur");
+        $invoice = new Invoice(2.16, "eur");
         $invoice->setOrderId("98e572ea-910e-415d-b6de-65f5090680f6");
         $invoice->setFullNotifications(true);
         $invoice->setExtendedNotifications(true);
@@ -97,6 +97,45 @@ class BitPayTest extends TestCase
         $this->assertNotNull($basicInvoice->getId());
         $this->assertNotNull($retrievedInvoice->getId());
         $this->assertEquals($basicInvoice->getId(), $retrievedInvoice->getId());
+    }
+
+    public function testShouldCreateInvoiceBtc()
+    {
+        try {
+            $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicInvoice->getId());
+
+    }
+
+    public function testShouldCreateInvoiceBch()
+    {
+        try {
+            $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BCH));
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicInvoice->getId());
+
+    }
+
+    public function testShouldCreateInvoiceEth()
+    {
+        try {
+            $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::ETH));
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicInvoice->getId());
+
     }
 
     public function testShouldGetInvoices()
