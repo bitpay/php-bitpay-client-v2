@@ -16,8 +16,9 @@ class RefundException extends BitPayException
      */
     public function __construct($message = "", $code = 161)
     {
-
-        $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
+        if (!$message) {
+            $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
+        }
 
         parent::__construct($message, $code);
     }
