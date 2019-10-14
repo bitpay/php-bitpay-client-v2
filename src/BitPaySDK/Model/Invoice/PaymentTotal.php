@@ -8,6 +8,7 @@ class PaymentTotal
 {
     protected $_btc;
     protected $_bch;
+    protected $_eth;
 
     public function __construct()
     {
@@ -16,8 +17,9 @@ class PaymentTotal
     public function toArray()
     {
         $elements = [
-            'btc' => $this->getBTC(),
-            'bch' => $this->getBCH(),
+            'BTC' => $this->getBTC(),
+            'BCH' => $this->getBCH(),
+            'ETH' => $this->getETH(),
         ];
 
         foreach ($elements as $key => $value) {
@@ -34,7 +36,7 @@ class PaymentTotal
         return $this->_btc;
     }
 
-    public function setBtc(float $btc)
+    public function setBTC(float $btc)
     {
         $this->_btc = $btc;
     }
@@ -44,8 +46,18 @@ class PaymentTotal
         return $this->_bch;
     }
 
-    public function setBch(float $bch)
+    public function setBCH(float $bch)
     {
         $this->_bch = $bch;
+    }
+
+    public function getETH()
+    {
+        return $this->_eth;
+    }
+
+    public function setETH(float $eth)
+    {
+        $this->_eth = $eth;
     }
 }
