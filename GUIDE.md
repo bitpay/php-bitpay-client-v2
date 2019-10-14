@@ -161,12 +161,11 @@ $invoiceUrl = $invoice->getURL();
 $status = $invoice->getStatus();
 ```
 
-<aside class="warning">
+> **WARNING**: 
 If you get the following error when initiating the client for first time:
 "500 Internal Server Error` response: {"error":"Account not setup completely yet."}"
 Please, go back to your BitPay account and complete the required steps.
 More info [here](https://support.bitpay.com/hc/en-us/articles/203010446-How-do-I-apply-for-a-merchant-account-)
-</aside>
 
 ### Retrieve an invoice
 
