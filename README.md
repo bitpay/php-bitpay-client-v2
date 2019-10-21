@@ -8,6 +8,8 @@
 
 Full implementation of the BitPay Payment Gateway. This library implements BitPay's [Cryptographically Secure RESTful API](https://bitpay.com/api).
 
+Our Lite version will most likely be all you need to integrate to your site, available [here](https://github.com/bitpay/php-bitpay-light-client)
+
 ## Getting Started
 
 To get up and running with our PHP library quickly, follow [The GUIDE](https://github.com/bitpay/php-bitpay-client-v2/blob/master/GUIDE.md)
