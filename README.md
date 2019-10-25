@@ -1,7 +1,7 @@
 <img src="https://bitpay.com/_nuxt/img/1c0494b.svg" width="150">
 
 # BitPay PHP Client
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bitpay/php-bitpay-client-v2/master/LICENSE.md)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bitpay/php-bitpay-client-v2/master/LICENSE)
 [![Packagist](https://img.shields.io/packagist/v/bitpay/sdk.svg?style=flat-square)](https://packagist.org/packages/bitpay/sdk)
 [![Total Downloads](https://poser.pugx.org/bitpay/sdk/downloads.svg)](https://packagist.org/packages/bitpay/sdk)
 [![Latest Unstable Version](https://poser.pugx.org/bitpay/sdk/v/unstable.svg)](https://packagist.org/packages/bitpay/sdk)
