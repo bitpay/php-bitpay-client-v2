@@ -401,7 +401,7 @@ class BitPayTest extends TestCase
     {
         $bills = null;
         try {
-            $bills = $this->client->getBills(BillStatus::New);
+            $bills = $this->client->getBills(BillStatus::Draft);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());

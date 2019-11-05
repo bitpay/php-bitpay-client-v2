@@ -67,6 +67,11 @@ class Refund
         return $this->_token;
     }
 
+    public function setToken(string $token)
+    {
+        $this->_token = $token;
+    }
+
     public function getCurrency()
     {
         return $this->_currency;
@@ -75,11 +80,6 @@ class Refund
     public function setCurrency(string $currency)
     {
         $this->_currency = $currency;
-    }
-
-    public function setToken(string $token)
-    {
-        $this->_token = $token;
     }
 
     // Response fields
