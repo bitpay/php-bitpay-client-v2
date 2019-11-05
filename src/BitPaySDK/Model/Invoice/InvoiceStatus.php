@@ -6,10 +6,10 @@ namespace BitPaySDK\Model\Invoice;
 
 interface InvoiceStatus
 {
-    const New        = "new";
-    const Funded     = "funded";
-    const Processing = "processing";
-    const Complete   = "complete";
-    const Failed     = "failed";
-    const Cancelled  = "cancelled";
+    const New       = "new";
+    const Paid      = "paid";
+    const Confirmed = "confirmed";
+    const Complete  = "complete";
+    const Expired   = "expired";
+    const Invalid   = "invalid";
 }
