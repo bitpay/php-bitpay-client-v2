@@ -592,7 +592,7 @@ class Invoice
             'minerFees'                      => $this->getMinerFees()->toArray(),
             'shopper'                        => $this->getShopper()->toArray(),
             'billId'                         => $this->getBillId(),
-            'refundInfo'                     => $this->getRefundInfo(),
+            'refundInfo'                     => $this->getRefundInfo()->toArray(),
             'paymentCodes'                   => $this->getPaymentCodes()->toArray(),
             'extendedNotifications'          => $this->getExtendedNotifications(),
             'transactionCurrency'            => $this->getTransactionCurrency(),

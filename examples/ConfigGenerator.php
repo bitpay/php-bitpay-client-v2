@@ -204,20 +204,20 @@ $config = [
     "BitPayConfiguration" => [
         "Environment" => $env,
         "EnvConfig"   => [
-            $env => [
-                "PrivateKeyPath"   => $privateKeyname,
-                "PrivateKeySecret" => $yourMasterPassword,
+            'Test' => [
+                "PrivateKeyPath"   => $isProd ? null : __DIR__."/".$privateKeyname,
+                "PrivateKeySecret" => $isProd ? null : $yourMasterPassword,
                 "ApiTokens"        => [
-                    "merchant" => $merchantToken,
-                    "payroll"  => $payrolToken,
+                    "merchant" => $isProd ? null : $merchantToken,
+                    "payroll"  => $isProd ? null : $payrolToken,
                 ],
             ],
             'Prod' => [
-                "PrivateKeyPath"   => $privateKeyname,
-                "PrivateKeySecret" => $yourMasterPassword,
+                "PrivateKeyPath"   => $isProd ? __DIR__."/".$privateKeyname : null,
+                "PrivateKeySecret" => $isProd ? $yourMasterPassword : null,
                 "ApiTokens"        => [
-                    "merchant" => $merchantToken,
-                    "payroll"  => $payrolToken,
+                    "merchant" => $isProd ? $merchantToken : null,
+                    "payroll"  => $isProd ? $payrolToken : null,
                 ],
             ],
         ],
