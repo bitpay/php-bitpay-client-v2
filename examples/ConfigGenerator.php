@@ -143,7 +143,7 @@ try {
 
     if ($generatePayrollToken) {
 
-        $facade = 'merchant';
+        $facade = 'payroll';
 
         $postData = json_encode(
             [
