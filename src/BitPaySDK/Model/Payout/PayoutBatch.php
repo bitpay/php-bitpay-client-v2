@@ -190,6 +190,9 @@ class PayoutBatch
         $this->_notificationUrl = $notificationUrl;
     }
 
+    /**
+     * @deprecated Use setNotificationURL instead
+     */
     public function setRedirectURL(string $notificationUrl)
     {
         $this->setNotificationURL($notificationUrl);
