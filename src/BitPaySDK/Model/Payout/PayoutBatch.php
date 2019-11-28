@@ -184,18 +184,20 @@ class PayoutBatch
     {
         return $this->_notificationUrl;
     }
-    
+
     public function setNotificationURL(string $notificationUrl)
     {
         $this->_notificationUrl = $notificationUrl;
     }
+
+//TODO remove on version 4.0
 
     /**
      * @deprecated Use setNotificationURL instead
      */
     public function setRedirectURL(string $notificationUrl)
     {
-        $this->setNotificationURL($notificationUrl);
+        $this->_notificationUrl = $notificationUrl;
     }
 
     public function getPricingMethod()
