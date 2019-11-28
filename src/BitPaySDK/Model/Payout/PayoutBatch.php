@@ -184,10 +184,18 @@ class PayoutBatch
     {
         return $this->_notificationUrl;
     }
-
-    public function setRedirectURL(string $notificationUrl)
+    
+    public function setNotificationURL(string $notificationUrl)
     {
         $this->_notificationUrl = $notificationUrl;
+    }
+
+    /**
+     * @deprecated Use setNotificationURL instead
+     */
+    public function setRedirectURL(string $notificationUrl)
+    {
+        $this->setNotificationURL($notificationUrl);
     }
 
     public function getPricingMethod()
@@ -324,7 +332,7 @@ class PayoutBatch
             'instructions'      => $this->getInstructions(),
             'reference'         => $this->getReference(),
             'notificationEmail' => $this->getNotificationEmail(),
-            'notificationUrl'   => $this->getNotificationURL(),
+            'notificationURL'   => $this->getNotificationURL(),
             'pricingMethod'     => $this->getPricingMethod(),
             'id'                => $this->getId(),
             'account'           => $this->getAccount(),
