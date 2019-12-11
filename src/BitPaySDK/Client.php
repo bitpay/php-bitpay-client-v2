@@ -44,9 +44,9 @@ use Symfony\Component\Yaml\Yaml;
  * Class Client
  * @package Bitpay
  * @author  Antonio Buedo
- * @version 3.3.1911
+ * @version 3.4.1912
  * See bitpay.com/api for more information.
- * date 15.11.2019
+ * date 10.12.2019
  */
 class Client
 {
@@ -79,6 +79,11 @@ class Client
      * @var RESTcli
      */
     protected $_RESTcli = null;
+
+    /**
+     * @var RESTcli
+     */
+    public static $_currenciesInfo = null;
 
     /**
      * Client constructor.
@@ -1228,6 +1233,7 @@ class Client
         try {
             $this->_RESTcli = new RESTcli($this->_env, $this->_ecKey);
             $this->loadAccessTokens();
+            $this->loadCurrencies();
         } catch (Exception $e) {
             throw new BitPayException("failed to build configuration : ".$e->getMessage());
         }
@@ -1252,5 +1258,37 @@ class Client
     private function clearAccessTokenCache()
     {
         $this->_tokenCache = new Tokens();
+    }
+
+    /**
+     * Load currencies info.
+     *
+     * @throws BitPayException BitPayException class
+     */
+    private function loadCurrencies()
+    {
+        try {
+            self::$_currenciesInfo = json_decode($this->_RESTcli->get("currencies/", null, false), false);
+        } catch (Exception $e) {
+            throw new BitPayException("When loading currencies info : ".$e->getMessage());
+        }
+    }
+
+    /**
+     * Gets info for specific currency.
+     *
+     * @param $currencyCode String Currency code for which the info will be retrieved.
+     *
+     * @return object|null
+     */
+    public static function getCurrencyInfo(string $currencyCode)
+    {
+        foreach (self::$_currenciesInfo as $currencyInfo) {
+            if ($currencyInfo->code == $currencyCode) {
+                return $currencyInfo;
+            }
+        }
+
+        return null;
     }
 }

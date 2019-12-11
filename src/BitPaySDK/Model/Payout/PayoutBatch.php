@@ -4,6 +4,7 @@
 namespace BitPaySDK\Model\Payout;
 
 
+use BitPaySDK;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
@@ -63,6 +64,9 @@ class PayoutBatch
 
     private function _computeAndSetAmount()
     {
+        $currencyInfo = BitPaySDK\Client::getCurrencyInfo($this->_currency);
+        $precision = is_null($currencyInfo) ? 2 : $currencyInfo->precision;
+
         $amount = 0.0;
         if ($this->_instructions) {
             foreach ($this->_instructions as $instruction) {
@@ -73,7 +77,7 @@ class PayoutBatch
                 }
             }
         }
-        $this->_amount = $amount;
+        $this->_amount = round($amount, $precision);
     }
 
     // API fields
