@@ -9,26 +9,12 @@ class PaymentTotal
     protected $_btc;
     protected $_bch;
     protected $_eth;
+    protected $_usdc;
+    protected $_gusd;
+    protected $_pax;
 
     public function __construct()
     {
-    }
-
-    public function toArray()
-    {
-        $elements = [
-            'BTC' => $this->getBTC(),
-            'BCH' => $this->getBCH(),
-            'ETH' => $this->getETH(),
-        ];
-
-        foreach ($elements as $key => $value) {
-            if (empty($value)) {
-                unset($elements[$key]);
-            }
-        }
-
-        return $elements;
     }
 
     public function getBTC()
@@ -59,5 +45,55 @@ class PaymentTotal
     public function setETH(float $eth)
     {
         $this->_eth = $eth;
+    }
+
+    public function getUSDC()
+    {
+        return $this->_usdc;
+    }
+
+    public function setUSDC(float $usdc)
+    {
+        $this->_usdc = $usdc;
+    }
+
+    public function getGUSD()
+    {
+        return $this->_gusd;
+    }
+
+    public function setGUSD(float $gusd)
+    {
+        $this->_gusd = $gusd;
+    }
+
+    public function getPAX()
+    {
+        return $this->_pax;
+    }
+
+    public function setPAX(float $pax)
+    {
+        $this->_pax = $pax;
+    }
+
+    public function toArray()
+    {
+        $elements = [
+            'BTC'  => $this->getBTC(),
+            'BCH'  => $this->getBCH(),
+            'ETH'  => $this->getETH(),
+            'USDC' => $this->getUSDC(),
+            'GUSD' => $this->getGUSD(),
+            'PAX'  => $this->getPAX(),
+        ];
+
+        foreach ($elements as $key => $value) {
+            if (empty($value)) {
+                unset($elements[$key]);
+            }
+        }
+
+        return $elements;
     }
 }
