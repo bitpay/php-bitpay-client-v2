@@ -7,6 +7,7 @@ namespace BitPaySDK\Model\Payout;
 use BitPaySDK;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  *
@@ -41,7 +42,6 @@ class PayoutBatch
     protected $_btc;
     protected $_requestDate;
     protected $_dateExecuted;
-    protected $_currencyInfo;
 
     /**
      * Constructor, create an instruction-full request PayoutBatch object.
@@ -50,14 +50,12 @@ class PayoutBatch
      * @param $effectiveDate string Date when request is effective. Note that the time of day will automatically be set
      *                       to 09:00:00.000 UTC time for the given day. Only requests submitted before 09:00:00.000
      *                       UTC are guaranteed to be processed on the same day.
-     * @param $instructions  array Payout instructions.
      */
-    public function __construct(string $currency = "USD", string $effectiveDate = null, array $instructions = null, array $currencyInfo = [])
+    public function __construct(string $currency = "USD", string $effectiveDate = null, array $instructions = null)
     {
         $this->_currency = $currency;
         $this->_effectiveDate = $effectiveDate;
         $this->_instructions = $instructions;
-        $this->_currencyInfo = $currencyInfo;
         $this->_computeAndSetAmount();
     }
 
@@ -66,12 +64,6 @@ class PayoutBatch
 
     private function _computeAndSetAmount()
     {
-        /**
-        * Null Coalescing Operator 
-        * @doc https://www.php.net/manual/en/language.operators.comparison.php#language.operators.comparison.coalesce
-        */
-        $precision = $this->_currencyInfo[$this->_currency]['precision'] ?? 2;
-
         $amount = 0.0;
         if ($this->_instructions) {
             foreach ($this->_instructions as $instruction) {
@@ -82,7 +74,7 @@ class PayoutBatch
                 }
             }
         }
-        $this->_amount = round($amount, $precision);
+        $this->_amount = $amount;
     }
 
     // API fields
@@ -119,6 +111,11 @@ class PayoutBatch
     public function setAmount(float $amount)
     {
         $this->_amount = $amount;
+    }
+
+    public function formatAmount(int $precision)
+    {
+        $this->_amount = round($this->_amount, $precision);
     }
 
     public function getCurrency()

@@ -83,7 +83,7 @@ class Client
     /**
      * @var RESTcli
      */
-    public static $_currenciesInfo = null;
+    protected $_currenciesInfo = null;
 
     /**
      * Client constructor.
@@ -713,6 +713,9 @@ class Client
             $batch->setToken($this->_tokenCache->getTokenByFacade(Facade::Payroll));
             $batch->setGuid(Util::guid());
 
+            $precision = $this->getCurrencyInfo($batch->getCurrency())->precision ?? 2;
+            $batch->formatAmount($precision);
+
             $responseJson = $this->_RESTcli->post("payouts", $batch->toArray());
         } catch (Exception $e) {
             throw new PayoutCreationException("failed to serialize PayoutBatch object : ".$e->getMessage());
@@ -1107,22 +1110,9 @@ class Client
     public function getCurrencies(): array
     {
         try {
-            $responseJson = $this->_RESTcli->get("currencies", null, false);
+            $currencies = json_decode($this->_RESTcli->get("currencies/", null, false), false);
         } catch (Exception $e) {
             throw new CurrencyQueryException("failed to serialize Currency object : ".$e->getMessage());
-        }
-
-        try {
-            $mapper = new JsonMapper();
-            $currencies = $mapper->mapArray(
-                json_decode($responseJson),
-                [],
-                'BitPaySDK\Model\Currency'
-            );
-
-        } catch (Exception $e) {
-            throw new CurrencyQueryException(
-                "failed to deserialize BitPay server response (Currency) : ".$e->getMessage());
         }
 
         return $currencies;
@@ -1268,7 +1258,7 @@ class Client
     private function loadCurrencies()
     {
         try {
-            self::$_currenciesInfo = json_decode($this->_RESTcli->get("currencies/", null, false), false);
+            $this->_currenciesInfo = $this->getCurrencies();
         } catch (Exception $e) {
             throw new BitPayException("When loading currencies info : ".$e->getMessage());
         }
@@ -1281,9 +1271,9 @@ class Client
      *
      * @return object|null
      */
-    public static function getCurrencyInfo(string $currencyCode)
+    public function getCurrencyInfo(string $currencyCode)
     {
-        foreach (self::$_currenciesInfo as $currencyInfo) {
+        foreach ($this->_currenciesInfo as $currencyInfo) {
             if ($currencyInfo->code == $currencyCode) {
                 return $currencyInfo;
             }
