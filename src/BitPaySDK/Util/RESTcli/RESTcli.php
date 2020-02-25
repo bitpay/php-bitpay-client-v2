@@ -48,7 +48,7 @@ class RESTcli
                     'defaults' => [
                         'headers' => [
                             "x-accept-version"           => Env::BitpayApiVersion,
-                            'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
+                            'X-BitPay-Plugin-Info'       => Env::BitpayPluginInfo,
                             'x-bitpay-api-frame'         => Env::BitpayApiFrame,
                             'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
                         ],
