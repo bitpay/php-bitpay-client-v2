@@ -15,7 +15,7 @@
     "bitpay/key-utils": "^1.0",
     "php": "^7.1",
     "guzzlehttp/guzzle": "^6.3",
-    "ext-json": "^1.5",
+    "ext-json": "*",
     "ext-reflection": "*",
     "symfony/yaml": "^3.0 || ^4.3"
   },

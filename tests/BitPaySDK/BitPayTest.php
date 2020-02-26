@@ -36,19 +36,40 @@ class BitPayTest extends TestCase
             "YourMasterPassword"
         );
 
-        $this->client = BitPaySDK\Client::create()->withData(
-            BitPaySDK\Env::Test,
-            __DIR__."/../../examples/bitpay_private_test.key",
-            new BitPaySDK\Tokens(
-                "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
-                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
-            ),
-            "YourMasterPassword");
+//        $this->client = BitPaySDK\Client::create()->withData(
+//            BitPaySDK\Env::Test,
+//            __DIR__."/../../examples/bitpay_private_test.key",
+//            new BitPaySDK\Tokens(
+//                "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
+//                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
+//            ),
+//            "YourMasterPassword");
+
+//        $this->client = BitPaySDK\Client::create()->withData(
+//            BitPaySDK\Env::Test,
+//            __DIR__."/../../examples/bitpay_private_prod.key",
+//            new BitPaySDK\Tokens(
+//                "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
+//                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
+//            ),
+//            "YourMasterPassword");
+
+        $this->client = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config_200210.json");
+
+
+//        $this->client = BitPaySDK\Client::create()->withData(
+//            BitPaySDK\Env::Test,
+//            __DIR__."/../../examples/bitpay_private_test_chin.key",
+//            new BitPaySDK\Tokens(
+//                "9bfyTgnV1xbpbqjL5qBDeXmJRCdEqmTPg9GkeSgisFRo5YPkxMEApxK8uoiZnSw1Sf",
+//                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
+//            ),
+//            "YourMasterPassword");
 
         /**
          * Uncomment only if you wish to test the client with config files
          * */
-//        $this->client1 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
+//        $this->client1 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config_200210.json");
 //        $this->client2 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
 
 
@@ -102,7 +123,7 @@ class BitPayTest extends TestCase
     public function testShouldCreateInvoiceBtc()
     {
         try {
-            $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
+            $basicInvoice = $this->client->createInvoice(new Invoice(5.56, Currency::USD));
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -138,6 +159,19 @@ class BitPayTest extends TestCase
 
     }
 
+    public function testShouldGetInvoice()
+    {
+        try {
+            $retrievedInvoice = $this->client->getInvoice("M4NQWAeYxteuYRPSWpKDod");
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($retrievedInvoice->getId());
+
+    }
+
     public function testShouldGetInvoices()
     {
         $invoices = null;
@@ -145,7 +179,7 @@ class BitPayTest extends TestCase
             //check within the last few days
             $date = new \DateTime();
             $today = $date->format("Y-m-d");
-            $dateBefore = $date->modify('-7 day');
+            $dateBefore = $date->modify('-70 day');
             $sevenDaysAgo = $dateBefore->format("Y-m-d");
             $invoices = $this->client->getInvoices($sevenDaysAgo, $today);
         } catch (\Exception $e) {
@@ -225,7 +259,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1001", Currency::USD, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1001", Currency::USD, "agallardo@bitpay.com", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -266,7 +300,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1002", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1002", Currency::EUR, "agallardo@bitpay.com", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -309,7 +343,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1003", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1003", Currency::EUR, "agallardo@bitpay.com", $items);
         $basicBill = null;
         $retrievedBill = null;
         try {
@@ -352,7 +386,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1004", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1004", Currency::EUR, "agallardo@bitpay.com", $items);
         $basicBill = null;
         $retrievedBill = null;
         $updatedBill = null;
@@ -438,7 +472,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1005", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1005", Currency::EUR, "agallardo@bitpay.com", $items);
         $basicBill = null;
         $retrievedBill = null;
         $result = null;
@@ -542,7 +576,7 @@ class BitPayTest extends TestCase
             //check within the last few days
             $date = new \DateTime();
             $today = $date->format("Y-m-d");
-            $dateBefore = $date->modify('-30 day');
+            $dateBefore = $date->modify('-100 day');
             $sevenDaysAgo = $dateBefore->format("Y-m-d");
             $ledger = $this->client->getLedger(Currency::USD, $sevenDaysAgo, $today);
         } catch (\Exception $e) {
@@ -574,10 +608,29 @@ class BitPayTest extends TestCase
         $threeDaysFromNow = $date->modify('+3 day');
 
         $effectiveDate = $threeDaysFromNow->format("Y-m-d");
-        $currency = Currency::USD;
+        $currency = Currency::BTC;
         $instructions = [
-            new BitPaySDK\Model\Payout\PayoutInstruction(100.0, "mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
-            new BitPaySDK\Model\Payout\PayoutInstruction(200.0, "mvR4Xj7MYT7GJcL93xAQbSZ2p4eHJV5F7A"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(12.97,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(27.09,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(361.22,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(5.42,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(21.69,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(55,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(126.53,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(1626.87,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(90.38,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(13.56,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(29.81,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(90.34,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(17.17,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(15.41,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(9.03,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(23.77,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(1533.8,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(16.24,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(4.51,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(875.25,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(90.24,"mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
         ];
 
         $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $effectiveDate, $instructions);
@@ -590,7 +643,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($batch->getId());
-        $this->assertTrue(count($batch->getInstructions()) == 2);
+        $this->assertTrue(count($batch->getInstructions()) == 21);
     }
 
     public function testShouldGetPayoutBatches()
