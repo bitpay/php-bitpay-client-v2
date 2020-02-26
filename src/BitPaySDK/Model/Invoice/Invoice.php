@@ -475,7 +475,6 @@ class Invoice
     /**
      * PaymentCodes will be deprecated TODO on version 4.0
      *
-     * @var array
      * @deprecated
      */
     public function getPaymentCodes()
