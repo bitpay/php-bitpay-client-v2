@@ -4,6 +4,11 @@
 namespace BitPaySDK\Model\Invoice;
 
 
+/**
+ * PaymentTotal will be deprecated TODO on version 4.0
+ *
+ * @deprecated
+ */
 class PaymentTotal
 {
     protected $_btc;

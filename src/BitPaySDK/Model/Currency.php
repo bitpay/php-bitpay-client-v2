@@ -17,6 +17,8 @@ class Currency
     const USDC = "USDC";
     const GUSD = "GUSD";
     const PAX  = "PAX";
+    const XRP  = "XRP";
+    const BUSD = "BUSD";
 
     // FIAT
     const AED = "AED";
