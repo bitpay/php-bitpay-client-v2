@@ -64,9 +64,37 @@ class Invoice
     protected $_transactionCurrency;
     protected $_amountPaid;
     protected $_exchangeRates;
+
+    /**
+     * PaymentTotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     protected $_paymentTotals;
+
+    /**
+     * PaymentSubtotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     protected $_paymentSubtotals;
+
+    /**
+     * PaymentDisplayTotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     protected $_paymentDisplayTotals;
+
+    /**
+     * PaymentDisplaySubTotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     protected $_paymentDisplaySubTotals;
 
     /**
@@ -86,10 +114,10 @@ class Invoice
         $this->_shopper = new Shopper();
         $this->_refundInfo = new RefundInfo();
         $this->_paymentCodes = null;
-        $this->_paymentTotals = new PaymentTotal();
-        $this->_paymentSubtotals = new PaymentTotal();
-        $this->_paymentDisplayTotals = new PaymentTotal();
-        $this->_paymentDisplaySubTotals = new PaymentTotal();
+        $this->_paymentTotals = null;
+        $this->_paymentSubtotals = null;
+        $this->_paymentDisplayTotals = null;
+        $this->_paymentDisplaySubTotals = null;
     }
 
     // API fields
@@ -534,44 +562,92 @@ class Invoice
         $this->_exchangeRates = $exchangeRates;
     }
 
+    /**
+     * PaymentTotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     public function getPaymentTotals()
     {
         return $this->_paymentTotals;
     }
 
+    /**
+     * PaymentTotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     public function setPaymentTotals($paymentTotals)
     {
-        $this->_paymentTotals = $paymentTotals;
+        $this->_paymentTotals = null;
     }
 
+    /**
+     * PaymentSubtotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     public function getPaymentSubtotals()
     {
         return $this->_paymentSubtotals;
     }
 
+    /**
+     * PaymentSubtotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     public function setPaymentSubtotals($paymentSubtotals)
     {
-        $this->_paymentSubtotals = $paymentSubtotals;
+        $this->_paymentSubtotals = null;
     }
 
+    /**
+     * PaymentDisplaySubTotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     public function getPaymentDisplaySubTotals()
     {
         return $this->_paymentDisplaySubTotals;
     }
 
+    /**
+     * PaymentDisplaySubTotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     public function setPaymentDisplaySubTotals($paymentDisplaySubTotals)
     {
-        $this->_paymentDisplaySubTotals = $paymentDisplaySubTotals;
+        $this->_paymentDisplaySubTotals = null;
     }
 
+    /**
+     * PaymentDisplayTotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     public function getPaymentDisplayTotals()
     {
         return $this->_paymentDisplayTotals;
     }
 
+    /**
+     * PaymentDisplayTotals will be deprecated TODO on version 4.0
+     *
+     * @var array
+     * @deprecated
+     */
     public function setPaymentDisplayTotals($paymentDisplayTotals)
     {
-        $this->_paymentDisplayTotals = $paymentDisplayTotals;
+        $this->_paymentDisplayTotals = null;
     }
 
     public function toArray()
@@ -618,10 +694,10 @@ class Invoice
             'transactionCurrency'            => $this->getTransactionCurrency(),
             'amountPaid'                     => $this->getAmountPaid(),
             'exchangeRates'                  => $this->getExchangeRates(),
-            'paymentTotals'                  => $this->getPaymentTotals()->toArray(),
-            'paymentSubtotals'               => $this->getPaymentSubtotals()->toArray(),
-            'paymentDisplayTotals'           => $this->getPaymentDisplaySubTotals()->toArray(),
-            'paymentDisplaySubTotals'        => $this->getPaymentDisplaySubTotals()->toArray(),
+            'paymentTotals'                  => [],
+            'paymentSubtotals'               => [],
+            'paymentDisplayTotals'           => [],
+            'paymentDisplaySubTotals'        => [],
         ];
 
         foreach ($elements as $key => $value) {
