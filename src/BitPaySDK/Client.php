@@ -665,7 +665,7 @@ class Client
                 "failed to deserialize BitPay server response (Ledger) : ".$e->getMessage());
         }
 
-       return $ledger;
+        return $ledger;
     }
 
     /**

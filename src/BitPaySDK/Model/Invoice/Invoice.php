@@ -536,7 +536,7 @@ class Invoice
             'extendedNotifications'          => $this->getExtendedNotifications(),
             'transactionCurrency'            => $this->getTransactionCurrency(),
             'amountPaid'                     => $this->getAmountPaid(),
-            'exchangeRates'                  => $this->getExchangeRates()
+            'exchangeRates'                  => $this->getExchangeRates(),
         ];
 
         foreach ($elements as $key => $value) {

@@ -7,7 +7,6 @@ namespace BitPaySDK\Model\Payout;
 use BitPaySDK;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
-use phpDocumentor\Reflection\Types\Integer;
 
 /**
  *
@@ -318,12 +317,12 @@ class PayoutBatch
     {
         $this->_dateExecuted = $dateExecuted;
     }
-    
+
     public function setCurrencyInfo(array $currencyInfo)
     {
         $this->_currnecyinfo = $currencyInfo;
     }
-    
+
     public function getCurrencyInfo()
     {
         return $this->_currencyInfo;
