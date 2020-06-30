@@ -44,9 +44,9 @@ use Symfony\Component\Yaml\Yaml;
  * Class Client
  * @package Bitpay
  * @author  Antonio Buedo
- * @version 3.6.2005
+ * @version 4.0.2006
  * See bitpay.com/api for more information.
- * date 02.05.2020
+ * date 19.06.2020
  */
 class Client
 {
@@ -632,7 +632,7 @@ class Client
      * @return Ledger A Ledger object populated with the BitPay ledger entries list.
      * @throws BitPayException BitPayException class
      */
-    public function getLedger(string $currency, string $startDate, string $endDate): Ledger
+    public function getLedger(string $currency, string $startDate, string $endDate): array
     {
         try {
             $params = [];
@@ -654,9 +654,10 @@ class Client
 
         try {
             $mapper = new JsonMapper();
-            $ledger = $mapper->map(
+            $ledger = $mapper->mapArray(
                 json_decode($responseJson),
-                new Ledger()
+                [],
+                'BitPaySDK\Model\Ledger\LedgerEntry'
             );
 
         } catch (Exception $e) {

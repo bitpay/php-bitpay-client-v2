@@ -7,7 +7,6 @@ namespace BitPaySDK\Model\Payout;
 use BitPaySDK;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
-use phpDocumentor\Reflection\Types\Integer;
 
 /**
  *
@@ -196,16 +195,6 @@ class PayoutBatch
         $this->_notificationUrl = $notificationUrl;
     }
 
-//TODO remove on version 4.0
-
-    /**
-     * @deprecated Use setNotificationURL instead
-     */
-    public function setRedirectURL(string $notificationUrl)
-    {
-        $this->_notificationUrl = $notificationUrl;
-    }
-
     public function getPricingMethod()
     {
         return $this->_pricingMethod;
@@ -328,12 +317,12 @@ class PayoutBatch
     {
         $this->_dateExecuted = $dateExecuted;
     }
-    
+
     public function setCurrencyInfo(array $currencyInfo)
     {
         $this->_currnecyinfo = $currencyInfo;
     }
-    
+
     public function getCurrencyInfo()
     {
         return $this->_currencyInfo;
