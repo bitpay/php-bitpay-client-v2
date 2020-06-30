@@ -51,51 +51,11 @@ class Invoice
     protected $_shopper;
     protected $_billId;
     protected $_refundInfo;
-
-    /**
-     * PaymentCodes will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    protected $_paymentCodes;
     protected $_extendedNotifications = false;
 
     protected $_transactionCurrency;
     protected $_amountPaid;
     protected $_exchangeRates;
-
-    /**
-     * PaymentTotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    protected $_paymentTotals;
-
-    /**
-     * PaymentSubtotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    protected $_paymentSubtotals;
-
-    /**
-     * PaymentDisplayTotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    protected $_paymentDisplayTotals;
-
-    /**
-     * PaymentDisplaySubTotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    protected $_paymentDisplaySubTotals;
 
     /**
      * Constructor, create a minimal request Invoice object.
@@ -113,11 +73,6 @@ class Invoice
         $this->_minerFees = new MinerFees();
         $this->_shopper = new Shopper();
         $this->_refundInfo = new RefundInfo();
-        $this->_paymentCodes = null;
-        $this->_paymentTotals = null;
-        $this->_paymentSubtotals = null;
-        $this->_paymentDisplayTotals = null;
-        $this->_paymentDisplaySubTotals = null;
     }
 
     // API fields
@@ -499,29 +454,6 @@ class Invoice
         $this->_refundInfo = $refundInfo;
     }
 
-
-    /**
-     * PaymentCodes will be deprecated TODO on version 4.0
-     *
-     * @deprecated
-     */
-    public function getPaymentCodes()
-    {
-        return $this->_paymentCodes;
-    }
-
-
-    /**
-     * PaymentCodes will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    public function setPaymentCodes(PaymentCodes $paymentCodes = null)
-    {
-        $this->_paymentCodes = null;
-    }
-
     public function getExtendedNotifications()
     {
         return $this->_extendedNotifications;
@@ -560,94 +492,6 @@ class Invoice
     public function setExchangeRates($exchangeRates)
     {
         $this->_exchangeRates = $exchangeRates;
-    }
-
-    /**
-     * PaymentTotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    public function getPaymentTotals()
-    {
-        return $this->_paymentTotals;
-    }
-
-    /**
-     * PaymentTotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    public function setPaymentTotals($paymentTotals)
-    {
-        $this->_paymentTotals = null;
-    }
-
-    /**
-     * PaymentSubtotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    public function getPaymentSubtotals()
-    {
-        return $this->_paymentSubtotals;
-    }
-
-    /**
-     * PaymentSubtotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    public function setPaymentSubtotals($paymentSubtotals)
-    {
-        $this->_paymentSubtotals = null;
-    }
-
-    /**
-     * PaymentDisplaySubTotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    public function getPaymentDisplaySubTotals()
-    {
-        return $this->_paymentDisplaySubTotals;
-    }
-
-    /**
-     * PaymentDisplaySubTotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    public function setPaymentDisplaySubTotals($paymentDisplaySubTotals)
-    {
-        $this->_paymentDisplaySubTotals = null;
-    }
-
-    /**
-     * PaymentDisplayTotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    public function getPaymentDisplayTotals()
-    {
-        return $this->_paymentDisplayTotals;
-    }
-
-    /**
-     * PaymentDisplayTotals will be deprecated TODO on version 4.0
-     *
-     * @var array
-     * @deprecated
-     */
-    public function setPaymentDisplayTotals($paymentDisplayTotals)
-    {
-        $this->_paymentDisplayTotals = null;
     }
 
     public function toArray()
@@ -689,15 +533,10 @@ class Invoice
             'shopper'                        => $this->getShopper()->toArray(),
             'billId'                         => $this->getBillId(),
             'refundInfo'                     => $this->getRefundInfo()->toArray(),
-            'paymentCodes'                   => [],
             'extendedNotifications'          => $this->getExtendedNotifications(),
             'transactionCurrency'            => $this->getTransactionCurrency(),
             'amountPaid'                     => $this->getAmountPaid(),
-            'exchangeRates'                  => $this->getExchangeRates(),
-            'paymentTotals'                  => [],
-            'paymentSubtotals'               => [],
-            'paymentDisplayTotals'           => [],
-            'paymentDisplaySubTotals'        => [],
+            'exchangeRates'                  => $this->getExchangeRates()
         ];
 
         foreach ($elements as $key => $value) {

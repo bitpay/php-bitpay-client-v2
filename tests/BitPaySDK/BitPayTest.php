@@ -518,12 +518,12 @@ class BitPayTest extends TestCase
 
     public function testShouldGetLedgerBtc()
     {
-        $ledge = null;
+        $ledger = null;
         try {
             //check within the last few days
             $date = new \DateTime();
             $today = $date->format("Y-m-d");
-            $dateBefore = $date->modify('-7 day');
+            $dateBefore = $date->modify('-30 day');
             $sevenDaysAgo = $dateBefore->format("Y-m-d");
             $ledger = $this->client->getLedger(Currency::BTC, $sevenDaysAgo, $today);
         } catch (\Exception $e) {
@@ -532,12 +532,12 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($ledger);
-        $this->assertTrue(count($ledger->getEntries()) > 0);
+        $this->assertTrue(count($ledger) > 0);
     }
 
     public function testShouldGetLedgerUsd()
     {
-        $ledge = null;
+        $ledger = null;
         try {
             //check within the last few days
             $date = new \DateTime();
@@ -551,7 +551,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($ledger);
-        $this->assertTrue(count($ledger->getEntries()) > 0);
+        $this->assertTrue(count($ledger) > 0);
     }
 
     public function testShouldGetLedgers()
