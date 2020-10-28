@@ -37,20 +37,33 @@ class BitPayTest extends TestCase
             "YourMasterPassword"
         );
 
-        $this->client = BitPaySDK\Client::create()->withData(
-            BitPaySDK\Env::Test,
-            __DIR__."/../../examples/bitpay_private_test.key",
-            new BitPaySDK\Tokens(
-                "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
-                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
-            ),
-            "YourMasterPassword");
+//        $this->client = BitPaySDK\Client::create()->withData(
+//            BitPaySDK\Env::Test,
+//            __DIR__."/../../examples/bitpay_private_test.key",
+//            new BitPaySDK\Tokens(
+//                "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
+//                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
+//            ),
+//            "YourMasterPassword");
 
         /**
          * Uncomment only if you wish to test the client with config files
          * */
-//        $this->client1 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
-//        $this->client2 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
+//        $this->client = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
+//        $this->client = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
+        $this->client = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config_new.json");
+
+
+
+// TEST CHARLES'S ACCOUNT
+//        $this->client = BitPaySDK\Client::create()->withData(
+//            BitPaySDK\Env::Test,
+//            __DIR__."/../../examples/bitpay_private_test_charles.key",
+//            new BitPaySDK\Tokens(
+//                "3gyeGnq11H4gywErv5J4H188iKcKFadk8zRWMTeBHERA",
+//                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
+//            ),
+//            "YourMasterPassword");
 
 
         $this->assertNotNull($this->client);
@@ -89,7 +102,7 @@ class BitPayTest extends TestCase
 
         try {
             $basicInvoice = $this->client->createInvoice($invoice);
-            $retrievedInvoice = $this->client->getInvoice($basicInvoice->getId());
+            $retrievedInvoice = $this->client->getInvoice($basicInvoice->getId());//JHJsfknvgUpZjL9ksSKFZu
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -146,9 +159,9 @@ class BitPayTest extends TestCase
             //check within the last few days
             $date = new \DateTime();
             $today = $date->format("Y-m-d");
-            $dateBefore = $date->modify('-7 day');
+            $dateBefore = $date->modify('-30 day');
             $sevenDaysAgo = $dateBefore->format("Y-m-d");
-            $invoices = $this->client->getInvoices($sevenDaysAgo, $today);
+            $invoices = $this->client->getInvoices($sevenDaysAgo, $today, null, null, 46);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -176,7 +189,8 @@ class BitPayTest extends TestCase
             /**
              * var Invoice
              */
-            $firstInvoice = $invoices[0];
+//            $firstInvoice = $invoices[0];
+            $firstInvoice = $this->client->getInvoice("JHJsfknvgUpZjL9ksSKFZu");
             $refunded = $this->client->createRefund(
                 $firstInvoice,
                 "sandbox@bitpay.com",
@@ -622,7 +636,7 @@ class BitPayTest extends TestCase
         $this->assertEquals($basicRecipient->getId(), $retrievedRecipient->getId());
     }
 
-    public function testShouldPayoutRecipients()
+    public function testShouldGetPayoutRecipients()
     {
         $recipients = null;
         try {
@@ -805,7 +819,7 @@ class BitPayTest extends TestCase
 
         $billData = new BitPaySDK\Model\Subscription\BillData(
             Currency::USD,
-            "",
+            "sandbox@bitpay.com",
             $dueDate,
             $items
         );
