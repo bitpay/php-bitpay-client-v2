@@ -8,6 +8,7 @@ use BitPaySDK\Model\Bill\BillStatus;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Invoice\Invoice as Invoice;
 use BitPaySDK\Model\Payout\PayoutStatus;
+use BitPaySDK\Model\Payout\RecipientStatus;
 use PHPUnit\Framework\TestCase;
 
 class BitPayTest extends TestCase
@@ -74,9 +75,9 @@ class BitPayTest extends TestCase
 
         $buyer = new BitPaySDK\Model\Invoice\Buyer();
         $buyer->setName("Bily Matthews");
-        $buyer->setEmail("");
+        $buyer->setEmail("sandbox@bitpay.com");
         $buyer->setAddress1("168 General Grove");
-        $buyer->setAddress2("");
+        $buyer->setAddress2("sandbox@bitpay.com");
         $buyer->setCountry("AD");
         $buyer->setLocality("Port Horizon");
         $buyer->setNotify(true);
@@ -178,7 +179,7 @@ class BitPayTest extends TestCase
             $firstInvoice = $invoices[0];
             $refunded = $this->client->createRefund(
                 $firstInvoice,
-                "",
+                "sandbox@bitpay.com",
                 $firstInvoice->getPrice(),
                 $firstInvoice->getCurrency()
             );
@@ -225,7 +226,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1001", Currency::USD, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1001", Currency::USD, "sandbox@bitpay.com", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -266,7 +267,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1002", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1002", Currency::EUR, "sandbox@bitpay.com", $items);
         $basicBill = null;
         try {
             $basicBill = $this->client->createBill($bill);
@@ -309,7 +310,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1003", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1003", Currency::EUR, "sandbox@bitpay.com", $items);
         $basicBill = null;
         $retrievedBill = null;
         try {
@@ -352,7 +353,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1004", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1004", Currency::EUR, "sandbox@bitpay.com", $items);
         $basicBill = null;
         $retrievedBill = null;
         $updatedBill = null;
@@ -438,7 +439,7 @@ class BitPayTest extends TestCase
         $item->setDescription("product-d");
         array_push($items, $item);
 
-        $bill = new BitPaySDK\Model\Bill\Bill("1005", Currency::EUR, "", $items);
+        $bill = new BitPaySDK\Model\Bill\Bill("1005", Currency::EUR, "sandbox@bitpay.com", $items);
         $basicBill = null;
         $retrievedBill = null;
         $result = null;
@@ -566,6 +567,73 @@ class BitPayTest extends TestCase
 
         $this->assertNotNull($ledgers);
         $this->assertTrue(count($ledgers) > 0);
+    }
+
+    public function testShouldSubmitPayoutRecipients()
+    {
+        $recipientsList = [
+            new BitPaySDK\Model\Payout\PayoutRecipient(
+                "sandbox@bitpay.com",
+                "recipient1",
+                "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
+            new BitPaySDK\Model\Payout\PayoutRecipient(
+                "sandbox@bitpay.com",
+                "recipient2",
+                "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
+            new BitPaySDK\Model\Payout\PayoutRecipient(
+                "sandbox@bitpay.com",
+                "recipient3",
+                "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
+        ];
+
+        $recipientsObj = new BitPaySDK\Model\Payout\PayoutRecipients($recipientsList);
+        try {
+            $recipients = $this->client->submitPayoutRecipients($recipientsObj);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($recipients);
+        $this->assertTrue(count($recipients) == 3);
+    }
+
+    public function testShouldGetPayoutRecipientId()
+    {
+        $recipientsList = [
+            new BitPaySDK\Model\Payout\PayoutRecipient(
+                "sandbox@bitpay.com",
+                "recipient1",
+                "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
+        ];
+
+        $recipientsObj = new BitPaySDK\Model\Payout\PayoutRecipients($recipientsList);
+        try {
+            $basicRecipient = $this->client->submitPayoutRecipients($recipientsObj);
+            $basicRecipient = reset($basicRecipient);
+            $retrievedRecipient = $this->client->getPayoutRecipient($basicRecipient->getId());//9EsKtXQ1nj41EQ1Dk7VxhE
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicRecipient);
+        $this->assertNotNull($retrievedRecipient->getId());
+        $this->assertEquals($basicRecipient->getId(), $retrievedRecipient->getId());
+    }
+
+    public function testShouldPayoutRecipients()
+    {
+        $recipients = null;
+        try {
+            $recipients = $this->client->getPayoutRecipients(RecipientStatus::INVITED, 2);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($recipients);
+        $this->assertTrue(count($recipients) == 2);
     }
 
     public function testShouldSubmitPayoutBatch()
@@ -792,7 +860,7 @@ class BitPayTest extends TestCase
 
         $billData = new BitPaySDK\Model\Subscription\BillData(
             Currency::USD,
-            "",
+            "sandbox@bitpay.com",
             $dueDate,
             $items
         );
@@ -811,7 +879,8 @@ class BitPayTest extends TestCase
         }
 
         $this->assertEquals($basicSubscription->getId(), $retrievedSubscription->getId());
-        $this->assertEquals($basicSubscription->getBillData()->getItems(), $retrievedSubscription->getBillData()->getItems());
+        $this->assertEquals(
+            $basicSubscription->getBillData()->getItems(), $retrievedSubscription->getBillData()->getItems());
     }
 
     public function testShouldUpdateSubscription()
@@ -849,7 +918,7 @@ class BitPayTest extends TestCase
 
         $billData = new BitPaySDK\Model\Subscription\BillData(
             Currency::USD,
-            "",
+            "sandbox@bitpay.com",
             $dueDate,
             $items
         );
