@@ -38,33 +38,20 @@ class BitPayTest extends TestCase
             "YourMasterPassword"
         );
 
-//        $this->client = BitPaySDK\Client::create()->withData(
-//            BitPaySDK\Env::Test,
-//            __DIR__."/../../examples/bitpay_private_test.key",
-//            new BitPaySDK\Tokens(
-//                "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
-//                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
-//            ),
-//            "YourMasterPassword");
+        $this->client = BitPaySDK\Client::create()->withData(
+            BitPaySDK\Env::Test,
+            __DIR__."/../../examples/bitpay_private_test.key",
+            new BitPaySDK\Tokens(
+                "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
+                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
+            ),
+            "YourMasterPassword");
 
         /**
          * Uncomment only if you wish to test the client with config files
          * */
-//        $this->client = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
-//        $this->client = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
-        $this->client = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config_new.json");
-
-
-
-// TEST CHARLES'S ACCOUNT
-//        $this->client = BitPaySDK\Client::create()->withData(
-//            BitPaySDK\Env::Test,
-//            __DIR__."/../../examples/bitpay_private_test_charles.key",
-//            new BitPaySDK\Tokens(
-//                "3gyeGnq11H4gywErv5J4H188iKcKFadk8zRWMTeBHERA",
-//                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
-//            ),
-//            "YourMasterPassword");
+//        $this->client1 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
+//        $this->client2 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
 
 
         $this->assertNotNull($this->client);
