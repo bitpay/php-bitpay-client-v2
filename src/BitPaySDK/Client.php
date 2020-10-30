@@ -815,6 +815,36 @@ class Client
         return $recipient;
     }
 
+//    TODO Resource inopperative
+//    /**
+//     * Notify BitPay Payout Recipients.
+//     *
+//     * @param  $recipientId string The id of the recipient to notify.
+//     * @return bool True if the notification was successfully sent, false otherwise.
+//     * @throws PayoutCreationException BitPayException class
+//     */
+//    public function notifyPayoutRecipient(string $recipientId): array
+//    {
+//        try {
+//            $content = [];
+//            $content["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+//
+//            $responseJson = $this->_RESTcli->post("recipients/".$recipientId."/notifications", $content);
+//        } catch (Exception $e) {
+//            throw new PayoutCreationException("failed to serialize PayoutRecipients object : ".$e->getMessage());
+//        }
+//
+//        try {
+//            $result = json_decode($responseJson)->success;
+//
+//        } catch (Exception $e) {
+//            throw new PayoutCreationException(
+//                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage());
+//        }
+//
+//        return $result;
+//    }
+
     /**
      * Submit a BitPay Payout batch.
      *

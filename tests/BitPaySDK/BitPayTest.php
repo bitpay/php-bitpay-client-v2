@@ -9,6 +9,7 @@ use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Invoice\Invoice as Invoice;
 use BitPaySDK\Model\Payout\PayoutStatus;
 use BitPaySDK\Model\Payout\RecipientStatus;
+use BitPaySDK\Model\Payout\RecipientReferenceMethod;
 use PHPUnit\Framework\TestCase;
 
 class BitPayTest extends TestCase
@@ -649,6 +650,31 @@ class BitPayTest extends TestCase
         $this->assertNotNull($recipients);
         $this->assertTrue(count($recipients) == 2);
     }
+
+//    public function testShouldNotifyPayoutRecipientId()
+//    {
+//        $result = null;
+//        $recipientsList = [
+//            new BitPaySDK\Model\Payout\PayoutRecipient(
+//                "agallardo+recipient1@bitpay.com",
+//                "recipient1",
+//                "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
+//        ];
+//
+//        $recipientsObj = new BitPaySDK\Model\Payout\PayoutRecipients($recipientsList);
+//        try {
+//            $basicRecipient = $this->client->submitPayoutRecipients($recipientsObj);
+//            $basicRecipient = reset($basicRecipient);
+//            $result = $this->client->notifyPayoutRecipient($basicRecipient->getId());//9EsKtXQ1nj41EQ1Dk7VxhE
+//            $result = $this->client->notifyPayoutRecipient("9EsKtXQ1nj41EQ1Dk7VxhE");
+//        } catch (\Exception $e) {
+//            $e->getTraceAsString();
+//            self::fail($e->getMessage());
+//        }
+//
+////        $this->assertNotNull($basicRecipient);
+//        $this->assertEquals("Success", $result);
+//    }
 
     public function testShouldSubmitPayoutBatch()
     {
