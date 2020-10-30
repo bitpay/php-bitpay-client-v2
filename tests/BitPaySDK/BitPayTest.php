@@ -641,7 +641,7 @@ class BitPayTest extends TestCase
     {
         $recipients = null;
         try {
-            $recipients = $this->client->getPayoutRecipients(RecipientStatus::INVITED, 2);
+            $recipients = $this->client->getPayoutRecipients(2);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -683,9 +683,12 @@ class BitPayTest extends TestCase
 
         $effectiveDate = $threeDaysFromNow->format("Y-m-d");
         $currency = Currency::USD;
+
+        $recipients = $this->client->getPayoutRecipients(null,2);
+
         $instructions = [
-            new BitPaySDK\Model\Payout\PayoutInstruction(100.0, "mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
-            new BitPaySDK\Model\Payout\PayoutInstruction(200.0, "mvR4Xj7MYT7GJcL93xAQbSZ2p4eHJV5F7A"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(100.0, RecipientReferenceMethod::EMAIL, $recipients[0]->getEmail()),
+            new BitPaySDK\Model\Payout\PayoutInstruction(200.0, RecipientReferenceMethod::RECIPIENT_ID, $recipients[1]->getId()),
         ];
 
         $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $effectiveDate, $instructions);

@@ -4,20 +4,20 @@
 namespace BitPaySDK\Model\Payout;
 
 
+use BitPaySDK\Exceptions\PayoutCreationException;
+
 /**
  *
  * @package Bitpay
  */
 class PayoutInstruction
 {
-    const STATUS_PAID  = "paid";
-    const MethodVwap24 = "vwap_24hr";
-
     protected $_amount;
-    protected $_address;
+    protected $_email;
+    protected $_recipientId;
+    protected $_shopperId;
     protected $_label = "";
     protected $_walletProvider;
-
     protected $_id;
 
     /**
@@ -30,13 +30,27 @@ class PayoutInstruction
     /**
      * Constructor, create a PayoutInstruction object.
      *
-     * @param $amount  float BTC amount.
-     * @param $address string Bitcoin address.
+     * @param $amount      float BTC amount.
+     * @param $method      int Method used to target the recipient.
+     * @param $methodValue string value for the choosen target method.
      */
-    public function __construct(float $amount = null, string $address = null)
+    public function __construct(float $amount, int $method, string $methodValue)
     {
         $this->_amount = $amount;
-        $this->_address = $address;
+        switch ($method) {
+            case RecipientReferenceMethod::EMAIL:
+                $this->_email = $methodValue;
+                break;
+            case RecipientReferenceMethod::RECIPIENT_ID:
+                $this->_recipientId = $methodValue;
+                break;
+            case RecipientReferenceMethod::SHOPPER_ID:
+                $this->_shopperId = $methodValue;
+                break;
+            default:
+                throw new PayoutCreationException("\$method code must be a type of RecipientReferenceMethod");
+                break;
+        }
     }
 
     public function getAmount()
@@ -49,14 +63,34 @@ class PayoutInstruction
         $this->_amount = $amount;
     }
 
-    public function getAddress()
+    public function getEmail()
     {
-        return $this->_address;
+        return $this->_email;
     }
 
-    public function setAddress(string $address)
+    public function setEmail(string $email)
     {
-        $this->_address = $address;
+        $this->_email = $email;
+    }
+
+    public function getRecipientId()
+    {
+        return $this->_recipientId;
+    }
+
+    public function setRecipientId(string $recipientId)
+    {
+        $this->_recipientId = $recipientId;
+    }
+
+    public function getShopperId()
+    {
+        return $this->_shopperId;
+    }
+
+    public function setShopperId(string $shopperId)
+    {
+        $this->_shopperId = $shopperId;
     }
 
     public function getLabel()
@@ -126,7 +160,9 @@ class PayoutInstruction
     {
         $elements = [
             'amount'       => $this->getAmount(),
-            'address'      => $this->getAddress(),
+            'email'        => $this->getEmail(),
+            'recipientId'  => $this->getRecipientId(),
+            'shopperId'    => $this->getShopperId(),
             'label'        => $this->getLabel(),
             'id'           => $this->getId(),
             'btc'          => $this->getBtc(),
