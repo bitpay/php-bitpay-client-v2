@@ -21,6 +21,7 @@ use BitPaySDK\Exceptions\PayoutCreationException;
 use BitPaySDK\Exceptions\PayoutQueryException;
 use BitPaySDK\Exceptions\RateQueryException;
 use BitPaySDK\Exceptions\RefundCreationException;
+use BitPaySDK\Exceptions\RefundCancellationException;
 use BitPaySDK\Exceptions\RefundQueryException;
 use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Exceptions\SubscriptionCreationException;
@@ -404,7 +405,7 @@ class Client
      * @param $refund    Refund The BitPay invoice having the associated refund to be canceled. Must have been obtained
      *                   using the merchant facade.
      * @return bool True if the refund was successfully canceled, false otherwise.
-     * @throws BitPayException BitPayException class
+     * @throws RefundCancellationException RefundCancellationException class
      */
     public function cancelRefund(string $invoiceId, Refund $refund): bool
     {
@@ -431,7 +432,7 @@ class Client
     /**
      * Create a BitPay Bill.
      *
-     * @param $bill        string A Bill object with request parameters defined.
+     * @param $bill        Bill A Bill object with request parameters defined.
      * @param $facade      string The facade used to create it.
      * @param $signRequest bool Signed request.
      * @return Bill A BitPay generated Bill object.
@@ -1046,7 +1047,7 @@ class Client
     /**
      * Retrieves a summary of the specified settlement.
      *
-     * @param $settlementId Settlement Id.
+     * @param $settlementId string Settlement Id.
      * @return Settlement A BitPay Settlement object.
      * @throws BitPayException BitPayException class
      */
@@ -1112,7 +1113,7 @@ class Client
     /**
      * Create a BitPay Subscription.
      *
-     * @param $subscription string A Subscription object with request parameters defined.
+     * @param $subscription Subscription A Subscription object with request parameters defined.
      * @return Subscription A BitPay generated Subscription object.
      * @throws BitPayException BitPayException class
      */

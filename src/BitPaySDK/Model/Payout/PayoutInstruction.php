@@ -33,6 +33,8 @@ class PayoutInstruction
      * @param $amount      float BTC amount.
      * @param $method      int Method used to target the recipient.
      * @param $methodValue string value for the choosen target method.
+     *
+     * @throws PayoutCreationException BitPayException class
      */
     public function __construct(float $amount, int $method, string $methodValue)
     {
