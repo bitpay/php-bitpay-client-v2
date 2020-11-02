@@ -9,6 +9,7 @@ use BitPaySDK\Env;
 use BitPaySDK\Exceptions\BitPayException;
 use Exception;
 use GuzzleHttp\Client as GuzzleHttpClient;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response as Response;
 use GuzzleHttp\RequestOptions as RequestOptions;
 
@@ -89,6 +90,8 @@ class RESTcli
             $responseJson = $this->responseToJsonString($response);
 
             return $responseJson;
+        } catch (GuzzleException $e) {
+            $this->responseToJsonString($e->getResponse());
         } catch (Exception $e) {
             throw new BitPayException("POST failed : ".$e->getMessage());
         }
@@ -128,6 +131,8 @@ class RESTcli
             $responseJson = $this->responseToJsonString($response);
 
             return $responseJson;
+        } catch (GuzzleException $e) {
+            $this->responseToJsonString($e->getResponse());
         } catch (Exception $e) {
             throw new BitPayException("GET failed : ".$e->getMessage());
         }
@@ -164,6 +169,8 @@ class RESTcli
             $responseJson = $this->responseToJsonString($response);
 
             return $responseJson;
+        } catch (GuzzleException $e) {
+            $this->responseToJsonString($e->getResponse());
         } catch (Exception $e) {
             throw new BitPayException("DELETE failed : ".$e->getMessage());
         }
@@ -196,6 +203,8 @@ class RESTcli
             $responseJson = $this->responseToJsonString($response);
 
             return $responseJson;
+        } catch (GuzzleException $e) {
+            $this->responseToJsonString($e->getResponse());
         } catch (Exception $e) {
             throw new BitPayException("UPDATE failed : ".$e->getMessage());
         }

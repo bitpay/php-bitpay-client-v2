@@ -14,8 +14,7 @@ use BitPaySDK\Model\Currency;
  */
 class PayoutBatch
 {
-    const MethodManual2 = "manual_2";
-    const MethodVwap24  = "vwap_24hr";
+    const MethodVwap24 = "vwap_24hr";
 
     protected $_guid  = "";
     protected $_token = "";
@@ -45,10 +44,12 @@ class PayoutBatch
     /**
      * Constructor, create an instruction-full request PayoutBatch object.
      *
-     * @param $currency      string The three digit currency string for the PayoutBatch to use.
-     * @param $effectiveDate string Date when request is effective. Note that the time of day will automatically be set
-     *                       to 09:00:00.000 UTC time for the given day. Only requests submitted before 09:00:00.000
-     *                       UTC are guaranteed to be processed on the same day.
+     * @param            $currency      string The three digit currency string for the PayoutBatch to use.
+     * @param            $effectiveDate string Date when request is effective. Note that the time of day will
+     *                                  automatically be set to 09:00:00.000 UTC time for the given day. Only requests
+     *                                  submitted before 09:00:00.000 UTC are guaranteed to be processed on the same
+     *                                  day.
+     * @param array|null $instructions
      */
     public function __construct(string $currency = "USD", string $effectiveDate = null, array $instructions = null)
     {
@@ -316,16 +317,6 @@ class PayoutBatch
     public function setDateExecuted(string $dateExecuted)
     {
         $this->_dateExecuted = $dateExecuted;
-    }
-
-    public function setCurrencyInfo(array $currencyInfo)
-    {
-        $this->_currnecyinfo = $currencyInfo;
-    }
-
-    public function getCurrencyInfo()
-    {
-        return $this->_currencyInfo;
     }
 
     public function toArray()
