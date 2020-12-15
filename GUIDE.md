@@ -110,7 +110,7 @@ php composer.phar update bitpay/sdk
 ### Install using composer
 
 ```bash
-php composer.phar require bitpay/sdk:~3.0
+php composer.phar require bitpay/sdk:^5.0
 ```
 
 ### Initializing your BitPay client
