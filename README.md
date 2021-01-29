@@ -1,4 +1,4 @@
-<img src="https://bitpay.com/_nuxt/img/1c0494b.svg" width="150">
+<img src="https://bitpay.com/_nuxt/img/bitpay-logo-blue.1c0494b.svg" width="150">
 
 # BitPay PHP Client
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bitpay/php-bitpay-client-v2/master/LICENSE)
