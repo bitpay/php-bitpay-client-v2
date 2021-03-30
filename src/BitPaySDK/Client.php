@@ -112,14 +112,15 @@ class Client
      * @param $privateKey       String Private Key file path or the HEX value.
      * @param $tokens           Tokens containing the available tokens.
      * @param $privateKeySecret String|null Private Key encryption password.
+     * @param $proxy            String|null The url of your proxy to forward requests through. Example: http://xxxxxxx.com:3128
      * @return Client
      * @throws BitPayException BitPayException class
      */
-    public function withData($environment, $privateKey, Tokens $tokens, $privateKeySecret = null)
+    public function withData($environment, $privateKey, Tokens $tokens, $privateKeySecret = null, ?string $proxy = null)
     {
         try {
             $this->_env = $environment;
-            $this->buildConfig($privateKey, $tokens, $privateKeySecret);
+            $this->buildConfig($privateKey, $tokens, $privateKeySecret, $proxy);
             $this->initKeys();
             $this->init();
 
@@ -1274,9 +1275,10 @@ class Client
      * @param $privateKey       String The full path to the securely located private key or the HEX key value.
      * @param $tokens           Tokens object containing the BitPay's API tokens.
      * @param $privateKeySecret String Private Key encryption password only for key file.
+     * @param $proxy            String|null An http url of a proxy to foward requests through.
      * @throws BitPayException BitPayException class
      */
-    private function buildConfig($privateKey, $tokens, $privateKeySecret = null)
+    private function buildConfig($privateKey, $tokens, $privateKeySecret = null, ?string $proxy = null)
     {
         try {
             if (!file_exists($privateKey)) {
@@ -1294,6 +1296,7 @@ class Client
                 "PrivateKeyPath"   => $privateKey,
                 "PrivateKeySecret" => $privateKeySecret,
                 "ApiTokens"        => $tokens,
+                "Proxy"            => $proxy,
             ];
 
             $this->_configuration->setEnvConfig($envConfig);
@@ -1325,11 +1328,13 @@ class Client
             $tokens = Tokens::loadFromArray($configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["ApiTokens"]);
             $privateKeyPath = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeyPath"];
             $privateKeySecret = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeySecret"];
+            $proxy = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["Proxy"] ?? null;
 
             $envConfig[$this->_env] = [
                 "PrivateKeyPath"   => $privateKeyPath,
                 "PrivateKeySecret" => $privateKeySecret,
                 "ApiTokens"        => $tokens,
+                "Proxy"            => $proxy,
             ];
 
             $this->_configuration->setEnvConfig($envConfig);
@@ -1367,7 +1372,8 @@ class Client
     private function init()
     {
         try {
-            $this->_RESTcli = new RESTcli($this->_env, $this->_ecKey);
+            $proxy = $this->_configuration->getEnvConfig()[$this->_env]["Proxy"] ?? null;
+            $this->_RESTcli = new RESTcli($this->_env, $this->_ecKey, $proxy);
             $this->loadAccessTokens();
             $this->loadCurrencies();
         } catch (Exception $e) {

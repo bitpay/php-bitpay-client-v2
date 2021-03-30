@@ -12,3 +12,4 @@ BitPayConfiguration:
       ApiTokens:
         merchant: null
         payroll: null
+      Proxy: null
