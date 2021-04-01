@@ -229,6 +229,9 @@ class RESTcli
 
         try {
             $body = json_decode($response->getBody()->getContents(), true);
+            if ($this->_proxy !== '' && !is_array($body)) {
+                throw new BitPayException("Please check your proxy settings, HTTP Code:".$response->getStatusCode().", failed to decode json: ".json_last_error_msg());
+            }
             $error_message = false;
             $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
             $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
