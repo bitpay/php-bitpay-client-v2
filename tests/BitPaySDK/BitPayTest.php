@@ -1,6 +1,6 @@
 <?php
 
-namespace BitPaySDK\Tests;
+namespace BitPaySDK\Test;
 
 
 use BitPaySDK;
@@ -8,7 +8,6 @@ use BitPaySDK\Model\Bill\BillStatus;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Invoice\Invoice as Invoice;
 use BitPaySDK\Model\Payout\PayoutStatus;
-use BitPaySDK\Model\Payout\RecipientStatus;
 use BitPaySDK\Model\Payout\RecipientReferenceMethod;
 use PHPUnit\Framework\TestCase;
 
@@ -156,7 +155,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($invoices);
-        $this->assertTrue(count($invoices) > 0);
+        $this->assertGreaterThan(0, count($invoices));
     }
 
     public function testShouldCreateGetCancelRefundRequest()
@@ -365,7 +364,7 @@ class BitPayTest extends TestCase
 
             $this->assertEquals($basicBill->getId(), $retrievedBill->getId());
             $this->assertEquals($basicBill->getItems(), $retrievedBill->getItems());
-            $this->assertEquals(count($retrievedBill->getItems()), 4);
+            $this->assertCount(4, $retrievedBill->getItems());
 
             $items = $retrievedBill->getItems();
 
@@ -383,7 +382,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertEquals(count($updatedBill->getItems()), 5);
+        $this->assertCount(5, $updatedBill->getItems());
         $this->assertEquals(end($items)->getDescription(), "product-added");
     }
 
@@ -397,7 +396,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue(count($bills) > 0);
+        $this->assertGreaterThan(0, count($bills));
     }
 
     public function testShouldGetBillsByStatus()
@@ -410,7 +409,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue(count($bills) > 0);
+        $this->assertGreaterThan(0, count($bills));
     }
 
     public function testShouldDeliverBill()
@@ -486,7 +485,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue($rate != 0);
+        $this->assertNotEquals(0, $rate);
     }
 
     public function testShouldGetCNYExchangeRate()
@@ -500,7 +499,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue($rate != 0);
+        $this->assertNotEquals(0, $rate);
     }
 
     public function testShouldUpdateExchangeRates()
@@ -535,7 +534,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($ledger);
-        $this->assertTrue(count($ledger) > 0);
+        $this->assertGreaterThan(0, count($ledger));
     }
 
     public function testShouldGetLedgerUsd()
@@ -554,7 +553,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($ledger);
-        $this->assertTrue(count($ledger) > 0);
+        $this->assertGreaterThan(0, count($ledger));
     }
 
     public function testShouldGetLedgers()
@@ -568,7 +567,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($ledgers);
-        $this->assertTrue(count($ledgers) > 0);
+        $this->assertGreaterThan(0, count($ledgers));
     }
 
     public function testShouldSubmitPayoutRecipients()
@@ -597,7 +596,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($recipients);
-        $this->assertTrue(count($recipients) == 3);
+        $this->assertEquals(3, count($recipients));
     }
 
     public function testShouldGetPayoutRecipientId()
@@ -635,7 +634,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($recipients);
-        $this->assertTrue(count($recipients) == 2);
+        $this->assertEquals(2, count($recipients));
     }
 
 //    public function testShouldNotifyPayoutRecipientId()
@@ -688,7 +687,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($batch->getId());
-        $this->assertTrue(count($batch->getInstructions()) == 2);
+        $this->assertEquals(2, count($batch->getInstructions()));
     }
 
     public function testShouldGetPayoutBatches()
@@ -700,7 +699,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue(count($batches) > 0);
+        $this->assertGreaterThan(0, count($batches));
     }
 
     public function testShouldGetPayoutBatchesByStatus()
@@ -712,7 +711,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue(count($batches) > 0);
+        $this->assertGreaterThan(0, count($batches));
     }
 
     public function testShouldSubmitGetAndDeletePayoutBatch()
@@ -741,7 +740,7 @@ class BitPayTest extends TestCase
         $this->assertNotNull($batch->getId());
         $this->assertNotNull($batchRetrieved->getId());
         $this->assertNotNull($batchCancelled->getId());
-        $this->assertTrue(count($batch->getInstructions()) == 2);
+        $this->assertEquals(2, count($batch->getInstructions()));
         $this->assertEquals($batch->getId(), $batchRetrieved->getId());
         $this->assertEquals($batchRetrieved->getId(), $batchCancelled->getId());
         $this->assertEquals($batchRetrieved->getStatus(), PayoutStatus::New);
@@ -769,7 +768,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($settlements);
-        $this->assertTrue(count($settlements) > 0);
+        $this->assertGreaterThan(0, count($settlements));
         $this->assertNotNull($settlement->getId());
         $this->assertEquals($firstSettlement->getId(), $settlement->getId());
     }
@@ -795,7 +794,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($settlements);
-        $this->assertTrue(count($settlements) > 0);
+        $this->assertGreaterThan(0, count($settlements));
         $this->assertNotNull($settlement->getId());
         $this->assertEquals($firstSettlement->getId(), $settlement->getId());
     }
@@ -966,7 +965,7 @@ class BitPayTest extends TestCase
             $this->assertEquals($basicSubscription->getId(), $retrievedSubscription->getId());
             $this->assertEquals(
                 $basicSubscription->getBillData()->getItems(), $retrievedSubscription->getBillData()->getItems());
-            $this->assertEquals(count($retrievedSubscription->getBillData()->getItems()), 4);
+            $this->assertCount(4, $retrievedSubscription->getBillData()->getItems());
 
             $items = $retrievedSubscription->getBillData()->getItems();
 
@@ -985,7 +984,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertEquals(count($updatedSubscription->getBillData()->getItems()), 5);
+        $this->assertCount(5, $updatedSubscription->getBillData()->getItems());
         $this->assertEquals(end($items)->getDescription(), "product-added");
     }
 
@@ -999,7 +998,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue(count($subscriptions) > 0);
+        $this->assertGreaterThan(0, count($subscriptions));
     }
 
     public function testShouldGetSubscriptionsByStatus()
@@ -1012,7 +1011,7 @@ class BitPayTest extends TestCase
             self::fail($e->getMessage());
         }
 
-        $this->assertTrue(count($subscriptions) > 0);
+        $this->assertGreaterThan(0, count($subscriptions));
     }
 
     public function testShouldGetCurrencies()
