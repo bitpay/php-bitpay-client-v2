@@ -596,7 +596,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($recipients);
-        $this->assertEquals(3, count($recipients));
+        $this->assertCount(3, $recipients);
     }
 
     public function testShouldGetPayoutRecipientId()
@@ -634,7 +634,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($recipients);
-        $this->assertEquals(2, count($recipients));
+        $this->assertCount(2, $recipients);
     }
 
 //    public function testShouldNotifyPayoutRecipientId()
@@ -687,7 +687,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($batch->getId());
-        $this->assertEquals(2, count($batch->getInstructions()));
+        $this->assertCount(2, $batch->getInstructions());
     }
 
     public function testShouldGetPayoutBatches()
@@ -740,7 +740,7 @@ class BitPayTest extends TestCase
         $this->assertNotNull($batch->getId());
         $this->assertNotNull($batchRetrieved->getId());
         $this->assertNotNull($batchCancelled->getId());
-        $this->assertEquals(2, count($batch->getInstructions()));
+        $this->assertCount(2, $batch->getInstructions());
         $this->assertEquals($batch->getId(), $batchRetrieved->getId());
         $this->assertEquals($batchRetrieved->getId(), $batchCancelled->getId());
         $this->assertEquals($batchRetrieved->getStatus(), PayoutStatus::New);
