@@ -24,6 +24,8 @@ class Invoice
     protected $_fullNotifications = false;
     protected $_notificationEmail = "";
     protected $_redirectURL       = "";
+    protected $_closeURL          = "";
+    protected $_autoRedirect      = false;
     protected $_orderId           = "";
     protected $_itemDesc          = "";
     protected $_itemCode          = "";
@@ -186,6 +188,26 @@ class Invoice
     public function setRedirectURL(string $redirectURL)
     {
         $this->_redirectURL = $redirectURL;
+    }
+    
+    public function getCloseURL()
+    {
+        return $this->_closeURL;
+    }
+
+    public function setCloseURL(string $closeURL)
+    {
+        $this->_closeURL = $closeURL;
+    }
+
+    public function getAutoRedirect()
+    {
+        return $this->_autoRedirect;
+    }
+
+    public function setAutoRedirect(bool $auRedirect)
+    {
+        $this->_autoRedirect = $auRedirect;
     }
 
     public function getOrderId()
@@ -507,6 +529,8 @@ class Invoice
             'fullNotifications'              => $this->getFullNotifications(),
             'notificationEmail'              => $this->getNotificationEmail(),
             'redirectURL'                    => $this->getRedirectURL(),
+            'closeURL'                       => $this->getCloseURL(),
+            'autoRedirect'                   => $this->getAutoRedirect(),
             'orderId'                        => $this->getOrderId(),
             'itemDesc'                       => $this->getItemDesc(),
             'itemCode'                       => $this->getItemCode(),
