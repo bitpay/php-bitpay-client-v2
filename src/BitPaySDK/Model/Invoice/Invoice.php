@@ -18,7 +18,7 @@ class Invoice
     protected $_token = "";
 
     protected $_price;
-    protected $_posData           = "";
+    protected $_posData;
     protected $_notificationURL   = "";
     protected $_transactionSpeed  = "";
     protected $_fullNotifications = false;
