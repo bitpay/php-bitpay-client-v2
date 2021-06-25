@@ -32,6 +32,9 @@ class Invoice
     protected $_acceptanceWindow;
     protected $_buyer;
     protected $_refundAddresses;
+    protected $_closeURL   = "";
+    protected $_autoRedirect  = false;
+    protected $_jsonPayProRequired;
 
     protected $_id;
     protected $_url;
@@ -48,12 +51,15 @@ class Invoice
     protected $_buyerProvidedInfo;
     protected $_supportedTransactionCurrencies;
     protected $_minerFees;
+    protected $_nonPayProPaymentReceived;
     protected $_shopper;
     protected $_billId;
     protected $_refundInfo;
     protected $_extendedNotifications = false;
 
     protected $_transactionCurrency;
+    protected $_underpaidAmount;
+    protected $_overpaidAmount;
     protected $_amountPaid;
     protected $_exchangeRates;
 
@@ -243,6 +249,36 @@ class Invoice
         return $this->_acceptanceWindow;
     }
 
+    public function getCloseURL()
+    {
+        return $this->_closeURL;
+    }
+
+    public function setCloseURL(string $closeURL)
+    {
+        $this->_closeURL = $closeURL;
+    }
+
+    public function getAutoRedirect()
+    {
+        return $this->_autoRedirect;
+    }
+
+    public function setAutoRedirect(bool $autoRedirect)
+    {
+        $this->_autoRedirect = $autoRedirect;
+    }
+
+    public function getJsonPayProRequired()
+    {
+        return $this->_jsonPayProRequired;
+    }
+
+    public function setJsonPayProRequired(bool $jsonPayProRequired)
+    {
+        $this->_jsonPayProRequired = $jsonPayProRequired;
+    }
+
     // Buyer data
     //
 
@@ -414,6 +450,26 @@ class Invoice
         $this->_supportedTransactionCurrencies = $supportedTransactionCurrencies;
     }
 
+    public function getUnderpaidAmount()
+    {
+        return $this->_underpaidAmount;
+    }
+
+    public function setUnderpaidAmount($underpaidAmount)
+    {
+        $this->_underpaidAmount = $underpaidAmount;
+    }
+
+    public function getOverpaidAmount()
+    {
+        return $this->_overpaidAmount;
+    }
+
+    public function setOverpaidAmount($overpaidAmount)
+    {
+        $this->_overpaidAmount = $overpaidAmount;
+    }
+
     public function getMinerFees()
     {
         return $this->_minerFees;
@@ -422,6 +478,16 @@ class Invoice
     public function setMinerFees(MinerFees $minerFees)
     {
         $this->_minerFees = $minerFees;
+    }
+
+    public function getNonPayProPaymentReceived()
+    {
+        return $this->_nonPayProPaymentReceived;
+    }
+
+    public function setNonPayProPaymentReceived(bool $nonPayProPaymentReceived)
+    {
+        $this->_nonPayProPaymentReceived = $nonPayProPaymentReceived;
     }
 
     public function getShopper()
@@ -513,6 +579,8 @@ class Invoice
             'physical'                       => $this->getPhysical(),
             'paymentCurrencies'              => $this->getPaymentCurrencies(),
             'acceptanceWindow'               => $this->getAcceptanceWindow(),
+            'closeURL'                       => $this->getCloseURL(),
+            'autoRedirect'                   => $this->getAutoRedirect(),
             'buyer'                          => $this->getBuyer()->toArray(),
             'refundAddresses'                => $this->getRefundAddresses(),
             'id'                             => $this->getId(),
