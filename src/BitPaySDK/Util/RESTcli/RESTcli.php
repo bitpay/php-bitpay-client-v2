@@ -40,10 +40,16 @@ class RESTcli
      */
     protected $_identity;
 
-    public function __construct(string $environment, PrivateKey $ecKey)
+    /**
+     * @var string
+     */
+    protected $_proxy;
+
+    public function __construct(string $environment, PrivateKey $ecKey, ?string $proxy = null)
     {
         $this->_ecKey = $ecKey;
         $this->_baseUrl = $environment == Env::Test ? Env::TestUrl : Env::ProdUrl;
+        $this->_proxy = $proxy !== null ? trim($proxy) : '';
         $this->init();
     }
 
@@ -51,18 +57,23 @@ class RESTcli
     {
         try {
             $this->_identity = $this->_ecKey->getPublicKey()->__toString();
-            $this->_client = new GuzzleHttpClient(
-                [
-                    'base_url' => $this->_baseUrl,
-                    'defaults' => [
-                        'headers' => [
-                            'x-accept-version'           => Env::BitpayApiVersion,
-                            'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
-                            'x-bitpay-api-frame'         => Env::BitpayApiFrame,
-                            'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
-                        ],
+            $config = [
+                'base_url' => $this->_baseUrl,
+                'defaults' => [
+                    'headers' => [
+                        'x-accept-version'           => Env::BitpayApiVersion,
+                        'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
+                        'x-bitpay-api-frame'         => Env::BitpayApiFrame,
+                        'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
                     ],
-                ]);
+                ],
+            ];
+
+            if ($this->_proxy !== '') {
+                $config['proxy'] = $this->_proxy;
+            }
+
+            $this->_client = new GuzzleHttpClient($config);
         } catch (Exception $e) {
             throw new BitPayException("RESTcli init failed : ".$e->getMessage());
         }
@@ -282,6 +293,9 @@ class RESTcli
 
         try {
             $body = json_decode($response->getBody()->getContents(), true);
+            if ($this->_proxy !== '' && !is_array($body)) {
+                throw new BitPayException("Please check your proxy settings, HTTP Code:".$response->getStatusCode().", failed to decode json: ".json_last_error_msg());
+            }
             $error_message = false;
             $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
             $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
