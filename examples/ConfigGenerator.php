@@ -24,6 +24,8 @@ $yourMasterPassword = 'YourMasterPassword'; //Will be used to encrypt your Priva
 $generateJSONfile = true; // Set to true to generate the Configuration File in Json format
 $generateYMLfile = true; // Set to true to generate the Configuration File in Yml format
 
+$proxy = null;
+
 
 /**
  * WARNING: DO NOT CHANGE ANYTHING FROM HERE ON
@@ -211,6 +213,7 @@ $config = [
                     "merchant" => $isProd ? null : $merchantToken,
                     "payroll"  => $isProd ? null : $payrolToken,
                 ],
+                "proxy" => $proxy,
             ],
             'Prod' => [
                 "PrivateKeyPath"   => $isProd ? __DIR__."/".$privateKeyname : null,
@@ -219,6 +222,7 @@ $config = [
                     "merchant" => $isProd ? $merchantToken : null,
                     "payroll"  => $isProd ? $payrolToken : null,
                 ],
+                "proxy" => $proxy,
             ],
         ],
     ],

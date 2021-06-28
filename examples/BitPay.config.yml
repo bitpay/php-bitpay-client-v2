@@ -7,8 +7,10 @@ BitPayConfiguration:
       ApiTokens:
         merchant: null
         payroll: null
+      Proxy: null
     Prod:
       PrivateKeyPath: null
+      PrivateKeySecret: null
       ApiTokens:
         merchant: null
         payroll: null
