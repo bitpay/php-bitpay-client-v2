@@ -8,6 +8,7 @@ class BuyerProvidedInfo
 {
     protected $_name;
     protected $_phoneNumber;
+    protected $_selectedWallet;
     protected $_emailAddress;
     protected $_selectedTransactionCurrency;
 
@@ -35,6 +36,16 @@ class BuyerProvidedInfo
         $this->_phoneNumber = $phoneNumber;
     }
 
+    public function getSelectedWallet()
+    {
+        return $this->_selectedWallet;
+    }
+
+    public function setSelectedWallet($selectedWallet)
+    {
+        $this->_selectedWallet = $selectedWallet;
+    }
+
     public function getEmailAddress()
     {
         return $this->_emailAddress;
@@ -60,6 +71,7 @@ class BuyerProvidedInfo
         $elements = [
             'name'                        => $this->getName(),
             'phoneNumber'                 => $this->getPhoneNumber(),
+            'selectedWallet'              => $this->getSelectedWallet(),
             'emailAddress'                => $this->getEmailAddress(),
             'selectedTransactionCurrency' => $this->getSelectedTransactionCurrency(),
         ];
