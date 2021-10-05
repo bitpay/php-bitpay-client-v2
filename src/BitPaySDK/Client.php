@@ -289,43 +289,70 @@ class Client
     }
 
     /**
-     * Create a BitPay refund.
+     * Create a refund for a BitPay invoice.
      *
-     * @param $invoice          Invoice A BitPay invoice object for which a refund request should be made.  Must have
-     *                          been obtained using the merchant facade.
-     * @param $refundEmail      string The email of the buyer to which the refund email will be sent
-     * @param $amount           float The amount of money to refund. If zero then a request for 100% of the invoice
-     *                          value is created.
-     * @param $currency         string The three digit currency code specifying the exchange rate to use when
-     *                          calculating the refund bitcoin amount. If this value is "BTC" then no exchange rate
-     *                          calculation is performed.
-     * @return bool True if the refund was successfully canceled, false otherwise.
-     * @throws BitPayException BitPayException class
+     * @param $invoiceId          The BitPay invoice Id having the associated refund to be created.
+     * @param $amount             Amount to be refunded in the currency indicated.
+     * @param $currency           Reference currency used for the refund, usually the same as the currency used to create the invoice.
+     * @param $preview            Whether to create the refund request as a preview (which will not be acted on until status is updated)
+     * @param $immediate          Whether funds should be removed from merchant ledger immediately on submission or at time of processing
+     * @param $buyerPaysRefundFee Whether the buyer should pay the refund fee (default is merchant)
+     * @return Refund             An updated Refund Object
+     * @throws RefundCreationException RefundCreationException class
+     * @throws BitPayException    BitPayException class
      */
     public function createRefund(
-        Invoice $invoice,
-        string $refundEmail,
+        string $invoiceId,
         float $amount,
-        string $currency
-    ): bool {
-        try {
-            $refund = new Refund($refundEmail, $amount, $currency, $invoice->getToken());
-            $refund->setGuid(Util::guid());
+        string $currency,
+        bool $preview,
+        bool $immediate,
+        bool $buyerPaysRefundFee
+    ): Refund {
+        $params = [];
+        $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
 
-            $responseJson = $this->_RESTcli->post("invoices/".$invoice->getId()."/refunds", $refund->toArray());
-        } catch (Exception $e) {
-            throw new RefundCreationException("failed to serialize Refund object : ".$e->getMessage());
+        if ($invoiceId == null && $amount == null && $currency == null) {
+            throw new RefundCreationException("Invoice ID, amount and currency are required to issue a refund.");
+        }
+        if ($invoiceId != null) {
+            $params["invoiceId"] =  $invoiceId;
+        }
+        if ($amount != null) {
+            $params["amount"] = $amount;
+        }
+        if ($currency != null) {
+            $params["currency"] = $currency;
+        }
+        if ($preview != null) {
+            $params["preview"] = $preview;
+        }
+        if ($immediate != null) {
+            $params["immediate"] = $immediate;
+        }
+        if ($buyerPaysRefundFee != null) {
+            $params["buyerPaysRefundFee"] = $buyerPaysRefundFee;
         }
 
         try {
-            $result = json_decode($responseJson)->success;
+            $responseJson = $this->_RESTcli->post("refunds/", $params, true);
+        } catch (Exception $e) {
+            throw new RefundQueryException("failed to serialize refund object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $Refund = $mapper->map(
+                json_decode($responseJson),
+                new Refund()
+            );
 
         } catch (Exception $e) {
-            throw new RefundCreationException(
+            throw new RefundQueryException(
                 "failed to deserialize BitPay server response (Refund) : ".$e->getMessage());
         }
 
-        return $result;
+        return $Refund;
     }
 
     /**

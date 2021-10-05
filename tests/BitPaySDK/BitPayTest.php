@@ -173,16 +173,9 @@ class BitPayTest extends TestCase
             $sevenDaysAgo = $dateBefore->format("Y-m-d");
             $invoices = $this->client->getInvoices(
                 $sevenDaysAgo, $today, BitPaySDK\Model\Invoice\InvoiceStatus::Complete);
-            /**
-             * var Invoice
-             */
-//            $firstInvoice = $invoices[0];
-            $firstInvoice = $this->client->getInvoice("JHJsfknvgUpZjL9ksSKFZu");
+            $firstInvoice = $invoices[0];    
             $refunded = $this->client->createRefund(
-                $firstInvoice,
-                "sandbox@bitpay.com",
-                $firstInvoice->getPrice(),
-                $firstInvoice->getCurrency()
+                $firstInvoice->getId(), 1.0, "USD", true, false, false
             );
             $retrievedRefunds = $this->client->getRefunds($firstInvoice);
             $firstRefund = $retrievedRefunds[0];
