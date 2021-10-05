@@ -612,7 +612,7 @@ class Invoice
         return $this->_displayAmountPaid;
     }
 
-    public function setAmountPaid($displayAmountPaid)
+    public function setDisplayAmountPaid($displayAmountPaid)
     {
         $this->_displayAmountPaid = $displayAmountPaid;
     }
