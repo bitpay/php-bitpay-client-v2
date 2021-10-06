@@ -21,6 +21,7 @@ class PayoutInfo
     protected $_wire;
     protected $_bankName;
     protected $_bankAddress;
+    protected $_bankAddress2;
     protected $_iban;
     protected $_additionalInformation;
     protected $_accountHolderName;
@@ -183,6 +184,16 @@ class PayoutInfo
     public function setBankAddress(string $bankAddress)
     {
         $this->_bankAddress = $bankAddress;
+    }
+
+    public function getBankAddress2()
+    {
+        return $this->_bankAddress2;
+    }
+
+    public function setBankAddress2(string $bankAddress2)
+    {
+        $this->_bankAddress2 = $bankAddress2;
     }
 
     public function getIban()
