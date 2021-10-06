@@ -17,14 +17,15 @@ $isProd = false; // Set to true if the environment for which the configuration f
 $privateKeyname = 'PrivateKeyName.key'; // Add here the name for your Private key
 
 $generateMerchantToken = true; // Set to true to generate a token for the Merchant facade
-$generatePayrollToken = false; // Set to true to generate a token for the Payroll facade (Request to Support if you need it)
+$generatePayrollToken = true; // ### DEPRECATED ### Set to true to generate a token for the Payroll facade ### DEPRECATED ###
+$generatePayoutToken = true; // Set to true to generate a token for the Payout facade (Request to Support if you need it)
 
 $yourMasterPassword = 'YourMasterPassword'; //Will be used to encrypt your PrivateKey
 
 $generateJSONfile = true; // Set to true to generate the Configuration File in Json format
 $generateYMLfile = true; // Set to true to generate the Configuration File in Yml format
 
-$proxy = null;
+$proxy = null; // The url of your proxy to forward requests through. Example: http://********.com:3128
 
 
 /**
@@ -85,6 +86,7 @@ $env = $isProd ? 'Prod' : 'Test';
 
 $merchantToken = null;
 $payrolToken = null;
+$payoutToken = null;
 
 
 /**
@@ -139,7 +141,7 @@ try {
         /** End of request **/
     }
 
-    /**
+    /** //TODO DEPRECATED delete in version 6.0
      * Repeat the process for the Payroll facade
      */
 
@@ -189,6 +191,58 @@ try {
         echo "\r\n";
 
         /** End of request **/
+    } //TODO DEPRECATED delete in version 6.0
+
+    /**
+     * Repeat the process for the Payout facade
+     */
+
+    if ($generatePayoutToken) {
+
+        $facade = 'payout';
+
+        $postData = json_encode(
+            [
+                'id'     => $sin,
+                'facade' => $facade,
+            ]);
+
+        $curlCli = curl_init($baseUrl . "/tokens");
+
+        curl_setopt(
+            $curlCli, CURLOPT_HTTPHEADER, [
+            'x-accept-version: 2.0.0',
+            'Content-Type: application/json',
+            'x-identity'  => $publicKey->__toString(),
+            'x-signature' => $privateKey->sign($baseUrl . "/tokens".$postData),
+        ]);
+
+        curl_setopt($curlCli, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($curlCli, CURLOPT_POSTFIELDS, stripslashes($postData));
+        curl_setopt($curlCli, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($curlCli);
+        $resultData = json_decode($result, true);
+        curl_close($curlCli);
+
+        if (array_key_exists('error', $resultData)) {
+            echo $resultData['error'];
+            exit;
+        }
+
+        /**
+         * Example of a pairing Code returned from the BitPay API
+         * which needs to be APPROVED on the BitPay Dashboard before being able to use it.
+         **/
+        $payoutToken = $resultData['data'][0]['token'];
+        echo "\r\nPayout Facade\r\n";
+        echo "    -> Pairing Code: ";
+        echo $resultData['data'][0]['pairingCode'];
+        echo "\r\n    -> Token: ";
+        echo $payoutToken;
+        echo "\r\n";
+
+        /** End of request **/
     }
 } catch (Exception $ex) {
     echo $ex->getMessage();
@@ -211,7 +265,8 @@ $config = [
                 "PrivateKeySecret" => $isProd ? null : $yourMasterPassword,
                 "ApiTokens"        => [
                     "merchant" => $isProd ? null : $merchantToken,
-                    "payroll"  => $isProd ? null : $payrolToken,
+                    "payroll"  => $isProd ? null : $payrolToken, //TODO DEPRECATED delete in version 6.0
+                    "payout"  => $isProd ? $payoutToken : null,
                 ],
                 "proxy" => $proxy,
             ],
@@ -220,7 +275,8 @@ $config = [
                 "PrivateKeySecret" => $isProd ? $yourMasterPassword : null,
                 "ApiTokens"        => [
                     "merchant" => $isProd ? $merchantToken : null,
-                    "payroll"  => $isProd ? $payrolToken : null,
+                    "payroll"  => $isProd ? $payrolToken : null, //TODO DEPRECATED delete in version 6.0
+                    "payout"  => $isProd ? $payoutToken : null,
                 ],
                 "proxy" => $proxy,
             ],
