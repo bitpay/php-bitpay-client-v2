@@ -29,6 +29,11 @@ class Invoice
     protected $_itemCode          = "";
     protected $_physical          = false;
     protected $_paymentCurrencies;
+    protected $_paymentSubtotals;
+    protected $_paymentTotals;
+    protected $_paymentDisplayTotals;
+    protected $_paymentDisplaySubTotals;
+    protected $_paymentCodes;
     protected $_acceptanceWindow;
     protected $_buyer;
     protected $_refundAddresses;
@@ -61,6 +66,7 @@ class Invoice
     protected $_underpaidAmount;
     protected $_overpaidAmount;
     protected $_amountPaid;
+    protected $_displayAmountPaid;
     protected $_exchangeRates;
 
     /**
@@ -449,6 +455,57 @@ class Invoice
     {
         $this->_supportedTransactionCurrencies = $supportedTransactionCurrencies;
     }
+    
+    public function getPaymentTotals()
+    {
+        return $this->_paymentTotals;
+    }
+
+    public function setPaymentTotals($paymentTotals)
+    {
+        $this->_paymentTotals = $paymentTotals;
+    }
+
+    public function getPaymentSubTotals()
+    {
+        return $this->_paymentSubtotals;
+    }
+
+    public function setPaymentSubTotals($paymentSubtotals)
+    {
+        $this->_paymentSubtotals = $paymentSubtotals;
+    }
+
+
+    public function getPaymentDisplaySubTotals()
+    {
+        return $this->_paymentDisplaySubtotals;
+    }
+
+    public function setPaymentDisplaySubTotals($paymentDisplaySubtotals)
+    {
+        $this->_paymentDisplaySubtotals = $paymentDisplaySubtotals;
+    }
+
+    public function getPaymentDisplayTotals()
+    {
+        return $this->_paymentDisplaytotals;
+    }
+
+    public function setPaymentDisplayTotals($paymentDisplaytotals)
+    {
+        $this->_paymentDisplaytotals = $paymentDisplaytotals;
+    }
+
+    public function getPaymentCodes()
+    {
+        return $this->_paymentCodes;
+    }
+
+    public function setPaymentCodes($paymentCodes)
+    {
+        $this->_paymentCodes = $paymentCodes;
+    }
 
     public function getUnderpaidAmount()
     {
@@ -548,6 +605,16 @@ class Invoice
     public function setAmountPaid($amountPaid)
     {
         $this->_amountPaid = $amountPaid;
+    }
+
+    public function getDisplayAmountPaid()
+    {
+        return $this->_displayAmountPaid;
+    }
+
+    public function setDisplayAmountPaid($displayAmountPaid)
+    {
+        $this->_displayAmountPaid = $displayAmountPaid;
     }
 
     public function getExchangeRates()
