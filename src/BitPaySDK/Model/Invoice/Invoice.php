@@ -45,10 +45,13 @@ class Invoice
     protected $_jsonPayProRequired;
     protected $_buyerSms;
     protected $_buyerEmail;
+    protected $_sms;
     protected $_smsCode;
     protected $_merchantName;
+    protected $_selectedWallet;
     protected $_forcedBuyerSelectedWallet;
     protected $_selectedTransactionCurrency;
+    protected $_forcedBuyerSelectedTransactionCurrency;
 
     protected $_id;
     protected $_url;
@@ -337,6 +340,16 @@ class Invoice
     public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
     {
         $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
+    }
+
+    public function getForcedBuyerSelectedTransactionCurrency()
+    {
+        return $this->_forcedBuyerSelectedTransactionCurrency;
+    }
+
+    public function setForcedBuyerSelectedTransactionCurrency(string $forcedBuyerSelectedTransactionCurrency)
+    {
+        $this->_forcedBuyerSelectedTransactionCurrency = $forcedBuyerSelectedTransactionCurrency;
     }
 
     // Buyer data
@@ -781,6 +794,26 @@ class Invoice
         $this->_fiatAmount = $fiatAmount;
     }
 
+    public function getSelectedWallet()
+    {
+        return $this->_selectedWallet;
+    }
+
+    public function setSelectedWallet($selectedWallet)
+    {
+        $this->_selectedWallet = $selectedWallet;
+    }
+
+    public function getSms()
+    {
+        return $this->_sms;
+    }
+
+    public function setSms($sms)
+    {
+        $this->_sms = $sms;
+    }
+
     public function toArray()
     {
         $elements = [
@@ -838,7 +871,10 @@ class Invoice
             'isCancelled'                    => $this->getIsCancelled(),
             'fiatAmount'                     => $this->getFiatAmount(),
             'buyerEmail'                     => $this->getBuyerEmail(),
-            'smsCode'                        => $this->getSmsCode()
+            'smsCode'                        => $this->getSmsCode(),
+            'selectedWallet'                 => $this->getSelectedWallet(),
+            'sms'                            => $this->getSms(),
+            'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];
 
         foreach ($elements as $key => $value) {
