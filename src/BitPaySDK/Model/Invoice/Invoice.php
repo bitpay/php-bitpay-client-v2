@@ -28,18 +28,27 @@ class Invoice
     protected $_itemDesc          = "";
     protected $_itemCode          = "";
     protected $_physical          = false;
+    protected $_description;
     protected $_paymentCurrencies;
     protected $_paymentSubtotals;
     protected $_paymentTotals;
     protected $_paymentDisplayTotals;
     protected $_paymentDisplaySubTotals;
     protected $_paymentCodes;
+    protected $_paymentString;
+    protected $_verificationLink;
     protected $_acceptanceWindow;
     protected $_buyer;
     protected $_refundAddresses;
     protected $_closeURL   = "";
     protected $_autoRedirect  = false;
     protected $_jsonPayProRequired;
+    protected $_buyerSms;
+    protected $_buyerEmail;
+    protected $_smsCode;
+    protected $_merchantName;
+    protected $_forcedBuyerSelectedWallet;
+    protected $_selectedTransactionCurrency;
 
     protected $_id;
     protected $_url;
@@ -61,13 +70,18 @@ class Invoice
     protected $_billId;
     protected $_refundInfo;
     protected $_extendedNotifications = false;
+    protected $_isCancelled;
+    protected $_fiatAmount;
 
     protected $_transactionCurrency;
+    protected $_amount;
+    protected $_isFee;
     protected $_underpaidAmount;
     protected $_overpaidAmount;
     protected $_amountPaid;
     protected $_displayAmountPaid;
     protected $_exchangeRates;
+    protected $_bitpayIdRequired;
 
     /**
      * Constructor, create a minimal request Invoice object.
@@ -285,6 +299,46 @@ class Invoice
         $this->_jsonPayProRequired = $jsonPayProRequired;
     }
 
+    public function getBitpayIdRequired()
+    {
+        return $this->_bitpayIdRequired;
+    }
+
+    public function setBitpayIdRequired(bool $bitpayIdRequired)
+    {
+        $this->_bitpayIdRequired = $bitpayIdRequired;
+    }
+
+    public function getMerchantName()
+    {
+        return $this->_merchantName;
+    }
+
+    public function setMerchantName(string $merchantName)
+    {
+        $this->_merchantName = $merchantName;
+    }
+
+    public function getForcedBuyerSelectedWallet()
+    {
+        return $this->_forcedBuyerSelectedWallet;
+    }
+
+    public function setForcedBuyerSelectedWallet(string $forcedBuyerSelectedWallet)
+    {
+        $this->_forcedBuyerSelectedWallet = $forcedBuyerSelectedWallet;
+    }
+
+    public function getSelectedTransactionCurrency()
+    {
+        return $this->_selectedTransactionCurrency;
+    }
+
+    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
+    {
+        $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
+    }
+
     // Buyer data
     //
 
@@ -301,6 +355,36 @@ class Invoice
     public function setBuyer(Buyer $buyer)
     {
         $this->_buyer = $buyer;
+    }
+
+    public function getBuyerSms()
+    {
+        return $this->_buyerSms;
+    }
+
+    public function setBuyerSms(string $buyerSms)
+    {
+        $this->_buyerSms = $buyerSms;
+    }
+
+    public function getBuyerEmail()
+    {
+        return $this->_buyerEmail;
+    }
+
+    public function setBuyerEmail(string $buyerEmail)
+    {
+        $this->_buyerEmail = $buyerEmail;
+    }
+
+    public function getSmsCode()
+    {
+        return $this->_smsCode;
+    }
+
+    public function setSmsCode(string $smsCode)
+    {
+        $this->_smsCode = $smsCode;
     }
 
     // Response fields
@@ -627,6 +711,76 @@ class Invoice
         $this->_exchangeRates = $exchangeRates;
     }
 
+    public function getPaymentString()
+    {
+        return $this->_paymentString;
+    }
+
+    public function setPaymentString(string $paymentString)
+    {
+        $this->_paymentString = $paymentString;
+    }
+
+    public function getVerificationLink()
+    {
+        return $this->_verificationLink;
+    }
+
+    public function setVerificationLink(string $verificationLink)
+    {
+        $this->_verificationLink = $verificationLink;
+    }
+
+    public function getAmount()
+    {
+        return $this->_amount;
+    }
+
+    public function setAmount($amount)
+    {
+        $this->_amount = $amount;
+    }
+
+    public function getDescription()
+    {
+        return $this->_description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->_description = $description;
+    }
+
+    public function getIsFee()
+    {
+        return $this->_isFee;
+    }
+
+    public function setIsFee(bool $isFee)
+    {
+        $this->_isFee = $isFee;
+    }
+
+    public function getIsCancelled()
+    {
+        return $this->_isCancelled;
+    }
+
+    public function setIsCancelled(bool $isCancelled)
+    {
+        $this->_isCancelled = $isCancelled;
+    }
+
+    public function getFiatAmount()
+    {
+        return $this->_fiatAmount;
+    }
+
+    public function setFiatAmount($fiatAmount)
+    {
+        $this->_fiatAmount = $fiatAmount;
+    }
+
     public function toArray()
     {
         $elements = [
@@ -672,6 +826,19 @@ class Invoice
             'transactionCurrency'            => $this->getTransactionCurrency(),
             'amountPaid'                     => $this->getAmountPaid(),
             'exchangeRates'                  => $this->getExchangeRates(),
+            'merchantName'                   => $this->getMerchantName(),
+            'bitpayIdRequired'               => $this->getBitpayIdRequired(),
+            'forcedBuyerSelectedWallet'      => $this->getForcedBuyerSelectedWallet(),
+            'buyerSms'                       => $this->getBuyerSms(),
+            'paymentString'                  => $this->getPaymentString(),
+            'verificationLink'               => $this->getVerificationLink(),
+            'amount'                         => $this->getAmount(),
+            'description'                    => $this->getDescription(),
+            'isFee'                          => $this->getIsFee(),
+            'isCancelled'                    => $this->getIsCancelled(),
+            'fiatAmount'                     => $this->getFiatAmount(),
+            'buyerEmail'                     => $this->getBuyerEmail(),
+            'smsCode'                        => $this->getSmsCode()
         ];
 
         foreach ($elements as $key => $value) {
