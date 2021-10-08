@@ -28,7 +28,6 @@ class Invoice
     protected $_itemDesc          = "";
     protected $_itemCode          = "";
     protected $_physical          = false;
-    protected $_description;
     protected $_paymentCurrencies;
     protected $_paymentSubtotals;
     protected $_paymentTotals;
@@ -45,13 +44,12 @@ class Invoice
     protected $_jsonPayProRequired;
     protected $_buyerSms;
     protected $_buyerEmail;
-    protected $_sms;
+    
     protected $_smsCode;
     protected $_merchantName;
-    protected $_selectedWallet;
     protected $_forcedBuyerSelectedWallet;
-    protected $_selectedTransactionCurrency;
     protected $_forcedBuyerSelectedTransactionCurrency;
+    protected $_itemizedDetails;
 
     protected $_id;
     protected $_url;
@@ -66,6 +64,7 @@ class Invoice
     protected $_refundAddressRequestPending;
     protected $_buyerProvidedEmail;
     protected $_buyerProvidedInfo;
+    protected $_universalCodes;
     protected $_supportedTransactionCurrencies;
     protected $_minerFees;
     protected $_nonPayProPaymentReceived;
@@ -77,8 +76,6 @@ class Invoice
     protected $_fiatAmount;
 
     protected $_transactionCurrency;
-    protected $_amount;
-    protected $_isFee;
     protected $_underpaidAmount;
     protected $_overpaidAmount;
     protected $_amountPaid;
@@ -92,16 +89,18 @@ class Invoice
      * @param $price    float The amount for which the invoice will be created.
      * @param $currency string three digit currency type used to compute the invoice bitcoin amount.
      */
-    public function __construct(float $price = null, string $currency = null)
+    public function __construct(float $price = null, string $currency = null, array $itemizedDetails = null)
     {
         $this->_price = $price;
         $this->_currency = $currency;
         $this->_buyer = new Buyer();
         $this->_buyerProvidedInfo = new BuyerProvidedInfo();
+        $this->_universalCodes = new UniversalCodes();
         $this->_supportedTransactionCurrencies = new SupportedTransactionCurrencies();
         $this->_minerFees = new MinerFees();
         $this->_shopper = new Shopper();
         $this->_refundInfo = new RefundInfo();
+        $this->itemizedDetails = $itemizedDetails;
     }
 
     // API fields
@@ -332,16 +331,6 @@ class Invoice
         $this->_forcedBuyerSelectedWallet = $forcedBuyerSelectedWallet;
     }
 
-    public function getSelectedTransactionCurrency()
-    {
-        return $this->_selectedTransactionCurrency;
-    }
-
-    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
-    {
-        $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
-    }
-
     public function getForcedBuyerSelectedTransactionCurrency()
     {
         return $this->_forcedBuyerSelectedTransactionCurrency;
@@ -352,6 +341,39 @@ class Invoice
         $this->_forcedBuyerSelectedTransactionCurrency = $forcedBuyerSelectedTransactionCurrency;
     }
 
+    public function getItemizedDetails()
+    {
+        return $this->_itemizedDetails;
+    }
+
+    public function getItemizedDetailsAsArray()
+    {
+        $items = [];
+
+        foreach ($this->_items as $item) {
+            if ($item instanceof ItemizedDetails) {
+                array_push($items, $item->toArray());
+            } else {
+                array_push($items, $item);
+            }
+        }
+
+        return $items;
+    }
+
+    public function setItemizedDetails(array $itemizedDetails)
+    {
+        $itemsArray = [];
+
+        foreach ($itemizedDetails as $item) {
+            if ($item instanceof Item) {
+                array_push($itemsArray, $item);
+            } else {
+                array_push($itemsArray, Item::createFromArray((array)$item));
+            }
+        }
+        $this->_itemizedDetails = $itemsArray;
+    }
     // Buyer data
     //
 
@@ -541,6 +563,16 @@ class Invoice
     public function setBuyerProvidedInfo(BuyerProvidedInfo $buyerProvidedInfo)
     {
         $this->_buyerProvidedInfo = $buyerProvidedInfo;
+    }
+
+    public function getUniversalCodes()
+    {
+        return $this->_universalCodes;
+    }
+
+    public function setUniversalCodes(UniversalCodes $universalCodes)
+    {
+        $this->_universalCodes = $universalCodes;
     }
 
     public function getSupportedTransactionCurrencies()
@@ -744,36 +776,6 @@ class Invoice
         $this->_verificationLink = $verificationLink;
     }
 
-    public function getAmount()
-    {
-        return $this->_amount;
-    }
-
-    public function setAmount($amount)
-    {
-        $this->_amount = $amount;
-    }
-
-    public function getDescription()
-    {
-        return $this->_description;
-    }
-
-    public function setDescription($description)
-    {
-        $this->_description = $description;
-    }
-
-    public function getIsFee()
-    {
-        return $this->_isFee;
-    }
-
-    public function setIsFee(bool $isFee)
-    {
-        $this->_isFee = $isFee;
-    }
-
     public function getIsCancelled()
     {
         return $this->_isCancelled;
@@ -792,26 +794,6 @@ class Invoice
     public function setFiatAmount($fiatAmount)
     {
         $this->_fiatAmount = $fiatAmount;
-    }
-
-    public function getSelectedWallet()
-    {
-        return $this->_selectedWallet;
-    }
-
-    public function setSelectedWallet($selectedWallet)
-    {
-        $this->_selectedWallet = $selectedWallet;
-    }
-
-    public function getSms()
-    {
-        return $this->_sms;
-    }
-
-    public function setSms($sms)
-    {
-        $this->_sms = $sms;
     }
 
     public function toArray()
@@ -850,6 +832,7 @@ class Invoice
             'refundAddressRequestPending'    => $this->getRefundAddressRequestPending(),
             'buyerProvidedEmail'             => $this->getBuyerProvidedEmail(),
             'buyerProvidedInfo'              => $this->getBuyerProvidedInfo()->toArray(),
+            'universalCodes'                 => $this->getUniversalCodes()->toArray(),
             'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()->toArray(),
             'minerFees'                      => $this->getMinerFees()->toArray(),
             'shopper'                        => $this->getShopper()->toArray(),
@@ -865,15 +848,11 @@ class Invoice
             'buyerSms'                       => $this->getBuyerSms(),
             'paymentString'                  => $this->getPaymentString(),
             'verificationLink'               => $this->getVerificationLink(),
-            'amount'                         => $this->getAmount(),
-            'description'                    => $this->getDescription(),
-            'isFee'                          => $this->getIsFee(),
             'isCancelled'                    => $this->getIsCancelled(),
             'fiatAmount'                     => $this->getFiatAmount(),
             'buyerEmail'                     => $this->getBuyerEmail(),
             'smsCode'                        => $this->getSmsCode(),
-            'selectedWallet'                 => $this->getSelectedWallet(),
-            'sms'                            => $this->getSms(),
+            'itemizedDetails'                => $this->getItemizedDetails(),
             'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];
 

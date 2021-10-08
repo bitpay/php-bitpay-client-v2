@@ -11,6 +11,8 @@ class BuyerProvidedInfo
     protected $_selectedWallet;
     protected $_emailAddress;
     protected $_selectedTransactionCurrency;
+    protected $_sms;
+    protected $_smsVerified;
 
     public function __construct()
     {
@@ -41,7 +43,7 @@ class BuyerProvidedInfo
         return $this->_selectedWallet;
     }
 
-    public function setSelectedWallet($selectedWallet)
+    public function setSelectedWallet(string $selectedWallet)
     {
         $this->_selectedWallet = $selectedWallet;
     }
@@ -61,9 +63,29 @@ class BuyerProvidedInfo
         return $this->_selectedTransactionCurrency;
     }
 
-    public function setSelectedTransactionCurrency($selectedTransactionCurrency)
+    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
     {
         $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
+    }
+
+    public function getSms()
+    {
+        return $this->_sms;
+    }
+
+    public function setSms(string $sms)
+    {
+        $this->_sms = $sms;
+    }
+
+    public function getSmsVerified()
+    {
+        return $this->_smsVerified;
+    }
+
+    public function setSmsVerified(bool $smsVerified)
+    {
+        $this->_smsVerified = $smsVerified;
     }
 
     public function toArray()
@@ -74,6 +96,8 @@ class BuyerProvidedInfo
             'selectedWallet'              => $this->getSelectedWallet(),
             'emailAddress'                => $this->getEmailAddress(),
             'selectedTransactionCurrency' => $this->getSelectedTransactionCurrency(),
+            'sms'                         => $this->getSms(),
+            'smsVerified'                 => $this->getSmsVerified()
         ];
 
         foreach ($elements as $key => $value) {

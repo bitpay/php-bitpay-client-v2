@@ -28,6 +28,7 @@ use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Exceptions\SubscriptionCreationException;
 use BitPaySDK\Exceptions\SubscriptionQueryException;
 use BitPaySDK\Exceptions\SubscriptionUpdateException;
+use BitPaySDK\Exceptions\WalletQueryException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
@@ -500,15 +501,13 @@ class Client
         }
 
         try {
-            $responseJson = $this->_RESTcli->post("refunds/".$refundId."/notifications", $params, true);
+            $responseJson = $this->_RESTcli->post("refunds/".$refundId."/notifications", $params, true);        
         } catch (Exception $e) {
             throw new RefundQueryException("failed to serialize object : ".$e->getMessage());
         }
-
+        
         try {
-
-            $result = true;
-            
+            $result = strtolower(trim($responseJson, '"')) === "success";
         } catch (Exception $e) {
             throw new RefundQueryException(
                 "failed to deserialize BitPay server response (Refund) : ".$e->getMessage());
@@ -554,6 +553,36 @@ class Client
         }
 
         return $Refund;
+    }
+
+    /**
+     * Retrieve all supported wallets.
+     *
+     * @return A list of wallet objets.
+     * @throws WalletQueryException WalletQueryException class
+     * @throws BitPayException       BitPayException class
+     */
+    public function getSupportedWallets(): array
+    {
+        try {
+            $responseJson = $this->_RESTcli->get("supportedWallets/", null, false);
+        } catch (Exception $e) {
+            throw new WalletQueryException("failed to deserialize BitPay server response (Wallet) : " + $e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $wallets = $mapper->mapArray(
+                json_decode($responseJson),
+                [],
+                'BitPaySDK\Model\Wallet\Wallet'
+            );
+
+        } catch (Exception $e) {
+            throw new WalletQueryException("failed to deserialize BitPay server response (Wallet) : " + $e->getMessage());
+        }
+
+        return $wallets;
     }
 
     /**
