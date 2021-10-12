@@ -177,10 +177,13 @@ class BitPayTest extends TestCase
             $refunded = $this->client->createRefund(
                 $firstInvoice->getId(), 1.0, "USD", true, false, false
             );
-            $retrievedRefunds = $this->client->getRefunds($firstInvoice);
-            $firstRefund = $retrievedRefunds[0];
-            $retrievedRefund = $this->client->getRefund($firstInvoice, $firstRefund->getId());
-            $cancelRefund = $this->client->cancelRefund($firstInvoice->getId(), $firstRefund);
+            $retrievedRefunds = $this->client->getRefunds($firstInvoice->getId());
+            $firstRefund = end($retrievedRefunds);
+            $updateRefund = $this->client->updateRefund($firstRefund->getId(), "created");
+            $retrievedRefund = $this->client->getRefund($firstRefund->getId());
+            $sentStatus = $this->client->sendRefundNotification($firstRefund->getId());
+            $cancelRefund = $this->client->cancelRefund($firstRefund->getId());
+            $supportedWallets = $this->client->getSupportedWallets();
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -188,8 +191,11 @@ class BitPayTest extends TestCase
 
         $this->assertNotNull($invoices);
         $this->assertNotNull($retrievedRefunds);
+        $this->assertEquals($updateRefund->getStatus(), "created");
         $this->assertEquals($firstRefund->getId(), $retrievedRefund->getId());
-        $this->assertTrue($cancelRefund);
+        $this->assertTrue($sentStatus);
+        $this->assertEquals($cancelRefund->getStatus(), "canceled");
+        $this->assertNotNull($supportedWallets);
     }
 
     public function testShouldCreateBillUSD()

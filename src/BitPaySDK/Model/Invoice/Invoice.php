@@ -100,7 +100,7 @@ class Invoice
         $this->_minerFees = new MinerFees();
         $this->_shopper = new Shopper();
         $this->_refundInfo = new RefundInfo();
-        $this->itemizedDetails = $itemizedDetails;
+        $this->_itemizedDetails = new ItemizedDetails();
     }
 
     // API fields
@@ -361,7 +361,7 @@ class Invoice
         return $items;
     }
 
-    public function setItemizedDetails(array $itemizedDetails)
+    public function setItemizedDetails(ItemizedDetails $itemizedDetails)
     {
         $itemsArray = [];
 
@@ -852,7 +852,7 @@ class Invoice
             'fiatAmount'                     => $this->getFiatAmount(),
             'buyerEmail'                     => $this->getBuyerEmail(),
             'smsCode'                        => $this->getSmsCode(),
-            'itemizedDetails'                => $this->getItemizedDetails(),
+            'itemizedDetails'                => $this->getItemizedDetails()->toArray(),
             'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];
 
