@@ -73,8 +73,7 @@ class Invoice
     protected $_refundInfo;
     protected $_extendedNotifications = false;
     protected $_isCancelled;
-    protected $_fiatAmount;
-
+    
     protected $_transactionCurrency;
     protected $_underpaidAmount;
     protected $_overpaidAmount;
@@ -786,16 +785,6 @@ class Invoice
         $this->_isCancelled = $isCancelled;
     }
 
-    public function getFiatAmount()
-    {
-        return $this->_fiatAmount;
-    }
-
-    public function setFiatAmount($fiatAmount)
-    {
-        $this->_fiatAmount = $fiatAmount;
-    }
-
     public function toArray()
     {
         $elements = [
@@ -849,7 +838,6 @@ class Invoice
             'paymentString'                  => $this->getPaymentString(),
             'verificationLink'               => $this->getVerificationLink(),
             'isCancelled'                    => $this->getIsCancelled(),
-            'fiatAmount'                     => $this->getFiatAmount(),
             'buyerEmail'                     => $this->getBuyerEmail(),
             'smsCode'                        => $this->getSmsCode(),
             'itemizedDetails'                => $this->getItemizedDetails()->toArray(),

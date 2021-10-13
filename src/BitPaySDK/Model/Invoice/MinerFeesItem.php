@@ -8,6 +8,7 @@ class MinerFeesItem
 {
     protected $_satoshisPerByte;
     protected $_totalFee;
+    protected $_fiatAmount;
 
     public function __construct()
     {
@@ -33,11 +34,22 @@ class MinerFeesItem
         $this->_totalFee = $totalFee;
     }
 
+    public function getFiatAmount()
+    {
+        return $this->_fiatAmount;
+    }
+
+    public function setFiatAmount($fiatAmount)
+    {
+        $this->_fiatAmount = $fiatAmount;
+    }
+
     public function toArray()
     {
         $elements = [
             'satoshisPerByte' => $this->getSatoshisPerByte(),
             'totalFee'        => $this->getTotalFee(),
+            'fiatAmount'      => $this->getFiatAmount()
         ];
 
         foreach ($elements as $key => $value) {
