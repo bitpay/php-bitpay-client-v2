@@ -19,9 +19,10 @@ use BitPaySDK\Exceptions\LedgerQueryException;
 use BitPaySDK\Exceptions\PayoutCancellationException;
 use BitPaySDK\Exceptions\PayoutCreationException;
 use BitPaySDK\Exceptions\PayoutQueryException;
+use BitPaySDK\Exceptions\PayoutUpdateException;
 use BitPaySDK\Exceptions\RateQueryException;
-use BitPaySDK\Exceptions\RefundCreationException;
 use BitPaySDK\Exceptions\RefundCancellationException;
+use BitPaySDK\Exceptions\RefundCreationException;
 use BitPaySDK\Exceptions\RefundQueryException;
 use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Exceptions\SubscriptionCreationException;
@@ -112,7 +113,8 @@ class Client
      * @param $privateKey       String Private Key file path or the HEX value.
      * @param $tokens           Tokens containing the available tokens.
      * @param $privateKeySecret String|null Private Key encryption password.
-     * @param $proxy            String|null The url of your proxy to forward requests through. Example: http://xxxxxxx.com:3128
+     * @param $proxy            String|null The url of your proxy to forward requests through. Example:
+     *                          http://********.com:3128
      * @return Client
      * @throws BitPayException BitPayException class
      */
@@ -817,36 +819,98 @@ class Client
         return $recipient;
     }
 
-//    TODO Resource inopperative
-//    /**
-//     * Notify BitPay Payout Recipients.
-//     *
-//     * @param  $recipientId string The id of the recipient to notify.
-//     * @return bool True if the notification was successfully sent, false otherwise.
-//     * @throws PayoutCreationException BitPayException class
-//     */
-//    public function notifyPayoutRecipient(string $recipientId): array
-//    {
-//        try {
-//            $content = [];
-//            $content["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
-//
-//            $responseJson = $this->_RESTcli->post("recipients/".$recipientId."/notifications", $content);
-//        } catch (Exception $e) {
-//            throw new PayoutCreationException("failed to serialize PayoutRecipients object : ".$e->getMessage());
-//        }
-//
-//        try {
-//            $result = json_decode($responseJson)->success;
-//
-//        } catch (Exception $e) {
-//            throw new PayoutCreationException(
-//                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage());
-//        }
-//
-//        return $result;
-//    }
+/**
+     * Notify BitPay Payout Recipients.
+     *
+     * @param  $recipientId string The id of the recipient to notify.
+     * @return bool True if the notification was successfully sent, false otherwise.
+     * @throws PayoutCreationException BitPayException class
+     */
+    public function notifyPayoutRecipient(string $recipientId): bool
+    {
+        try {
+            $content = [];
+            $content["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
 
+            $responseJson = $this->_RESTcli->post("recipients/".$recipientId."/notifications", $content);
+        } catch (Exception $e) {
+            throw new PayoutCreationException("failed to serialize PayoutRecipients object : ".$e->getMessage());
+        }
+
+        try {
+            $result = json_decode($responseJson)->success;
+
+        } catch (Exception $e) {
+            throw new PayoutCreationException(
+                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage());
+        }
+
+        return $result;
+    }
+
+    /**
+     * Update a Payout Recipient.
+     *
+     * @param $recipientId string The recipient id for the recipient to be updated.
+     * @param $recipient   PayoutRecipient A PayoutRecipient object with updated parameters defined.
+     * @return PayoutRecipient Uhe updated recipient object.
+     * @throws PayoutUpdateException PayoutUpdateException class
+     */
+    public function updatePayoutRecipient(string $recipientId, PayoutRecipient $recipient): PayoutRecipient
+    {
+        try {
+            $recipient->setToken($this->_tokenCache->getTokenByFacade(Facade::Payroll));
+
+            $responseJson = $this->_RESTcli->update("recipients/".$recipientId, $recipient->toArray());
+        } catch (Exception $e) {
+            throw new PayoutUpdateException("failed to serialize PayoutRecipient object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $recipient = $mapper->map(
+                json_decode($responseJson),
+                new PayoutRecipient()
+            );
+
+        } catch (Exception $e) {
+            throw new PayoutUpdateException(
+                "failed to deserialize BitPay server response (PayoutRecipient) : ".$e->getMessage());
+        }
+
+        return $recipient;
+    }
+
+    /**
+     * Delete a Payout Recipient.
+     *
+     * @param $recipientId string The recipient id for the recipient to be deleted.
+     * @return bool True if the recipient was successfully deleted, false otherwise.
+     * @throws PayoutCancellationException PayoutCancellationException class
+     */
+    public function deletePayoutRecipient(string $recipientId): bool
+    {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+
+            $responseJson = $this->_RESTcli->delete("recipients/".$recipientId, $params);
+        } catch (Exception $e) {
+            throw new PayoutCancellationException("failed to serialize server object : ".$e->getMessage());
+        }
+
+        try {
+            $result = json_decode($responseJson)->success;
+
+        } catch (Exception $e) {
+            throw new PayoutCancellationException(
+                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage());
+        }
+
+        return $result;
+    }
+
+    //TODO // Deprecate on v6.0 ////////////////////////////////////////////////////////////////////////////////////////
     /**
      * Submit a BitPay Payout batch.
      *
@@ -857,7 +921,7 @@ class Client
     public function submitPayoutBatch(PayoutBatch $batch): PayoutBatch
     {
         try {
-            $batch->setToken($this->_tokenCache->getTokenByFacade(Facade::Payroll));
+            $batch->setToken($this->_tokenCache->getTokenByFacade(Facade::Payout));
             $batch->setGuid(Util::guid());
 
             $precision = $this->getCurrencyInfo($batch->getCurrency())->precision ?? 2;
@@ -894,7 +958,7 @@ class Client
     {
         try {
             $params = [];
-            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
             if ($status) {
                 $params["status"] = $status;
             }
@@ -932,7 +996,7 @@ class Client
     {
         try {
             $params = [];
-            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
 
             $responseJson = $this->_RESTcli->get("payouts/".$batchId, $params);
         } catch (Exception $e) {
@@ -986,6 +1050,148 @@ class Client
         }
 
         return $batch;
+    }
+
+    //TODO // Deprecate on v6.0 ////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Submit a BitPay Payout.
+     *
+     * @param $payout PayoutBatch A PayoutBatch object with request parameters defined.
+     * @return PayoutBatch A PayoutBatch BitPay generated PayoutBatch object.
+     * @throws PayoutCreationException BitPayException class
+     */
+    public function submitPayout(PayoutBatch $payout): PayoutBatch
+    {
+        try {
+            $payout->setToken($this->_tokenCache->getTokenByFacade(Facade::Payout));
+            $payout->setGuid(Util::guid());
+
+            $precision = $this->getCurrencyInfo($payout->getCurrency())->precision ?? 2;
+            $payout->formatAmount($precision);
+
+            $responseJson = $this->_RESTcli->post("payouts", $payout->toArray());
+        } catch (Exception $e) {
+            throw new PayoutCreationException("failed to serialize PayoutBatch object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $payout = $mapper->map(
+                json_decode($responseJson),
+                new PayoutBatch()
+            );
+
+        } catch (Exception $e) {
+            throw new PayoutCreationException(
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+        }
+
+        return $payout;
+    }
+
+    /**
+     * Retrieve a collection of BitPay payouts.
+     *
+     * @param $status string The status to filter the Payout Batches.
+     * @return array A list of BitPay PayoutBatch objects.
+     * @throws PayoutQueryException
+     */
+    public function getPayouts(string $status = null): array
+    {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
+            if ($status) {
+                $params["status"] = $status;
+            }
+
+            $responseJson = $this->_RESTcli->get("payouts", $params);
+        } catch (Exception $e) {
+            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $payouts = $mapper->mapArray(
+                json_decode($responseJson),
+                [],
+                'BitPaySDK\Model\Payout\PayoutBatch'
+            );
+
+        } catch (Exception $e) {
+            throw new PayoutQueryException(
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+        }
+
+        return $payouts;
+    }
+
+    /**
+     * Retrieve a BitPay payout by batch id using.  The client must have been previously authorized for the
+     * payroll facade.
+     *
+     * @param $payoutId string The id of the batch to retrieve.
+     * @return PayoutBatch A BitPay PayoutBatch object.
+     * @throws PayoutQueryException BitPayException class
+     */
+    public function getPayout(string $payoutId): PayoutBatch
+    {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
+
+            $responseJson = $this->_RESTcli->get("payouts/".$payoutId, $params);
+        } catch (Exception $e) {
+            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $payout = $mapper->map(
+                json_decode($responseJson),
+                new PayoutBatch()
+            );
+
+        } catch (Exception $e) {
+            throw new PayoutQueryException(
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+        }
+
+        return $payout;
+    }
+
+    /**
+     * Cancel a BitPay Payout.
+     *
+     * @param $payoutId string The id of the batch to cancel.
+     * @return PayoutBatch A BitPay generated PayoutBatch object.
+     * @throws PayoutCancellationException BitPayException class
+     */
+    public function cancelPayout(string $payoutId): PayoutBatch
+    {
+        try {
+            $payout = $this->getPayoutBatch($payoutId);
+            $params = [];
+            $params["token"] = $payout->getToken();
+
+            $responseJson = $this->_RESTcli->delete("payouts/".$payoutId, $params);
+        } catch (Exception $e) {
+            throw new PayoutCancellationException("failed to serialize PayoutBatch object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $payout = $mapper->map(
+                json_decode($responseJson),
+                new PayoutBatch()
+            );
+
+        } catch (Exception $e) {
+            throw new PayoutCancellationException(
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+        }
+
+        return $payout;
     }
 
     /**

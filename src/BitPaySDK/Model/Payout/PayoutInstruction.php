@@ -4,6 +4,7 @@
 namespace BitPaySDK\Model\Payout;
 
 
+use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\PayoutCreationException;
 
 /**
@@ -38,7 +39,7 @@ class PayoutInstruction
      */
     public function __construct(float $amount, int $method, string $methodValue)
     {
-        $this->_amount = $amount;
+        $this->setAmount($amount);
         switch ($method) {
             case RecipientReferenceMethod::EMAIL:
                 $this->_email = $methodValue;
@@ -62,6 +63,10 @@ class PayoutInstruction
 
     public function setAmount(float $amount)
     {
+        if ($amount < 5) {
+            throw new BitPayException("Instruction amount should be 5 or higher.");
+        }
+
         $this->_amount = $amount;
     }
 
