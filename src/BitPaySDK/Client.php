@@ -295,11 +295,11 @@ class Client
     /**
      * Create a refund for a BitPay invoice.
      *
-     * @param $invoiceId  string The BitPay invoice Id having the associated refund to be created.
-     * @param $amount     float Amount to be refunded in the currency indicated.
-     * @param $currency   string Reference currency used for the refund, usually the same as the currency used to create the invoice.
-     * @param $preview    bool Whether to create the refund request as a preview (which will not be acted on until status is updated)
-     * @param $immediate  bool Whether funds should be removed from merchant ledger immediately on submission or at time of processing
+     * @param $invoiceId          string The BitPay invoice Id having the associated refund to be created.
+     * @param $amount             float Amount to be refunded in the currency indicated.
+     * @param $currency           string Reference currency used for the refund, usually the same as the currency used to create the invoice.
+     * @param $preview            bool Whether to create the refund request as a preview (which will not be acted on until status is updated)
+     * @param $immediate          bool Whether funds should be removed from merchant ledger immediately on submission or at time of processing
      * @param $buyerPaysRefundFee bool Whether the buyer should pay the refund fee (default is merchant)
      * @return refund An updated Refund Object
      * @throws RefundCreationException RefundCreationException class
@@ -504,7 +504,7 @@ class Client
 
         try {
             $mapper = new JsonMapper();
-            $Refund = $mapper->map(
+            $refund = $mapper->map(
                 json_decode($responseJson),
                 new Refund()
             );

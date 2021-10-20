@@ -8,7 +8,7 @@ class MinerFeesItem
 {
     protected $_satoshisPerByte;
     protected $_totalFee;
-    protected $_fiatAmount;
+    protected $_fiatAmount = null;
 
     public function __construct()
     {
@@ -39,7 +39,7 @@ class MinerFeesItem
         return $this->_fiatAmount;
     }
 
-    public function setFiatAmount($fiatAmount)
+    public function setFiatAmount(?float $fiatAmount)
     {
         $this->_fiatAmount = $fiatAmount;
     }

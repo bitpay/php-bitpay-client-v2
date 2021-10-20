@@ -167,7 +167,7 @@ class Refund
         return $this->_refundFee;
     }
 
-    public function setRefundFee($refundFee)
+    public function setRefundFee(float $refundFee)
     {
         $this->_refundFee = $refundFee;
     }

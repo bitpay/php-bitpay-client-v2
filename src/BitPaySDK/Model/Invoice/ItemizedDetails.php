@@ -8,15 +8,9 @@ class ItemizedDetails{
     protected $_description;
     protected $_isFee;
 
-    public function __construct(
-        float $amount = null,
-        string $description = null,
-        bool $isFee = null
-    ) {
-        $this->_amount = $amount;
-        $this->_description = $description;
-        $this->_isFee = $isFee;
-    }
+    public function __construct()
+    {
+    } 
 
     public function getAmount()
     {
