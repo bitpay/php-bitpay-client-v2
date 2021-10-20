@@ -3,22 +3,22 @@
 namespace BitPaySDK\Exceptions;
 
 
-class WalletQueryException extends RefundException
+class WalletQueryException extends WalletException
 {
-    
+    private $bitPayMessage = "Failed to retrieve supported wallets";
+    private $bitPayCode    = "BITPAY-WALLET-GET";
+
     /**
      * Construct the WalletQueryException.
      *
-     * @param $message String [optional] The Exception message to throw.
-    */
-    private $bitPayMessage = "Failed to retrieve supported wallets";
-    private $bitPayCode = "BITPAY-WALLET-GET";
-
-    public function __construct($message = "")
+     * @param string $message [optional] The Exception message to throw.
+     * @param int    $code    [optional] The Exception code to throw.
+     */
+    public function __construct($message = "", $code = 167)
     {
-        if (!$message) {
-            $message = $this->bitPayMessage."-> ".$message;
-        }
-        parent::__construct($message);
+
+        $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
+
+        parent::__construct($message, $code);
     }
 }

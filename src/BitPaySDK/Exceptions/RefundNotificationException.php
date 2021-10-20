@@ -3,18 +3,18 @@
 namespace BitPaySDK\Exceptions;
 
 
-class RefundUpdateException extends RefundException
+class RefundNotificationException extends RefundException
 {
-    private $bitPayMessage = "Failed to update refund";
-    private $bitPayCode    = "BITPAY-REFUND-UPDATE";
+    private $bitPayMessage = "Failed to send refund notification";
+    private $bitPayCode    = "BITPAY-REFUND-NOTIFICATION";
 
     /**
-     * Construct the RefundUpdateException.
+     * Construct the RefundNotificationException.
      *
      * @param string $message [optional] The Exception message to throw.
      * @param int    $code    [optional] The Exception code to throw.
      */
-    public function __construct($message = "", $code = 165)
+    public function __construct($message = "", $code = 166)
     {
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;

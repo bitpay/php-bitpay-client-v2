@@ -134,7 +134,7 @@ class MinerFees
     public function toArray()
     {
         $elements = [
-            'btc'  => $this->getBTH()->toArray(),
+            'btc'  => $this->getBTC()->toArray(),
             'bch'  => $this->getBCH()->toArray(),
             'eth'  => $this->getETH()->toArray(),
             'usdc' => $this->getUSDC()->toArray(),

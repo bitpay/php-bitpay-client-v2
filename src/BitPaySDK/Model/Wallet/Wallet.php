@@ -10,6 +10,11 @@ class Wallet{
     protected $_paypro;
     protected $_currencies;
 
+    /**
+     * Constructor, create a minimal request Wallet object.
+     *
+     * @param $currencies details of what currencies support payments for this wallet 
+    */
     public function __construct()
     {
         $this->_currencies = new Currencies();

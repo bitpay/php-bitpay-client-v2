@@ -9,7 +9,7 @@ class ItemizedDetails{
     protected $_isFee;
 
     public function __construct(
-        $amount = null,
+        float $amount = null,
         string $description = null,
         bool $isFee = null
     ) {
@@ -23,7 +23,7 @@ class ItemizedDetails{
         return $this->_amount;
     }
 
-    public function setAmount($amount)
+    public function setAmount(float $amount)
     {
         $this->_amount = $amount;
     }
