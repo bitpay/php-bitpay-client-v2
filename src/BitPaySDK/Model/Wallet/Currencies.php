@@ -2,7 +2,8 @@
 
 namespace BitPaySDK\Model\Wallet;
 
-class Currencies{
+class Currencies
+{
     protected $_code;
     protected $_p2p;
     protected $_dappBrowser;

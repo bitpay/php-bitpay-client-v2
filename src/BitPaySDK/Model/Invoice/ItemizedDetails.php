@@ -3,7 +3,8 @@
 
 namespace BitPaySDK\Model\Invoice;
 
-class ItemizedDetails{
+class ItemizedDetails
+{
     protected $_amount;
     protected $_description;
     protected $_isFee;

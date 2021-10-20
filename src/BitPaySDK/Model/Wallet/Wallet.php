@@ -2,8 +2,12 @@
 
 namespace BitPaySDK\Model\Wallet;
 
-
-class Wallet{
+/**
+ *
+ * @package Bitpay
+ */
+class Wallet
+{
     protected $_key;
     protected $_displayName;
     protected $_avatar;

@@ -2,7 +2,8 @@
 
 namespace BitPaySDK\Model\Wallet;
 
-class CurrencyQr{
+class CurrencyQr
+{
 
     protected $_type;
     protected $_collapsed;
