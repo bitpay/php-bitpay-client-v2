@@ -307,6 +307,10 @@ class RESTcli
                 return json_encode($body);
             }
 
+            if (!empty($body['status'])) {
+                return json_encode($body);
+            }
+
             // TODO Temporary fix for legacy response
             if (!array_key_exists('data', $body)) {
                 return json_encode($body);

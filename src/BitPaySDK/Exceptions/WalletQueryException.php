@@ -14,7 +14,7 @@ class WalletQueryException extends WalletException
      * @param string $message [optional] The Exception message to throw.
      * @param int    $code    [optional] The Exception code to throw.
      */
-    public function __construct($message = "", $code = 167)
+    public function __construct($message = "", $code = 183)
     {
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;

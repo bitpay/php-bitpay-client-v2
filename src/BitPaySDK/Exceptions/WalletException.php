@@ -14,7 +14,7 @@ class WalletException extends BitPayException
      * @param string $message [optional] The Exception message to throw.
      * @param int    $code    [optional] The Exception code to throw.
      */
-    public function __construct($message = "", $code = 168)
+    public function __construct($message = "", $code = 181)
     {
         if (!$message) {
             $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;

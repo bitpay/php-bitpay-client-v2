@@ -301,7 +301,7 @@ class Client
      * @param $preview            bool Whether to create the refund request as a preview (which will not be acted on until status is updated)
      * @param $immediate          bool Whether funds should be removed from merchant ledger immediately on submission or at time of processing
      * @param $buyerPaysRefundFee bool Whether the buyer should pay the refund fee (default is merchant)
-     * @return refund An updated Refund Object
+     * @return $refund            Refund An updated Refund Object
      * @throws RefundCreationException RefundCreationException class
      * @throws BitPayException BitPayException class
      */
@@ -348,7 +348,7 @@ class Client
      *
      * @param $refundId     string BitPay refund ID.
      * @param $status       string The new status for the refund to be updated.
-     * @return refund A BitPay generated Refund object.
+     * @return $refund      Refund A BitPay generated Refund object.
      * @throws RefundUpdateException RefundUpdateException class
      * @throws BitPayException BitPayException class
      */
@@ -385,7 +385,7 @@ class Client
      * Retrieve all refund requests on a BitPay invoice.
      *
      * @param $invoiceId    string The BitPay invoice object having the associated refunds.
-     * @return array list of BitPay Refund objects with the associated Refund objects.
+     * @return $refunds     array list of BitPay Refund objects with the associated Refund objects.
      * @throws RefundQueryException RefundQueryException class
      * @throws BitPayException BitPayException class
      */
@@ -422,7 +422,7 @@ class Client
      * Retrieve a previously made refund request on a BitPay invoice.
      *
      * @param $refundId     string The BitPay refund ID.
-     * @return refund BitPay Refund object with the associated Refund object.
+     * @return $refund      Refund BitPay Refund object with the associated Refund object.
      * @throws RefundQueryException RefundQueryException class
      * @throws BitPayException BitPayException class
      */
@@ -457,7 +457,7 @@ class Client
      * Send a refund notification.
      *
      * @param $refundId     string A BitPay refund ID.
-     * @return result       bool An updated Refund Object
+     * @return $result      bool An updated Refund Object
      * @throws RefundCreationException RefundCreationException class
      * @throws BitPayException BitPayException class
      */
@@ -473,7 +473,7 @@ class Client
         }
         
         try {
-            $result = strtolower(trim($responseJson, '"')) === "success";
+            $result = json_decode($responseJson)->status == "success";
         } catch (Exception $e) {
             throw new RefundNotificationException(
                 "failed to deserialize BitPay server response (Refund) : ".$e->getMessage());
@@ -487,7 +487,7 @@ class Client
      * Cancel a previously submitted refund request on a BitPay invoice.
      *
      * @param $refundId     string The refund Id for the refund to be canceled.
-     * @return refund updated Refund Object.
+     * @return $refund      Refund Updated refund Object.
      * @throws RefundCancellationException RefundCancellationException class
      * @throws BitPayException BitPayException class
      */
@@ -520,7 +520,7 @@ class Client
     /**
      * Retrieve all supported wallets.
      *
-     * @return wallets array A list of wallet objets.
+     * @return $wallets     array A list of wallet objets.
      * @throws WalletQueryException WalletQueryException class
      * @throws BitPayException BitPayException class
      */
