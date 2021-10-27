@@ -14,7 +14,9 @@ use BitPaySDK\Exceptions\BillUpdateException;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\CurrencyQueryException;
 use BitPaySDK\Exceptions\InvoiceCreationException;
+use BitPaySDK\Exceptions\InvoiceUpdateException;
 use BitPaySDK\Exceptions\InvoiceQueryException;
+use BitPaySDK\Exceptions\InvoiceCancellationException;
 use BitPaySDK\Exceptions\LedgerQueryException;
 use BitPaySDK\Exceptions\PayoutCancellationException;
 use BitPaySDK\Exceptions\PayoutCreationException;
@@ -194,6 +196,50 @@ class Client
     }
 
     /**
+     * Update a BitPay invoice.
+     *
+     * @param $invoiceId    string The id of the invoice to updated.
+     * @param $buyerEmail   string The buyer's email address.
+     * @param $buyerSms     string The buyer's cell number.
+     * @param $smsCode      string The buyer's received verification code.
+     * @return $invoice     Invoice A BitPay updated Invoice object.
+     * @throws InvoiceUpdateException InvoiceUpdateException class
+     * @throws BitPayException BitPayException class
+     */
+    public function updateInvoice(
+        string $invoiceId,
+        string $buyerEmail,
+        string $buyerSms,
+        string $smsCode
+    ): Invoice {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["buyerEmail"] = $buyerEmail;
+            $params["buyerSms"] = $buyerSms;
+            $params["smsCode"] = $smsCode;
+
+            $responseJson = $this->_RESTcli->update("invoices/".$invoiceId, $params);
+        } catch (Exception $e) {
+            throw new InvoiceUpdateException("failed to serialize Invoice object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $invoice = $mapper->map(
+                json_decode($responseJson),
+                new Invoice()
+            );
+
+        } catch (Exception $e) {
+            throw new InvoiceUpdateException(
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+        }
+
+        return $invoice;
+    }
+
+    /**
      * Retrieve a BitPay invoice by invoice id using the specified facade.  The client must have been previously
      * authorized for the specified facade (the public facade requires no authorization).
      *
@@ -290,6 +336,41 @@ class Client
         }
 
         return $invoices;
+    }
+
+    /**
+     * Cancel a BitPay invoice.
+     *
+     * @param $invoiceId    string The id of the invoice to updated.
+     * @return $invoice     Invoice Cancelled invoice object.
+     * @throws InvoiceCancellationException InvoiceCancellationException class
+     * @throws BitPayException BitPayException class
+     */
+    public function cancelInvoice(
+        string $invoiceId
+    ): Invoice {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+
+            $responseJson = $this->_RESTcli->delete("invoices/".$invoiceId, $params);
+        } catch (Exception $e) {
+            throw new InvoiceCancellationException("failed to serialize Invoice object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $invoice = $mapper->map(
+                json_decode($responseJson),
+                new Invoice()
+            );
+
+        } catch (Exception $e) {
+            throw new InvoiceCancellationException(
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+        }
+
+        return $invoice;
     }
 
     /**
@@ -487,7 +568,7 @@ class Client
      * Cancel a previously submitted refund request on a BitPay invoice.
      *
      * @param $refundId     string The refund Id for the refund to be canceled.
-     * @return $refund      Refund Updated refund Object.
+     * @return $refund      Refund Cancelled refund Object.
      * @throws RefundCancellationException RefundCancellationException class
      * @throws BitPayException BitPayException class
      */

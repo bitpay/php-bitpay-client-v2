@@ -5,7 +5,7 @@ namespace BitPaySDK\Exceptions;
 
 class RefundCancellationException extends RefundException
 {
-    private $bitPayMessage = "Failed to cancel refund batch";
+    private $bitPayMessage = "Failed to cancel refund object";
     private $bitPayCode    = "BITPAY-REFUND-CANCEL";
 
     /**
@@ -14,7 +14,7 @@ class RefundCancellationException extends RefundException
      * @param string $message [optional] The Exception message to throw.
      * @param int    $code    [optional] The Exception code to throw.
      */
-    public function __construct($message = "", $code = 164)
+    public function __construct($message = "", $code = 165)
     {
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
