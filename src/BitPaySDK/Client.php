@@ -35,6 +35,7 @@ use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Payout\PayoutBatch;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
+use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Model\Settlement\Settlement;
 use BitPaySDK\Model\Subscription\Subscription;
@@ -625,6 +626,70 @@ class Client
         }
 
         return new Rates($rates, $this);
+    }
+
+    /**
+     * Retrieve all the rates for a given cryptocurrency
+     *
+     * @param string $baseCurrency The cryptocurrency for which you want to fetch the rates.
+     *                             Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC
+     * @return Rates A Rates object populated with the currency rates for the requested baseCurrency.
+     * @throws BitPayException BitPayException class
+     */
+    public function getCurrencyRates(string $baseCurrency): Rates
+    {
+        try {
+            $responseJson = $this->_RESTcli->get("rates/".$baseCurrency, null, false);
+        } catch (Exception $e) {
+            throw new RateQueryException("failed to serialize Rates object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $rates = $mapper->mapArray(
+                json_decode($responseJson),
+                [],
+                'BitPaySDK\Model\Rate\Rate'
+            );
+
+        } catch (Exception $e) {
+            throw new RateQueryException(
+                "failed to deserialize BitPay server response (Rates) : ".$e->getMessage());
+        }
+
+        return new Rates($rates, $this);
+    }
+
+    /**
+     * Retrieve the rate for a cryptocurrency / fiat pair
+     *
+     * @param string $baseCurrency The cryptocurrency for which you want to fetch the fiat-equivalent rate.
+     *                             Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC
+     * @param string $currency The fiat currency for which you want to fetch the baseCurrency rate
+     * @return Rate A Rate object populated with the currency rate for the requested baseCurrency.
+     * @throws RateQueryException
+     */
+    public function getCurrencyPairRate(string $baseCurrency, string $currency): Rate
+    {
+        try {
+            $responseJson = $this->_RESTcli->get("rates/".$baseCurrency."/".$currency, null, false);
+        } catch (Exception $e) {
+            throw new RateQueryException("failed to serialize Rate object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $rate = $mapper->map(
+                json_decode($responseJson),
+                new Rate()
+            );
+
+        } catch (Exception $e) {
+            throw new RateQueryException(
+                "failed to deserialize BitPay server response (Rate) : ".$e->getMessage());
+        }
+
+        return $rate;
     }
 
     /**

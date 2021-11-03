@@ -185,5 +185,19 @@ $rate = $rates->getRate(Currency::USD); //Always use the included Currency model
 $rates->update();
 ```
 
+You can retrieve all the rates for a given cryptocurrency
+
+```php
+$rates = $bitpay->getCurrencyRates(Currency::ETH);
+
+$rate = $rates->getRate(Currency::USD);
+```
+
+You can retrieve the rate for a cryptocurrency / fiat pair
+
+```php
+$rate = $bitpay->getCurrencyPairRate(Currency::BTC, Currency::USD);
+```
+
 See also the test package for more examples of API calls.
 
