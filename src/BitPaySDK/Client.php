@@ -667,7 +667,7 @@ class Client
      *                             Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC
      * @param string $currency The fiat currency for which you want to fetch the baseCurrency rate
      * @return Rate A Rate object populated with the currency rate for the requested baseCurrency.
-     * @throws RateQueryException
+     * @throws BitPayException BitPayException class
      */
     public function getCurrencyPairRate(string $baseCurrency, string $currency): Rate
     {
