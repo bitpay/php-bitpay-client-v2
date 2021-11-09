@@ -19,6 +19,9 @@ class Currency
     const PAX  = "PAX";
     const XRP  = "XRP";
     const BUSD = "BUSD";
+    const DOGE  = "DOGE";
+    const WBTC  = "WBTC";
+    const DAI  = "DAI";
 
     // FIAT
     const AED = "AED";

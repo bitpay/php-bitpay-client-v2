@@ -23,10 +23,15 @@ class PayoutBatch
     protected $_currency     = "";
     protected $_effectiveDate;
     protected $_instructions = [];
+    protected $_ledgerCurrency = "";
 
     protected $_reference         = "";
-    protected $_notificationEmail = "";
     protected $_notificationUrl   = "";
+    protected $_notificationEmail = "";
+    protected $_email = "";
+    protected $_recipientId = "";
+    protected $_shopperId = "";
+    protected $_label = "";
     protected $_pricingMethod     = self::MethodVwap24;
 
     protected $_id;
@@ -40,22 +45,29 @@ class PayoutBatch
     protected $_btc;
     protected $_requestDate;
     protected $_dateExecuted;
+    protected $_exchangeRates;
 
     /**
      * Constructor, create an instruction-full request PayoutBatch object.
      *
-     * @param            $currency      string The three digit currency string for the PayoutBatch to use.
-     * @param            $effectiveDate string Date when request is effective. Note that the time of day will
-     *                                  automatically be set to 09:00:00.000 UTC time for the given day. Only requests
-     *                                  submitted before 09:00:00.000 UTC are guaranteed to be processed on the same
-     *                                  day.
+     * @param $currency          string The three digit currency string for the PayoutBatch to use.
+     * @param $effectiveDate     string Date when request is effective. Note that the time of day will
+     *                           automatically be set to 09:00:00.000 UTC time for the given day. Only
+     *                           requests submitted before 09:00:00.000 UTC are guaranteed to be processed
+     *                           on the same day.
+     * @param $ledgerCurrency    string Ledger currency code set for the payout request (ISO 4217 3-character
+     *                           currency code), it indicates on which ledger the payout request will be
+     *                           recorded. If not provided in the request, this parameter will be set by
+     *                           default to the active ledger currency on your account, e.g. your settlement
+     *                           currency.
      * @param array|null $instructions
-     */
-    public function __construct(string $currency = "USD", string $effectiveDate = null, array $instructions = null)
+     */ // TODO: $effectiveDate and $instructions will be deprecated in v6.0
+    public function __construct(string $currency = "EUR", string $effectiveDate = null, array $instructions = null, string $ledgerCurrency = null)
     {
         $this->_currency = $currency;
         $this->_effectiveDate = $effectiveDate;
         $this->_instructions = $instructions;
+        $this->_ledgerCurrency = $ledgerCurrency;
         $this->_computeAndSetAmount();
     }
 
@@ -163,6 +175,20 @@ class PayoutBatch
         $this->_computeAndSetAmount();
     }
 
+    public function getLedgerCurrency()
+    {
+        return $this->_ledgerCurrency;
+    }
+
+    public function setLedgerCurrency(string $ledgerCurrency)
+    {
+        if (!Currency::isValid($ledgerCurrency)) {
+            throw new BitPayException("currency code must be a type of Model.Currency");
+        }
+
+        $this->_ledgerCurrency = $ledgerCurrency;
+    }
+
     // Optional fields
     //
 
@@ -176,6 +202,16 @@ class PayoutBatch
         $this->_reference = $reference;
     }
 
+    public function getNotificationURL()
+    {
+        return $this->_notificationUrl;
+    }
+
+    public function setNotificationURL(string $notificationUrl)
+    {
+        $this->_notificationUrl = $notificationUrl;
+    }
+
     public function getNotificationEmail()
     {
         return $this->_notificationEmail;
@@ -186,14 +222,44 @@ class PayoutBatch
         $this->_notificationEmail = $notificationEmail;
     }
 
-    public function getNotificationURL()
+    public function getEmail()
     {
-        return $this->_notificationUrl;
+        return $this->_email;
     }
 
-    public function setNotificationURL(string $notificationUrl)
+    public function setEmail(string $email)
     {
-        $this->_notificationUrl = $notificationUrl;
+        $this->_email = $email;
+    }
+
+    public function getRecipientId()
+    {
+        return $this->_recipientId;
+    }
+
+    public function setRecipientId(string $recipientId)
+    {
+        $this->_recipientId = $recipientId;
+    }
+
+    public function getShopperId()
+    {
+        return $this->_shopperId;
+    }
+
+    public function setShopperId(string $shopperId)
+    {
+        $this->_shopperId = $shopperId;
+    }
+
+    public function getLabel()
+    {
+        return $this->_label;
+    }
+
+    public function setLabel(string $label)
+    {
+        $this->_label = $label;
     }
 
     public function getPricingMethod()
@@ -319,6 +385,16 @@ class PayoutBatch
         $this->_dateExecuted = $dateExecuted;
     }
 
+    public function getExchangeRates()
+    {
+        return $this->_exchangeRates;
+    }
+
+    public function setExchangeRates($exchangeRates)
+    {
+        $this->_exchangeRates = $exchangeRates;
+    }
+
     public function toArray()
     {
         $elements = [
@@ -328,9 +404,14 @@ class PayoutBatch
             'currency'          => $this->getCurrency(),
             'effectiveDate'     => $this->getEffectiveDate(),
             'instructions'      => $this->getInstructions(),
+            'ledgerCurrency'    => $this->getLedgerCurrency(),
             'reference'         => $this->getReference(),
-            'notificationEmail' => $this->getNotificationEmail(),
             'notificationURL'   => $this->getNotificationURL(),
+            'notificationEmail' => $this->getNotificationEmail(),
+            'email'             => $this->getEmail(),
+            'recipientId'       => $this->getRecipientId(),
+            'shopperId'         => $this->getShopperId(),
+            'label'             => $this->getLabel(),
             'pricingMethod'     => $this->getPricingMethod(),
             'id'                => $this->getId(),
             'account'           => $this->getAccount(),
@@ -343,6 +424,7 @@ class PayoutBatch
             'btc'               => $this->getBtc(),
             'requestDate'       => $this->getRequestDate(),
             'dateExecuted'      => $this->getDateExecuted(),
+            'exchangeRates'     => $this->getExchangeRates(),
         ];
 
         foreach ($elements as $key => $value) {

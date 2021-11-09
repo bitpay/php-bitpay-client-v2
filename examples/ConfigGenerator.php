@@ -266,7 +266,7 @@ $config = [
                 "ApiTokens"        => [
                     "merchant" => $isProd ? null : $merchantToken,
                     "payroll"  => $isProd ? null : $payrolToken, //TODO DEPRECATED delete in version 6.0
-                    "payout"  => $isProd ? $payoutToken : null,
+                    "payout"  => $isProd ? null : $payoutToken,
                 ],
                 "proxy" => $proxy,
             ],
