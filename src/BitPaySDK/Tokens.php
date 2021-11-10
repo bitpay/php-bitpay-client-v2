@@ -20,7 +20,7 @@ class Tokens
     /**
      * @var
      */
-    protected $payroll;//TODO DEPRECATED delete in version 6.0
+    protected $payroll;
     /**
      * @var
      */
@@ -34,7 +34,7 @@ class Tokens
     public function __construct($merchant = null, $payroll = null, $payout = null)
     {
         $this->merchant = $merchant;
-        $this->payroll = $payroll;//TODO DEPRECATED delete in version 6.0
+        $this->payroll = $payroll;
         $this->payout = $payout;
     }
 
@@ -61,7 +61,7 @@ class Tokens
             case Facade::Merchant:
                 $token = $this->merchant;
                 break;
-            case Facade::Payroll://TODO DEPRECATED delete in version 6.0
+            case Facade::Payroll:
                 $token = $this->payroll;
                 break;
             case Facade::Payout:
@@ -87,7 +87,7 @@ class Tokens
     /**
      * @return mixed
      */
-    public function getPayrollToken()//TODO DEPRECATED delete in version 6.0
+    public function getPayrollToken()
     {
         return $this->payroll;
     }
@@ -95,7 +95,7 @@ class Tokens
     /**
      * @param $payroll
      */
-    public function setPayrollToken($payroll)//TODO DEPRECATED delete in version 6.0
+    public function setPayrollToken($payroll)
     {
         $this->payroll = $payroll;
     }

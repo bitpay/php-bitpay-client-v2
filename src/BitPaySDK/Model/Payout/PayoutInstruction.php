@@ -5,7 +5,7 @@ namespace BitPaySDK\Model\Payout;
 
 
 use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\PayoutCreationException;
+use BitPaySDK\Exceptions\PayoutBatchCreationException;
 
 /**
  *
@@ -18,7 +18,6 @@ class PayoutInstruction
     protected $_recipientId;
     protected $_shopperId;
     protected $_label = "";
-    protected $_walletProvider;
     protected $_id;
 
     /**
@@ -35,7 +34,7 @@ class PayoutInstruction
      * @param $method      int Method used to target the recipient.
      * @param $methodValue string value for the choosen target method.
      *
-     * @throws PayoutCreationException BitPayException class
+     * @throws PayoutBatchCreationException BitPayException class
      */
     public function __construct(float $amount, int $method, string $methodValue)
     {
@@ -51,7 +50,7 @@ class PayoutInstruction
                 $this->_shopperId = $methodValue;
                 break;
             default:
-                throw new PayoutCreationException("\$method code must be a type of RecipientReferenceMethod");
+                throw new PayoutBatchCreationException("\$method code must be a type of RecipientReferenceMethod");
                 break;
         }
     }
@@ -108,16 +107,6 @@ class PayoutInstruction
     public function setLabel(string $label)
     {
         $this->_label = $label;
-    }
-
-    public function getWalletProvider()
-    {
-        return $this->_walletProvider;
-    }
-
-    public function setWalletProvider(string $walletProvider)
-    {
-        $this->_walletProvider = $walletProvider;
     }
 
     // Response fields

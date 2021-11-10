@@ -141,7 +141,7 @@ try {
         /** End of request **/
     }
 
-    /** //TODO DEPRECATED delete in version 6.0
+    /**
      * Repeat the process for the Payroll facade
      */
 
@@ -191,7 +191,7 @@ try {
         echo "\r\n";
 
         /** End of request **/
-    } //TODO DEPRECATED delete in version 6.0
+    }
 
     /**
      * Repeat the process for the Payout facade
@@ -265,7 +265,7 @@ $config = [
                 "PrivateKeySecret" => $isProd ? null : $yourMasterPassword,
                 "ApiTokens"        => [
                     "merchant" => $isProd ? null : $merchantToken,
-                    "payroll"  => $isProd ? null : $payrolToken, //TODO DEPRECATED delete in version 6.0
+                    "payroll"  => $isProd ? null : $payrolToken,
                     "payout"  => $isProd ? null : $payoutToken,
                 ],
                 "proxy" => $proxy,
@@ -275,7 +275,7 @@ $config = [
                 "PrivateKeySecret" => $isProd ? $yourMasterPassword : null,
                 "ApiTokens"        => [
                     "merchant" => $isProd ? $merchantToken : null,
-                    "payroll"  => $isProd ? $payrolToken : null, //TODO DEPRECATED delete in version 6.0
+                    "payroll"  => $isProd ? $payrolToken : null,
                     "payout"  => $isProd ? $payoutToken : null,
                 ],
                 "proxy" => $proxy,
