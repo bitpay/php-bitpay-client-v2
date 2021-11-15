@@ -4,18 +4,18 @@
 namespace BitPaySDK\Exceptions;
 
 
-class PayoutCreationException extends BitPayException
+class PayoutBatchCreationException extends BitPayException
 {
-    private $bitPayMessage = "Failed to create payout";
-    private $bitPayCode    = "BITPAY-PAYOUT-SUBMIT";
+    private $bitPayMessage = "Failed to create payout batch";
+    private $bitPayCode    = "BITPAY-PAYOUT-BATCH-SUBMIT";
 
     /**
-     * Construct the PayoutCreationException.
+     * Construct the PayoutBatchCreationException.
      *
      * @param string $message [optional] The Exception message to throw.
      * @param int    $code    [optional] The Exception code to throw.
      */
-    public function __construct($message = "", $code = 122)
+    public function __construct($message = "", $code = 126)
     {
 
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
