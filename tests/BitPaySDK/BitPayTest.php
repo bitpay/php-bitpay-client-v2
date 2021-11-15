@@ -8,7 +8,6 @@ use BitPaySDK\Model\Bill\BillStatus;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Invoice\Invoice as Invoice;
 use BitPaySDK\Model\Payout\PayoutStatus;
-use BitPaySDK\Model\Payout\RecipientStatus;
 use BitPaySDK\Model\Payout\RecipientReferenceMethod;
 use PHPUnit\Framework\TestCase;
 
@@ -38,19 +37,19 @@ class BitPayTest extends TestCase
             "YourMasterPassword"
         );
 
-        // $this->client = BitPaySDK\Client::create()->withData(
-        //     BitPaySDK\Env::Test,
-        //     __DIR__."/../../examples/bitpay_private_test.key",
-        //     new BitPaySDK\Tokens(
-        //         "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
-        //         "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
-        //     ),
-        //     "YourMasterPassword");
+        $this->client = BitPaySDK\Client::create()->withData(
+            BitPaySDK\Env::Test,
+            __DIR__."/../../examples/bitpay_private_test.key",
+            new BitPaySDK\Tokens(
+                "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ",
+                "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47"
+            ),
+            "YourMasterPassword");
 
         /**
          * Uncomment only if you wish to test the client with config files
          * */
-        $this->client = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
+//        $this->client1 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.json");
 //        $this->client2 = BitPaySDK\Client::create()->withFile(__DIR__."/../../examples/BitPay.config.yml");
 
 
@@ -64,7 +63,7 @@ class BitPayTest extends TestCase
 
     public function testShouldGetInvoiceId()
     {
-        $invoice = new Invoice(2.16, "eur");
+        $invoice = new Invoice(2.16, Currency::EUR);
         $invoice->setOrderId("98e572ea-910e-415d-b6de-65f5090680f6");
         $invoice->setFullNotifications(true);
         $invoice->setExtendedNotifications(true);
@@ -178,7 +177,7 @@ class BitPayTest extends TestCase
              * var Invoice
              */
 //            $firstInvoice = $invoices[0];
-            $firstInvoice = $this->client->getInvoice("CaZmogErHPfAYiko5cmGQC");
+            $firstInvoice = $this->client->getInvoice("JHJsfknvgUpZjL9ksSKFZu");
             $refunded = $this->client->createRefund(
                 $firstInvoice,
                 "sandbox@bitpay.com",
@@ -198,6 +197,22 @@ class BitPayTest extends TestCase
         $this->assertNotNull($retrievedRefunds);
         $this->assertEquals($firstRefund->getId(), $retrievedRefund->getId());
         $this->assertTrue($cancelRefund);
+    }
+
+    public function testShouldRequestResendInvoiceWebhook()
+    {
+        $webhookResent = false;
+
+        try {
+            $ethInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::ETH));
+            $webhookResent = $this->client->requestInvoiceWebhook($ethInvoice->getId(), $ethInvoice->getToken());
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertTrue($webhookResent);
+
     }
 
     public function testShouldCreateBillUSD()
@@ -631,8 +646,8 @@ class BitPayTest extends TestCase
     {
         $recipientsList = [
             new BitPaySDK\Model\Payout\PayoutRecipient(
-                "nsoni_test@mailinator.com",
-                "recipient",
+                "sandbox@bitpay.com",
+                "recipient1",
                 "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
         ];
 
@@ -654,9 +669,8 @@ class BitPayTest extends TestCase
     public function testShouldGetPayoutRecipients()
     {
         $recipients = null;
-        $status = 'active';
         try {
-            $recipients = $this->client->getPayoutRecipients($status, 2);
+            $recipients = $this->client->getPayoutRecipients(2);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -666,183 +680,50 @@ class BitPayTest extends TestCase
         $this->assertCount(2, $recipients);
     }
 
-    public function testShouldSubmitGetAndDeletePayoutRecipient()
-    {
-        $recipientsList = [
-            new BitPaySDK\Model\Payout\PayoutRecipient(
-                "sandbox@bitpay.com",
-                "recipient1",
-                "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
-        ];
-
-        $recipientsObj = new BitPaySDK\Model\Payout\PayoutRecipients($recipientsList);
-        try {
-            $basicRecipient = $this->client->submitPayoutRecipients($recipientsObj);
-            $basicRecipient = reset($basicRecipient);
-            $retrievedRecipient = $this->client->getPayoutRecipient($basicRecipient->getId());//9EsKtXQ1nj41EQ1Dk7VxhE
-            $retrievedRecipient->setLabel("updatedLabel");
-            $updatedRecipient = $this->client->updatePayoutRecipient($retrievedRecipient->getId(), $retrievedRecipient);
-            $deletedRecipient = $this->client->deletePayoutRecipient($retrievedRecipient->getId());
-        } catch (\Exception $e) {
-            $e->getTraceAsString();
-            self::fail($e->getMessage());
-        }
-
-        $this->assertNotNull($basicRecipient);
-        $this->assertNotNull($retrievedRecipient->getId());
-        $this->assertEquals($basicRecipient->getId(), $retrievedRecipient->getId());
-        $this->assertEquals($retrievedRecipient->getStatus(), RecipientStatus::INVITED);
-        $this->assertTrue($deletedRecipient);
-        $this->assertEquals($updatedRecipient->getLabel(), "updatedLabel");
-    }
-
-    public function testShouldNotifyPayoutRecipientId()
-    {
-        $result = null;
-        $recipientsList = [
-            new BitPaySDK\Model\Payout\PayoutRecipient(
-                "sandbox@bitpay.com",
-                "recipient1",
-                "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
-        ];
-
-        $recipientsObj = new BitPaySDK\Model\Payout\PayoutRecipients($recipientsList);
-        try {
-            $basicRecipient = $this->client->submitPayoutRecipients($recipientsObj);
-            $basicRecipient = reset($basicRecipient);
-            $result = $this->client->notifyPayoutRecipient($basicRecipient->getId());//9EsKtXQ1nj41EQ1Dk7VxhE
-            //$result = $this->client->notifyPayoutRecipient("9EsKtXQ1nj41EQ1Dk7VxhE");
-        } catch (\Exception $e) {
-            $e->getTraceAsString();
-            self::fail($e->getMessage());
-        }
-
-        $this->assertTrue($result);
-    }
-
-    public function testShouldSubmitPayout()
-    {
-        $recipients = $this->client->getPayoutRecipients(null, 1);
-
-        $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
-
-        $payout = new BitPaySDK\Model\Payout\Payout(5.0, $currency, $ledgerCurrency);
-        $payout->setRecipientId($recipients[0]->getId());
-        
-        $cancelledPayout = null;
-        $createPayout = null;
-
-        try {
-            $createPayout = $this->client->submitPayout($payout);
-            $cancelledPayout = $this->client->cancelPayout($createPayout->getId());
-        } catch (\Exception $e) {
-            $e->getTraceAsString();
-            self::fail($e->getMessage());
-        }
-
-        $this->assertNotNull($createPayout->getId());
-        $this->assertTrue($cancelledPayout);
-    }
-
-    public function testShouldGetPayouts()
-    {
-        try {
-            $payouts = $this->client->getPayouts();
-        } catch (\Exception $e) {
-            $e->getTraceAsString();
-            self::fail($e->getMessage());
-        }
-
-        $this->assertGreaterThan(0, count($payouts));
-    }
-
-    public function testShouldGetPayoutsByStatus()
-    {
-        try {
-            $payouts = $this->client->getPayouts(PayoutStatus::New);
-        } catch (\Exception $e) {
-            $e->getTraceAsString();
-            self::fail($e->getMessage());
-        }
-
-        $this->assertGreaterThan(0, count($payouts));
-    }
-
-    public function testShouldSubmitGetAndDeletePayout()
-    {
-        $recipients = $this->client->getPayoutRecipients(null, 1);
-
-        $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
-
-        $payout = new BitPaySDK\Model\Payout\Payout(5.0, $currency, $ledgerCurrency);
-        $payout->setRecipientId($recipients[0]->getId());
-
-        $payoutRetrieved = null;
-
-        try {
-            $payout = $this->client->submitPayout($payout);
-            $payoutRetrieved = $this->client->getPayout($payout->getId());
-            $payoutCancelled = $this->client->cancelPayout($payoutRetrieved->getId());
-        } catch (\Exception $e) {
-            $e->getTraceAsString();
-            self::fail($e->getMessage());
-        }
-
-        $this->assertNotNull($payout->getId());
-        $this->assertNotNull($payoutRetrieved->getId());
-        $this->assertTrue($payoutCancelled);
-        $this->assertEquals($payout->getId(), $payoutRetrieved->getId());
-        $this->assertEquals($payoutRetrieved->getStatus(), PayoutStatus::New);
-    }
-
-    public function testShouldNotifyPayout()
-    {
-        $recipients = $this->client->getPayoutRecipients(null, 1);
-
-        $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
-
-        $payout = new BitPaySDK\Model\Payout\Payout(5.0, $currency, $ledgerCurrency);
-        $payout->setRecipientId($recipients[0]->getId());
-        $payout->setNotificationEmail('sandbox@bitpay.com');
-        $payout->setNotificationURL('https://hookb.in/QJOPBdMgRkukpp2WO60o');
-        
-        $cancelledPayout = null;
-        $createPayout = null;
-
-        try {
-            $createPayout = $this->client->submitPayout($payout);
-            $this->client->notifyPayout($createPayout->getId());
-            $cancelledPayout = $this->client->cancelPayout($createPayout->getId());
-        } catch (\Exception $e) {
-            $e->getTraceAsString();
-            self::fail($e->getMessage());
-        }
-
-        $this->assertNotNull($createPayout->getId());
-        $this->assertTrue($cancelledPayout);
-    }
+//    public function testShouldNotifyPayoutRecipientId()
+//    {
+//        $result = null;
+//        $recipientsList = [
+//            new BitPaySDK\Model\Payout\PayoutRecipient(
+//                "sandbox@bitpay.com",
+//                "recipient1",
+//                "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
+//        ];
+//
+//        $recipientsObj = new BitPaySDK\Model\Payout\PayoutRecipients($recipientsList);
+//        try {
+//            $basicRecipient = $this->client->submitPayoutRecipients($recipientsObj);
+//            $basicRecipient = reset($basicRecipient);
+//            $result = $this->client->notifyPayoutRecipient($basicRecipient->getId());//9EsKtXQ1nj41EQ1Dk7VxhE
+//            $result = $this->client->notifyPayoutRecipient("9EsKtXQ1nj41EQ1Dk7VxhE");
+//        } catch (\Exception $e) {
+//            $e->getTraceAsString();
+//            self::fail($e->getMessage());
+//        }
+//
+////        $this->assertNotNull($basicRecipient);
+//        $this->assertEquals("Success", $result);
+//    }
 
     public function testShouldSubmitPayoutBatch()
     {
-        $recipients = $this->client->getPayoutRecipients(null, 2);
+        $date = new \DateTime();
+        $threeDaysFromNow = $date->modify('+3 day');
+
+        $effectiveDate = $threeDaysFromNow->format("Y-m-d");
         $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
+
+        $recipients = $this->client->getPayoutRecipients(null,2);
 
         $instructions = [
-            new BitPaySDK\Model\Payout\PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, $recipients[0]->getEmail()),
-            new BitPaySDK\Model\Payout\PayoutInstruction(6.0, RecipientReferenceMethod::RECIPIENT_ID, $recipients[1]->getId()),
+            new BitPaySDK\Model\Payout\PayoutInstruction(100.0, RecipientReferenceMethod::EMAIL, $recipients[0]->getEmail()),
+            new BitPaySDK\Model\Payout\PayoutInstruction(200.0, RecipientReferenceMethod::RECIPIENT_ID, $recipients[1]->getId()),
         ];
 
-        $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $instructions, $ledgerCurrency);
-
-        $cancelledPayoutBatch = null;
-
+        $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $effectiveDate, $instructions);
         try {
             $batch = $this->client->submitPayoutBatch($batch);
-            $cancelledPayoutBatch = $this->client->cancelPayoutBatch($batch->getId());
+            $this->client->cancelPayoutBatch($batch->getId());
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -850,7 +731,6 @@ class BitPayTest extends TestCase
 
         $this->assertNotNull($batch->getId());
         $this->assertCount(2, $batch->getInstructions());
-        $this->assertTrue($cancelledPayoutBatch);
     }
 
     public function testShouldGetPayoutBatches()
@@ -879,19 +759,18 @@ class BitPayTest extends TestCase
 
     public function testShouldSubmitGetAndDeletePayoutBatch()
     {
-        $recipients = $this->client->getPayoutRecipients(null, 2);
-        $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
+        $date = new \DateTime();
+        $threeDaysFromNow = $date->modify('+3 day');
 
+        $effectiveDate = $threeDaysFromNow->format("Y-m-d");
+        $currency = Currency::USD;
         $instructions = [
-            new BitPaySDK\Model\Payout\PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, $recipients[0]->getEmail()),
-            new BitPaySDK\Model\Payout\PayoutInstruction(6.0, RecipientReferenceMethod::RECIPIENT_ID, $recipients[1]->getId()),
+            new BitPaySDK\Model\Payout\PayoutInstruction(100.0, "mtHDtQtkEkRRB5mgeWpLhALsSbga3iZV6u"),
+            new BitPaySDK\Model\Payout\PayoutInstruction(200.0, "mvR4Xj7MYT7GJcL93xAQbSZ2p4eHJV5F7A"),
         ];
 
-        $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $instructions, $ledgerCurrency);
+        $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $effectiveDate, $instructions);
         $batchRetrieved = null;
-        $batchCancelled = null;
-
         try {
             $batch = $this->client->submitPayoutBatch($batch);
             $batchRetrieved = $this->client->getPayoutBatch($batch->getId());
@@ -903,42 +782,12 @@ class BitPayTest extends TestCase
 
         $this->assertNotNull($batch->getId());
         $this->assertNotNull($batchRetrieved->getId());
-        $this->assertTrue($batchCancelled);
+        $this->assertNotNull($batchCancelled->getId());
         $this->assertCount(2, $batch->getInstructions());
         $this->assertEquals($batch->getId(), $batchRetrieved->getId());
+        $this->assertEquals($batchRetrieved->getId(), $batchCancelled->getId());
         $this->assertEquals($batchRetrieved->getStatus(), PayoutStatus::New);
-    }
-
-    public function testShouldNotifyPayoutBatch()
-    {
-        $recipients = $this->client->getPayoutRecipients(null, 2);
-
-        $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
-
-        $instructions = [
-            new BitPaySDK\Model\Payout\PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, $recipients[0]->getEmail()),
-            new BitPaySDK\Model\Payout\PayoutInstruction(6.0, RecipientReferenceMethod::RECIPIENT_ID, $recipients[1]->getId()),
-        ];
-
-        $batch = new BitPaySDK\Model\Payout\PayoutBatch($currency, $instructions, $ledgerCurrency);
-        $batch->setNotificationEmail('sandbox@bitpay.com');
-        $batch->setNotificationURL('https://hookb.in/QJOPBdMgRkukpp2WO60o');
-
-        $cancelledPayoutBatch = null;
-
-        try {
-            $batch = $this->client->submitPayoutBatch($batch);
-            $this->client->notifyPayoutBatch($batch->getId());
-            $cancelledPayoutBatch = $this->client->cancelPayoutBatch($batch->getId());
-        } catch (\Exception $e) {
-            $e->getTraceAsString();
-            self::fail($e->getMessage());
-        }
-
-        $this->assertNotNull($batch->getId());
-        $this->assertCount(2, $batch->getInstructions());
-        $this->assertTrue($cancelledPayoutBatch);
+        $this->assertEquals($batchCancelled->getStatus(), PayoutStatus::Cancelled);
     }
 
     public function testGetSettlements()

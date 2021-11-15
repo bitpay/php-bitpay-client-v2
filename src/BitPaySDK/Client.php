@@ -29,6 +29,7 @@ use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Exceptions\SubscriptionCreationException;
 use BitPaySDK\Exceptions\SubscriptionQueryException;
 use BitPaySDK\Exceptions\SubscriptionUpdateException;
+use BitPaySDK\Exceptions\WebhookRequestException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
@@ -430,6 +431,33 @@ class Client
         } catch (Exception $e) {
             throw new RefundCancellationException(
                 "failed to deserialize BitPay server response (Refund) : ".$e->getMessage());
+        }
+
+        return $result;
+    }
+
+    /**
+     * Request the last BitPay Invoice webhook to be resent.
+     *
+     * @param string $invoiceId The id of the invoice for which you want the last webhook to be resent.
+     * @param string $invoiceToken The resource token for the `invoiceId` you want the webhook to be resent.
+     * @return bool True if the webhook has been resent for the current invoice status, false otherwise.
+     * @throws  BitPayException BitPayException class
+     */
+    public function requestInvoiceWebhook(string $invoiceId, string $invoiceToken): bool
+    {
+        try {
+            $responseJson = $this->_RESTcli->post(
+                "invoices/".$invoiceId."/notifications", ['token' => $invoiceToken]);
+        } catch (Exception $e) {
+            throw new WebhookRequestException("failed to serialize WebhookRequest object : ".$e->getMessage());
+        }
+
+        try {
+            $result = strtolower(trim($responseJson, '"')) === "success";
+
+        } catch (Exception $e) {
+            throw new WebhookRequestException("failed to deserialize BitPay server response (WebhookRequest) : ".$e->getMessage());
         }
 
         return $result;
