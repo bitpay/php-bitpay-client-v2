@@ -519,6 +519,33 @@ class BitPayTest extends TestCase
         $this->assertNotNull($ratesList);
     }
 
+    public function testShouldGetETHExchangeRates()
+    {
+        $ratesList = null;
+        try {
+            $rates = $this->client->getCurrencyRates(Currency::ETH);
+            $ratesList = $rates->getRates();
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($ratesList);
+    }
+
+    public function testShouldGetETHToUSDExchangeRate()
+    {
+        $rate = null;
+        try {
+            $rate = $this->client->getCurrencyPairRate(Currency::ETH, Currency::USD);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($rate);
+    }
+
     public function testShouldGetLedgerBtc()
     {
         $ledger = null;
