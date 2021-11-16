@@ -631,8 +631,8 @@ class BitPayTest extends TestCase
     {
         $recipientsList = [
             new BitPaySDK\Model\Payout\PayoutRecipient(
-                "nsoni_test@mailinator.com",
-                "recipient",
+                "sandbox@bitpay.com",
+                "recipient1",
                 "https://hookb.in/QJOPBdMgRkukpp2WO60o"),
         ];
 
