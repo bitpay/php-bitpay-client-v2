@@ -5,7 +5,6 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
-
 class BillException extends BitPayException
 {
     private $bitPayMessage = "An unexpected error occurred while trying to manage the bill";

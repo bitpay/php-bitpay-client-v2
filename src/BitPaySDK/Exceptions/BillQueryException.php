@@ -6,7 +6,6 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
-
 class BillQueryException extends BillException
 {
     private $bitPayMessage = "Failed to retrieve bill";

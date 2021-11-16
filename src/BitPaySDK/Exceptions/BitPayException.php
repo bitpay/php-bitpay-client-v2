@@ -5,7 +5,6 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
-
 class BitPayException extends Exception
 {
     private $bitPayMessage = "Unexpected Bitpay exeption.";
