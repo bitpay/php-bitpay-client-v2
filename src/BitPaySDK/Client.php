@@ -51,9 +51,9 @@ use Symfony\Component\Yaml\Yaml;
  * Class Client
  * @package Bitpay
  * @author  Antonio Buedo
- * @version 5.3.2110
+ * @version 6.0.2111
  * See bitpay.com/api for more information.
- * date 06.10.2021
+ * date 15.11.2021
  */
 class Client
 {
@@ -131,7 +131,7 @@ class Client
 
             return $this;
         } catch (Exception $e) {
-            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
+            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
     }
 
@@ -152,7 +152,7 @@ class Client
 
             return $this;
         } catch (Exception $e) {
-            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
+            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
     }
 
@@ -176,7 +176,7 @@ class Client
 
             $responseJson = $this->_RESTcli->post("invoices", $invoice->toArray(), $signRequest);
         } catch (Exception $e) {
-            throw new InvoiceCreationException("failed to serialize Invoice object : ".$e->getMessage());
+            throw new InvoiceCreationException("failed to serialize Invoice object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -188,7 +188,7 @@ class Client
 
         } catch (Exception $e) {
             throw new InvoiceCreationException(
-                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $invoice;
@@ -215,7 +215,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("invoices/".$invoiceId, $params, $signRequest);
         } catch (Exception $e) {
-            throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage());
+            throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -227,7 +227,7 @@ class Client
 
         } catch (Exception $e) {
             throw new InvoiceQueryException(
-                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $invoice;
@@ -274,7 +274,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("invoices", $params);
         } catch (Exception $e) {
-            throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage());
+            throw new InvoiceQueryException("failed to serialize Invoice object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -287,7 +287,7 @@ class Client
 
         } catch (Exception $e) {
             throw new InvoiceQueryException(
-                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $invoices;
@@ -319,7 +319,7 @@ class Client
 
             $responseJson = $this->_RESTcli->post("invoices/".$invoice->getId()."/refunds", $refund->toArray());
         } catch (Exception $e) {
-            throw new RefundCreationException("failed to serialize Refund object : ".$e->getMessage());
+            throw new RefundCreationException("failed to serialize Refund object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -327,7 +327,7 @@ class Client
 
         } catch (Exception $e) {
             throw new RefundCreationException(
-                "failed to deserialize BitPay server response (Refund) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Refund) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $result;
@@ -349,7 +349,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("invoices/".$invoice->getId()."/refunds", $params);
         } catch (Exception $e) {
-            throw new RefundQueryException("failed to serialize refund object : ".$e->getMessage());
+            throw new RefundQueryException("failed to serialize refund object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -362,7 +362,7 @@ class Client
 
         } catch (Exception $e) {
             throw new RefundQueryException(
-                "failed to deserialize BitPay server response (Refund) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Refund) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $refunds;
@@ -386,7 +386,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("invoices/".$invoice->getId()."/refunds/".$refundId, $params);
         } catch (Exception $e) {
-            throw new RefundQueryException("failed to serialize refund object : ".$e->getMessage());
+            throw new RefundQueryException("failed to serialize refund object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -398,7 +398,7 @@ class Client
 
         } catch (Exception $e) {
             throw new RefundQueryException(
-                "failed to deserialize BitPay server response (Refund) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Refund) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $Refund;
@@ -421,7 +421,7 @@ class Client
 
             $responseJson = $this->_RESTcli->delete("invoices/".$invoiceId."/refunds/".$refund->getId(), $params);
         } catch (Exception $e) {
-            throw new RefundCancellationException("failed to serialize server object : ".$e->getMessage());
+            throw new RefundCancellationException("failed to serialize server object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -429,7 +429,7 @@ class Client
 
         } catch (Exception $e) {
             throw new RefundCancellationException(
-                "failed to deserialize BitPay server response (Refund) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Refund) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $result;
@@ -451,7 +451,7 @@ class Client
 
             $responseJson = $this->_RESTcli->post("bills", $bill->toArray(), $signRequest);
         } catch (Exception $e) {
-            throw new BillCreationException("failed to serialize Bill object : ".$e->getMessage());
+            throw new BillCreationException("failed to serialize Bill object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -463,7 +463,7 @@ class Client
 
         } catch (Exception $e) {
             throw new BillCreationException(
-                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $bill;
@@ -487,7 +487,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("bills/".$billId, $params, $signRequest);
         } catch (Exception $e) {
-            throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage());
+            throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -499,7 +499,7 @@ class Client
 
         } catch (Exception $e) {
             throw new BillQueryException(
-                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $bill;
@@ -523,7 +523,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("bills", $params);
         } catch (Exception $e) {
-            throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage());
+            throw new BillQueryException("failed to serialize Bill object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -536,7 +536,7 @@ class Client
 
         } catch (Exception $e) {
             throw new BillQueryException(
-                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Bill) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $bills;
@@ -558,7 +558,7 @@ class Client
 
             $responseJson = $this->_RESTcli->update("bills/".$billId, $bill->toArray());
         } catch (Exception $e) {
-            throw new BillUpdateException("failed to serialize Bill object : ".$e->getMessage());
+            throw new BillUpdateException("failed to serialize Bill object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -569,7 +569,7 @@ class Client
             );
 
         } catch (Exception $e) {
-            throw new BillUpdateException("failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+            throw new BillUpdateException("failed to deserialize BitPay server response (Bill) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $bill;
@@ -590,13 +590,13 @@ class Client
             $responseJson = $this->_RESTcli->post(
                 "bills/".$billId."/deliveries", ['token' => $billToken], $signRequest);
         } catch (Exception $e) {
-            throw new BillDeliveryException("failed to serialize Bill object : ".$e->getMessage());
+            throw new BillDeliveryException("failed to serialize Bill object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
             $result = str_replace("\"", "", $responseJson);
         } catch (Exception $e) {
-            throw new BillDeliveryException("failed to deserialize BitPay server response (Bill) : ".$e->getMessage());
+            throw new BillDeliveryException("failed to deserialize BitPay server response (Bill) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $result;
@@ -613,7 +613,7 @@ class Client
         try {
             $responseJson = $this->_RESTcli->get("rates", null, false);
         } catch (Exception $e) {
-            throw new RateQueryException("failed to serialize Rates object : ".$e->getMessage());
+            throw new RateQueryException("failed to serialize Rates object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -626,7 +626,7 @@ class Client
 
         } catch (Exception $e) {
             throw new RateQueryException(
-                "failed to deserialize BitPay server response (Rates) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Rates) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return new Rates($rates, $this);
@@ -645,7 +645,7 @@ class Client
         try {
             $responseJson = $this->_RESTcli->get("rates/".$baseCurrency, null, false);
         } catch (Exception $e) {
-            throw new RateQueryException("failed to serialize Rates object : ".$e->getMessage());
+            throw new RateQueryException("failed to serialize Rates object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -658,7 +658,7 @@ class Client
 
         } catch (Exception $e) {
             throw new RateQueryException(
-                "failed to deserialize BitPay server response (Rates) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Rates) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return new Rates($rates, $this);
@@ -678,7 +678,7 @@ class Client
         try {
             $responseJson = $this->_RESTcli->get("rates/".$baseCurrency."/".$currency, null, false);
         } catch (Exception $e) {
-            throw new RateQueryException("failed to serialize Rate object : ".$e->getMessage());
+            throw new RateQueryException("failed to serialize Rate object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -690,7 +690,7 @@ class Client
 
         } catch (Exception $e) {
             throw new RateQueryException(
-                "failed to deserialize BitPay server response (Rate) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Rate) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $rate;
@@ -722,7 +722,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("ledgers/".$currency, $params);
         } catch (Exception $e) {
-            throw new LedgerQueryException("failed to serialize Ledger object : ".$e->getMessage());
+            throw new LedgerQueryException("failed to serialize Ledger object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -735,7 +735,7 @@ class Client
 
         } catch (Exception $e) {
             throw new LedgerQueryException(
-                "failed to deserialize BitPay server response (Ledger) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Ledger) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $ledger;
@@ -755,7 +755,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("ledgers", $params);
         } catch (Exception $e) {
-            throw new LedgerQueryException("failed to serialize Ledger object : ".$e->getMessage());
+            throw new LedgerQueryException("failed to serialize Ledger object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -768,7 +768,7 @@ class Client
 
         } catch (Exception $e) {
             throw new LedgerQueryException(
-                "failed to deserialize BitPay server response (Ledger) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Ledger) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $ledgers;
@@ -784,12 +784,12 @@ class Client
     public function submitPayoutRecipients(PayoutRecipients $recipients): array
     {
         try {
-            $recipients->setToken($this->_tokenCache->getTokenByFacade(Facade::Payroll));
+            $recipients->setToken($this->_tokenCache->getTokenByFacade(Facade::Payout));
             $recipients->setGuid(Util::guid());
 
             $responseJson = $this->_RESTcli->post("recipients", $recipients->toArray());
         } catch (Exception $e) {
-            throw new PayoutCreationException("failed to serialize PayoutRecipients object : ".$e->getMessage());
+            throw new PayoutCreationException("failed to serialize PayoutRecipients object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -802,7 +802,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutCreationException(
-                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $recipients;
@@ -823,7 +823,7 @@ class Client
     ): array {
         try {
             $params = [];
-            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
             if ($status) {
                 $params["status"] = $status;
             }
@@ -833,7 +833,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("recipients", $params);
         } catch (Exception $e) {
-            throw new PayoutQueryException("failed to serialize PayoutRecipients object : ".$e->getMessage());
+            throw new PayoutQueryException("failed to serialize PayoutRecipients object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -846,7 +846,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutQueryException(
-                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $recipients;
@@ -864,11 +864,11 @@ class Client
     {
         try {
             $params = [];
-            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
 
             $responseJson = $this->_RESTcli->get("recipients/".$recipientId, $params);
         } catch (Exception $e) {
-            throw new PayoutQueryException("failed to serialize PayoutRecipient object : ".$e->getMessage());
+            throw new PayoutQueryException("failed to serialize PayoutRecipient object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -880,7 +880,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutQueryException(
-                "failed to deserialize BitPay server response (PayoutRecipient) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutRecipient) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $recipient;
@@ -897,11 +897,11 @@ class Client
     {
         try {
             $content = [];
-            $content["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+            $content["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
 
             $responseJson = $this->_RESTcli->post("recipients/".$recipientId."/notifications", $content);
         } catch (Exception $e) {
-            throw new PayoutCreationException("failed to serialize PayoutRecipients object : ".$e->getMessage());
+            throw new PayoutCreationException("failed to serialize PayoutRecipients object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -909,7 +909,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutCreationException(
-                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $result;
@@ -926,11 +926,11 @@ class Client
     public function updatePayoutRecipient(string $recipientId, PayoutRecipient $recipient): PayoutRecipient
     {
         try {
-            $recipient->setToken($this->_tokenCache->getTokenByFacade(Facade::Payroll));
+            $recipient->setToken($this->_tokenCache->getTokenByFacade(Facade::Payout));
 
             $responseJson = $this->_RESTcli->update("recipients/".$recipientId, $recipient->toArray());
         } catch (Exception $e) {
-            throw new PayoutUpdateException("failed to serialize PayoutRecipient object : ".$e->getMessage());
+            throw new PayoutUpdateException("failed to serialize PayoutRecipient object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -942,7 +942,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutUpdateException(
-                "failed to deserialize BitPay server response (PayoutRecipient) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutRecipient) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $recipient;
@@ -959,11 +959,11 @@ class Client
     {
         try {
             $params = [];
-            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payroll);
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
 
             $responseJson = $this->_RESTcli->delete("recipients/".$recipientId, $params);
         } catch (Exception $e) {
-            throw new PayoutCancellationException("failed to serialize server object : ".$e->getMessage());
+            throw new PayoutCancellationException("failed to serialize server object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -971,7 +971,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutCancellationException(
-                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutRecipients) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $result;
@@ -994,7 +994,7 @@ class Client
 
             $responseJson = $this->_RESTcli->post("payoutBatches", $batch->toArray());
         } catch (Exception $e) {
-            throw new PayoutBatchCreationException("failed to serialize PayoutBatch object : ".$e->getMessage());
+            throw new PayoutBatchCreationException("failed to serialize PayoutBatch object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1006,7 +1006,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutBatchCreationException(
-                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $batch;
@@ -1030,7 +1030,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("payoutBatches", $params);
         } catch (Exception $e) {
-            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage());
+            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1043,7 +1043,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutQueryException(
-                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $batches;
@@ -1065,7 +1065,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("payoutBatches/".$batchId, $params);
         } catch (Exception $e) {
-            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage());
+            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1077,7 +1077,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutQueryException(
-                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $batch;
@@ -1095,19 +1095,19 @@ class Client
         try {
             $batch = $this->getPayoutBatch($batchId);
             $params = [];
-            $params["token"] = $batch->getToken();
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
 
             $responseJson = $this->_RESTcli->delete("payoutBatches/".$batchId, $params);
         } catch (Exception $e) {
-            throw new PayoutCancellationException("failed to serialize PayoutBatch object : ".$e->getMessage());
+            throw new PayoutCancellationException("failed to serialize PayoutBatch object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
-            $result = json_decode($responseJson)->success;
+            $result = strtolower(json_decode($responseJson)->status) == 'success';
 
         } catch (Exception $e) {
             throw new PayoutCancellationException(
-                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $result;
@@ -1128,7 +1128,7 @@ class Client
 
             $responseJson = $this->_RESTcli->post("payoutBatches/".$payoutId."/notifications", $content);
         } catch (Exception $e) {
-            throw new PayoutBatchCreationException("failed to serialize PayoutBatch object : ".$e->getMessage());
+            throw new PayoutBatchCreationException("failed to serialize PayoutBatch object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1141,7 +1141,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutBatchCreationException(
-                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (PayoutBatch) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $result;
@@ -1164,7 +1164,7 @@ class Client
 
             $responseJson = $this->_RESTcli->post("payouts", $payout->toArray());
         } catch (Exception $e) {
-            throw new PayoutCreationException("failed to serialize Payout object : ".$e->getMessage());
+            throw new PayoutCreationException("failed to serialize Payout object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1176,7 +1176,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutCreationException(
-                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $payout;
@@ -1200,7 +1200,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("payouts", $params);
         } catch (Exception $e) {
-            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage());
+            throw new PayoutQueryException("failed to serialize PayoutBatch object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1213,7 +1213,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutQueryException(
-                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $payouts;
@@ -1235,7 +1235,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("payouts/".$payoutId, $params);
         } catch (Exception $e) {
-            throw new PayoutQueryException("failed to serialize Payout object : ".$e->getMessage());
+            throw new PayoutQueryException("failed to serialize Payout object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1247,7 +1247,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutQueryException(
-                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $payout;
@@ -1263,22 +1263,21 @@ class Client
     public function cancelPayout(string $payoutId): bool
     {
         try {
-            $payout = $this->getPayout($payoutId);
             $params = [];
-            $params["token"] = $payout->getToken();
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
 
             $responseJson = $this->_RESTcli->delete("payouts/".$payoutId, $params);
             
         } catch (Exception $e) {
-            throw new PayoutCancellationException("failed to serialize Payout object : ".$e->getMessage());
+            throw new PayoutCancellationException("failed to serialize Payout object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
-            $result = json_decode($responseJson)->success;
+            $result = strtolower(json_decode($responseJson)->status) == 'success';
 
         } catch (Exception $e) {
             throw new PayoutCancellationException(
-                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $result;
@@ -1299,7 +1298,7 @@ class Client
 
             $responseJson = $this->_RESTcli->post("payouts/".$payoutId."/notifications", $content);
         } catch (Exception $e) {
-            throw new PayoutCreationException("failed to serialize Payout object : ".$e->getMessage());
+            throw new PayoutCreationException("failed to serialize Payout object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1312,7 +1311,7 @@ class Client
 
         } catch (Exception $e) {
             throw new PayoutCreationException(
-                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Payout) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $payouts;
@@ -1356,7 +1355,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("settlements", $params);
         } catch (Exception $e) {
-            throw new SettlementQueryException("failed to serialize Settlement object : ".$e->getMessage());
+            throw new SettlementQueryException("failed to serialize Settlement object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1369,7 +1368,7 @@ class Client
 
         } catch (Exception $e) {
             throw new SettlementQueryException(
-                "failed to deserialize BitPay server response (Settlement) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Settlement) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $settlements;
@@ -1390,7 +1389,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("settlements/".$settlementId, $params);
         } catch (Exception $e) {
-            throw new SettlementQueryException("failed to serialize Settlement object : ".$e->getMessage());
+            throw new SettlementQueryException("failed to serialize Settlement object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1402,7 +1401,7 @@ class Client
 
         } catch (Exception $e) {
             throw new SettlementQueryException(
-                "failed to deserialize BitPay server response (Settlement) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Settlement) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $settlement;
@@ -1423,7 +1422,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("settlements/".$settlement->getId()."/reconciliationReport", $params);
         } catch (Exception $e) {
-            throw new SettlementQueryException("failed to serialize Reconciliation Report object : ".$e->getMessage());
+            throw new SettlementQueryException("failed to serialize Reconciliation Report object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1435,7 +1434,7 @@ class Client
 
         } catch (Exception $e) {
             throw new SettlementQueryException(
-                "failed to deserialize BitPay server response (Reconciliation Report) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Reconciliation Report) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $reconciliationReport;
@@ -1455,7 +1454,7 @@ class Client
 
             $responseJson = $this->_RESTcli->post("subscriptions", $subscription->toArray());
         } catch (Exception $e) {
-            throw new SubscriptionCreationException("failed to serialize Subscription object : ".$e->getMessage());
+            throw new SubscriptionCreationException("failed to serialize Subscription object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1467,7 +1466,7 @@ class Client
 
         } catch (Exception $e) {
             throw new SubscriptionCreationException(
-                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $subscription;
@@ -1489,7 +1488,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("subscriptions/".$subscriptionId, $params);
         } catch (Exception $e) {
-            throw new SubscriptionQueryException("failed to serialize Subscription object : ".$e->getMessage());
+            throw new SubscriptionQueryException("failed to serialize Subscription object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1501,7 +1500,7 @@ class Client
 
         } catch (Exception $e) {
             throw new SubscriptionQueryException(
-                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $subscription;
@@ -1525,7 +1524,7 @@ class Client
 
             $responseJson = $this->_RESTcli->get("subscriptions", $params);
         } catch (Exception $e) {
-            throw new SubscriptionQueryException("failed to serialize Subscription object : ".$e->getMessage());
+            throw new SubscriptionQueryException("failed to serialize Subscription object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1538,7 +1537,7 @@ class Client
 
         } catch (Exception $e) {
             throw new SubscriptionQueryException(
-                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $subscriptions;
@@ -1560,7 +1559,7 @@ class Client
 
             $responseJson = $this->_RESTcli->update("subscriptions/".$subscriptionId, $subscription->toArray());
         } catch (Exception $e) {
-            throw new SubscriptionUpdateException("failed to serialize Subscription object : ".$e->getMessage());
+            throw new SubscriptionUpdateException("failed to serialize Subscription object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         try {
@@ -1572,7 +1571,7 @@ class Client
 
         } catch (Exception $e) {
             throw new SubscriptionUpdateException(
-                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Subscription) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $subscription;
@@ -1589,7 +1588,7 @@ class Client
         try {
             $currencies = json_decode($this->_RESTcli->get("currencies/", null, false), false);
         } catch (Exception $e) {
-            throw new CurrencyQueryException("failed to serialize Currency object : ".$e->getMessage());
+            throw new CurrencyQueryException("failed to serialize Currency object : ".$e->getMessage(), null, null, $e->getApiCode());
         }
 
         return $currencies;
@@ -1631,7 +1630,7 @@ class Client
 
             $this->_configuration->setEnvConfig($envConfig);
         } catch (Exception $e) {
-            throw new BitPayException("failed to build configuration : ".$e->getMessage());
+            throw new BitPayException("failed to build configuration : ".$e->getMessage(), null, null, $e->getApiCode());
         }
     }
 
@@ -1669,7 +1668,7 @@ class Client
 
             $this->_configuration->setEnvConfig($envConfig);
         } catch (Exception $e) {
-            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage());
+            throw new BitPayException("failed to initialize BitPay Client (Config) : ".$e->getMessage(), null, null, $e->getApiCode());
         }
     }
 
@@ -1690,7 +1689,7 @@ class Client
                 $this->_ecKey = $storageEngine->load($privateKey);
             }
         } catch (Exception $e) {
-            throw new BitPayException("failed to build configuration : ".$e->getMessage());
+            throw new BitPayException("failed to build configuration : ".$e->getMessage(), null, null, $e->getApiCode());
         }
     }
 
@@ -1707,7 +1706,7 @@ class Client
             $this->loadAccessTokens();
             $this->loadCurrencies();
         } catch (Exception $e) {
-            throw new BitPayException("failed to build configuration : ".$e->getMessage());
+            throw new BitPayException("failed to build configuration : ".$e->getMessage(), null, null, $e->getApiCode());
         }
     }
 
@@ -1723,7 +1722,7 @@ class Client
 
             $this->_tokenCache = $this->_configuration->getEnvConfig()[$this->_env]["ApiTokens"];
         } catch (Exception $e) {
-            throw new BitPayException("When trying to load the tokens : ".$e->getMessage());
+            throw new BitPayException("When trying to load the tokens : ".$e->getMessage(), null, null, $e->getApiCode());
         }
     }
 
@@ -1742,7 +1741,7 @@ class Client
         try {
             $this->_currenciesInfo = $this->getCurrencies();
         } catch (Exception $e) {
-            throw new BitPayException("When loading currencies info : ".$e->getMessage());
+            throw new BitPayException("When loading currencies info : ".$e->getMessage(), null, null, $e->getApiCode());
         }
     }
 
