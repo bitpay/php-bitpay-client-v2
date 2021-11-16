@@ -18,7 +18,7 @@ class SettlementException extends BitPayException
      * @param int    $code    [optional] The Exception code to throw.
      * @param string $apiCode [optional] The API Exception code to throw.
      */
-    public function __construct($message = "", $code = 151, Exception $previous=NULL, $apiCode = "0000")
+    public function __construct($message = "", $code = 151, Exception $previous=NULL, $apiCode = "000000")
     {
         if (!$message) {
             $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
