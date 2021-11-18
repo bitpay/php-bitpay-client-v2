@@ -7,7 +7,7 @@ use Exception;
 
 class PayoutException extends BitPayException
 {
-    private $bitPayMessage = "An unexpected error occurred while trying to manage the payout batch";
+    private $bitPayMessage = "An unexpected error occurred while trying to manage the payout";
     private $bitPayCode    = "BITPAY-PAYOUT-GENERIC";
     protected $apiCode;
 

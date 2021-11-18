@@ -5,23 +5,24 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
-class PayoutCancellationException extends PayoutException
+class PayoutRecipientException extends BitPayException
 {
-    private $bitPayMessage = "Failed to cancel payout";
-    private $bitPayCode    = "BITPAY-PAYOUT-CANCEL";
+    private $bitPayMessage = "An unexpected error occurred while trying to manage the payout recipient";
+    private $bitPayCode    = "BITPAY-PAYOUT-RECIPIENT-GENERIC";
     protected $apiCode;
 
     /**
-     * Construct the PayoutCancellationException.
+     * Construct the PayoutRecipientException.
      *
      * @param string $message [optional] The Exception message to throw.
      * @param int    $code    [optional] The Exception code to throw.
      * @param string $apiCode [optional] The API Exception code to throw.
      */
-    public function __construct($message = "", $code = 124, Exception $previous=NULL, $apiCode = "000000")
+    public function __construct($message = "", $code = 1217, Exception $previous=NULL, $apiCode = "000000")
     {
-        $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
-        $this->apiCode = $apiCode;
+        if (!$message) {
+            $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
+        }
         parent::__construct($message, $code, $previous);
     }
 

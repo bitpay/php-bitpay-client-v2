@@ -760,7 +760,7 @@ class BitPayTest extends TestCase
     public function testShouldGetPayoutsByStatus()
     {
         try {
-            $payouts = $this->client->getPayouts(PayoutStatus::New);
+            $payouts = $this->client->getPayouts(null, null, PayoutStatus::New);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -811,10 +811,11 @@ class BitPayTest extends TestCase
         
         $cancelledPayout = null;
         $createPayout = null;
+        $notificationSent = false;
 
         try {
             $createPayout = $this->client->submitPayout($payout);
-            $this->client->notifyPayout($createPayout->getId());
+            $notificationSent = $this->client->sendPayoutNotification($createPayout->getId());
             $cancelledPayout = $this->client->cancelPayout($createPayout->getId());
         } catch (\Exception $e) {
             $e->getTraceAsString();
@@ -822,6 +823,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($createPayout->getId());
+        $this->assertTrue($notificationSent);
         $this->assertTrue($cancelledPayout);
     }
 
@@ -868,7 +870,7 @@ class BitPayTest extends TestCase
     public function testShouldGetPayoutBatchesByStatus()
     {
         try {
-            $batches = $this->client->getPayoutBatches(PayoutStatus::New);
+            $batches = $this->client->getPayoutBatches(null, null, PayoutStatus::New);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -926,10 +928,11 @@ class BitPayTest extends TestCase
         $batch->setNotificationURL('https://hookb.in/QJOPBdMgRkukpp2WO60o');
 
         $cancelledPayoutBatch = null;
+        $notificationSent = false;
 
         try {
             $batch = $this->client->submitPayoutBatch($batch);
-            $this->client->notifyPayoutBatch($batch->getId());
+            $notificationSent = $this->client->sendPayoutBatchNotification($batch->getId());
             $cancelledPayoutBatch = $this->client->cancelPayoutBatch($batch->getId());
         } catch (\Exception $e) {
             $e->getTraceAsString();
@@ -938,6 +941,7 @@ class BitPayTest extends TestCase
 
         $this->assertNotNull($batch->getId());
         $this->assertCount(2, $batch->getInstructions());
+        $this->assertTrue($notificationSent);
         $this->assertTrue($cancelledPayoutBatch);
     }
 
