@@ -1,28 +1,28 @@
 <?php
 
-
 namespace BitPaySDK\Exceptions;
 
 
 use Exception;
 
-class PayoutBatchCreationException extends PayoutBatchException
+class PayoutRecipientException extends BitPayException
 {
-    private $bitPayMessage = "Failed to create payout batch";
-    private $bitPayCode    = "BITPAY-PAYOUT-BATCH-SUBMIT";
+    private $bitPayMessage = "An unexpected error occurred while trying to manage the payout recipient";
+    private $bitPayCode    = "BITPAY-PAYOUT-RECIPIENT-GENERIC";
     protected $apiCode;
 
     /**
-     * Construct the PayoutBatchCreationException.
+     * Construct the PayoutRecipientException.
      *
      * @param string $message [optional] The Exception message to throw.
      * @param int    $code    [optional] The Exception code to throw.
      * @param string $apiCode [optional] The API Exception code to throw.
      */
-    public function __construct($message = "", $code = 202, Exception $previous=NULL, $apiCode = "000000")
+    public function __construct($message = "", $code = 191, Exception $previous=NULL, $apiCode = "000000")
     {
-        $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
-        $this->apiCode = $apiCode;
+        if (!$message) {
+            $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
+        }
         parent::__construct($message, $code, $previous);
     }
 
