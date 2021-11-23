@@ -20,21 +20,16 @@ class Tokens
     /**
      * @var
      */
-    protected $payroll;
-    /**
-     * @var
-     */
     protected $payout;
 
     /**
      * Tokens constructor.
      * @param string|null $merchant
-     * @param string|null $payroll
+     * @param string|null $payout
      */
-    public function __construct($merchant = null, $payroll = null, $payout = null)
+    public function __construct($merchant = null, $payout = null)
     {
         $this->merchant = $merchant;
-        $this->payroll = $payroll;
         $this->payout = $payout;
     }
 
@@ -61,9 +56,6 @@ class Tokens
             case Facade::Merchant:
                 $token = $this->merchant;
                 break;
-            case Facade::Payroll:
-                $token = $this->payroll;
-                break;
             case Facade::Payout:
                 $token = $this->payout;
                 break;
@@ -82,22 +74,6 @@ class Tokens
     public function setMerchantToken($merchant)
     {
         $this->merchant = $merchant;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPayrollToken()
-    {
-        return $this->payroll;
-    }
-
-    /**
-     * @param $payroll
-     */
-    public function setPayrollToken($payroll)
-    {
-        $this->payroll = $payroll;
     }
 
     /**

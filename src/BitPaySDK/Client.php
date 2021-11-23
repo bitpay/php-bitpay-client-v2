@@ -855,7 +855,7 @@ class Client
 
     /**
      * Retrieve a BitPay payout recipient by batch id using.  The client must have been previously authorized for the
-     * payroll facade.
+     * payout facade.
      *
      * @param $recipientId string The id of the recipient to retrieve.
      * @return PayoutRecipient A BitPay PayoutRecipient object.
@@ -1072,7 +1072,7 @@ class Client
     }
 
     /**
-     * Retrieve a BitPay payout by payout id using.  The client must have been previously authorized for the payroll facade.
+     * Retrieve a BitPay payout by payout id using.  The client must have been previously authorized for the payout facade.
      *
      * @param $payoutId string The id of the payout to retrieve.
      * @return Payout A BitPay Payout object.
@@ -1272,7 +1272,7 @@ class Client
 
     /**
      * Retrieve a BitPay payout batch by batch id using.  The client must have been previously authorized for the
-     * payroll facade.
+     * payout facade.
      *
      * @param $payoutBatchId string The id of the batch to retrieve.
      * @return PayoutBatch A BitPay PayoutBatch object.
