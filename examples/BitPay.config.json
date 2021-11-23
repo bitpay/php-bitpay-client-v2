@@ -8,7 +8,17 @@
         "ApiTokens": {
           "merchant": "",
           "payroll": ""
-        }
+        },
+        "Proxy": ""
+      }
+      "Prod": {
+        "PrivateKeyPath": "",
+        "PrivateKeySecret": "",
+        "ApiTokens": {
+          "merchant": "",
+          "payroll": ""
+        },
+        "Proxy": ""
       }
     }
   }
