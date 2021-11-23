@@ -43,7 +43,8 @@ JSON:
         "ApiTokens": {
           "merchant": "",
           "payroll": ""
-        }
+        },
+        "Proxy": ""
       },
       "Prod": {
         "PrivateKeyPath": "",
@@ -51,7 +52,8 @@ JSON:
         "ApiTokens": {
           "merchant": "",
           "payroll": ""
-        }
+        },
+        "Proxy": ""
       }
     }
   }
@@ -69,11 +71,13 @@ BitPayConfiguration:
       ApiTokens:
         merchant: null
         payroll: null
+      Proxy: null
     Prod:
       PrivateKeyPath: null
       ApiTokens:
         merchant: null
         payroll: null
+      Proxy: null
 ```
 
 # Installation
@@ -134,7 +138,8 @@ $bitpay = BitPaySDK\Client::create()->withData(
         "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ", //merchant
         "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
     ),
-    "YourMasterPassword" //used to decrypt your private key, if encrypted
+    "YourMasterPassword", //used to decrypt your private key, if encrypted
+    "http://********.com:3128" //url and port of your proxy to forward requests through
 );
 ```
 ```php
