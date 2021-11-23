@@ -42,7 +42,7 @@ JSON:
         "PrivateKeySecret": "",
         "ApiTokens": {
           "merchant": "",
-          "payroll": ""
+          "payout": ""
         },
         "Proxy": ""
       },
@@ -51,7 +51,7 @@ JSON:
         "PrivateKeySecret": "",
         "ApiTokens": {
           "merchant": "",
-          "payroll": ""
+          "payout": ""
         },
         "Proxy": ""
       }
@@ -70,13 +70,13 @@ BitPayConfiguration:
       PrivateKeySecret: null
       ApiTokens:
         merchant: null
-        payroll: null
+        payout: null
       Proxy: null
     Prod:
       PrivateKeyPath: null
       ApiTokens:
         merchant: null
-        payroll: null
+        payout: null
       Proxy: null
 ```
 
@@ -136,7 +136,7 @@ $bitpay = BitPaySDK\Client::create()->withData(
     "[FULL_PATH_TO_THE_PRIVATE_KEY]",
     new BitPaySDK\Tokens(
         "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ", //merchant
-        "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
+        "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payout
     ),
     "YourMasterPassword", //used to decrypt your private key, if encrypted
     "http://********.com:3128" //(optional) url and port of your proxy to forward requests through
@@ -151,7 +151,7 @@ $bitpay = BitPaySDK\Client::create()->withData(
     "[PRIVATE_KEY_AS_HEX_STRING]",
     new BitPaySDK\Tokens(
         "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ", //merchant
-        "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
+        "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payout
     ),
     "http://********.com:3128" //(optional) url and port of your proxy to forward requests through
 );
