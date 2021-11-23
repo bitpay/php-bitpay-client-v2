@@ -696,7 +696,7 @@ class BitPayTest extends TestCase
         $this->assertEquals($updatedRecipient->getLabel(), "updatedLabel");
     }
 
-    public function testShouldNotifyPayoutRecipientId()
+    public function testShouldRequestPayoutRecipientNotification()
     {
         $result = null;
         $recipientsList = [
@@ -710,8 +710,7 @@ class BitPayTest extends TestCase
         try {
             $basicRecipient = $this->client->submitPayoutRecipients($recipientsObj);
             $basicRecipient = reset($basicRecipient);
-            $result = $this->client->notifyPayoutRecipient($basicRecipient->getId());//9EsKtXQ1nj41EQ1Dk7VxhE
-            //$result = $this->client->notifyPayoutRecipient("9EsKtXQ1nj41EQ1Dk7VxhE");
+            $result = $this->client->requestPayoutRecipientNotification($basicRecipient->getId());
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -760,7 +759,7 @@ class BitPayTest extends TestCase
     public function testShouldGetPayoutsByStatus()
     {
         try {
-            $payouts = $this->client->getPayouts(PayoutStatus::New);
+            $payouts = $this->client->getPayouts(null, null, PayoutStatus::New);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -797,7 +796,7 @@ class BitPayTest extends TestCase
         $this->assertEquals($payoutRetrieved->getStatus(), PayoutStatus::New);
     }
 
-    public function testShouldNotifyPayout()
+    public function testShouldRequestPayoutNotification()
     {
         $recipients = $this->client->getPayoutRecipients(null, 1);
 
@@ -811,10 +810,11 @@ class BitPayTest extends TestCase
         
         $cancelledPayout = null;
         $createPayout = null;
+        $notificationSent = false;
 
         try {
             $createPayout = $this->client->submitPayout($payout);
-            $this->client->notifyPayout($createPayout->getId());
+            $notificationSent = $this->client->requestPayoutNotification($createPayout->getId());
             $cancelledPayout = $this->client->cancelPayout($createPayout->getId());
         } catch (\Exception $e) {
             $e->getTraceAsString();
@@ -822,6 +822,7 @@ class BitPayTest extends TestCase
         }
 
         $this->assertNotNull($createPayout->getId());
+        $this->assertTrue($notificationSent);
         $this->assertTrue($cancelledPayout);
     }
 
@@ -868,7 +869,7 @@ class BitPayTest extends TestCase
     public function testShouldGetPayoutBatchesByStatus()
     {
         try {
-            $batches = $this->client->getPayoutBatches(PayoutStatus::New);
+            $batches = $this->client->getPayoutBatches(null, null, PayoutStatus::New);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -909,7 +910,7 @@ class BitPayTest extends TestCase
         $this->assertEquals($batchRetrieved->getStatus(), PayoutStatus::New);
     }
 
-    public function testShouldNotifyPayoutBatch()
+    public function testShouldRequestPayoutBatchNotification()
     {
         $recipients = $this->client->getPayoutRecipients(null, 2);
 
@@ -926,10 +927,11 @@ class BitPayTest extends TestCase
         $batch->setNotificationURL('https://hookb.in/QJOPBdMgRkukpp2WO60o');
 
         $cancelledPayoutBatch = null;
+        $notificationSent = false;
 
         try {
             $batch = $this->client->submitPayoutBatch($batch);
-            $this->client->notifyPayoutBatch($batch->getId());
+            $notificationSent = $this->client->requestPayoutBatchNotification($batch->getId());
             $cancelledPayoutBatch = $this->client->cancelPayoutBatch($batch->getId());
         } catch (\Exception $e) {
             $e->getTraceAsString();
@@ -938,6 +940,7 @@ class BitPayTest extends TestCase
 
         $this->assertNotNull($batch->getId());
         $this->assertCount(2, $batch->getInstructions());
+        $this->assertTrue($notificationSent);
         $this->assertTrue($cancelledPayoutBatch);
     }
 

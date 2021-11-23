@@ -6,7 +6,7 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
-class PayoutCreationException extends BitPayException
+class PayoutCreationException extends PayoutException
 {
     private $bitPayMessage = "Failed to create payout";
     private $bitPayCode    = "BITPAY-PAYOUT-SUBMIT";

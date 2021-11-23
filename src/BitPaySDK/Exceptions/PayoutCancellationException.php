@@ -7,8 +7,8 @@ use Exception;
 
 class PayoutCancellationException extends PayoutException
 {
-    private $bitPayMessage = "Failed to cancel payout batch";
-    private $bitPayCode    = "BITPAY-PAYOUT-BATCH-CANCEL";
+    private $bitPayMessage = "Failed to cancel payout";
+    private $bitPayCode    = "BITPAY-PAYOUT-CANCEL";
     protected $apiCode;
 
     /**
