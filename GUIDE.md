@@ -139,7 +139,7 @@ $bitpay = BitPaySDK\Client::create()->withData(
         "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
     ),
     "YourMasterPassword", //used to decrypt your private key, if encrypted
-    "http://********.com:3128" //url and port of your proxy to forward requests through
+    "http://********.com:3128" //(optional) url and port of your proxy to forward requests through
 );
 ```
 ```php
@@ -152,7 +152,8 @@ $bitpay = BitPaySDK\Client::create()->withData(
     new BitPaySDK\Tokens(
         "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ", //merchant
         "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
-    )
+    ),
+    "http://********.com:3128" //(optional) url and port of your proxy to forward requests through
 );
 ```
 ##
