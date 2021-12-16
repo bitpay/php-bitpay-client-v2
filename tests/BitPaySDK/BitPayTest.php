@@ -169,7 +169,7 @@ class BitPayTest extends TestCase
         try {
             $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
             $retreivedInvoice = $this->client->getInvoice($basicInvoice->getId());
-            $updatedInvoice = $this->client->updateInvoice($retreivedInvoice->getId(), "sandbox@bitpay.com", "", "");
+            $updatedInvoice = $this->client->updateInvoice($retreivedInvoice->getId(), "sandbox@bitpay.com");
             $cancelledInvoice = $this->client->cancelInvoice($updatedInvoice->getId());
             $retreivedCancelledInvoice = $this->client->getInvoice($cancelledInvoice->getId());
         } catch (\Exception $e) {

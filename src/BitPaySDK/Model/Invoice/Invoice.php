@@ -42,10 +42,8 @@ class Invoice
     protected $_closeURL   = "";
     protected $_autoRedirect  = false;
     protected $_jsonPayProRequired;
-    protected $_buyerSms;
     protected $_buyerEmail;
     
-    protected $_smsCode;
     protected $_merchantName;
     protected $_forcedBuyerSelectedWallet;
     protected $_forcedBuyerSelectedTransactionCurrency;
@@ -391,16 +389,6 @@ class Invoice
         $this->_buyer = $buyer;
     }
 
-    public function getBuyerSms()
-    {
-        return $this->_buyerSms;
-    }
-
-    public function setBuyerSms(string $buyerSms)
-    {
-        $this->_buyerSms = $buyerSms;
-    }
-
     public function getBuyerEmail()
     {
         return $this->_buyerEmail;
@@ -409,16 +397,6 @@ class Invoice
     public function setBuyerEmail(string $buyerEmail)
     {
         $this->_buyerEmail = $buyerEmail;
-    }
-
-    public function getSmsCode()
-    {
-        return $this->_smsCode;
-    }
-
-    public function setSmsCode(string $smsCode)
-    {
-        $this->_smsCode = $smsCode;
     }
 
     // Response fields
@@ -834,12 +812,10 @@ class Invoice
             'merchantName'                   => $this->getMerchantName(),
             'bitpayIdRequired'               => $this->getBitpayIdRequired(),
             'forcedBuyerSelectedWallet'      => $this->getForcedBuyerSelectedWallet(),
-            'buyerSms'                       => $this->getBuyerSms(),
             'paymentString'                  => $this->getPaymentString(),
             'verificationLink'               => $this->getVerificationLink(),
             'isCancelled'                    => $this->getIsCancelled(),
             'buyerEmail'                     => $this->getBuyerEmail(),
-            'smsCode'                        => $this->getSmsCode(),
             'itemizedDetails'                => $this->getItemizedDetails()->toArray(),
             'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];

@@ -200,24 +200,18 @@ class Client
      *
      * @param $invoiceId    string The id of the invoice to updated.
      * @param $buyerEmail   string The buyer's email address.
-     * @param $buyerSms     string The buyer's cell number.
-     * @param $smsCode      string The buyer's received verification code.
      * @return $invoice     Invoice A BitPay updated Invoice object.
      * @throws InvoiceUpdateException InvoiceUpdateException class
      * @throws BitPayException BitPayException class
      */
     public function updateInvoice(
         string $invoiceId,
-        string $buyerEmail,
-        string $buyerSms,
-        string $smsCode
+        string $buyerEmail
     ): Invoice {
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
             $params["buyerEmail"] = $buyerEmail;
-            $params["buyerSms"] = $buyerSms;
-            $params["smsCode"] = $smsCode;
 
             $responseJson = $this->_RESTcli->update("invoices/".$invoiceId, $params);
         } catch (Exception $e) {
