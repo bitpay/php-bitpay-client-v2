@@ -12,14 +12,13 @@ use BitPaySDK\Model\Currency;
  *
  * @package Bitpay
  */
-class PayoutBatch
+class Payout
 {
     protected $_token = "";
 
     protected $_amount       = 0.0;
     protected $_currency     = "";
     protected $_effectiveDate;
-    protected $_instructions = [];
     protected $_ledgerCurrency = "";
 
     protected $_reference         = "";
@@ -32,53 +31,28 @@ class PayoutBatch
     protected $_message = "";
 
     protected $_id;
-    protected $_account;
-    protected $_supportPhone;
     protected $_status;
-    protected $_percentFee;
-    protected $_fee;
-    protected $_depositTotal;
-    protected $_rate;
-    protected $_btc;
     protected $_requestDate;
-    protected $_dateExecuted;
     protected $_exchangeRates;
+    protected $_transactions;
 
     /**
-     * Constructor, create an instruction-full request PayoutBatch object.
+     * Constructor, create a request Payout object.
      *
+     * @param $amount            float The amount for which the payout will be created.
      * @param $currency          string The three digit currency string for the PayoutBatch to use.
      * @param $ledgerCurrency    string Ledger currency code set for the payout request (ISO 4217 3-character
      *                           currency code), it indicates on which ledger the payout request will be
      *                           recorded. If not provided in the request, this parameter will be set by
      *                           default to the active ledger currency on your account, e.g. your settlement
      *                           currency.
-     * @param array|null $instructions
      */
-    public function __construct(string $currency = null, array $instructions = null, string $ledgerCurrency = null)
+    public function __construct(float $amount = null, string $currency = null, string $ledgerCurrency = null)
     {
-        $this->_currency = $currency;
-        $this->_instructions = $instructions;
-        $this->_ledgerCurrency = $ledgerCurrency;
-        $this->_computeAndSetAmount();
-    }
-
-    // Private methods
-    //
-
-    private function _computeAndSetAmount()
-    {
-        $amount = 0.0;
-        if ($this->_instructions) {
-            foreach ($this->_instructions as $instruction) {
-                if ($instruction instanceof PayoutInstruction) {
-                    $amount += $instruction->getAmount();
-                } else {
-                    $amount += $instruction->amount;
-                }
-            }
-        }
         $this->_amount = $amount;
+        $this->_currency = $currency;
+        $this->_ledgerCurrency = $ledgerCurrency;
+        $this->_transactions = new PayoutTransaction();
     }
 
     // API fields
@@ -134,27 +108,6 @@ class PayoutBatch
     public function setEffectiveDate(string $effectiveDate)
     {
         $this->_effectiveDate = $effectiveDate;
-    }
-
-    public function getInstructions()
-    {
-        $instructions = [];
-
-        foreach ($this->_instructions as $instruction) {
-            if ($instruction instanceof PayoutInstruction) {
-                array_push($instructions, $instruction->toArray());
-            } else {
-                array_push($instructions, $instruction);
-            }
-        }
-
-        return $instructions;
-    }
-
-    public function setInstructions(array $instructions)
-    {
-        $this->_instructions = $instructions;
-        $this->_computeAndSetAmount();
     }
 
     public function getLedgerCurrency()
@@ -267,26 +220,6 @@ class PayoutBatch
         $this->_id = $id;
     }
 
-    public function getAccount()
-    {
-        return $this->_account;
-    }
-
-    public function setAccount(string $account)
-    {
-        $this->_account = $account;
-    }
-
-    public function getSupportPhone()
-    {
-        return $this->_supportPhone;
-    }
-
-    public function setSupportPhone(string $supportPhone)
-    {
-        $this->_supportPhone = $supportPhone;
-    }
-
     public function getStatus()
     {
         return $this->_status;
@@ -295,56 +228,6 @@ class PayoutBatch
     public function setStatus(string $status)
     {
         $this->_status = $status;
-    }
-
-    public function getPercentFee()
-    {
-        return $this->_percentFee;
-    }
-
-    public function setPercentFee(float $percentFee)
-    {
-        $this->_percentFee = $percentFee;
-    }
-
-    public function getFee()
-    {
-        return $this->_fee;
-    }
-
-    public function setFee(float $fee)
-    {
-        $this->_fee = $fee;
-    }
-
-    public function getDepositTotal()
-    {
-        return $this->_depositTotal;
-    }
-
-    public function setDepositTotal(float $depositTotal)
-    {
-        $this->_depositTotal = $depositTotal;
-    }
-
-    public function getBtc()
-    {
-        return $this->_btc;
-    }
-
-    public function setBtc(?float $btc)
-    {
-        $this->_btc = $btc;
-    }
-
-    public function getRate()
-    {
-        return $this->_rate;
-    }
-
-    public function setRate(float $rate)
-    {
-        $this->_rate = $rate;
     }
 
     public function getRequestDate()
@@ -357,16 +240,6 @@ class PayoutBatch
         $this->_requestDate = $requestDate;
     }
 
-    public function getDateExecuted()
-    {
-        return $this->_dateExecuted;
-    }
-
-    public function setDateExecuted(string $dateExecuted)
-    {
-        $this->_dateExecuted = $dateExecuted;
-    }
-
     public function getExchangeRates()
     {
         return $this->_exchangeRates;
@@ -377,6 +250,16 @@ class PayoutBatch
         $this->_exchangeRates = $exchangeRates;
     }
 
+    public function getTransactions()
+    {
+        return $this->_transactions;
+    }
+
+    public function setTransactions(array $transactions)
+    {
+        $this->_transactions = $transactions;
+    }
+
     public function toArray()
     {
         $elements = [
@@ -384,7 +267,6 @@ class PayoutBatch
             'amount'            => $this->getAmount(),
             'currency'          => $this->getCurrency(),
             'effectiveDate'     => $this->getEffectiveDate(),
-            'instructions'      => $this->getInstructions(),
             'ledgerCurrency'    => $this->getLedgerCurrency(),
             'reference'         => $this->getReference(),
             'notificationURL'   => $this->getNotificationURL(),
@@ -395,17 +277,10 @@ class PayoutBatch
             'label'             => $this->getLabel(),
             'message'           => $this->getMessage(),
             'id'                => $this->getId(),
-            'account'           => $this->getAccount(),
-            'supportPhone'      => $this->getSupportPhone(),
             'status'            => $this->getStatus(),
-            'percentFee'        => $this->getPercentFee(),
-            'fee'               => $this->getFee(),
-            'depositTotal'      => $this->getDepositTotal(),
-            'rate'              => $this->getRate(),
-            'btc'               => $this->getBtc(),
             'requestDate'       => $this->getRequestDate(),
-            'dateExecuted'      => $this->getDateExecuted(),
             'exchangeRates'     => $this->getExchangeRates(),
+            'transactions'      => $this->getTransactions()->toArray()
         ];
 
         foreach ($elements as $key => $value) {
@@ -416,4 +291,5 @@ class PayoutBatch
 
         return $elements;
     }
+
 }

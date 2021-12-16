@@ -7,8 +7,18 @@
         "PrivateKeySecret": "",
         "ApiTokens": {
           "merchant": "",
-          "payroll": ""
-        }
+          "payout": ""
+        },
+        "Proxy": ""
+      },
+      "Prod": {
+        "PrivateKeyPath": "",
+        "PrivateKeySecret": "",
+        "ApiTokens": {
+          "merchant": "",
+          "payout": ""
+        },
+        "Proxy": ""
       }
     }
   }

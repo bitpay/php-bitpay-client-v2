@@ -42,16 +42,18 @@ JSON:
         "PrivateKeySecret": "",
         "ApiTokens": {
           "merchant": "",
-          "payroll": ""
-        }
+          "payout": ""
+        },
+        "Proxy": ""
       },
       "Prod": {
         "PrivateKeyPath": "",
         "PrivateKeySecret": "",
         "ApiTokens": {
           "merchant": "",
-          "payroll": ""
-        }
+          "payout": ""
+        },
+        "Proxy": ""
       }
     }
   }
@@ -68,12 +70,14 @@ BitPayConfiguration:
       PrivateKeySecret: null
       ApiTokens:
         merchant: null
-        payroll: null
+        payout: null
+      Proxy: null
     Prod:
       PrivateKeyPath: null
       ApiTokens:
         merchant: null
-        payroll: null
+        payout: null
+      Proxy: null
 ```
 
 # Installation
@@ -132,9 +136,10 @@ $bitpay = BitPaySDK\Client::create()->withData(
     "[FULL_PATH_TO_THE_PRIVATE_KEY]",
     new BitPaySDK\Tokens(
         "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ", //merchant
-        "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
+        "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payout
     ),
-    "YourMasterPassword" //used to decrypt your private key, if encrypted
+    "YourMasterPassword", //used to decrypt your private key, if encrypted
+    "http://********.com:3128" //(optional) url and port of your proxy to forward requests through
 );
 ```
 ```php
@@ -146,8 +151,9 @@ $bitpay = BitPaySDK\Client::create()->withData(
     "[PRIVATE_KEY_AS_HEX_STRING]",
     new BitPaySDK\Tokens(
         "7UeQtMcsHamehE4gDZojUQbNRbSuSdggbH17sawtobGJ", //merchant
-        "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payroll
-    )
+        "5j48K7pUrX5k59DLhRVYkCupgw2CtoEt8DBFrHo2vW47" //payout
+    ),
+    "http://********.com:3128" //(optional) url and port of your proxy to forward requests through
 );
 ```
 ##
@@ -183,6 +189,20 @@ $rates = $bitpay->getRates();
 $rate = $rates->getRate(Currency::USD); //Always use the included Currency model to avoid typos
 
 $rates->update();
+```
+
+You can retrieve all the rates for a given cryptocurrency
+
+```php
+$rates = $bitpay->getCurrencyRates(Currency::ETH);
+
+$rate = $rates->getRate(Currency::USD);
+```
+
+You can retrieve the rate for a cryptocurrency / fiat pair
+
+```php
+$rate = $bitpay->getCurrencyPairRate(Currency::BTC, Currency::USD);
 ```
 
 See also the test package for more examples of API calls.

@@ -20,17 +20,17 @@ class Tokens
     /**
      * @var
      */
-    protected $payroll;
+    protected $payout;
 
     /**
      * Tokens constructor.
      * @param string|null $merchant
-     * @param string|null $payroll
+     * @param string|null $payout
      */
-    public function __construct($merchant = null, $payroll = null)
+    public function __construct($merchant = null, $payout = null)
     {
         $this->merchant = $merchant;
-        $this->payroll = $payroll;
+        $this->payout = $payout;
     }
 
     public static function loadFromArray(array $tokens)
@@ -56,8 +56,8 @@ class Tokens
             case Facade::Merchant:
                 $token = $this->merchant;
                 break;
-            case Facade::Payroll:
-                $token = $this->payroll;
+            case Facade::Payout:
+                $token = $this->payout;
                 break;
         }
 
@@ -79,16 +79,16 @@ class Tokens
     /**
      * @return mixed
      */
-    public function getPayrollToken()
+    public function getPayoutToken()
     {
-        return $this->payroll;
+        return $this->payout;
     }
 
     /**
-     * @param $payroll
+     * @param $payout
      */
-    public function setPayrollToken($payroll)
+    public function setPayoutToken($payout)
     {
-        $this->payroll = $payroll;
+        $this->payout = $payout;
     }
 }

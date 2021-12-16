@@ -9,7 +9,6 @@ use ReflectionClass;
 
 class Currency
 {
-
     // Crypto
     const BCH  = "BCH";
     const BTC  = "BTC";

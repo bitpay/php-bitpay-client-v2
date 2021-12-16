@@ -1,28 +1,29 @@
 <?php
 
+
 namespace BitPaySDK\Exceptions;
 
 
 use Exception;
 
-class InvoiceQueryException extends InvoiceException
+class PayoutRecipientCreationException extends PayoutRecipientException
 {
-    private $bitPayMessage = "Failed to retrieve invoice";
-    private $bitPayCode    = "BITPAY-INVOICE-GET";
+    private $bitPayMessage = "Failed to create payout recipient";
+    private $bitPayCode    = "BITPAY-PAYOUT-RECIPIENT-SUBMIT";
     protected $apiCode;
 
     /**
-     * Construct the InvoiceQueryException.
+     * Construct the PayoutRecipientCreationException.
      *
      * @param string $message [optional] The Exception message to throw.
      * @param int    $code    [optional] The Exception code to throw.
      * @param string $apiCode [optional] The API Exception code to throw.
      */
-    public function __construct($message = "", $code = 103, Exception $previous=NULL, $apiCode = "000000")
+    public function __construct($message = "", $code = 192, Exception $previous=NULL, $apiCode = "000000")
     {
         $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
         $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 
     /**

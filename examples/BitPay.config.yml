@@ -6,12 +6,12 @@ BitPayConfiguration:
       PrivateKeySecret: null
       ApiTokens:
         merchant: null
-        payroll: null
+        payout: null
       Proxy: null
     Prod:
       PrivateKeyPath: null
       PrivateKeySecret: null
       ApiTokens:
         merchant: null
-        payroll: null
+        payout: null
       Proxy: null

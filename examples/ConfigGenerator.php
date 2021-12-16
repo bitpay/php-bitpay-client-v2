@@ -17,7 +17,6 @@ $isProd = false; // Set to true if the environment for which the configuration f
 $privateKeyname = 'PrivateKeyName.key'; // Add here the name for your Private key
 
 $generateMerchantToken = true; // Set to true to generate a token for the Merchant facade
-$generatePayrollToken = true; // ### DEPRECATED ### Set to true to generate a token for the Payroll facade ### DEPRECATED ###
 $generatePayoutToken = true; // Set to true to generate a token for the Payout facade (Request to Support if you need it)
 
 $yourMasterPassword = 'YourMasterPassword'; //Will be used to encrypt your PrivateKey
@@ -85,7 +84,6 @@ $env = $isProd ? 'Prod' : 'Test';
 
 
 $merchantToken = null;
-$payrolToken = null;
 $payoutToken = null;
 
 
@@ -140,58 +138,6 @@ try {
 
         /** End of request **/
     }
-
-    /** //TODO DEPRECATED delete in version 6.0
-     * Repeat the process for the Payroll facade
-     */
-
-    if ($generatePayrollToken) {
-
-        $facade = 'payroll';
-
-        $postData = json_encode(
-            [
-                'id'     => $sin,
-                'facade' => $facade,
-            ]);
-
-        $curlCli = curl_init($baseUrl . "/tokens");
-
-        curl_setopt(
-            $curlCli, CURLOPT_HTTPHEADER, [
-            'x-accept-version: 2.0.0',
-            'Content-Type: application/json',
-            'x-identity'  => $publicKey->__toString(),
-            'x-signature' => $privateKey->sign($baseUrl . "/tokens".$postData),
-        ]);
-
-        curl_setopt($curlCli, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($curlCli, CURLOPT_POSTFIELDS, stripslashes($postData));
-        curl_setopt($curlCli, CURLOPT_RETURNTRANSFER, true);
-
-        $result = curl_exec($curlCli);
-        $resultData = json_decode($result, true);
-        curl_close($curlCli);
-
-        if (array_key_exists('error', $resultData)) {
-            echo $resultData['error'];
-            exit;
-        }
-
-        /**
-         * Example of a pairing Code returned from the BitPay API
-         * which needs to be APPROVED on the BitPay Dashboard before being able to use it.
-         **/
-        $payrolToken = $resultData['data'][0]['token'];
-        echo "\r\nPayroll Facade\r\n";
-        echo "    -> Pairing Code: ";
-        echo $resultData['data'][0]['pairingCode'];
-        echo "\r\n    -> Token: ";
-        echo $payrolToken;
-        echo "\r\n";
-
-        /** End of request **/
-    } //TODO DEPRECATED delete in version 6.0
 
     /**
      * Repeat the process for the Payout facade
@@ -265,8 +211,7 @@ $config = [
                 "PrivateKeySecret" => $isProd ? null : $yourMasterPassword,
                 "ApiTokens"        => [
                     "merchant" => $isProd ? null : $merchantToken,
-                    "payroll"  => $isProd ? null : $payrolToken, //TODO DEPRECATED delete in version 6.0
-                    "payout"  => $isProd ? $payoutToken : null,
+                    "payout"  => $isProd ? null : $payoutToken,
                 ],
                 "proxy" => $proxy,
             ],
@@ -275,7 +220,6 @@ $config = [
                 "PrivateKeySecret" => $isProd ? $yourMasterPassword : null,
                 "ApiTokens"        => [
                     "merchant" => $isProd ? $merchantToken : null,
-                    "payroll"  => $isProd ? $payrolToken : null, //TODO DEPRECATED delete in version 6.0
                     "payout"  => $isProd ? $payoutToken : null,
                 ],
                 "proxy" => $proxy,
