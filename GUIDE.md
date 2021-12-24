@@ -1,10 +1,31 @@
-## Using the BitPay PHP client
+# BitPay PHP client
 
-This SDK provides a convenient abstraction of BitPay's [cryptographically-secure API](https://bitpay.com/api) and allows payment gateway developers to focus on payment flow/e-commerce integration rather than on the specific details of client-server interaction using the API.  This SDK optionally provides the flexibility for developers to have control over important details, including the handling of private keys needed for client-server communication.
+This SDK provides a convenient abstraction of BitPay's [cryptographically-secure API](https://bitpay.com/api) and allows payment gateway developers to focus on payment flow/e-commerce integration rather than on the specific details of client-server interaction using the API.  This SDK optionally provides the flexibility for developers to have control over important details, including the handling of private tokens needed for client-server communication.
 
-It also implements BitPay's remote client authentication and authorization strategy.  No private or shared-secret information is ever transmitted over the wire.
+- [Dependencies](GUIDE.md#dependencies)
+- [Handling your client private key](GUIDE.md#handling-your-client-private-key)
+- [Usage](GUIDE.md#usage)
+  - [Getting your client token](GUIDE.md#getting-your-client-token)
+  - [Installation](GUIDE.md#installation)
+  - - [Composer](GUIDE.md#composer)
+  - - - [Install composer](GUIDE.md#install-composer)
+  - - - [Install via composer by hand](GUIDE.md#install-via-composer-by-hand)
+  - - - [Install using composer](GUIDE.md#install-using-composer)
+  - [Getting Started](GUIDE.md#getting-started)
+  - - [Invoice](docs/usage/invoice.md)
+  - - [Bill](docs/usage/bill.md)
+  - - [Ledger](docs/usage/ledger.md)
+  - - [Payout Recipients](docs/usage/payout_recipients.md)
+  - - [Payouts](docs/usage/payouts.md)
+  - - [Payout Batch](docs/usage/payout_batch.md)
+  - - [Rate](docs/usage/rate.md)
+  - - [Refunds](docs/usage/refunds.md)
+  - - [Settlement](docs/usage/settlement.md)
+  - - [Subscription](docs/usage/subscription.md)
+  - - [Errors](docs/usage/errors.md)
+- [Copyright](GUIDE.md#copyright)
 
-### Dependencies
+# Dependencies
 
 You must have a BitPay merchant account to use this SDK.  It's free to [sign-up for a BitPay merchant account](https://bitpay.com/start).
 
@@ -15,15 +36,15 @@ If you need testnet bitcoin please visit a testnet faucet, e.g. https://testnet.
 
 For more information about testing, please see https://bitpay.com/docs/testing
 
-### Handling your client private key
+# Handling your client private key
 
-Each client paired with the BitPay server requires a ECDSA key.  This key provides the security mechanism for all client interaction with the BitPay server. The public key is used to derive the specific client identity that is displayed on your BitPay dashboard.  The public key is also used for securely signing all API requests from the client.  See the [BitPay API](https://bitpay.com/api) for more information.
+Each client paired with the BitPay server requires a ECDSA key. This key provides the security mechanism for all client interaction with the BitPay server. The public key is used to derive the specific client identity that is displayed on your BitPay dashboard. The public key is also used for securely signing all API requests from the client. See the [BitPay API](https://bitpay.com/api/) for more information.
 
-The private key should be stored in the client environment such that it cannot be compromised.  If your private key is compromised you should revoke the compromised client identity from the BitPay server and re-pair your client, see the [API tokens](https://bitpay.com/api-tokens) for more information.
+The private key should be stored in the client environment such that it cannot be compromised. If your private key is compromised you should revoke the compromised client identity from the BitPay server and re-pair your client, see the [API tokens](https://bitpay.com/api-tokens) for more information.
 
 To generate the configuration file required to load the SDK:
 
-The [BitPay Config Generator](https://github.com/bitpay/php-bitpay-client-v2/blob/master/examples/ConfigGenerator.php) helps to generate the private key, as well as a environment file formatted in JSON or YML which contains all configuration requirements, that should be stored in the client local file system. It is not recommended to transmit the private key over any public or unsecure networks.
+The [BitPay Config Generator](examples/ConfigGenerator.php) helps to generate the private key, as well as a environment file formatted in JSON or YML which contains all configuration requirements, that should be stored in the client local file system. It is not recommended to transmit the private key over any public or unsecure networks.
 
 The comments in this script will assist you to create the environment file which you will be able to modify it later.
 
@@ -31,58 +52,68 @@ Once the Config Generator has run and generated the Json/Yml correctly, read the
 
 The environment file can be either generated by the script mentioned avobe or created manually by copying the following Json or YML structure:
 
-JSON:
+### JSON:
+
 ```json
 {
-  "BitPayConfiguration": {
-    "Environment": "",
-    "EnvConfig": {
-      "Test": {
-        "PrivateKeyPath": "",
-        "PrivateKeySecret": "",
-        "ApiTokens": {
-          "merchant": "",
-          "payout": ""
-        },
-        "Proxy": ""
-      },
-      "Prod": {
-        "PrivateKeyPath": "",
-        "PrivateKeySecret": "",
-        "ApiTokens": {
-          "merchant": "",
-          "payout": ""
-        },
-        "Proxy": ""
-      }
+    "BitPayConfiguration": {
+        "Environment": "",
+        "EnvConfig": {
+            "Test": {
+                "PrivateKeyPath": "",
+                "PrivateKeySecret": "",
+                "ApiTokens": {
+                "merchant": "",
+                "payout": ""
+                },
+                "Proxy": ""
+            },
+            "Prod": {
+                "PrivateKeyPath": "",
+                "PrivateKeySecret": "",
+                "ApiTokens": {
+                "merchant": "",
+                "payout": ""
+                },
+                "Proxy": ""
+            }
+        }
     }
-  }
 }
 ```
-##
-YML:
+
+### YML:
+
 ```yml
 BitPayConfiguration:
-  Environment: null
-  EnvConfig:
-    Test:
-      PrivateKeyPath: null
-      PrivateKeySecret: null
-      ApiTokens:
-        merchant: null
-        payout: null
-      Proxy: null
-    Prod:
-      PrivateKeyPath: null
-      ApiTokens:
-        merchant: null
-        payout: null
-      Proxy: null
+    Environment: null
+    EnvConfig:
+        Test:
+            PrivateKeyPath: null
+            PrivateKeySecret: null
+            ApiTokens:
+                merchant: null
+                payout: null
+            Proxy: null
+        Prod:
+            PrivateKeyPath: null
+            ApiTokens:
+                merchant: null
+                payout: null
+            Proxy: null
 ```
 
-# Installation
+# Usage
 
-## Composer
+This library was built and tested using the PhpStorm IDE; the source code tree is directly compatible with Other PHP IDEs.
+Library dependencies can be downloaded by executing the following command at the root of the library:
+```bash
+php composer.phar install
+```
+
+## Installation
+
+### Composer
 
 ### Install Composer
 
@@ -94,7 +125,7 @@ curl -sS https://getcomposer.org/installer | php
 
 Add to your composer.json file by hand.
 
-```javascript
+```bash
 {
     ...
     "require": {
@@ -116,6 +147,8 @@ php composer.phar update bitpay/sdk
 ```bash
 php composer.phar require bitpay/sdk:^5.0
 ```
+
+## Getting Started
 
 ### Initializing your BitPay client
 
@@ -142,6 +175,7 @@ $bitpay = BitPaySDK\Client::create()->withData(
     "http://********.com:3128" //(optional) url and port of your proxy to forward requests through
 );
 ```
+
 ```php
 // Initialize with separate variables 
 // and Private Key as HEX string.
@@ -156,54 +190,7 @@ $bitpay = BitPaySDK\Client::create()->withData(
     "http://********.com:3128" //(optional) url and port of your proxy to forward requests through
 );
 ```
-##
-### Create an invoice
 
-```php
-$invoice = $bitpay->createInvoice(new Invoice(50.0, "USD"));
+# Copyright
 
-$invoiceUrl = $invoice->getURL();
-
-$status = $invoice->getStatus();
-```
-
-> **WARNING**: 
-If you get the following error when initiating the client for first time:
-"500 Internal Server Error` response: {"error":"Account not setup completely yet."}"
-Please, go back to your BitPay account and complete the required steps.
-More info [here](https://support.bitpay.com/hc/en-us/articles/203010446-How-do-I-apply-for-a-merchant-account-)
-
-### Retrieve an invoice
-
-```php
-$invoice = $bitpay->getInvoice($invoice->getId());
-```
-
-### Get exchange Rates
-
-You can retrieve BitPay's [BBB exchange rates](https://bitpay.com/exchange-rates).
-
-```php
-$rates = $bitpay->getRates();
-
-$rate = $rates->getRate(Currency::USD); //Always use the included Currency model to avoid typos
-
-$rates->update();
-```
-
-You can retrieve all the rates for a given cryptocurrency
-
-```php
-$rates = $bitpay->getCurrencyRates(Currency::ETH);
-
-$rate = $rates->getRate(Currency::USD);
-```
-
-You can retrieve the rate for a cryptocurrency / fiat pair
-
-```php
-$rate = $bitpay->getCurrencyPairRate(Currency::BTC, Currency::USD);
-```
-
-See also the test package for more examples of API calls.
-
+Copyright (c) 2019 BitPay
