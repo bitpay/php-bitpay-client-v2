@@ -22,6 +22,7 @@ class Currency
     const DOGE  = "DOGE";
     const WBTC  = "WBTC";
     const DAI  = "DAI";
+    const SHIB = "SHIB";
 
     // FIAT
     const AED = "AED";
