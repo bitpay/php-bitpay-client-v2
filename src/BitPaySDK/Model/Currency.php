@@ -18,6 +18,7 @@ class Currency
     const GUSD = "GUSD";
     const PAX  = "PAX";
     const XRP  = "XRP";
+    const LTC = "LTC";
     const BUSD = "BUSD";
     const DOGE  = "DOGE";
     const WBTC  = "WBTC";
