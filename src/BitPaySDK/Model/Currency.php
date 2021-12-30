@@ -7,24 +7,23 @@ namespace BitPaySDK\Model;
 use Exception;
 use ReflectionClass;
 
-class Currency
-{
-    // Crypto
-    const BCH  = "BCH";
-    const BTC  = "BTC";
-    const ETH  = "ETH";
-    const USDC = "USDC";
-    const GUSD = "GUSD";
-    const PAX  = "PAX";
-    const XRP  = "XRP";
-    const BUSD = "BUSD";
-    const DOGE  = "DOGE";
-    const WBTC  = "WBTC";
-    const DAI  = "DAI";
-    const LTC  = "LTC";
-    const SHIB  = "SHIB";
+class Currency {
+	// Crypto
+	const BCH = "BCH";
+	const BTC = "BTC";
+	const ETH = "ETH";
+	const USDC = "USDC";
+	const GUSD = "GUSD";
+	const PAX = "PAX";
+	const XRP = "XRP";
+	const BUSD = "BUSD";
+	const DOGE = "DOGE";
+	const WBTC = "WBTC";
+	const DAI = "DAI";
+	const LTC = "LTC";
+	const SHIB = "SHIB";
 
-    // FIAT
+	// FIAT
 	const AED = "AED";
 	const AFN = "AFN";
 	const ALL = "ALL";
@@ -184,175 +183,150 @@ class Currency
 	const ZMW = "ZMW";
 	const ZWL = "ZWL";
 
-    protected $_code;
-    protected $_symbol;
-    protected $_precision;
-    protected $_currentlySettled;
-    protected $_name;
-    protected $_plural;
-    protected $_alts;
-    protected $_minimum;
-    protected $_sanctioned;
-    protected $_decimals;
-    protected $_payoutFields;
-    protected $_settlementMinimum;
+	protected $_code;
+	protected $_symbol;
+	protected $_precision;
+	protected $_currentlySettled;
+	protected $_name;
+	protected $_plural;
+	protected $_alts;
+	protected $_minimum;
+	protected $_sanctioned;
+	protected $_decimals;
+	protected $_payoutFields;
+	protected $_settlementMinimum;
 
-    public static function isValid($value)
-    {
-        try {
-            $reflect = new ReflectionClass(Currency::class);
+	public static function isValid( $value ) {
+		try {
+			$reflect = new ReflectionClass( Currency::class );
 
-            return array_key_exists($value, $reflect->getConstants());
-        } catch (Exception $e) {
-            return false;
-        }
-    }
+			return array_key_exists( $value, $reflect->getConstants() );
+		} catch ( Exception $e ) {
+			return false;
+		}
+	}
 
-    public function __construct() { }
+	public function __construct() {
+	}
 
-    public function getCode()
-    {
-        return $this->_code;
-    }
+	public function getCode() {
+		return $this->_code;
+	}
 
-    public function setCode(string $code)
-    {
-        $this->_code = $code;
-    }
+	public function setCode( string $code ) {
+		$this->_code = $code;
+	}
 
-    public function getSymbol()
-    {
-        return $this->_symbol;
-    }
+	public function getSymbol() {
+		return $this->_symbol;
+	}
 
-    public function setSymbol(string $symbol = null)
-    {
-        $this->_symbol = $symbol;
-    }
+	public function setSymbol( string $symbol = null ) {
+		$this->_symbol = $symbol;
+	}
 
-    public function getPrecision()
-    {
-        return $this->_precision;
-    }
+	public function getPrecision() {
+		return $this->_precision;
+	}
 
-    public function setPrecision(int $precision)
-    {
-        $this->_precision = $precision;
-    }
+	public function setPrecision( int $precision ) {
+		$this->_precision = $precision;
+	}
 
-    public function getCurrentlySettled()
-    {
-        return $this->_currentlySettled;
-    }
+	public function getCurrentlySettled() {
+		return $this->_currentlySettled;
+	}
 
-    public function setCurrentlySettled(bool $currentlySettled)
-    {
-        $this->_currentlySettled = $currentlySettled;
-    }
+	public function setCurrentlySettled( bool $currentlySettled ) {
+		$this->_currentlySettled = $currentlySettled;
+	}
 
-    public function getName()
-    {
-        return $this->_name;
-    }
+	public function getName() {
+		return $this->_name;
+	}
 
-    public function setName(string $name)
-    {
-        $this->_name = $name;
-    }
+	public function setName( string $name ) {
+		$this->_name = $name;
+	}
 
-    public function getPlural()
-    {
-        return $this->_plural;
-    }
+	public function getPlural() {
+		return $this->_plural;
+	}
 
-    public function setPlural(string $plural)
-    {
-        $this->_plural = $plural;
-    }
+	public function setPlural( string $plural ) {
+		$this->_plural = $plural;
+	}
 
-    public function getAlts()
-    {
-        return $this->_alts;
-    }
+	public function getAlts() {
+		return $this->_alts;
+	}
 
-    public function setAlts(string $alts)
-    {
-        $this->_alts = $alts;
-    }
+	public function setAlts( string $alts ) {
+		$this->_alts = $alts;
+	}
 
-    public function getMinimum()
-    {
-        return $this->_minimum;
-    }
+	public function getMinimum() {
+		return $this->_minimum;
+	}
 
-    public function setMinimum(string $minimum)
-    {
-        $this->_minimum = $minimum;
-    }
+	public function setMinimum( string $minimum ) {
+		$this->_minimum = $minimum;
+	}
 
-    public function getSanctioned()
-    {
-        return $this->_sanctioned;
-    }
+	public function getSanctioned() {
+		return $this->_sanctioned;
+	}
 
-    public function setSanctioned(bool $sanctioned)
-    {
-        $this->_sanctioned = $sanctioned;
-    }
+	public function setSanctioned( bool $sanctioned ) {
+		$this->_sanctioned = $sanctioned;
+	}
 
-    public function getDecimals()
-    {
-        return $this->_decimals;
-    }
+	public function getDecimals() {
+		return $this->_decimals;
+	}
 
-    public function setDecimals(string $decimals)
-    {
-        $this->_decimals = $decimals;
-    }
+	public function setDecimals( string $decimals ) {
+		$this->_decimals = $decimals;
+	}
 
-    public function getPayoutFields()
-    {
-        return $this->_payoutFields;
-    }
+	public function getPayoutFields() {
+		return $this->_payoutFields;
+	}
 
-    public function setPayoutFields(array $payoutFields)
-    {
-        $this->_payoutFields = $payoutFields;
-    }
+	public function setPayoutFields( array $payoutFields ) {
+		$this->_payoutFields = $payoutFields;
+	}
 
-    public function getSettlementMinimum()
-    {
-        return $this->_settlementMinimum;
-    }
+	public function getSettlementMinimum() {
+		return $this->_settlementMinimum;
+	}
 
-    public function setSettlementMinimum(array $settlementMinimum)
-    {
-        $this->_settlementMinimum = $settlementMinimum;
-    }
+	public function setSettlementMinimum( array $settlementMinimum ) {
+		$this->_settlementMinimum = $settlementMinimum;
+	}
 
-    public function toArray()
-    {
-        $elements = [
-            'code'              => $this->getCode(),
-            'symbol'            => $this->getSymbol(),
-            'precision'         => $this->getPrecision(),
-            'currentlySettled'  => $this->getCurrentlySettled(),
-            'name'              => $this->getName(),
-            'plural'            => $this->getPlural(),
-            'alts'              => $this->getAlts(),
-            'minimum'           => $this->getMinimum(),
-            'sanctioned'        => $this->getSanctioned(),
-            'decimals'          => $this->getDecimals(),
-            'payoutFields'      => $this->getPayoutFields(),
-            'settlementMinimum' => $this->getSettlementMinimum(),
-        ];
+	public function toArray() {
+		$elements = [
+			'code'              => $this->getCode(),
+			'symbol'            => $this->getSymbol(),
+			'precision'         => $this->getPrecision(),
+			'currentlySettled'  => $this->getCurrentlySettled(),
+			'name'              => $this->getName(),
+			'plural'            => $this->getPlural(),
+			'alts'              => $this->getAlts(),
+			'minimum'           => $this->getMinimum(),
+			'sanctioned'        => $this->getSanctioned(),
+			'decimals'          => $this->getDecimals(),
+			'payoutFields'      => $this->getPayoutFields(),
+			'settlementMinimum' => $this->getSettlementMinimum(),
+		];
 
-        foreach ($elements as $key => $value) {
-            if (empty($value)) {
-                unset($elements[$key]);
-            }
-        }
+		foreach ( $elements as $key => $value ) {
+			if ( empty( $value ) ) {
+				unset( $elements[ $key ] );
+			}
+		}
 
-        return $elements;
-    }
+		return $elements;
+	}
 }
