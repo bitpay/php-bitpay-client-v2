@@ -7,21 +7,22 @@ namespace BitPaySDK\Model;
 use Exception;
 use ReflectionClass;
 
-class Currency {
-	// Crypto
-	const BCH = "BCH";
-	const BTC = "BTC";
-	const ETH = "ETH";
-	const USDC = "USDC";
-	const GUSD = "GUSD";
-	const PAX = "PAX";
-	const XRP = "XRP";
-	const BUSD = "BUSD";
-	const DOGE = "DOGE";
-	const WBTC = "WBTC";
-	const DAI = "DAI";
-	const LTC = "LTC";
-	const SHIB = "SHIB";
+class Currency
+{
+    // Crypto
+    const BCH  = "BCH";
+    const BTC  = "BTC";
+    const ETH  = "ETH";
+    const USDC = "USDC";
+    const GUSD = "GUSD";
+    const PAX  = "PAX";
+    const XRP  = "XRP";
+    const BUSD = "BUSD";
+    const DOGE = "DOGE";
+    const WBTC = "WBTC";
+    const DAI  = "DAI";
+    const LTC  = "LTC";
+    const SHIB = "SHIB";
 
 	// FIAT
 	const AED = "AED";
