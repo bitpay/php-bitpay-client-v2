@@ -20,6 +20,7 @@ class Refund
     protected $_immediate;
     protected $_buyerPaysRefundFee;
     protected $_refundFee;
+    protected $_reference;
     protected $_lastRefundNotification;
     protected $_invoice;
 
@@ -47,6 +48,16 @@ class Refund
     public function setGuid(string $guid)
     {
         $this->_guid = $guid;
+    }
+
+    public function getReference()
+    {
+        return $this->_reference;
+    }
+
+    public function setReference(string $reference)
+    {
+        $this->_reference = $reference;
     }
 
     public function getRefundEmail()
@@ -220,6 +231,7 @@ class Refund
             'refundFee'                => $this->getRefundFee(),
             'invoice'                  => $this->getInvoice(),
             'buyerPaysRefundFee'       => $this->getBuyerPaysRefundFee(),
+            'reference'                => $this->getReference(),
             'lastRefundNotification'   => $this->getLastRefundNotification()
         ];
 

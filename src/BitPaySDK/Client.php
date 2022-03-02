@@ -17,6 +17,7 @@ use BitPaySDK\Exceptions\InvoiceCreationException;
 use BitPaySDK\Exceptions\InvoiceUpdateException;
 use BitPaySDK\Exceptions\InvoiceQueryException;
 use BitPaySDK\Exceptions\InvoiceCancellationException;
+use BitPaySDK\Exceptions\InvoicePaymentException;
 use BitPaySDK\Exceptions\LedgerQueryException;
 use BitPaySDK\Exceptions\PayoutRecipientCreationException;
 use BitPaySDK\Exceptions\PayoutRecipientCancellationException;
@@ -251,6 +252,8 @@ class Client
         return $invoice;
     }
 
+
+
     /**
      * Retrieve a BitPay invoice by invoice id using the specified facade.  The client must have been previously
      * authorized for the specified facade (the public facade requires no authorization).
@@ -363,11 +366,14 @@ class Client
      * @throws BitPayException BitPayException class
      */
     public function cancelInvoice(
-        string $invoiceId
+        string $invoiceId, bool $forceCancel = false
     ): Invoice {
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            if ($forceCancel) {
+                $params["forceCancel"] = $forceCancel;
+            } 
 
             $responseJson = $this->_RESTcli->delete("invoices/".$invoiceId, $params);
         } catch (BitPayException $e) {
@@ -390,6 +396,50 @@ class Client
 
         return $invoice;
     }
+
+    /**
+     * Pay an invoice with a mock transaction
+     *
+     * @param $invoiceId    string The id of the invoice.
+     * @param $complete     bool indicate if paid invoice should have status if complete true or a confirmed status
+     * @return $invoice     Invoice object.
+     * @throws InvoicePaymentException InvoicePaymentException class
+     * @throws BitPayException BitPayException class
+     */
+    public function payInvoice(
+        string $invoiceId,
+        bool $complete = true
+    ): Invoice {
+        if (strtolower($this->_env) != "test")
+        {
+            throw new InvoicePaymentException("Pay Invoice method only available in test or demo environments");
+        }
+
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["complete"] = $complete;
+            $responseJson = $this->_RESTcli->update("invoices/pay/".$invoiceId, $params, true);  
+        } catch (BitPayException $e) {
+            throw new InvoicePaymentException("failed to serialize Invoice object : ".$e->getMessage(), null, null, $e->getApiCode());
+        } catch (Exception $e) {
+            throw new InvoicePaymentException("failed to serialize Invoice object : ".$e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $invoice = $mapper->map(
+                json_decode($responseJson),
+                new Invoice()
+            );
+        } catch (Exception $e) {
+            throw new InvoicePaymentException(
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+        }
+
+        return $invoice;
+    }
+
 
     /**
      * Create a refund for a BitPay invoice.

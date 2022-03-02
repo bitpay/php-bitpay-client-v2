@@ -171,7 +171,7 @@ class BitPayTest extends TestCase
             $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
             $retreivedInvoice = $this->client->getInvoice($basicInvoice->getId());
             $updatedInvoice = $this->client->updateInvoice($retreivedInvoice->getId(), "sandbox@bitpay.com");
-            $cancelledInvoice = $this->client->cancelInvoice($updatedInvoice->getId());
+            $cancelledInvoice = $this->client->cancelInvoice($updatedInvoice->getId(), false);
             $retreivedCancelledInvoice = $this->client->getInvoice($cancelledInvoice->getId());
         } catch (\Exception $e) {
             $e->getTraceAsString();
@@ -185,6 +185,23 @@ class BitPayTest extends TestCase
         $this->assertNotNull($retreivedCancelledInvoice);
     }
 
+    public function testShouldPayInvoice()
+    {
+        $basicInvoice = null;
+        $payInvoice = null;        
+
+        try {
+            $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
+            $payInvoice = $this->client->payInvoice($basicInvoice->getId());
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicInvoice);
+        $this->assertNotNull($payInvoice);
+    }
+
     public function testShouldCreateGetCancelRefundRequest()
     {
         $invoices = null;
@@ -196,11 +213,11 @@ class BitPayTest extends TestCase
         try {
             $date = new \DateTime();
             $today = $date->format("Y-m-d");
-            $dateBefore = $date->modify('-30 day');
+            $dateBefore = $date->modify('-90 day');
             $sevenDaysAgo = $dateBefore->format("Y-m-d");
             $invoices = $this->client->getInvoices(
                 $sevenDaysAgo, $today, BitPaySDK\Model\Invoice\InvoiceStatus::Complete);
-            $firstInvoice = $invoices[0];    
+            $firstInvoice = $invoices[2];    
             $refunded = $this->client->createRefund(
                 $firstInvoice->getId(), 1.0, "USD", true, false, false
             );
