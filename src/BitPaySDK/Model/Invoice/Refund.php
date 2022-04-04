@@ -15,6 +15,14 @@ class Refund
     protected $_requestDate;
     protected $_status;
     protected $_params;
+    protected $_invoiceId;
+    protected $_preview;
+    protected $_immediate;
+    protected $_buyerPaysRefundFee;
+    protected $_refundFee;
+    protected $_reference;
+    protected $_lastRefundNotification;
+    protected $_invoice;
 
     public function __construct(
         string $refundEmail = "",
@@ -40,6 +48,16 @@ class Refund
     public function setGuid(string $guid)
     {
         $this->_guid = $guid;
+    }
+
+    public function getReference()
+    {
+        return $this->_reference;
+    }
+
+    public function setReference(string $reference)
+    {
+        $this->_reference = $reference;
     }
 
     public function getRefundEmail()
@@ -80,6 +98,26 @@ class Refund
     public function setCurrency(string $currency)
     {
         $this->_currency = $currency;
+    }
+
+    public function getPreview()
+    {
+        return $this->_preview;
+    }
+
+    public function setPreview(bool $preview)
+    {
+        $this->_preview = $preview;
+    }
+
+    public function getInvoiceId()
+    {
+        return $this->_invoiceId;
+    }
+
+    public function setInvoiceId(string $invoiceId)
+    {
+        $this->_invoiceId = $invoiceId;
     }
 
     // Response fields
@@ -125,18 +163,76 @@ class Refund
         $this->_params = $params;
     }
 
+    public function getImmediate()
+    {
+        return $this->_immediate;
+    }
+
+    public function setImmediate(bool $immediate)
+    {
+        $this->_immediate = $immediate;
+    }
+
+    public function getRefundFee()
+    {
+        return $this->_refundFee;
+    }
+
+    public function setRefundFee(float $refundFee)
+    {
+        $this->_refundFee = $refundFee;
+    }
+
+    public function getLastRefundNotification()
+    {
+        return $this->_lastRefundNotification;
+    }
+
+    public function setLastRefundNotification(string $lastRefundNotification)
+    {
+        $this->_lastRefundNotification = $lastRefundNotification;
+    }
+
+    public function getInvoice()
+    {
+        return $this->_invoice;
+    }
+
+    public function setInvoice(string $invoice)
+    {
+        $this->_invoice = $invoice;
+    }
+
+    public function getBuyerPaysRefundFee()
+    {
+        return $this->_buyerPaysRefundFee;
+    }
+
+    public function setBuyerPaysRefundFee(bool $buyerPaysRefundFee)
+    {
+        $this->_buyerPaysRefundFee = $buyerPaysRefundFee;
+    }
+
     public function toArray()
     {
         $elements = [
-            'guid'        => $this->getGuid(),
-            'refundEmail' => $this->getRefundEmail(),
-            'amount'      => $this->getAmount(),
-            'currency'    => $this->getCurrency(),
-            'token'       => $this->getToken(),
-            'id'          => $this->getId(),
-            'requestDate' => $this->getRequestDate(),
-            'status'      => $this->getStatus(),
-            'params'      => $this->getParams()->toArray(),
+            'guid'                     => $this->getGuid(),
+            'refundEmail'              => $this->getRefundEmail(),
+            'amount'                   => $this->getAmount(),
+            'currency'                 => $this->getCurrency(),
+            'token'                    => $this->getToken(),
+            'id'                       => $this->getId(),
+            'requestDate'              => $this->getRequestDate(),
+            'status'                   => $this->getStatus(),
+            'params'                   => $this->getParams()->toArray(),
+            'invoiceId'                => $this->getInvoiceId(),
+            'preview'                  => $this->getPreview(),
+            'immediate'                => $this->getImmediate(),
+            'refundFee'                => $this->getRefundFee(),
+            'invoice'                  => $this->getInvoice(),
+            'buyerPaysRefundFee'       => $this->getBuyerPaysRefundFee(),
+            'reference'                => $this->getReference(),
+            'lastRefundNotification'   => $this->getLastRefundNotification()
         ];
 
         return $elements;

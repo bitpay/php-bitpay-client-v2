@@ -12,6 +12,10 @@ class MinerFees
     protected $_usdc;
     protected $_gusd;
     protected $_pax;
+    protected $_busd;
+    protected $_xrp;
+    protected $_doge;
+    protected $_ltc;
 
     public function __construct()
     {
@@ -21,14 +25,18 @@ class MinerFees
         $this->_usdc = new MinerFeesItem();
         $this->_gusd = new MinerFeesItem();
         $this->_pax = new MinerFeesItem();
+        $this->_busd = new MinerFeesItem();
+        $this->_xrp = new MinerFeesItem();
+        $this->_doge = new MinerFeesItem();
+        $this->_ltc = new MinerFeesItem();
     }
 
-    public function getBTH()
+    public function getBTC()
     {
         return $this->_btc;
     }
 
-    public function setBTH(MinerFeesItem $btc)
+    public function setBTC(MinerFeesItem $btc)
     {
         $this->_btc = $btc;
     }
@@ -45,7 +53,7 @@ class MinerFees
 
     public function getETH()
     {
-        return $this->_bch;
+        return $this->_eth;
     }
 
     public function setETH(MinerFeesItem $eth)
@@ -83,15 +91,59 @@ class MinerFees
         $this->_pax = $pax;
     }
 
+    public function getBUSD()
+    {
+        return $this->_busd;
+    }
+
+    public function setBUSD(MinerFeesItem $busd)
+    {
+        $this->_busd = $busd;
+    }
+
+    public function getXRP()
+    {
+        return $this->_xrp;
+    }
+
+    public function setXRP(MinerFeesItem $xrp)
+    {
+        $this->_xrp = $xrp;
+    }
+
+    public function getDOGE()
+    {
+        return $this->_doge;
+    }
+
+    public function setDOGE(MinerFeesItem $doge)
+    {
+        $this->_doge = $doge;
+    }
+
+    public function getLTC()
+    {
+        return $this->_ltc;
+    }
+
+    public function setLTC(MinerFeesItem $ltc)
+    {
+        $this->_ltc = $ltc;
+    }
+
     public function toArray()
     {
         $elements = [
-            'btc'  => $this->getBTH()->toArray(),
+            'btc'  => $this->getBTC()->toArray(),
             'bch'  => $this->getBCH()->toArray(),
             'eth'  => $this->getETH()->toArray(),
             'usdc' => $this->getUSDC()->toArray(),
             'gusd' => $this->getGUSD()->toArray(),
             'pax'  => $this->getPAX()->toArray(),
+            'busd' => $this->getBUSD()->toArray(),
+            'xrp'  => $this->getXRP()->toArray(),
+            'doge' => $this->getDOGE()->toArray(),
+            'ltc'  => $this->getLTC()->toArray(),
         ];
 
         foreach ($elements as $key => $value) {

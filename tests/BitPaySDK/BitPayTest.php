@@ -159,36 +159,75 @@ class BitPayTest extends TestCase
         $this->assertGreaterThan(0, count($invoices));
     }
 
+    public function testShouldCreateUpdateAndDeleteInvoice()
+    {
+        $basicInvoice = null;
+        $retreivedInvoice = null;
+        $updatedInvoice = null;
+        $cancelledInvoice = null;
+        $retreivedCancelledInvoice = null;
+        
+        try {
+            $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
+            $retreivedInvoice = $this->client->getInvoice($basicInvoice->getId());
+            $updatedInvoice = $this->client->updateInvoice($retreivedInvoice->getId(), "sandbox@bitpay.com");
+            $cancelledInvoice = $this->client->cancelInvoice($updatedInvoice->getId(), false);
+            $retreivedCancelledInvoice = $this->client->getInvoice($cancelledInvoice->getId());
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicInvoice);
+        $this->assertNotNull($retreivedInvoice);
+        $this->assertNotNull($updatedInvoice);
+        $this->assertNotNull($cancelledInvoice);
+        $this->assertNotNull($retreivedCancelledInvoice);
+    }
+
+    public function testShouldPayInvoice()
+    {
+        $basicInvoice = null;
+        $payInvoice = null;        
+
+        try {
+            $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
+            $payInvoice = $this->client->payInvoice($basicInvoice->getId());
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicInvoice);
+        $this->assertNotNull($payInvoice);
+    }
+
     public function testShouldCreateGetCancelRefundRequest()
     {
         $invoices = null;
         $firstInvoice = null;
-        $firstRefund = null;
+        $lastRefund = null;
         $retrievedRefund = null;
         $retrievedRefunds = null;
         $cancelRefund = null;
         try {
             $date = new \DateTime();
             $today = $date->format("Y-m-d");
-            $dateBefore = $date->modify('-30 day');
+            $dateBefore = $date->modify('-90 day');
             $sevenDaysAgo = $dateBefore->format("Y-m-d");
             $invoices = $this->client->getInvoices(
                 $sevenDaysAgo, $today, BitPaySDK\Model\Invoice\InvoiceStatus::Complete);
-            /**
-             * var Invoice
-             */
-//            $firstInvoice = $invoices[0];
-            $firstInvoice = $this->client->getInvoice("CaZmogErHPfAYiko5cmGQC");
+            $firstInvoice = $invoices[2];    
             $refunded = $this->client->createRefund(
-                $firstInvoice,
-                "sandbox@bitpay.com",
-                $firstInvoice->getPrice(),
-                $firstInvoice->getCurrency()
+                $firstInvoice->getId(), 1.0, "USD", true, false, false
             );
-            $retrievedRefunds = $this->client->getRefunds($firstInvoice);
-            $firstRefund = $retrievedRefunds[0];
-            $retrievedRefund = $this->client->getRefund($firstInvoice, $firstRefund->getId());
-            $cancelRefund = $this->client->cancelRefund($firstInvoice->getId(), $firstRefund);
+            $retrievedRefunds = $this->client->getRefunds($firstInvoice->getId());
+            $lastRefund = end($retrievedRefunds);
+            $updateRefund = $this->client->updateRefund($lastRefund->getId(), "created");
+            $retrievedRefund = $this->client->getRefund($lastRefund->getId());
+            $notificationStatus = $this->client->sendRefundNotification($lastRefund->getId());
+            $cancelRefund = $this->client->cancelRefund($lastRefund->getId());
+            $supportedWallets = $this->client->getSupportedWallets();
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -196,8 +235,11 @@ class BitPayTest extends TestCase
 
         $this->assertNotNull($invoices);
         $this->assertNotNull($retrievedRefunds);
-        $this->assertEquals($firstRefund->getId(), $retrievedRefund->getId());
-        $this->assertTrue($cancelRefund);
+        $this->assertEquals($updateRefund->getStatus(), "created");
+        $this->assertEquals($lastRefund->getId(), $retrievedRefund->getId());
+        $this->assertTrue($notificationStatus);
+        $this->assertEquals($cancelRefund->getStatus(), "canceled");
+        $this->assertNotNull($supportedWallets);
     }
 
     public function testShouldCreateBillUSD()
