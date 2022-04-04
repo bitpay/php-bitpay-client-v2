@@ -34,12 +34,20 @@ class Invoice
     protected $_paymentDisplayTotals;
     protected $_paymentDisplaySubTotals;
     protected $_paymentCodes;
+    protected $_paymentString;
+    protected $_verificationLink;
     protected $_acceptanceWindow;
     protected $_buyer;
     protected $_refundAddresses;
     protected $_closeURL   = "";
     protected $_autoRedirect  = false;
     protected $_jsonPayProRequired;
+    protected $_buyerEmail;
+    
+    protected $_merchantName;
+    protected $_forcedBuyerSelectedWallet;
+    protected $_forcedBuyerSelectedTransactionCurrency;
+    protected $_itemizedDetails;
 
     protected $_id;
     protected $_url;
@@ -54,6 +62,7 @@ class Invoice
     protected $_refundAddressRequestPending;
     protected $_buyerProvidedEmail;
     protected $_buyerProvidedInfo;
+    protected $_universalCodes;
     protected $_supportedTransactionCurrencies;
     protected $_minerFees;
     protected $_nonPayProPaymentReceived;
@@ -61,13 +70,15 @@ class Invoice
     protected $_billId;
     protected $_refundInfo;
     protected $_extendedNotifications = false;
-
+    protected $_isCancelled;
+    
     protected $_transactionCurrency;
     protected $_underpaidAmount;
     protected $_overpaidAmount;
     protected $_amountPaid;
     protected $_displayAmountPaid;
     protected $_exchangeRates;
+    protected $_bitpayIdRequired;
 
     /**
      * Constructor, create a minimal request Invoice object.
@@ -81,10 +92,12 @@ class Invoice
         $this->_currency = $currency;
         $this->_buyer = new Buyer();
         $this->_buyerProvidedInfo = new BuyerProvidedInfo();
+        $this->_universalCodes = new UniversalCodes();
         $this->_supportedTransactionCurrencies = new SupportedTransactionCurrencies();
         $this->_minerFees = new MinerFees();
         $this->_shopper = new Shopper();
         $this->_refundInfo = new RefundInfo();
+        $this->_itemizedDetails = new ItemizedDetails();
     }
 
     // API fields
@@ -285,6 +298,79 @@ class Invoice
         $this->_jsonPayProRequired = $jsonPayProRequired;
     }
 
+    public function getBitpayIdRequired()
+    {
+        return $this->_bitpayIdRequired;
+    }
+
+    public function setBitpayIdRequired(bool $bitpayIdRequired)
+    {
+        $this->_bitpayIdRequired = $bitpayIdRequired;
+    }
+
+    public function getMerchantName()
+    {
+        return $this->_merchantName;
+    }
+
+    public function setMerchantName(string $merchantName)
+    {
+        $this->_merchantName = $merchantName;
+    }
+
+    public function getForcedBuyerSelectedWallet()
+    {
+        return $this->_forcedBuyerSelectedWallet;
+    }
+
+    public function setForcedBuyerSelectedWallet(string $forcedBuyerSelectedWallet)
+    {
+        $this->_forcedBuyerSelectedWallet = $forcedBuyerSelectedWallet;
+    }
+
+    public function getForcedBuyerSelectedTransactionCurrency()
+    {
+        return $this->_forcedBuyerSelectedTransactionCurrency;
+    }
+
+    public function setForcedBuyerSelectedTransactionCurrency(string $forcedBuyerSelectedTransactionCurrency)
+    {
+        $this->_forcedBuyerSelectedTransactionCurrency = $forcedBuyerSelectedTransactionCurrency;
+    }
+
+    public function getItemizedDetails()
+    {
+        return $this->_itemizedDetails;
+    }
+
+    public function getItemizedDetailsAsArray()
+    {
+        $items = [];
+
+        foreach ($this->_items as $item) {
+            if ($item instanceof ItemizedDetails) {
+                array_push($items, $item->toArray());
+            } else {
+                array_push($items, $item);
+            }
+        }
+
+        return $items;
+    }
+
+    public function setItemizedDetails(ItemizedDetails $itemizedDetails)
+    {
+        $itemsArray = [];
+
+        foreach ($itemizedDetails as $item) {
+            if ($item instanceof Item) {
+                array_push($itemsArray, $item);
+            } else {
+                array_push($itemsArray, Item::createFromArray((array)$item));
+            }
+        }
+        $this->_itemizedDetails = $itemsArray;
+    }
     // Buyer data
     //
 
@@ -301,6 +387,16 @@ class Invoice
     public function setBuyer(Buyer $buyer)
     {
         $this->_buyer = $buyer;
+    }
+
+    public function getBuyerEmail()
+    {
+        return $this->_buyerEmail;
+    }
+
+    public function setBuyerEmail(string $buyerEmail)
+    {
+        $this->_buyerEmail = $buyerEmail;
     }
 
     // Response fields
@@ -444,6 +540,16 @@ class Invoice
     public function setBuyerProvidedInfo(BuyerProvidedInfo $buyerProvidedInfo)
     {
         $this->_buyerProvidedInfo = $buyerProvidedInfo;
+    }
+
+    public function getUniversalCodes()
+    {
+        return $this->_universalCodes;
+    }
+
+    public function setUniversalCodes(UniversalCodes $universalCodes)
+    {
+        $this->_universalCodes = $universalCodes;
     }
 
     public function getSupportedTransactionCurrencies()
@@ -627,6 +733,36 @@ class Invoice
         $this->_exchangeRates = $exchangeRates;
     }
 
+    public function getPaymentString()
+    {
+        return $this->_paymentString;
+    }
+
+    public function setPaymentString(string $paymentString)
+    {
+        $this->_paymentString = $paymentString;
+    }
+
+    public function getVerificationLink()
+    {
+        return $this->_verificationLink;
+    }
+
+    public function setVerificationLink(string $verificationLink)
+    {
+        $this->_verificationLink = $verificationLink;
+    }
+
+    public function getIsCancelled()
+    {
+        return $this->_isCancelled;
+    }
+
+    public function setIsCancelled(bool $isCancelled)
+    {
+        $this->_isCancelled = $isCancelled;
+    }
+
     public function toArray()
     {
         $elements = [
@@ -663,6 +799,7 @@ class Invoice
             'refundAddressRequestPending'    => $this->getRefundAddressRequestPending(),
             'buyerProvidedEmail'             => $this->getBuyerProvidedEmail(),
             'buyerProvidedInfo'              => $this->getBuyerProvidedInfo()->toArray(),
+            'universalCodes'                 => $this->getUniversalCodes()->toArray(),
             'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()->toArray(),
             'minerFees'                      => $this->getMinerFees()->toArray(),
             'shopper'                        => $this->getShopper()->toArray(),
@@ -672,6 +809,15 @@ class Invoice
             'transactionCurrency'            => $this->getTransactionCurrency(),
             'amountPaid'                     => $this->getAmountPaid(),
             'exchangeRates'                  => $this->getExchangeRates(),
+            'merchantName'                   => $this->getMerchantName(),
+            'bitpayIdRequired'               => $this->getBitpayIdRequired(),
+            'forcedBuyerSelectedWallet'      => $this->getForcedBuyerSelectedWallet(),
+            'paymentString'                  => $this->getPaymentString(),
+            'verificationLink'               => $this->getVerificationLink(),
+            'isCancelled'                    => $this->getIsCancelled(),
+            'buyerEmail'                     => $this->getBuyerEmail(),
+            'itemizedDetails'                => $this->getItemizedDetails()->toArray(),
+            'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];
 
         foreach ($elements as $key => $value) {

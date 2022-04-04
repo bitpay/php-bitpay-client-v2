@@ -294,7 +294,7 @@ class RESTcli
         if ($response == null) {
             throw new Exception("Error: HTTP response is null");
         }
-
+        
         try {
             $body = json_decode($response->getBody()->getContents(), true);
             if ($this->_proxy !== '' && !is_array($body)) {
@@ -317,6 +317,10 @@ class RESTcli
             if (!empty($body['success'])) {
                 return json_encode($body);
             }
+
+            // if (!empty($body['status'])) {
+            //     return json_encode($body);
+            // }
 
             // TODO Temporary fix for legacy response
             if (!array_key_exists('data', $body)) {

@@ -41,7 +41,7 @@ class BuyerProvidedInfo
         return $this->_selectedWallet;
     }
 
-    public function setSelectedWallet($selectedWallet)
+    public function setSelectedWallet(string $selectedWallet)
     {
         $this->_selectedWallet = $selectedWallet;
     }
@@ -61,7 +61,7 @@ class BuyerProvidedInfo
         return $this->_selectedTransactionCurrency;
     }
 
-    public function setSelectedTransactionCurrency($selectedTransactionCurrency)
+    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
     {
         $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
     }
@@ -73,7 +73,7 @@ class BuyerProvidedInfo
             'phoneNumber'                 => $this->getPhoneNumber(),
             'selectedWallet'              => $this->getSelectedWallet(),
             'emailAddress'                => $this->getEmailAddress(),
-            'selectedTransactionCurrency' => $this->getSelectedTransactionCurrency(),
+            'selectedTransactionCurrency' => $this->getSelectedTransactionCurrency()
         ];
 
         foreach ($elements as $key => $value) {
