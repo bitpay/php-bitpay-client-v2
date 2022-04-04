@@ -159,6 +159,23 @@ class BitPayTest extends TestCase
         $this->assertGreaterThan(0, count($invoices));
     }
 
+    public function testShouldRequestInvoiceWebhook()
+    {
+        $basicInvoice = null;
+        
+        try {
+            $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
+            $notificationStatus = $this->client->requestInvoiceNotification($basicInvoice->getId());
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($basicInvoice);
+        $this->assertTrue($notificationStatus);
+    }
+            
+
     public function testShouldCreateUpdateAndDeleteInvoice()
     {
         $basicInvoice = null;
@@ -766,7 +783,7 @@ class BitPayTest extends TestCase
         $recipients = $this->client->getPayoutRecipients(null, 1);
 
         $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
+        $ledgerCurrency = Currency::USD;
 
         $payout = new BitPaySDK\Model\Payout\Payout(5.0, $currency, $ledgerCurrency);
         $payout->setRecipientId($recipients[0]->getId());
@@ -801,7 +818,7 @@ class BitPayTest extends TestCase
     public function testShouldGetPayoutsByStatus()
     {
         try {
-            $payouts = $this->client->getPayouts(null, null, PayoutStatus::New);
+            $payouts = $this->client->getPayouts(null, null, PayoutStatus::Cancelled);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -815,7 +832,7 @@ class BitPayTest extends TestCase
         $recipients = $this->client->getPayoutRecipients(null, 1);
 
         $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
+        $ledgerCurrency = Currency::USD;
 
         $payout = new BitPaySDK\Model\Payout\Payout(5.0, $currency, $ledgerCurrency);
         $payout->setRecipientId($recipients[0]->getId());
@@ -843,7 +860,7 @@ class BitPayTest extends TestCase
         $recipients = $this->client->getPayoutRecipients(null, 1);
 
         $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
+        $ledgerCurrency = Currency::USD;
 
         $payout = new BitPaySDK\Model\Payout\Payout(5.0, $currency, $ledgerCurrency);
         $payout->setRecipientId($recipients[0]->getId());
@@ -872,7 +889,7 @@ class BitPayTest extends TestCase
     {
         $recipients = $this->client->getPayoutRecipients(null, 2);
         $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
+        $ledgerCurrency = Currency::USD;
 
         $instructions = [
             new BitPaySDK\Model\Payout\PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, $recipients[0]->getEmail()),
@@ -911,7 +928,7 @@ class BitPayTest extends TestCase
     public function testShouldGetPayoutBatchesByStatus()
     {
         try {
-            $batches = $this->client->getPayoutBatches(null, null, PayoutStatus::New);
+            $batches = $this->client->getPayoutBatches(null, null, PayoutStatus::Cancelled);
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
@@ -924,7 +941,7 @@ class BitPayTest extends TestCase
     {
         $recipients = $this->client->getPayoutRecipients(null, 2);
         $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
+        $ledgerCurrency = Currency::USD;
 
         $instructions = [
             new BitPaySDK\Model\Payout\PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, $recipients[0]->getEmail()),
@@ -957,7 +974,7 @@ class BitPayTest extends TestCase
         $recipients = $this->client->getPayoutRecipients(null, 2);
 
         $currency = Currency::USD;
-        $ledgerCurrency = Currency::ETH;
+        $ledgerCurrency = Currency::USD;
 
         $instructions = [
             new BitPaySDK\Model\Payout\PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, $recipients[0]->getEmail()),

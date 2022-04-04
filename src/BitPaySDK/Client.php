@@ -358,6 +358,39 @@ class Client
     }
 
     /**
+     * Request a BitPay Invoice Webhook.
+     *
+     * @param $invoiceId     string A BitPay invoice ID.
+     * @return $result      bool True if the webhook was successfully requested, false otherwise.
+     * @throws InvoiceNotificationException InvoiceNotificationException class
+     * @throws BitPayException BitPayException class
+     */
+    public function requestInvoiceNotification(string $invoiceId): bool
+    {
+        try {
+            $params = [];
+            $invoice = $this->getInvoice($invoiceId);
+                    
+        } catch (BitPayException $e) {
+            throw new InvoiceNotificationException("failed to serialize invoice object : ".$e->getMessage(), null, null, $e->getApiCode());
+        } catch (Exception $e) {
+            throw new InvoiceNotificationException("failed to serialize invoice object : ".$e->getMessage());
+        }
+
+        $params["token"] = $invoice->getToken();
+        
+        try {
+            $responseJson = $this->_RESTcli->post("invoices/".$invoiceId."/notifications", $params);
+            $result = strtolower(json_decode($responseJson)) == "success";
+        } catch (Exception $e) {
+            throw new InvoiceNotificationException(
+                "failed to deserialize BitPay server response (Invoice) : ".$e->getMessage());
+        }
+
+        return $result;
+    }
+
+    /**
      * Cancel a BitPay invoice.
      *
      * @param $invoiceId    string The id of the invoice to updated.
@@ -1244,7 +1277,7 @@ class Client
         }
 
         try {
-            $result = json_decode($responseJson) == [];
+            $result = strtolower(json_decode($responseJson)->status) == "success";
 
         } catch (Exception $e) {
             throw new PayoutRecipientCancellationException(
@@ -1275,7 +1308,7 @@ class Client
         }
 
         try {
-            $result = json_decode($responseJson) == [];
+            $result = strtolower(json_decode($responseJson)->status) == "success";
 
         } catch (Exception $e) {
             throw new PayoutRecipientNotificationException(
@@ -1443,7 +1476,7 @@ class Client
         }
 
         try {
-            $result = json_decode($responseJson) == [];
+            $result = strtolower(json_decode($responseJson)->status) == "success";
 
         } catch (Exception $e) {
             throw new PayoutCancellationException(
@@ -1474,7 +1507,7 @@ class Client
         }
 
         try {
-            $result = json_decode($responseJson) == [];
+            $result = strtolower(json_decode($responseJson)->status) == "success";
 
         } catch (Exception $e) {
             throw new PayoutNotificationException(
@@ -1639,7 +1672,7 @@ class Client
         }
 
         try {
-            $result = json_decode($responseJson) == [];
+            $result = strtolower(json_decode($responseJson)->status) == "success";
 
         } catch (Exception $e) {
             throw new PayoutBatchCancellationException(
@@ -1670,7 +1703,7 @@ class Client
         }
 
         try {
-            $result = json_decode($responseJson) == [];
+            $result = strtolower(json_decode($responseJson)->status) == "success";
 
         } catch (Exception $e) {
             throw new PayoutBatchNotificationException(
