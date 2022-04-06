@@ -327,4 +327,35 @@ To get the generated invoices filtered by query parameters
 $invoices = $bitpay->getInvoices('YYYY-MM-DD', 'YYYY-MM-DD', InvoiceStatus::Complete, null, 10); //Always use the included InvoiceStatus model to avoid typos
 ```
 
+### Pay invoice
+
+`PUT /invoices/pay/:invoiceId`
+
+Facade `MERCHANT`
+
+HTTP Request
+
+URL Parameters
+
+| Parameter | Description | Type | Presence |
+| --- | --- | :---: | :---: |
+| `status` | status of invoice | `string` | Mandatory |
+| `complete` | indicate if paid invoice should have status if complete true or a confirmed status | `boolean` | Optional |
+
+Headers
+
+| Fields | Description | Presence |
+| --- | --- | :---: |
+| `X-Accept-Version` | Must be set to `2.0.0` for requests to the BitPay API. | Mandatory |
+| `Content-Type` | must be set to `application/json` for requests to the BitPay API. | Mandatory |
+| `X-Identity` | the hexadecimal public key generated from the client private key. This header is required when using tokens with higher privileges (`merchant` facade). When using standard `pos` facade token directly from the [BitPay dashboard](https://test.bitpay.com/dashboard/merchant/api-tokens) (with `"Require Authentication"` disabled), this header is not needed. | Mandatory |
+| `X-Signature` | header is the ECDSA signature of the full request URL concatenated with the request body, signed with your private key. This header is required when using tokens with higher privileges (`merchant` facade). When using standard `pos` facade token directly from the [BitPay dashboard](https://test.bitpay.com/dashboard/merchant/api-tokens) (with `"Require Authentication"` disabled), this header is not needed. | Mandatory |
+
+To get the generated invoices filtered by query parameters 
+
+```php
+$basicInvoice = $bitpay->createInvoice(new Invoice(0.1, Currency::BTC));
+$payInvoice = $bitpay->payInvoice($basicInvoice->getId(), "confirmed");
+```
+
 ### [Back to guide index](../../GUIDE.md)

@@ -67,7 +67,7 @@ use Symfony\Component\Yaml\Yaml;
  * Class Client
  * @package Bitpay
  * @author  Antonio Buedo
- * @version 6.0.2111
+ * @version 6.1.2204 
  * See bitpay.com/api for more information.
  * date 15.11.2021
  */
@@ -441,6 +441,7 @@ class Client
      */
     public function payInvoice(
         string $invoiceId,
+        string $status,
         bool $complete = true
     ): Invoice {
         if (strtolower($this->_env) != "test")
@@ -451,6 +452,7 @@ class Client
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["status"] = $status;
             $params["complete"] = $complete;
             $responseJson = $this->_RESTcli->update("invoices/pay/".$invoiceId, $params, true);  
         } catch (BitPayException $e) {

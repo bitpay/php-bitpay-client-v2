@@ -202,14 +202,14 @@ class BitPayTest extends TestCase
         $this->assertNotNull($retreivedCancelledInvoice);
     }
 
-    public function testShouldPayInvoice()
+    public function testShouldPayInvoiceByStatus()
     {
         $basicInvoice = null;
         $payInvoice = null;        
 
         try {
             $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
-            $payInvoice = $this->client->payInvoice($basicInvoice->getId());
+            $payInvoice = $this->client->payInvoice($basicInvoice->getId(), "confirmed");
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
