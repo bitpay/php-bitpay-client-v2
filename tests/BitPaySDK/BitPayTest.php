@@ -140,15 +140,33 @@ class BitPayTest extends TestCase
 
     }
 
-    public function testShouldGetInvoices()
+    public function testShouldGetInvoicesWithDate()
     {
         $invoices = null;
         try {
             //check within the last few days
             $date = new \DateTime();
             $today = $date->format("Y-m-d");
-            $dateBefore = $date->modify('-30 day');
+            $dateBefore = $date->modify('-7 day');
             $sevenDaysAgo = $dateBefore->format("Y-m-d");
+            $invoices = $this->client->getInvoices($sevenDaysAgo, $today, null, null, 46);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($invoices);
+        $this->assertGreaterThan(0, count($invoices));
+    }
+
+    public function testShouldGetInvoicesWithDateTime()
+    {
+        $invoices = null;
+        try {
+            $dateTime = \DateTime::createFromFormat('Y-m-d H:i', "2022-04-06 10:00");
+            $today = $dateTime->format("Y-m-d\TH:i:s.v\Z");
+            $dateBefore = $dateTime->modify('-7 day');
+            $sevenDaysAgo = $dateBefore->format("Y-m-d\TH:i:s.v\Z");
             $invoices = $this->client->getInvoices($sevenDaysAgo, $today, null, null, 46);
         } catch (\Exception $e) {
             $e->getTraceAsString();

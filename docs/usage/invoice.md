@@ -324,7 +324,21 @@ Headers
 To get the generated invoices filtered by query parameters 
 
 ```php
-$invoices = $bitpay->getInvoices('YYYY-MM-DD', 'YYYY-MM-DD', InvoiceStatus::Complete, null, 10); //Always use the included InvoiceStatus model to avoid typos
+// If you want to retrieve invoices with respect to date then use this:
+$date = new \DateTime();
+$today = $date->format("Y-m-d");
+$dateBefore = $date->modify('-7 day');
+$sevenDaysAgo = $dateBefore->format("Y-m-d");
+$getInvoices = $bitpay->getInvoices($sevenDaysAgo, $today, null, null, 10);
+```
+
+```php
+// If you want to retrieve invoices with respect to datetime then use this:
+$datetime = DateTime::createFromFormat('Y-m-d H:i', "2022-04-06 10:00");
+$today = $datetime->format("Y-m-d\TH:i:s.v\Z");
+$dateBefore = $datetime->modify('-7 day');
+$sevenDaysAgo = $dateBefore->format("Y-m-d\TH:i:s.v\Z");
+$getInvoices = $bitpay->getInvoices($sevenDaysAgo, $today, null, null, 10);
 ```
 
 ### Pay invoice
