@@ -140,15 +140,33 @@ class BitPayTest extends TestCase
 
     }
 
-    public function testShouldGetInvoices()
+    public function testShouldGetInvoicesWithDate()
     {
         $invoices = null;
         try {
             //check within the last few days
             $date = new \DateTime();
             $today = $date->format("Y-m-d");
-            $dateBefore = $date->modify('-30 day');
+            $dateBefore = $date->modify('-7 day');
             $sevenDaysAgo = $dateBefore->format("Y-m-d");
+            $invoices = $this->client->getInvoices($sevenDaysAgo, $today, null, null, 46);
+        } catch (\Exception $e) {
+            $e->getTraceAsString();
+            self::fail($e->getMessage());
+        }
+
+        $this->assertNotNull($invoices);
+        $this->assertGreaterThan(0, count($invoices));
+    }
+
+    public function testShouldGetInvoicesWithDateTime()
+    {
+        $invoices = null;
+        try {
+            $dateTime = \DateTime::createFromFormat('Y-m-d H:i', "2022-04-06 10:00");
+            $today = $dateTime->format("Y-m-d\TH:i:s.v\Z");
+            $dateBefore = $dateTime->modify('-7 day');
+            $sevenDaysAgo = $dateBefore->format("Y-m-d\TH:i:s.v\Z");
             $invoices = $this->client->getInvoices($sevenDaysAgo, $today, null, null, 46);
         } catch (\Exception $e) {
             $e->getTraceAsString();
@@ -202,14 +220,14 @@ class BitPayTest extends TestCase
         $this->assertNotNull($retreivedCancelledInvoice);
     }
 
-    public function testShouldPayInvoice()
+    public function testShouldPayInvoiceByStatus()
     {
         $basicInvoice = null;
         $payInvoice = null;        
 
         try {
             $basicInvoice = $this->client->createInvoice(new Invoice(0.1, Currency::BTC));
-            $payInvoice = $this->client->payInvoice($basicInvoice->getId());
+            $payInvoice = $this->client->payInvoice($basicInvoice->getId(), "confirmed");
         } catch (\Exception $e) {
             $e->getTraceAsString();
             self::fail($e->getMessage());
