@@ -310,17 +310,29 @@ class RESTcli
             $error_message = false;
             $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
             $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
-            $error_message = (is_array($error_message)) ? implode("\n", $error_message) : $error_message;
+
+            if(is_array($error_message)){
+                if (count($error_message) == count($error_message, 1)) 
+                {
+                    $error_message = implode("\n", $error_message);
+                }
+                else
+                {
+                    $errors = array();
+                    foreach ($error_message as $error) {
+                        $errors[] = $error['param'].": ".$error['error'];
+                    }
+                    $error_message = implode(',', $errors);
+                }
+            }
+
             if (false !== $error_message) {
                 throw new BitpayException($error_message);
             }
+            
             if (!empty($body['success'])) {
                 return json_encode($body);
             }
-
-            // if (!empty($body['status'])) {
-            //     return json_encode($body);
-            // }
 
             // TODO Temporary fix for legacy response
             if (!array_key_exists('data', $body)) {
