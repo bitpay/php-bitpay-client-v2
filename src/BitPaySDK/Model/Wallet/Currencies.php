@@ -6,6 +6,7 @@ class Currencies
 {
     protected $_code;
     protected $_p2p;
+    protected $_image;
     protected $_dappBrowser;
     protected $_payPro;
     protected $_qr;
@@ -35,6 +36,16 @@ class Currencies
     public function setP2p(bool $p2p)
     {
         $this->_p2p = $p2p;
+    }
+
+    public function getImage()
+    {
+        return $this->_image;
+    }
+
+    public function setImage(string $image)
+    {
+        $this->_image = $image;
     }
 
     public function getDappBrowser()
@@ -92,6 +103,7 @@ class Currencies
         $elements = [
             'code'            => $this->getCode(),
             'p2p'             => $this->getP2p(),
+            'image'           => $this->getImage(),
             'dappBrowser'     => $this->getDappBrowser(),
             'paypro'          => $this->getPayPro(),
             'qr'              => $this->getQr()->toArray(),

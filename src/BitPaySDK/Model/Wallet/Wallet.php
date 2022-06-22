@@ -13,6 +13,7 @@ class Wallet
     protected $_avatar;
     protected $_paypro;
     protected $_currencies;
+    protected $_image;
 
     /**
      * Constructor, create a minimal request Wallet object.
@@ -74,6 +75,16 @@ class Wallet
         $this->_currencies = $currencies;
     }
 
+    public function getImage()
+    {
+        return $this->_image;
+    }
+
+    public function setImage(string $image)
+    {
+        $this->_image = $image;
+    }
+
     public function toArray()
     {
         $elements = [
@@ -81,7 +92,8 @@ class Wallet
             'displayName'  => $this->getDisplayName(),
             'avatar'       => $this->getAvatar(),
             'paypro'       => $this->getPayPro(),
-            'currencies'   => $this->getCurrencies()->toArray()
+            'currencies'   => $this->getCurrencies()->toArray(),
+            'image'        => $this->getImage()
         ];
 
         return $elements;

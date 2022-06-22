@@ -10,13 +10,9 @@
  * @license  OSL-3.0 http://opensource.org/licenses/osl-3.0
  * @link     http://cweiske.de/
  */
-
 namespace BitPaySDK\Util\JsonMapper;
-
-
 use ReflectionClass;
 use ReflectionNamedType;
-
 /**
  * Automatically map JSON structures into objects.
  *
@@ -178,7 +174,7 @@ class JsonMapper
 
             if (!$hasProperty) {
                 if ($this->bExceptionOnUndefinedProperty) {
-                    throw new JsonMapperException(
+                    throw new JsonMapper_Exception(
                         'JSON property "' . $key . '" does not exist'
                         . ' in object of type ' . $strClassName
                     );
@@ -199,7 +195,7 @@ class JsonMapper
 
             if ($accessor === null) {
                 if ($this->bExceptionOnUndefinedProperty) {
-                    throw new JsonMapperException(
+                    throw new JsonMapper_Exception(
                         'JSON property "' . $key . '" has no public setter method'
                         . ' in object of type ' . $strClassName
                     );
@@ -219,7 +215,7 @@ class JsonMapper
                 }
                 $type = $this->removeNullable($type);
             } else if ($jvalue === null) {
-                throw new JsonMapperException(
+                throw new JsonMapper_Exception(
                     'JSON property "' . $key . '" in class "'
                     . $strClassName . '" must not be NULL'
                 );
@@ -237,7 +233,7 @@ class JsonMapper
                 continue;
             } else if ($this->isSimpleType($type)) {
                 if ($type === 'string' && is_object($jvalue)) {
-                    throw new JsonMapperException(
+                    throw new JsonMapper_Exception(
                         'JSON property "' . $key . '" in class "'
                         . $strClassName . '" is an object and'
                         . ' cannot be converted to a string'
@@ -250,7 +246,7 @@ class JsonMapper
 
             //FIXME: check if type exists, give detailed error message if not
             if ($type === '') {
-                throw new JsonMapperException(
+                throw new JsonMapper_Exception(
                     'Empty type at property "'
                     . $strClassName . '::$' . $key . '"'
                 );
@@ -277,7 +273,7 @@ class JsonMapper
 
             if ($array !== null) {
                 if (!is_array($jvalue) && $this->isFlatType(gettype($jvalue))) {
-                    throw new JsonMapperException(
+                    throw new JsonMapper_Exception(
                         'JSON property "' . $key . '" must be an array, '
                         . gettype($jvalue) . ' given'
                     );
@@ -290,7 +286,7 @@ class JsonMapper
                 //use constructor parameter if we have a class
                 // but only a flat type (i.e. string, int)
                 if ($this->bStrictObjectTypeChecking) {
-                    throw new JsonMapperException(
+                    throw new JsonMapper_Exception(
                         'JSON property "' . $key . '" must be an object, '
                         . gettype($jvalue) . ' given'
                     );
@@ -352,7 +348,7 @@ class JsonMapper
      * @param array  $providedProperties array with json properties
      * @param object $rc                 Reflection class to check
      *
-     * @throws JsonMapperException
+     * @throws JsonMapper_Exception
      *
      * @return void
      */
@@ -365,7 +361,7 @@ class JsonMapper
             if (isset($annotations['required'])
                 && !isset($providedProperties[$property->name])
             ) {
-                throw new JsonMapperException(
+                throw new JsonMapper_Exception(
                     'Required property "' . $property->name . '" of class '
                     . $rc->getName()
                     . ' is missing in JSON data'
@@ -439,7 +435,7 @@ class JsonMapper
                     }
                 }
             } else if ($this->isFlatType($class)) {
-                throw new JsonMapperException(
+                throw new JsonMapper_Exception(
                     'JSON property "' . ($parent_key ? $parent_key : '?') . '"'
                     . ' is an array of type "' . $class . '"'
                     . ' but contained a value of type'
@@ -550,18 +546,18 @@ class JsonMapper
 
                         if ($this->isSimpleType($propTypeName)) {
                             return array(
-                                true,
-                                $rprop,
-                                $propTypeName,
-                                $rPropType->allowsNull()
+                              true,
+                              $rprop,
+                              $propTypeName,
+                              $rPropType->allowsNull()
                             );
                         }
 
                         return array(
-                            true,
-                            $rprop,
-                            '\\'.$propTypeName,
-                            $rPropType->allowsNull()
+                          true,
+                          $rprop,
+                          '\\'.$propTypeName,
+                          $rPropType->allowsNull()
                         );
                     }
 
@@ -683,7 +679,7 @@ class JsonMapper
         if (isset($this->classMap[$type])) {
             $target = $this->classMap[$type];
         } else if (is_string($type) && $type !== '' && $type[0] == '\\'
-                   && isset($this->classMap[substr($type, 1)])
+            && isset($this->classMap[substr($type, 1)])
         ) {
             $target = $this->classMap[substr($type, 1)];
         } else {
@@ -712,10 +708,10 @@ class JsonMapper
     protected function isSimpleType($type)
     {
         return $type == 'string'
-               || $type == 'boolean' || $type == 'bool'
-               || $type == 'integer' || $type == 'int'
-               || $type == 'double' || $type == 'float'
-               || $type == 'array' || $type == 'object';
+            || $type == 'boolean' || $type == 'bool'
+            || $type == 'integer' || $type == 'int'
+            || $type == 'double' || $type == 'float'
+            || $type == 'array' || $type == 'object';
     }
 
     /**
@@ -748,10 +744,10 @@ class JsonMapper
     protected function isFlatType($type)
     {
         return $type == 'NULL'
-               || $type == 'string'
-               || $type == 'boolean' || $type == 'bool'
-               || $type == 'integer' || $type == 'int'
-               || $type == 'double' || $type == 'float';
+            || $type == 'string'
+            || $type == 'boolean' || $type == 'bool'
+            || $type == 'integer' || $type == 'int'
+            || $type == 'double' || $type == 'float';
     }
 
     /**
@@ -853,3 +849,4 @@ class JsonMapper
         $this->logger = $logger;
     }
 }
+?>
