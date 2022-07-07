@@ -434,7 +434,7 @@ class Client
      * Pay an invoice with a mock transaction
      *
      * @param $invoiceId    string The id of the invoice.
-     * @param $complete     bool indicate if paid invoice should have status if complete true or a confirmed status
+     * @param $status       string Status the invoice will become. Acceptable values are confirmed and complete.
      * @return $invoice     Invoice object.
      * @throws InvoicePaymentException InvoicePaymentException class
      * @throws BitPayException BitPayException class
@@ -442,7 +442,6 @@ class Client
     public function payInvoice(
         string $invoiceId,
         string $status,
-        bool $complete = true
     ): Invoice {
         if (strtolower($this->_env) != "test")
         {
@@ -453,7 +452,6 @@ class Client
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
             $params["status"] = $status;
-            $params["complete"] = $complete;
             $responseJson = $this->_RESTcli->update("invoices/pay/".$invoiceId, $params, true);  
         } catch (BitPayException $e) {
             throw new InvoicePaymentException("failed to serialize Invoice object : ".$e->getMessage(), null, null, $e->getApiCode());
