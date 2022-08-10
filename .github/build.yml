@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: [7.4, 8.0, 8.1]
+    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v5 # or alternative dependency management
+      - uses: php-actions/phpunit@v3
+        with:
+          php_version: ${{ matrix.java-version }}
+          php_extensions: xdebug
+      - name: Run Composer
+        run: composer install
+      - name: Run PHPUnit
+        run: ./vendor/bin/phpunit .
+    
