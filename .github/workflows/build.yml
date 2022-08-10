@@ -19,9 +19,7 @@ jobs:
       - uses: php-actions/phpunit@v3
         with:
           php_version: ${{ matrix.java-version }}
-          php_extensions: xdebug
-      - name: Run Composer
-        run: composer install
+          php_extensions: ext-bcmath xdebug
       - name: Run PHPUnit
         run: ./vendor/bin/phpunit .
     
