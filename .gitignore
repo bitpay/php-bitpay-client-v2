@@ -7,4 +7,4 @@ composer.phar
 
 # PHPUnit
 .phpunit.result.cache
-.report/
+test/unit/_html

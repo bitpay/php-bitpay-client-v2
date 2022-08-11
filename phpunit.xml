@@ -6,12 +6,12 @@
       <directory suffix=".php">src</directory>
     </include>
     <report>
-      <html outputDirectory="./.report" />
+      <html outputDirectory="test/unit/_html" />
     </report>
   </coverage>
   <testsuites>
     <testsuite name="Unit">
-      <directory>./tests/unit</directory>
+      <directory>./test/unit</directory>
     </testsuite>
   </testsuites>
   <logging/>
