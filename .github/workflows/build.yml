@@ -18,11 +18,11 @@ jobs:
       - uses: php-actions/composer@v5
         with:
           php_version: ${{ matrix.php-version }}
-          php_extensions: ext-bcmath xdebug
+          php_extensions: bcmath xdebug
       - uses: php-actions/phpunit@v3
         with:
           php_version: ${{ matrix.php-version }}
-          php_extensions: ext-bcmath xdebug
+          php_extensions: bcmath xdebug
       - name: Run PHPUnit
         run: ./vendor/bin/phpunit .
     
