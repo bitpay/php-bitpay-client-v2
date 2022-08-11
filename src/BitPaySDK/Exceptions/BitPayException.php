@@ -2,7 +2,6 @@
 
 namespace BitPaySDK\Exceptions;
 
-
 use Exception;
 
 class BitPayException extends Exception
@@ -18,10 +17,10 @@ class BitPayException extends Exception
      * @param int    $code    [optional] The Exception code to throw.
      * @param string $apiCode [optional] The API Exception code to throw.
      */
-    public function __construct($message = "", $code = 100, Exception $previous=NULL, $apiCode = null)
+    public function __construct($message = "", $code = 100, Exception $previous = null, $apiCode = null)
     {
         if (!$message) {
-            $message = $this->bitPayCode.": ".$this->bitPayMessage."-> ".$message;
+            $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
         }
         $this->apiCode = $apiCode;
         parent::__construct($message, $code, $previous);

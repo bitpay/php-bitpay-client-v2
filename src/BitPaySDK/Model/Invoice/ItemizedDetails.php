@@ -1,6 +1,5 @@
 <?php
 
-
 namespace BitPaySDK\Model\Invoice;
 
 class ItemizedDetails
@@ -11,7 +10,7 @@ class ItemizedDetails
 
     public function __construct()
     {
-    } 
+    }
 
     public function getAmount()
     {

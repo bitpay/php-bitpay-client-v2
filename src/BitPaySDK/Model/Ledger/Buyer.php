@@ -2,7 +2,6 @@
 
 namespace BitPaySDK\Model\Ledger;
 
-
 class Buyer
 {
     protected $_name;

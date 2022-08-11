@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BitPaySDK\Model\Payout;
-
 
 use BitPaySDK;
 use BitPaySDK\Exceptions\BitPayException;

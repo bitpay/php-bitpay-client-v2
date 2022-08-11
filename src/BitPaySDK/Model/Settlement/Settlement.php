@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BitPaySDK\Model\Settlement;
-
 
 class Settlement
 {
@@ -33,7 +31,7 @@ class Settlement
         return $this->_id;
     }
 
-    public function setId(String $id)
+    public function setId(string $id)
     {
         $this->_id = $id;
     }
@@ -43,7 +41,7 @@ class Settlement
         return $this->_accountId;
     }
 
-    public function setAccountId(String $accountId)
+    public function setAccountId(string $accountId)
     {
         $this->_accountId = $accountId;
     }
@@ -53,7 +51,7 @@ class Settlement
         return $this->_currency;
     }
 
-    public function setCurrency(String $currency)
+    public function setCurrency(string $currency)
     {
         $this->_currency = $currency;
     }
@@ -73,7 +71,7 @@ class Settlement
         return $this->_status;
     }
 
-    public function setStatus(String $status)
+    public function setStatus(string $status)
     {
         $this->_status = $status;
     }
@@ -213,7 +211,7 @@ class Settlement
         return $this->_token;
     }
 
-    public function setToken(String $token)
+    public function setToken(string $token)
     {
         $this->_token = $token;
     }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace BitPaySDK\Model\Payout;
 
 /**

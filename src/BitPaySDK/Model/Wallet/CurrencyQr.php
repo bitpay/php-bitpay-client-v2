@@ -4,7 +4,6 @@ namespace BitPaySDK\Model\Wallet;
 
 class CurrencyQr
 {
-
     protected $_type;
     protected $_collapsed;
 
@@ -41,5 +40,4 @@ class CurrencyQr
 
         return $elements;
     }
-
 }

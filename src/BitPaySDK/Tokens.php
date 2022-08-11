@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BitPaySDK;
-
 
 use BitPaySDK\Model\Facade;
 use Exception;

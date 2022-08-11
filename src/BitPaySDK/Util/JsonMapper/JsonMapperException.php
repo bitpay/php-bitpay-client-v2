@@ -2,7 +2,6 @@
 
 namespace BitPaySDK\Util\JsonMapper;
 
-
 use Exception;
 
 class JsonMapperException extends Exception
@@ -18,7 +17,7 @@ class JsonMapperException extends Exception
     public function __construct($message = "")
     {
 
-        $message = $this->bitPayCode.$this->bitPayMessage."-> ".$message;
+        $message = $this->bitPayCode . $this->bitPayMessage . "-> " . $message;
 
         parent::__construct($message, 101);
     }

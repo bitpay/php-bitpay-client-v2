@@ -85,7 +85,7 @@ class Currencies
     public function setWalletConnect(bool $walletConnect)
     {
         $this->_walletConnect = $walletConnect;
-    }    
+    }
 
     public function toArray()
     {
