@@ -1,4 +1,4 @@
-name: Build
+name: Test
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'master'
 
 jobs:
-  build-and-test:
+  phpunit:
     runs-on: ubuntu-latest
 
     strategy:
