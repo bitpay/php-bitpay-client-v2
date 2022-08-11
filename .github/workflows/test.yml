@@ -36,4 +36,4 @@ jobs:
       - name: Install PHP_CodeSniffer
         run: |
           curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-          php phpcs.phar src --standard=PSR12
+          php phpcs.phar src --standard=ruleset.xml
