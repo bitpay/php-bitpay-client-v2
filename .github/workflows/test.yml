@@ -1,0 +1,27 @@
+name: Test
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: [7.4, 8.0, 8.1]
+    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v5
+        with:
+          php_version: ${{ matrix.php-version }}
+          php_extensions: bcmath gmp xdebug
+      - uses: php-actions/phpunit@v3
+        with:
+          configuration: phpunit.xml
+          php_version: ${{ matrix.php-version }}
+          php_extensions: bcmath gmp xdebug
+    
