@@ -24,4 +24,16 @@ jobs:
           configuration: phpunit.xml
           php_version: ${{ matrix.php-version }}
           php_extensions: bcmath gmp xdebug
+  phpcs:
+    runs-on: ubuntu-latest
     
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v5
+        with:
+          php_version: 8.1
+          php_extensions: bcmath gmp xdebug
+      - name: Install PHP_CodeSniffer
+        run: |
+          curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+          php phpcs.phar src --standard=ruleset.xml

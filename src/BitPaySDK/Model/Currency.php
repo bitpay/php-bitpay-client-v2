@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BitPaySDK\Model;
-
 
 use Exception;
 use ReflectionClass;
@@ -216,7 +214,9 @@ class Currency
         }
     }
 
-    public function __construct() { }
+    public function __construct()
+    {
+    }
 
     public function getCode()
     {

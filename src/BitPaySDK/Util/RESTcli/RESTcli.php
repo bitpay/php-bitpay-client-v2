@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BitPaySDK\Util\RESTcli;
-
 
 use BitPayKeyUtils\KeyHelper\PrivateKey;
 use BitPaySDK\Env;
@@ -75,14 +73,14 @@ class RESTcli
 
             $this->_client = new GuzzleHttpClient($config);
         } catch (Exception $e) {
-            throw new BitPayException("RESTcli init failed : ".$e->getMessage());
+            throw new BitPayException("RESTcli init failed : " . $e->getMessage());
         }
     }
 
     public function post($uri, array $formData = [], $signatureRequired = true): string
     {
         try {
-            $fullURL = $this->_baseUrl.$uri;
+            $fullURL = $this->_baseUrl . $uri;
             $headers = [
                 'Content-Type'               => 'application/json',
                 'x-accept-version'           => Env::BitpayApiVersion,
@@ -92,7 +90,7 @@ class RESTcli
             ];
 
             if ($signatureRequired) {
-                $headers['x-signature'] = $this->_ecKey->sign($fullURL.json_encode($formData));
+                $headers['x-signature'] = $this->_ecKey->sign($fullURL . json_encode($formData));
                 $headers['x-identity'] = $this->_identity;
             }
 
@@ -100,41 +98,48 @@ class RESTcli
              * @var Response
              */
             $response = $this->_client->requestAsync(
-                'POST', $fullURL, [
+                'POST',
+                $fullURL,
+                [
                 $options[RequestOptions::SYNCHRONOUS] = false,
                 'headers'            => $headers,
                 RequestOptions::JSON => $formData,
-            ])->wait();
+                ]
+            )->wait();
 
             $responseJson = $this->responseToJsonString($response);
 
             return $responseJson;
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
-            throw new BitPayException("POST failed : Guzzle/BadResponseException : ".$errorJson['message'], $errorJson['code']);
+            throw new BitPayException(
+                "POST failed : Guzzle/BadResponseException : " .
+                $errorJson['message'],
+                $errorJson['code']
+            );
         } catch (ClientException $e) {
-            throw new BitPayException("POST failed : Guzzle/ClientException : ".$e->getMessage());
+            throw new BitPayException("POST failed : Guzzle/ClientException : " . $e->getMessage());
         } catch (ConnectException $e) {
-            throw new BitPayException("POST failed : Guzzle/ConnectException : ".$e->getMessage());
+            throw new BitPayException("POST failed : Guzzle/ConnectException : " . $e->getMessage());
         } catch (GuzzleException $e) {
-            throw new BitPayException("POST failed : Guzzle/GuzzleException : ".$e->getMessage());
+            throw new BitPayException("POST failed : Guzzle/GuzzleException : " . $e->getMessage());
         } catch (InvalidArgumentException $e) {
-            throw new BitPayException("POST failed : Guzzle/InvalidArgumentException : ".$e->getMessage());
+            throw new BitPayException("POST failed : Guzzle/InvalidArgumentException : " . $e->getMessage());
         } catch (RequestException $e) {
-            throw new BitPayException("POST failed : Guzzle/RequestException : ".$e->getMessage());
+            throw new BitPayException("POST failed : Guzzle/RequestException : " . $e->getMessage());
         } catch (ServerException $e) {
-            throw new BitPayException("POST failed : Guzzle/ServerException : ".$e->getMessage());
+            throw new BitPayException("POST failed : Guzzle/ServerException : " . $e->getMessage());
         } catch (TooManyRedirectsException $e) {
-            throw new BitPayException("POST failed : Guzzle/TooManyRedirectsException : ".$e->getMessage());
+            throw new BitPayException("POST failed : Guzzle/TooManyRedirectsException : " . $e->getMessage());
         } catch (Exception $e) {
-            throw new BitPayException("POST failed : ".$e->getMessage());
+            throw new BitPayException("POST failed : " . $e->getMessage());
         }
     }
 
     public function get($uri, array $parameters = null, $signatureRequired = true): string
     {
         try {
-            $fullURL = $this->_baseUrl.$uri;
+            $fullURL = $this->_baseUrl . $uri;
             $headers = [
                 'Content-Type'               => 'application/json',
                 'x-accept-version'           => Env::BitpayApiVersion,
@@ -144,7 +149,7 @@ class RESTcli
             ];
 
             if ($parameters) {
-                $fullURL .= '?'.http_build_query($parameters);
+                $fullURL .= '?' . http_build_query($parameters);
             }
 
             if ($signatureRequired) {
@@ -156,43 +161,50 @@ class RESTcli
              * @var Response
              */
             $response = $this->_client->requestAsync(
-                'GET', $fullURL, [
+                'GET',
+                $fullURL,
+                [
                 $options[RequestOptions::SYNCHRONOUS] = false,
                 'headers' => $headers,
                 'query'   => $parameters,
-            ])->wait();
+                ]
+            )->wait();
 
             $responseJson = $this->responseToJsonString($response);
 
             return $responseJson;
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
-            throw new BitPayException("GET failed : Guzzle/BadResponseException : ".$errorJson['message'], $errorJson['code']);
+            throw new BitPayException(
+                "GET failed : Guzzle/BadResponseException : " .
+                $errorJson['message'],
+                $errorJson['code']
+            );
         } catch (ClientException $e) {
-            throw new BitPayException("GET failed : Guzzle/ClientException : ".$e->getMessage());
+            throw new BitPayException("GET failed : Guzzle/ClientException : " . $e->getMessage());
         } catch (ConnectException $e) {
-            throw new BitPayException("GET failed : Guzzle/ConnectException : ".$e->getMessage());
+            throw new BitPayException("GET failed : Guzzle/ConnectException : " . $e->getMessage());
         } catch (GuzzleException $e) {
-            throw new BitPayException("GET failed : Guzzle/GuzzleException : ".$e->getMessage());
+            throw new BitPayException("GET failed : Guzzle/GuzzleException : " . $e->getMessage());
         } catch (InvalidArgumentException $e) {
-            throw new BitPayException("GET failed : Guzzle/InvalidArgumentException : ".$e->getMessage());
+            throw new BitPayException("GET failed : Guzzle/InvalidArgumentException : " . $e->getMessage());
         } catch (RequestException $e) {
-            throw new BitPayException("GET failed : Guzzle/RequestException : ".$e->getMessage());
+            throw new BitPayException("GET failed : Guzzle/RequestException : " . $e->getMessage());
         } catch (ServerException $e) {
-            throw new BitPayException("GET failed : Guzzle/ServerException : ".$e->getMessage());
+            throw new BitPayException("GET failed : Guzzle/ServerException : " . $e->getMessage());
         } catch (TooManyRedirectsException $e) {
-            throw new BitPayException("GET failed : Guzzle/TooManyRedirectsException : ".$e->getMessage());
+            throw new BitPayException("GET failed : Guzzle/TooManyRedirectsException : " . $e->getMessage());
         } catch (Exception $e) {
-            throw new BitPayException("GET failed : ".$e->getMessage());
+            throw new BitPayException("GET failed : " . $e->getMessage());
         }
     }
 
     public function delete($uri, array $parameters = null): string
     {
         try {
-            $fullURL = $this->_baseUrl.$uri;
+            $fullURL = $this->_baseUrl . $uri;
             if ($parameters) {
-                $fullURL .= '?'.http_build_query($parameters);
+                $fullURL .= '?' . http_build_query($parameters);
             }
 
             $headers = [
@@ -209,48 +221,55 @@ class RESTcli
              * @var Response
              */
             $response = $this->_client->requestAsync(
-                'DELETE', $fullURL, [
+                'DELETE',
+                $fullURL,
+                [
                 $options[RequestOptions::SYNCHRONOUS] = false,
                 'headers' => $headers,
                 'query'   => $parameters,
-            ])->wait();
+                ]
+            )->wait();
 
             $responseJson = $this->responseToJsonString($response);
 
             return $responseJson;
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
-            throw new BitPayException("DELETE failed : Guzzle/BadResponseException : ".$errorJson['message'], $errorJson['code']);
+            throw new BitPayException(
+                "DELETE failed : Guzzle/BadResponseException : " .
+                $errorJson['message'],
+                $errorJson['code']
+            );
         } catch (ClientException $e) {
-            throw new BitPayException("DELETE failed : Guzzle/ClientException : ".$e->getMessage());
+            throw new BitPayException("DELETE failed : Guzzle/ClientException : " . $e->getMessage());
         } catch (ConnectException $e) {
-            throw new BitPayException("DELETE failed : Guzzle/ConnectException : ".$e->getMessage());
+            throw new BitPayException("DELETE failed : Guzzle/ConnectException : " . $e->getMessage());
         } catch (GuzzleException $e) {
-            throw new BitPayException("DELETE failed : Guzzle/GuzzleException : ".$e->getMessage());
+            throw new BitPayException("DELETE failed : Guzzle/GuzzleException : " . $e->getMessage());
         } catch (InvalidArgumentException $e) {
-            throw new BitPayException("DELETE failed : Guzzle/InvalidArgumentException : ".$e->getMessage());
+            throw new BitPayException("DELETE failed : Guzzle/InvalidArgumentException : " . $e->getMessage());
         } catch (RequestException $e) {
-            throw new BitPayException("DELETE failed : Guzzle/RequestException : ".$e->getMessage());
+            throw new BitPayException("DELETE failed : Guzzle/RequestException : " . $e->getMessage());
         } catch (ServerException $e) {
-            throw new BitPayException("DELETE failed : Guzzle/ServerException : ".$e->getMessage());
+            throw new BitPayException("DELETE failed : Guzzle/ServerException : " . $e->getMessage());
         } catch (TooManyRedirectsException $e) {
-            throw new BitPayException("DELETE failed : Guzzle/TooManyRedirectsException : ".$e->getMessage());
+            throw new BitPayException("DELETE failed : Guzzle/TooManyRedirectsException : " . $e->getMessage());
         } catch (Exception $e) {
-            throw new BitPayException("DELETE failed : ".$e->getMessage());
+            throw new BitPayException("DELETE failed : " . $e->getMessage());
         }
     }
 
     public function update($uri, array $formData = []): string
     {
         try {
-            $fullURL = $this->_baseUrl.$uri;
+            $fullURL = $this->_baseUrl . $uri;
             $headers = [
                 'x-accept-version'           => Env::BitpayApiVersion,
                 'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
                 'x-bitpay-api-frame'         => Env::BitpayApiFrame,
                 'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
                 'Content-Type'               => 'application/json',
-                'x-signature'                => $this->_ecKey->sign($fullURL.json_encode($formData)),
+                'x-signature'                => $this->_ecKey->sign($fullURL . json_encode($formData)),
                 'x-identity'                 => $this->_identity,
             ];
 
@@ -258,34 +277,41 @@ class RESTcli
              * @var Response
              */
             $response = $this->_client->requestAsync(
-                'PUT', $fullURL, [
+                'PUT',
+                $fullURL,
+                [
                 $options[RequestOptions::SYNCHRONOUS] = false,
                 'headers'            => $headers,
                 RequestOptions::JSON => $formData,
-            ])->wait();
+                ]
+            )->wait();
 
             $responseJson = $this->responseToJsonString($response);
 
             return $responseJson;
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
-            throw new BitPayException("UPDATE failed : Guzzle/BadResponseException : ".$errorJson['message'], $errorJson['code']);
+            throw new BitPayException(
+                "UPDATE failed : Guzzle/BadResponseException : " .
+                $errorJson['message'],
+                $errorJson['code']
+            );
         } catch (ClientException $e) {
-            throw new BitPayException("UPDATE failed : Guzzle/ClientException : ".$e->getMessage());
+            throw new BitPayException("UPDATE failed : Guzzle/ClientException : " . $e->getMessage());
         } catch (ConnectException $e) {
-            throw new BitPayException("UPDATE failed : Guzzle/ConnectException : ".$e->getMessage());
+            throw new BitPayException("UPDATE failed : Guzzle/ConnectException : " . $e->getMessage());
         } catch (GuzzleException $e) {
-            throw new BitPayException("UPDATE failed : Guzzle/GuzzleException : ".$e->getMessage());
+            throw new BitPayException("UPDATE failed : Guzzle/GuzzleException : " . $e->getMessage());
         } catch (InvalidArgumentException $e) {
-            throw new BitPayException("UPDATE failed : Guzzle/InvalidArgumentException : ".$e->getMessage());
+            throw new BitPayException("UPDATE failed : Guzzle/InvalidArgumentException : " . $e->getMessage());
         } catch (RequestException $e) {
-            throw new BitPayException("UPDATE failed : Guzzle/RequestException : ".$e->getMessage());
+            throw new BitPayException("UPDATE failed : Guzzle/RequestException : " . $e->getMessage());
         } catch (ServerException $e) {
-            throw new BitPayException("UPDATE failed : Guzzle/ServerException : ".$e->getMessage());
+            throw new BitPayException("UPDATE failed : Guzzle/ServerException : " . $e->getMessage());
         } catch (TooManyRedirectsException $e) {
-            throw new BitPayException("UPDATE failed : Guzzle/TooManyRedirectsException : ".$e->getMessage());
+            throw new BitPayException("UPDATE failed : Guzzle/TooManyRedirectsException : " . $e->getMessage());
         } catch (Exception $e) {
-            throw new BitPayException("UPDATE failed : ".$e->getMessage());
+            throw new BitPayException("UPDATE failed : " . $e->getMessage());
         }
     }
 
@@ -294,11 +320,16 @@ class RESTcli
         if ($response == null) {
             throw new Exception("Error: HTTP response is null");
         }
-        
+
         try {
             $body = json_decode($response->getBody()->getContents(), true);
             if ($this->_proxy !== '' && !is_array($body)) {
-                throw new BitPayException("Please check your proxy settings, HTTP Code:".$response->getStatusCode().", failed to decode json: ".json_last_error_msg());
+                throw new BitPayException(
+                    "Please check your proxy settings, HTTP Code:" .
+                    $response->getStatusCode() .
+                    ", failed to decode json: " .
+                    json_last_error_msg()
+                );
             }
 
             if (!empty($body['status'])) {
@@ -311,16 +342,13 @@ class RESTcli
             $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
             $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
 
-            if(is_array($error_message)){
-                if (count($error_message) == count($error_message, 1)) 
-                {
+            if (is_array($error_message)) {
+                if (count($error_message) == count($error_message, 1)) {
                     $error_message = implode("\n", $error_message);
-                }
-                else
-                {
+                } else {
                     $errors = array();
                     foreach ($error_message as $error) {
-                        $errors[] = $error['param'].": ".$error['error'];
+                        $errors[] = $error['param'] . ": " . $error['error'];
                     }
                     $error_message = implode(',', $errors);
                 }
@@ -329,7 +357,7 @@ class RESTcli
             if (false !== $error_message) {
                 throw new BitpayException($error_message);
             }
-            
+
             if (!empty($body['success'])) {
                 return json_encode($body);
             }
@@ -340,12 +368,16 @@ class RESTcli
             }
 
             return json_encode($body['data']);
-
         } catch (BitpayException $e) {
-            throw new BitPayException("failed to retrieve HTTP response body : ".$e->getMessage(), null, null, $e->getApiCode());
+            throw new BitPayException(
+                "failed to retrieve HTTP response body : " .
+                $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
         } catch (Exception $e) {
-            throw new BitPayException("failed to retrieve HTTP response body : ".$e->getMessage());
+            throw new BitPayException("failed to retrieve HTTP response body : " . $e->getMessage());
         }
     }
-
 }

@@ -2,7 +2,6 @@
 
 namespace BitPaySDK\Model\Invoice;
 
-
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
@@ -43,7 +42,7 @@ class Invoice
     protected $_autoRedirect  = false;
     protected $_jsonPayProRequired;
     protected $_buyerEmail;
-    
+
     protected $_merchantName;
     protected $_forcedBuyerSelectedWallet;
     protected $_forcedBuyerSelectedTransactionCurrency;
@@ -71,7 +70,7 @@ class Invoice
     protected $_refundInfo;
     protected $_extendedNotifications = false;
     protected $_isCancelled;
-    
+
     protected $_transactionCurrency;
     protected $_underpaidAmount;
     protected $_overpaidAmount;
@@ -561,7 +560,7 @@ class Invoice
     {
         $this->_supportedTransactionCurrencies = $supportedTransactionCurrencies;
     }
-    
+
     public function getPaymentTotals()
     {
         return $this->_paymentTotals;

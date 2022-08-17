@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BitPaySDK\Model\Invoice;
-
 
 interface RefundStatus
 {

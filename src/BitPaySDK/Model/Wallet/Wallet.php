@@ -17,7 +17,7 @@ class Wallet
     /**
      * Constructor, create a minimal request Wallet object.
      *
-     * @param $currencies details of what currencies support payments for this wallet 
+     * @param $currencies details of what currencies support payments for this wallet
     */
     public function __construct()
     {

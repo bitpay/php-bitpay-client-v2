@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BitPaySDK\Model\Rate;
-
 
 use BitPaySDK\Client;
 use BitPaySDK\Exceptions\BitPayException;
@@ -39,7 +37,7 @@ class Rates
         $this->_rates = $this->_bp->getRates()->getRates();
     }
 
-    public function getRate(String $currencyCode)
+    public function getRate(string $currencyCode)
     {
         $val = null;
 

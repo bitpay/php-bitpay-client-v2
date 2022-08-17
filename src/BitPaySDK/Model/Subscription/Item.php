@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BitPaySDK\Model\Subscription;
-
 
 class Item
 {
@@ -52,7 +50,7 @@ class Item
         $instance = new self();
 
         foreach ($item as $key => $value) {
-            $instance->{'_'.$key} = $value;
+            $instance->{'_' . $key} = $value;
         }
 
         return $instance;

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<ruleset name="BitPayStandard">
+    <description>BitPay coding standard, based on PSR-12, temporarily excluding some rules.</description>
+    <rule ref="PSR12">
+        <exclude name="Generic.NamingConventions.UpperCaseConstantName" />
+        <exclude name="PSR12.Properties.ConstantVisibility.NotFound" />
+        <exclude name="PSR2.Classes.PropertyDeclaration" />
+        <exclude name="PSR2.Methods.MethodDeclaration.Underscore" />
+    </rule>
+</ruleset>

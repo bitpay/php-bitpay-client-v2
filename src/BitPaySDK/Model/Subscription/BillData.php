@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BitPaySDK\Model\Subscription;
-
 
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;

@@ -8,7 +8,6 @@ namespace BitPaySDK\Model\Bill;
  */
 class Item
 {
-
     protected $_id;
     protected $_description;
     protected $_price;
@@ -63,7 +62,7 @@ class Item
         $instance = new self();
 
         foreach ($item as $key => $value) {
-            $instance->{'_'.$key} = $value;
+            $instance->{'_' . $key} = $value;
         }
 
         return $instance;
