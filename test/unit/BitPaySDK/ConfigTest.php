@@ -16,7 +16,7 @@ class ConfigTest extends TestCase
     public function testGetEnvironment()
     {
         $config = new Config();
-        $environment = '';
+        $environment = 'test';
         $config->setEnvironment($environment);
         $this->assertEquals($environment, $config->getEnvironment());
     }
@@ -24,7 +24,7 @@ class ConfigTest extends TestCase
     public function testGetEnvConfig()
     {
         $config = new Config();
-        $envConfig = '';
+        $envConfig = 'test';
         $config->setEnvConfig($envConfig);
         $this->assertEquals($envConfig, $config->getEnvConfig());
     }
