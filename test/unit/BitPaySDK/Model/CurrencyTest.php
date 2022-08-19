@@ -64,22 +64,6 @@ class CurrencyTest extends TestCase
         $this->assertEquals($currencyArray['settlementMinimum'], ['test']);
     }
 
-    private function setSetters(Currency $currency)
-    {
-        $currency->setCode('BTC');
-        $currency->setSymbol('Symbol');
-        $currency->setPrecision(1);
-        $currency->setCurrentlySettled(true);
-        $currency->setName('Bitcoin');
-        $currency->setPlural('plural');
-        $currency->setAlts('alts');
-        $currency->setMinimum('minimum');
-        $currency->setSanctioned(true);
-        $currency->setDecimals('decimals');
-        $currency->setPayoutFields(['test']);
-        $currency->setSettlementMinimum(['test']);
-    }
-
     public function testGetCode()
     {
         $currency = $this->createClassObject();
@@ -167,5 +151,21 @@ class CurrencyTest extends TestCase
     private function createClassObject()
     {
         return new Currency();
+    }
+
+    private function setSetters(Currency $currency)
+    {
+        $currency->setCode('BTC');
+        $currency->setSymbol('Symbol');
+        $currency->setPrecision(1);
+        $currency->setCurrentlySettled(true);
+        $currency->setName('Bitcoin');
+        $currency->setPlural('plural');
+        $currency->setAlts('alts');
+        $currency->setMinimum('minimum');
+        $currency->setSanctioned(true);
+        $currency->setDecimals('decimals');
+        $currency->setPayoutFields(['test']);
+        $currency->setSettlementMinimum(['test']);
     }
 }
