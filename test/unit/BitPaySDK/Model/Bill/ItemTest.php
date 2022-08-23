@@ -15,30 +15,38 @@ class ItemTest extends TestCase
 
     public function testGetId()
     {
+        $expectedId = 5;
+
         $item = $this->createClassObject();
-        $item->setId(5);
-        $this->assertEquals(5, $item->getId());
+        $item->setId($expectedId);
+        $this->assertEquals($expectedId, $item->getId());
     }
 
     public function testGetDescription()
     {
+        $expectedDescription = 'test description';
+
         $item = $this->createClassObject();
-        $item->setDescription('test description');
-        $this->assertEquals('test description', $item->getDescription());
+        $item->setDescription($expectedDescription);
+        $this->assertEquals($expectedDescription, $item->getDescription());
     }
 
     public function testGetPrice()
     {
+        $expectedPrice = 10.0;
+
         $item = $this->createClassObject();
-        $item->setPrice(10.0);
-        $this->assertEquals(10.0, $item->getPrice());
+        $item->setPrice($expectedPrice);
+        $this->assertEquals($expectedPrice, $item->getPrice());
     }
 
     public function testGetQuantity()
     {
+        $expectedQuantity = 5;
+
         $item = $this->createClassObject();
-        $item->setQuantity(5);
-        $this->assertEquals(5, $item->getQuantity());
+        $item->setQuantity($expectedQuantity);
+        $this->assertEquals($expectedQuantity, $item->getQuantity());
     }
 
     public function testCreateFromArray()

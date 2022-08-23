@@ -16,31 +16,37 @@ class BillTest extends TestCase
 
     public function testGetToken()
     {
+        $expectedToken = 'abcd123';
+
         $bill = $this->createClassObject();
-        $bill->setToken('abcd123');
-        $this->assertEquals('abcd123', $bill->getToken());
+        $bill->setToken($expectedToken);
+        $this->assertEquals($expectedToken, $bill->getToken());
     }
 
     public function testGetCurrency()
     {
+        $expectedCurrency = 'BTC';
+
         $bill = $this->createClassObject();
-        $bill->setCurrency('BTC');
-        $this->assertEquals('BTC', $bill->getCurrency());
+        $bill->setCurrency($expectedCurrency);
+        $this->assertEquals($expectedCurrency, $bill->getCurrency());
     }
 
     public function testGetEmail()
     {
+        $expectedEmail = 'test@test.com';
+
         $bill = $this->createClassObject();
-        $bill->setEmail('test@test.com');
-        $this->assertEquals('test@test.com', $bill->getEmail());
+        $bill->setEmail($expectedEmail);
+        $this->assertEquals($expectedEmail, $bill->getEmail());
     }
 
     public function testSetItems()
     {
         $bill = $this->createClassObject();
-        $arrayWithOutObject = ['test' => 'gd'];
+        $arrayWithoutObject = ['test' => 'gd'];
 
-        $createdObject = Item::createFromArray($arrayWithOutObject);
+        $createdObject = Item::createFromArray($arrayWithoutObject);
         $testArray = [new Item(), $createdObject];
 
         $bill->setItems($testArray);
@@ -50,79 +56,101 @@ class BillTest extends TestCase
 
     public function testGetNumber()
     {
+        $expectedNumber = '12';
+
         $bill = $this->createClassObject();
-        $bill->setNumber('12');
-        $this->assertEquals('12', $bill->getNumber());
+        $bill->setNumber($expectedNumber);
+        $this->assertEquals($expectedNumber, $bill->getNumber());
     }
 
     public function testGetName()
     {
+        $expectedName = 'TestName';
+
         $bill = $this->createClassObject();
-        $bill->setName('TestName');
-        $this->assertEquals('TestName',  $bill->getName());
+        $bill->setName($expectedName);
+        $this->assertEquals($expectedName,  $bill->getName());
     }
 
     public function testGetAddress1()
     {
+        $expectedAddress = 'Address1';
+
         $bill = $this->createClassObject();
-        $bill->setAddress1('Address1');
-        $this->assertEquals('Address1', $bill->getAddress1());
+        $bill->setAddress1($expectedAddress);
+        $this->assertEquals($expectedAddress, $bill->getAddress1());
     }
 
     public function testGetAddress2()
     {
+        $expectedAddress2 = 'Address2';
+
         $bill = $this->createClassObject();
-        $bill->setAddress2('Address2');
-        $this->assertEquals('Address2', $bill->getAddress2());
+        $bill->setAddress2($expectedAddress2);
+        $this->assertEquals($expectedAddress2, $bill->getAddress2());
     }
 
     public function testGetCity()
     {
+        $expectedCity = 'Miami';
+
         $bill = $this->createClassObject();
-        $bill->setCity('Miami');
-        $this->assertEquals('Miami', $bill->getCity());
+        $bill->setCity($expectedCity);
+        $this->assertEquals($expectedCity, $bill->getCity());
     }
 
     public function testGetState()
     {
+        $expectedState = 'Ab';
+
         $bill = $this->createClassObject();
-        $bill->setState('AB');
-        $this->assertEquals('AB', $bill->getState());
+        $bill->setState($expectedState);
+        $this->assertEquals($expectedState, $bill->getState());
     }
 
     public function testGetZip()
     {
+        $expectedZip = '12345';
+
         $bill = $this->createClassObject();
-        $bill->setZip('12345');
-        $this->assertEquals('12345', $bill->getZip());
+        $bill->setZip($expectedZip);
+        $this->assertEquals($expectedZip, $bill->getZip());
     }
 
     public function testGetCountry()
     {
+        $expectedCountry = 'Canada';
+
         $bill = $this->createClassObject();
-        $bill->setCountry('Canada');
-        $this->assertEquals('Canada', $bill->getCountry());
+        $bill->setCountry($expectedCountry);
+        $this->assertEquals($expectedCountry, $bill->getCountry());
     }
 
     public function testGetCc()
     {
+        $expectedCc = [''];
+
         $bill = $this->createClassObject();
-        $bill->setCc(['']);
-        $this->assertEquals([''], $bill->getCc());
+        $bill->setCc($expectedCc);
+        $this->assertEquals($expectedCc, $bill->getCc());
     }
 
     public function testGetPhone()
     {
+        $expectedPhone = '123456789';
+
         $bill = $this->createClassObject();
-        $bill->setPhone('123456789');
-        $this->assertEquals('123456789', $bill->getPhone());
+        $bill->setPhone($expectedPhone);
+        $this->assertEquals($expectedPhone, $bill->getPhone());
     }
 
     public function testGetDueDate()
     {
+        $expectedDueDate = '2022-01-01';
+
         $bill = $this->createClassObject();
-        $bill->setDueDate('2022-01-01');
-        $this->assertEquals('2022-01-01', $bill->getDueDate());
+        $bill->setDueDate($expectedDueDate);
+        $this->assertEquals($expectedDueDate, $bill->getDueDate());
     }
 
     public function testGetPassProcessingFee()
@@ -134,37 +162,47 @@ class BillTest extends TestCase
 
     public function testGetStatus()
     {
+        $expectedStatus = 'status';
+
         $bill = $this->createClassObject();
-        $bill->setStatus('status');
-        $this->assertEquals('status', $bill->getStatus());
+        $bill->setStatus($expectedStatus);
+        $this->assertEquals($expectedStatus, $bill->getStatus());
     }
 
     public function testGetUrl()
     {
+        $expectedUrl = 'http://test.com';
+
         $bill = $this->createClassObject();
-        $bill->setUrl('http://test.com');
-        $this->assertEquals('http://test.com', $bill->getUrl());
+        $bill->setUrl($expectedUrl);
+        $this->assertEquals($expectedUrl, $bill->getUrl());
     }
 
     public function testGetCreateDate()
     {
+        $expectedCreateDate = '2022-01-01';
+
         $bill = $this->createClassObject();
-        $bill->setCreateDate('2022-01-01');
-        $this->assertEquals('2022-01-01', $bill->getCreateDate());
+        $bill->setCreateDate($expectedCreateDate);
+        $this->assertEquals($expectedCreateDate, $bill->getCreateDate());
     }
 
     public function testGetId()
     {
+        $expectedId = '1';
+
         $bill = $this->createClassObject();
-        $bill->setId('1');
-        $this->assertEquals('1', $bill->getId());
+        $bill->setId($expectedId);
+        $this->assertEquals($expectedId, $bill->getId());
     }
 
     public function testGetMerchant()
     {
+        $expectedMerchant = 'TestUser';
+
         $bill = $this->createClassObject();
-        $bill->setMerchant('TestUser');
-        $this->assertEquals('TestUser', $bill->getMerchant());
+        $bill->setMerchant($expectedMerchant);
+        $this->assertEquals($expectedMerchant, $bill->getMerchant());
     }
 
     public function testToArray()
