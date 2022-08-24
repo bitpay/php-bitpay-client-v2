@@ -7,6 +7,12 @@ use PHPUnit\Framework\TestCase;
 
 class BuyerTest extends TestCase
 {
+    public function testInstanceOf()
+    {
+        $buyer = $this->createClassObject();
+        $this->assertInstanceOf(Buyer::class, $buyer);
+    }
+
     public function testGetName()
     {
         $expectedName = 'Test Name';
