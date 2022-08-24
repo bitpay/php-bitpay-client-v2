@@ -7,6 +7,12 @@ use PHPUnit\Framework\TestCase;
 
 class RateTest extends TestCase
 {
+    public function testInstanceOf()
+    {
+        $rate = $this->createClassObject();
+        $this->assertInstanceOf(Rate::class, $rate);
+    }
+
     public function testGetName()
     {
         $expectedName = 'Bitcoin';
