@@ -15,7 +15,7 @@ class Currencies
 
     public function __construct()
     {
-        // $this->_currencies = new CurrencyQr();
+        $this->_currencies = new CurrencyQr();
     }
 
     public function getCode()
