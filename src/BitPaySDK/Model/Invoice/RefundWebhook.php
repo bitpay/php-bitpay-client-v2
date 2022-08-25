@@ -16,7 +16,8 @@ class RefundWebhook
     protected $_buyerPaysRefundFee;
     protected $_requestDate;
 
-    public function __construct() {
+    public function __construct()
+    {
     }
 
     public function getId()
