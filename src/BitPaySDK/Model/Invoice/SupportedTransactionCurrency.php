@@ -5,6 +5,7 @@ namespace BitPaySDK\Model\Invoice;
 class SupportedTransactionCurrency
 {
     protected $_enabled;
+    protected $_reason;
 
     public function __construct()
     {
@@ -20,10 +21,21 @@ class SupportedTransactionCurrency
         return $this->_enabled;
     }
 
+    public function setReason(string $reason)
+    {
+        $this->_reason = $reason;
+    }
+
+    public function getReason()
+    {
+        return $this->_reason;
+    }
+
     public function toArray()
     {
         $elements = [
             'enabled' => $this->getEnabled(),
+            'reason'  => $this->getReason()
         ];
 
         foreach ($elements as $key => $value) {
