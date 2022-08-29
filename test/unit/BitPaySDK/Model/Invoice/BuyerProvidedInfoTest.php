@@ -103,6 +103,36 @@ class BuyerProvidedInfoTest extends TestCase
     $this->assertEquals($buyerProvidedInfoArray['smsVerified'], true);
   }
 
+  public function testToArrayEmptyKey()
+  {
+    $buyerProvidedInfo = $this->createClassObject();
+    $buyerProvidedInfo->setName('Test User');
+    $buyerProvidedInfo->setPhoneNumber('1112223333');
+    $buyerProvidedInfo->setSelectedWallet('bitpay');
+    $buyerProvidedInfo->setEmailAddress('example@bitpay.com');
+    $buyerProvidedInfo->setSelectedTransactionCurrency('BTC');
+    $buyerProvidedInfo->setSms('4445556666');
+
+    $buyerProvidedInfoArray = $buyerProvidedInfo->toArray();
+
+    $this->assertNotNull($buyerProvidedInfoArray);
+    $this->assertIsArray($buyerProvidedInfoArray);
+
+    $this->assertArrayHasKey('name', $buyerProvidedInfoArray);
+    $this->assertArrayHasKey('phoneNumber', $buyerProvidedInfoArray);
+    $this->assertArrayHasKey('selectedWallet', $buyerProvidedInfoArray);
+    $this->assertArrayHasKey('emailAddress', $buyerProvidedInfoArray);
+    $this->assertArrayHasKey('selectedTransactionCurrency', $buyerProvidedInfoArray);
+    $this->assertArrayHasKey('sms', $buyerProvidedInfoArray);
+
+    $this->assertEquals($buyerProvidedInfoArray['name'], 'Test User');
+    $this->assertEquals($buyerProvidedInfoArray['phoneNumber'], '1112223333');
+    $this->assertEquals($buyerProvidedInfoArray['selectedWallet'], 'bitpay');
+    $this->assertEquals($buyerProvidedInfoArray['emailAddress'], 'example@bitpay.com');
+    $this->assertEquals($buyerProvidedInfoArray['selectedTransactionCurrency'], 'BTC');
+    $this->assertEquals($buyerProvidedInfoArray['sms'], '4445556666');
+  }
+
   private function createClassObject()
   {
     return new BuyerProvidedInfo();
