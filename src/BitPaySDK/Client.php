@@ -488,15 +488,14 @@ class Client
      * Pay an invoice with a mock transaction
      *
      * @param  string $invoiceId The id of the invoice.
-     * @param  bool   $complete  Indicates if paid invoice should have status if complete true or a confirmed status
+     * @param  string $status    Status the invoice will become. Acceptable values are confirmed (default) and complete.
      * @return Invoice $invoice  Invoice object.
      * @throws InvoicePaymentException
      * @throws BitPayException
      */
     public function payInvoice(
         string $invoiceId,
-        string $status,
-        bool $complete = true
+        string $status = 'confirmed'
     ): Invoice {
         if (strtolower($this->_env) != "test") {
             throw new InvoicePaymentException("Pay Invoice method only available in test or demo environments");
@@ -506,7 +505,6 @@ class Client
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
             $params["status"] = $status;
-            $params["complete"] = $complete;
             $responseJson = $this->_RESTcli->update("invoices/pay/" . $invoiceId, $params, true);
         } catch (BitPayException $e) {
             throw new InvoicePaymentException(
