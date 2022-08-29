@@ -411,6 +411,7 @@ class PayoutBatch
     public function toArray()
     {
         $elements = [
+            'guid'              => $this->getGuid(),
             'token'             => $this->getToken(),
             'amount'            => $this->getAmount(),
             'currency'          => $this->getCurrency(),
@@ -425,6 +426,8 @@ class PayoutBatch
             'shopperId'         => $this->getShopperId(),
             'label'             => $this->getLabel(),
             'message'           => $this->getMessage(),
+            'redirectUrl'       => $this->getRedirectUrl(),
+            'pricingMethod'     => $this->getPricingMethod(),
             'id'                => $this->getId(),
             'account'           => $this->getAccount(),
             'supportPhone'      => $this->getSupportPhone(),
