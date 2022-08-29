@@ -102,7 +102,7 @@ class SupportedTransactionCurrencies
             'usdc' => $this->getUSDC()->toArray(),
             'gusd' => $this->getGUSD()->toArray(),
             'pax'  => $this->getPAX()->toArray(),
-            'xrp'  => $this->getXRP()->toArray()  
+            'xrp'  => $this->getXRP()->toArray()
         ];
 
         foreach ($elements as $key => $value) {
