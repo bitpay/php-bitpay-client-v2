@@ -820,6 +820,7 @@ class Invoice
             'amountPaid'                     => $this->getAmountPaid(),
             'exchangeRates'                  => $this->getExchangeRates(),
             'merchantName'                   => $this->getMerchantName(),
+            'selectedTransactionCurrency'    => $this->getSelectedTransactionCurrency(),
             'bitpayIdRequired'               => $this->getBitpayIdRequired(),
             'forcedBuyerSelectedWallet'      => $this->getForcedBuyerSelectedWallet(),
             'paymentString'                  => $this->getPaymentString(),
