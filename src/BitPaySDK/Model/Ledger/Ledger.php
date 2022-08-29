@@ -57,6 +57,7 @@ class Ledger
     public function toArray()
     {
         $elements = [
+            'entries'  => $this->getEntries(),
             'currency' => $this->getCurrency(),
             'balance'  => $this->getBalance(),
         ];
