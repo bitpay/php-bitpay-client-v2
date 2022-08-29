@@ -42,6 +42,7 @@ class Invoice
     protected $_autoRedirect  = false;
     protected $_jsonPayProRequired;
     protected $_buyerEmail;
+    protected $_buyerSms;
 
     protected $_merchantName;
     protected $_selectedTransactionCurrency;
@@ -407,6 +408,16 @@ class Invoice
     public function setBuyerEmail(string $buyerEmail)
     {
         $this->_buyerEmail = $buyerEmail;
+    }
+
+    public function getBuyerSms()
+    {
+        return $this->_buyerSms;
+    }
+
+    public function setBuyerSms(string $buyerSms)
+    {
+        $this->_buyerSms = $buyerSms;
     }
 
     // Response fields
@@ -827,6 +838,7 @@ class Invoice
             'verificationLink'               => $this->getVerificationLink(),
             'isCancelled'                    => $this->getIsCancelled(),
             'buyerEmail'                     => $this->getBuyerEmail(),
+            'buyerSms'                       => $this->getBuyerSms(),
             'itemizedDetails'                => $this->getItemizedDetails()->toArray(),
             'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];

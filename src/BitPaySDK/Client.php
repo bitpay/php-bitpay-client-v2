@@ -220,19 +220,32 @@ class Client
      * Update a BitPay invoice.
      *
      * @param string $invoiceId       The id of the invoice to updated.
+     * @param string $buyerSms        The buyer's cell number.
+     * @param string $smsCode         The buyer's received verification code.
      * @param string $buyerEmail      The buyer's email address.
+     * @param string $autoVerify      Skip the user verification on sandbox ONLY.
      * @return Invoice
      * @throws InvoiceUpdateException
      * @throws BitPayException
      */
     public function updateInvoice(
         string $invoiceId,
-        string $buyerEmail
+        string $buyerSms,
+        string $smsCode,
+        string $buyerEmail,
+        bool $autoVerify
     ): Invoice {
+        if ($buyerSms == null && $smsCode == null) {
+            throw new InvoiceUpdateException("Updating the invoice requires Mobile Phone Number for SMS reception.");
+        }
+
         try {
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
             $params["buyerEmail"] = $buyerEmail;
+            $params["buyerSms"]   = $buyerSms;
+            $params["smsCode"]    = $smsCode;
+            $params["autoVerify"] = $autoVerify;
 
             $responseJson = $this->_RESTcli->update("invoices/" . $invoiceId, $params);
         } catch (BitPayException $e) {
