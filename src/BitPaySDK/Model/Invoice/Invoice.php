@@ -44,6 +44,7 @@ class Invoice
     protected $_buyerEmail;
 
     protected $_merchantName;
+    protected $_selectedTransactionCurrency;
     protected $_forcedBuyerSelectedWallet;
     protected $_forcedBuyerSelectedTransactionCurrency;
     protected $_itemizedDetails;
@@ -315,6 +316,16 @@ class Invoice
     public function setMerchantName(string $merchantName)
     {
         $this->_merchantName = $merchantName;
+    }
+
+    public function getSelectedTransactionCurrency()
+    {
+        return $this->_selectedTransactionCurrency;
+    }
+
+    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
+    {
+        $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
     }
 
     public function getForcedBuyerSelectedWallet()
