@@ -235,8 +235,14 @@ class Client
         string $buyerEmail,
         bool $autoVerify
     ): Invoice {
-        if ($buyerSms == null && $smsCode == null) {
-            throw new InvoiceUpdateException("Updating the invoice requires Mobile Phone Number for SMS reception.");
+        // Updating the invoice will require EITHER SMS or E-mail, but not both.
+        if ((empty($buyerSms) && empty($buyerEmail)) || (!empty($buyerSms) && empty(!$buyerEmail))) {
+            throw new InvoiceUpdateException("Updating the invoice requires buyerSms or buyerEmail, but not both.");
+        }
+        
+        // smsCode required only when verifying SMS
+        if ((!empty($buyerSms) && empty($smsCode)) || (!empty($smsCode) && empty($buyerSms))) {
+            throw new InvoiceUpdateException("Updating the invoice requires both buyerSms and smsCode when verifying SMS.");
         }
 
         try {
