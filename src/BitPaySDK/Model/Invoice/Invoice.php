@@ -831,6 +831,7 @@ class Invoice
             'refundAddressRequestPending'    => $this->getRefundAddressRequestPending(),
             'buyerProvidedEmail'             => $this->getBuyerProvidedEmail(),
             'buyerProvidedInfo'              => $this->getBuyerProvidedInfo()->toArray(),
+            'transactionDetails'             => $this->getTransactionDetails()->toArray(),
             'universalCodes'                 => $this->getUniversalCodes()->toArray(),
             'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()->toArray(),
             'minerFees'                      => $this->getMinerFees()->toArray(),
