@@ -63,6 +63,7 @@ class Invoice
     protected $_refundAddressRequestPending;
     protected $_buyerProvidedEmail;
     protected $_buyerProvidedInfo;
+    protected $_transactionDetails;
     protected $_universalCodes;
     protected $_supportedTransactionCurrencies;
     protected $_minerFees;
@@ -561,6 +562,16 @@ class Invoice
     public function setBuyerProvidedInfo(BuyerProvidedInfo $buyerProvidedInfo)
     {
         $this->_buyerProvidedInfo = $buyerProvidedInfo;
+    }
+
+    public function getTransactionDetails()
+    {
+        return $this->_transactionDetails;
+    }
+
+    public function setTransactionDetails(TransactionDetails $transactionDetails)
+    {
+        $this->_transactionDetails = $transactionDetails;
     }
 
     public function getUniversalCodes()
