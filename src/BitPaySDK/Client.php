@@ -236,12 +236,12 @@ class Client
         bool $autoVerify = false
     ): Invoice {
         // Updating the invoice will require EITHER SMS or E-mail, but not both.
-        if ((empty($buyerSms) && empty($buyerEmail)) || (!empty($buyerSms) && empty(!$buyerEmail))) {
+        if ($this->buyerEmailOrSms($buyerEmail, $buyerSms)) {
             throw new InvoiceUpdateException("Updating the invoice requires buyerSms or buyerEmail, but not both.");
         }
 
         // smsCode required only when verifying SMS, except when autoVerify is true.
-        if ($autoVerify == false && (!empty($buyerSms) && empty($smsCode)) || (!empty($smsCode) && empty($buyerSms))) {
+        if ($this->isSmsCodeRequired($autoVerify, $buyerSms, $smsCode)) {
             throw new InvoiceUpdateException(
                 "Updating the invoice requires both buyerSms and smsCode when verifying SMS."
             );
@@ -249,7 +249,7 @@ class Client
 
         try {
             $params = [];
-            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"]      = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
             $params["buyerEmail"] = $buyerEmail;
             $params["buyerSms"]   = $buyerSms;
             $params["smsCode"]    = $smsCode;
@@ -2506,5 +2506,32 @@ class Client
         }
 
         return null;
+    }
+
+
+    /**
+     * Check if buyerEmail or buyerSms is present, and not both.
+     *
+     * @param string $buyerEmail The buyer's email address.
+     * @param string $buyerSms   The buyer's cell number.
+     *
+     * @return bool
+     */
+    private function buyerEmailOrSms(string $buyerEmail, string $buyerSms): bool
+    {
+        return (empty($buyerSms) && empty($buyerEmail)) || (!empty($buyerSms) && empty(!$buyerEmail));
+    }
+
+    /**
+     * Check if smsCode is required.
+     *
+     * @param bool   $autoVerify Skip the user verification on sandbox ONLY.
+     * @param string $buyerEmail The buyer's email address.
+     * @param string $smsCode    The buyer's received verification code.
+     */
+    private function isSmsCodeRequired(bool $autoVerify, string $buyerSms, string $smsCode): bool
+    {
+        return $autoVerify == false &&
+            (!empty($buyerSms) && empty($smsCode)) || (!empty($smsCode) && empty($buyerSms));
     }
 }
