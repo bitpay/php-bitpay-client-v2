@@ -7,6 +7,14 @@ use PHPUnit\Framework\TestCase;
 
 class BillExceptionTest extends TestCase
 {
+
+  public function testDefaultApiCode()
+  {
+    $exception = $this->createClassObject();
+    
+    $this->assertEquals(null, $exception->getApiCode());
+  }
+
   public function testInstanceOf()
   {
     $exception = $this->createClassObject();
@@ -27,10 +35,7 @@ class BillExceptionTest extends TestCase
   {
     $exception = $this->createClassObject();
     
-    $this->assertEquals(
-      111,
-      $exception->getCode()
-    );
+    $this->assertEquals(111, $exception->getCode());
   }
 
   // public function testGetApiCode()

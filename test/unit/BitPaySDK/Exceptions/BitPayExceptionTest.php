@@ -13,6 +13,20 @@ class BitPayExceptionTest extends TestCase
     $this->assertInstanceOf(BitPayException::class, $exception);
   }
 
+  public function testDefaultApiCode()
+  {
+    $exception = $this->createClassObject();
+    
+    $this->assertEquals(null, $exception->getApiCode());
+  }
+
+  public function testDefaultCode()
+  {
+    $exception = $this->createClassObject();
+    
+    $this->assertEquals(100, $exception->getCode());
+  }
+
   public function testDefaultMessage()
   {
     $exception = $this->createClassObject();
@@ -20,16 +34,6 @@ class BitPayExceptionTest extends TestCase
     $this->assertEquals(
       'BITPAY-GENERIC: Unexpected Bitpay exeption.-> ',
       $exception->getMessage()
-    );
-  }
-
-  public function testDefaultCode()
-  {
-    $exception = $this->createClassObject();
-    
-    $this->assertEquals(
-      100,
-      $exception->getCode()
     );
   }
 
