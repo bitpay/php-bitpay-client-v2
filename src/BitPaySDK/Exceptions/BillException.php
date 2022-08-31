@@ -6,8 +6,8 @@ use Exception;
 
 class BillException extends BitPayException
 {
-    private   $bitPayMessage = "An unexpected error occurred while trying to manage the bill";
-    private   $bitPayCode    = "BITPAY-BILL-GENERIC";
+    private $bitPayMessage = "An unexpected error occurred while trying to manage the bill";
+    private $bitPayCode    = "BITPAY-BILL-GENERIC";
 
     /**
      * Construct the BillException.
