@@ -8,7 +8,6 @@ class LedgerQueryException extends LedgerException
 {
     private $bitPayMessage = "Failed to retrieve ledger";
     private $bitPayCode    = "BITPAY-LEDGER-GET";
-    protected $apiCode;
 
     /**
      * Construct the LedgerQueryException.
@@ -21,14 +20,6 @@ class LedgerQueryException extends LedgerException
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
         $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }

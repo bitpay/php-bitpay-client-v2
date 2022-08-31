@@ -18,7 +18,6 @@ class InvoiceUpdateException extends InvoiceException
      */
     public function __construct($message = "", $code = 104, Exception $previous = null, $apiCode = "000000")
     {
-
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
         parent::__construct($message, $code, $previous, $apiCode);
     }

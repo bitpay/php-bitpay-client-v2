@@ -2,10 +2,10 @@
 
 namespace BitPaySDK\Test\Exceptions;
 
-use BitPaySDK\Exceptions\InvoiceUpdateException;
+use BitPaySDK\Exceptions\LedgerException;
 use PHPUnit\Framework\TestCase;
 
-class InvoiceUpdateExceptionTest extends TestCase
+class LedgerExceptionTest extends TestCase
 {
 
   public function testDefaultApiCode()
@@ -18,7 +18,7 @@ class InvoiceUpdateExceptionTest extends TestCase
   public function testInstanceOf()
   {
     $exception = $this->createClassObject();
-    $this->assertInstanceOf(InvoiceUpdateException::class, $exception);
+    $this->assertInstanceOf(LedgerException::class, $exception);
   }
 
   public function testDefaultMessage()
@@ -26,7 +26,7 @@ class InvoiceUpdateExceptionTest extends TestCase
     $exception = $this->createClassObject();
     
     $this->assertEquals(
-      'BITPAY-INVOICE-UPDATE: Failed to update invoice-> ',
+      'BITPAY-LEDGER-GENERIC: An unexpected error occurred while trying to manage the ledger-> ',
       $exception->getMessage()
     );
   }
@@ -35,14 +35,14 @@ class InvoiceUpdateExceptionTest extends TestCase
   {
     $exception = $this->createClassObject();
     
-    $this->assertEquals(104, $exception->getCode());
+    $this->assertEquals(131, $exception->getCode());
   }
 
   public function testGetApiCode()
   {
-    $exception = new InvoiceUpdateException(
+    $exception = new LedgerException(
       'My test message',
-      104,
+      131,
       null,
       'CUSTOM-API-CODE'
     );
@@ -52,6 +52,6 @@ class InvoiceUpdateExceptionTest extends TestCase
 
   private function createClassObject()
   {
-    return new InvoiceUpdateException();
+    return new LedgerException();
   }
 }
