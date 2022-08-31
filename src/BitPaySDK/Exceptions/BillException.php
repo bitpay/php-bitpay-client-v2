@@ -6,9 +6,8 @@ use Exception;
 
 class BillException extends BitPayException
 {
-    private $bitPayMessage = "An unexpected error occurred while trying to manage the bill";
-    private $bitPayCode    = "BITPAY-BILL-GENERIC";
-    protected $apiCode;
+    private   $bitPayMessage = "An unexpected error occurred while trying to manage the bill";
+    private   $bitPayCode    = "BITPAY-BILL-GENERIC";
 
     /**
      * Construct the BillException.
@@ -22,14 +21,6 @@ class BillException extends BitPayException
         if (!$message) {
             $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
         }
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }

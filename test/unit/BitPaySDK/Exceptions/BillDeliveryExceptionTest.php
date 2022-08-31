@@ -2,10 +2,10 @@
 
 namespace BitPaySDK\Test\Exceptions;
 
-use BitPaySDK\Exceptions\BillException;
+use BitPaySDK\Exceptions\BillDeliveryException;
 use PHPUnit\Framework\TestCase;
 
-class BillExceptionTest extends TestCase
+class BillDeliveryExceptionTest extends TestCase
 {
 
   public function testDefaultApiCode()
@@ -18,7 +18,7 @@ class BillExceptionTest extends TestCase
   public function testInstanceOf()
   {
     $exception = $this->createClassObject();
-    $this->assertInstanceOf(BillException::class, $exception);
+    $this->assertInstanceOf(BillDeliveryException::class, $exception);
   }
 
   public function testDefaultMessage()
@@ -26,7 +26,7 @@ class BillExceptionTest extends TestCase
     $exception = $this->createClassObject();
     
     $this->assertEquals(
-      'BITPAY-BILL-GENERIC: An unexpected error occurred while trying to manage the bill-> ',
+      'BITPAY-BILL-DELIVERY: Failed to deliver bill-> ',
       $exception->getMessage()
     );
   }
@@ -35,14 +35,14 @@ class BillExceptionTest extends TestCase
   {
     $exception = $this->createClassObject();
     
-    $this->assertEquals(111, $exception->getCode());
+    $this->assertEquals(115, $exception->getCode());
   }
 
   public function testGetApiCode()
   {
-    $exception = new BillException(
+    $exception = new BillDeliveryException(
       'My test message',
-      111,
+      115,
       null,
       'CUSTOM-API-CODE'
     );
@@ -52,6 +52,6 @@ class BillExceptionTest extends TestCase
 
   private function createClassObject()
   {
-    return new BillException();
+    return new BillDeliveryException();
   }
 }

@@ -8,7 +8,6 @@ class BillDeliveryException extends BillException
 {
     private $bitPayMessage = "Failed to deliver bill";
     private $bitPayCode    = "BITPAY-BILL-DELIVERY";
-    protected $apiCode;
 
     /**
      * Construct the BillDeliveryException.
@@ -20,15 +19,6 @@ class BillDeliveryException extends BillException
     public function __construct($message = "", $code = 115, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }
