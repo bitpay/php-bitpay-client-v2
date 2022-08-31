@@ -8,7 +8,6 @@ class PayoutBatchQueryException extends PayoutBatchException
 {
     private $bitPayMessage = "Failed to retrieve payout batch";
     private $bitPayCode    = "BITPAY-PAYOUT-BATCH-GET";
-    protected $apiCode;
 
     /**
      * Construct the PayoutBatchQueryException.
@@ -20,15 +19,6 @@ class PayoutBatchQueryException extends PayoutBatchException
     public function __construct($message = "", $code = 203, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }
