@@ -43,6 +43,7 @@ class TransactionDetailsTest extends TestCase
   public function testToArray()
   {
     $transactionDetails = $this->createClassObject();
+    $this->objectSetters($transactionDetails);
 
     $transactionDetailsArray = $transactionDetails->toArray();
 
@@ -60,9 +61,13 @@ class TransactionDetailsTest extends TestCase
 
   private function createClassObject()
   {
-    $amount      = 1.23;
-    $description = 'My description';
-    $isFee       = false;
-    return new TransactionDetails($amount, $description, $isFee);
+    return new TransactionDetails();
+  }
+
+  private function objectSetters(TransactionDetails $transactionDetails): void
+  {
+    $transactionDetails->setAmount(1.23);
+    $transactionDetails->setDescription("My description");
+    $transactionDetails->setIsFee(false);
   }
 }
