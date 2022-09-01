@@ -8,21 +8,11 @@ class TransactionDetails
     protected $_description;
     protected $_isFee;
 
-  /**
-   * Constructs a TransactionDetails object.
-   *
-   * @param float  $amount      The amount of the transaction.
-   * @param string $description The three digit currency string.
-   * @param bool   $isFee       Designates if the amount is a fee.
-   */
-    public function __construct(float $amount, string $description, bool $isFee)
+    public function __construct()
     {
-        $this->_amount = $amount;
-        $this->_description = $description;
-        $this->_isFee = $isFee;
     }
 
-    public function getAmount(): float
+    public function getAmount()
     {
         return $this->_amount;
     }
@@ -32,7 +22,7 @@ class TransactionDetails
         $this->_amount = $amount;
     }
 
-    public function getDescription(): string
+    public function getDescription()
     {
         return $this->_description;
     }
@@ -42,7 +32,7 @@ class TransactionDetails
         $this->_description = $description;
     }
 
-    public function getIsFee(): bool
+    public function getIsFee()
     {
         return $this->_isFee;
     }

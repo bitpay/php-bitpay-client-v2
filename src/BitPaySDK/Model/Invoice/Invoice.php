@@ -100,6 +100,7 @@ class Invoice
         $this->_shopper = new Shopper();
         $this->_refundInfo = new RefundInfo();
         $this->_itemizedDetails = new ItemizedDetails();
+        $this->_transactionDetails = new TransactionDetails();
     }
 
     // API fields
