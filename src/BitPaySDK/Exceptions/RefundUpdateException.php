@@ -2,11 +2,12 @@
 
 namespace BitPaySDK\Exceptions;
 
+use Exception;
+
 class RefundUpdateException extends RefundException
 {
     private $bitPayMessage = "Failed to update refund";
     private $bitPayCode    = "BITPAY-REFUND-UPDATE";
-    protected $apiCode;
 
     /**
      * Construct the RefundUpdateException.
@@ -19,15 +20,6 @@ class RefundUpdateException extends RefundException
     {
 
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }

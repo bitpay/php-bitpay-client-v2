@@ -8,7 +8,6 @@ class SubscriptionCreationException extends SubscriptionException
 {
     private $bitPayMessage = "Failed to create subscription";
     private $bitPayCode    = "BITPAY-SUBSCRIPTION-CREATE";
-    protected $apiCode;
 
     /**
      * Construct the SubscriptionCreationException.
@@ -20,15 +19,6 @@ class SubscriptionCreationException extends SubscriptionException
     public function __construct($message = "", $code = 172, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }
