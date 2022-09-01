@@ -7,6 +7,7 @@ class Currencies
     protected $_code;
     protected $_p2p;
     protected $_dappBrowser;
+    protected $_image;
     protected $_payPro;
     protected $_qr;
     protected $_withdrawalFee;
@@ -45,6 +46,16 @@ class Currencies
     public function setDappBrowser(bool $dappBrowser)
     {
         $this->_dappBrowser = $dappBrowser;
+    }
+
+    public function getImage()
+    {
+        return $this->_image;
+    }
+
+    public function setImage(string $image)
+    {
+        $this->_image = $image;
     }
 
     public function getPayPro()
@@ -93,6 +104,7 @@ class Currencies
             'code'            => $this->getCode(),
             'p2p'             => $this->getP2p(),
             'dappBrowser'     => $this->getDappBrowser(),
+            'image'           => $this->getImage(),
             'paypro'          => $this->getPayPro(),
             'qr'              => $this->getQr()->toArray(),
             'withdrawalFee'   => $this->getWithdrawalFee(),
