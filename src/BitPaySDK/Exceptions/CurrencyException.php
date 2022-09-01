@@ -8,7 +8,6 @@ class CurrencyException extends BitPayException
 {
     private $bitPayMessage = "An unexpected error occurred while trying to manage the currencies";
     private $bitPayCode    = "BITPAY-CURRENCY-GENERIC";
-    protected $apiCode;
 
     /**
      * Construct the CurrencyException.
@@ -22,14 +21,6 @@ class CurrencyException extends BitPayException
         if (!$message) {
             $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
         }
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }

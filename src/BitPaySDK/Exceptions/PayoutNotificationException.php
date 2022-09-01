@@ -8,7 +8,6 @@ class PayoutNotificationException extends PayoutException
 {
     private $bitPayMessage = "Failed to send payout notification";
     private $bitPayCode    = "BITPAY-PAYOUT-NOTIFICATION";
-    protected $apiCode;
 
     /**
      * Construct the PayoutNotificationException.
@@ -20,15 +19,6 @@ class PayoutNotificationException extends PayoutException
     public function __construct($message = "", $code = 126, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }

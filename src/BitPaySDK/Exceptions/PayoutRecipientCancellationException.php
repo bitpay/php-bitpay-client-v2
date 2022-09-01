@@ -8,7 +8,6 @@ class PayoutRecipientCancellationException extends PayoutRecipientException
 {
     private $bitPayMessage = "Failed to cancel payout recipient";
     private $bitPayCode    = "BITPAY-PAYOUT-RECIPIENT-CANCEL";
-    protected $apiCode;
 
     /**
      * Construct the PayoutRecipientCancellationException.
@@ -20,15 +19,6 @@ class PayoutRecipientCancellationException extends PayoutRecipientException
     public function __construct($message = "", $code = 194, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }
