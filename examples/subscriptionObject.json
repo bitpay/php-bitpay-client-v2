@@ -1,0 +1,43 @@
+{
+  "facade": "merchant/subscription",
+  "data": {
+    "id": "SeL33Hjyr3VmFHA5Skc4zy",
+    "status": "draft",
+    "billData": {
+      "emailBill": true,
+      "cc": [
+        "jane@doe.com"
+      ],
+      "number": "subscription1234-ABCDE",
+      "currency": "USD",
+      "name": "John Doe",
+      "address1": "2630 Hegal Place",
+      "address2": "Apt 42",
+      "city": "Alexandria",
+      "state": "VA",
+      "zip": "23242",
+      "country": "US",
+      "email": "john@doe.com",
+      "phone": "555-123-456",
+      "dueDate": "2031-5-31",
+      "passProcessingFee": true,
+      "items": [
+        {
+          "description": "Test Item 1",
+          "price": 6,
+          "quantity": 1
+        },
+        {
+          "description": "Test Item 2",
+          "price": 4,
+          "quantity": 1
+        }
+      ],
+      "merchant": "5461e13dfd8b0047590d644a"
+    },
+    "schedule": "yearly",
+    "nextDelivery": "2031-05-24",
+    "createdDate": "2021-05-21",
+    "token": "85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn"
+  }
+}
