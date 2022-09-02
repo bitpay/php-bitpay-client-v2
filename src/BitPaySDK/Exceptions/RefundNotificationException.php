@@ -2,11 +2,12 @@
 
 namespace BitPaySDK\Exceptions;
 
+use Exception;
+
 class RefundNotificationException extends RefundException
 {
     private $bitPayMessage = "Failed to send refund notification";
     private $bitPayCode    = "BITPAY-REFUND-NOTIFICATION";
-    protected $apiCode;
 
     /**
      * Construct the RefundNotificationException.
@@ -19,15 +20,6 @@ class RefundNotificationException extends RefundException
     {
 
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }
