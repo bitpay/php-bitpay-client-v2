@@ -51,16 +51,13 @@ class SupportedTransactionCurrencyTest extends TestCase
   public function testToArrayEmptyKey()
   {
     $supportedTransactionCurrency = $this->createClassObject();
-    $supportedTransactionCurrency->setEnabled(true);
 
     $supportedTransactionCurrencyArray = $supportedTransactionCurrency->toArray();
 
     $this->assertNotNull($supportedTransactionCurrencyArray);
     $this->assertIsArray($supportedTransactionCurrencyArray);
 
-    $this->assertArrayHasKey('enabled', $supportedTransactionCurrencyArray);
-
-    $this->assertEquals($supportedTransactionCurrencyArray['enabled'], true);
+    $this->assertArrayNotHasKey('enabled', $supportedTransactionCurrencyArray);
   }
 
   private function createClassObject()
