@@ -3,6 +3,7 @@
 namespace BitPaySDK\Test\Model\Rate;
 
 use BitPaySDK\Client;
+use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use PHPUnit\Framework\TestCase;
@@ -21,6 +22,26 @@ class RatesTest extends TestCase
 
         $ratesArray = $rates->getRates();
         $this->assertIsArray($ratesArray);
+    }
+
+    public function testGetRateException()
+    {
+        $rates = $this->createClassObject();
+        $this->expectException(BitPayException::class);
+        $this->expectExceptionMessage('currency code must be a type of Model.Currency');
+        $rates->getRate('ELO');
+    }
+
+    public function testToArray()
+    {
+        $rates = $this->createClassObject();
+        $ratesEmpty = new Rates([], $this->getMockBuilder(Client::class)->getMock());
+        $ratesArray = $rates->toArray();
+
+        $ratesEmptyArray = $ratesEmpty->toArray();
+
+        $this->assertIsArray($ratesArray);
+        $this->assertArrayNotHasKey('rates', $ratesEmptyArray);
     }
 
     private function createClassObject()
