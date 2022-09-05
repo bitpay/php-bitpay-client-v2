@@ -34,8 +34,7 @@ class UniversalCodesTest extends TestCase
     public function testToArray()
     {
         $universalCodes = $this->createClassObject();
-        $universalCodes->setPaymentString('Test payment string');
-        $universalCodes->setVerificationLink('http://test.com');
+        $this->setSetters($universalCodes);
         $universalCodesArray = $universalCodes->toArray();
 
         $this->assertNotNull($universalCodesArray);
@@ -51,5 +50,11 @@ class UniversalCodesTest extends TestCase
     private function createClassObject()
     {
         return new UniversalCodes();
+    }
+
+    private function setSetters(UniversalCodes $universalCodes)
+    {
+        $universalCodes->setPaymentString('Test payment string');
+        $universalCodes->setVerificationLink('http://test.com');
     }
 }
