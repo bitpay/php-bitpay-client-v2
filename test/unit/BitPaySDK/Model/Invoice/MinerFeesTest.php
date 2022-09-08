@@ -104,10 +104,21 @@ class MinerFeesTest extends TestCase
         $this->assertEquals($expectedLTC, $minesFees->getLTC());
     }
 
-//    public function testToArray()
-//    {
-//
-//    }
+    public function testToArray()
+    {
+        $expectedMinerFeesItem = $this->getMockBuilder(MinerFeesItem::class)->getMock();
+        $expectedMinerFeesItem->expects($this->once())->method('toArray')->willReturn(['satoshisPerByte' => 1.1, 'totalFee' => 1.1, 'fiatAmount' => 1.1]);
+        $minesFees = $this->createClassObject();
+        $minesFees->setBTC($expectedMinerFeesItem);
+        $minesFeesArray = $minesFees->toArray();
+
+        $this->assertNotNull($minesFeesArray);
+        $this->assertIsArray($minesFeesArray);
+
+        $this->assertArrayHasKey('btc', $minesFeesArray);
+        $this->assertArrayNotHasKey('bch', $minesFeesArray);
+        $this->assertEquals(['btc' => ['satoshisPerByte' => 1.1,  'totalFee' => 1.1, 'fiatAmount' => 1.1]], $minesFeesArray);
+    }
 
     public function testToArrayEmptyKey()
     {
