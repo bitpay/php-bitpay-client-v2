@@ -70,22 +70,25 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $this->assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getXRP());
     }
 
-//    public function testToArray()
-//    {
-//        $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
-//        $expectedSupportedTransactionCurrency->expects($this->once())->method('getEnabled')->willReturn(false);
-//        $expectedSupportedTransactionCurrency->expects($this->once())->method('getReason')->willReturn('test reason');
-//        $expectedSupportedTransactionCurrency->expects($this->once())->method('toArray')->willReturn(false);
-//        $supportedTransactionCurrencies = $this->createClassObject();
-//        $supportedTransactionCurrencies->setBTC($expectedSupportedTransactionCurrency);
-//        $test = $supportedTransactionCurrencies->toArray();
-//
-//    }
+    public function testToArray()
+    {
+        $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
+        $expectedSupportedTransactionCurrency->expects($this->once())->method('toArray')->willReturn(['enabled' => true, 'reason' => 'test']);
+        $supportedTransactionCurrencies = $this->createClassObject();
+        $supportedTransactionCurrencies->setBTC($expectedSupportedTransactionCurrency);
+        $supportedTransactionCurrenciesArray = $supportedTransactionCurrencies->toArray();
+
+        $this->assertNotNull($supportedTransactionCurrenciesArray);
+        $this->assertIsArray($supportedTransactionCurrenciesArray);
+
+        $this->assertArrayHasKey('btc', $supportedTransactionCurrenciesArray);
+        $this->assertArrayNotHasKey('bch', $supportedTransactionCurrenciesArray);
+        $this->assertEquals(['btc' => ['enabled' => true,  'reason' => 'test']], $supportedTransactionCurrenciesArray);
+    }
 
     public function testToArrayEmptyKey()
     {
         $supportedTransactionCurrencies = $this->createClassObject();
-
         $supportedTransactionCurrenciesArray = $supportedTransactionCurrencies->toArray();
 
         $this->assertNotNull($supportedTransactionCurrenciesArray);
