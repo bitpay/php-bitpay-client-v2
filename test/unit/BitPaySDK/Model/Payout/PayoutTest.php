@@ -25,7 +25,7 @@ class PayoutTest extends TestCase
     $this->assertEquals($expectedToken, $payout->getToken());
   }
 
-  public function testAmount()
+  public function testGetAmount()
   {
     $expectedAmount = 10.0;
 
