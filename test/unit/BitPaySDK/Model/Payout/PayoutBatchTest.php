@@ -83,9 +83,20 @@ class PayoutBatchTest extends TestCase
     $this->assertEquals($expectedInstructions[0]->toArray(), $payoutBatch->getInstructions()[0]);
   }
 
-  // public function testGetInstructionsArray()
-  // {
-  // }
+  public function testGetInstructionsArray()
+  {
+
+    $expectedInstructions = [
+      [
+        'amount' => 10.0,
+        'email' => 'john@doe.com'
+      ]
+    ];
+    
+    $payoutBatch = new PayoutBatch(Currency::USD, [], Currency::BTC);
+    $payoutBatch->setInstructions($expectedInstructions);
+    $this->assertEquals($expectedInstructions, $payoutBatch->getInstructions());
+  }
 
   public function testGetLedgerCurrency() {
     $expectedLedgerCurrency = Currency::BTC;
