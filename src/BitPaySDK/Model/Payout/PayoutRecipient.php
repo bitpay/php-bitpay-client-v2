@@ -2,8 +2,6 @@
 
 namespace BitPaySDK\Model\Payout;
 
-use BitPaySDK;
-
 /**
  *
  * @package Bitpay
