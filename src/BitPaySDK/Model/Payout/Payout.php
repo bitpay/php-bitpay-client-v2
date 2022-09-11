@@ -11,21 +11,21 @@ use BitPaySDK\Model\Currency;
  */
 class Payout
 {
-    protected $_token = "";
+    protected $_token = '';
 
     protected $_amount       = 0.0;
-    protected $_currency     = "";
+    protected $_currency     = '';
     protected $_effectiveDate;
-    protected $_ledgerCurrency = "";
+    protected $_ledgerCurrency = '';
 
-    protected $_reference         = "";
-    protected $_notificationUrl   = "";
-    protected $_notificationEmail = "";
-    protected $_email = "";
-    protected $_recipientId = "";
-    protected $_shopperId = "";
-    protected $_label = "";
-    protected $_message = "";
+    protected $_reference         = '';
+    protected $_notificationUrl   = '';
+    protected $_notificationEmail = '';
+    protected $_email = '';
+    protected $_recipientId = '';
+    protected $_shopperId = '';
+    protected $_label = '';
+    protected $_message = '';
 
     protected $_id;
     protected $_status;

@@ -15,7 +15,7 @@ class PayoutInstruction
     protected $_email;
     protected $_recipientId;
     protected $_shopperId;
-    protected $_label = "";
+    protected $_label = '';
     protected $_id;
 
     /**
