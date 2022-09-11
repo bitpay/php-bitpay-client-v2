@@ -31,9 +31,6 @@ class PayoutInstructionsBtcSummaryTest extends TestCase
 
   public function testToArray()
   {
-    $expectedPaid = 1.23;
-    $expectedUnpaid = 4.56;
-
     $payoutInstructionBtcSummary = $this->createClassObject();
     $payoutInstructionBtcSummaryArray = $payoutInstructionBtcSummary->toArray();
 
@@ -42,6 +39,9 @@ class PayoutInstructionsBtcSummaryTest extends TestCase
 
     $this->assertArrayHasKey('paid', $payoutInstructionBtcSummaryArray);
     $this->assertArrayHasKey('unpaid', $payoutInstructionBtcSummaryArray);
+
+    $this->assertEquals($payoutInstructionBtcSummaryArray['paid'], 1.23);
+    $this->assertEquals($payoutInstructionBtcSummaryArray['unpaid'], 4.56);
   }
 
   private function createClassObject()

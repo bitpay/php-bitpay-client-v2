@@ -313,6 +313,35 @@ class PayoutBatchTest extends TestCase
     $this->assertArrayHasKey('requestDate', $payoutBatchArray);
     $this->assertArrayHasKey('dateExecuted', $payoutBatchArray);
     $this->assertArrayHasKey('exchangeRates', $payoutBatchArray);
+
+    $this->assertEquals($payoutBatchArray['currency'], Currency::USD);
+    $this->assertEquals($payoutBatchArray['instructions'][0]['amount'], 10.0);
+    $this->assertEquals($payoutBatchArray['instructions'][0]['email'], 'john@doe.com');
+    $this->assertEquals($payoutBatchArray['ledgerCurrency'], Currency::BTC);
+    $this->assertEquals($payoutBatchArray['token'], '6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL');
+    $this->assertEquals($payoutBatchArray['amount'], 10.0);
+    $this->assertEquals($payoutBatchArray['effectiveDate'], '2021-05-27T09:00:00.000Z');
+    $this->assertEquals($payoutBatchArray['reference'], 'payout_20210527');
+    $this->assertEquals($payoutBatchArray['notificationURL'], 'http://example.com');
+    $this->assertEquals($payoutBatchArray['notificationEmail'], 'test@test.com');
+    $this->assertEquals($payoutBatchArray['email'], 'test@test.com');
+    $this->assertEquals($payoutBatchArray['recipientId'], 'LDxRZCGq174SF8AnQpdBPB');
+    $this->assertEquals($payoutBatchArray['shopperId'], '7qohDf2zZnQK5Qanj8oyC2');
+    $this->assertEquals($payoutBatchArray['label'], 'My label');
+    $this->assertEquals($payoutBatchArray['message'], 'My message');
+    $this->assertEquals($payoutBatchArray['id'], 'abcd123');
+    $this->assertEquals($payoutBatchArray['account'], 'Test account');
+    $this->assertEquals($payoutBatchArray['supportPhone'], '2155551212');
+    $this->assertEquals($payoutBatchArray['status'], 'success');
+    $this->assertEquals($payoutBatchArray['percentFee'], 1.0);
+    $this->assertEquals($payoutBatchArray['fee'], 1.0);
+    $this->assertEquals($payoutBatchArray['depositTotal'], 1.0);
+    $this->assertEquals($payoutBatchArray['btc'], 1);
+    $this->assertEquals($payoutBatchArray['rate'], 1);
+    $this->assertEquals($payoutBatchArray['requestDate'], '2021-05-27T10:47:37.834Z');
+    $this->assertEquals($payoutBatchArray['dateExecuted'], '2022-01-01T10:47:37.834Z');
+    $this->assertEquals($payoutBatchArray['exchangeRates']['BTC']['USD'], 39390.47);
+    $this->assertEquals($payoutBatchArray['exchangeRates']['BTC']['GBP'], 27883.962246420004);
   }
 
   public function testToArrayEmptyKey()
