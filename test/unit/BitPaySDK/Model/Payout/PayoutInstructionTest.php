@@ -6,6 +6,7 @@ use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\PayoutBatchCreationException;
 use BitPaySDK\Model\Payout\PayoutInstruction;
 use BitPaySDK\Model\Payout\PayoutInstructionBtcSummary;
+use BitPaySDK\Model\Payout\PayoutInstructionTransaction;
 use BitPaySDK\Model\Payout\RecipientReferenceMethod;
 use PHPUnit\Framework\TestCase;
 
@@ -119,13 +120,13 @@ class PayoutInstructionTest extends TestCase
 
   public function testGetTransactions()
   {
-    $expectedTransactions = [
-      [
-        'txid' => 'db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057',
-        'amount' => 0.000254,
-        'date' => '2021-05-27T11:04:23.155Z'
-      ]
-    ];
+    $expectedTransactions = [];
+
+    $transaction = new PayoutInstructionTransaction();
+    $transaction->setTxid('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
+    $transaction->setAmount(0.000254);
+    $transaction->setDate('2021-05-27T11:04:23.155Z');
+    array_push($expectedTransactions, $transaction);
 
     $payoutInstruction = new PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, 'john@doe.com');
     $payoutInstruction->setTransactions($expectedTransactions);
@@ -133,7 +134,7 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedTransactions, $payoutInstruction->getTransactions());
   }
 
-  public function testgetStatus()
+  public function testGetStatus()
   {
     $expectedStatus = 'success';
     
@@ -176,8 +177,26 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($payoutInstructionArray['status'], 'success');
   }
 
+  public function testToArrayEmptyKey()
+  {
+    $payoutInstruction = new PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, 'john@doe.com');
+    $payoutInstructionArray = $payoutInstruction->toArray();
+
+    $this->assertNotNull($payoutInstructionArray);
+    $this->assertIsArray($payoutInstructionArray);
+
+    $this->assertArrayNotHasKey('transactions', $payoutInstructionArray);
+  }
+
   private function objectSetters(PayoutInstruction $payoutInstruction)
   {
+    $transactions = [];
+    $transaction = new PayoutInstructionTransaction();
+    $transaction->setTxid('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
+    $transaction->setAmount(0.000254);
+    $transaction->setDate('2021-05-27T11:04:23.155Z');
+    array_push($transactions, $transaction->toArray());
+
     $payoutInstruction->setAmount(10.0);
     $payoutInstruction->setEmail('jane@doe.com');
     $payoutInstruction->setRecipientId('abcd123');
@@ -185,13 +204,7 @@ class PayoutInstructionTest extends TestCase
     $payoutInstruction->setLabel('My label');
     $payoutInstruction->setId('ijkl789');
     $payoutInstruction->setBtc(new PayoutInstructionBtcSummary(1.23, 4.56));
-    $payoutInstruction->setTransactions([
-      [
-        'txid' => 'db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057',
-        'amount' => 0.000254,
-        'date' => '2021-05-27T11:04:23.155Z'
-      ]
-    ]);
+    $payoutInstruction->setTransactions($transactions);
     $payoutInstruction->setStatus('success');
   }
 }
