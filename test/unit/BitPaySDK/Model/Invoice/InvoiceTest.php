@@ -6,6 +6,7 @@ use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Invoice\Buyer;
 use BitPaySDK\Model\Invoice\BuyerProvidedInfo;
 use BitPaySDK\Model\Invoice\Invoice;
+use BitPaySDK\Model\Invoice\ItemizedDetails;
 use BitPaySDK\Model\Invoice\MinerFees;
 use BitPaySDK\Model\Invoice\RefundInfo;
 use BitPaySDK\Model\Invoice\Shopper;
@@ -238,10 +239,14 @@ class InvoiceTest extends TestCase
         $this->assertEquals($expectedForcedBuyerSelectedTransactionCurrency, $invoice->getForcedBuyerSelectedTransactionCurrency());
     }
 
-//    public function testGetItemizedDetailsAsArray()
-//    {
-//        TODO
-//    }
+    public function testGetItemizedDetailsAsArray()
+    {
+        $expectedItemizedDetails = $this->getMockBuilder(ItemizedDetails::class)->getMock();
+        $invoice = $this->createClassObject();
+        $invoice->setItemizedDetails($expectedItemizedDetails);
+
+        $this->assertEquals([], $invoice->getItemizedDetails());
+    }
 
     public function testGetBuyer()
     {
@@ -595,10 +600,154 @@ class InvoiceTest extends TestCase
         $this->assertFalse($invoice->getIsCancelled());
     }
 
-//    public function testToArray()
-//    {
-//        TODO
-//    }
+    public function testToArray()
+    {
+        $invoice = $this->createClassObject();
+        $invoice->setCurrency('BTC');
+        $invoice->setGuid('Test guid');
+        $invoice->setToken('4h2h7kee5eh2hh4');
+        $invoice->setPrice(355.3);
+        $invoice->setPosData('Test pos data');
+        $invoice->setNotificationURL('http://test.com');
+        $invoice->setTransactionSpeed('Test transaction speed');
+        $invoice->setFullNotifications(true);
+        $invoice->setNotificationEmail('test@email.com');
+        $invoice->setRedirectURL('http://test.com');
+        $invoice->setOrderId('34');
+        $invoice->setItemDesc('Test item desc');
+        $invoice->setItemCode('Test item code');
+        $invoice->setPhysical(true);
+        $invoice->setPaymentCurrencies(['BTC']);
+        $invoice->setAcceptanceWindow(1.1);
+        $invoice->setCloseURL('http://test.com');
+        $invoice->setAutoRedirect(true);
+        $invoice->setRefundAddresses(['Test refund address']);
+        $invoice->setId('12');
+        $invoice->setUrl('http://test.com');
+        $invoice->setStatus('pending');
+        $invoice->setLowFeeDetected('Low fee detected');
+        $invoice->setInvoiceTime('01:01:01');
+        $invoice->setExpirationTime('01:01:01');
+        $invoice->setCurrentTime('01:01:01');
+        $invoice->setTransactions('Transactions');
+        $invoice->setExceptionStatus('Exception status');
+        $invoice->setTargetConfirmations('Target confirmations');
+        $invoice->setRefundAddressRequestPending('Refund address request pending');
+        $invoice->setBuyerProvidedEmail('test@email.com');
+        $invoice->setBillId('34');
+        $invoice->setExtendedNotifications(true);
+        $invoice->setTransactionCurrency('BTC');
+        $invoice->setAmountPaid(12);
+        $invoice->setExchangeRates('ExchangeRates');
+        $invoice->setMerchantName('Merchant name');
+        $invoice->setSelectedTransactionCurrency('BTC');
+        $invoice->setBitpayIdRequired(true);
+        $invoice->setForcedBuyerSelectedWallet('Forced Buyer Selected Wallet');
+        $invoice->setPaymentString('Payment string');
+        $invoice->setVerificationLink('http://test.com');
+        $invoice->setIsCancelled(true);
+        $invoice->setBuyerEmail('test@email.com');
+        $invoice->setBuyerSms('Buyer sms');
+        $invoice->setForcedBuyerSelectedTransactionCurrency('BTC');
+        $invoiceArray = $invoice->toArray();
+
+        $this->assertNotNull($invoiceArray);
+        $this->assertIsArray($invoiceArray);
+
+        $this->assertArrayHasKey('currency', $invoiceArray);
+        $this->assertArrayHasKey('guid', $invoiceArray);
+        $this->assertArrayHasKey('token', $invoiceArray);
+        $this->assertArrayHasKey('price', $invoiceArray);
+        $this->assertArrayHasKey('posData', $invoiceArray);
+        $this->assertArrayHasKey('notificationURL', $invoiceArray);
+        $this->assertArrayHasKey('transactionSpeed', $invoiceArray);
+        $this->assertArrayHasKey('fullNotifications', $invoiceArray);
+        $this->assertArrayHasKey('notificationEmail', $invoiceArray);
+        $this->assertArrayHasKey('redirectURL', $invoiceArray);
+        $this->assertArrayHasKey('orderId', $invoiceArray);
+        $this->assertArrayHasKey('itemDesc', $invoiceArray);
+        $this->assertArrayHasKey('itemCode', $invoiceArray);
+        $this->assertArrayHasKey('physical', $invoiceArray);
+        $this->assertArrayHasKey('paymentCurrencies', $invoiceArray);
+        $this->assertArrayHasKey('acceptanceWindow', $invoiceArray);
+        $this->assertArrayHasKey('closeURL', $invoiceArray);
+        $this->assertArrayHasKey('autoRedirect', $invoiceArray);
+        $this->assertArrayHasKey('refundAddresses', $invoiceArray);
+        $this->assertArrayHasKey('id', $invoiceArray);
+        $this->assertArrayHasKey('url', $invoiceArray);
+        $this->assertArrayHasKey('status', $invoiceArray);
+        $this->assertArrayHasKey('lowFeeDetected', $invoiceArray);
+        $this->assertArrayHasKey('invoiceTime', $invoiceArray);
+        $this->assertArrayHasKey('expirationTime', $invoiceArray);
+        $this->assertArrayHasKey('currentTime', $invoiceArray);
+        $this->assertArrayHasKey('transactions', $invoiceArray);
+        $this->assertArrayHasKey('exceptionStatus', $invoiceArray);
+        $this->assertArrayHasKey('targetConfirmations', $invoiceArray);
+        $this->assertArrayHasKey('refundAddressRequestPending', $invoiceArray);
+        $this->assertArrayHasKey('buyerProvidedEmail', $invoiceArray);
+        $this->assertArrayHasKey('billId', $invoiceArray);
+        $this->assertArrayHasKey('extendedNotifications', $invoiceArray);
+        $this->assertArrayHasKey('transactionCurrency', $invoiceArray);
+        $this->assertArrayHasKey('amountPaid', $invoiceArray);
+        $this->assertArrayHasKey('exchangeRates', $invoiceArray);
+        $this->assertArrayHasKey('merchantName', $invoiceArray);
+        $this->assertArrayHasKey('selectedTransactionCurrency', $invoiceArray);
+        $this->assertArrayHasKey('bitpayIdRequired', $invoiceArray);
+        $this->assertArrayHasKey('forcedBuyerSelectedWallet', $invoiceArray);
+        $this->assertArrayHasKey('paymentString', $invoiceArray);
+        $this->assertArrayHasKey('verificationLink', $invoiceArray);
+        $this->assertArrayHasKey('isCancelled', $invoiceArray);
+        $this->assertArrayHasKey('buyerEmail', $invoiceArray);
+        $this->assertArrayHasKey('buyerSms', $invoiceArray);
+        $this->assertArrayHasKey('forcedBuyerSelectedTransactionCurrency', $invoiceArray);
+
+        $this->assertEquals($invoiceArray['currency'], 'BTC');
+        $this->assertEquals($invoiceArray['guid'], 'Test guid');
+        $this->assertEquals($invoiceArray['token'], '4h2h7kee5eh2hh4');
+        $this->assertEquals($invoiceArray['price'], 355.3);
+        $this->assertEquals($invoiceArray['posData'], 'Test pos data');
+        $this->assertEquals($invoiceArray['notificationURL'], 'http://test.com');
+        $this->assertEquals($invoiceArray['transactionSpeed'], 'Test transaction speed');
+        $this->assertTrue($invoiceArray['fullNotifications']);
+        $this->assertEquals($invoiceArray['notificationEmail'], 'test@email.com');
+        $this->assertEquals($invoiceArray['redirectURL'], 'http://test.com');
+        $this->assertEquals($invoiceArray['orderId'], '34');
+        $this->assertEquals($invoiceArray['itemDesc'], 'Test item desc');
+        $this->assertEquals($invoiceArray['itemCode'], 'Test item code');
+        $this->assertTrue($invoiceArray['physical']);
+        $this->assertEquals($invoiceArray['paymentCurrencies'], ['BTC']);
+        $this->assertEquals($invoiceArray['acceptanceWindow'], 1.1);
+        $this->assertEquals($invoiceArray['closeURL'], 'http://test.com');
+        $this->assertTrue($invoiceArray['autoRedirect']);
+        $this->assertEquals($invoiceArray['refundAddresses'], ['Test refund address']);
+        $this->assertEquals($invoiceArray['id'], '12');
+        $this->assertEquals($invoiceArray['url'], 'http://test.com');
+        $this->assertEquals($invoiceArray['status'], 'pending');
+        $this->assertEquals($invoiceArray['lowFeeDetected'], 'Low fee detected');
+        $this->assertEquals($invoiceArray['invoiceTime'], '01:01:01');
+        $this->assertEquals($invoiceArray['expirationTime'], '01:01:01');
+        $this->assertEquals($invoiceArray['currentTime'], '01:01:01');
+        $this->assertEquals($invoiceArray['transactions'], 'Transactions');
+        $this->assertEquals($invoiceArray['exceptionStatus'], 'Exception status');
+        $this->assertEquals($invoiceArray['targetConfirmations'], 'Target confirmations');
+        $this->assertEquals($invoiceArray['refundAddressRequestPending'], 'Refund address request pending');
+        $this->assertEquals($invoiceArray['buyerProvidedEmail'], 'test@email.com');
+        $this->assertEquals($invoiceArray['billId'], '34');
+        $this->assertTrue($invoiceArray['extendedNotifications']);
+        $this->assertEquals($invoiceArray['transactionCurrency'], 'BTC');
+        $this->assertEquals($invoiceArray['amountPaid'], 12);
+        $this->assertEquals($invoiceArray['exchangeRates'], 'ExchangeRates');
+        $this->assertEquals($invoiceArray['merchantName'], 'Merchant name');
+        $this->assertEquals($invoiceArray['selectedTransactionCurrency'], 'BTC');
+        $this->assertTrue($invoiceArray['bitpayIdRequired']);
+        $this->assertEquals($invoiceArray['forcedBuyerSelectedWallet'], 'Forced Buyer Selected Wallet');
+        $this->assertEquals($invoiceArray['paymentString'], 'Payment string');
+        $this->assertEquals($invoiceArray['verificationLink'], 'http://test.com');
+        $this->assertTrue($invoiceArray['isCancelled']);
+        $this->assertEquals($invoiceArray['buyerEmail'], 'test@email.com');
+        $this->assertEquals($invoiceArray['buyerSms'], 'Buyer sms');
+        $this->assertEquals($invoiceArray['forcedBuyerSelectedTransactionCurrency'], 'BTC');
+    }
 
     public function testToArrayEmptyKey()
     {
