@@ -10,6 +10,7 @@ class SupportedTransactionCurrencies
     protected $_usdc;
     protected $_gusd;
     protected $_pax;
+    protected $_xrp;
 
     public function __construct()
     {
@@ -19,6 +20,7 @@ class SupportedTransactionCurrencies
         $this->_usdc = new SupportedTransactionCurrency();
         $this->_gusd = new SupportedTransactionCurrency();
         $this->_pax = new SupportedTransactionCurrency();
+        $this->_xrp = new SupportedTransactionCurrency();
     }
 
     public function getBTC()
@@ -81,6 +83,16 @@ class SupportedTransactionCurrencies
         $this->_pax = $pax;
     }
 
+    public function getXRP()
+    {
+        return $this->_xrp;
+    }
+
+    public function setXRP(SupportedTransactionCurrency $xrp)
+    {
+        $this->_xrp = $xrp;
+    }
+
     public function toArray()
     {
         $elements = [
@@ -90,6 +102,7 @@ class SupportedTransactionCurrencies
             'usdc' => $this->getUSDC()->toArray(),
             'gusd' => $this->getGUSD()->toArray(),
             'pax'  => $this->getPAX()->toArray(),
+            'xrp'  => $this->getXRP()->toArray()
         ];
 
         foreach ($elements as $key => $value) {

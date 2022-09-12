@@ -21,11 +21,20 @@ class Payout
     protected $_reference         = '';
     protected $_notificationUrl   = '';
     protected $_notificationEmail = '';
+    protected $_redirectUrl = '';
+    protected $_account = '';
     protected $_email = '';
     protected $_recipientId = '';
     protected $_shopperId = '';
     protected $_label = '';
+    protected $_supportPhone = '';
     protected $_message = '';
+    protected $_percentFee = 0.0;
+    protected $_fee = 0.0;
+    protected $_depositTotal = 0.0;
+    protected $_rate = 0.0;
+    protected $_btc = 0.0;
+    protected $_dateExecuted;
 
     protected $_id;
     protected $_status;
@@ -91,7 +100,7 @@ class Payout
     public function setCurrency(string $currency)
     {
         if (!Currency::isValid($currency)) {
-            throw new BitPayException("currency code must be a type of Model.Currency");
+            throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
         $this->_currency = $currency;
@@ -115,7 +124,7 @@ class Payout
     public function setLedgerCurrency(string $ledgerCurrency)
     {
         if (!Currency::isValid($ledgerCurrency)) {
-            throw new BitPayException("currency code must be a type of Model.Currency");
+            throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
         $this->_ledgerCurrency = $ledgerCurrency;
@@ -152,6 +161,26 @@ class Payout
     public function setNotificationEmail(string $notificationEmail)
     {
         $this->_notificationEmail = $notificationEmail;
+    }
+
+    public function getRedirectUrl()
+    {
+        return $this->_redirectUrl;
+    }
+
+    public function setRedirectUrl(string $redirectUrl)
+    {
+        $this->_redirectUrl = $redirectUrl;
+    }
+
+    public function getAccount()
+    {
+        return $this->_account;
+    }
+
+    public function setAccount(string $account)
+    {
+        $this->_account = $account;
     }
 
     public function getEmail()
@@ -194,6 +223,16 @@ class Payout
         $this->_label = $label;
     }
 
+    public function getSupportPhone()
+    {
+        return $this->_supportPhone;
+    }
+
+    public function setSupportPhone(string $supportPhone)
+    {
+        $this->_supportPhone = $supportPhone;
+    }
+
     public function getMessage()
     {
         return $this->_message;
@@ -202,6 +241,66 @@ class Payout
     public function setMessage(string $message)
     {
         $this->_message = $message;
+    }
+
+    public function getPercentFee()
+    {
+        return $this->_percentFee;
+    }
+
+    public function setPercentFee(float $percentFee)
+    {
+        $this->_percentFee = $percentFee;
+    }
+
+    public function getFee()
+    {
+        return $this->_fee;
+    }
+
+    public function setFee(float $fee)
+    {
+        $this->_fee = $fee;
+    }
+
+    public function getDepositTotal()
+    {
+        return $this->_depositTotal;
+    }
+
+    public function setDepositTotal(float $depositTotal)
+    {
+        $this->_depositTotal = $depositTotal;
+    }
+
+    public function getRate()
+    {
+        return $this->_rate;
+    }
+
+    public function setRate(float $rate)
+    {
+        $this->_rate = $rate;
+    }
+
+    public function getBtc()
+    {
+        return $this->_btc;
+    }
+
+    public function setBtc(float $btc)
+    {
+        $this->_btc = $btc;
+    }
+
+    public function getDateExecuted()
+    {
+        return $this->_dateExecuted;
+    }
+
+    public function setDateExecuted(string $dateExecuted)
+    {
+        $this->_dateExecuted = $dateExecuted;
     }
 
     // Response fields
@@ -278,11 +377,20 @@ class Payout
             'reference'         => $this->getReference(),
             'notificationURL'   => $this->getNotificationURL(),
             'notificationEmail' => $this->getNotificationEmail(),
+            'redirectUrl'       => $this->getRedirectUrl(),
+            'account'           => $this->getAccount(),
             'email'             => $this->getEmail(),
             'recipientId'       => $this->getRecipientId(),
             'shopperId'         => $this->getShopperId(),
             'label'             => $this->getLabel(),
+            'supportPhone'      => $this->getSupportPhone(),
             'message'           => $this->getMessage(),
+            'percentFee'        => $this->getPercentFee(),
+            'fee'               => $this->getFee(),
+            'depositTotal'      => $this->getDepositTotal(),
+            'rate'              => $this->getRate(),
+            'btc'               => $this->getBtc(),
+            'dateExecuted'      => $this->getDateExecuted(),
             'id'                => $this->getId(),
             'status'            => $this->getStatus(),
             'requestDate'       => $this->getRequestDate(),

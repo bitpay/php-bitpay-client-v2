@@ -1,8 +1,8 @@
 <?php
 
-namespace BitPaySDK\Test\Model\Settlement;
+namespace BitPaySDK\Test\Model\Invoice;
 
-use BitPaySDK\Model\Settlement\RefundInfo;
+use BitPaySDK\Model\Invoice\RefundInfo;
 use PHPUnit\Framework\TestCase;
 
 class RefundInfoTest extends TestCase
@@ -33,20 +33,11 @@ class RefundInfoTest extends TestCase
 
     public function testGetAmounts()
     {
-        $expectedAmounts = [25];
+        $expectedAmount = ['test amount'];
 
         $refundInfo = $this->createClassObject();
-        $refundInfo->setAmounts($expectedAmounts);
-        $this->assertEquals($expectedAmounts, $refundInfo->getAmounts());
-    }
-
-    public function testGetReference()
-    {
-        $expectedReference = 'abcd123';
-
-        $refundInfo = $this->createClassObject();
-        $refundInfo->setReference($expectedReference);
-        $this->assertEquals($expectedReference, $refundInfo->getReference());
+        $refundInfo->setAmounts($expectedAmount);
+        $this->assertEquals($expectedAmount, $refundInfo->getAmounts());
     }
 
     public function testToArray()
@@ -60,11 +51,10 @@ class RefundInfoTest extends TestCase
 
         $this->assertArrayHasKey('supportRequest', $refundInfoArray);
         $this->assertArrayHasKey('currency', $refundInfoArray);
-        $this->assertArrayHasKey('amounts', $refundInfoArray);
+        $this->assertArrayNotHasKey('amounts', $refundInfoArray);
 
         $this->assertEquals($refundInfoArray['supportRequest'], 'Test support request');
         $this->assertEquals($refundInfoArray['currency'], 'BTC');
-        $this->assertEquals($refundInfoArray['amounts'], [25]);
     }
 
     private function createClassObject()
@@ -76,6 +66,6 @@ class RefundInfoTest extends TestCase
     {
         $refundInfo->setSupportRequest('Test support request');
         $refundInfo->setCurrency('BTC');
-        $refundInfo->setAmounts([25]);
+        $refundInfo->setAmounts([]);
     }
 }
