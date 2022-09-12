@@ -90,7 +90,7 @@ class SupportedTransactionCurrencies
 
     public function setXRP(SupportedTransactionCurrency $xrp)
     {
-        $this->xrp = $xrp;
+        $this->_xrp = $xrp;
     }
 
     public function toArray()
