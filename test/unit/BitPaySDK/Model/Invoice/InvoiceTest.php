@@ -603,52 +603,7 @@ class InvoiceTest extends TestCase
     public function testToArray()
     {
         $invoice = $this->createClassObject();
-        $invoice->setCurrency('BTC');
-        $invoice->setGuid('Test guid');
-        $invoice->setToken('4h2h7kee5eh2hh4');
-        $invoice->setPrice(355.3);
-        $invoice->setPosData('Test pos data');
-        $invoice->setNotificationURL('http://test.com');
-        $invoice->setTransactionSpeed('Test transaction speed');
-        $invoice->setFullNotifications(true);
-        $invoice->setNotificationEmail('test@email.com');
-        $invoice->setRedirectURL('http://test.com');
-        $invoice->setOrderId('34');
-        $invoice->setItemDesc('Test item desc');
-        $invoice->setItemCode('Test item code');
-        $invoice->setPhysical(true);
-        $invoice->setPaymentCurrencies(['BTC']);
-        $invoice->setAcceptanceWindow(1.1);
-        $invoice->setCloseURL('http://test.com');
-        $invoice->setAutoRedirect(true);
-        $invoice->setRefundAddresses(['Test refund address']);
-        $invoice->setId('12');
-        $invoice->setUrl('http://test.com');
-        $invoice->setStatus('pending');
-        $invoice->setLowFeeDetected('Low fee detected');
-        $invoice->setInvoiceTime('01:01:01');
-        $invoice->setExpirationTime('01:01:01');
-        $invoice->setCurrentTime('01:01:01');
-        $invoice->setTransactions('Transactions');
-        $invoice->setExceptionStatus('Exception status');
-        $invoice->setTargetConfirmations('Target confirmations');
-        $invoice->setRefundAddressRequestPending('Refund address request pending');
-        $invoice->setBuyerProvidedEmail('test@email.com');
-        $invoice->setBillId('34');
-        $invoice->setExtendedNotifications(true);
-        $invoice->setTransactionCurrency('BTC');
-        $invoice->setAmountPaid(12);
-        $invoice->setExchangeRates('ExchangeRates');
-        $invoice->setMerchantName('Merchant name');
-        $invoice->setSelectedTransactionCurrency('BTC');
-        $invoice->setBitpayIdRequired(true);
-        $invoice->setForcedBuyerSelectedWallet('Forced Buyer Selected Wallet');
-        $invoice->setPaymentString('Payment string');
-        $invoice->setVerificationLink('http://test.com');
-        $invoice->setIsCancelled(true);
-        $invoice->setBuyerEmail('test@email.com');
-        $invoice->setBuyerSms('Buyer sms');
-        $invoice->setForcedBuyerSelectedTransactionCurrency('BTC');
+        $this->setObjectSetters($invoice);
         $invoiceArray = $invoice->toArray();
 
         $this->assertNotNull($invoiceArray);
@@ -763,5 +718,55 @@ class InvoiceTest extends TestCase
     private function createClassObject()
     {
         return new Invoice();
+    }
+
+    private function setObjectSetters(Invoice $invoice)
+    {
+        $invoice->setCurrency('BTC');
+        $invoice->setGuid('Test guid');
+        $invoice->setToken('4h2h7kee5eh2hh4');
+        $invoice->setPrice(355.3);
+        $invoice->setPosData('Test pos data');
+        $invoice->setNotificationURL('http://test.com');
+        $invoice->setTransactionSpeed('Test transaction speed');
+        $invoice->setFullNotifications(true);
+        $invoice->setNotificationEmail('test@email.com');
+        $invoice->setRedirectURL('http://test.com');
+        $invoice->setOrderId('34');
+        $invoice->setItemDesc('Test item desc');
+        $invoice->setItemCode('Test item code');
+        $invoice->setPhysical(true);
+        $invoice->setPaymentCurrencies(['BTC']);
+        $invoice->setAcceptanceWindow(1.1);
+        $invoice->setCloseURL('http://test.com');
+        $invoice->setAutoRedirect(true);
+        $invoice->setRefundAddresses(['Test refund address']);
+        $invoice->setId('12');
+        $invoice->setUrl('http://test.com');
+        $invoice->setStatus('pending');
+        $invoice->setLowFeeDetected('Low fee detected');
+        $invoice->setInvoiceTime('01:01:01');
+        $invoice->setExpirationTime('01:01:01');
+        $invoice->setCurrentTime('01:01:01');
+        $invoice->setTransactions('Transactions');
+        $invoice->setExceptionStatus('Exception status');
+        $invoice->setTargetConfirmations('Target confirmations');
+        $invoice->setRefundAddressRequestPending('Refund address request pending');
+        $invoice->setBuyerProvidedEmail('test@email.com');
+        $invoice->setBillId('34');
+        $invoice->setExtendedNotifications(true);
+        $invoice->setTransactionCurrency('BTC');
+        $invoice->setAmountPaid(12);
+        $invoice->setExchangeRates('ExchangeRates');
+        $invoice->setMerchantName('Merchant name');
+        $invoice->setSelectedTransactionCurrency('BTC');
+        $invoice->setBitpayIdRequired(true);
+        $invoice->setForcedBuyerSelectedWallet('Forced Buyer Selected Wallet');
+        $invoice->setPaymentString('Payment string');
+        $invoice->setVerificationLink('http://test.com');
+        $invoice->setIsCancelled(true);
+        $invoice->setBuyerEmail('test@email.com');
+        $invoice->setBuyerSms('Buyer sms');
+        $invoice->setForcedBuyerSelectedTransactionCurrency('BTC');
     }
 }
