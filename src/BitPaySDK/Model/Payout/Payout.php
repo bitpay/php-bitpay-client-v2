@@ -2,7 +2,6 @@
 
 namespace BitPaySDK\Model\Payout;
 
-use BitPaySDK;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
@@ -349,7 +348,17 @@ class Payout
 
     public function getTransactions()
     {
-        return $this->_transactions;
+        $transactions = [];
+
+        foreach ($this->_transactions as $transaction) {
+            if ($transaction instanceof PayoutTransaction) {
+                array_push($transactions, $transaction->toArray());
+            } else {
+                array_push($transactions, $transaction);
+            }
+        }
+
+        return $transactions;
     }
 
     public function setTransactions(array $transactions)
@@ -386,7 +395,7 @@ class Payout
             'status'            => $this->getStatus(),
             'requestDate'       => $this->getRequestDate(),
             'exchangeRates'     => $this->getExchangeRates(),
-            'transactions'      => $this->getTransactions()->toArray()
+            'transactions'      => $this->getTransactions()
         ];
 
         foreach ($elements as $key => $value) {

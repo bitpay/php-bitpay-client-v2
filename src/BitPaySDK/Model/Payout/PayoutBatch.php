@@ -2,7 +2,6 @@
 
 namespace BitPaySDK\Model\Payout;
 
-use BitPaySDK;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
@@ -75,7 +74,7 @@ class PayoutBatch
                 if ($instruction instanceof PayoutInstruction) {
                     $amount += $instruction->getAmount();
                 } else {
-                    $amount += $instruction->amount;
+                    $amount += $instruction['amount'];
                 }
             }
         }

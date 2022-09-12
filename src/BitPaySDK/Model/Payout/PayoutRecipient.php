@@ -97,7 +97,7 @@ class PayoutRecipient
 
     public function getAccount()
     {
-        return $this->account;
+        return $this->_account;
     }
 
     public function setAccount(string $account)
