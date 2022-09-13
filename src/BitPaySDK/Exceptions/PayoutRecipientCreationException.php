@@ -8,7 +8,6 @@ class PayoutRecipientCreationException extends PayoutRecipientException
 {
     private $bitPayMessage = "Failed to create payout recipient";
     private $bitPayCode    = "BITPAY-PAYOUT-RECIPIENT-SUBMIT";
-    protected $apiCode;
 
     /**
      * Construct the PayoutRecipientCreationException.
@@ -20,15 +19,6 @@ class PayoutRecipientCreationException extends PayoutRecipientException
     public function __construct($message = "", $code = 192, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
         parent::__construct($message, $code, $previous, $apiCode);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
     }
 }

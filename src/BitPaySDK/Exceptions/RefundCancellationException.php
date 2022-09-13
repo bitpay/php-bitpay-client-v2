@@ -8,7 +8,6 @@ class RefundCancellationException extends RefundException
 {
     private $bitPayMessage = "Failed to cancel refund object";
     private $bitPayCode    = "BITPAY-REFUND-CANCEL";
-    protected $apiCode;
 
     /**
      * Construct the RefundCancellationException.
@@ -20,15 +19,6 @@ class RefundCancellationException extends RefundException
     public function __construct($message = "", $code = 165, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }

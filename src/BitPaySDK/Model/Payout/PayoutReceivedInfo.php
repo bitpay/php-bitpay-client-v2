@@ -52,6 +52,12 @@ class PayoutReceivedInfo
 
     public function toArray()
     {
+        /**
+         * @todo In a future version, instead of removing values that are not
+         *       set, update this logic to only include elements that *are*
+         *       set. This will mitigate errors when calling toArray() on
+         *       elements that are not set. This should be done universally.
+         */
         $elements = [
             'name'    => $this->getName(),
             'email'   => $this->getEmail(),

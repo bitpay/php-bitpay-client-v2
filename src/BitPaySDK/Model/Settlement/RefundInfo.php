@@ -7,6 +7,7 @@ class RefundInfo
     protected $_supportRequest;
     protected $_currency;
     protected $_amounts;
+    protected $_reference;
 
     public function __construct()
     {
@@ -42,12 +43,23 @@ class RefundInfo
         $this->_amounts = $amounts;
     }
 
+    public function getReference()
+    {
+        return $this->_reference;
+    }
+
+    public function setReference(string $reference)
+    {
+        $this->_reference = $reference;
+    }
+
     public function toArray()
     {
         $elements = [
             'supportRequest' => $this->getSupportRequest(),
             'currency'       => $this->getCurrency(),
             'amounts'        => $this->getAmounts(),
+            'reference'      => $this->getReference()
         ];
 
         return $elements;

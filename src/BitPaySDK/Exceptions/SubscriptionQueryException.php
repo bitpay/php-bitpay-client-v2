@@ -8,7 +8,6 @@ class SubscriptionQueryException extends SubscriptionException
 {
     private $bitPayMessage = "Failed to retrieve subscription";
     private $bitPayCode    = "BITPAY-SUBSCRIPTION-GET";
-    protected $apiCode;
 
     /**
      * Construct the SubscriptionQueryException.
@@ -20,15 +19,6 @@ class SubscriptionQueryException extends SubscriptionException
     public function __construct($message = "", $code = 173, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }

@@ -8,7 +8,6 @@ class InvoiceCreationException extends InvoiceException
 {
     private $bitPayMessage = "Failed to create invoice";
     private $bitPayCode    = "BITPAY-INVOICE-CREATE";
-    protected $apiCode;
 
     /**
      * Construct the InvoiceCreationException.
@@ -20,15 +19,6 @@ class InvoiceCreationException extends InvoiceException
     public function __construct($message = "", $code = 102, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }

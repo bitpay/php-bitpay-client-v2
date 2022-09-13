@@ -8,7 +8,6 @@ class PayoutUpdateException extends PayoutException
 {
     private $bitPayMessage = "Failed to update payout batch";
     private $bitPayCode    = "BITPAY-PAYOUT-BATCH-UPDATE";
-    protected $apiCode;
 
     /**
      * Construct the PayoutUpdateException.
@@ -20,15 +19,6 @@ class PayoutUpdateException extends PayoutException
     public function __construct($message = "", $code = 125, Exception $previous = null, $apiCode = "000000")
     {
         $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
-        $this->apiCode = $apiCode;
-        parent::__construct($message, $code, $previous);
-    }
-
-    /**
-     * @return string Error code provided by the BitPay REST API
-     */
-    public function getApiCode()
-    {
-        return $this->apiCode;
+        parent::__construct($message, $code, $previous, $apiCode);
     }
 }
