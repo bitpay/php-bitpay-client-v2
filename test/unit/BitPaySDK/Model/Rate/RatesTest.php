@@ -7,6 +7,7 @@ use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 class RatesTest extends TestCase
 {
@@ -22,6 +23,22 @@ class RatesTest extends TestCase
 
         $ratesArray = $rates->getRates();
         $this->assertIsArray($ratesArray);
+    }
+
+    public function testUpdate()
+    {
+        $rates = [new Rate(), 'test' => 'test'];
+        $bp = $this->getMockBuilder(Client::class)->getMock();
+        $bp->method('getRates')->willReturn(new Rates($rates, $bp));
+
+        $rates = new Rates($rates, $bp);
+
+        $reflection = new ReflectionClass(Rates::class);
+        $rates->update();
+
+        $reflectionTest = $reflection->getProperty('_rates')->setAccessible(true);
+
+        $this->assertEquals(null, $reflectionTest);
     }
 
     public function testGetRateException()
