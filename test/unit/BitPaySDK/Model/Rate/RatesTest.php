@@ -32,6 +32,21 @@ class RatesTest extends TestCase
         $rates->getRate('ELO');
     }
 
+    public function testGetRate()
+    {
+        $expectedValue = 12;
+
+        $rateMock = $this->getMockBuilder(Rate::class)->disableOriginalConstructor()->getMock();
+        $rateMock->method('getCode')->willReturn('BTC');
+        $rateMock->method('getRate')->willReturn(12);
+
+        $rates = [$rateMock];
+        $bp = $this->getMockBuilder(Client::class)->getMock();
+        $rates = new Rates($rates, $bp);
+
+        $this->assertEquals($expectedValue, $rates->getRate('BTC'));
+    }
+
     public function testToArray()
     {
         $rates = $this->createClassObject();
