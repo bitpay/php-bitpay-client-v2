@@ -23,6 +23,7 @@ class BitPayException extends Exception
             $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;
         }
         $this->apiCode = $apiCode;
+        $code = $code ?? 100;
         parent::__construct($message, $code, $previous);
     }
 
