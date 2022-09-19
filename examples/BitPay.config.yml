@@ -1,17 +1,17 @@
 BitPayConfiguration:
-  Environment: null
-  EnvConfig:
-    Test:
-      PrivateKeyPath: null
-      PrivateKeySecret: null
-      ApiTokens:
-        merchant: null
-        payout: null
-      Proxy: null
-    Prod:
-      PrivateKeyPath: null
-      PrivateKeySecret: null
-      ApiTokens:
-        merchant: null
-        payout: null
-      Proxy: null
+    Environment: Test
+    EnvConfig:
+        Test:
+            PrivateKeyPath: examples/PrivateKeyName.key
+            PrivateKeySecret: changedPassword
+            ApiTokens:
+                merchant: HpNyt429yg8mVtWwRJJs7A3CgK6qYesMoPfXUJxWhkh7
+                payout: 42dpWSzkv3EiJHcUUaLJ98JkhEJjrpCYzxuobCHo5DCZ
+            proxy: null
+        Prod:
+            PrivateKeyPath: null
+            PrivateKeySecret: null
+            ApiTokens:
+                merchant: null
+                payout: null
+            proxy: null
