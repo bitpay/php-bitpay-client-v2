@@ -42,8 +42,10 @@ class Invoice
     protected $_autoRedirect  = false;
     protected $_jsonPayProRequired;
     protected $_buyerEmail;
+    protected $_buyerSms;
 
     protected $_merchantName;
+    protected $_selectedTransactionCurrency;
     protected $_forcedBuyerSelectedWallet;
     protected $_forcedBuyerSelectedTransactionCurrency;
     protected $_itemizedDetails;
@@ -61,6 +63,7 @@ class Invoice
     protected $_refundAddressRequestPending;
     protected $_buyerProvidedEmail;
     protected $_buyerProvidedInfo;
+    protected $_transactionDetails;
     protected $_universalCodes;
     protected $_supportedTransactionCurrencies;
     protected $_minerFees;
@@ -97,6 +100,7 @@ class Invoice
         $this->_shopper = new Shopper();
         $this->_refundInfo = new RefundInfo();
         $this->_itemizedDetails = new ItemizedDetails();
+        $this->_transactionDetails = new TransactionDetails();
     }
 
     // API fields
@@ -317,6 +321,16 @@ class Invoice
         $this->_merchantName = $merchantName;
     }
 
+    public function getSelectedTransactionCurrency()
+    {
+        return $this->_selectedTransactionCurrency;
+    }
+
+    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
+    {
+        $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
+    }
+
     public function getForcedBuyerSelectedWallet()
     {
         return $this->_forcedBuyerSelectedWallet;
@@ -396,6 +410,16 @@ class Invoice
     public function setBuyerEmail(string $buyerEmail)
     {
         $this->_buyerEmail = $buyerEmail;
+    }
+
+    public function getBuyerSms()
+    {
+        return $this->_buyerSms;
+    }
+
+    public function setBuyerSms(string $buyerSms)
+    {
+        $this->_buyerSms = $buyerSms;
     }
 
     // Response fields
@@ -539,6 +563,16 @@ class Invoice
     public function setBuyerProvidedInfo(BuyerProvidedInfo $buyerProvidedInfo)
     {
         $this->_buyerProvidedInfo = $buyerProvidedInfo;
+    }
+
+    public function getTransactionDetails()
+    {
+        return $this->_transactionDetails;
+    }
+
+    public function setTransactionDetails(TransactionDetails $transactionDetails)
+    {
+        $this->_transactionDetails = $transactionDetails;
     }
 
     public function getUniversalCodes()
@@ -798,6 +832,7 @@ class Invoice
             'refundAddressRequestPending'    => $this->getRefundAddressRequestPending(),
             'buyerProvidedEmail'             => $this->getBuyerProvidedEmail(),
             'buyerProvidedInfo'              => $this->getBuyerProvidedInfo()->toArray(),
+            'transactionDetails'             => $this->getTransactionDetails()->toArray(),
             'universalCodes'                 => $this->getUniversalCodes()->toArray(),
             'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()->toArray(),
             'minerFees'                      => $this->getMinerFees()->toArray(),
@@ -809,12 +844,14 @@ class Invoice
             'amountPaid'                     => $this->getAmountPaid(),
             'exchangeRates'                  => $this->getExchangeRates(),
             'merchantName'                   => $this->getMerchantName(),
+            'selectedTransactionCurrency'    => $this->getSelectedTransactionCurrency(),
             'bitpayIdRequired'               => $this->getBitpayIdRequired(),
             'forcedBuyerSelectedWallet'      => $this->getForcedBuyerSelectedWallet(),
             'paymentString'                  => $this->getPaymentString(),
             'verificationLink'               => $this->getVerificationLink(),
             'isCancelled'                    => $this->getIsCancelled(),
             'buyerEmail'                     => $this->getBuyerEmail(),
+            'buyerSms'                       => $this->getBuyerSms(),
             'itemizedDetails'                => $this->getItemizedDetails()->toArray(),
             'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];

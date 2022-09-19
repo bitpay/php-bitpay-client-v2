@@ -2,7 +2,6 @@
 
 namespace BitPaySDK\Model\Payout;
 
-use BitPaySDK;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
@@ -12,22 +11,25 @@ use BitPaySDK\Model\Currency;
  */
 class PayoutBatch
 {
-    protected $_token = "";
+    protected $_guid = '';
+    protected $_token = '';
 
     protected $_amount       = 0.0;
-    protected $_currency     = "";
+    protected $_currency     = '';
     protected $_effectiveDate;
     protected $_instructions = [];
-    protected $_ledgerCurrency = "";
+    protected $_ledgerCurrency = '';
 
-    protected $_reference         = "";
-    protected $_notificationUrl   = "";
-    protected $_notificationEmail = "";
-    protected $_email = "";
-    protected $_recipientId = "";
-    protected $_shopperId = "";
-    protected $_label = "";
-    protected $_message = "";
+    protected $_reference         = '';
+    protected $_notificationUrl   = '';
+    protected $_notificationEmail = '';
+    protected $_email = '';
+    protected $_recipientId = '';
+    protected $_shopperId = '';
+    protected $_label = '';
+    protected $_message = '';
+    protected $_redirectUrl = '';
+    protected $_pricingMethod = 'vwap_24hr';
 
     protected $_id;
     protected $_account;
@@ -72,7 +74,7 @@ class PayoutBatch
                 if ($instruction instanceof PayoutInstruction) {
                     $amount += $instruction->getAmount();
                 } else {
-                    $amount += $instruction->amount;
+                    $amount += $instruction['amount'];
                 }
             }
         }
@@ -81,6 +83,16 @@ class PayoutBatch
 
     // API fields
     //
+
+    public function getGuid()
+    {
+        return $this->_guid;
+    }
+
+    public function setGuid(string $guid)
+    {
+        $this->_guid = $guid;
+    }
 
     public function getToken()
     {
@@ -118,7 +130,7 @@ class PayoutBatch
     public function setCurrency(string $currency)
     {
         if (!Currency::isValid($currency)) {
-            throw new BitPayException("currency code must be a type of Model.Currency");
+            throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
         $this->_currency = $currency;
@@ -163,7 +175,7 @@ class PayoutBatch
     public function setLedgerCurrency(string $ledgerCurrency)
     {
         if (!Currency::isValid($ledgerCurrency)) {
-            throw new BitPayException("currency code must be a type of Model.Currency");
+            throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
         $this->_ledgerCurrency = $ledgerCurrency;
@@ -250,6 +262,26 @@ class PayoutBatch
     public function setMessage(string $message)
     {
         $this->_message = $message;
+    }
+
+    public function getRedirectUrl()
+    {
+        return $this->_redirectUrl;
+    }
+
+    public function setRedirectUrl(string $redirectUrl)
+    {
+        $this->_redurectUrl = $redirectUrl;
+    }
+
+    public function getPricingMethod()
+    {
+        return $this->_pricingMethod;
+    }
+
+    public function setPricingMethod(string $pricingMethod)
+    {
+        $this->_pricingMethod = $pricingMethod;
     }
 
     // Response fields
@@ -378,6 +410,7 @@ class PayoutBatch
     public function toArray()
     {
         $elements = [
+            'guid'              => $this->getGuid(),
             'token'             => $this->getToken(),
             'amount'            => $this->getAmount(),
             'currency'          => $this->getCurrency(),
@@ -392,6 +425,8 @@ class PayoutBatch
             'shopperId'         => $this->getShopperId(),
             'label'             => $this->getLabel(),
             'message'           => $this->getMessage(),
+            'redirectUrl'       => $this->getRedirectUrl(),
+            'pricingMethod'     => $this->getPricingMethod(),
             'id'                => $this->getId(),
             'account'           => $this->getAccount(),
             'supportPhone'      => $this->getSupportPhone(),

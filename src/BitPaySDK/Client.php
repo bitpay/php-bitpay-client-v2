@@ -220,19 +220,40 @@ class Client
      * Update a BitPay invoice.
      *
      * @param string $invoiceId       The id of the invoice to updated.
+     * @param string $buyerSms        The buyer's cell number.
+     * @param string $smsCode         The buyer's received verification code.
      * @param string $buyerEmail      The buyer's email address.
+     * @param string $autoVerify      Skip the user verification on sandbox ONLY.
      * @return Invoice
      * @throws InvoiceUpdateException
      * @throws BitPayException
      */
     public function updateInvoice(
         string $invoiceId,
-        string $buyerEmail
+        string $buyerSms,
+        string $smsCode,
+        string $buyerEmail,
+        bool $autoVerify = false
     ): Invoice {
+        // Updating the invoice will require EITHER SMS or E-mail, but not both.
+        if ($this->buyerEmailOrSms($buyerEmail, $buyerSms)) {
+            throw new InvoiceUpdateException("Updating the invoice requires buyerSms or buyerEmail, but not both.");
+        }
+
+        // smsCode required only when verifying SMS, except when autoVerify is true.
+        if ($this->isSmsCodeRequired($autoVerify, $buyerSms, $smsCode)) {
+            throw new InvoiceUpdateException(
+                "Updating the invoice requires both buyerSms and smsCode when verifying SMS."
+            );
+        }
+
         try {
             $params = [];
-            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"]      = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
             $params["buyerEmail"] = $buyerEmail;
+            $params["buyerSms"]   = $buyerSms;
+            $params["smsCode"]    = $smsCode;
+            $params["autoVerify"] = $autoVerify;
 
             $responseJson = $this->_RESTcli->update("invoices/" . $invoiceId, $params);
         } catch (BitPayException $e) {
@@ -469,15 +490,14 @@ class Client
      * Pay an invoice with a mock transaction
      *
      * @param  string $invoiceId The id of the invoice.
-     * @param  bool   $complete  Indicates if paid invoice should have status if complete true or a confirmed status
+     * @param  string $status    Status the invoice will become. Acceptable values are confirmed (default) and complete.
      * @return Invoice $invoice  Invoice object.
      * @throws InvoicePaymentException
      * @throws BitPayException
      */
     public function payInvoice(
         string $invoiceId,
-        string $status,
-        bool $complete = true
+        string $status = 'confirmed'
     ): Invoice {
         if (strtolower($this->_env) != "test") {
             throw new InvoicePaymentException("Pay Invoice method only available in test or demo environments");
@@ -487,7 +507,6 @@ class Client
             $params = [];
             $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
             $params["status"] = $status;
-            $params["complete"] = $complete;
             $responseJson = $this->_RESTcli->update("invoices/pay/" . $invoiceId, $params, true);
         } catch (BitPayException $e) {
             throw new InvoicePaymentException(
@@ -2487,5 +2506,32 @@ class Client
         }
 
         return null;
+    }
+
+
+    /**
+     * Check if buyerEmail or buyerSms is present, and not both.
+     *
+     * @param string $buyerEmail The buyer's email address.
+     * @param string $buyerSms   The buyer's cell number.
+     *
+     * @return bool
+     */
+    private function buyerEmailOrSms(string $buyerEmail, string $buyerSms): bool
+    {
+        return (empty($buyerSms) && empty($buyerEmail)) || (!empty($buyerSms) && empty(!$buyerEmail));
+    }
+
+    /**
+     * Check if smsCode is required.
+     *
+     * @param bool   $autoVerify Skip the user verification on sandbox ONLY.
+     * @param string $buyerEmail The buyer's email address.
+     * @param string $smsCode    The buyer's received verification code.
+     */
+    private function isSmsCodeRequired(bool $autoVerify, string $buyerSms, string $smsCode): bool
+    {
+        return $autoVerify == false &&
+            (!empty($buyerSms) && empty($smsCode)) || (!empty($smsCode) && empty($buyerSms));
     }
 }

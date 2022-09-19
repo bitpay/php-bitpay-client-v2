@@ -2,8 +2,6 @@
 
 namespace BitPaySDK\Model\Payout;
 
-use BitPaySDK;
-
 /**
  *
  * @package Bitpay
@@ -11,13 +9,17 @@ use BitPaySDK;
 class PayoutRecipient
 {
     protected $_email;
+    protected $_guid;
     protected $_label;
+    protected $_reference;
     protected $_notificationURL;
 
+    protected $_account;
     protected $_status;
     protected $_id;
     protected $_shopperId;
     protected $_token;
+    protected $_supportPhone;
 
     /**
      * Constructor, create a minimal Recipient object.
@@ -50,6 +52,16 @@ class PayoutRecipient
     // Optional fields
     //
 
+    public function getGuid()
+    {
+        return $this->_guid;
+    }
+
+    public function setGuid(string $guid)
+    {
+        $this->_guid = $guid;
+    }
+
     public function getLabel()
     {
         return $this->_label;
@@ -58,6 +70,16 @@ class PayoutRecipient
     public function setLabel(?string $label)
     {
         $this->_label = $label;
+    }
+
+    public function getReference()
+    {
+        return $this->_reference;
+    }
+
+    public function setReference(string $reference)
+    {
+        $this->_reference = $reference;
     }
 
     public function getNotificationURL()
@@ -72,6 +94,16 @@ class PayoutRecipient
 
     // Response fields
     //
+
+    public function getAccount()
+    {
+        return $this->_account;
+    }
+
+    public function setAccount(string $account)
+    {
+        $this->_account = $account;
+    }
 
     public function getStatus()
     {
@@ -113,16 +145,30 @@ class PayoutRecipient
         $this->_token = $token;
     }
 
+    public function getSupportPhone()
+    {
+        return $this->_supportPhone;
+    }
+
+    public function setSupportPhone(string $supportPhone)
+    {
+        $this->_supportPhone = $supportPhone;
+    }
+
     public function toArray()
     {
         $elements = [
             'email'           => $this->getEmail(),
+            'guid'            => $this->getGuid(),
             'label'           => $this->getLabel(),
+            'reference'       => $this->getReference(),
             'notificationURL' => $this->getNotificationURL(),
+            'account'         => $this->getAccount(),
             'status'          => $this->getStatus(),
             'id'              => $this->getId(),
             'shopperId'       => $this->getShopperId(),
             'token'           => $this->getToken(),
+            'supportPhone'    => $this->getSupportPhone()
         ];
 
         foreach ($elements as $key => $value) {

@@ -2,17 +2,15 @@
 
 namespace BitPaySDK\Model\Payout;
 
-use BitPaySDK;
-
 /**
  *
  * @package Bitpay
  */
 class PayoutRecipients
 {
-    protected $_guid  = "";
+    protected $_guid  = '';
     protected $_recipients = [];
-    protected $_token      = "";
+    protected $_token      = '';
 
     /**
      * Constructor, create an recipient-full request PayoutBatch object.
@@ -73,6 +71,7 @@ class PayoutRecipients
     public function toArray()
     {
         $elements = [
+            'guid'       => $this->getGuid(),
             'recipients' => $this->getRecipients(),
             'token'      => $this->getToken(),
         ];
