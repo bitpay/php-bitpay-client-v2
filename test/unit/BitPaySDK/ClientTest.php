@@ -184,7 +184,7 @@ class ClientTest extends TestCase
         $fileContents = file_get_contents(__DIR__ . '/../../../examples/currenciesResponse.json');
         $exampleResponse = json_encode(json_decode(trim($fileContents), true));
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("currencies/", null, false)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("currencies/", null, false)->willReturn($exampleResponse);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -206,7 +206,7 @@ class ClientTest extends TestCase
     {
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->willThrowException(new BitPayException());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -226,7 +226,7 @@ class ClientTest extends TestCase
     {
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->willThrowException(new Exception());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -267,7 +267,7 @@ class ClientTest extends TestCase
         $exampleCurrency = Currency::USD;
         $restCliMock = $this->getRestCliMock();
 
-        $restCliMock->method('get')->with('rates/' . $exampleCurrency, null, false)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with('rates/' . $exampleCurrency, null, false)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -287,7 +287,7 @@ class ClientTest extends TestCase
         $exampleCurrency = Currency::USD;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with('rates/' . $exampleCurrency, null, false)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with('rates/' . $exampleCurrency, null, false)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -307,7 +307,7 @@ class ClientTest extends TestCase
         $exampleCurrency = Currency::USD;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with('rates/' . $exampleCurrency, null, false)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with('rates/' . $exampleCurrency, null, false)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -327,7 +327,7 @@ class ClientTest extends TestCase
         $exampleCurrency = Currency::USD;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with('rates/' . $exampleCurrency, null, false)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with('rates/' . $exampleCurrency, null, false)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -346,17 +346,16 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
         $params['token'] = $this->getMerchantTokenFromFile();
         $params['status'] = 'status';
-        $params['complete'] = true;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
         $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
         $doSetRestCli();
 
-        $result = $testedObject->payInvoice($invoiceId, $params['status'], $params['complete']);
+        $result = $testedObject->payInvoice($invoiceId, $params['status']);
         $this->assertInstanceOf(Invoice::class, $result);
     }
 
@@ -368,10 +367,9 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
         $params['token'] = $this->getMerchantTokenFromFile();
         $params['status'] = 'status';
-        $params['complete'] = true;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -379,7 +377,7 @@ class ClientTest extends TestCase
         $doSetRestCli();
 
         $this->expectException(InvoicePaymentException::class);
-        $testedObject->payInvoice($invoiceId, $params['status'], $params['complete']);
+        $testedObject->payInvoice($invoiceId, $params['status']);
     }
 
     /**
@@ -390,10 +388,9 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
         $params['token'] = $this->getMerchantTokenFromFile();
         $params['status'] = 'status';
-        $params['complete'] = true;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -401,7 +398,7 @@ class ClientTest extends TestCase
         $doSetRestCli();
 
         $this->expectException(InvoicePaymentException::class);
-        $testedObject->payInvoice($invoiceId, $params['status'], $params['complete']);
+        $testedObject->payInvoice($invoiceId, $params['status']);
     }
 
     /**
@@ -412,10 +409,9 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
         $params['token'] = $this->getMerchantTokenFromFile();
         $params['status'] = 'status';
-        $params['complete'] = true;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -423,7 +419,7 @@ class ClientTest extends TestCase
         $doSetRestCli();
 
         $this->expectException(InvoicePaymentException::class);
-        $testedObject->payInvoice($invoiceId, $params['status'], $params['complete']);
+        $testedObject->payInvoice($invoiceId, $params['status']);
     }
 
     /**
@@ -437,15 +433,15 @@ class ClientTest extends TestCase
         $params['complete'] = true;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willReturn(self::CORRUPT_JSON_STRING);
-        $setRestCli = function () use ($restCliMock) {
+	    $restCliMock->expects($this->never())->method('update')->with('invoices/pay/' . $invoiceId, $params, true)->willReturn(self::CORRUPT_JSON_STRING);
+	    $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
             $this->_env = 'not_test';
         };
-        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
-        $doSetRestCli();
-
-        $this->expectException(InvoicePaymentException::class);
+	    $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+	    $doSetRestCli();
+	
+	    $this->expectException(InvoicePaymentException::class);
         $testedObject->payInvoice($invoiceId, $params['status'], $params['complete']);
     }
 
@@ -459,7 +455,7 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with('invoices/' . $invoiceId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('delete')->with('invoices/' . $invoiceId, $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -480,7 +476,7 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with('invoices/' . $invoiceId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('delete')->with('invoices/' . $invoiceId, $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -501,7 +497,7 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with('invoices/' . $invoiceId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('delete')->with('invoices/' . $invoiceId, $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -522,7 +518,7 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with('invoices/' . $invoiceId, $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('delete')->with('invoices/' . $invoiceId, $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -541,9 +537,9 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
         $params['token'] = $this->getMerchantTokenFromFile();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("invoices/" . $invoiceId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
         $params['token'] = false;
-        $restCliMock->method('post')->with('invoices/' . $invoiceId . '/notifications', $params)->willReturn('string');
+        $restCliMock->expects($this->once())->method('post')->with('invoices/' . $invoiceId . '/notifications', $params)->willReturn('string');
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -561,9 +557,9 @@ class ClientTest extends TestCase
 //        $invoiceId = 'testId';
 //        $params['token'] = $this->getMerchantTokenFromFile();
 //        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->method('get')->with("invoices/" . $invoiceId, $params, true)->willThrowException(new BitPayException());
+//        $restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willThrowException(new BitPayException());
 ////        $params['token'] = false;
-//        $restCliMock->method('post')->with('invoices/' . $invoiceId . '/notifications', $params)->willReturn('string');
+//        $restCliMock->expects($this->once())->method('post')->with('invoices/' . $invoiceId . '/notifications', $params)->willReturn('string');
 //        $setRestCli = function () use ($restCliMock) {
 //            $this->_RESTcli = $restCliMock;
 //        };
@@ -582,7 +578,7 @@ class ClientTest extends TestCase
         $invoiceId = 'test';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("invoices/" . $invoiceId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -601,7 +597,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $invoiceId = 'test';
-        $restCliMock->method('get')->with("invoices/" . $invoiceId, $params, true)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -620,7 +616,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $invoiceId = 'test';
-        $restCliMock->method('get')->with("invoices/" . $invoiceId, $params, true)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -640,7 +636,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $invoiceId = 'test';
         $exampleResponse = '{"code":"USD""name":"US Dollar","rate":21205.85}';
-        $restCliMock->method('get')->with("invoices/" . $invoiceId, $params, true)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -673,7 +669,7 @@ class ClientTest extends TestCase
 
         $exampleResponse = json_encode($this->getExampleInvoiceData());
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("invoices", $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("invoices", $params)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -707,7 +703,7 @@ class ClientTest extends TestCase
         $params['orderId'] = $orderId;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("invoices", $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("invoices", $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -740,7 +736,7 @@ class ClientTest extends TestCase
         $params['orderId'] = $orderId;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("invoices", $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("invoices", $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -773,7 +769,7 @@ class ClientTest extends TestCase
         $params['orderId'] = $orderId;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("invoices", $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("invoices", $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -792,20 +788,87 @@ class ClientTest extends TestCase
     {
         $invoiceId = 'testId';
         $params['token'] = $this->getMerchantTokenFromFile();
-        $params['buyerEmail'] = 'buyerEmail';
-
+        $params['buyerEmail'] = '';
+	    $params['buyerSms'] = 'buyerSms';
+	    $params['smsCode'] = 'smsCode';
+	    $params['autoVerify'] = false;
+		
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("invoices/" . $invoiceId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('update')->with("invoices/" . $invoiceId, $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
 
         $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
         $doSetRestCli();
-
-        $result = $testedObject->updateInvoice($invoiceId, $params['buyerEmail']);
+	
+	    $result = $testedObject->updateInvoice($invoiceId, $params['buyerSms'], $params['smsCode'], $params['buyerEmail'], $params['autoVerify']);
         $this->assertInstanceOf(Invoice::class, $result);
     }
+	
+	/**
+	 * @depends testWithFileJsonConfig
+	 */
+	public function testUpdateInvoiceWhenLacksSmsCode($testedObject)
+	{
+		$invoiceId = 'testId';
+		$params['token'] = $this->getMerchantTokenFromFile();
+		$params['buyerEmail'] = '';
+		$params['buyerSms'] = 'buyerSms';
+		$params['smsCode'] = '';
+		$params['autoVerify'] = false;
+		
+		$restCliMock = $this->getRestCliMock();
+		$restCliMock->expects($this->never())->method('update')->with("invoices/" . $invoiceId, $params)->willReturn(self::CORRECT_JSON_STRING);
+		$setRestCli = function () use ($restCliMock) {
+			$this->_RESTcli = $restCliMock;
+		};
+		
+		$doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+		$doSetRestCli();
+
+		$this->expectException(InvoiceUpdateException::class);
+		$testedObject->updateInvoice($invoiceId, $params['buyerSms'], $params['smsCode'], $params['buyerEmail'], $params['autoVerify']);
+	}
+	
+	/**
+	 * @depends testWithFileJsonConfig
+	 */
+	public function testUpdateInvoiceShouldPassWhenAutoVerifyTrue($testedObject)
+	{
+		$invoiceId = 'testId';
+		$params['token'] = $this->getMerchantTokenFromFile();
+		$params['buyerEmail'] = '';
+		$params['buyerSms'] = 'buyerSms';
+		$params['smsCode'] = '';
+		$params['autoVerify'] = true;
+		
+		$restCliMock = $this->getRestCliMock();
+		$restCliMock->expects($this->once())->method('update')->with("invoices/" . $invoiceId, $params)->willReturn(self::CORRECT_JSON_STRING);
+		$setRestCli = function () use ($restCliMock) {
+			$this->_RESTcli = $restCliMock;
+		};
+		
+		$doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+		$doSetRestCli();
+		
+		$result = $testedObject->updateInvoice($invoiceId, $params['buyerSms'], $params['smsCode'], $params['buyerEmail'], $params['autoVerify']);
+		$this->assertInstanceOf(Invoice::class, $result);
+	}
+	
+	public function testUpdateInvoiceShouldThrowExceptionWhenProvidedBothBuyerSmsAndEmail()
+	{
+		$testedObject = $this->getTestedClassInstance();
+		$invoiceId = 'testId';
+		$params['token'] = $this->getMerchantTokenFromFile();
+		$params['buyerEmail'] = 'buyerEmail';
+		$params['buyerSms'] = 'buyerSms';
+		$params['smsCode'] = 'smsCode';
+		$params['autoVerify'] = false;
+		
+		$this->expectExceptionMessage('Updating the invoice requires buyerSms or buyerEmail, but not both.');
+		$testedObject->updateInvoice($invoiceId, $params['buyerSms'], $params['smsCode'], $params['buyerEmail'], $params['autoVerify']);
+	}
 
     /**
      * @depends testWithFileJsonConfig
@@ -815,9 +878,12 @@ class ClientTest extends TestCase
         $invoiceId = 'testId';
         $params['token'] = $this->getMerchantTokenFromFile();
         $params['buyerEmail'] = 'buyerEmail';
+		$params['buyerSms'] = '';
+		$params['smsCode'] = '';
+		$params['autoVerify'] = false;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("invoices/" . $invoiceId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('update')->with("invoices/" . $invoiceId, $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -826,7 +892,7 @@ class ClientTest extends TestCase
         $doSetRestCli();
 
         $this->expectException(InvoiceUpdateException::class);
-        $testedObject->updateInvoice($invoiceId, $params['buyerEmail']);
+        $testedObject->updateInvoice($invoiceId, $params['buyerSms'], $params['smsCode'], $params['buyerEmail'], $params['autoVerify']);
     }
 
     /**
@@ -836,10 +902,13 @@ class ClientTest extends TestCase
     {
         $invoiceId = 'testId';
         $params['token'] = $this->getMerchantTokenFromFile();
-        $params['buyerEmail'] = 'buyerEmail';
-
+	    $params['buyerEmail'] = '';
+	    $params['buyerSms'] = 'buyerSms';
+	    $params['smsCode'] = 'smsCode';
+	    $params['autoVerify'] = false;
+		
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("invoices/" . $invoiceId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('update')->with("invoices/" . $invoiceId, $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -848,7 +917,7 @@ class ClientTest extends TestCase
         $doSetRestCli();
 
         $this->expectException(InvoiceUpdateException::class);
-        $testedObject->updateInvoice($invoiceId, $params['buyerEmail']);
+	    $testedObject->updateInvoice($invoiceId, $params['buyerSms'], $params['smsCode'], $params['buyerEmail'], $params['autoVerify']);
     }
 
     /**
@@ -858,10 +927,13 @@ class ClientTest extends TestCase
     {
         $invoiceId = 'testId';
         $params['token'] = $this->getMerchantTokenFromFile();
-        $params['buyerEmail'] = 'buyerEmail';
-
+        $params['buyerEmail'] = '';
+	    $params['buyerSms'] = 'buyerSms';
+	    $params['smsCode'] = 'smsCode';
+	    $params['autoVerify'] = false;
+		
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("invoices/" . $invoiceId, $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('update')->with("invoices/" . $invoiceId, $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -870,7 +942,7 @@ class ClientTest extends TestCase
         $doSetRestCli();
 
         $this->expectException(InvoiceUpdateException::class);
-        $testedObject->updateInvoice($invoiceId, $params['buyerEmail']);
+        $testedObject->updateInvoice($invoiceId, $params['buyerSms'], $params['smsCode'], $params['buyerEmail']);
     }
 
     /**
@@ -892,7 +964,7 @@ class ClientTest extends TestCase
             ->willReturn($invoiceToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("invoices", $invoice->toArray(), true)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("invoices", $invoice->toArray(), true)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -923,7 +995,7 @@ class ClientTest extends TestCase
             ->willReturn($invoiceToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("invoices", $invoice->toArray(), true)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('post')->with("invoices", $invoice->toArray(), true)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -954,7 +1026,7 @@ class ClientTest extends TestCase
             ->willReturn($invoiceToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("invoices", $invoice->toArray(), true)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('post')->with("invoices", $invoice->toArray(), true)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -985,7 +1057,7 @@ class ClientTest extends TestCase
             ->willReturn($invoiceToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("invoices", $invoice->toArray(), true)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("invoices", $invoice->toArray(), true)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1016,9 +1088,9 @@ class ClientTest extends TestCase
             'token'        => 'token',
         ];
         $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->method('update')->withAnyParameters()->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willReturn($exampleResponse);
         $params['token'] = $this->getMerchantTokenFromFile();
-        $restCliMock->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1051,9 +1123,9 @@ class ClientTest extends TestCase
             'token'        => 'token',
         ];
         $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->method('update')->withAnyParameters()->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willThrowException(new BitPayException());
         $params['token'] = $this->getMerchantTokenFromFile();
-        $restCliMock->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1086,9 +1158,9 @@ class ClientTest extends TestCase
             'token'        => 'token',
         ];
         $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->method('update')->withAnyParameters()->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willThrowException(new Exception());
         $params['token'] = $this->getMerchantTokenFromFile();
-        $restCliMock->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1121,9 +1193,9 @@ class ClientTest extends TestCase
             'token'        => 'token',
         ];
         $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->method('update')->withAnyParameters()->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willReturn(self::CORRUPT_JSON_STRING);
         $params['token'] = $this->getMerchantTokenFromFile();
-        $restCliMock->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1155,7 +1227,7 @@ class ClientTest extends TestCase
             'token'        => 'token',
         ];
         $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->method('post')->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('post')->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1184,7 +1256,7 @@ class ClientTest extends TestCase
             'token'        => 'token',
         ];
         $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->method('post')->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('post')->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1213,7 +1285,7 @@ class ClientTest extends TestCase
             'token'        => 'token',
         ];
         $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->method('post')->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('post')->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1242,7 +1314,7 @@ class ClientTest extends TestCase
             'token'        => 'token',
         ];
         $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->method('post')->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1264,7 +1336,7 @@ class ClientTest extends TestCase
         $status = 'draft';
         $params['status'] = $status;
 
-        $restCliMock->method('get')->with("subscriptions", $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions", $params)->willReturn($exampleResponse);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1289,7 +1361,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $params['token'] = $this->getMerchantTokenFromFile();
 
-        $restCliMock->method('get')->with("subscriptions", $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions", $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1309,7 +1381,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $params['token'] = $this->getMerchantTokenFromFile();
 
-        $restCliMock->method('get')->with("subscriptions", $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions", $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1328,7 +1400,7 @@ class ClientTest extends TestCase
     {
         $restCliMock = $this->getRestCliMock();
         $params['token'] = $this->getMerchantTokenFromFile();
-        $restCliMock->method('get')->with("subscriptions", $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions", $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1347,7 +1419,7 @@ class ClientTest extends TestCase
         $exampleResponse = json_encode($this->getExampleSubscriptionData());
         $exampleSubscriptionId = 'subscriptionId';
         $params['token'] = $this->getMerchantTokenFromFile();
-        $restCliMock->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1367,7 +1439,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $exampleSubscriptionId = 'subscriptionId';
         $params['token'] = $this->getMerchantTokenFromFile();
-        $restCliMock->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willThrowException(new BitPayException());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1387,7 +1459,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $exampleSubscriptionId = 'subscriptionId';
         $params['token'] = $this->getMerchantTokenFromFile();
-        $restCliMock->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willThrowException(new Exception());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1407,7 +1479,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $exampleSubscriptionId = 'subscriptionId';
         $params['token'] = $this->getMerchantTokenFromFile();
-        $restCliMock->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn(self::CORRUPT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1426,7 +1498,7 @@ class ClientTest extends TestCase
     {
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->willReturn(self::CORRECT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1446,7 +1518,7 @@ class ClientTest extends TestCase
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
 
-        $restCliMock->method('get')->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->willReturn(self::CORRUPT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1466,7 +1538,7 @@ class ClientTest extends TestCase
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
 
-        $restCliMock->method('get')->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->willThrowException(new BitPayException());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1485,7 +1557,7 @@ class ClientTest extends TestCase
     {
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willThrowException(new \Exception());
+        $restCliMock->expects($this->once())->method('get')->willThrowException(new \Exception());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1512,7 +1584,7 @@ class ClientTest extends TestCase
         $params["startDate"] = $exampleStartDate;
         $params["endDate"] = $exampleEndDate;
 
-        $restCliMock->method('get')->with("ledgers/".$exampleCurrency, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("ledgers/".$exampleCurrency, $params)->willReturn(self::CORRECT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1531,7 +1603,7 @@ class ClientTest extends TestCase
     public function testGetLedgerShouldCatchRestCliException($testedObject)
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willThrowException(new \Exception());
+        $restCliMock->expects($this->once())->method('get')->willThrowException(new \Exception());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1552,7 +1624,7 @@ class ClientTest extends TestCase
     public function testGetLedgerShouldCatchRestCliBitPayException($testedObject)
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->willThrowException(new BitPayException());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1573,7 +1645,7 @@ class ClientTest extends TestCase
     public function testGetLedgerShouldCatchJsonMapperException($testedObject)
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->willReturn(self::CORRUPT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1596,7 +1668,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $params['token'] = $this->getMerchantTokenFromFile();
 
-        $restCliMock->method('get')->with("ledgers", $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("ledgers", $params)->willReturn(self::CORRECT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1615,7 +1687,7 @@ class ClientTest extends TestCase
     public function testGetLedgersShouldCatchBitPayException($testedObject)
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->willThrowException(new BitPayException());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1633,7 +1705,7 @@ class ClientTest extends TestCase
     public function testGetLedgersShouldCatchRestCliException($testedObject)
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->willThrowException(new Exception());
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1651,7 +1723,7 @@ class ClientTest extends TestCase
     public function testGetLedgersShouldCatchJsonMapperException($testedObject)
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->willReturn(self::CORRUPT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -1678,7 +1750,7 @@ class ClientTest extends TestCase
     {
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with('rates', null, false)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with('rates', null, false)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1696,7 +1768,7 @@ class ClientTest extends TestCase
     {
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with('rates', null, false)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with('rates', null, false)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1711,7 +1783,7 @@ class ClientTest extends TestCase
     {
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with('rates', null, false)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with('rates', null, false)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1729,7 +1801,7 @@ class ClientTest extends TestCase
     {
         $testedObject = $this->getTestedClassInstance();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with('rates', null, false)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with('rates', null, false)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1749,7 +1821,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $exampleResponse = json_encode($this->getExamplePayoutData());
         $payoutId = '123';
-        $restCliMock->method('get')->with("payouts/" . $payoutId, $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("payouts/" . $payoutId, $params)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1767,7 +1839,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $payoutId = '123';
-        $restCliMock->method('get')->with("payouts/" . $payoutId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("payouts/" . $payoutId, $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1785,7 +1857,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $payoutId = '123';
-        $restCliMock->method('get')->with("payouts/" . $payoutId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("payouts/" . $payoutId, $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1803,7 +1875,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $payoutId = '123';
-        $restCliMock->method('get')->with("payouts/" . $payoutId, $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("payouts/" . $payoutId, $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1835,7 +1907,7 @@ class ClientTest extends TestCase
 
         $restCliMock = $this->getRestCliMock();
         $exampleResponse = json_encode($this->getExamplePayoutData());
-        $restCliMock->method('get')->with("payouts", $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("payouts", $params)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1868,7 +1940,7 @@ class ClientTest extends TestCase
         $params['reference'] = $reference;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payouts", $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("payouts", $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1900,7 +1972,7 @@ class ClientTest extends TestCase
         $params['reference'] = $reference;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payouts", $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("payouts", $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1932,7 +2004,7 @@ class ClientTest extends TestCase
         $params['reference'] = $reference;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payouts", $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("payouts", $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1952,7 +2024,7 @@ class ClientTest extends TestCase
         $examplePayoutId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("payouts/" . $examplePayoutId, $params)->willReturn('{"status":"success"}');
+        $restCliMock->expects($this->once())->method('delete')->with("payouts/" . $examplePayoutId, $params)->willReturn('{"status":"success"}');
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1972,7 +2044,7 @@ class ClientTest extends TestCase
         $examplePayoutId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("payouts/" . $examplePayoutId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('delete')->with("payouts/" . $examplePayoutId, $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -1992,7 +2064,7 @@ class ClientTest extends TestCase
         $examplePayoutId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("payouts/" . $examplePayoutId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('delete')->with("payouts/" . $examplePayoutId, $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2012,7 +2084,7 @@ class ClientTest extends TestCase
         $examplePayoutId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("payouts/" . $examplePayoutId, $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('delete')->with("payouts/" . $examplePayoutId, $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2039,7 +2111,7 @@ class ClientTest extends TestCase
         $payoutMock->method('toArray')->willReturn($payoutBatchToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payouts", $payoutMock->toArray())->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("payouts", $payoutMock->toArray())->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2066,7 +2138,7 @@ class ClientTest extends TestCase
         $payoutMock->method('toArray')->willReturn($payoutBatchToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payouts", $payoutMock->toArray())->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('post')->with("payouts", $payoutMock->toArray())->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2093,7 +2165,7 @@ class ClientTest extends TestCase
         $payoutMock->method('toArray')->willReturn($payoutBatchToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payouts", $payoutMock->toArray())->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('post')->with("payouts", $payoutMock->toArray())->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2120,7 +2192,7 @@ class ClientTest extends TestCase
         $payoutMock->method('toArray')->willReturn($payoutBatchToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payouts", $payoutMock->toArray())->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("payouts", $payoutMock->toArray())->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2139,7 +2211,7 @@ class ClientTest extends TestCase
         $examplePayoutBatchId = 'test';
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payoutBatches/" . $examplePayoutBatchId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("payoutBatches/" . $examplePayoutBatchId, $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2159,7 +2231,7 @@ class ClientTest extends TestCase
         $exampleRecipientId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("recipients/" . $exampleRecipientId . '/notifications', $content)->willReturn('{"status":"success"}');
+        $restCliMock->expects($this->once())->method('post')->with("recipients/" . $exampleRecipientId . '/notifications', $content)->willReturn('{"status":"success"}');
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2179,7 +2251,7 @@ class ClientTest extends TestCase
         $exampleRecipientId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("recipients/" . $exampleRecipientId . '/notifications', $content)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('post')->with("recipients/" . $exampleRecipientId . '/notifications', $content)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2199,7 +2271,7 @@ class ClientTest extends TestCase
         $exampleRecipientId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("recipients/" . $exampleRecipientId . '/notifications', $content)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('post')->with("recipients/" . $exampleRecipientId . '/notifications', $content)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2219,7 +2291,7 @@ class ClientTest extends TestCase
         $exampleRecipientId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("recipients/" . $exampleRecipientId . '/notifications', $content)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("recipients/" . $exampleRecipientId . '/notifications', $content)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2239,7 +2311,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("recipients/" . $exampleRecipientId, $params)->willReturn('{"status":"success"}');
+        $restCliMock->expects($this->once())->method('delete')->with("recipients/" . $exampleRecipientId, $params)->willReturn('{"status":"success"}');
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2259,7 +2331,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("recipients/" . $exampleRecipientId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('delete')->with("recipients/" . $exampleRecipientId, $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2279,7 +2351,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("recipients/" . $exampleRecipientId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('delete')->with("recipients/" . $exampleRecipientId, $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2299,7 +2371,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("recipients/" . $exampleRecipientId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('delete')->with("recipients/" . $exampleRecipientId, $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2323,7 +2395,7 @@ class ClientTest extends TestCase
         ];
         $payoutRecipientMock->method('toArray')->willReturn($payoutRecipientToArray);
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('update')->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2347,7 +2419,7 @@ class ClientTest extends TestCase
         ];
         $payoutRecipientMock->method('toArray')->willReturn($payoutRecipientToArray);
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('update')->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2371,7 +2443,7 @@ class ClientTest extends TestCase
         ];
         $payoutRecipientMock->method('toArray')->willReturn($payoutRecipientToArray);
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('update')->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2395,7 +2467,7 @@ class ClientTest extends TestCase
         ];
         $payoutRecipientMock->method('toArray')->willReturn($payoutRecipientToArray);
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('update')->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2420,7 +2492,7 @@ class ClientTest extends TestCase
         ];
         $payoutRecipientsMock->method('toArray')->willReturn($payoutRecipientToArray);
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("recipients", $payoutRecipientsMock->toArray())->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("recipients", $payoutRecipientsMock->toArray())->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2445,7 +2517,7 @@ class ClientTest extends TestCase
         $payoutRecipientsMock->method('toArray')->willReturn($payoutRecipientToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("recipients", $payoutRecipientsMock->toArray())->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('post')->with("recipients", $payoutRecipientsMock->toArray())->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2470,7 +2542,7 @@ class ClientTest extends TestCase
         $payoutRecipientsMock->method('toArray')->willReturn($payoutRecipientToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("recipients", $payoutRecipientsMock->toArray())->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('post')->with("recipients", $payoutRecipientsMock->toArray())->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2495,7 +2567,7 @@ class ClientTest extends TestCase
         $payoutRecipientsMock->method('toArray')->willReturn($payoutRecipientToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("recipients", $payoutRecipientsMock->toArray())->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("recipients", $payoutRecipientsMock->toArray())->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2514,7 +2586,7 @@ class ClientTest extends TestCase
         $examplePayoutBatchId = 'test';
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payoutBatches/" . $examplePayoutBatchId, $params)
+        $restCliMock->expects($this->once())->method('get')->with("payoutBatches/" . $examplePayoutBatchId, $params)
             ->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -2534,7 +2606,7 @@ class ClientTest extends TestCase
         $examplePayoutBatchId = 'test';
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payoutBatches/" . $examplePayoutBatchId, $params)
+        $restCliMock->expects($this->once())->method('get')->with("payoutBatches/" . $examplePayoutBatchId, $params)
             ->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -2554,7 +2626,7 @@ class ClientTest extends TestCase
         $examplePayoutBatchId = 'test';
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payoutBatches/" . $examplePayoutBatchId, $params)
+        $restCliMock->expects($this->once())->method('get')->with("payoutBatches/" . $examplePayoutBatchId, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -2585,7 +2657,7 @@ class ClientTest extends TestCase
         $params['offset'] = $offset;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payoutBatches", $params)
+        $restCliMock->expects($this->once())->method('get')->with("payoutBatches", $params)
             ->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -2617,7 +2689,7 @@ class ClientTest extends TestCase
         $params['offset'] = $offset;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payoutBatches", $params)
+        $restCliMock->expects($this->once())->method('get')->with("payoutBatches", $params)
             ->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -2637,7 +2709,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payoutBatches", $params)
+        $restCliMock->expects($this->once())->method('get')->with("payoutBatches", $params)
             ->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -2657,7 +2729,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("payoutBatches", $params)
+        $restCliMock->expects($this->once())->method('get')->with("payoutBatches", $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -2679,7 +2751,7 @@ class ClientTest extends TestCase
         $exampleResponse = json_encode(['status' => 'success']);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("payoutBatches/" . $payoutBatchId, $params)
+        $restCliMock->expects($this->once())->method('delete')->with("payoutBatches/" . $payoutBatchId, $params)
             ->willReturn($exampleResponse);
 
         $setRestCli = function () use ($restCliMock) {
@@ -2701,7 +2773,7 @@ class ClientTest extends TestCase
         $payoutBatchId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("payoutBatches/" . $payoutBatchId, $params)
+        $restCliMock->expects($this->once())->method('delete')->with("payoutBatches/" . $payoutBatchId, $params)
             ->willThrowException(new BitPayException());
 
         $setRestCli = function () use ($restCliMock) {
@@ -2723,7 +2795,7 @@ class ClientTest extends TestCase
         $payoutBatchId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("payoutBatches/" . $payoutBatchId, $params)
+        $restCliMock->expects($this->once())->method('delete')->with("payoutBatches/" . $payoutBatchId, $params)
             ->willThrowException(new Exception());
 
         $setRestCli = function () use ($restCliMock) {
@@ -2745,7 +2817,7 @@ class ClientTest extends TestCase
         $payoutBatchId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("payoutBatches/" . $payoutBatchId, $params)
+        $restCliMock->expects($this->once())->method('delete')->with("payoutBatches/" . $payoutBatchId, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
@@ -2768,7 +2840,7 @@ class ClientTest extends TestCase
         $exampleResponse = json_encode(['status' => 'success']);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payoutBatches/" . $payoutBatchId . "/notifications", $content)
+        $restCliMock->expects($this->once())->method('post')->with("payoutBatches/" . $payoutBatchId . "/notifications", $content)
             ->willReturn($exampleResponse);
 
         $setRestCli = function () use ($restCliMock) {
@@ -2789,7 +2861,7 @@ class ClientTest extends TestCase
         $payoutBatchId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payoutBatches/" . $payoutBatchId . "/notifications", $content)
+        $restCliMock->expects($this->once())->method('post')->with("payoutBatches/" . $payoutBatchId . "/notifications", $content)
             ->willThrowException(new BitPayException());
 
         $setRestCli = function () use ($restCliMock) {
@@ -2811,7 +2883,7 @@ class ClientTest extends TestCase
         $payoutBatchId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payoutBatches/" . $payoutBatchId . "/notifications", $content)
+        $restCliMock->expects($this->once())->method('post')->with("payoutBatches/" . $payoutBatchId . "/notifications", $content)
             ->willThrowException(new Exception());
 
         $setRestCli = function () use ($restCliMock) {
@@ -2833,7 +2905,7 @@ class ClientTest extends TestCase
         $payoutBatchId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payoutBatches/" . $payoutBatchId . "/notifications", $content)
+        $restCliMock->expects($this->once())->method('post')->with("payoutBatches/" . $payoutBatchId . "/notifications", $content)
             ->willReturn(self::CORRUPT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
@@ -2861,7 +2933,7 @@ class ClientTest extends TestCase
         $payoutBatchMock->method('getCurrency')->willReturn(Currency::USD);
         $payoutBatchMock->method('toArray')->willReturn($payoutBatchToArray);
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payoutBatches", $payoutBatchMock->toArray() )
+        $restCliMock->expects($this->once())->method('post')->with("payoutBatches", $payoutBatchMock->toArray() )
             ->willReturn(json_encode($payoutBatchMock->toArray()));
 
         $setRestCli = function () use ($restCliMock) {
@@ -2889,7 +2961,7 @@ class ClientTest extends TestCase
         $payoutBatchMock->method('getCurrency')->willReturn(Currency::USD);
         $payoutBatchMock->method('toArray')->willReturn($payoutBatchToArray);
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payoutBatches", $payoutBatchMock->toArray() )
+        $restCliMock->expects($this->once())->method('post')->with("payoutBatches", $payoutBatchMock->toArray() )
             ->willThrowException(new BitPayException());
 
         $setRestCli = function () use ($restCliMock) {
@@ -2917,7 +2989,7 @@ class ClientTest extends TestCase
         $payoutBatchMock->method('getCurrency')->willReturn(Currency::USD);
         $payoutBatchMock->method('toArray')->willReturn($payoutBatchToArray);
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payoutBatches", $payoutBatchMock->toArray() )
+        $restCliMock->expects($this->once())->method('post')->with("payoutBatches", $payoutBatchMock->toArray() )
             ->willThrowException(new Exception());
 
         $setRestCli = function () use ($restCliMock) {
@@ -2945,7 +3017,7 @@ class ClientTest extends TestCase
         $payoutBatchMock->method('getCurrency')->willReturn(Currency::USD);
         $payoutBatchMock->method('toArray')->willReturn($payoutBatchToArray);
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payoutBatches", $payoutBatchMock->toArray() )
+        $restCliMock->expects($this->once())->method('post')->with("payoutBatches", $payoutBatchMock->toArray() )
             ->willReturn(self::CORRUPT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
@@ -2967,7 +3039,7 @@ class ClientTest extends TestCase
         $examplePayoutId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payouts/" . $examplePayoutId . '/notifications', $content )
+        $restCliMock->expects($this->once())->method('post')->with("payouts/" . $examplePayoutId . '/notifications', $content )
             ->willReturn('{"status":"success"}');
 
         $setRestCli = function () use ($restCliMock) {
@@ -2989,7 +3061,7 @@ class ClientTest extends TestCase
         $examplePayoutId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payouts/" . $examplePayoutId . '/notifications', $content )
+        $restCliMock->expects($this->once())->method('post')->with("payouts/" . $examplePayoutId . '/notifications', $content )
             ->willThrowException(new BitPayException());
 
         $setRestCli = function () use ($restCliMock) {
@@ -3011,7 +3083,7 @@ class ClientTest extends TestCase
         $examplePayoutId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payouts/" . $examplePayoutId . '/notifications', $content )
+        $restCliMock->expects($this->once())->method('post')->with("payouts/" . $examplePayoutId . '/notifications', $content )
             ->willThrowException(new Exception());
 
         $setRestCli = function () use ($restCliMock) {
@@ -3033,7 +3105,7 @@ class ClientTest extends TestCase
         $examplePayoutId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("payouts/" . $examplePayoutId . '/notifications', $content )
+        $restCliMock->expects($this->once())->method('post')->with("payouts/" . $examplePayoutId . '/notifications', $content )
             ->willReturn(self::CORRECT_JSON_STRING);
 
         $setRestCli = function () use ($restCliMock) {
@@ -3055,7 +3127,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
         $exampleBillId = '123';
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("bills/" . $exampleBillId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("bills/" . $exampleBillId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3075,7 +3147,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
         $exampleBillId = '123';
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("bills/" . $exampleBillId, $params, true)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("bills/" . $exampleBillId, $params, true)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3095,7 +3167,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
         $exampleBillId = '123';
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("bills/" . $exampleBillId, $params, true)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("bills/" . $exampleBillId, $params, true)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3116,7 +3188,7 @@ class ClientTest extends TestCase
         $exampleBillId = '123';
         $exampleResponse = trim('[ { "currency": "EUR""balance": 0 }, { "currency": "USD", "balance": 2389.82 }, { "currency": "BTC", "balance": 0.000287 } ]');
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("bills/" . $exampleBillId, $params, true)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("bills/" . $exampleBillId, $params, true)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3138,7 +3210,7 @@ class ClientTest extends TestCase
         $status = 'test';
         $params['status'] = $status;
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("bills", $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("bills", $params)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3161,7 +3233,7 @@ class ClientTest extends TestCase
         $status = 'test';
         $params['status'] = $status;
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("bills", $params)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("bills", $params)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3182,7 +3254,7 @@ class ClientTest extends TestCase
         $status = 'test';
         $params['status'] = $status;
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("bills", $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("bills", $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3203,7 +3275,7 @@ class ClientTest extends TestCase
         $status = 'test';
         $params['status'] = $status;
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("bills", $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("bills", $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3223,7 +3295,7 @@ class ClientTest extends TestCase
         $exampleBillToken = 'testToken';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("bills/". $exampleBillId . '/deliveries', [ 'token' => $exampleBillToken ])->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("bills/". $exampleBillId . '/deliveries', [ 'token' => $exampleBillToken ])->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3243,7 +3315,7 @@ class ClientTest extends TestCase
         $exampleBillToken = 'testToken';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("bills/". $exampleBillId . '/deliveries', [ 'token' => $exampleBillToken ])->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('post')->with("bills/". $exampleBillId . '/deliveries', [ 'token' => $exampleBillToken ])->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3263,7 +3335,7 @@ class ClientTest extends TestCase
         $exampleBillToken = 'testToken';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("bills/". $exampleBillId . '/deliveries', [ 'token' => $exampleBillToken ])->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('post')->with("bills/". $exampleBillId . '/deliveries', [ 'token' => $exampleBillToken ])->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3294,8 +3366,8 @@ class ClientTest extends TestCase
         $billMock->method('toArray')->willReturn($billToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("bills/". $exampleBillId, $billMock->toArray())->willReturn($exampleResponse);
-        $restCliMock->method('get')->with("bills/". $exampleBillId, $params, true)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('update')->with("bills/". $exampleBillId, $billMock->toArray())->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('get')->with("bills/". $exampleBillId, $params, true)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3326,8 +3398,8 @@ class ClientTest extends TestCase
         $billMock->method('toArray')->willReturn($billToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("bills/". $exampleBillId, $billMock->toArray())->willThrowException(new BitPayException());
-        $restCliMock->method('get')->with("bills/". $exampleBillId, $params, true)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('update')->with("bills/". $exampleBillId, $billMock->toArray())->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("bills/". $exampleBillId, $params, true)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3358,8 +3430,8 @@ class ClientTest extends TestCase
         $billMock->method('toArray')->willReturn($billToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("bills/". $exampleBillId, $billMock->toArray())->willThrowException(new Exception());
-        $restCliMock->method('get')->with("bills/". $exampleBillId, $params, true)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('update')->with("bills/". $exampleBillId, $billMock->toArray())->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("bills/". $exampleBillId, $params, true)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3390,8 +3462,8 @@ class ClientTest extends TestCase
         $billMock->method('toArray')->willReturn($billToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("bills/". $exampleBillId, $billMock->toArray())->willReturn(self::CORRUPT_JSON_STRING);
-        $restCliMock->method('get')->with("bills/". $exampleBillId, $params, true)->willReturn($exampleResponse);
+        $restCliMock->expects($this->once())->method('update')->with("bills/". $exampleBillId, $billMock->toArray())->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("bills/". $exampleBillId, $params, true)->willReturn($exampleResponse);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3417,7 +3489,7 @@ class ClientTest extends TestCase
         $billMock->method('toArray')->willReturn($billToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("bills", $billMock->toArray(), true)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("bills", $billMock->toArray(), true)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3443,7 +3515,7 @@ class ClientTest extends TestCase
         $billMock->method('toArray')->willReturn($billToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("bills", $billMock->toArray(), true)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('post')->with("bills", $billMock->toArray(), true)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3469,7 +3541,7 @@ class ClientTest extends TestCase
         $billMock->method('toArray')->willReturn($billToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("bills", $billMock->toArray(), true)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('post')->with("bills", $billMock->toArray(), true)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3495,7 +3567,7 @@ class ClientTest extends TestCase
         $billMock->method('toArray')->willReturn($billToArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("bills", $billMock->toArray(), true)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("bills", $billMock->toArray(), true)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3512,7 +3584,7 @@ class ClientTest extends TestCase
     public function testGetSupportedWallets($testedObject)
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("supportedWallets/", null, false)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("supportedWallets/", null, false)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3530,7 +3602,7 @@ class ClientTest extends TestCase
     public function testGetSupportedWalletsShouldCatchRestCliBitPayException($testedObject)
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("supportedWallets/", null, false)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("supportedWallets/", null, false)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3547,7 +3619,7 @@ class ClientTest extends TestCase
 //    public function testGetSupportedWalletsShouldCatchRestCliException($testedObject)
 //    {
 //        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->method('get')->with("supportedWallets/", null, false)->willThrowException(new Exception());
+//        $restCliMock->expects($this->once())->method('get')->with("supportedWallets/", null, false)->willThrowException(new Exception());
 //        $setRestCli = function () use ($restCliMock) {
 //            $this->_RESTcli = $restCliMock;
 //        };
@@ -3564,7 +3636,7 @@ class ClientTest extends TestCase
 //    public function testGetSupportedWalletsShouldCatchJsonMapperException($testedObject)
 //    {
 //        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->method('get')->with("supportedWallets/", null, false)->willReturn(self::CORRUPT_JSON_STRING);
+//        $restCliMock->expects($this->once())->method('get')->with("supportedWallets/", null, false)->willReturn(self::CORRUPT_JSON_STRING);
 //        $setRestCli = function () use ($restCliMock) {
 //            $this->_RESTcli = $restCliMock;
 //        };
@@ -3584,7 +3656,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
         $recipientId = 'test';
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("recipients/" .$recipientId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("recipients/" .$recipientId, $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3604,7 +3676,7 @@ class ClientTest extends TestCase
         $exampleRefundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("refunds/" . $exampleRefundId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('delete')->with("refunds/" . $exampleRefundId, $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3624,7 +3696,7 @@ class ClientTest extends TestCase
         $exampleRefundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("refunds/" . $exampleRefundId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('delete')->with("refunds/" . $exampleRefundId, $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3644,7 +3716,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("refunds/" . $exampleRefundId . "/notifications", $params, true)->willReturn('{"status":"success"}');
+        $restCliMock->expects($this->once())->method('post')->with("refunds/" . $exampleRefundId . "/notifications", $params, true)->willReturn('{"status":"success"}');
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3664,7 +3736,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("refunds/" . $exampleRefundId . "/notifications", $params, true)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('post')->with("refunds/" . $exampleRefundId . "/notifications", $params, true)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3684,7 +3756,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("refunds/" . $exampleRefundId . "/notifications", $params, true)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('post')->with("refunds/" . $exampleRefundId . "/notifications", $params, true)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3704,7 +3776,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("refunds/" . $exampleRefundId . "/notifications", $params, true)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("refunds/" . $exampleRefundId . "/notifications", $params, true)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3724,7 +3796,7 @@ class ClientTest extends TestCase
         $exampleRefundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("refunds/" . $exampleRefundId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("refunds/" . $exampleRefundId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3744,7 +3816,7 @@ class ClientTest extends TestCase
         $exampleRefundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("refunds/" . $exampleRefundId, $params, true)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("refunds/" . $exampleRefundId, $params, true)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3764,7 +3836,7 @@ class ClientTest extends TestCase
         $exampleRefundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("refunds/" . $exampleRefundId, $params, true)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("refunds/" . $exampleRefundId, $params, true)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3784,7 +3856,7 @@ class ClientTest extends TestCase
         $exampleRefundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("refunds/" . $exampleRefundId, $params, true)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("refunds/" . $exampleRefundId, $params, true)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3805,7 +3877,7 @@ class ClientTest extends TestCase
         $params['invoiceId'] = $exampleInvoiceId;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("refunds/", $params, true)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("refunds/", $params, true)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3827,7 +3899,7 @@ class ClientTest extends TestCase
         $params['invoiceId'] = $exampleInvoiceId;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("refunds/", $params, true)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("refunds/", $params, true)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3848,7 +3920,7 @@ class ClientTest extends TestCase
         $params['invoiceId'] = $exampleInvoiceId;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("refunds/", $params, true)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("refunds/", $params, true)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3869,7 +3941,7 @@ class ClientTest extends TestCase
         $params['invoiceId'] = $exampleInvoiceId;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("refunds/", $params, true)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("refunds/", $params, true)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3890,7 +3962,7 @@ class ClientTest extends TestCase
         $refundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("refunds/" . $refundId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('update')->with("refunds/" . $refundId, $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3911,7 +3983,7 @@ class ClientTest extends TestCase
         $refundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("refunds/" . $refundId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('update')->with("refunds/" . $refundId, $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3932,7 +4004,7 @@ class ClientTest extends TestCase
         $refundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("refunds/" . $refundId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('update')->with("refunds/" . $refundId, $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3953,7 +4025,7 @@ class ClientTest extends TestCase
         $refundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('update')->with("refunds/" . $refundId, $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('update')->with("refunds/" . $refundId, $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -3981,7 +4053,7 @@ class ClientTest extends TestCase
         $params['buyerPaysRefundFee'] = false;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("refunds/", $params, true)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("refunds/", $params, true)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4009,7 +4081,7 @@ class ClientTest extends TestCase
         $params['buyerPaysRefundFee'] = false;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("refunds/", $params, true)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('post')->with("refunds/", $params, true)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4037,7 +4109,7 @@ class ClientTest extends TestCase
         $params['buyerPaysRefundFee'] = false;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("refunds/", $params, true)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('post')->with("refunds/", $params, true)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4065,7 +4137,7 @@ class ClientTest extends TestCase
         $params['buyerPaysRefundFee'] = false;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('post')->with("refunds/", $params, true)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('post')->with("refunds/", $params, true)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4085,7 +4157,7 @@ class ClientTest extends TestCase
         $exampleRefundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("refunds/" . $exampleRefundId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('delete')->with("refunds/" . $exampleRefundId, $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4105,7 +4177,7 @@ class ClientTest extends TestCase
         $exampleRefundId = 'testId';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('delete')->with("refunds/" . $exampleRefundId, $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('delete')->with("refunds/" . $exampleRefundId, $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4125,7 +4197,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $recipientId = 'test';
-        $restCliMock->method('get')->with("recipients/" .$recipientId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("recipients/" .$recipientId, $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4145,7 +4217,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $recipientId = 'test';
-        $restCliMock->method('get')->with("recipients/" .$recipientId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("recipients/" .$recipientId, $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4165,7 +4237,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $recipientId = 'test';
-        $restCliMock->method('get')->with("recipients/" .$recipientId, $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("recipients/" .$recipientId, $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4193,7 +4265,7 @@ class ClientTest extends TestCase
         $params['limit'] = $limit;
         $params['offset'] = $offset;
 
-        $restCliMock->method('get')->with("recipients", $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("recipients", $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4222,7 +4294,7 @@ class ClientTest extends TestCase
         $params['limit'] = $limit;
         $params['offset'] = $offset;
 
-        $restCliMock->method('get')->with("recipients", $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("recipients", $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4250,7 +4322,7 @@ class ClientTest extends TestCase
         $params['limit'] = $limit;
         $params['offset'] = $offset;
 
-        $restCliMock->method('get')->with("recipients", $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("recipients", $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4278,7 +4350,7 @@ class ClientTest extends TestCase
         $params['limit'] = $limit;
         $params['offset'] = $offset;
 
-        $restCliMock->method('get')->with("recipients", $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("recipients", $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4298,7 +4370,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $settlementId = 'test';
-        $restCliMock->method('get')->with("settlements/" . $settlementId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("settlements/" . $settlementId, $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4318,7 +4390,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $settlementId = 'test';
-        $restCliMock->method('get')->with("settlements/" . $settlementId, $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("settlements/" . $settlementId, $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4338,7 +4410,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $settlementId = 'test';
-        $restCliMock->method('get')->with("settlements/" . $settlementId, $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("settlements/" . $settlementId, $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4358,7 +4430,7 @@ class ClientTest extends TestCase
         $params['token'] = $this->getMerchantTokenFromFile();
         $restCliMock = $this->getRestCliMock();
         $settlementId = 'test';
-        $restCliMock->method('get')->with("settlements/" . $settlementId, $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("settlements/" . $settlementId, $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4390,7 +4462,7 @@ class ClientTest extends TestCase
         $params['limit'] = $limit;
         $params['offset'] = $offset;
 
-        $restCliMock->method('get')->with("settlements", $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("settlements", $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4423,7 +4495,7 @@ class ClientTest extends TestCase
         $params['limit'] = $limit;
         $params['offset'] = $offset;
 
-        $restCliMock->method('get')->with("settlements", $params)->willThrowException(new BitPayException());
+        $restCliMock->expects($this->once())->method('get')->with("settlements", $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4455,7 +4527,7 @@ class ClientTest extends TestCase
         $params['limit'] = $limit;
         $params['offset'] = $offset;
 
-        $restCliMock->method('get')->with("settlements", $params)->willThrowException(new Exception());
+        $restCliMock->expects($this->once())->method('get')->with("settlements", $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4487,7 +4559,7 @@ class ClientTest extends TestCase
         $params['limit'] = $limit;
         $params['offset'] = $offset;
 
-        $restCliMock->method('get')->with("settlements", $params)->willReturn(self::CORRUPT_JSON_STRING);
+        $restCliMock->expects($this->once())->method('get')->with("settlements", $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -4512,7 +4584,7 @@ class ClientTest extends TestCase
         $params['token'] = $exampleToken;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("settlements/" . $exampleId . '/reconciliationReport',
+        $restCliMock->expects($this->once())->method('get')->with("settlements/" . $exampleId . '/reconciliationReport',
             $params)->willReturn(self::CORRECT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -4538,7 +4610,7 @@ class ClientTest extends TestCase
         $params['token'] = $exampleToken;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("settlements/" . $exampleId . '/reconciliationReport',
+        $restCliMock->expects($this->once())->method('get')->with("settlements/" . $exampleId . '/reconciliationReport',
             $params)->willThrowException(new BitPayException());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -4564,7 +4636,7 @@ class ClientTest extends TestCase
         $params['token'] = $exampleToken;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("settlements/" . $exampleId . '/reconciliationReport',
+        $restCliMock->expects($this->once())->method('get')->with("settlements/" . $exampleId . '/reconciliationReport',
             $params)->willThrowException(new Exception());
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
@@ -4590,7 +4662,7 @@ class ClientTest extends TestCase
         $params['token'] = $exampleToken;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->method('get')->with("settlements/" . $exampleId . '/reconciliationReport',
+        $restCliMock->expects($this->once())->method('get')->with("settlements/" . $exampleId . '/reconciliationReport',
             $params)->willReturn(self::CORRUPT_JSON_STRING);
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
