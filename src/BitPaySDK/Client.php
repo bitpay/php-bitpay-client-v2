@@ -429,7 +429,8 @@ class Client
 
         try {
             $responseJson = $this->_RESTcli->post("invoices/" . $invoiceId . "/notifications", $params);
-            $result = strtolower(json_decode($responseJson)) == "success";
+            $decodedResponseJson = json_decode($responseJson) ?? '';
+            $result = strtolower($decodedResponseJson) == "success";
         } catch (Exception $e) {
             throw new InvoiceNotificationException(
                 "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
