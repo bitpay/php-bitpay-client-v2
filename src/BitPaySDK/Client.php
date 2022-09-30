@@ -405,7 +405,7 @@ class Client
      *
      * @param  string $invoiceId A BitPay invoice ID.
      * @return bool              True if the webhook was successfully requested, false otherwise.
-     * @throws InvoiceNotificationException
+     * @throws InvoiceQueryException
      * @throws BitPayException
      */
     public function requestInvoiceNotification(string $invoiceId): bool
@@ -414,7 +414,7 @@ class Client
             $params = [];
             $invoice = $this->getInvoice($invoiceId);
         } catch (BitPayException $e) {
-            throw new InvoiceNotificationException(
+            throw new InvoiceQueryException(
                 "failed to serialize invoice object : " .
                 $e->getMessage(),
                 null,
@@ -422,7 +422,7 @@ class Client
                 $e->getApiCode()
             );
         } catch (Exception $e) {
-            throw new InvoiceNotificationException("failed to serialize invoice object : " . $e->getMessage());
+            throw new InvoiceQueryException("failed to serialize invoice object : " . $e->getMessage());
         }
 
         $params["token"] = $invoice->getToken();
@@ -432,7 +432,7 @@ class Client
             $decodedResponseJson = json_decode($responseJson) ?? '';
             $result = strtolower($decodedResponseJson) == "success";
         } catch (Exception $e) {
-            throw new InvoiceNotificationException(
+            throw new InvoiceQueryException(
                 "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
             );
         }
@@ -835,7 +835,7 @@ class Client
             );
         } catch (Exception $e) {
             throw new WalletQueryException(
-                "failed to deserialize BitPay server response (Wallet) : " + $e->getMessage()
+                "failed to deserialize BitPay server response (Wallet) : " . $e->getMessage()
             );
         }
 
@@ -848,7 +848,7 @@ class Client
             );
         } catch (Exception $e) {
             throw new WalletQueryException(
-                "failed to deserialize BitPay server response (Wallet) : " + $e->getMessage()
+                "failed to deserialize BitPay server response (Wallet) : " . $e->getMessage()
             );
         }
 
