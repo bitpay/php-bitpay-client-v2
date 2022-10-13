@@ -50,6 +50,12 @@ class ItemizedDetails
             'isFee'         => $this->getIsFee()
         ];
 
+        foreach ($elements as $key => $value) {
+            if (empty($value)) {
+                unset($elements[$key]);
+            }
+        }
+
         return $elements;
     }
 }
