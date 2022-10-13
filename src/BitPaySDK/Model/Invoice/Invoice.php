@@ -358,31 +358,12 @@ class Invoice
 
     public function getItemizedDetailsAsArray()
     {
-        $items = [];
-
-        foreach ($this->_items as $item) {
-            if ($item instanceof ItemizedDetails) {
-                array_push($items, $item->toArray());
-            } else {
-                array_push($items, $item);
-            }
-        }
-
-        return $items;
+        return $this->_itemizedDetails->toArray();
     }
 
     public function setItemizedDetails(ItemizedDetails $itemizedDetails)
     {
-        $itemsArray = [];
-
-        foreach ($itemizedDetails as $item) {
-            if ($item instanceof Item) {
-                array_push($itemsArray, $item);
-            } else {
-                array_push($itemsArray, Item::createFromArray((array)$item));
-            }
-        }
-        $this->_itemizedDetails = $itemsArray;
+        $this->_itemizedDetails = $itemizedDetails;
     }
     // Buyer data
     //
