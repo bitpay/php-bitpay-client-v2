@@ -19,10 +19,10 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-      - uses: php-actions/composer@v5
-        with:
-          php_version: ${{ matrix.php-version }}
-          php_extensions: bcmath gmp xdebug
+      # - uses: php-actions/composer@v5
+      #   with:
+      #     php_version: ${{ matrix.php-version }}
+      #     php_extensions: bcmath gmp xdebug
       - uses: php-actions/phpunit@v3
         with:
           configuration: phpunit.xml
