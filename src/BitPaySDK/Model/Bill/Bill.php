@@ -59,6 +59,8 @@ class Bill
 
     /**
      * Gets token
+     * API token for bill resource. This token is actually derived from the API token used to
+     * create the bill and is tied to the specific resource id created.
      *
      * @return string the token
      */
@@ -81,6 +83,7 @@ class Bill
 
     /**
      * Gets bill currency
+     * ISO 4217 3-character currency code. This is the currency associated with the price field
      *
      * @return string the bill currency
      */
@@ -176,6 +179,7 @@ class Bill
 
     /**
      * Gets bill number
+     * Bill identifier, specified by merchant
      *
      * @return string the number
      */
@@ -196,7 +200,7 @@ class Bill
     }
 
     /**
-     * Gets bill name
+     * Gets Bill recipient's name
      *
      * @return string the name
      */
@@ -206,8 +210,7 @@ class Bill
     }
 
     /**
-     * Sets Bill's name
-     * Bill recipient's name
+     * Sets Bill recipient's name
      *
      * @param string $name the name
      */
@@ -217,7 +220,7 @@ class Bill
     }
 
     /**
-     * Gets bill address 1
+     * Gets Bill recipient's address
      *
      * @return string the address1
      */
@@ -227,8 +230,7 @@ class Bill
     }
 
     /**
-     * Sets Bill's address1
-     * Bill recipient's address
+     * Sets Bill recipient's address
      *
      * @param string $address1
      */
@@ -238,7 +240,7 @@ class Bill
     }
 
     /**
-     * Gets bill address 2
+     * Gets Bill recipient's address
      *
      * @return string the address2
      */
@@ -248,8 +250,7 @@ class Bill
     }
 
     /**
-     * Sets Bill's address2
-     * Bill recipient's address
+     * Sets Bill recipient's address
      *
      * @param string $address2
      */
@@ -259,7 +260,7 @@ class Bill
     }
 
     /**
-     * Gets bill city
+     * Gets Bill recipient's city
      *
      * @return string the city
      */
@@ -269,8 +270,7 @@ class Bill
     }
 
     /**
-     * Sets Bill's city
-     * Bill recipient's city
+     * Sets Bill recipient's city
      *
      * @param string $city
      */
@@ -280,7 +280,7 @@ class Bill
     }
 
     /**
-     * Gets bill state
+     * Gets Bill recipient's state or province
      *
      * @return string the state
      */
@@ -290,8 +290,7 @@ class Bill
     }
 
     /**
-     * Sets Bill's state
-     * Bill recipient's state or province
+     * Sets Bill recipient's state or province
      *
      * @param string $state
      */
@@ -301,7 +300,7 @@ class Bill
     }
 
     /**
-     * Gets bill zip
+     * Gets Bill recipient's ZIP code
      *
      * @return string the zip
      */
@@ -311,8 +310,7 @@ class Bill
     }
 
     /**
-     * Sets Bill's zip
-     * Bill recipient's ZIP code
+     * Sets Bill recipient's ZIP code
      *
      * @param string $zip
      */
@@ -322,7 +320,7 @@ class Bill
     }
 
     /**
-     * Gets bill country
+     * Gets Bill recipient's country
      *
      * @return string the country
      */
@@ -332,8 +330,7 @@ class Bill
     }
 
     /**
-     * Sets Bill's country
-     *Bill recipient's country
+     * Sets Bill recipient's country
      *
      * @param string $country
      */
@@ -343,7 +340,8 @@ class Bill
     }
 
     /**
-     * Gets bill cc
+     * Gets Bill cc
+     * Email addresses to which a copy of the bill must be sent
      *
      * @return array the cc
      */
@@ -364,7 +362,7 @@ class Bill
     }
 
     /**
-     * Gets bill phone
+     * Gets Bill recipient's phone number
      *
      * @return string the phone
      */
@@ -374,8 +372,7 @@ class Bill
     }
 
     /**
-     * Sets Bill's phone
-     * Bill recipient's phone number
+     * Sets Bill recipient's phone number
      *
      * @param string $phone
      */
@@ -385,7 +382,8 @@ class Bill
     }
 
     /**
-     * Gets bill due date
+     * Gets Bill due date
+     * Date and time at which a bill is due, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
      * @return string the number
      */
@@ -428,6 +426,7 @@ class Bill
 
     /**
      * Gets bill status
+     * Can "draft", "sent", "new", "paid", or "complete"
      *
      * @return string the status
      */
@@ -449,6 +448,7 @@ class Bill
 
     /**
      * Gets bill url
+     * Web address of bill
      *
      * @return string the url
      */
@@ -470,6 +470,7 @@ class Bill
 
     /**
      * Gets bill create date
+     * Date and time of Bill creation, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
      * @return string the create date
      */
@@ -491,6 +492,7 @@ class Bill
 
     /**
      * Gets bill id
+     * Bill resource id
      *
      * @return string the id
      */
@@ -512,6 +514,7 @@ class Bill
 
     /**
      * Gets bill merchant
+     * Internal identifier for BitPay, this field can be ignored by the merchants.
      *
      * @return string the merchant
      */
