@@ -21,7 +21,7 @@ interface InvoiceStatus
      * it will still reflect a status of new to the merchant. From a merchant system perspective,
      * an invoice is either paid or not paid, partial payments are automatically refunded by BitPay to the consumer.
      */
-    public const New       = "new";
+    public const New = "new";
 
     /**
      * As soon as payment is received it is evaluated against the invoice requested amount.
@@ -29,7 +29,7 @@ interface InvoiceStatus
      * To detect whether the invoice has been overpaid consult the invoice exception status (exceptionStatus parameter).
      * The overpaid amount on an invoice is automatically refunded by BitPay to the consumer.
      */
-    public const Paid      = "paid";
+    public const Paid = "paid";
 
     /**
      * This status can be used by merchants in order to fulfill orders placed by the consumer.
@@ -46,12 +46,12 @@ interface InvoiceStatus
      * 6 confirmation blocks on the bitcoin network are required for an invoice to be complete,
      * this takes on average 1 hour.
      */
-    public const Complete  = "complete";
+    public const Complete = "complete";
 
     /**
      * An invoice reaches the expired status if no payment was received and the 15 minute payment window has elapsed.
      */
-    public const Expired   = "expired";
+    public const Expired = "expired";
 
     /**
      * An invoice is considered invalid when it was paid,
@@ -60,5 +60,5 @@ interface InvoiceStatus
      * If the transaction confirms after 1 hour, BitPay will update the invoice state from "invalid" to "complete"
      * (6 confirmations for transactions on the bitcoin network for instance).
      */
-    public const Invalid   = "invalid";
+    public const Invalid = "invalid";
 }
