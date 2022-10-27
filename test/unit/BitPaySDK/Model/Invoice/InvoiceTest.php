@@ -250,14 +250,17 @@ class InvoiceTest extends TestCase
         $expectedItemizedDetails->method('toArray')->willReturn($expectedArray);
 
         $invoice = $this->createClassObject();
-        $invoice->setItemizedDetails($expectedItemizedDetails);
+        $invoice->setItemizedDetails([$expectedItemizedDetails]);
 
-        $this->assertIsArray($invoice->getItemizedDetailsAsArray());
-        $this->assertNotNull($invoice->getItemizedDetailsAsArray());
-        $this->assertArrayHasKey('amount', $invoice->getItemizedDetailsAsArray());
-        $this->assertArrayHasKey('description', $invoice->getItemizedDetailsAsArray());
-        $this->assertArrayHasKey('isFee', $invoice->getItemizedDetailsAsArray());
-        $this->assertEquals($expectedArray, $invoice->getItemizedDetailsAsArray());
+        $this->assertIsArray($invoice->getItemizedDetails());
+        $this->assertNotNull($invoice->getItemizedDetails());
+
+        foreach ($invoice->getItemizedDetails() as $item) {
+            $this->assertArrayHasKey('amount', $item);
+            $this->assertArrayHasKey('description', $item);
+            $this->assertArrayHasKey('isFee', $item);
+            $this->assertEquals($expectedArray, $item);
+        }
     }
 
     public function testGetBuyer()

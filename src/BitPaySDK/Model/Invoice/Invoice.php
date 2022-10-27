@@ -356,17 +356,19 @@ class Invoice
         return $this->_itemizedDetails;
     }
 
-    public function getItemizedDetailsAsArray()
+    public function setItemizedDetails(array $itemizedDetails)
     {
-        return $this->_itemizedDetails->toArray();
-    }
+        $itemsArray = [];
 
-    public function setItemizedDetails(ItemizedDetails $itemizedDetails)
-    {
-        $this->_itemizedDetails = $itemizedDetails;
+        foreach ($itemizedDetails as $item) {
+            if ($item instanceof ItemizedDetails) {
+                array_push($itemsArray, $item->toArray());
+            } else {
+                array_push($itemsArray, $item);
+            }
+        }
+        $this->_itemizedDetails = $itemsArray;
     }
-    // Buyer data
-    //
 
     public function setAcceptanceWindow(float $acceptanceWindow)
     {
@@ -833,7 +835,7 @@ class Invoice
             'isCancelled'                    => $this->getIsCancelled(),
             'buyerEmail'                     => $this->getBuyerEmail(),
             'buyerSms'                       => $this->getBuyerSms(),
-            'itemizedDetails'                => $this->getItemizedDetails()->toArray(),
+            'itemizedDetails'                => $this->getItemizedDetails(),
             'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];
 
