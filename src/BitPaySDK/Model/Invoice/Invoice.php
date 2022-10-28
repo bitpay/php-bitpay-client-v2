@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
+
 namespace BitPaySDK\Model\Invoice;
 
 use BitPaySDK\Exceptions\BitPayException;
@@ -105,16 +110,31 @@ class Invoice
 
     // API fields
     //
-
-    public function getCurrency()
+	
+	/**
+	 * Gets currency
+	 * ISO 4217 3-character currency code. This is the currency associated with the price field, supported currencies are available via the
+	 * <a href="#rest-api-resources-currencies">Currencies resource</a>
+	 * @return string
+	 */
+	public function getCurrency()
     {
         return $this->_currency;
     }
 
     // Required fields
     //
-
-    public function setCurrency(string $currency)
+	
+	/**
+	 * Sets currency
+	 * ISO 4217 3-character currency code. This is the currency associated with the price field, supported currencies are available via the
+	 * <a href="#rest-api-resources-currencies">Currencies resource</a>
+	 * @param string $currency
+	 *
+	 * @return void
+	 * @throws BitPayException
+	 */
+	public function setCurrency( string $currency)
     {
         if (!Currency::isValid($currency)) {
             throw new BitPayException("currency code must be a type of Model.Currency");
@@ -122,166 +142,375 @@ class Invoice
 
         $this->_currency = $currency;
     }
-
-    public function getGuid()
+	
+	/**
+	 * Gets guid
+	 * A passthru variable provided by the merchant and designed to be used by the merchant to correlate the invoice with an order ID in their system,
+	 * which can be used as a lookup variable in Retrieve Invoice by GUID.
+	 * @return string
+	 */
+	public function getGuid()
     {
         return $this->_guid;
     }
-
-    public function setGuid(string $guid)
+	
+	/**
+	 * Sets guid
+	 * A passthru variable provided by the merchant and designed to be used by the merchant to correlate the invoice with an order ID in their system,
+	 * which can be used as a lookup variable in Retrieve Invoice by GUID.
+	 *
+	 * @param string $guid
+	 */
+	public function setGuid( string $guid )
     {
         $this->_guid = $guid;
     }
-
-    public function getToken()
+	
+	/**
+	 * Gets token
+	 * Invoice resource token. This token is derived from the API token initially used to create the invoice and is tied to the specific resource id created.
+	 * @return string - Invoice resource token.
+	 */
+	public function getToken()
     {
         return $this->_token;
     }
 
     // Optional fields
     //
-
+	/**
+	 * Sets token
+	 * Invoice resource token. This token is derived from the API token initially used to create the invoice and is tied to the specific resource id created.
+	 *
+	 * @param string $token
+	 */
     public function setToken(string $token)
     {
         $this->_token = $token;
     }
-
-    public function getPrice()
+	
+	
+	/**
+	 * Gets price
+	 * Fixed price amount for the checkout, in the "currency" of the invoice object.
+	 * @return float
+	 */
+	public function getPrice()
     {
         return $this->_price;
     }
-
-    public function setPrice(float $price)
+	
+	/**
+	 * Sets price
+	 * Fixed price amount for the checkout, in the "currency" of the invoice object.
+	 * @param float $price
+	 *
+	 * @return void
+	 */
+	public function setPrice( float $price)
     {
         $this->_price = $price;
     }
-
-    public function getPosData()
+	
+	/**
+	 * Gets posData
+	 * A passthru variable provided by the merchant during invoice creation and designed to be used by the merchant to correlate the invoice with an order or other object in their system.
+	 * This passthru variable can be a serialized object.
+	 *
+	 * @return string
+	 */
+	public function getPosData()
     {
         return $this->_posData;
     }
-
+	
+	/**
+	 * Sets posData
+	 * A passthru variable provided by the merchant during invoice creation and designed to be used by the merchant to correlate the invoice with an order or other object in their system.
+	 * This passthru variable can be a serialized object.
+	 *
+	 * @param string $posData
+	 */
     public function setPosData(string $posData)
     {
         $this->_posData = $posData;
     }
-
-    public function getNotificationURL()
+	
+	/**
+	 * Gets notificationURL
+	 * @return string - URL to which BitPay sends webhook notifications. HTTPS is mandatory.
+	 */
+	public function getNotificationURL()
     {
         return $this->_notificationURL;
     }
-
-    public function setNotificationURL(string $notificationURL)
+	
+	/**
+	 * Sets notificationURL
+	 * @param string $notificationURL - URL to which BitPay sends webhook notifications. HTTPS is mandatory.
+	 *
+	 * @return void
+	 */
+	public function setNotificationURL( string $notificationURL)
     {
         $this->_notificationURL = $notificationURL;
     }
-
-    public function getTransactionSpeed()
+	
+	/**
+	 * Gets transactionSpeed.
+	 * This is a risk mitigation parameter for the merchant to configure how they want
+	 * to fulfill orders depending on the number of block confirmations for the transaction made by the consumer on the selected cryptocurrency.
+	 * If not set on the invoice, transactionSpeed will default to the account-level Order Settings.
+	 * Note : orders are only credited to your BitPay Account Summary for settlement after the invoice reaches the status "complete" (regardless of this setting).
+	 *
+	 * @return string
+	 */
+	public function getTransactionSpeed()
     {
         return $this->_transactionSpeed;
     }
-
+	
+	/**
+	 * Sets transactionSpeed.
+	 * This is a risk mitigation parameter for the merchant to configure how they want
+	 * to fulfill orders depending on the number of block confirmations for the transaction made by the consumer on the selected cryptocurrency.
+	 * If not set on the invoice, transactionSpeed will default to the account-level Order Settings.
+	 * Note : orders are only credited to your BitPay Account Summary for settlement after the invoice reaches the status "complete" (regardless of this setting).
+	 *
+	 * @param string $transactionSpeed
+	 */
     public function setTransactionSpeed(string $transactionSpeed)
     {
         $this->_transactionSpeed = $transactionSpeed;
     }
-
-    public function getFullNotifications()
+	
+	/**
+	 * Gets fullNotifications
+	 * This parameter is set to true by default, meaning all standard notifications are being sent for a payment made to an invoice.
+	 * If you decide to set it to false instead, only 1 webhook will be sent for each invoice paid by the consumer.
+	 * This webhook will be for the "confirmed" or "complete" invoice status, depending on the transactionSpeed selected.
+	 *
+	 * @return bool
+	 */
+	public function getFullNotifications()
     {
         return $this->_fullNotifications;
     }
-
+	
+	/**
+	 * Sets fullNotifications
+	 * This parameter is set to true by default, meaning all standard notifications are being sent for a payment made to an invoice.
+	 * If you decide to set it to false instead, only 1 webhook will be sent for each invoice paid by the consumer.
+	 * This webhook will be for the "confirmed" or "complete" invoice status, depending on the transactionSpeed selected.
+	 *
+	 * @param bool $fullNotifications
+	 */
     public function setFullNotifications(bool $fullNotifications)
     {
         $this->_fullNotifications = $fullNotifications;
     }
-
-    public function getNotificationEmail()
+	
+	/**
+	 * Gets NotificationEmail
+	 * Merchant email address for notification of payout status change.
+	 *
+	 * @return string
+	 */
+	public function getNotificationEmail()
     {
         return $this->_notificationEmail;
     }
-
-    public function setNotificationEmail(string $notificationEmail)
+	
+	/**
+	 * Sets NotificationEmail
+	 * Merchant email address for notification of payout status change.
+	 * @param string $notificationEmail
+	 */
+	public function setNotificationEmail( string $notificationEmail)
     {
         $this->_notificationEmail = $notificationEmail;
     }
-
-    public function getRedirectURL()
+	
+	/**
+	 * Gets RedirectURL
+	 * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or when clicking on the Close button if a separate closeURL is not specified.
+	 *
+	 * @return string
+	 */
+	public function getRedirectURL()
     {
         return $this->_redirectURL;
     }
-
-    public function setRedirectURL(string $redirectURL)
+	
+	/**
+	 * Sets RedirectURL
+	 * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or when clicking on the Close button if a separate closeURL is not specified.
+	 * Be sure to include "http://" or "https://" in the url.
+	 *
+	 * @param string $redirectURL
+	 */
+	public function setRedirectURL( string $redirectURL)
     {
         $this->_redirectURL = $redirectURL;
     }
-
-    public function getOrderId()
+	
+	/**
+	 * Gets orderId
+	 * Can be used by the merchant to assign their own internal Id to an invoice. If used, there should be a direct match between an orderId and an invoice id.
+	 *
+	 * @return string
+	 */
+	public function getOrderId()
     {
         return $this->_orderId;
     }
-
-    public function setOrderId(string $orderId)
+	
+	/**
+	 * Sets orderId
+	 * Can be used by the merchant to assign their own internal Id to an invoice. If used, there should be a direct match between an orderId and an invoice id.
+	 *
+	 * @param string $orderId
+	 */
+	public function setOrderId( string $orderId)
     {
         $this->_orderId = $orderId;
     }
-
-    public function getItemDesc()
+	
+	
+	/**
+	 * Gets itemDesc
+	 * Invoice description - will be added as a line item on the BitPay checkout page, under the merchant name.
+	 *
+	 * @return string
+	 */
+	public function getItemDesc()
     {
         return $this->_itemDesc;
     }
-
-    public function setItemDesc(string $itemDesc)
+	
+	
+	/**
+	 * Sets itemDesc
+	 * Invoice description - will be added as a line item on the BitPay checkout page, under the merchant name.
+	 *
+	 * @param string $itemDesc
+	 */
+	public function setItemDesc( string $itemDesc)
     {
         $this->_itemDesc = $itemDesc;
     }
-
-    public function getItemCode()
+	
+	/**
+	 * Gets itemCode
+	 * "bitcoindonation" for donations, otherwise do not include the field in the request.
+	 *
+	 * @return string
+	 */
+	public function getItemCode()
     {
         return $this->_itemCode;
     }
-
-    public function setItemCode(string $itemCode)
+	
+	/**
+	 * Sets itemCode
+	 * "bitcoindonation" for donations, otherwise do not include the field in the request.
+	 *
+	 * @param string $itemCode
+	 */
+	public function setItemCode( string $itemCode)
     {
         $this->_itemCode = $itemCode;
     }
-
-    public function getPhysical()
+	
+	/**
+	 * Gets physical.
+	 * Indicates whether items are physical goods. Alternatives include digital goods and services.
+	 *
+	 * @return bool
+	 */
+	public function getPhysical()
     {
         return $this->_physical;
     }
-
-    public function setPhysical(bool $physical)
-    {
-        $this->_physical = $physical;
-    }
-
-    public function getPaymentCurrencies()
+	
+	/**
+	 * Sets physical.
+	 * Indicates whether items are physical goods. Alternatives include digital goods and services.
+	 *
+	 * @param bool $physical
+	 */
+	public function setPhysical( bool $physical )
+	{
+		$this->_physical = $physical;
+	}
+	
+	/**
+	 * Gets paymentCurrencies
+	 * Allow the merchant to select the cryptocurrencies available as payment option on the BitPay invoice.
+	 * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
+	 * For instance "paymentCurrencies": ["BTC"] will create an invoice with only XRP available as transaction currency, thus bypassing the currency selection step on the invoice.
+	 *
+	 * @return mixed
+	 */
+	public function getPaymentCurrencies()
     {
         return $this->_paymentCurrencies;
     }
-
+	
+	/**
+	 * Sets paymentCurrencies
+	 * Allow the merchant to select the cryptocurrencies available as payment option on the BitPay invoice.
+	 * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
+	 * For instance "paymentCurrencies": ["BTC"] will create an invoice with only XRP available as transaction currency, thus bypassing the currency selection step on the invoice.
+	 *
+	 * @param array $paymentCurrencies
+	 */
     public function setPaymentCurrencies(array $paymentCurrencies)
     {
         $this->_paymentCurrencies = $paymentCurrencies;
     }
-
-    public function getAcceptanceWindow()
+	
+	/**
+	 * Gets acceptanceWindow
+	 * Number of milliseconds that a user has to pay an invoice before it expires (0-900000).
+	 * If not set, invoice will default to the account acceptanceWindow.
+	 * If account acceptanceWindow is not set, invoice will default to 15 minutes (900,000 milliseconds).
+	 *
+	 * @return mixed
+	 */
+	public function getAcceptanceWindow()
     {
         return $this->_acceptanceWindow;
     }
-
-    public function getCloseURL()
+	
+	
+	/**
+	 * Gets closeURL
+	 * URL to redirect if the shopper does not pay the invoice and click on the Close button instead.
+	 *
+	 * @return string
+	 */
+	public function getCloseURL()
     {
         return $this->_closeURL;
     }
 
+	/**
+	 * Gets closeURL
+	 * URL to redirect if the shopper does not pay the invoice and click on the Close button instead. Be sure to include "http://" or "https://" in the url.
+	 *
+	 * @param string $closeURL
+	 */
     public function setCloseURL(string $closeURL)
     {
         $this->_closeURL = $closeURL;
     }
-
-    public function getAutoRedirect()
+	
+	/**
+	 *
+	 * @return bool
+	 */
+	public function getAutoRedirect()
     {
         return $this->_autoRedirect;
     }
