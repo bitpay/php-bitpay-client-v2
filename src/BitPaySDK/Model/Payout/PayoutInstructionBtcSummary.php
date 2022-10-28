@@ -48,7 +48,7 @@ class PayoutInstructionBtcSummary
     }
 
     /**
-     * Return array with paid and unpaid value.
+     * Return an array with paid and unpaid value.
      *
      * @return float[]
      */
