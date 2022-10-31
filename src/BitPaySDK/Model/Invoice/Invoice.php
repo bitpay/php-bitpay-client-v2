@@ -110,31 +110,34 @@ class Invoice
 
     // API fields
     //
-	
-	/**
-	 * Gets currency
-	 * ISO 4217 3-character currency code. This is the currency associated with the price field, supported currencies are available via the
-	 * <a href="#rest-api-resources-currencies">Currencies resource</a>
-	 * @return string
-	 */
-	public function getCurrency()
+
+    /**
+     * Gets currency
+     * ISO 4217 3-character currency code. This is the currency associated with the price field,
+     * supported currencies are available via the
+     * <a href="#rest-api-resources-currencies">Currencies resource</a>
+     *
+     * @return string
+     */
+    public function getCurrency()
     {
         return $this->_currency;
     }
 
     // Required fields
     //
-	
-	/**
-	 * Sets currency
-	 * ISO 4217 3-character currency code. This is the currency associated with the price field, supported currencies are available via the
-	 * <a href="#rest-api-resources-currencies">Currencies resource</a>
-	 * @param string $currency
-	 *
-	 * @return void
-	 * @throws BitPayException
-	 */
-	public function setCurrency( string $currency)
+
+    /**
+     * Sets currency
+     * ISO 4217 3-character currency code. This is the currency associated with the price field,
+     * supported currencies are available via the
+     * <a href="#rest-api-resources-currencies">Currencies resource</a>
+     *
+     * @param string $currency
+     *
+     * @throws BitPayException
+     */
+    public function setCurrency(string $currency)
     {
         if (!Currency::isValid($currency)) {
             throw new BitPayException("currency code must be a type of Model.Currency");
@@ -142,383 +145,415 @@ class Invoice
 
         $this->_currency = $currency;
     }
-	
-	/**
-	 * Gets guid
-	 * A passthru variable provided by the merchant and designed to be used by the merchant to correlate the invoice with an order ID in their system,
-	 * which can be used as a lookup variable in Retrieve Invoice by GUID.
-	 * @return string
-	 */
-	public function getGuid()
+
+    /**
+     * Gets guid
+     * A passthru variable provided by the merchant and designed to be used by the merchant
+     * to correlate the invoice with an order ID in their system,
+     * which can be used as a lookup variable in Retrieve Invoice by GUID.
+     *
+     * @return string
+     */
+    public function getGuid()
     {
         return $this->_guid;
     }
-	
-	/**
-	 * Sets guid
-	 * A passthru variable provided by the merchant and designed to be used by the merchant to correlate the invoice with an order ID in their system,
-	 * which can be used as a lookup variable in Retrieve Invoice by GUID.
-	 *
-	 * @param string $guid
-	 */
-	public function setGuid( string $guid )
+
+    /**
+     * Sets guid
+     * A passthru variable provided by the merchant and designed to be used by the merchant
+     * to correlate the invoice with an order ID in their system,
+     * which can be used as a lookup variable in Retrieve Invoice by GUID.
+     *
+     * @param string $guid
+     */
+    public function setGuid(string $guid)
     {
         $this->_guid = $guid;
     }
-	
-	/**
-	 * Gets token
-	 * Invoice resource token. This token is derived from the API token initially used to create the invoice and is tied to the specific resource id created.
-	 * @return string - Invoice resource token.
-	 */
-	public function getToken()
+
+    /**
+     * Gets token
+     * Invoice resource token. This token is derived from the API token initially used
+     * to create the invoice and is tied to the specific resource id created.
+     *
+     * @return string - Invoice resource token.
+     */
+    public function getToken()
     {
         return $this->_token;
     }
 
     // Optional fields
     //
-	/**
-	 * Sets token
-	 * Invoice resource token. This token is derived from the API token initially used to create the invoice and is tied to the specific resource id created.
-	 *
-	 * @param string $token
-	 */
+    /**
+     * Sets token
+     * Invoice resource token.
+     * This token is derived from the API token initially used to create the
+     * invoice and is tied to the specific resource id created.
+     *
+     * @param string $token
+     */
     public function setToken(string $token)
     {
         $this->_token = $token;
     }
-	
-	
-	/**
-	 * Gets price
-	 * Fixed price amount for the checkout, in the "currency" of the invoice object.
-	 * @return float
-	 */
-	public function getPrice()
+
+    /**
+     * Gets price
+     * Fixed price amount for the checkout, in the "currency" of the invoice object.
+     *
+     * @return float
+     */
+    public function getPrice()
     {
         return $this->_price;
     }
-	
-	/**
-	 * Sets price
-	 * Fixed price amount for the checkout, in the "currency" of the invoice object.
-	 * @param float $price
-	 *
-	 * @return void
-	 */
-	public function setPrice( float $price)
+
+    /**
+     * Sets price
+     * Fixed price amount for the checkout, in the "currency" of the invoice object.
+     *
+     * @param float $price
+     *
+     */
+    public function setPrice(float $price)
     {
         $this->_price = $price;
     }
-	
-	/**
-	 * Gets posData
-	 * A passthru variable provided by the merchant during invoice creation and designed to be used by the merchant to correlate the invoice with an order or other object in their system.
-	 * This passthru variable can be a serialized object.
-	 *
-	 * @return string
-	 */
-	public function getPosData()
+
+    /**
+     * Gets posData
+     * A passthru variable provided by the merchant during invoice creation and designed to be
+     * used by the merchant to correlate the invoice with an order or other object in their system.
+     * This passthru variable can be a serialized object.
+     *
+     * @return string
+     */
+    public function getPosData()
     {
         return $this->_posData;
     }
-	
-	/**
-	 * Sets posData
-	 * A passthru variable provided by the merchant during invoice creation and designed to be used by the merchant to correlate the invoice with an order or other object in their system.
-	 * This passthru variable can be a serialized object.
-	 *
-	 * @param string $posData
-	 */
+
+    /**
+     * Sets posData
+     * A passthru variable provided by the merchant during invoice creation and designed to be
+     * used by the merchant to correlate the invoice with an order or other object in their system.
+     * This passthru variable can be a serialized object.
+     *
+     * @param string $posData
+     */
     public function setPosData(string $posData)
     {
         $this->_posData = $posData;
     }
-	
-	/**
-	 * Gets notificationURL
-	 * @return string - URL to which BitPay sends webhook notifications. HTTPS is mandatory.
-	 */
-	public function getNotificationURL()
+
+    /**
+     * Gets notificationURL
+     *
+     * @return string - URL to which BitPay sends webhook notifications. HTTPS is mandatory.
+     */
+    public function getNotificationURL()
     {
         return $this->_notificationURL;
     }
-	
-	/**
-	 * Sets notificationURL
-	 * @param string $notificationURL - URL to which BitPay sends webhook notifications. HTTPS is mandatory.
-	 *
-	 * @return void
-	 */
-	public function setNotificationURL( string $notificationURL)
+
+    /**
+     * Sets notificationURL
+     *
+     * @param string $notificationURL - URL to which BitPay sends webhook notifications. HTTPS is mandatory.
+     */
+    public function setNotificationURL(string $notificationURL)
     {
         $this->_notificationURL = $notificationURL;
     }
-	
-	/**
-	 * Gets transactionSpeed.
-	 * This is a risk mitigation parameter for the merchant to configure how they want
-	 * to fulfill orders depending on the number of block confirmations for the transaction made by the consumer on the selected cryptocurrency.
-	 * If not set on the invoice, transactionSpeed will default to the account-level Order Settings.
-	 * Note : orders are only credited to your BitPay Account Summary for settlement after the invoice reaches the status "complete" (regardless of this setting).
-	 *
-	 * @return string
-	 */
-	public function getTransactionSpeed()
+
+    /**
+     * Gets transactionSpeed.
+     * This is a risk mitigation parameter for the merchant to configure how they want
+     * to fulfill orders depending on the number of block confirmations for the transaction
+     * made by the consumer on the selected cryptocurrency.
+     * If not set on the invoice, transactionSpeed will default to the account-level Order Settings.
+     * Note : orders are only credited to your BitPay Account Summary for settlement after
+     * the invoice reaches the status "complete" (regardless of this setting).
+     *
+     * @return string
+     */
+    public function getTransactionSpeed()
     {
         return $this->_transactionSpeed;
     }
-	
-	/**
-	 * Sets transactionSpeed.
-	 * This is a risk mitigation parameter for the merchant to configure how they want
-	 * to fulfill orders depending on the number of block confirmations for the transaction made by the consumer on the selected cryptocurrency.
-	 * If not set on the invoice, transactionSpeed will default to the account-level Order Settings.
-	 * Note : orders are only credited to your BitPay Account Summary for settlement after the invoice reaches the status "complete" (regardless of this setting).
-	 *
-	 * @param string $transactionSpeed
-	 */
+
+    /**
+     * Sets transactionSpeed.
+     * This is a risk mitigation parameter for the merchant to configure how they want
+     * to fulfill orders depending on the number of block confirmations for the transaction
+     * made by the consumer on the selected cryptocurrency.
+     * If not set on the invoice, transactionSpeed will default to the account-level Order Settings.
+     * Note : orders are only credited to your BitPay Account Summary for settlement after
+     * the invoice reaches the status "complete" (regardless of this setting).
+     *
+     * @param string $transactionSpeed
+     */
     public function setTransactionSpeed(string $transactionSpeed)
     {
         $this->_transactionSpeed = $transactionSpeed;
     }
-	
-	/**
-	 * Gets fullNotifications
-	 * This parameter is set to true by default, meaning all standard notifications are being sent for a payment made to an invoice.
-	 * If you decide to set it to false instead, only 1 webhook will be sent for each invoice paid by the consumer.
-	 * This webhook will be for the "confirmed" or "complete" invoice status, depending on the transactionSpeed selected.
-	 *
-	 * @return bool
-	 */
-	public function getFullNotifications()
+
+    /**
+     * Gets fullNotifications
+     * This parameter is set to true by default, meaning all standard notifications
+     * are being sent for a payment made to an invoice.
+     * If you decide to set it to false instead, only 1 webhook will be sent for each
+     * invoice paid by the consumer.
+     * This webhook will be for the "confirmed" or "complete" invoice status,
+     * depending on the transactionSpeed selected.
+     *
+     * @return bool
+     */
+    public function getFullNotifications()
     {
         return $this->_fullNotifications;
     }
-	
-	/**
-	 * Sets fullNotifications
-	 * This parameter is set to true by default, meaning all standard notifications are being sent for a payment made to an invoice.
-	 * If you decide to set it to false instead, only 1 webhook will be sent for each invoice paid by the consumer.
-	 * This webhook will be for the "confirmed" or "complete" invoice status, depending on the transactionSpeed selected.
-	 *
-	 * @param bool $fullNotifications
-	 */
+
+    /**
+     * Sets fullNotifications
+     * This parameter is set to true by default, meaning all standard notifications
+     * are being sent for a payment made to an invoice.
+     * If you decide to set it to false instead, only 1 webhook will be sent for each
+     * invoice paid by the consumer.
+     * This webhook will be for the "confirmed" or "complete" invoice status,
+     * depending on the transactionSpeed selected.
+     *
+     * @param bool $fullNotifications
+     */
     public function setFullNotifications(bool $fullNotifications)
     {
         $this->_fullNotifications = $fullNotifications;
     }
-	
-	/**
-	 * Gets NotificationEmail
-	 * Merchant email address for notification of payout status change.
-	 *
-	 * @return string
-	 */
-	public function getNotificationEmail()
+
+    /**
+     * Gets NotificationEmail
+     * Merchant email address for notification of payout status change.
+     *
+     * @return string
+     */
+    public function getNotificationEmail()
     {
         return $this->_notificationEmail;
     }
-	
-	/**
-	 * Sets NotificationEmail
-	 * Merchant email address for notification of payout status change.
-	 * @param string $notificationEmail
-	 */
-	public function setNotificationEmail( string $notificationEmail)
+
+    /**
+     * Sets NotificationEmail
+     * Merchant email address for notification of payout status change.
+     *
+     * @param string $notificationEmail
+     */
+    public function setNotificationEmail(string $notificationEmail)
     {
         $this->_notificationEmail = $notificationEmail;
     }
-	
-	/**
-	 * Gets RedirectURL
-	 * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or when clicking on the Close button if a separate closeURL is not specified.
-	 *
-	 * @return string
-	 */
-	public function getRedirectURL()
+
+    /**
+     * Gets RedirectURL
+     * The shopper will be redirected to this URL when clicking on the Return button
+     * after a successful payment or when clicking on the Close button if a separate closeURL is not specified.
+     *
+     * @return string
+     */
+    public function getRedirectURL()
     {
         return $this->_redirectURL;
     }
-	
-	/**
-	 * Sets RedirectURL
-	 * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or when clicking on the Close button if a separate closeURL is not specified.
-	 * Be sure to include "http://" or "https://" in the url.
-	 *
-	 * @param string $redirectURL
-	 */
-	public function setRedirectURL( string $redirectURL)
+
+    /**
+     * Sets RedirectURL
+     * The shopper will be redirected to this URL when clicking on the Return button
+     * after a successful payment or when clicking on the Close button if a separate closeURL is not specified.
+     * Be sure to include "http://" or "https://" in the url.
+     *
+     * @param string $redirectURL
+     */
+    public function setRedirectURL(string $redirectURL)
     {
         $this->_redirectURL = $redirectURL;
     }
-	
-	/**
-	 * Gets orderId
-	 * Can be used by the merchant to assign their own internal Id to an invoice. If used, there should be a direct match between an orderId and an invoice id.
-	 *
-	 * @return string
-	 */
-	public function getOrderId()
+
+    /**
+     * Gets orderId
+     * Can be used by the merchant to assign their own internal Id to an invoice.
+     * If used, there should be a direct match between an orderId and an invoice id.
+     *
+     * @return string
+     */
+    public function getOrderId()
     {
         return $this->_orderId;
     }
-	
-	/**
-	 * Sets orderId
-	 * Can be used by the merchant to assign their own internal Id to an invoice. If used, there should be a direct match between an orderId and an invoice id.
-	 *
-	 * @param string $orderId
-	 */
-	public function setOrderId( string $orderId)
+
+    /**
+     * Sets orderId
+     * Can be used by the merchant to assign their own internal Id to an invoice.
+     * If used, there should be a direct match between an orderId and an invoice id.
+     *
+     * @param string $orderId
+     */
+    public function setOrderId(string $orderId)
     {
         $this->_orderId = $orderId;
     }
-	
-	
-	/**
-	 * Gets itemDesc
-	 * Invoice description - will be added as a line item on the BitPay checkout page, under the merchant name.
-	 *
-	 * @return string
-	 */
-	public function getItemDesc()
+
+
+    /**
+     * Gets itemDesc
+     * Invoice description - will be added as a line item on the BitPay checkout page, under the merchant name.
+     *
+     * @return string
+     */
+    public function getItemDesc()
     {
         return $this->_itemDesc;
     }
-	
-	
-	/**
-	 * Sets itemDesc
-	 * Invoice description - will be added as a line item on the BitPay checkout page, under the merchant name.
-	 *
-	 * @param string $itemDesc
-	 */
-	public function setItemDesc( string $itemDesc)
+
+
+    /**
+     * Sets itemDesc
+     * Invoice description - will be added as a line item on the BitPay checkout page, under the merchant name.
+     *
+     * @param string $itemDesc
+     */
+    public function setItemDesc(string $itemDesc)
     {
         $this->_itemDesc = $itemDesc;
     }
-	
-	/**
-	 * Gets itemCode
-	 * "bitcoindonation" for donations, otherwise do not include the field in the request.
-	 *
-	 * @return string
-	 */
-	public function getItemCode()
+
+    /**
+     * Gets itemCode
+     * "bitcoindonation" for donations, otherwise do not include the field in the request.
+     *
+     * @return string
+     */
+    public function getItemCode()
     {
         return $this->_itemCode;
     }
-	
-	/**
-	 * Sets itemCode
-	 * "bitcoindonation" for donations, otherwise do not include the field in the request.
-	 *
-	 * @param string $itemCode
-	 */
-	public function setItemCode( string $itemCode)
+
+    /**
+     * Sets itemCode
+     * "bitcoindonation" for donations, otherwise do not include the field in the request.
+     *
+     * @param string $itemCode
+     */
+    public function setItemCode(string $itemCode)
     {
         $this->_itemCode = $itemCode;
     }
-	
-	/**
-	 * Gets physical.
-	 * Indicates whether items are physical goods. Alternatives include digital goods and services.
-	 *
-	 * @return bool
-	 */
-	public function getPhysical()
+
+    /**
+     * Gets physical.
+     * Indicates whether items are physical goods. Alternatives include digital goods and services.
+     *
+     * @return bool
+     */
+    public function getPhysical()
     {
         return $this->_physical;
     }
-	
-	/**
-	 * Sets physical.
-	 * Indicates whether items are physical goods. Alternatives include digital goods and services.
-	 *
-	 * @param bool $physical
-	 */
-	public function setPhysical( bool $physical )
-	{
-		$this->_physical = $physical;
-	}
-	
-	/**
-	 * Gets paymentCurrencies
-	 * Allow the merchant to select the cryptocurrencies available as payment option on the BitPay invoice.
-	 * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
-	 * For instance "paymentCurrencies": ["BTC"] will create an invoice with only XRP available as transaction currency, thus bypassing the currency selection step on the invoice.
-	 *
-	 * @return mixed
-	 */
-	public function getPaymentCurrencies()
+
+    /**
+     * Sets physical.
+     * Indicates whether items are physical goods. Alternatives include digital goods and services.
+     *
+     * @param bool $physical
+     */
+    public function setPhysical(bool $physical)
+    {
+        $this->_physical = $physical;
+    }
+
+    /**
+     * Gets paymentCurrencies
+     * Allow the merchant to select the cryptocurrencies available as payment option on the BitPay invoice.
+     * Possible values are currently "BTC", "BCH", "ETH", "GUSD",
+     * "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
+     * For instance "paymentCurrencies": ["BTC"] will create an invoice with only XRP available as transaction currency,
+     * thus bypassing the currency selection step on the invoice.
+     *
+     * @return mixed
+     */
+    public function getPaymentCurrencies()
     {
         return $this->_paymentCurrencies;
     }
-	
-	/**
-	 * Sets paymentCurrencies
-	 * Allow the merchant to select the cryptocurrencies available as payment option on the BitPay invoice.
-	 * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
-	 * For instance "paymentCurrencies": ["BTC"] will create an invoice with only XRP available as transaction currency, thus bypassing the currency selection step on the invoice.
-	 *
-	 * @param array $paymentCurrencies
-	 */
+
+    /**
+     * Sets paymentCurrencies
+     * Allow the merchant to select the cryptocurrencies available as payment option on the BitPay invoice.
+     * Possible values are currently "BTC", "BCH", "ETH", "GUSD",
+     * "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
+     * For instance "paymentCurrencies": ["BTC"] will create an invoice with only XRP available as transaction currency,
+     * thus bypassing the currency selection step on the invoice.
+     *
+     * @param array $paymentCurrencies
+     */
     public function setPaymentCurrencies(array $paymentCurrencies)
     {
         $this->_paymentCurrencies = $paymentCurrencies;
     }
-	
-	/**
-	 * Gets acceptanceWindow
-	 * Number of milliseconds that a user has to pay an invoice before it expires (0-900000).
-	 * If not set, invoice will default to the account acceptanceWindow.
-	 * If account acceptanceWindow is not set, invoice will default to 15 minutes (900,000 milliseconds).
-	 *
-	 * @return mixed
-	 */
-	public function getAcceptanceWindow()
+
+    /**
+     * Gets acceptanceWindow
+     * Number of milliseconds that a user has to pay an invoice before it expires (0-900000).
+     * If not set, invoice will default to the account acceptanceWindow.
+     * If account acceptanceWindow is not set, invoice will default to 15 minutes (900,000 milliseconds).
+     *
+     * @return mixed
+     */
+    public function getAcceptanceWindow()
     {
         return $this->_acceptanceWindow;
     }
-	
-	
-	/**
-	 * Gets closeURL
-	 * URL to redirect if the shopper does not pay the invoice and click on the Close button instead.
-	 *
-	 * @return string
-	 */
-	public function getCloseURL()
+
+
+    /**
+     * Gets closeURL
+     * URL to redirect if the shopper does not pay the invoice and click on the Close button instead.
+     *
+     * @return string
+     */
+    public function getCloseURL()
     {
         return $this->_closeURL;
     }
 
-	/**
-	 * Gets closeURL
-	 * URL to redirect if the shopper does not pay the invoice and click on the Close button instead. Be sure to include "http://" or "https://" in the url.
-	 *
-	 * @param string $closeURL
-	 */
+    /**
+     * Gets closeURL
+     * URL to redirect if the shopper does not pay the invoice and click on the Close button instead.
+     * Be sure to include "http://" or "https://" in the url.
+     *
+     * @param string $closeURL
+     */
     public function setCloseURL(string $closeURL)
     {
         $this->_closeURL = $closeURL;
     }
-	
-	/**
+
+    /**
      * Gets autoRedirect
-	 * Set to false by default, merchant can setup automatic redirect to their website by setting this parameter to true.
-	 * @return bool
-	 */
-	public function getAutoRedirect()
+     * Set to false by default,
+     * merchant can setup automatic redirect to their website by setting this parameter to true.
+     *
+     * @return bool
+     */
+    public function getAutoRedirect()
     {
         return $this->_autoRedirect;
     }
 
     /**
      * Sets autoRedirect
-     * Set to false by default, merchant can setup automatic redirect to their website by setting this parameter to true.
+     * Set to false by default,
+     * merchant can setup automatic redirect to their website by setting this parameter to true.
      *
      * @param bool $autoRedirect
      */
@@ -529,8 +564,10 @@ class Invoice
 
     /**
      * Gets jsonPayProRequired
-     * Boolean set to false by default. If set to true, this means that the invoice will only accept payments
-     * from wallets which have implemented the <a href="https://bitpay.com/docs/payment-protocol">BitPay JSON Payment Protocol</a>
+     * Boolean set to false by default.
+     * If set to true, this means that the invoice will only accept payments
+     * from wallets which have implemented the
+     * <a href="https://bitpay.com/docs/payment-protocol">BitPay JSON Payment Protocol</a>
      *
      * @return mixed
      */
@@ -541,8 +578,10 @@ class Invoice
 
     /**
      * Sets jsonPayProRequired
-     * Boolean set to false by default. If set to true, this means that the invoice will only accept payments
-     * from wallets which have implemented the <a href="https://bitpay.com/docs/payment-protocol">BitPay JSON Payment Protocol</a>
+     * Boolean set to false by default.
+     * If set to true, this means that the invoice will only accept payments
+     * from wallets which have implemented the
+     * <a href="https://bitpay.com/docs/payment-protocol">BitPay JSON Payment Protocol</a>
      *
      * @param bool $jsonPayProRequired
      */
@@ -553,8 +592,8 @@ class Invoice
 
     /**
      * Gets bitpayIdRequired
-     * BitPay ID is a verification process that is required when a user is making payments or receiving a refund over a given threshold,
-     * which may vary by region.
+     * BitPay ID is a verification process that is required when a user is making payments
+     * or receiving a refund over a given threshold, which may vary by region.
      * This Boolean forces the invoice to require BitPay ID regardless of the price.
      *
      * @return mixed
@@ -566,8 +605,8 @@ class Invoice
 
     /**
      * Sets bitpayIdRequired
-     * BitPay ID is a verification process that is required when a user is making payments or receiving a refund over a given threshold,
-     * which may vary by region.
+     * BitPay ID is a verification process that is required when a user is making payments
+     * or receiving a refund over a given threshold, which may vary by region.
      * This Boolean forces the invoice to require BitPay ID regardless of the price.
      *
      * @param bool $bitpayIdRequired
@@ -602,7 +641,8 @@ class Invoice
     /**
      * Gets selectedTransactionCurrency
      * This field will be populated with the cryptocurrency selected to pay the BitPay invoice,
-     * current supported values are "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
+     * current supported values are "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD",
+     * "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      * If not yet selected, this field will not be returned.
      *
      * @return mixed
@@ -615,13 +655,13 @@ class Invoice
     /**
      * Sets selectedTransactionCurrency
      * This field will be populated with the cryptocurrency selected to pay the BitPay invoice,
-     * current supported values are "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
+     * current supported values are "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD",
+     * "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      * If not yet selected, this field will not be returned.
      *
      * @param string $selectedTransactionCurrency
-     * @return void
      */
-    public function setSelectedTransactionCurrency( string $selectedTransactionCurrency)
+    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
     {
         $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
     }
@@ -643,7 +683,7 @@ class Invoice
      *
      * @param string $forcedBuyerSelectedWallet
      */
-    public function setForcedBuyerSelectedWallet( string $forcedBuyerSelectedWallet)
+    public function setForcedBuyerSelectedWallet(string $forcedBuyerSelectedWallet)
     {
         $this->_forcedBuyerSelectedWallet = $forcedBuyerSelectedWallet;
     }
@@ -708,7 +748,7 @@ class Invoice
      *
      * @param ItemizedDetails $itemizedDetails
      */
-    public function setItemizedDetails( ItemizedDetails $itemizedDetails)
+    public function setItemizedDetails(ItemizedDetails $itemizedDetails)
     {
         $itemsArray = [];
 
@@ -733,7 +773,7 @@ class Invoice
      *
      * @param float $acceptanceWindow
      */
-    public function setAcceptanceWindow( float $acceptanceWindow)
+    public function setAcceptanceWindow(float $acceptanceWindow)
     {
         $this->_acceptanceWindow = $acceptanceWindow;
     }
@@ -787,7 +827,8 @@ class Invoice
     /**
      * Gets buyerSms
      * SMS provided by user for communications.
-     * This is only used for instances where a buyers email (primary form of buyer communication) is can not be gathered.
+     * This is only used for instances where a buyers email
+     * (primary form of buyer communication) is can not be gathered.
      *
      * @return mixed
      */
@@ -799,7 +840,8 @@ class Invoice
     /**
      * Sets buyerSms
      * SMS provided by user for communications.
-     * This is only used for instances where a buyers email (primary form of buyer communication) is can not be gathered.
+     * This is only used for instances where a buyers email
+     * (primary form of buyer communication) is can not be gathered.
      *
      * @param string $buyerSms
      */
@@ -814,7 +856,8 @@ class Invoice
     /**
      * Gets refundAddresses
      * Initially empty when the invoice is created.
-     * This field will be populated with the refund address provided by the customer if you request a refund of the specific invoice.
+     * This field will be populated with the refund address
+     * provided by the customer if you request a refund of the specific invoice.
      *
      * @return array
      */
@@ -826,7 +869,8 @@ class Invoice
     /**
      * Sets refundAddresses
      * Initially empty when the invoice is created.
-     * This field will be populated with the refund address provided by the customer if you request a refund of the specific invoice.
+     * This field will be populated with the refund address
+     * provided by the customer if you request a refund of the specific invoice.
      *
      * @param array $refundAddresses
      */
@@ -880,7 +924,9 @@ class Invoice
     /**
      * Gets status
      * Detailed information about invoice status notifications can be found under the
-     * <a href="https://bitpay.com/api/#notifications-webhooks-instant-payment-notifications-handling">Instant Payment Notification (IPN) section.</a>
+     * <a href="https://bitpay.com/api/#notifications-webhooks-instant-payment-notifications-handling">
+     * Instant Payment Notification (IPN) section.
+     * </a>
      *
      * @return string
      */
@@ -892,7 +938,9 @@ class Invoice
     /**
      * Sets status
      * Detailed information about invoice status notifications can be found under the
-     * <a href="https://bitpay.com/api/#notifications-webhooks-instant-payment-notifications-handling">Instant Payment Notification (IPN) section.</a>
+     * <a href="https://bitpay.com/api/#notifications-webhooks-instant-payment-notifications-handling">
+     * Instant Payment Notification (IPN) section.
+     * </a>
      *
      * @param string $status
      */
@@ -940,7 +988,7 @@ class Invoice
      *
      * @param $invoiceTime
      */
-    public function setInvoiceTime( $invoiceTime)
+    public function setInvoiceTime($invoiceTime)
     {
         $this->_invoiceTime = $invoiceTime;
     }
@@ -960,7 +1008,7 @@ class Invoice
      *
      * @param string $expirationTime
      */
-    public function setExpirationTime( $expirationTime)
+    public function setExpirationTime($expirationTime)
     {
         $this->_expirationTime = $expirationTime;
     }
@@ -1039,8 +1087,10 @@ class Invoice
 
     /**
      * Gets targetConfirmations
-     * Indicates the number of block confirmation of the crypto currency transaction which are required to credit a paid invoice to the merchant account.
-     * Currently, the value set is set to 6 by default for BTC/BCH/XRP, 40 for DOGE and 50 for ETH/GUSD/PAX/USDC/BUSD/DAI/WBTC
+     * Indicates the number of block confirmation of the crypto currency
+     * transaction which are required to credit a paid invoice to the merchant account.
+     * Currently, the value set is set to 6 by default for BTC/BCH/XRP,
+     * 40 for DOGE and 50 for ETH/GUSD/PAX/USDC/BUSD/DAI/WBTC
      *
      * @return numeric
      */
@@ -1051,8 +1101,10 @@ class Invoice
 
     /**
      * Sets targetConfirmations
-     * Indicates the number of block confirmation of the crypto currency transaction which are required to credit a paid invoice to the merchant account.
-     * Currently, the value set is set to 6 by default for BTC/BCH/XRP, 40 for DOGE and 50 for ETH/GUSD/PAX/USDC/BUSD/DAI/WBTC
+     * Indicates the number of block confirmation of the crypto currency
+     * transaction which are required to credit a paid invoice to the merchant account.
+     * Currently, the value set is set to 6 by default for BTC/BCH/XRP,
+     * 40 for DOGE and 50 for ETH/GUSD/PAX/USDC/BUSD/DAI/WBTC
      *
      * @param numeric $targetConfirmations
      */
@@ -1063,8 +1115,10 @@ class Invoice
 
     /**
      * Gets refundAddressRequestPending
-     * Initially set to false when the invoice is created, this field will be set to true once a refund request has been issued by the merchant.
-     * This flag is here to indicate that the refund request is pending action from the buyer to provide an address for the refund,
+     * Initially set to false when the invoice is created,
+     * this field will be set to true once a refund request has been issued by the merchant.
+     * This flag is here to indicate that the refund request is pending action
+     * from the buyer to provide an address for the refund,
      * via the secure link which has been automatically emailed to him.
      *
      * @return boolean
@@ -1076,8 +1130,10 @@ class Invoice
 
     /**
      * Sets refundAddressRequestPending
-     * Initially set to false when the invoice is created, this field will be set to true once a refund request has been issued by the merchant.
-     * This flag is here to indicate that the refund request is pending action from the buyer to provide an address for the refund,
+     * Initially set to false when the invoice is created,
+     * this field will be set to true once a refund request has been issued by the merchant.
+     * This flag is here to indicate that the refund request is pending action
+     * from the buyer to provide an address for the refund,
      * via the secure link which has been automatically emailed to him.
      *
      * @param boolean $refundAddressRequestPending
@@ -1092,7 +1148,8 @@ class Invoice
      * Populated with the buyer's email address if passed in the buyer object by the merchant,
      * otherwise this field is not returned for newly created invoices.
      * If the merchant does not pass the buyer email in the invoice request,
-     * the bitpay invoice UI will prompt the user to enter his email address and this field will be populated with the email submitted.
+     * the bitpay invoice UI will prompt the user to enter his
+     * email address and this field will be populated with the email submitted.
      *
      * @return string
      */
@@ -1106,7 +1163,8 @@ class Invoice
      * Populated with the buyer's email address if passed in the buyer object by the merchant,
      * otherwise this field is not returned for newly created invoices.
      * If the merchant does not pass the buyer email in the invoice request,
-     * the bitpay invoice UI will prompt the user to enter his email address and this field will be populated with the email submitted.
+     * the bitpay invoice UI will prompt the user to enter his
+     * email address and this field will be populated with the email submitted.
      *
      * @param string $buyerProvidedEmail
      */
@@ -1165,7 +1223,7 @@ class Invoice
      *
      * @param UniversalCodes $universalCodes
      */
-    public function setUniversalCodes( UniversalCodes $universalCodes)
+    public function setUniversalCodes(UniversalCodes $universalCodes)
     {
         $this->_universalCodes = $universalCodes;
     }
@@ -1177,7 +1235,8 @@ class Invoice
      * The object is keyed by currency code.
      * The values are objects with an "enabled" boolean and option.
      * An extra "reason" parameter is added in the object if a cryptocurrency is disabled on a specific invoice.
-     * If you disable a currency via the invoice parameter "paymentCurrencies", this parameter will be set to "merchantDisabledByParam"
+     * If you disable a currency via the invoice parameter "paymentCurrencies",
+     * this parameter will be set to "merchantDisabledByParam"
      *
      * @return object
      */
@@ -1193,7 +1252,8 @@ class Invoice
      * The object is keyed by currency code.
      * The values are objects with an "enabled" boolean and option.
      * An extra "reason" parameter is added in the object if a cryptocurrency is disabled on a specific invoice.
-     * If you disable a currency via the invoice parameter "paymentCurrencies", this parameter will be set to "merchantDisabledByParam"
+     * If you disable a currency via the invoice parameter "paymentCurrencies",
+     * this parameter will be set to "merchantDisabledByParam"
      *
      * @param SupportedTransactionCurrencies $supportedTransactionCurrencies
      */
@@ -1219,7 +1279,7 @@ class Invoice
      *
      * @param $paymentTotals
      */
-    public function setPaymentTotals( $paymentTotals)
+    public function setPaymentTotals($paymentTotals)
     {
         $this->_paymentTotals = $paymentTotals;
     }
@@ -1248,9 +1308,9 @@ class Invoice
 
     /**
      * Gets paymentDisplaySubtotals
-     * The total amount that the purchaser should pay as displayed on the invoice UI.
-     * This is like paymentDisplaySubTotals but with the minerFees included.
-     * The key is the currency and the value is an amount indicated in the base unit for each supported transactionCurrency.
+     * Equivalent to price for each supported transactionCurrency, excluding minerFees.
+     * The key is the currency and the value is an amount indicated in the base unit
+     * for each supported transactionCurrency.
      *
      * @return object
      */
@@ -1261,9 +1321,9 @@ class Invoice
 
     /**
      * Sets paymentDisplaySubtotals
-     * The total amount that the purchaser should pay as displayed on the invoice UI.
-     * This is like paymentDisplaySubTotals but with the minerFees included.
-     * The key is the currency and the value is an amount indicated in the base unit for each supported transactionCurrency.
+     * Equivalent to price for each supported transactionCurrency, excluding minerFees.
+     * The key is the currency and the value is an amount indicated in the base unit
+     * for each supported transactionCurrency.
      *
      * @param $paymentDisplaySubtotals
      */
@@ -1274,8 +1334,10 @@ class Invoice
 
     /**
      * Gets paymentDisplayTotals
-     * Equivalent to price for each supported transactionCurrency, excluding minerFees.
-     * The key is the currency and the value is an amount indicated in the base unit for each supported transactionCurrency.
+     * The total amount that the purchaser should pay as displayed on the invoice UI.
+     * This is like paymentDisplaySubTotals but with the minerFees included.
+     * The key is the currency and the value is an amount
+     * indicated in the base unit for each supported transactionCurrency.
      *
      * @return object
      */
@@ -1286,8 +1348,10 @@ class Invoice
 
     /**
      * Sets paymentDisplayTotals
-     * Equivalent to price for each supported transactionCurrency, excluding minerFees.
-     * The key is the currency and the value is an amount indicated in the base unit for each supported transactionCurrency.
+     * The total amount that the purchaser should pay as displayed on the invoice UI.
+     * This is like paymentDisplaySubTotals but with the minerFees included.
+     * The key is the currency and the value is an amount
+     * indicated in the base unit for each supported transactionCurrency.
      *
      * @param $paymentDisplaytotals
      */
@@ -1298,7 +1362,9 @@ class Invoice
 
     /**
      * Gets paymentCodes
-     * The URIs for sending a transaction to the invoice. The first key is the transaction currency. The transaction currency maps to an object containing the payment URIs. The key of this object is the BIP number and the value is the payment URI.
+     * The URIs for sending a transaction to the invoice. The first key is the transaction currency.
+     * The transaction currency maps to an object containing the payment URIs.
+     * The key of this object is the BIP number and the value is the payment URI.
      * For "BTC", "BCH" and "DOGE" - BIP72b and BIP73 are supported.
      * For "ETH", "GUSD", "PAX", "BUSD", "USDC", "DAI" and "WBTC"- EIP681 is supported
      * For "XRP" - RIP681, BIP72b and BIP73 is supported
@@ -1312,7 +1378,9 @@ class Invoice
 
     /**
      * Sets paymentCodes
-     * The URIs for sending a transaction to the invoice. The first key is the transaction currency. The transaction currency maps to an object containing the payment URIs. The key of this object is the BIP number and the value is the payment URI.
+     * The URIs for sending a transaction to the invoice. The first key is the transaction currency.
+     * The transaction currency maps to an object containing the payment URIs.
+     * The key of this object is the BIP number and the value is the payment URI.
      * For "BTC", "BCH" and "DOGE" - BIP72b and BIP73 are supported.
      * For "ETH", "GUSD", "PAX", "BUSD", "USDC", "DAI" and "WBTC"- EIP681 is supported
      * For "XRP" - RIP681, BIP72b and BIP73 is supported
@@ -1326,8 +1394,10 @@ class Invoice
 
     /**
      * Gets underpaidAmount
-     * This parameter will be returned on the invoice object if the invoice was underpaid ("exceptionStatus": "paidPartial").
-     * It equals to the absolute difference between amountPaid and paymentTotals for the corresponding transactionCurrency used.
+     * This parameter will be returned on the invoice object
+     * if the invoice was underpaid ("exceptionStatus": "paidPartial").
+     * It equals to the absolute difference between amountPaid
+     * and paymentTotals for the corresponding transactionCurrency used.
      *
      * @return numeric
      */
@@ -1338,8 +1408,10 @@ class Invoice
 
     /**
      * Sets underpaidAmount
-     * This parameter will be returned on the invoice object if the invoice was underpaid ("exceptionStatus": "paidPartial").
-     * It equals to the absolute difference between amountPaid and paymentTotals for the corresponding transactionCurrency used.
+     * This parameter will be returned on the invoice object
+     * if the invoice was underpaid ("exceptionStatus": "paidPartial").
+     * It equals to the absolute difference between amountPaid
+     * and paymentTotals for the corresponding transactionCurrency used.
      *
      * @param $underpaidAmount
      */
@@ -1350,8 +1422,10 @@ class Invoice
 
     /**
      * Gets overpaidAmount
-     * This parameter will be returned on the invoice object if the invoice was overpaid ("exceptionStatus": "paidOver").
-     * It equals to the absolute difference between amountPaid and paymentTotals for the corresponding transactionCurrency used.
+     * This parameter will be returned on the invoice object
+     * if the invoice was overpaid ("exceptionStatus": "paidOver").
+     * It equals to the absolute difference between amountPaid
+     * and paymentTotals for the corresponding transactionCurrency used.
      *
      * @return numeric
      */
@@ -1362,8 +1436,10 @@ class Invoice
 
     /**
      * Sets overpaidAmount
-     * This parameter will be returned on the invoice object if the invoice was overpaid ("exceptionStatus": "paidOver").
-     * It equals to the absolute difference between amountPaid and paymentTotals for the corresponding transactionCurrency used.
+     * This parameter will be returned on the invoice object
+     * if the invoice was overpaid ("exceptionStatus": "paidOver").
+     * It equals to the absolute difference between amountPaid
+     * and paymentTotals for the corresponding transactionCurrency used.
      *
      * @param $overpaidAmount
      */
@@ -1375,10 +1451,12 @@ class Invoice
     /**
      * Gets minerFees
      * The total amount of fees that the purchaser will pay to cover BitPay's UTXO sweep cost for an invoice.
-     * The key is the currency and the value is an object containing the satoshis per byte, the total fee, and the fiat amount.
+     * The key is the currency and the value is an object containing
+     * the satoshis per byte, the total fee, and the fiat amount.
      * This is referenced as "Network Cost" on an invoice, see
-     * <a href="https://support.bitpay.com/hc/en-us/articles/115002990803-What-is-the-Network-Cost-fee-on-BitPay-invoices-and-why-is-BitPay-charging-it-">this support article</a>
-     * for more information
+     * <a href="https://support.bitpay.com/hc/en-us/articles/115002990803-What-is-the-Network-Cost-fee-on-BitPay-invoices-and-why-is-BitPay-charging-it-">
+     * this support article
+     * </a> for more information
      *
      * @return MinerFees
      */
@@ -1390,10 +1468,12 @@ class Invoice
     /**
      * Sets minerFees
      * The total amount of fees that the purchaser will pay to cover BitPay's UTXO sweep cost for an invoice.
-     * The key is the currency and the value is an object containing the satoshis per byte, the total fee, and the fiat amount.
+     * The key is the currency and the value is an object containing
+     * the satoshis per byte, the total fee, and the fiat amount.
      * This is referenced as "Network Cost" on an invoice, see
-     * <a href="https://support.bitpay.com/hc/en-us/articles/115002990803-What-is-the-Network-Cost-fee-on-BitPay-invoices-and-why-is-BitPay-charging-it-">this support article</a>
-     * for more information
+     * <a href="https://support.bitpay.com/hc/en-us/articles/115002990803-What-is-the-Network-Cost-fee-on-BitPay-invoices-and-why-is-BitPay-charging-it-">
+     * this support article
+     * </a> for more information
      *
      * @param MinerFees $minerFees
      */
@@ -1498,9 +1578,11 @@ class Invoice
 
     /**
      * Gets extendedNotifications
-     * Allows merchants to get access to additional webhooks. For instance when an invoice expires without receiving a payment or when it is refunded.
+     * Allows merchants to get access to additional webhooks.
+     * For instance when an invoice expires without receiving a payment or when it is refunded.
      * If set to true, then fullNotifications is automatically set to true.
-     * When using the extendedNotifications parameter, the webhook also have a payload slightly different from the standard webhooks.
+     * When using the extendedNotifications parameter,
+     * the webhook also have a payload slightly different from the standard webhooks.
      *
      * @return bool
      */
@@ -1511,9 +1593,11 @@ class Invoice
 
     /**
      * Sets extendedNotifications
-     * Allows merchants to get access to additional webhooks. For instance when an invoice expires without receiving a payment or when it is refunded.
+     * Allows merchants to get access to additional webhooks.
+     * For instance when an invoice expires without receiving a payment or when it is refunded.
      * If set to true, then fullNotifications is automatically set to true.
-     * When using the extendedNotifications parameter, the webhook also have a payload slightly different from the standard webhooks.
+     * When using the extendedNotifications parameter,
+     * the webhook also have a payload slightly different from the standard webhooks.
      *
      * @param bool $extendedNotifications
      */
@@ -1524,8 +1608,10 @@ class Invoice
 
     /**
      * Gets transactionCurrency
-     * The cryptocurrency used to pay the invoice. This field will only be available after a transaction is applied to the invoice.
-     * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
+     * The cryptocurrency used to pay the invoice.
+     * This field will only be available after a transaction is applied to the invoice.
+     * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD",
+     * "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      *
      * @return string
      */
@@ -1536,8 +1622,10 @@ class Invoice
 
     /**
      * Sets transactionCurrency
-     * The cryptocurrency used to pay the invoice. This field will only be available after a transaction is applied to the invoice.
-     * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
+     * The cryptocurrency used to pay the invoice.
+     * This field will only be available after a transaction is applied to the invoice.
+     * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD",
+     * "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      *
      * @param string $transactionCurrency
      */
@@ -1573,7 +1661,8 @@ class Invoice
     /**
      * Gets displayAmountPaid
      * Initially set to "0" when creating the invoice.
-     * It will be updated with the total amount paid to the invoice indicated in the base unit for the corresponding transactionCurrency
+     * It will be updated with the total amount paid to the invoice
+     * indicated in the base unit for the corresponding transactionCurrency
      *
      * @return string
      */
@@ -1585,7 +1674,8 @@ class Invoice
     /**
      * Sets displayAmountPaid
      * Initially set to "0" when creating the invoice.
-     * It will be updated with the total amount paid to the invoice indicated in the base unit for the corresponding transactionCurrency
+     * It will be updated with the total amount paid to the invoice
+     * indicated in the base unit for the corresponding transactionCurrency
      *
      * @param string $displayAmountPaid
      */
