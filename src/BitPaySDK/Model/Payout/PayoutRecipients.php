@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
+
 namespace BitPaySDK\Model\Payout;
 
 /**
@@ -25,21 +30,41 @@ class PayoutRecipients
     // API fields
     //
 
+    /**
+     * Gets guid.
+     *
+     * @return string
+     */
     public function getGuid()
     {
         return $this->_guid;
     }
 
+    /**
+     * Sets guid.
+     *
+     * @param string $guid
+     */
     public function setGuid(string $guid)
     {
         $this->_guid = $guid;
     }
 
+    /**
+     * Gets token.
+     *
+     * @return string
+     */
     public function getToken()
     {
         return $this->_token;
     }
 
+    /**
+     * Sets token.
+     *
+     * @param string $token
+     */
     public function setToken(string $token)
     {
         $this->_token = $token;
@@ -48,6 +73,11 @@ class PayoutRecipients
     // Required fields
     //
 
+    /**
+     * Gets an array with all recipients.
+     *
+     * @return array
+     */
     public function getRecipients()
     {
         $recipients = [];
@@ -63,11 +93,21 @@ class PayoutRecipients
         return $recipients;
     }
 
+    /**
+     * Sets array with all recipients.
+     *
+     * @param array $recipients
+     */
     public function setRecipients(array $recipients)
     {
         $this->_recipients = $recipients;
     }
 
+    /**
+     * Return an array with paid and unpaid value.
+     *
+     * @return array
+     */
     public function toArray()
     {
         $elements = [
