@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
+
 namespace BitPaySDK\Util\RESTcli;
 
 use BitPayKeyUtils\KeyHelper\PrivateKey;
@@ -19,6 +24,10 @@ use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Response as Response;
 use GuzzleHttp\RequestOptions as RequestOptions;
 
+/**
+ * Class RESTcli
+ * @package BitPaySDK\Util\RESTcli
+ */
 class RESTcli
 {
     /**
@@ -43,6 +52,13 @@ class RESTcli
      */
     protected $_proxy;
 
+    /**
+     * RESTcli constructor.
+     * @param string $environment
+     * @param PrivateKey $ecKey
+     * @param string|null $proxy
+     * @throws BitPayException
+     */
     public function __construct(string $environment, PrivateKey $ecKey, ?string $proxy = null)
     {
         $this->_ecKey = $ecKey;
@@ -51,6 +67,11 @@ class RESTcli
         $this->init();
     }
 
+    /**
+     * Initialize Client.
+     *
+     * @throws BitPayException
+     */
     public function init()
     {
         try {
@@ -77,6 +98,15 @@ class RESTcli
         }
     }
 
+    /**
+     * Send POST request.
+     *
+     * @param $uri
+     * @param array $formData
+     * @param bool $signatureRequired
+     * @return string (json)
+     * @throws BitPayException
+     */
     public function post($uri, array $formData = [], $signatureRequired = true): string
     {
         try {
@@ -136,6 +166,15 @@ class RESTcli
         }
     }
 
+    /**
+     * Send GET request.
+     *
+     * @param $uri
+     * @param array|null $parameters
+     * @param bool $signatureRequired
+     * @return string (json)
+     * @throws BitPayException
+     */
     public function get($uri, array $parameters = null, $signatureRequired = true): string
     {
         try {
@@ -199,6 +238,14 @@ class RESTcli
         }
     }
 
+    /**
+     * Send DELETE request.
+     *
+     * @param $uri
+     * @param array|null $parameters
+     * @return string
+     * @throws BitPayException
+     */
     public function delete($uri, array $parameters = null): string
     {
         try {
@@ -259,6 +306,14 @@ class RESTcli
         }
     }
 
+    /**
+     * Send PUT request.
+     *
+     * @param $uri
+     * @param array $formData
+     * @return string
+     * @throws BitPayException
+     */
     public function update($uri, array $formData = []): string
     {
         try {
@@ -315,6 +370,13 @@ class RESTcli
         }
     }
 
+    /**
+     * Convert Response object into json
+     *
+     * @param Response $response
+     * @return string
+     * @throws BitPayException
+     */
     public function responseToJsonString(Response $response): string
     {
         if ($response == null) {
