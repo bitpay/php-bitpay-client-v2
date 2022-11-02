@@ -548,26 +548,44 @@ class ClientTest extends TestCase
         $result = $testedObject->requestInvoiceNotification($invoiceId);
         $this->assertIsBool($result);
     }
-
-//    /**
-//     * @depends testWithFileJsonConfig
-//     */
-//    public function testRequestInvoiceNotificationShouldCatchExceptionFromGetInvoice($testedObject)
-//    {
-//        $invoiceId = 'testId';
-//        $params['token'] = $this->getMerchantTokenFromFile();
-//        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willThrowException(new BitPayException());
-////        $params['token'] = false;
-//        $restCliMock->expects($this->once())->method('post')->with('invoices/' . $invoiceId . '/notifications', $params)->willReturn('string');
-//        $setRestCli = function () use ($restCliMock) {
-//            $this->_RESTcli = $restCliMock;
-//        };
-//        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
-//        $doSetRestCli();
-//        $this->expectException(InvoiceNotificationException::class);
-//        $result = $testedObject->requestInvoiceNotification($invoiceId);
-//    }
+	
+	/**
+	 * @depends testWithFileJsonConfig
+	 */
+	public function testRequestInvoiceNotificationShouldCatchExceptionFromGetInvoice($testedObject)
+	{
+		$invoiceId = 'testId';
+		$params['token'] = $this->getMerchantTokenFromFile();
+		$restCliMock = $this->getRestCliMock();
+		$restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willThrowException(new BitPayException());
+		$setRestCli = function () use ($restCliMock) {
+			$this->_RESTcli = $restCliMock;
+		};
+		$doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+		$doSetRestCli();
+		$this->expectException(InvoiceQueryException::class);
+		$testedObject->requestInvoiceNotification($invoiceId);
+	}
+	
+	/**
+	 * @depends testWithFileJsonConfig
+	 */
+	public function testRequestInvoiceNotificationShouldCatchRestCliException($testedObject)
+	{
+		$invoiceId = 'testId';
+		$params['token'] = $this->getMerchantTokenFromFile();
+		$restCliMock = $this->getRestCliMock();
+		$restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
+		$params['token'] = false;
+		$restCliMock->expects($this->once())->method('post')->with('invoices/' . $invoiceId . '/notifications', $params)->willThrowException(new Exception());
+		$setRestCli = function () use ($restCliMock) {
+			$this->_RESTcli = $restCliMock;
+		};
+		$doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+		$doSetRestCli();
+		$this->expectException(InvoiceQueryException::class);
+		$testedObject->requestInvoiceNotification($invoiceId);
+	}
 
     /**
      * @depends testWithFileJsonConfig
@@ -3613,39 +3631,39 @@ class ClientTest extends TestCase
         $testedObject->getSupportedWallets();
     }
 
-//    /**
-//     * @depends testWithFileJsonConfig
-//     */
-//    public function testGetSupportedWalletsShouldCatchRestCliException($testedObject)
-//    {
-//        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->expects($this->once())->method('get')->with("supportedWallets/", null, false)->willThrowException(new Exception());
-//        $setRestCli = function () use ($restCliMock) {
-//            $this->_RESTcli = $restCliMock;
-//        };
-//        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
-//        $doSetRestCli();
-//
-//        $this->expectException(WalletQueryException::class);
-//        $testedObject->getSupportedWallets();
-//    }
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testGetSupportedWalletsShouldCatchRestCliException($testedObject)
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')->with("supportedWallets/", null, false)->willThrowException(new Exception());
+        $setRestCli = function () use ($restCliMock) {
+            $this->_RESTcli = $restCliMock;
+        };
+        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+        $doSetRestCli();
 
-//    /**
-//     * @depends testWithFileJsonConfig
-//     */
-//    public function testGetSupportedWalletsShouldCatchJsonMapperException($testedObject)
-//    {
-//        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->expects($this->once())->method('get')->with("supportedWallets/", null, false)->willReturn(self::CORRUPT_JSON_STRING);
-//        $setRestCli = function () use ($restCliMock) {
-//            $this->_RESTcli = $restCliMock;
-//        };
-//        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
-//        $doSetRestCli();
-//
-//        $this->expectException(WalletQueryException::class);
-//        $testedObject->getSupportedWallets();
-//    }
+        $this->expectException(WalletQueryException::class);
+        $testedObject->getSupportedWallets();
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testGetSupportedWalletsShouldCatchJsonMapperException($testedObject)
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')->with("supportedWallets/", null, false)->willReturn(self::CORRUPT_JSON_STRING);
+        $setRestCli = function () use ($restCliMock) {
+            $this->_RESTcli = $restCliMock;
+        };
+        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+        $doSetRestCli();
+
+        $this->expectException(WalletQueryException::class);
+        $testedObject->getSupportedWallets();
+    }
 
     /**
      * @throws BitPayException

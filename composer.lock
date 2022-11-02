@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02abb3a9887c4186d3a44941233fbee9",
+    "content-hash": "3e861f2c90bb9900a30e0374f1e46a8a",
     "packages": [
         {
             "name": "bitpay/key-utils",
-            "version": "v1.0.1908",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bitpay/bitpay-php-keyutils.git",
-                "reference": "004edafa83bf08dc1ec4a7bdd75d5663882ce073"
+                "reference": "d17fe78d802f74103d730089ff7c3345fb25a9d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/004edafa83bf08dc1ec4a7bdd75d5663882ce073",
-                "reference": "004edafa83bf08dc1ec4a7bdd75d5663882ce073",
+                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/d17fe78d802f74103d730089ff7c3345fb25a9d7",
+                "reference": "d17fe78d802f74103d730089ff7c3345fb25a9d7",
                 "shasum": ""
             },
             "require": {
@@ -27,6 +27,9 @@
                 "ext-iconv": "*",
                 "ext-json": "*",
                 "ext-openssl": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5 || ^9.0"
             },
             "type": "library",
             "autoload": {
@@ -47,9 +50,9 @@
             "description": "BitPay Utils pack for cryptography",
             "support": {
                 "issues": "https://github.com/bitpay/bitpay-php-keyutils/issues",
-                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/master"
+                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/1.1.1"
             },
-            "time": "2019-08-19T16:42:16+00:00"
+            "time": "2022-10-17T13:58:20+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2736,10 +2739,10 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1 || ^8.0",
+        "php": "^7.4 || ^8.0 || ^8.1",
         "ext-json": "*",
         "ext-reflection": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }
