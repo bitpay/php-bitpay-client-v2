@@ -14,7 +14,7 @@
   "require": {
     "bitpay/key-utils": "^1.1",
     "php": "^7.4 || ^8.0 || ^8.1",
-    "guzzlehttp/guzzle": "^6.3 || ^7.0",
+    "guzzlehttp/guzzle": "^7.0",
     "ext-json": "*",
     "ext-reflection": "*",
     "symfony/yaml": "^3.0 || ^4.3 || ^5.0 || ^6.0"
