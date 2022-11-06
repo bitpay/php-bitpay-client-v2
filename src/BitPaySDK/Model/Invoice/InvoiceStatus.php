@@ -35,8 +35,8 @@ interface InvoiceStatus
      * This status can be used by merchants in order to fulfill orders placed by the consumer.
      * Merchants can configure the timing at which BitPay sets this specific invoice status,
      * depending on the number of confirmation achieved by the consumer's transaction in the selected cryptocurrency.
-     * This can be configured during invoice creation using the "transactionSpeed" parameter (section Create an invoice),
-     * or at account level via a dashboard setting.
+     * This can be configured during invoice creation using the "transactionSpeed" parameter
+     * (section Create an invoice), or at account level via a dashboard setting.
      */
     public const Confirmed = "confirmed";
 

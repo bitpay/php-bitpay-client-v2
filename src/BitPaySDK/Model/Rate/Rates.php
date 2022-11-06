@@ -22,7 +22,7 @@ class Rates
 
     /**
      * Rates constructor.
-     * 
+     *
      * @param array $rates
      * @param Client $bp
      */

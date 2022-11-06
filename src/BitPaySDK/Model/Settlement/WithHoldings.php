@@ -9,7 +9,7 @@ namespace BitPaySDK\Model\Settlement;
 
 /**
  * Class WithHoldings
- * 
+ *
  * @see <a href="https://bitpay.com/api/#rest-api-resources-settlements">Settlements</a>
  * @package BitPaySDK\Model\Settlement
  */
