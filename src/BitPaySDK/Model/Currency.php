@@ -1,10 +1,18 @@
 <?php
 
+/**
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
+
 namespace BitPaySDK\Model;
 
 use Exception;
 use ReflectionClass;
 
+/**
+ * Object containing currency information
+ */
 class Currency
 {
     // Crypto
@@ -203,6 +211,12 @@ class Currency
     protected $_payoutFields;
     protected $_settlementMinimum;
 
+    /**
+     * Currency validation
+     *
+     * @param string $value the currency value
+     * @return bool
+     */
     public static function isValid($value)
     {
         try {
@@ -218,126 +232,251 @@ class Currency
     {
     }
 
+    /**
+     * Get ISO 4217 3-character currency code
+     *
+     * @return string the code
+     */
     public function getCode()
     {
         return $this->_code;
     }
 
+    /**
+     * Sets ISO 4217 3-character currency code
+     *
+     * @param string $code the code
+     */
     public function setCode(string $code)
     {
         $this->_code = $code;
     }
 
+    /**
+     * Display symbol
+     *
+     * @return string the symbol
+     */
     public function getSymbol()
     {
         return $this->_symbol;
     }
 
+    /**
+     * Sets symbol
+     *
+     * @param string|null $symbol
+     */
     public function setSymbol(string $symbol = null)
     {
         $this->_symbol = $symbol;
     }
 
+    /**
+     * Number of decimal places
+     *
+     * @return int the precision
+     */
     public function getPrecision()
     {
         return $this->_precision;
     }
 
+    /**
+     * Sets number of decimal places
+     *
+     * @param int $precision the precision
+     */
     public function setPrecision(int $precision)
     {
         $this->_precision = $precision;
     }
 
+    /**
+     * Gets currently settled value
+     *
+     * @return bool
+     */
     public function getCurrentlySettled()
     {
         return $this->_currentlySettled;
     }
 
+    /**
+     * Sets currently settled value
+     *
+     * @param bool $currentlySettled
+     */
     public function setCurrentlySettled(bool $currentlySettled)
     {
         $this->_currentlySettled = $currentlySettled;
     }
 
+    /**
+     * Gets currency name
+     *
+     * @return string the name
+     */
     public function getName()
     {
         return $this->_name;
     }
 
+    /**
+     * Sets currency name
+     *
+     * @param string $name the name
+     */
     public function setName(string $name)
     {
         $this->_name = $name;
     }
 
+    /**
+     * Gets English plural form
+     *
+     * @return string the plural form
+     */
     public function getPlural()
     {
         return $this->_plural;
     }
 
+    /**
+     * Sets English plural form
+     *
+     * @param string $plural the plural form
+     */
     public function setPlural(string $plural)
     {
         $this->_plural = $plural;
     }
 
+    /**
+     * Gets alternative currency name(s)
+     *
+     * @return string the alts
+     */
     public function getAlts()
     {
         return $this->_alts;
     }
 
+    /**
+     * Sets alternative currency name(s)
+     *
+     * @param string $alts the alts
+     */
     public function setAlts(string $alts)
     {
         $this->_alts = $alts;
     }
 
+    /**
+     * Gets minimum supported value when creating an invoice, bill or payout for instance
+     *
+     * @return string the minimum
+     */
     public function getMinimum()
     {
         return $this->_minimum;
     }
 
+    /**
+     * Sets minimum supported value when creating an invoice, bill or payout for instance
+     *
+     * @param string $minimum the minimum
+     */
     public function setMinimum(string $minimum)
     {
         $this->_minimum = $minimum;
     }
 
+    /**
+     * Gets if the currency is linked to a sanctionned country
+     *
+     * @return bool the sanctioned
+     */
     public function getSanctioned()
     {
         return $this->_sanctioned;
     }
 
+    /**
+     * Sets if the currency is linked to a sanctionned country
+     *
+     * @param bool $sanctioned the sanctioned
+     */
     public function setSanctioned(bool $sanctioned)
     {
         $this->_sanctioned = $sanctioned;
     }
 
+    /**
+     * Gets decimal precision
+     *
+     * @return string decimals
+     */
     public function getDecimals()
     {
         return $this->_decimals;
     }
 
+    /**
+     * Sets decimal precision
+     *
+     * @param string $decimals decimals
+     */
     public function setDecimals(string $decimals)
     {
         $this->_decimals = $decimals;
     }
 
+    /**
+     * Gets payout fields
+     *
+     * @return array the payout fields
+     */
     public function getPayoutFields()
     {
         return $this->_payoutFields;
     }
 
+    /**
+     * Sets payout fields
+     *
+     * @param array $payoutFields the payout fields
+     */
     public function setPayoutFields(array $payoutFields)
     {
         $this->_payoutFields = $payoutFields;
     }
 
+    /**
+     * Gets settlement minimum
+     *
+     * @return array the settlement minimum
+     */
     public function getSettlementMinimum()
     {
         return $this->_settlementMinimum;
     }
 
+    /**
+     * Sets settlement minimum
+     *
+     * @param array $settlementMinimum the settlement minimum
+     */
     public function setSettlementMinimum(array $settlementMinimum)
     {
         $this->_settlementMinimum = $settlementMinimum;
     }
 
+    /**
+     * Gets currency data as array
+     *
+     * @return array currency data as array
+     */
     public function toArray()
     {
         $elements = [

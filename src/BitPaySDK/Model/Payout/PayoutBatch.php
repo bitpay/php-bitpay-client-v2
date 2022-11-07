@@ -1,13 +1,20 @@
 <?php
 
+/**
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
+
 namespace BitPaySDK\Model\Payout;
 
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
 /**
+ * Class PayoutBatch
  *
- * @package Bitpay
+ * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">REST API Payouts</a>
+ * @package BitPaySDK\Model\Payout
  */
 class PayoutBatch
 {
@@ -66,6 +73,9 @@ class PayoutBatch
     // Private methods
     //
 
+    /**
+     * Compute and set amount based on PayoutInstruction.
+     */
     private function _computeAndSetAmount()
     {
         $amount = 0.0;
@@ -84,21 +94,41 @@ class PayoutBatch
     // API fields
     //
 
+    /**
+     *  Gets guid.
+     *
+     * @return string
+     */
     public function getGuid()
     {
         return $this->_guid;
     }
 
+    /**
+     * Sets guid.
+     *
+     * @param string $guid
+     */
     public function setGuid(string $guid)
     {
         $this->_guid = $guid;
     }
 
+    /**
+     * Gets token.
+     *
+     * @return string
+     */
     public function getToken()
     {
         return $this->_token;
     }
 
+    /**
+     * Sets token.
+     *
+     * @param string $token
+     */
     public function setToken(string $token)
     {
         $this->_token = $token;
@@ -107,26 +137,52 @@ class PayoutBatch
     // Required fields
     //
 
+    /**
+     * Gets amount.
+     *
+     * @return float
+     */
     public function getAmount()
     {
         return $this->_amount;
     }
 
+    /**
+     * Sets amount.
+     *
+     * @param float $amount
+     */
     public function setAmount(float $amount)
     {
         $this->_amount = $amount;
     }
 
+    /**
+     * Gets amount based on precision.
+     *
+     * @param int $precision
+     */
     public function formatAmount(int $precision)
     {
         $this->_amount = round($this->_amount, $precision);
     }
 
+    /**
+     * Gets currency.
+     *
+     * @return string|null
+     */
     public function getCurrency()
     {
         return $this->_currency;
     }
 
+    /**
+     * Sets currency.
+     *
+     * @param string $currency
+     * @throws BitPayException
+     */
     public function setCurrency(string $currency)
     {
         if (!Currency::isValid($currency)) {
@@ -136,16 +192,31 @@ class PayoutBatch
         $this->_currency = $currency;
     }
 
+    /**
+     * Gets effective date.
+     *
+     * @return string|null
+     */
     public function getEffectiveDate()
     {
         return $this->_effectiveDate;
     }
 
+    /**
+     * Sets effective date.
+     *
+     * @param string $effectiveDate
+     */
     public function setEffectiveDate(string $effectiveDate)
     {
         $this->_effectiveDate = $effectiveDate;
     }
 
+    /**
+     * Gets instructions.
+     *
+     * @return array
+     */
     public function getInstructions()
     {
         $instructions = [];
@@ -161,17 +232,33 @@ class PayoutBatch
         return $instructions;
     }
 
+    /**
+     * Sets instructions.
+     *
+     * @param array $instructions
+     */
     public function setInstructions(array $instructions)
     {
         $this->_instructions = $instructions;
         $this->_computeAndSetAmount();
     }
 
+    /**
+     * Gets ledger currency.
+     *
+     * @return string|null
+     */
     public function getLedgerCurrency()
     {
         return $this->_ledgerCurrency;
     }
 
+    /**
+     * Sets ledger currency.
+     *
+     * @param string $ledgerCurrency
+     * @throws BitPayException
+     */
     public function setLedgerCurrency(string $ledgerCurrency)
     {
         if (!Currency::isValid($ledgerCurrency)) {
@@ -184,101 +271,201 @@ class PayoutBatch
     // Optional fields
     //
 
+    /**
+     * Gets reference.
+     *
+     * @return string
+     */
     public function getReference()
     {
         return $this->_reference;
     }
 
+    /**
+     * Sets reference.
+     *
+     * @param string $reference
+     */
     public function setReference(string $reference)
     {
         $this->_reference = $reference;
     }
 
+    /**
+     * Gets notification url.
+     *
+     * @return string
+     */
     public function getNotificationURL()
     {
         return $this->_notificationUrl;
     }
 
+    /**
+     * Sets notification url.
+     *
+     * @param string $notificationUrl
+     */
     public function setNotificationURL(string $notificationUrl)
     {
         $this->_notificationUrl = $notificationUrl;
     }
 
+    /**
+     * Gets notification email.
+     *
+     * @return string
+     */
     public function getNotificationEmail()
     {
         return $this->_notificationEmail;
     }
 
+    /**
+     * Sets notification email.
+     *
+     * @param string $notificationEmail
+     */
     public function setNotificationEmail(string $notificationEmail)
     {
         $this->_notificationEmail = $notificationEmail;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return string
+     */
     public function getEmail()
     {
         return $this->_email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param string $email
+     */
     public function setEmail(string $email)
     {
         $this->_email = $email;
     }
 
+    /**
+     * Gets Recipient ID.
+     *
+     * @return string
+     */
     public function getRecipientId()
     {
         return $this->_recipientId;
     }
 
+    /**
+     * Sets Recipient ID.
+     *
+     * @param string $recipientId
+     */
     public function setRecipientId(string $recipientId)
     {
         $this->_recipientId = $recipientId;
     }
 
+    /**
+     * Gets Shopper ID.
+     *
+     * @return string
+     */
     public function getShopperId()
     {
         return $this->_shopperId;
     }
 
+    /**
+     * Sets Shopper ID.
+     *
+     * @param string $shopperId
+     */
     public function setShopperId(string $shopperId)
     {
         $this->_shopperId = $shopperId;
     }
 
+    /**
+     * Gets label.
+     *
+     * @return string
+     */
     public function getLabel()
     {
         return $this->_label;
     }
 
+    /**
+     * Sets label.
+     *
+     * @param string $label
+     */
     public function setLabel(string $label)
     {
         $this->_label = $label;
     }
 
+    /**
+     * Gets message.
+     *
+     * @return string
+     */
     public function getMessage()
     {
         return $this->_message;
     }
 
+    /**
+     * Sets message.
+     *
+     * @param string $message
+     */
     public function setMessage(string $message)
     {
         $this->_message = $message;
     }
 
+    /**
+     * Gets redirect url.
+     *
+     * @return string
+     */
     public function getRedirectUrl()
     {
         return $this->_redirectUrl;
     }
 
+    /**
+     * Sets redirect url.
+     *
+     * @param string $redirectUrl
+     */
     public function setRedirectUrl(string $redirectUrl)
     {
         $this->_redurectUrl = $redirectUrl;
     }
 
+    /**
+     * Gets pricing method.
+     *
+     * @return string
+     */
     public function getPricingMethod()
     {
         return $this->_pricingMethod;
     }
 
+    /**
+     * Sets pricing method.
+     *
+     * @param string $pricingMethod
+     */
     public function setPricingMethod(string $pricingMethod)
     {
         $this->_pricingMethod = $pricingMethod;
@@ -287,126 +474,250 @@ class PayoutBatch
     // Response fields
     //
 
+    /**
+     * Gets ID.
+     *
+     * @return string|null
+     */
     public function getId()
     {
         return $this->_id;
     }
 
+    /**
+     * Sets ID.
+     *
+     * @param string $id
+     */
     public function setId(string $id)
     {
         $this->_id = $id;
     }
 
+    /**
+     * Gets account.
+     *
+     * @return string|null
+     */
     public function getAccount()
     {
         return $this->_account;
     }
 
+    /**
+     * Sets account.
+     *
+     * @param string $account
+     */
     public function setAccount(string $account)
     {
         $this->_account = $account;
     }
 
+    /**
+     * Gets support phone.
+     *
+     * @return string|null
+     */
     public function getSupportPhone()
     {
         return $this->_supportPhone;
     }
 
+    /**
+     * Sets support phone.
+     *
+     * @param string $supportPhone
+     */
     public function setSupportPhone(string $supportPhone)
     {
         $this->_supportPhone = $supportPhone;
     }
 
+    /**
+     * Gets status.
+     *
+     * @return string|null
+     */
     public function getStatus()
     {
         return $this->_status;
     }
 
+    /**
+     * Sets status.
+     *
+     * @param string $status
+     */
     public function setStatus(string $status)
     {
         $this->_status = $status;
     }
 
+    /**
+     * Gets percent fee.
+     *
+     * @return float|null
+     */
     public function getPercentFee()
     {
         return $this->_percentFee;
     }
 
+    /**
+     * Sets percent fee
+     * @param float $percentFee
+     */
     public function setPercentFee(float $percentFee)
     {
         $this->_percentFee = $percentFee;
     }
 
+    /**
+     * Gets fee.
+     *
+     * @return float|null
+     */
     public function getFee()
     {
         return $this->_fee;
     }
 
+    /**
+     * Sets fee.
+     *
+     * @param float $fee
+     */
     public function setFee(float $fee)
     {
         $this->_fee = $fee;
     }
 
+    /**
+     * Gets deposit total.
+     *
+     * @return float|null
+     */
     public function getDepositTotal()
     {
         return $this->_depositTotal;
     }
 
+    /**
+     * Sets deposit total.
+     *
+     * @param float $depositTotal
+     */
     public function setDepositTotal(float $depositTotal)
     {
         $this->_depositTotal = $depositTotal;
     }
 
+    /**
+     * Gets BTC.
+     *
+     * @return float|null
+     */
     public function getBtc()
     {
         return $this->_btc;
     }
 
+    /**
+     * Sets BTC.
+     *
+     * @param float|null $btc
+     */
     public function setBtc(?float $btc)
     {
         $this->_btc = $btc;
     }
 
+    /**
+     * Gets rate.
+     *
+     * @return float|null
+     */
     public function getRate()
     {
         return $this->_rate;
     }
 
+    /**
+     * Sets rate.
+     *
+     * @param float $rate
+     */
     public function setRate(float $rate)
     {
         $this->_rate = $rate;
     }
 
+    /**
+     * Get request date.
+     *
+     * @return string|null
+     */
     public function getRequestDate()
     {
         return $this->_requestDate;
     }
 
+    /**
+     * Sets request date.
+     *
+     * @param string $requestDate
+     */
     public function setRequestDate(string $requestDate)
     {
         $this->_requestDate = $requestDate;
     }
 
+    /**
+     * Gets date executed.
+     *
+     * @return string|null
+     */
     public function getDateExecuted()
     {
         return $this->_dateExecuted;
     }
 
+    /**
+     * Sets date executed.
+     *
+     * @param string $dateExecuted
+     */
     public function setDateExecuted(string $dateExecuted)
     {
         $this->_dateExecuted = $dateExecuted;
     }
 
+    /**
+     * Gets exchange rates.
+     *
+     * @return mixed
+     */
     public function getExchangeRates()
     {
         return $this->_exchangeRates;
     }
 
+    /**
+     * Sets exchange rates.
+     *
+     * @param $exchangeRates
+     */
     public function setExchangeRates($exchangeRates)
     {
         $this->_exchangeRates = $exchangeRates;
     }
 
+    /**
+     * Return an array with class values.
+     *
+     * @return array
+     */
     public function toArray()
     {
         $elements = [

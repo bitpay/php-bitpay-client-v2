@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
+
 namespace BitPaySDK\Model\Payout;
 
 /**
@@ -16,40 +21,78 @@ class PayoutReceivedInfo
      * */
     protected $_address;
 
+    /**
+     * PayoutReceivedInfo constructor.
+     */
     public function __construct()
     {
     }
 
+    /**
+     * Gets name.
+     *
+     * @return string|null
+     */
     public function getName()
     {
         return $this->_name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param string $name
+     */
     public function setName(string $name)
     {
         $this->_name = $name;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return string|null
+     */
     public function getEmail()
     {
         return $this->_email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param string $email
+     */
     public function setEmail(string $email)
     {
         $this->_email = $email;
     }
 
+    /**
+     * Gets address.
+     *
+     * @return PayoutReceivedInfoAddress|null
+     */
     public function getAddress()
     {
         return $this->_address;
     }
 
+    /**
+     * Sets address.
+     *
+     * @param PayoutReceivedInfoAddress $address
+     */
     public function setAddress(PayoutReceivedInfoAddress $address)
     {
         $this->_address = $address;
     }
 
+    /**
+     * Return array with values of all fields.
+     *
+     * @return array
+     */
     public function toArray()
     {
         /**
