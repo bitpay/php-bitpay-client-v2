@@ -241,11 +241,26 @@ class InvoiceTest extends TestCase
 
     public function testGetItemizedDetailsAsArray()
     {
-        $expectedItemizedDetails = $this->getMockBuilder(ItemizedDetails::class)->getMock();
-        $invoice = $this->createClassObject();
-        $invoice->setItemizedDetails($expectedItemizedDetails);
+        $expectedArray = [
+            'amount' => 1,
+            'description' => 'testDescription',
+            'isFee' => true
+        ];
+        $expectedItemizedDetails = $this->getMockBuilder(ItemizedDetails::class)->disableOriginalConstructor()->getMock();
+        $expectedItemizedDetails->method('toArray')->willReturn($expectedArray);
 
-        $this->assertEquals([], $invoice->getItemizedDetails());
+        $invoice = $this->createClassObject();
+        $invoice->setItemizedDetails([$expectedItemizedDetails]);
+
+        $this->assertIsArray($invoice->getItemizedDetails());
+        $this->assertNotNull($invoice->getItemizedDetails());
+
+        foreach ($invoice->getItemizedDetails() as $item) {
+            $this->assertArrayHasKey('amount', $item);
+            $this->assertArrayHasKey('description', $item);
+            $this->assertArrayHasKey('isFee', $item);
+            $this->assertEquals($expectedArray, $item);
+        }
     }
 
     public function testGetBuyer()

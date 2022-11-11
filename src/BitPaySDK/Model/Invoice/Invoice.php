@@ -722,47 +722,25 @@ class Invoice
     }
 
     /**
-     * Gets itemizedDetails as array
-     * Object containing line item details for display.
-     *
-     * @return array
-     */
-    public function getItemizedDetailsAsArray()
-    {
-        $items = [];
-
-        foreach ($this->_items as $item) {
-            if ($item instanceof ItemizedDetails) {
-                array_push($items, $item->toArray());
-            } else {
-                array_push($items, $item);
-            }
-        }
-
-        return $items;
-    }
-
-    /**
      * Sets itemizedDetails
      * Object containing line item details for display.
      *
-     * @param ItemizedDetails $itemizedDetails
+     * @param array $itemizedDetails
      */
-    public function setItemizedDetails(ItemizedDetails $itemizedDetails)
+    public function setItemizedDetails(array $itemizedDetails)
     {
         $itemsArray = [];
 
         foreach ($itemizedDetails as $item) {
-            if ($item instanceof Item) {
-                array_push($itemsArray, $item);
+            if ($item instanceof ItemizedDetails) {
+                array_push($itemsArray, $item->toArray());
             } else {
-                array_push($itemsArray, Item::createFromArray((array)$item));
+                array_push($itemsArray, $item);
             }
         }
+
         $this->_itemizedDetails = $itemsArray;
     }
-    // Buyer data
-    //
 
     /**
      * Sets acceptanceWindow
@@ -1833,7 +1811,7 @@ class Invoice
             'isCancelled'                    => $this->getIsCancelled(),
             'buyerEmail'                     => $this->getBuyerEmail(),
             'buyerSms'                       => $this->getBuyerSms(),
-            'itemizedDetails'                => $this->getItemizedDetails()->toArray(),
+            'itemizedDetails'                => $this->getItemizedDetails(),
             'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];
 
