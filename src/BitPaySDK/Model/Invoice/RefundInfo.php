@@ -22,6 +22,7 @@ class RefundInfo
 
     /**
      * Gets support request
+     *
      * For a refunded invoice, this field will contain the refund requestId once executed.
      *
      * @return string the support request
@@ -33,6 +34,7 @@ class RefundInfo
 
     /**
      * Sets support request
+     *
      * For a refunded invoice, this field will contain the refund requestId once executed.
      *
      * @param string $supportRequest the support request
@@ -44,6 +46,7 @@ class RefundInfo
 
     /**
      * Gets currency
+     *
      * For a refunded invoice, this field will contain the base currency selected for the refund.
      * Typically the same as the invoice currency.
      *
@@ -56,6 +59,7 @@ class RefundInfo
 
     /**
      * Sets currency
+     *
      * For a refunded invoice, this field will contain the base currency selected for the refund.
      * Typically the same as the invoice currency.
      *
@@ -68,6 +72,7 @@ class RefundInfo
 
     /**
      * Gets amounts
+     *
      * For a refunded invoice, this object will contain the crypto currency amount
      * refunded by BitPay to the consumer (in the selected transactionCurrency)
      * and the equivalent refunded amount from the invoice in the given currency
@@ -82,6 +87,7 @@ class RefundInfo
 
     /**
      * Set amounts
+     *
      * For a refunded invoice, this object will contain the crypto currency amount
      * refunded by BitPay to the consumer (in the selected transactionCurrency)
      * and the equivalent refunded amount from the invoice in the given currency

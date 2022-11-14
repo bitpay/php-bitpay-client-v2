@@ -36,6 +36,7 @@ class LedgerEntry
 
     /**
      * Gets type
+     *
      * Contains the Ledger entry name.
      * See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes
      *
@@ -48,6 +49,7 @@ class LedgerEntry
 
     /**
      * Sets type
+     *
      * Contains the Ledger entry name.
      * See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes
      *
@@ -82,6 +84,7 @@ class LedgerEntry
 
     /**
      * Gets code
+     *
      * Contains the Ledger entry code.
      * See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes
      *
@@ -94,6 +97,7 @@ class LedgerEntry
 
     /**
      * Sets code
+     *
      * Contains the Ledger entry code.
      * See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes
      *
@@ -146,6 +150,7 @@ class LedgerEntry
 
     /**
      * Gets tx type
+     *
      * [DEPRECRATED] see type
      *
      * @return string the txType
@@ -157,6 +162,7 @@ class LedgerEntry
 
     /**
      * Sets tx type
+     *
      * [DEPRECRATED] see type
      *
      * @param string $txType the txType
@@ -168,6 +174,7 @@ class LedgerEntry
 
     /**
      * Gets scale
+     *
      * Power of 10 used for conversion
      *
      * @return string the scale
@@ -179,6 +186,7 @@ class LedgerEntry
 
     /**
      * Sets scale
+     *
      * Power of 10 used for conversion
      *
      * @param string $scale the scale
@@ -230,6 +238,7 @@ class LedgerEntry
 
     /**
      * Gets description
+     *
      * Ledger entry description. Also contains an id depending on the type of entry
      * (for instance payout id, settlement id, invoice orderId etc...)
      *
@@ -242,6 +251,7 @@ class LedgerEntry
 
     /**
      * Sets description
+     *
      * Ledger entry description. Also contains an id depending on the type of entry
      * (for instance payout id, settlement id, invoice orderId etc...)
      *
@@ -274,6 +284,7 @@ class LedgerEntry
 
     /**
      * Gets buyer fields
+     *
      * If provided by the merchant in the buyer object during invoice creation
      *
      * @return Buyer

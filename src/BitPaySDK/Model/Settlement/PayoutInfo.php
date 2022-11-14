@@ -63,6 +63,7 @@ class PayoutInfo
 
     /**
      * Gets routing
+     *
      * for merchants receiving USD settlements via local ACH, this field contains the ABA provided by the merchant
      *
      * @return string the routing
@@ -84,6 +85,7 @@ class PayoutInfo
 
     /**
      * Gets merchant ein
+     *
      * for merchants receiving USD settlements via local ACH, this field contains the merchant's EIN
      *
      * @return string the merchant ein
@@ -105,6 +107,7 @@ class PayoutInfo
 
     /**
      * Gets label
+     *
      * As indicated by the merchant in his settlement settings
      *
      * @return string the label
@@ -206,6 +209,7 @@ class PayoutInfo
 
     /**
      * Gets address
+     *
      * This field is used to indicate the wallet address used for the settlement,
      * if the settlement currency selected by the merchant is one of the supported crypto currency:
      * Bitcoin (BTC), Bitcoin Cash (BCH), Dogecoin (DOGE), Ether (ETH), Gemini US Dollar (GUSD),
@@ -272,6 +276,7 @@ class PayoutInfo
 
     /**
      * Gets sort
+     *
      * used to pass country specific bank fields: BSB for AUD
      *
      * @return string
@@ -293,6 +298,7 @@ class PayoutInfo
 
     /**
      * Gets wire
+     *
      * If set to true, this means BitPay will be settling the account using an international transfer via the SWIFT
      * network instead of local settlement methods like ACH(United States) or SEPA (European Economic Area)
      *
@@ -315,6 +321,7 @@ class PayoutInfo
 
     /**
      * Gets bank name
+     *
      * Name of the bank used by the merchant. Field returned if "wire": true in the "payoutInfo" object
      *
      * @return string the bank name
@@ -336,6 +343,7 @@ class PayoutInfo
 
     /**
      * Gets bank address
+     *
      * Address of the merchant's bank. Field returned if "wire": true in the "payoutInfo" object
      *
      * @return string the bank address
@@ -357,6 +365,7 @@ class PayoutInfo
 
     /**
      * Gets bank address 2
+     *
      * Address of the merchant's bank. Field returned if "wire": true in the "payoutInfo" object
      *
      * @return string the bank address2
@@ -378,6 +387,7 @@ class PayoutInfo
 
     /**
      * Gets iban
+     *
      * The merchant's bank account number, in the IBAN (International Bank Account Number) format.
      * Field returned if "wire": true in the "payoutInfo" object
      *
@@ -401,6 +411,7 @@ class PayoutInfo
 
     /**
      * Gets additional information
+     *
      * When providing the settlement info via the dashboard, this field can be used by the merchant to provide
      * additional information about the receiving bank. Field returned if "wire": true in the "payoutInfo" object
      *
