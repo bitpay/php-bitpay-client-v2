@@ -62,6 +62,7 @@ class BillData
 
     /**
      * Sets email bill
+     *
      * If set the true, BitPay will automatically issue recurring bills to the email address
      * provided once the status of the subscription is set to active.
      *
@@ -114,6 +115,7 @@ class BillData
 
     /**
      * Gets currency
+     *
      * ISO 4217 3-character currency code. This is the currency associated with the price field
      *
      * @return string
@@ -125,6 +127,7 @@ class BillData
 
     /**
      * Sets currency
+     *
      * ISO 4217 3-character currency code. This is the currency associated with the price field
      *
      * @param string $currency
@@ -321,6 +324,7 @@ class BillData
 
     /**
      * Gets due date.
+     *
      * Date and time at which a bill is due, ISO-8601 format yyyy-mm-ddThh:mm:ssZ (UTC).
      *
      * @return string
@@ -332,6 +336,7 @@ class BillData
 
     /**
      * Sets due date.
+     *
      * Date and time at which a bill is due, ISO-8601 format yyyy-mm-ddThh:mm:ssZ (UTC).
      *
      * @param string $dueDate
@@ -343,6 +348,7 @@ class BillData
 
     /**
      * Gets pass processing fee
+     *
      * If set to true, BitPay's processing fee will be included in the amount charged on the invoice
      *
      * @return bool
@@ -354,6 +360,7 @@ class BillData
 
     /**
      * Sets pass processing fee
+     *
      * If set to true, BitPay's processing fee will be included in the amount charged on the invoice
      *
      * @param bool $passProcessingFee
@@ -365,6 +372,7 @@ class BillData
 
     /**
      * Gets merchant
+     *
      * Internal identifier for BitPay, this field can be ignored by the merchants.
      *
      * @return string
@@ -376,6 +384,7 @@ class BillData
 
     /**
      * Sets merchant
+     *
      * Internal identifier for BitPay, this field can be ignored by the merchants.
      *
      * @param string $merchant

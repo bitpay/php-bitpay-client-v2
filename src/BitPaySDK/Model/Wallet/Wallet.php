@@ -52,6 +52,7 @@ class Wallet
 
     /**
      * Gets display name
+     *
      * Human readable display name for the wallet
      *
      * @return string the display name
@@ -63,6 +64,7 @@ class Wallet
 
     /**
      * Sets display name
+     *
      * Human readable display name for the wallet
      *
      * @param string $displayName the display name
@@ -74,6 +76,7 @@ class Wallet
 
     /**
      * Gets avatar
+     *
      * Filename of a wallet graphic (not fully qualified)
      *
      * @return string the avatar
@@ -85,6 +88,7 @@ class Wallet
 
     /**
      * Sets avatar
+     *
      * Filename of a wallet graphic (not fully qualified)
      *
      * @param string $avatar the avatar
@@ -96,6 +100,7 @@ class Wallet
 
     /**
      * Gets pay pro
+     *
      * Whether or not the wallet supports ANY BitPay Payment Protocol options
      *
      * @return bool the pay pro
@@ -107,6 +112,7 @@ class Wallet
 
     /**
      * Sets pay pro
+     *
      * Whether or not the wallet supports ANY BitPay Payment Protocol options
      *
      * @param bool $payPro the pay pro
@@ -118,6 +124,7 @@ class Wallet
 
     /**
      * Gets currencies
+     *
      * Details of what currencies support payments for this wallet
      *
      * @return Currencies the currencies
@@ -129,6 +136,7 @@ class Wallet
 
     /**
      * Sets currencies
+     *
      * Details of what currencies support payments for this wallet
      *
      * @param Currencies $currencies the currencies
@@ -140,6 +148,7 @@ class Wallet
 
     /**
      * Gets image
+     *
      * URL that displays wallet avatar image
      *
      * @return string the image url
@@ -151,6 +160,7 @@ class Wallet
 
     /**
      * Sets image
+     *
      * URL that displays wallet avatar image
      *
      * @param string $image the image url

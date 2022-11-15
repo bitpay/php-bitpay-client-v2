@@ -25,7 +25,8 @@ class BuyerProvidedInfo
     }
 
     /**
-     * Gets
+     * Gets name
+     *
      * Populated with the buyer's name address if passed in the buyer object by the merchant
      *
      * @return string the name
@@ -37,6 +38,7 @@ class BuyerProvidedInfo
 
     /**
      * Sets name
+     *
      * Populated with the buyer's name address if passed in the buyer object by the merchant
      *
      * @param string $name the name
@@ -48,6 +50,7 @@ class BuyerProvidedInfo
 
     /**
      * Gets phone number
+     *
      * Populated with the buyer's phone number if passed in the buyer object by the merchant
      *
      * @return string the phone number
@@ -59,6 +62,7 @@ class BuyerProvidedInfo
 
     /**
      * Sets phone number
+     *
      * Populated with the buyer's phone number if passed in the buyer object by the merchant
      *
      * @param string $phoneNumber the phone number
@@ -70,6 +74,7 @@ class BuyerProvidedInfo
 
     /**
      * Gets selected wallet
+     *
      * This field contains the name of the cryptocurrency wallet selected by the shopper to complete the payment.
      *
      * @return string the selected wallet
@@ -81,6 +86,7 @@ class BuyerProvidedInfo
 
     /**
      * Sets selected wallet
+     *
      * This field contains the name of the cryptocurrency wallet selected by the shopper to complete the payment.
      *
      * @param string $selectedWallet the selected wallet
@@ -92,6 +98,7 @@ class BuyerProvidedInfo
 
     /**
      * Gets email address
+     *
      * Populated with the buyer's email address if passed in the buyer object,
      * otherwise this field is not returned in the response.
      *
@@ -104,6 +111,7 @@ class BuyerProvidedInfo
 
     /**
      * Sets email address
+     *
      * Populated with the buyer's email address if passed in the buyer object,
      * otherwise this field is not returned in the response.
      *
@@ -116,6 +124,7 @@ class BuyerProvidedInfo
 
     /**
      * Gets selected transaction currency
+     *
      * This field will be populated with the cryptocurrency selected to pay the BitPay invoice,
      * current supported values are "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      * If not yet selected, this field will not be returned.
@@ -129,6 +138,7 @@ class BuyerProvidedInfo
 
     /**
      * Sets selected transaction currency
+     *
      * This field will be populated with the cryptocurrency selected to pay the BitPay invoice,
      * current supported values are "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      * If not yet selected, this field will not be returned.
@@ -142,6 +152,7 @@ class BuyerProvidedInfo
 
     /**
      * Gets sms
+     *
      * SMS provided by user for communications. This is only used for instances where a buyers email
      * (primary form of buyer communication) is can not be gathered.
      *
@@ -154,6 +165,7 @@ class BuyerProvidedInfo
 
     /**
      * Sets sms
+     *
      * SMS provided by user for communications. This is only used for instances where a buyers email
      * (primary form of buyer communication) is can not be gathered.
      *

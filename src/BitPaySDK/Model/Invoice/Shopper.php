@@ -21,6 +21,7 @@ class Shopper
 
     /**
      * Gets user
+     *
      * If a shopper signs in on the invoice using his BitPay ID,
      * this field will contain the unique ID assigned by BitPay to this shopper.
      *
@@ -33,6 +34,7 @@ class Shopper
 
     /**
      * Sets user
+     *
      * If a shopper signs in on the invoice using his BitPay ID,
      * this field will contain the unique ID assigned by BitPay to this shopper.
      *

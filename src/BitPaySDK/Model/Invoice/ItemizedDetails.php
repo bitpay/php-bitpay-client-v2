@@ -39,6 +39,7 @@ class ItemizedDetails
 
     /**
      * Gets description
+     *
      * Display string for the item.
      *
      * @return string the description
@@ -60,6 +61,7 @@ class ItemizedDetails
 
     /**
      * Gets is fee
+     *
      * Indicates whether or not the item is considered a fee/tax or part of the main purchase.
      *
      * @return bool is fee
@@ -71,6 +73,7 @@ class ItemizedDetails
 
     /**
      * Sets is fee
+     *
      * Gets Indicates whether or not the item is considered a fee/tax or part of the main purchase.
      *
      * @param bool $isFee is fee

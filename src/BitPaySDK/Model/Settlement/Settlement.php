@@ -36,6 +36,7 @@ class Settlement
 
     /**
      * Gets id
+     *
      * String identifying the settlement; this id will also be in the description of the corresponding bank settlement.
      *
      * @return string
@@ -47,6 +48,7 @@ class Settlement
 
     /**
      * Sets id
+     *
      * String identifying the settlement; this id will also be in the description of the corresponding bank settlement.
      *
      * @param string $id
@@ -58,6 +60,7 @@ class Settlement
 
     /**
      * Gets account id
+     *
      * String identifying the BitPay merchant. For internal use, this field can be ignored in merchant implementations.
      *
      * @return string
@@ -69,6 +72,7 @@ class Settlement
 
     /**
      * Sets account id
+     *
      * String identifying the BitPay merchant. For internal use, this field can be ignored in merchant implementations.
      *
      * @param string $accountId
@@ -80,6 +84,7 @@ class Settlement
 
     /**
      * Gets currency
+     *
      * ISO 4217 3-character currency code. This is the currency associated with the settlement.
      * Supported settlement currencies are listed on https://bitpay.com/docs/settlement
      *
@@ -92,6 +97,7 @@ class Settlement
 
     /**
      * Sets currency
+     *
      * ISO 4217 3-character currency code. This is the currency associated with the settlement.
      * Supported settlement currencies are listed on https://bitpay.com/docs/settlement
      *
@@ -144,6 +150,7 @@ class Settlement
 
     /**
      * Gets date created
+     *
      * Timestamp when the settlement was created. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
      * @return string
@@ -155,6 +162,7 @@ class Settlement
 
     /**
      * Sets date created
+     *
      * Timestamp when the settlement was created. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
      * @param string $dateCreated
@@ -166,6 +174,7 @@ class Settlement
 
     /**
      * Gets date executed
+     *
      * Timestamp when the settlement was executed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
      * @return string
@@ -177,6 +186,7 @@ class Settlement
 
     /**
      * Sets date executed
+     *
      * Timestamp when the settlement was executed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
      * @param string $dateExecuted
@@ -188,6 +198,7 @@ class Settlement
 
     /**
      * Gets date completed
+     *
      * Timestamp when the settlement was completed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
      * @return string
@@ -199,6 +210,7 @@ class Settlement
 
     /**
      * Sets date completed
+     *
      * Timestamp when the settlement was completed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
      * @param string $dateCompleted
@@ -210,6 +222,7 @@ class Settlement
 
     /**
      * Gets opening date
+     *
      * corresponds to the closingDate of the previous settlement executed.
      * For the first settlement of an account the value will be the BitPay merchant account creation date.
      * UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
@@ -223,6 +236,7 @@ class Settlement
 
     /**
      * Sets opening date
+     *
      * corresponds to the closingDate of the previous settlement executed.
      * For the first settlement of an account the value will be the BitPay merchant account creation date.
      * UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
@@ -236,6 +250,7 @@ class Settlement
 
     /**
      * Gets closing date.
+     *
      * Date & time for last ledger entry used for the settlement. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
      * @return string
@@ -247,6 +262,7 @@ class Settlement
 
     /**
      * Sets closing date.
+     *
      * Date & time for last ledger entry used for the settlement. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
      * @param string $closingDate
@@ -278,6 +294,7 @@ class Settlement
 
     /**
      * Gets ledger entries sum.
+     *
      * Sum of all ledger entries in the settlement, this means all the debits & credits
      * which happened between openingDate and closingDate
      *
@@ -290,6 +307,7 @@ class Settlement
 
     /**
      * Sets ledger entries sum.
+     *
      * Sum of all ledger entries in the settlement, this means all the debits & credits
      * which happened between openingDate and closingDate
      *
@@ -302,6 +320,7 @@ class Settlement
 
     /**
      * Gets with holdings
+     *
      * Array of withholdings. Withholdings are kept on the ledger to be used later and thus withheld
      * from this settlement. Each withholding is a JSON object containing a code, amount and description field.
      *
@@ -324,6 +343,7 @@ class Settlement
 
     /**
      * Sets with holdings
+     *
      * Array of withholdings. Withholdings are kept on the ledger to be used later and thus withheld
      * from this settlement. Each withholding is a JSON object containing a code, amount and description field.
      *
@@ -356,6 +376,7 @@ class Settlement
 
     /**
      * Gets total amount sent to the merchant; 2 decimals.
+     *
      * totalAmount = openingBalance + ledgerEntriesSum - withholdingsSum
      *
      * @return float
@@ -366,7 +387,8 @@ class Settlement
     }
 
     /**
-     * Sets total amount sent to the merchant; 2 deci
+     * Sets total amount sent to the merchant; 2 decimals.
+     *
      * totalAmount = openingBalance + ledgerEntriesSum - withholdingsSum
      *
      * @param float $totalAmount
@@ -378,6 +400,7 @@ class Settlement
 
     /**
      * Gets Array of ledger entries listing the various debits and credits which are settled in the report.
+     *
      * The total sum of all ledger entries is reported in the field ledgerEntriesSum.
      * A description of all ledger codes can be found
      *
@@ -400,6 +423,7 @@ class Settlement
 
     /**
      * Sets Array of ledger entries listing the various debits and credits which are settled in the report.
+     *
      * The total sum of all ledger entries is reported in the field ledgerEntriesSum.
      * A description of all ledger codes can be found
      *
@@ -412,6 +436,7 @@ class Settlement
 
     /**
      * Gets API token for the corresponding settlement resource.
+     *
      * This token is actually derived from the merchant facade token used during the query.
      * This token is required to fetch the reconciliation report
      *
@@ -424,6 +449,7 @@ class Settlement
 
     /**
      * Sets API token for the corresponding settlement resource.
+     *
      * This token is actually derived from the merchant facade token used during the query.
      * This token is required to fetch the reconciliation report
      *
