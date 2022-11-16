@@ -50,6 +50,7 @@ class Subscription
 
     /**
      * Gets Subscription object status.
+     *
      * Can be draft, active or cancelled. Subscriptions in active state will create new Bills on the nextDelivery date.
      *
      * @return string the status
@@ -61,6 +62,7 @@ class Subscription
 
     /**
      * Sets Subscription object status.
+     *
      * Can be draft, active or cancelled. Subscriptions in active state will create new Bills on the nextDelivery date.
      *
      * @param string $status the status
@@ -94,6 +96,7 @@ class Subscription
 
     /**
      * Gets Schedule of repeat bill due dates.
+     *
      * Can be weekly, monthly, quarterly, yearly, or a simple cron expression specifying seconds, minutes, hours,
      * day of month, month, and day of week. BitPay maintains the difference between the due date and the delivery
      * date in all subsequent, automatically-generated bills.
@@ -107,6 +110,7 @@ class Subscription
 
     /**
      * Sets Schedule of repeat bill due dates.
+     *
      * Can be weekly, monthly, quarterly, yearly, or a simple cron expression specifying seconds, minutes, hours,
      * day of month, month, and day of week. BitPay maintains the difference between the due date and the delivery
      * date in all subsequent, automatically-generated bills.
@@ -120,6 +124,7 @@ class Subscription
 
     /**
      * Gets Default is current date & time, ISO-8601 format yyyy-mm-ddThh:mm:ssZ (UTC).
+     *
      * Current or past date indicates that the bill can be delivered immediately.
      * BitPay may modify the hh:mm:ss values in order to distribute deliveries evenly throughout the day.
      *
@@ -132,6 +137,7 @@ class Subscription
 
     /**
      * Gets Default is current date & time, ISO-8601 format yyyy-mm-ddThh:mm:ssZ (UTC).
+     *
      * Current or past date indicates that the bill can be delivered immediately.
      * BitPay may modify the hh:mm:ss values in order to distribute deliveries evenly throughout the day.
      *
@@ -163,7 +169,9 @@ class Subscription
     }
 
     /**
-     * Gets API token for subscription resource. This token is actually derived from the API token
+     * Gets API token for subscription resource.
+     *
+     * This token is actually derived from the API token
      * used to create the subscription and is tied to the specific resource id created.
      *
      * @return string the token
@@ -174,7 +182,9 @@ class Subscription
     }
 
     /**
-     * Sets API token for subscription resource. This token is actually derived from the API token
+     * Sets API token for subscription resource.
+     *
+     * This token is actually derived from the API token
      * used to create the subscription and is tied to the specific resource id created.
      *
      * @param string $token the token

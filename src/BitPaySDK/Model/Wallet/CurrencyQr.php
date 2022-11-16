@@ -21,6 +21,7 @@ class CurrencyQr
 
     /**
      * Gets Type
+     *
      * The type of QR code to use (ex. BIP21, ADDRESS, BIP72b, BIP681, BIP681b, etc)
      *
      * @return string The type of QR code to use
@@ -32,6 +33,7 @@ class CurrencyQr
 
     /**
      * Sets Type
+     *
      * The type of QR code to use (ex. BIP21, ADDRESS, BIP72b, BIP681, BIP681b, etc)
      *
      * @param string $type The type of QR code to use
@@ -43,6 +45,7 @@ class CurrencyQr
 
     /**
      * Gets collapsed
+     *
      * UI hint for BitPay invoice, generally not relevant to customer integrations
      *
      * @return bool the collapsed
@@ -54,6 +57,7 @@ class CurrencyQr
 
     /**
      * Sets collapsed
+     *
      * UI hint for BitPay invoice, generally not relevant to customer integrations
      *
      * @param bool $collapsed the collapsed
