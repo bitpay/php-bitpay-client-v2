@@ -1015,7 +1015,7 @@ class Invoice
     /**
      * Gets invoiceTime - UNIX time of invoice creation, in milliseconds
      *
-     * @return string
+     * @return int
      */
     public function getInvoiceTime()
     {
@@ -1025,7 +1025,7 @@ class Invoice
     /**
      * Sets invoiceTime - UNIX time of invoice creation, in milliseconds
      *
-     * @param $invoiceTime
+     * @param int $invoiceTime
      */
     public function setInvoiceTime($invoiceTime)
     {
@@ -1105,7 +1105,7 @@ class Invoice
      * "paidPartial": (string) if the consumer did not send enough funds when paying the invoice.
      * "paidOver": (string) if the consumer sent to much funds when paying the invoice.
      *
-     * @return boolean|string
+     * @return boolean
      */
     public function getExceptionStatus()
     {
@@ -1121,7 +1121,7 @@ class Invoice
      * "paidPartial": (string) if the consumer did not send enough funds when paying the invoice.
      * "paidOver": (string) if the consumer sent to much funds when paying the invoice.
      *
-     * @param boolean|string $exceptionStatus
+     * @param boolean $exceptionStatus
      */
     public function setExceptionStatus($exceptionStatus)
     {
@@ -1136,7 +1136,7 @@ class Invoice
      * Currently, the value set is set to 6 by default for BTC/BCH/XRP,
      * 40 for DOGE and 50 for ETH/GUSD/PAX/USDC/BUSD/DAI/WBTC
      *
-     * @return numeric
+     * @return int
      */
     public function getTargetConfirmations()
     {
@@ -1150,8 +1150,8 @@ class Invoice
      * transaction which are required to credit a paid invoice to the merchant account.
      * Currently, the value set is set to 6 by default for BTC/BCH/XRP,
      * 40 for DOGE and 50 for ETH/GUSD/PAX/USDC/BUSD/DAI/WBTC
-     *
-     * @param numeric $targetConfirmations
+     *c
+     * @param int $targetConfirmations
      */
     public function setTargetConfirmations($targetConfirmations)
     {
@@ -1331,7 +1331,7 @@ class Invoice
      *
      * For internal use - This field can be ignored in merchant implementations.
      *
-     * @param $paymentTotals
+     * @param object $paymentTotals
      */
     public function setPaymentTotals($paymentTotals)
     {
@@ -1355,7 +1355,7 @@ class Invoice
      *
      * For internal use. This field can be ignored in merchant implementations.
      *
-     * @param $paymentSubtotals
+     * @param object $paymentSubtotals
      */
     public function setPaymentSubTotals($paymentSubtotals)
     {
@@ -1383,7 +1383,7 @@ class Invoice
      * The key is the currency and the value is an amount indicated in the base unit
      * for each supported transactionCurrency.
      *
-     * @param $paymentDisplaySubtotals
+     * @param object $paymentDisplaySubtotals
      */
     public function setPaymentDisplaySubTotals($paymentDisplaySubtotals)
     {
@@ -1413,7 +1413,7 @@ class Invoice
      * The key is the currency and the value is an amount
      * indicated in the base unit for each supported transactionCurrency.
      *
-     * @param $paymentDisplaytotals
+     * @param object $paymentDisplaytotals
      */
     public function setPaymentDisplayTotals($paymentDisplaytotals)
     {
@@ -1733,7 +1733,7 @@ class Invoice
      * The total amount paid to the invoice in terms of the invoice transactionCurrency indicated
      * in the smallest possible unit for the corresponding transactionCurrency (e.g satoshis for BTC and BCH)
      *
-     * @param number $amountPaid
+     * @param int $amountPaid
      */
     public function setAmountPaid($amountPaid)
     {
@@ -1785,7 +1785,7 @@ class Invoice
      *
      * Exchange rates keyed by source and target currencies.
      *
-     * @param $exchangeRates
+     * @param object $exchangeRates
      */
     public function setExchangeRates($exchangeRates)
     {
