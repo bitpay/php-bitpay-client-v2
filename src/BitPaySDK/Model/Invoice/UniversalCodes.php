@@ -21,6 +21,7 @@ class UniversalCodes
 
     /**
      * Gets payment string
+     *
      * Payment protocol URL for selected wallet, defaults to BitPay URL if no wallet selected.
      *
      * @return string the payment string
@@ -32,6 +33,7 @@ class UniversalCodes
 
     /**
      * Sets payment string
+     *
      * Payment protocol URL for selected wallet, defaults to BitPay URL if no wallet selected.
      *
      * @param string $paymentString the payment string
@@ -43,6 +45,7 @@ class UniversalCodes
 
     /**
      * Gets verification link
+     *
      * Link to bring user to BitPay ID flow, only present when bitpayIdRequired is true.
      *
      * @return string
@@ -54,6 +57,7 @@ class UniversalCodes
 
     /**
      * Sets verification link
+     *
      * Link to bring user to BitPay ID flow, only present when bitpayIdRequired is true.
      *
      * @param string $verificationLink the verification link

@@ -60,6 +60,7 @@ class Bill
 
     /**
      * Gets token
+     *
      * API token for bill resource. This token is actually derived from the API token used to
      * create the bill and is tied to the specific resource id created.
      *
@@ -72,6 +73,7 @@ class Bill
 
     /**
      * Sets Bill's token
+     *
      * API token for bill resource. This token is actually derived from the API token used to
      * create the bill and is tied to the specific resource id created.
      *
@@ -84,6 +86,7 @@ class Bill
 
     /**
      * Gets bill currency
+     *
      * ISO 4217 3-character currency code. This is the currency associated with the price field
      *
      * @return string the bill currency
@@ -95,6 +98,7 @@ class Bill
 
     /**
      * Sets Bill's currency
+     *
      * ISO 4217 3-character currency code. This is the currency associated with the price field
      *
      * @param string $currency 3-character currency code
@@ -180,6 +184,7 @@ class Bill
 
     /**
      * Gets bill number
+     *
      * Bill identifier, specified by merchant
      *
      * @return string the number
@@ -191,6 +196,7 @@ class Bill
 
     /**
      * Sets Bill's number
+     *
      * Bill identifier, specified by merchant
      *
      * @param string $number Bill identifier, specified by merchant
@@ -342,6 +348,7 @@ class Bill
 
     /**
      * Gets Bill cc
+     *
      * Email addresses to which a copy of the bill must be sent
      *
      * @return array the cc
@@ -353,6 +360,7 @@ class Bill
 
     /**
      * Sets Bill's cc
+     *
      * Email addresses to which a copy of the bill must be sent
      *
      * @param array $cc Email addresses to which a copy of the bill must be sent
@@ -384,6 +392,7 @@ class Bill
 
     /**
      * Gets Bill due date
+     *
      * Date and time at which a bill is due, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
      * @return string the number
@@ -395,6 +404,7 @@ class Bill
 
     /**
      * Sets Bill's due date
+     *
      * Date and time at which a bill is due, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
      * @param string $dueDate Date and time at which a bill is due
@@ -416,6 +426,7 @@ class Bill
 
     /**
      * Sets Bill's pass processing fee
+     *
      * If set to true, BitPay's processing fee will be included in the amount charged on the invoice
      *
      * @param bool $passProcessingFee Bill's pass processing fee
@@ -427,6 +438,7 @@ class Bill
 
     /**
      * Gets bill status
+     *
      * Can "draft", "sent", "new", "paid", or "complete"
      *
      * @return string the status
@@ -438,6 +450,7 @@ class Bill
 
     /**
      * Sets Bill's status
+     *
      * Can "draft", "sent", "new", "paid", or "complete"
      *
      * @param string $status Bill's status
@@ -449,6 +462,7 @@ class Bill
 
     /**
      * Gets bill url
+     *
      * Web address of bill
      *
      * @return string the url
@@ -460,6 +474,7 @@ class Bill
 
     /**
      * Sets Bill's url
+     *
      * Web address of bill
      *
      * @param string $url Web address of bill
@@ -471,6 +486,7 @@ class Bill
 
     /**
      * Gets bill create date
+     *
      * Date and time of Bill creation, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
      * @return string the create date
@@ -482,6 +498,7 @@ class Bill
 
     /**
      * Sets Bill's create date
+     *
      * Date and time of Bill creation, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
      * @param string $createDate Bill's create date
@@ -493,6 +510,7 @@ class Bill
 
     /**
      * Gets bill id
+     *
      * Bill resource id
      *
      * @return string the id
@@ -504,6 +522,7 @@ class Bill
 
     /**
      * Sets Bill's id
+     *
      * Bill resource id
      *
      * @param string $id Bill resource id
@@ -515,6 +534,7 @@ class Bill
 
     /**
      * Gets bill merchant
+     *
      * Internal identifier for BitPay, this field can be ignored by the merchants.
      *
      * @return string the merchant
@@ -526,6 +546,7 @@ class Bill
 
     /**
      * Sets Bill's merchant
+     *
      * Internal identifier for BitPay, this field can be ignored by the merchants.
      *
      * @param string $merchant Internal identifier for BitPay

@@ -151,6 +151,7 @@ class Buyer
 
     /**
      * Gets Buyer's Country code
+     *
      * Format ISO 3166-1 alpha-2
      *
      * @return string Buyer's Country code
@@ -172,6 +173,7 @@ class Buyer
 
     /**
      * Gets Buyer's email address.
+     *
      * If provided during invoice creation, this will bypass the email prompt for the consumer when opening the invoice.
      *
      * @return string Buyer's email address
@@ -183,6 +185,7 @@ class Buyer
 
     /**
      * Sets Buyer's email address
+     *
      * If provided during invoice creation, this will bypass the email prompt for the consumer when opening the invoice.
      *
      * @param string $email Buyer's email address
@@ -214,6 +217,7 @@ class Buyer
 
     /**
      * Gets Buyer's notify
+     *
      * Indicates whether a BitPay email confirmation should be sent to the buyer once he has paid the invoice
      *
      * @return bool Buyer's notify
@@ -225,6 +229,7 @@ class Buyer
 
     /**
      * Sets Buyer's notify
+     *
      * Indicates whether a BitPay email confirmation should be sent to the buyer once he has paid the invoice
      *
      * @param bool $notify  Buyer's notify

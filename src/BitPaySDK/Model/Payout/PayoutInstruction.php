@@ -154,6 +154,7 @@ class PayoutInstruction
 
     /**
      * Gets label.
+     *
      * For merchant use, pass through - can be the customer name or unique merchant reference assigned
      * by the merchant to to the recipient
      *

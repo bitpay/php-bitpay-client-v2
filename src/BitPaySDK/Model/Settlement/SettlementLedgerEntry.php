@@ -24,6 +24,7 @@ class SettlementLedgerEntry
 
     /**
      * Gets code
+     *
      * Contains the Ledger entry code
      *
      * @return int the code
@@ -35,6 +36,7 @@ class SettlementLedgerEntry
 
     /**
      * Sets code
+     *
      * Contains the Ledger entry code
      *
      * @param int $code the code
@@ -66,6 +68,7 @@ class SettlementLedgerEntry
 
     /**
      * Gets amount
+     *
      * Amount for the ledger entry. Can be positive of negative depending on the type of entry (debit or credit)
      *
      * @return float the amount
@@ -77,6 +80,7 @@ class SettlementLedgerEntry
 
     /**
      * Sets amount
+     *
      * Amount for the ledger entry. Can be positive of negative depending on the type of entry (debit or credit)
      *
      * @param float $amount the amount
@@ -108,6 +112,7 @@ class SettlementLedgerEntry
 
     /**
      * Gets Ledger entry description.
+     *
      * This field often contains an id depending on the type of entry
      * (for instance payout id, settlement id, invoice orderId etc...)
      *
@@ -120,6 +125,7 @@ class SettlementLedgerEntry
 
     /**
      * Sets Ledger entry description.
+     *
      * This field often contains an id depending on the type of entry
      * (for instance payout id, settlement id, invoice orderId etc...)
      *
@@ -152,6 +158,7 @@ class SettlementLedgerEntry
 
     /**
      * Gets Invoice Data
+     *
      * Object containing relevant information from the paid invoice
      *
      * @return InvoiceData
@@ -163,6 +170,7 @@ class SettlementLedgerEntry
 
     /**
      * Sets Invoice Data
+     *
      * Object containing relevant information from the paid invoice
      *
      * @param InvoiceData $invoiceData

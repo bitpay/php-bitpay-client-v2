@@ -566,6 +566,7 @@ class PayoutBatch
 
     /**
      * Sets percent fee
+     *
      * @param float $percentFee
      */
     public function setPercentFee(float $percentFee)

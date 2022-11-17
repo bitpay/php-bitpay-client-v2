@@ -71,6 +71,7 @@ class Payout
 
     /**
      * Gets resource token.
+     *
      * <p>
      *  This token is actually derived from the API token -
      *  used to submit the payout and is tied to the specific payout resource id created.
@@ -85,6 +86,7 @@ class Payout
 
     /**
      * Sets resource token.
+     *
      * This token is actually derived from the API token -
      * used to submit the payout and is tied to the specific payout resource id created.
      *
@@ -154,7 +156,8 @@ class Payout
     }
 
     /**
-     * Gets Ledger currency code (ISO 4217 3-character currency code),
+     * Gets Ledger currency code (ISO 4217 3-character currency code)
+     *
      * it indicates on which ledger the payout request will be recorded. If not provided in the request,
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
@@ -170,6 +173,7 @@ class Payout
 
     /**
      * Sets effective date and time (UTC) for the payout.
+     *
      * ISO-8601 format yyyy-mm-ddThh:mm:ssZ. If not provided, defaults to date and time of creation.
      *
      * @param string $effectiveDate
@@ -180,7 +184,8 @@ class Payout
     }
 
     /**
-     * Gets Ledger currency code (ISO 4217 3-character currency code),
+     * Gets Ledger currency code (ISO 4217 3-character currency code
+     *
      * it indicates on which ledger the payout request will be recorded. If not provided in the request,
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
@@ -195,7 +200,8 @@ class Payout
     }
 
     /**
-     * Sets Ledger currency code (ISO 4217 3-character currency code),
+     * Sets Ledger currency code (ISO 4217 3-character currency code)
+     *
      * it indicates on which ledger the payout request will be recorded. If not provided in the request,
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
@@ -217,6 +223,7 @@ class Payout
 
     /**
      * Gets reference.
+     *
      * Present only if specified by the merchant in the request.
      * Merchants can pass their own unique identifier in this field for reconciliation purpose.
      * Maximum string length is 100 characters.
@@ -230,6 +237,7 @@ class Payout
 
     /**
      * Sets reference.
+     *
      * Present only if specified by the merchant in the request.
      * Merchants can pass their own unique identifier in this field for reconciliation purpose.
      * Maximum string length is 100 characters.
@@ -243,6 +251,7 @@ class Payout
 
     /**
      * Gets notification url.
+     *
      * URL to which BitPay sends webhook notifications. HTTPS is mandatory.
      *
      * @return string
@@ -254,6 +263,7 @@ class Payout
 
     /**
      * Sets notification url.
+     *
      * URL to which BitPay sends webhook notifications. HTTPS is mandatory.
      *
      * @param string $notificationUrl
@@ -265,6 +275,7 @@ class Payout
 
     /**
      * Gets notification email.
+     *
      * Merchant email address for notification of payout status change.
      *
      * @return string
@@ -276,6 +287,7 @@ class Payout
 
     /**
      * Sets notification email.
+     *
      * Merchant email address for notification of payout status change.
      *
      * @param string $notificationEmail
@@ -287,6 +299,7 @@ class Payout
 
     /**
      * Gets redirect url.
+     *
      * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or
      * when clicking on the Close button if a separate closeURL is not specified.
      * Be sure to include "http://" or "https://" in the url.
@@ -300,6 +313,7 @@ class Payout
 
     /**
      * Sets redirect url.
+     *
      * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or
      * when clicking on the Close button if a separate closeURL is not specified.
      * Be sure to include "http://" or "https://" in the url.
@@ -333,6 +347,7 @@ class Payout
 
     /**
      * Gets email.
+     *
      * Email address of an active recipient.
      * Note: In the future, BitPay may allow recipients to update the email address tied to their personal account.
      * BitPay encourages the use of `recipientId` or `shopperId` when programatically creating payouts requests.
@@ -346,6 +361,7 @@ class Payout
 
     /**
      * Sets email.
+     *
      * Email address of an active recipient.
      * Note: In the future, BitPay may allow recipients to update the email address tied to their personal account.
      * BitPay encourages the use of `recipientId` or `shopperId` when programatically creating payouts requests.
@@ -379,6 +395,7 @@ class Payout
 
     /**
      * Gets shopper id.
+     *
      * This is the unique id assigned by BitPay if the shopper used his personal BitPay account to authenticate and
      * pay an invoice. For customers signing up for a brand new BitPay personal account,
      * this id will only be created as part of the payout onboarding.
@@ -395,6 +412,7 @@ class Payout
 
     /**
      * Sets shopper id.
+     *
      * This is the unique id assigned by BitPay if the shopper used his personal BitPay account to authenticate and
      * pay an invoice. For customers signing up for a brand new BitPay personal account,
      * this id will only be created as part of the payout onboarding.
@@ -411,6 +429,7 @@ class Payout
 
     /**
      * Gets label.
+     *
      * For merchant use, pass through - can be the customer name or unique merchant reference assigned by
      * the merchant to the recipient.
      *
@@ -423,6 +442,7 @@ class Payout
 
     /**
      * Sets label.
+     *
      * For merchant use, pass through - can be the customer name or unique merchant reference assigned by
      * the merchant to the recipient.
      *
@@ -455,6 +475,7 @@ class Payout
 
     /**
      * Gets message.
+     *
      * In case of error, this field will contain a description message. Set to `null` if the request is successful.
      *
      * @return string
@@ -466,6 +487,7 @@ class Payout
 
     /**
      * Sets message.
+     *
      * In case of error, this field will contain a description message. Set to `null` if the request is successful.
      *
      * @param string $message
@@ -619,7 +641,9 @@ class Payout
     }
 
     /**
-     * Gets payout request status, the possible values are:
+     * Gets payout request status.
+     *
+     * The possible values are:
      * <ul>
      *     <li>new - initial status when the payout batch is created</li>
      *     <li>funded - if there are enough funds available on the merchant account,
@@ -644,7 +668,9 @@ class Payout
     }
 
     /**
-     * Sets payout request status, the possible values are:
+     * Sets payout request status.
+     *
+     * The possible values are:
      * <ul>
      *     <li>new - initial status when the payout batch is created</li>
      *     <li>funded - if there are enough funds available on the merchant account,

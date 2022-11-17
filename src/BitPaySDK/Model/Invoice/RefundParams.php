@@ -27,6 +27,7 @@ class RefundParams
 
     /**
      * Gets Requester type
+     *
      * Set to "purchaser"
      *
      * @return string requester type
@@ -38,6 +39,7 @@ class RefundParams
 
     /**
      * Sets requester type
+     *
      * Set to "purchaser"
      *
      * @param string $requesterType the requester type
@@ -90,6 +92,7 @@ class RefundParams
 
     /**
      * Get currency
+     *
      * Reference currency used for the refund, usually the same as the currency used to create the invoice.
      *
      * @return string the currency
@@ -101,6 +104,7 @@ class RefundParams
 
     /**
      * Sets currency
+     *
      * Reference currency used for the refund, usually the same as the currency used to create the invoice.
      *
      * @param string $currency the currency
@@ -132,6 +136,7 @@ class RefundParams
 
     /**
      * Gets purchaser notify email.
+     *
      * Email address to which the refund link was sent.
      * This is equal to the refundEmail used when submitting the refund request.
      *
@@ -144,6 +149,7 @@ class RefundParams
 
     /**
      * Sets purchaser notify email.
+     *
      * Email address to which the refund link was sent.
      * This is equal to the refundEmail used when submitting the refund request.
      *
@@ -156,6 +162,7 @@ class RefundParams
 
     /**
      * Gets refund address.
+     *
      * Contains the cryptocurrency address provided by the customer via the refund link which was emailed to him.
      *
      * @return string the refund address
@@ -167,6 +174,7 @@ class RefundParams
 
     /**
      * Sets refund address.
+     *
      * Contains the cryptocurrency address provided by the customer via the refund link which was emailed to him.
      *
      * @param string $refundAddress the refund address
@@ -178,6 +186,7 @@ class RefundParams
 
     /**
      * Gets support request eid.
+     *
      * Contains the refund requestId.
      *
      * @return string the support request eid
@@ -189,6 +198,7 @@ class RefundParams
 
     /**
      * Sets support request eid.
+     *
      * Contains the refund requestId.
      *
      * @param string $supportRequestEid the support request eid

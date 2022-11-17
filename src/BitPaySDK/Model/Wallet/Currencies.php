@@ -28,6 +28,7 @@ class Currencies
 
     /**
      * Gets code
+     *
      * Identifying code for the currency
      *
      * @return string the code
@@ -39,6 +40,7 @@ class Currencies
 
     /**
      * Sets code
+     *
      * Identifying code for the currency
      *
      * @param string $code the code
@@ -50,6 +52,7 @@ class Currencies
 
     /**
      * Gets p2p
+     *
      * Indicates that this is a peer to peer (p2p) payment method (as opposed to payment protocol)
      *
      * @return bool the p2p
@@ -61,6 +64,7 @@ class Currencies
 
     /**
      * Sets p2p
+     *
      * Indicates that this is a peer to peer (p2p) payment method (as opposed to payment protocol)
      *
      * @param bool $p2p the p2p
@@ -72,6 +76,7 @@ class Currencies
 
     /**
      * Gets Dapp Browser
+     *
      * Indicates that this payment method operates via a browser plugin interacting with the invoice
      *
      * @return bool the dapp browser
@@ -83,6 +88,7 @@ class Currencies
 
     /**
      * Sets Dapp Browser
+     *
      * Indicates that this payment method operates via a browser plugin interacting with the invoice
      *
      * @param bool $dappBrowser the dapp browser
@@ -114,6 +120,7 @@ class Currencies
 
     /**
      * Gets pay pro
+     *
      * Whether or not BitPay Payment Protocol is supported on this particular currency option
      *
      * @return bool the pay pro
@@ -125,6 +132,7 @@ class Currencies
 
     /**
      * Sets pay pro
+     *
      * Whether or not BitPay Payment Protocol is supported on this particular currency option
      *
      * @param bool $payPro the pay pro
@@ -136,6 +144,7 @@ class Currencies
 
     /**
      * Gets CurrencyQr
+     *
      * Object containing QR code related information to show for this payment method
      *
      * @return CurrencyQr the qr
@@ -147,6 +156,7 @@ class Currencies
 
     /**
      * Sets CurrencyQr
+     *
      * Object containing QR code related information to show for this payment method
      *
      * @param CurrencyQr $qr the currency qr
@@ -178,6 +188,7 @@ class Currencies
 
     /**
      * Gets wallet connect
+     *
      * Whether or not this wallet supports walletConnect
      *
      * @return bool the wallet connect
@@ -189,6 +200,7 @@ class Currencies
 
     /**
      * Sets wallet connect
+     *
      * Whether or not this wallet supports walletConnect
      *
      * @param bool $walletConnect the wallet connect

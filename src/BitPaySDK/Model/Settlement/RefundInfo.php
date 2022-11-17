@@ -23,6 +23,7 @@ class RefundInfo
 
     /**
      * Gets support request.
+     *
      * BitPay support request ID associated to the refund
      *
      * @return string the support request
@@ -34,6 +35,7 @@ class RefundInfo
 
     /**
      * Sets support request.
+     *
      * BitPay support request ID associated to the refund
      *
      * @param string $supportRequest the support request
@@ -45,6 +47,7 @@ class RefundInfo
 
     /**
      * Gets currency.
+     *
      * ISO 4217 3-character currency code. This is the currency associated with the settlement.
      * Supported settlement currencies are listed on <a href="https://bitpay.com/docs/settlement">Settlement Docs</a>
      *
@@ -70,6 +73,7 @@ class RefundInfo
 
     /**
      * Gets amounts.
+     *
      * This object will contain the crypto currency amount refunded by BitPay to the consumer
      *
      * @return array
