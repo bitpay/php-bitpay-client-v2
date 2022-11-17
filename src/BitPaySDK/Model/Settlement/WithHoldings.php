@@ -42,7 +42,7 @@ class WithHoldings
     /**
      * Sets amount.
      *
-     * @param float $amount
+     * @param float $amount the amount
      */
     public function setAmount(float $amount)
     {
@@ -62,7 +62,7 @@ class WithHoldings
     /**
      * Sets code.
      *
-     * @param string $code
+     * @param string $code the code
      */
     public function setCode(string $code)
     {
@@ -82,7 +82,7 @@ class WithHoldings
     /**
      * Sets description.
      *
-     * @param string $description
+     * @param string $description the description
      */
     public function setDescription(string $description)
     {
@@ -102,7 +102,7 @@ class WithHoldings
     /**
      * Sets notes.
      *
-     * @param string $notes
+     * @param string $notes the notes
      */
     public function setNotes(string $notes)
     {
@@ -122,7 +122,7 @@ class WithHoldings
     /**
      * Sets label.
      *
-     * @param string $label
+     * @param string $label the label
      */
     public function setLabel(string $label)
     {
@@ -142,7 +142,7 @@ class WithHoldings
     /**
      * Sets bank country.
      *
-     * @param string $bankCountry
+     * @param string $bankCountry the bank country
      */
     public function setBankCountry(string $bankCountry)
     {
