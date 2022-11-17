@@ -40,7 +40,7 @@ class PayoutReceivedInfoAddress
     /**
      * Sets recipient's address
      *
-     * @param string $address1
+     * @param string $address1 recipient's address
      */
     public function setAddress1(string $address1)
     {
@@ -60,7 +60,7 @@ class PayoutReceivedInfoAddress
     /**
      * Sets recipient's address
      *
-     * @param string $address2
+     * @param string $address2 recipient's address2
      */
     public function setAddress2(string $address2)
     {
@@ -80,7 +80,7 @@ class PayoutReceivedInfoAddress
     /**
      * Sets city or locality.
      *
-     * @param string $locality
+     * @param string $locality recipient's city or locality
      */
     public function setLocality(string $locality)
     {
@@ -100,7 +100,7 @@ class PayoutReceivedInfoAddress
     /**
      * Sets state or province.
      *
-     * @param string $region
+     * @param string $region recipient's state or province
      */
     public function setRegion(string $region)
     {
@@ -120,7 +120,7 @@ class PayoutReceivedInfoAddress
     /**
      * Sets Zip or Postal Code.
      *
-     * @param string $postalCode
+     * @param string $postalCode recipient's zip or postal code
      */
     public function setPostalCode(string $postalCode)
     {
@@ -140,7 +140,7 @@ class PayoutReceivedInfoAddress
     /**
      * Sets Country code. Format ISO 3166-1 alpha-2.
      *
-     * @param string $country
+     * @param string $country recipient's country
      */
     public function setCountry(string $country)
     {
