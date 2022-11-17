@@ -57,7 +57,7 @@ class PayoutRecipient
     /**
      * Sets email.
      *
-     * @param string|null $email
+     * @param string|null $email Recipient email address
      */
     public function setEmail(?string $email)
     {
@@ -80,7 +80,7 @@ class PayoutRecipient
     /**
      * Sets guid.
      *
-     * @param string $guid
+     * @param string $guid the guid
      */
     public function setGuid(string $guid)
     {
@@ -100,7 +100,7 @@ class PayoutRecipient
     /**
      * Sets label.
      *
-     * @param string|null $label
+     * @param string|null $label could be customer name or unique reference
      */
     public function setLabel(?string $label)
     {
@@ -120,7 +120,7 @@ class PayoutRecipient
     /**
      * Sets reference.
      *
-     * @param string $reference
+     * @param string $reference the reference
      */
     public function setReference(string $reference)
     {
@@ -140,7 +140,7 @@ class PayoutRecipient
     /**
      * Sets notification url.
      *
-     * @param string|null $notificationURL
+     * @param string|null $notificationURL URL to which BitPay sends webhook notifications
      */
     public function setNotificationURL(?string $notificationURL)
     {
@@ -163,7 +163,7 @@ class PayoutRecipient
     /**
      * Sets account.
      *
-     * @param string $account
+     * @param string $account the account
      */
     public function setAccount(string $account)
     {
@@ -183,7 +183,7 @@ class PayoutRecipient
     /**
      * Sets status.
      *
-     * @param string $status
+     * @param string $status Recipient status
      */
     public function setStatus(string $status)
     {
@@ -203,7 +203,7 @@ class PayoutRecipient
     /**
      * Sets id.
      *
-     * @param string|null $id
+     * @param string|null $id Unique recipient id
      */
     public function setId(?string $id)
     {
@@ -223,7 +223,7 @@ class PayoutRecipient
     /**
      * Sets Shopper ID.
      *
-     * @param string|null $shopperId
+     * @param string|null $shopperId shopper unique id
      */
     public function setShopperId(?string $shopperId)
     {
@@ -243,7 +243,7 @@ class PayoutRecipient
     /**
      * Sets token.
      *
-     * @param string $token
+     * @param string $token Approved payout facade token.
      */
     public function setToken(string $token)
     {
@@ -263,7 +263,7 @@ class PayoutRecipient
     /**
      * Sets support phone.
      *
-     * @param string $supportPhone
+     * @param string $supportPhone the support phone
      */
     public function setSupportPhone(string $supportPhone)
     {
