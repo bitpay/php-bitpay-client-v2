@@ -43,7 +43,7 @@ class PayoutRecipients
     /**
      * Sets guid.
      *
-     * @param string $guid
+     * @param string $guid the guid
      */
     public function setGuid(string $guid)
     {
@@ -63,7 +63,7 @@ class PayoutRecipients
     /**
      * Sets token.
      *
-     * @param string $token
+     * @param string $token the token
      */
     public function setToken(string $token)
     {
@@ -96,7 +96,7 @@ class PayoutRecipients
     /**
      * Sets array with all recipients.
      *
-     * @param array $recipients
+     * @param array $recipients array with all recipients
      */
     public function setRecipients(array $recipients)
     {
