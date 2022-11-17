@@ -51,7 +51,7 @@ class SupportedTransactionCurrencies
     /**
      * Sets BTC.
      *
-     * @param SupportedTransactionCurrency $btc
+     * @param SupportedTransactionCurrency $btc the BTC
      */
     public function setBTC(SupportedTransactionCurrency $btc)
     {
@@ -71,7 +71,7 @@ class SupportedTransactionCurrencies
     /**
      * Sets BCH.
      *
-     * @param SupportedTransactionCurrency $bch
+     * @param SupportedTransactionCurrency $bch the BCH
      */
     public function setBCH(SupportedTransactionCurrency $bch)
     {
@@ -91,7 +91,7 @@ class SupportedTransactionCurrencies
     /**
      * Sets ETH.
      *
-     * @param SupportedTransactionCurrency $eth
+     * @param SupportedTransactionCurrency $eth the ETH
      */
     public function setETH(SupportedTransactionCurrency $eth)
     {
@@ -111,7 +111,7 @@ class SupportedTransactionCurrencies
     /**
      * Sets USDC.
      *
-     * @param SupportedTransactionCurrency $usdc
+     * @param SupportedTransactionCurrency $usdc the USDC
      */
     public function setUSDC(SupportedTransactionCurrency $usdc)
     {
@@ -131,7 +131,7 @@ class SupportedTransactionCurrencies
     /**
      * Sets GUSD.
      *
-     * @param SupportedTransactionCurrency $gusd
+     * @param SupportedTransactionCurrency $gusd the GUSD
      */
     public function setGUSD(SupportedTransactionCurrency $gusd)
     {
@@ -151,7 +151,7 @@ class SupportedTransactionCurrencies
     /**
      * Sets PAX.
      *
-     * @param SupportedTransactionCurrency $pax
+     * @param SupportedTransactionCurrency $pax the PAX
      */
     public function setPAX(SupportedTransactionCurrency $pax)
     {
@@ -171,7 +171,7 @@ class SupportedTransactionCurrencies
     /**
      * Sets XRP.
      *
-     * @param SupportedTransactionCurrency $xrp
+     * @param SupportedTransactionCurrency $xrp the XRP
      */
     public function setXRP(SupportedTransactionCurrency $xrp)
     {
