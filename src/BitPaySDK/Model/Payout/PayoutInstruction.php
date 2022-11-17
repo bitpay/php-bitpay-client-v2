@@ -71,7 +71,7 @@ class PayoutInstruction
     /**
      * Sets the amount of the payout in the indicated currency
      *
-     * @param float $amount
+     * @param float $amount The amount of the payout in the indicated currency
      * @throws BitPayException
      */
     public function setAmount(float $amount)
@@ -97,7 +97,7 @@ class PayoutInstruction
     /**
      * Sets email address of an active recipient
      *
-     * @param string $email
+     * @param string $email Email address of an active recipient
      */
     public function setEmail(string $email)
     {
@@ -120,7 +120,7 @@ class PayoutInstruction
     /**
      * Sets recipient id
      *
-     * @param string $recipientId
+     * @param string $recipientId BitPay recipient id
      */
     public function setRecipientId(string $recipientId)
     {
@@ -145,7 +145,7 @@ class PayoutInstruction
      * Sets unique id assigned by BitPay if the shopper used their personal BitPay account to authenticate
      * and pay an invoice
      *
-     * @param string $shopperId
+     * @param string $shopperId shopper unique id
      */
     public function setShopperId(string $shopperId)
     {
@@ -168,7 +168,7 @@ class PayoutInstruction
     /**
      * Sets label
      *
-     * @param string $label
+     * @param string $label can be the customer name or unique merchant reference
      */
     public function setLabel(string $label)
     {
@@ -191,7 +191,7 @@ class PayoutInstruction
     /**
      * Sets payout id
      *
-     * @param string $id
+     * @param string $id Payout id
      */
     public function setId(string $id)
     {
@@ -211,7 +211,7 @@ class PayoutInstruction
     /**
      * Sets payout instruction BTC summary
      *
-     * @param PayoutInstructionBtcSummary $btc
+     * @param PayoutInstructionBtcSummary $btc the BTC
      */
     public function setBtc(PayoutInstructionBtcSummary $btc)
     {
@@ -231,7 +231,7 @@ class PayoutInstruction
     /**
      * Sets cryptocurrency transaction details for the executed payout
      *
-     * @param array $transactions
+     * @param array $transactions cryptocurrency transaction details for the executed payout
      */
     public function setTransactions(array $transactions)
     {
@@ -251,7 +251,7 @@ class PayoutInstruction
     /**
      * Sets payout status
      *
-     * @param string $status
+     * @param string $status Payout status
      */
     public function setStatus(string $status)
     {
