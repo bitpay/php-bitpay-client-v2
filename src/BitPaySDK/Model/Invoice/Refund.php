@@ -65,7 +65,7 @@ class Refund
     /**
      * Sets guid
      *
-     * @param string $guid
+     * @param string $guid the guid
      */
     public function setGuid(string $guid)
     {
@@ -87,7 +87,7 @@ class Refund
     /**
      * Sets reference label for refund
      *
-     * @param string $reference
+     * @param string $reference the reference
      */
     public function setReference(string $reference)
     {
@@ -107,7 +107,7 @@ class Refund
     /**
      * Sets refund email
      *
-     * @param string $refundEmail
+     * @param string $refundEmail email address to which you want BitPay to send the refund link
      */
     public function setRefundEmail(string $refundEmail)
     {
@@ -127,7 +127,7 @@ class Refund
     /**
      * Sets amount to be refunded
      *
-     * @param float $amount
+     * @param float $amount The amount to be refunded
      */
     public function setAmount(float $amount)
     {
@@ -147,7 +147,7 @@ class Refund
     /**
      * Sets API token
      *
-     * @param string $token
+     * @param string $token The resource token for the invoiceId
      */
     public function setToken(string $token)
     {
@@ -167,7 +167,7 @@ class Refund
     /**
      * Sets currency used for the refund
      *
-     * @param string $currency
+     * @param string $currency The currency in which to price the refund
      */
     public function setCurrency(string $currency)
     {
@@ -187,7 +187,7 @@ class Refund
     /**
      * Sets preview
      *
-     * @param bool $preview
+     * @param bool $preview Whether to create the refund request as a preview
      */
     public function setPreview(bool $preview)
     {
@@ -207,7 +207,7 @@ class Refund
     /**
      * Sets invoice id
      *
-     * @param string $invoiceId
+     * @param string $invoiceId The ID of the invoice to refund.
      */
     public function setInvoiceId(string $invoiceId)
     {
@@ -230,7 +230,7 @@ class Refund
     /**
      * Sets id of the refund
      *
-     * @param string $id
+     * @param string $id The ID of the refund
      */
     public function setId(string $id)
     {
@@ -250,7 +250,7 @@ class Refund
     /**
      * Sets request date
      *
-     * @param string $requestDate
+     * @param string $requestDate The date the refund was requested
      */
     public function setRequestDate(string $requestDate)
     {
@@ -270,7 +270,7 @@ class Refund
     /**
      * Sets refund status
      *
-     * @param string $status
+     * @param string $status The refund lifecycle status of the request
      */
     public function setStatus(string $status)
     {
@@ -290,7 +290,7 @@ class Refund
     /**
      * Sets refund params object
      *
-     * @param RefundParams $params
+     * @param RefundParams $params Object containing the refund request parameters
      */
     public function setParams(RefundParams $params)
     {
@@ -311,7 +311,8 @@ class Refund
     /**
      * Sets immediate value
      *
-     * @param bool $immediate
+     * @param bool $immediate Whether funds should be removed from merchant ledger immediately
+     * on submission or at time of processing
      */
     public function setImmediate(bool $immediate)
     {
@@ -331,7 +332,7 @@ class Refund
     /**
      * Sets amount of the refund fee
      *
-     * @param float $refundFee
+     * @param float $refundFee The amount of refund fee expressed in terms of pricing currency
      */
     public function setRefundFee(float $refundFee)
     {
@@ -351,7 +352,7 @@ class Refund
     /**
      * Sets last refund notification
      *
-     * @param string $lastRefundNotification
+     * @param string $lastRefundNotification Timestamp of last notification sent to customer about refund
      */
     public function setLastRefundNotification(string $lastRefundNotification)
     {
@@ -371,7 +372,7 @@ class Refund
     /**
      * Sets the id of the invoice being refunded
      *
-     * @param string $invoice
+     * @param string $invoice BitPay invoice ID associated to the refund
      */
     public function setInvoice(string $invoice)
     {
@@ -392,7 +393,7 @@ class Refund
     /**
      * Sets whether the buyer should pay the refund fee rather
      *
-     * @param bool $buyerPaysRefundFee
+     * @param bool $buyerPaysRefundFee Whether the buyer should pay the refund fee
      */
     public function setBuyerPaysRefundFee(bool $buyerPaysRefundFee)
     {
