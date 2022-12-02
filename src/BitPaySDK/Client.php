@@ -646,6 +646,53 @@ class Client
     }
 
     /**
+     * Update the status of a BitPay invoice.
+     *
+     * @param  string $guid        BitPay refund Guid.
+     * @param  string $status      The new status for the refund to be updated.
+     * @return Refund $refund      Refund A BitPay generated Refund object.
+     * @throws RefundUpdateException
+     * @throws BitPayException
+     * @since 7.2.0
+     */
+    public function updateRefundByGuid(
+        string $guid,
+        string $status
+    ): Refund {
+        $params = [];
+        $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["status"] = $status;
+
+        try {
+            $responseJson = $this->_RESTcli->update("refunds/guid/" . $guid, $params);
+        } catch (BitPayException $e) {
+            throw new RefundUpdateException(
+                "failed to serialize refund object : " .
+                $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new RefundUpdateException("failed to serialize refund object : " . $e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $refund = $mapper->map(
+                json_decode($responseJson),
+                new Refund()
+            );
+        } catch (Exception $e) {
+            throw new RefundUpdateException(
+                "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
+            );
+        }
+
+        return $refund;
+    }
+
+    /**
      * Retrieve all refund requests on a BitPay invoice.
      *
      * @param  string $invoiceId   The BitPay invoice object having the associated refunds.

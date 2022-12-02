@@ -3975,20 +3975,25 @@ class ClientTest extends TestCase
      */
     public function testUpdateRefund($testedObject)
     {
+        $guid = 'payment#1234';
         $params['token'] = $this->getMerchantTokenFromFile();
-        $params['status'] = 'status';
-        $refundId = 'testId';
+        $params['status'] = 'created';
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects($this->once())->method('update')->with("refunds/" . $refundId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects($this->once())
+            ->method('update')
+            ->with("refunds/guid/" . $guid, $params)
+            ->willReturn(file_get_contents('json/getRefund.json', true));
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
         $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
         $doSetRestCli();
 
-        $result = $testedObject->updateRefund($refundId, $params['status']);
-        $this->assertInstanceOf(Refund::class, $result);
+        $result = $testedObject->updateRefundByGuid($guid, $params['status']);
+        $this->assertSame($guid, $result->getGuid());
+        $this->assertSame('WoE46gSLkJQS48RJEiNw3L', $result->getId());
+        $this->assertSame('2021-08-29T20:45:34.000Z', $result->getRequestDate());
     }
 
     /**
