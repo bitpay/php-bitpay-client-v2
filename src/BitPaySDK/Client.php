@@ -734,6 +734,48 @@ class Client
     }
 
     /**
+     * Retrieve a previously made refund request on a BitPay invoice by guid.
+     *
+     * @param  string $guid The BitPay refund Guid.
+     * @return Refund $refund   BitPay Refund object with the associated Refund object.
+     * @throws RefundQueryException
+     * @throws BitPayException
+     * @since 7.2.0
+     */
+    public function getRefundByGuid(string $guid): Refund {
+        $params = [];
+        $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+
+        try {
+            $responseJson = $this->_RESTcli->get("refunds/guid/" . $guid, $params, true);
+        } catch (BitPayException $e) {
+            throw new RefundQueryException(
+                "failed to serialize refund object : " .
+                $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new RefundQueryException("failed to serialize refund object : " . $e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $refund = $mapper->map(
+                json_decode($responseJson),
+                new Refund()
+            );
+        } catch (Exception $e) {
+            throw new RefundQueryException(
+                "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
+            );
+        }
+
+        return $refund;
+    }
+
+    /**
      * Send a refund notification.
      *
      * @param  string $refundId    A BitPay refund ID.
