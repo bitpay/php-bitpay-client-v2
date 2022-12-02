@@ -16,7 +16,6 @@ use BitPaySDK\Client\SettlementsClient;
 use BitPaySDK\Client\SubscriptionClient;
 use BitPaySDK\Client\WalletClient;
 use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\CurrencyQueryException;
 use BitPaySDK\Exceptions\InvoiceUpdateException;
 use BitPaySDK\Exceptions\InvoiceQueryException;
 use BitPaySDK\Exceptions\InvoiceCancellationException;
@@ -66,40 +65,9 @@ use Symfony\Component\Yaml\Yaml;
  */
 class Client
 {
-    /**
-     * @var Config
-     */
-    protected $_configuration;
-
-    /**
-     * @var string
-     */
-    protected $_env;
-
-    /**
-     * @var Tokens
-     */
-    protected $_tokenCache; // {facade, token}
-
-    /**
-     * @var string
-     */
-    protected $_configFilePath;
-
-    /**
-     * @var PrivateKey
-     */
-    protected $_ecKey;
-
-    /**
-     * @var RESTcli
-     */
-    protected $_RESTcli = null;
-
-    /**
-     * @var RESTcli
-     */
-    protected $_currenciesInfo = null;
+    protected $tokenCache; // {facade, token}
+    protected $restCli = null;
+    protected $util;
 
     /**
      * Client constructor.
@@ -130,15 +98,23 @@ class Client
      * @return Client
      * @throws BitPayException
      */
-    public function withData($environment, $privateKey, Tokens $tokens, $privateKeySecret = null, ?string $proxy = null)
-    {
+    public static function createWithData(
+        string $environment,
+        string $privateKey,
+        Tokens $tokens,
+        ?string $privateKeySecret = null,
+        ?string $proxy = null
+    ): Client {
         try {
-            $this->_env = $environment;
-            $this->buildConfig($privateKey, $tokens, $privateKeySecret, $proxy);
-            $this->initKeys();
-            $this->init();
+            $instance = new self();
 
-            return $this;
+            $key = self::initKeys2($privateKey, $privateKeySecret);
+
+            $instance->restCli = new RESTcli($environment, $key, $proxy);
+            $instance->tokenCache = $tokens;
+            $instance->util = new Util();
+
+            return $instance;
         } catch (Exception $e) {
             throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
         }
@@ -151,15 +127,22 @@ class Client
      * @return Client
      * @throws BitPayException        BitPayException class
      */
-    public function withFile($configFilePath)
+    public static function createWithFile(string $configFilePath): Client
     {
         try {
-            $this->_configFilePath = $configFilePath;
-            $this->getConfig();
-            $this->initKeys();
-            $this->init();
+            $instance = new self();
 
-            return $this;
+            $configData = self::getConfigData($configFilePath);
+            $env = $configData["BitPayConfiguration"]["Environment"];
+            $config = $configData["BitPayConfiguration"]["EnvConfig"][$env];
+
+            $key = self::initKeys2($config['PrivateKeyPath'], $config['PrivateKeySecret']);
+
+            $instance->restCli = new RESTcli($env, $key, $config['proxy']);
+            $instance->tokenCache = new Tokens($config['ApiTokens']['merchant'], $config['ApiTokens']['payout']);
+            $instance->util = new Util();
+
+            return $instance;
         } catch (Exception $e) {
             throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
         }
@@ -301,7 +284,7 @@ class Client
     ): Invoice {
         $invoiceClient = $this->createInvoiceClient();
 
-        return $invoiceClient->pay($invoiceId, $this->_env, $status);
+        return $invoiceClient->pay($invoiceId, $status);
     }
 
     /**
@@ -942,214 +925,137 @@ class Client
     }
 
     /**
-     * Fetch the supported currencies.
-     *
-     * @return Invoice[]
+     * @param string $privateKey
+     * @param string|null $privateKeySecret
+     * @return \BitPayKeyUtils\KeyHelper\KeyInterface|PrivateKey|mixed
      * @throws BitPayException
      */
-    public function getCurrencies(): array
+    private static function initKeys2(string $privateKey, ?string $privateKeySecret)
     {
-        try {
-            $currencies = json_decode($this->_RESTcli->get("currencies/", null, false), false);
-        } catch (BitPayException $e) {
-            throw new CurrencyQueryException(
-                "failed to serialize Currency object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new CurrencyQueryException("failed to serialize Currency object : " . $e->getMessage());
-        }
-
-        return $currencies;
-    }
-
-    /**
-     * Builds the configuration object
-     *
-     * @param string      $privateKey       The full path to the securely located private key or the HEX key value.
-     * @param Tokens      $tokens           Tokens object containing the BitPay's API tokens.
-     * @param string      $privateKeySecret Private Key encryption password only for key file.
-     * @param string|null $proxy            An http url of a proxy to foward requests through.
-     * @throws BitPayException
-     */
-    private function buildConfig($privateKey, $tokens, $privateKeySecret = null, ?string $proxy = null)
-    {
-        try {
-            if (!file_exists($privateKey)) {
-                $key = new PrivateKey("plainHex");
-                $key->setHex($privateKey);
-                if (!$key->isValid()) {
-                    throw new BitPayException("Private Key not found/valid");
-                }
-                $this->_ecKey = $key;
+        if (!file_exists($privateKey)) {
+            $key = new PrivateKey("plainHex");
+            $key->setHex($privateKey);
+            if (!$key->isValid()) {
+                throw new BitPayException("Private Key not found/valid");
             }
-            $this->_configuration = new Config();
-            $this->_configuration->setEnvironment($this->_env);
-
-            $envConfig[$this->_env] = [
-                "PrivateKeyPath"   => $privateKey,
-                "PrivateKeySecret" => $privateKeySecret,
-                "ApiTokens"        => $tokens,
-                "Proxy"            => $proxy,
-            ];
-
-            $this->_configuration->setEnvConfig($envConfig);
-        } catch (Exception $e) {
-            throw new BitPayException("failed to build configuration : " . $e->getMessage());
         }
+
+        if (!isset($key)) {
+            $storageEngine = new EncryptedFilesystemStorage($privateKeySecret);
+            $key = $storageEngine->load($privateKey);
+        }
+
+        return $key;
     }
 
     /**
-     * Loads the configuration file (JSON)
-     *
+     * @param $configFilePath
+     * @return array
      * @throws BitPayException
      */
-    public function getConfig()
+    private static function getConfigData($configFilePath)
     {
-        try {
-            $this->_configuration = new Config();
-            if (!file_exists($this->_configFilePath)) {
-                throw new BitPayException("Configuration file not found");
-            }
-            $configData = json_decode(file_get_contents($this->_configFilePath), true);
-
-            if (!$configData) {
-                $configData = Yaml::parseFile($this->_configFilePath);
-            }
-            $this->_configuration->setEnvironment($configData["BitPayConfiguration"]["Environment"]);
-            $this->_env = $this->_configuration->getEnvironment();
-
-            $tokens = Tokens::loadFromArray($configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["ApiTokens"]);
-            $privateKeyPath = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeyPath"];
-            $privateKeySecret = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["PrivateKeySecret"];
-            $proxy = $configData["BitPayConfiguration"]["EnvConfig"][$this->_env]["Proxy"] ?? null;
-
-            $envConfig[$this->_env] = [
-                "PrivateKeyPath"   => $privateKeyPath,
-                "PrivateKeySecret" => $privateKeySecret,
-                "ApiTokens"        => $tokens,
-                "Proxy"            => $proxy,
-            ];
-
-            $this->_configuration->setEnvConfig($envConfig);
-        } catch (Exception $e) {
-            throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
+        if (!file_exists($configFilePath)) {
+            throw new BitPayException("Configuration file not found");
         }
+
+        $configData = json_decode(file_get_contents($configFilePath), true);
+
+        if (!$configData) {
+            $configData = Yaml::parseFile($configFilePath);
+        }
+
+        return $configData;
     }
+
 
     /**
-     * Initialize the public/private key pair by either loading the existing one or by creating a new one.
+     * Gets invoice client
      *
-     * @throws BitPayException
+     * @return InvoiceClient the invoice client
      */
-    private function initKeys()
-    {
-        $privateKey = $this->_configuration->getEnvConfig()[$this->_env]["PrivateKeyPath"];
-        $privateKeySecret = $this->_configuration->getEnvConfig()[$this->_env]["PrivateKeySecret"];
-
-        try {
-            if (!$this->_ecKey) {
-                $this->_ecKey = new PrivateKey($privateKey);
-                $storageEngine = new EncryptedFilesystemStorage($privateKeySecret);
-                $this->_ecKey = $storageEngine->load($privateKey);
-            }
-        } catch (Exception $e) {
-            throw new BitPayException("failed to build configuration : " . $e->getMessage());
-        }
-    }
-
-    /**
-     * Initialize this object with the client name and the environment Url.
-     *
-     * @throws BitPayException
-     */
-    private function init()
-    {
-        try {
-            $proxy = $this->_configuration->getEnvConfig()[$this->_env]["Proxy"] ?? null;
-            $this->_RESTcli = new RESTcli($this->_env, $this->_ecKey, $proxy);
-            $this->loadAccessTokens();
-            $this->loadCurrencies();
-        } catch (Exception $e) {
-            throw new BitPayException("failed to build configuration : " . $e->getMessage());
-        }
-    }
-
-    /**
-     * Load tokens from configuration.
-     *
-     * @throws BitPayException
-     */
-    private function loadAccessTokens()
-    {
-        try {
-            $this->clearAccessTokenCache();
-
-            $this->_tokenCache = $this->_configuration->getEnvConfig()[$this->_env]["ApiTokens"];
-        } catch (Exception $e) {
-            throw new BitPayException("When trying to load the tokens : " . $e->getMessage());
-        }
-    }
-
-    private function clearAccessTokenCache()
-    {
-        $this->_tokenCache = new Tokens();
-    }
-
-    /**
-     * Load currencies info.
-     *
-     * @throws BitPayException
-     */
-    private function loadCurrencies()
-    {
-        try {
-            $this->_currenciesInfo = $this->getCurrencies();
-        } catch (Exception $e) {
-            throw new BitPayException("When loading currencies info : " . $e->getMessage());
-        }
-    }
-
     protected function createInvoiceClient(): InvoiceClient {
-        return new InvoiceClient($this->_tokenCache, $this->_RESTcli, new Util());
+        return new InvoiceClient($this->tokenCache, $this->restCli, $this->util);
     }
 
+    /**
+     * Gets refund client
+     *
+     * @return RefundClient the refund client
+     */
     protected function createRefundClient(): RefundClient {
-        return new RefundClient($this->_tokenCache, $this->_RESTcli);
+        return new RefundClient($this->tokenCache, $this->restCli);
     }
 
+    /**
+     * Gets wallet client
+     *
+     * @return WalletClient the wallet client
+     */
     protected function createWalletClient(): WalletClient {
-        return new WalletClient($this->_RESTcli);
+        return new WalletClient($this->restCli);
     }
 
+    /**
+     * Gets bill client
+     *
+     * @return BillClient the bill client
+     */
     protected function createBillClient(): BillClient {
-        return new BillClient($this->_tokenCache, $this->_RESTcli);
+        return new BillClient($this->tokenCache, $this->restCli);
     }
 
+    /**
+     * Gets rate client
+     *
+     * @return RateClient the rate client
+     */
     protected function createRateClient(): RateClient {
-        return new RateClient($this->_RESTcli, $this);
+        return new RateClient($this->restCli, $this);
     }
 
+    /**
+     * Gets ledger client
+     *
+     * @return LedgerClient the ledger client
+     */
     protected function createLedgerClient(): LedgerClient {
-        return new LedgerClient($this->_tokenCache, $this->_RESTcli);
+        return new LedgerClient($this->tokenCache, $this->restCli);
     }
 
+    /**
+     * Gets payout recipients client
+     *
+     * @return PayoutRecipientsClient the payout recipients client
+     */
     protected function createPayoutRecipientsClient(): PayoutRecipientsClient {
-        return new PayoutRecipientsClient($this->_tokenCache, $this->_RESTcli, new Util());
+        return new PayoutRecipientsClient($this->tokenCache, $this->restCli, $this->util);
     }
 
+    /**
+     * Gets payout client
+     *
+     * @return PayoutClient the payout client
+     */
     protected function createPayoutClient(): PayoutClient {
-        return new PayoutClient($this->_tokenCache, $this->_RESTcli, $this->_currenciesInfo);
+        return new PayoutClient($this->tokenCache, $this->restCli);
     }
 
+    /**
+     * Gets settlements client
+     *
+     * @return SettlementsClient the settlements client
+     */
     protected function createSettlementsClient(): SettlementsClient {
-        return new SettlementsClient($this->_tokenCache, $this->_RESTcli);
+        return new SettlementsClient($this->tokenCache, $this->restCli);
     }
 
+    /**
+     * Gets subscription client
+     *
+     * @return SubscriptionClient the subscription clients
+     */
     protected function createSubscriptionClient(): SubscriptionClient {
-        return new SubscriptionClient($this->_tokenCache, $this->_RESTcli);
+        return new SubscriptionClient($this->tokenCache, $this->restCli);
     }
 }

@@ -25,7 +25,7 @@ class PayoutClient
     private RESTcli $restCli;
     private RESTcli $currenciesInfo;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli, $currenciesInfo)
+    public function __construct(Tokens $tokenCache, RESTcli $restCli, $currenciesInfo = null)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;

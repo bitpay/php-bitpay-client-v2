@@ -355,13 +355,8 @@ class InvoiceClient
      */
     public function pay(
         string $invoiceId,
-        string $env,
         string $status = 'confirmed'
     ): Invoice {
-        if (strtolower($env) != "test") {
-            throw new InvoicePaymentException("Pay Invoice method only available in test or demo environments");
-        }
-
         try {
             $params = [];
             $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
