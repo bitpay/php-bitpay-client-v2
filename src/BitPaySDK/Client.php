@@ -108,7 +108,7 @@ class Client
         try {
             $instance = new self();
 
-            $key = self::initKeys2($privateKey, $privateKeySecret);
+            $key = self::initKeys($privateKey, $privateKeySecret);
 
             $instance->restCli = new RESTcli($environment, $key, $proxy);
             $instance->tokenCache = $tokens;
@@ -136,7 +136,7 @@ class Client
             $env = $configData["BitPayConfiguration"]["Environment"];
             $config = $configData["BitPayConfiguration"]["EnvConfig"][$env];
 
-            $key = self::initKeys2($config['PrivateKeyPath'], $config['PrivateKeySecret']);
+            $key = self::initKeys($config['PrivateKeyPath'], $config['PrivateKeySecret']);
 
             $instance->restCli = new RESTcli($env, $key, $config['proxy']);
             $instance->tokenCache = new Tokens($config['ApiTokens']['merchant'], $config['ApiTokens']['payout']);
@@ -930,7 +930,7 @@ class Client
      * @return \BitPayKeyUtils\KeyHelper\KeyInterface|PrivateKey|mixed
      * @throws BitPayException
      */
-    private static function initKeys2(string $privateKey, ?string $privateKeySecret)
+    private static function initKeys(string $privateKey, ?string $privateKeySecret)
     {
         if (!file_exists($privateKey)) {
             $key = new PrivateKey("plainHex");
