@@ -49,6 +49,15 @@ class RefundInfoTest extends TestCase
         $this->assertEquals($expectedReference, $refundInfo->getReference());
     }
 
+    public function testGetRefundRequestEid()
+    {
+        $expectedRefundRequestEid = 'abcd123';
+
+        $refundInfo = $this->createClassObject();
+        $refundInfo->setRefundRequestEid($expectedRefundRequestEid);
+        $this->assertEquals($expectedRefundRequestEid, $refundInfo->getRefundRequestEid());
+    }
+
     public function testToArray()
     {
         $refundInfo = $this->createClassObject();
