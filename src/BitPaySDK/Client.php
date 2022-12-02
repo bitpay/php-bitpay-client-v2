@@ -742,7 +742,8 @@ class Client
      * @throws BitPayException
      * @since 7.2.0
      */
-    public function getRefundByGuid(string $guid): Refund {
+    public function getRefundByGuid(string $guid): Refund
+    {
         $params = [];
         $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
 
