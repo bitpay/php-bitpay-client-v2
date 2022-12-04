@@ -3828,6 +3828,31 @@ class ClientTest extends TestCase
     /**
      * @depends testWithFileJsonConfig
      */
+    public function testGetRefundByGuid($testedObject)
+    {
+        $params['token'] = $this->getMerchantTokenFromFile();
+        $exampleGuid = 'payment#1234';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())
+            ->method('get')
+            ->with("refunds/guid/" . $exampleGuid, $params, true)
+            ->willReturn(file_get_contents('json/getRefund.json', true));
+        $setRestCli = function () use ($restCliMock) {
+            $this->_RESTcli = $restCliMock;
+        };
+        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+        $doSetRestCli();
+
+        $result = $testedObject->getRefundByGuid($exampleGuid);
+        $this->assertSame($exampleGuid, $result->getGuid());
+        $this->assertSame('WoE46gSLkJQS48RJEiNw3L', $result->getId());
+        $this->assertSame('2021-08-29T20:45:34.000Z', $result->getRequestDate());
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
     public function testGetRefundShouldCatchRestCliBitPayException($testedObject)
     {
         $params['token'] = $this->getMerchantTokenFromFile();
