@@ -41,7 +41,7 @@ class PayoutReceivedInfo
     /**
      * Sets name.
      *
-     * @param string $name
+     * @param string $name the name
      */
     public function setName(string $name)
     {
@@ -61,7 +61,7 @@ class PayoutReceivedInfo
     /**
      * Sets email.
      *
-     * @param string $email
+     * @param string $email the email
      */
     public function setEmail(string $email)
     {
@@ -81,7 +81,7 @@ class PayoutReceivedInfo
     /**
      * Sets address.
      *
-     * @param PayoutReceivedInfoAddress $address
+     * @param PayoutReceivedInfoAddress $address the address
      */
     public function setAddress(PayoutReceivedInfoAddress $address)
     {

@@ -135,7 +135,7 @@ class Invoice
      * supported currencies are available via the
      * <a href="#rest-api-resources-currencies">Currencies resource</a>
      *
-     * @param string $currency
+     * @param string $currency 3-character currency code
      *
      * @throws BitPayException
      */
@@ -169,7 +169,7 @@ class Invoice
      * to correlate the invoice with an order ID in their system,
      * which can be used as a lookup variable in Retrieve Invoice by GUID.
      *
-     * @param string $guid
+     * @param string $guid The guid of the refund request being retrieved
      */
     public function setGuid(string $guid)
     {
@@ -198,7 +198,7 @@ class Invoice
      * This token is derived from the API token initially used to create the
      * invoice and is tied to the specific resource id created.
      *
-     * @param string $token
+     * @param string $token Invoice resource token
      */
     public function setToken(string $token)
     {
@@ -222,7 +222,7 @@ class Invoice
      *
      * Fixed price amount for the checkout, in the "currency" of the invoice object.
      *
-     * @param float $price
+     * @param float $price Fixed price amount for the checkout, in the "currency" of the invoice object.
      *
      */
     public function setPrice(float $price)
@@ -251,7 +251,7 @@ class Invoice
      * used by the merchant to correlate the invoice with an order or other object in their system.
      * This passthru variable can be a serialized object.
      *
-     * @param string $posData
+     * @param string $posData the pos data
      */
     public function setPosData(string $posData)
     {
@@ -305,7 +305,7 @@ class Invoice
      * Note : orders are only credited to your BitPay Account Summary for settlement after
      * the invoice reaches the status "complete" (regardless of this setting).
      *
-     * @param string $transactionSpeed
+     * @param string $transactionSpeed the transaction speed
      */
     public function setTransactionSpeed(string $transactionSpeed)
     {
@@ -339,7 +339,7 @@ class Invoice
      * This webhook will be for the "confirmed" or "complete" invoice status,
      * depending on the transactionSpeed selected.
      *
-     * @param bool $fullNotifications
+     * @param bool $fullNotifications the full notification
      */
     public function setFullNotifications(bool $fullNotifications)
     {
@@ -363,7 +363,7 @@ class Invoice
      *
      * Merchant email address for notification of payout status change.
      *
-     * @param string $notificationEmail
+     * @param string $notificationEmail Merchant email address for notification of payout status change
      */
     public function setNotificationEmail(string $notificationEmail)
     {
@@ -390,7 +390,7 @@ class Invoice
      * after a successful payment or when clicking on the Close button if a separate closeURL is not specified.
      * Be sure to include "http://" or "https://" in the url.
      *
-     * @param string $redirectURL
+     * @param string $redirectURL The shopper will be redirected to this URL
      */
     public function setRedirectURL(string $redirectURL)
     {
@@ -416,7 +416,7 @@ class Invoice
      * Can be used by the merchant to assign their own internal Id to an invoice.
      * If used, there should be a direct match between an orderId and an invoice id.
      *
-     * @param string $orderId
+     * @param string $orderId Invoice order id
      */
     public function setOrderId(string $orderId)
     {
@@ -442,7 +442,7 @@ class Invoice
      *
      * Invoice description - will be added as a line item on the BitPay checkout page, under the merchant name.
      *
-     * @param string $itemDesc
+     * @param string $itemDesc Invoice description
      */
     public function setItemDesc(string $itemDesc)
     {
@@ -466,7 +466,7 @@ class Invoice
      *
      * "bitcoindonation" for donations, otherwise do not include the field in the request.
      *
-     * @param string $itemCode
+     * @param string $itemCode "bitcoindonation" for donations, otherwise do not include the field in the request.
      */
     public function setItemCode(string $itemCode)
     {
@@ -490,7 +490,7 @@ class Invoice
      *
      * Indicates whether items are physical goods. Alternatives include digital goods and services.
      *
-     * @param bool $physical
+     * @param bool $physical the physical
      */
     public function setPhysical(bool $physical)
     {
@@ -522,7 +522,7 @@ class Invoice
      * For instance "paymentCurrencies": ["BTC"] will create an invoice with only XRP available as transaction currency,
      * thus bypassing the currency selection step on the invoice.
      *
-     * @param array $paymentCurrencies
+     * @param array $paymentCurrencies the payment currencies
      */
     public function setPaymentCurrencies(array $paymentCurrencies)
     {
@@ -562,7 +562,7 @@ class Invoice
      * URL to redirect if the shopper does not pay the invoice and click on the Close button instead.
      * Be sure to include "http://" or "https://" in the url.
      *
-     * @param string $closeURL
+     * @param string $closeURL URL to redirect if the shopper does not pay the invoice
      */
     public function setCloseURL(string $closeURL)
     {
@@ -588,7 +588,7 @@ class Invoice
      * Set to false by default,
      * merchant can setup automatic redirect to their website by setting this parameter to true.
      *
-     * @param bool $autoRedirect
+     * @param bool $autoRedirect the auto redirect
      */
     public function setAutoRedirect(bool $autoRedirect)
     {
@@ -618,7 +618,7 @@ class Invoice
      * from wallets which have implemented the
      * <a href="https://bitpay.com/docs/payment-protocol">BitPay JSON Payment Protocol</a>
      *
-     * @param bool $jsonPayProRequired
+     * @param bool $jsonPayProRequired the json pay pro required
      */
     public function setJsonPayProRequired(bool $jsonPayProRequired)
     {
@@ -646,7 +646,7 @@ class Invoice
      * or receiving a refund over a given threshold, which may vary by region.
      * This Boolean forces the invoice to require BitPay ID regardless of the price.
      *
-     * @param bool $bitpayIdRequired
+     * @param bool $bitpayIdRequired the bitpay id required
      */
     public function setBitpayIdRequired(bool $bitpayIdRequired)
     {
@@ -670,7 +670,7 @@ class Invoice
      *
      * A display string for merchant identification (ex. Wal-Mart Store #1452, Bowling Green, KY).
      *
-     * @param string $merchantName
+     * @param string $merchantName A display string for merchant identification
      */
     public function setMerchantName(string $merchantName)
     {
@@ -700,7 +700,8 @@ class Invoice
      * "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      * If not yet selected, this field will not be returned.
      *
-     * @param string $selectedTransactionCurrency
+     * @param string $selectedTransactionCurrency This field will be populated with the cryptocurrency selected
+     * to pay the BitPay invoice
      */
     public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
     {
@@ -724,7 +725,7 @@ class Invoice
      *
      * Merchant pre-selects transaction currency on behalf of buyer.
      *
-     * @param string $forcedBuyerSelectedWallet
+     * @param string $forcedBuyerSelectedWallet Merchant pre-selects wallet on behalf of buyer
      */
     public function setForcedBuyerSelectedWallet(string $forcedBuyerSelectedWallet)
     {
@@ -748,7 +749,7 @@ class Invoice
      *
      * Merchant pre-selects transaction currency on behalf of buyer.
      *
-     * @param string $forcedBuyerSelectedTransactionCurrency
+     * @param string $forcedBuyerSelectedTransactionCurrency Merchant pre-selects transaction currency
      */
     public function setForcedBuyerSelectedTransactionCurrency(string $forcedBuyerSelectedTransactionCurrency)
     {
@@ -772,7 +773,7 @@ class Invoice
      *
      * Object containing line item details for display.
      *
-     * @param array $itemizedDetails
+     * @param array $itemizedDetails Objects array containing line item details for display.
      */
     public function setItemizedDetails(array $itemizedDetails)
     {
@@ -796,7 +797,7 @@ class Invoice
      * If not set, invoice will default to the account acceptanceWindow.
      * If account acceptanceWindow is not set, invoice will default to 15 minutes (900,000 milliseconds).
      *
-     * @param float $acceptanceWindow
+     * @param float $acceptanceWindow Number of milliseconds that a user has to pay an invoice before it expire
      */
     public function setAcceptanceWindow(float $acceptanceWindow)
     {
@@ -820,7 +821,7 @@ class Invoice
      *
      * Allows merchant to pass buyer related information in the invoice object
      *
-     * @param Buyer $buyer
+     * @param Buyer $buyer the buyer
      */
     public function setBuyer(Buyer $buyer)
     {
@@ -846,7 +847,7 @@ class Invoice
      * Buyer's email address.
      * If provided during invoice creation, this will bypass the email prompt for the consumer when opening the invoice.
      *
-     * @param string $buyerEmail
+     * @param string $buyerEmail Buyer's email address
      */
     public function setBuyerEmail(string $buyerEmail)
     {
@@ -874,7 +875,7 @@ class Invoice
      * This is only used for instances where a buyers email
      * (primary form of buyer communication) is can not be gathered.
      *
-     * @param string $buyerSms
+     * @param string $buyerSms SMS provided by user for communication
      */
     public function setBuyerSms(string $buyerSms)
     {
@@ -905,7 +906,7 @@ class Invoice
      * This field will be populated with the refund address
      * provided by the customer if you request a refund of the specific invoice.
      *
-     * @param array $refundAddresses
+     * @param array $refundAddresses Refund address provided by the customer
      */
     public function setRefundAddresses(array $refundAddresses)
     {
@@ -925,7 +926,7 @@ class Invoice
     /**
      * Sets invoice resource id
      *
-     * @param string $id
+     * @param string $id Invoice resource id
      */
     public function setId($id)
     {
@@ -949,7 +950,7 @@ class Invoice
      *
      * Web address of invoice, expires at expirationTime
      *
-     * @param string $url
+     * @param string $url Web address of invoice
      */
     public function setUrl($url)
     {
@@ -979,7 +980,7 @@ class Invoice
      * Instant Payment Notification (IPN) section.
      * </a>
      *
-     * @param string $status
+     * @param string $status Invoice status
      */
     public function setStatus($status)
     {
@@ -1005,7 +1006,7 @@ class Invoice
      * Flag to indicate if the miner fee used by the buyer is too low.
      * Initially set to false when the invoice is created.
      *
-     * @param boolean $lowFeeDetected
+     * @param boolean $lowFeeDetected Flag to indicate if the miner fee used by the buyer is too low
      */
     public function setLowFeeDetected($lowFeeDetected)
     {
@@ -1025,7 +1026,7 @@ class Invoice
     /**
      * Sets invoiceTime - UNIX time of invoice creation, in milliseconds
      *
-     * @param int $invoiceTime
+     * @param int $invoiceTime UNIX time of invoice creation, in milliseconds
      */
     public function setInvoiceTime($invoiceTime)
     {
@@ -1045,7 +1046,7 @@ class Invoice
     /**
      * Sets expirationTime - UNIX time when invoice is last available to be paid, in milliseconds
      *
-     * @param string $expirationTime
+     * @param string $expirationTime UNIX time when invoice is last available to be paid, in milliseconds
      */
     public function setExpirationTime($expirationTime)
     {
@@ -1065,7 +1066,7 @@ class Invoice
     /**
      * Sets currentTime - UNIX time of API call, in milliseconds
      *
-     * @param string $currentTime
+     * @param string $currentTime UNIX time of API call, in milliseconds
      */
     public function setCurrentTime($currentTime)
     {
@@ -1089,7 +1090,7 @@ class Invoice
      *
      * Contains the cryptocurrency transaction details for the executed payout.
      *
-     * @param array $transactions
+     * @param array $transactions array with the crypto currency transaction hashes linked to the invoice
      */
     public function setTransactions($transactions)
     {
@@ -1121,7 +1122,7 @@ class Invoice
      * "paidPartial": (string) if the consumer did not send enough funds when paying the invoice.
      * "paidOver": (string) if the consumer sent to much funds when paying the invoice.
      *
-     * @param boolean $exceptionStatus
+     * @param boolean $exceptionStatus this parameter will indicate if the purchaser sent too much or not enough funds
      */
     public function setExceptionStatus($exceptionStatus)
     {
@@ -1151,7 +1152,8 @@ class Invoice
      * Currently, the value set is set to 6 by default for BTC/BCH/XRP,
      * 40 for DOGE and 50 for ETH/GUSD/PAX/USDC/BUSD/DAI/WBTC
      *c
-     * @param int $targetConfirmations
+     * @param int $targetConfirmations Indicates the number of block confirmation of the crypto currency transaction
+     * which are required to credit a paid invoice to the merchant account
      */
     public function setTargetConfirmations($targetConfirmations)
     {
@@ -1183,7 +1185,8 @@ class Invoice
      * from the buyer to provide an address for the refund,
      * via the secure link which has been automatically emailed to him.
      *
-     * @param boolean $refundAddressRequestPending
+     * @param boolean $refundAddressRequestPending This flag is here to indicate that the refund
+     * request is pending action
      */
     public function setRefundAddressRequestPending($refundAddressRequestPending)
     {
@@ -1215,7 +1218,8 @@ class Invoice
      * the bitpay invoice UI will prompt the user to enter his
      * email address and this field will be populated with the email submitted.
      *
-     * @param string $buyerProvidedEmail
+     * @param string $buyerProvidedEmail Populated with the buyer's email address if passed in the buyer object
+     * by the merchant
      */
     public function setBuyerProvidedEmail($buyerProvidedEmail)
     {
@@ -1241,7 +1245,8 @@ class Invoice
      * Information collected from the buyer during the process of paying an invoice.
      * Initially this object is empty.
      *
-     * @param BuyerProvidedInfo $buyerProvidedInfo
+     * @param BuyerProvidedInfo $buyerProvidedInfo Information collected from the buyer
+     * during the process of paying an invoice
      */
     public function setBuyerProvidedInfo(BuyerProvidedInfo $buyerProvidedInfo)
     {
@@ -1273,7 +1278,7 @@ class Invoice
     /**
      * Sets universalCodes
      *
-     * @param UniversalCodes $universalCodes
+     * @param UniversalCodes $universalCodes Object containing wallet-specific URLs for payment protocol.
      */
     public function setUniversalCodes(UniversalCodes $universalCodes)
     {
@@ -1307,7 +1312,8 @@ class Invoice
      * If you disable a currency via the invoice parameter "paymentCurrencies",
      * this parameter will be set to "merchantDisabledByParam"
      *
-     * @param SupportedTransactionCurrencies $supportedTransactionCurrencies
+     * @param SupportedTransactionCurrencies $supportedTransactionCurrencies The currencies that may be used
+     * to pay this invoice
      */
     public function setSupportedTransactionCurrencies(SupportedTransactionCurrencies $supportedTransactionCurrencies)
     {
@@ -1331,7 +1337,7 @@ class Invoice
      *
      * For internal use - This field can be ignored in merchant implementations.
      *
-     * @param object $paymentTotals
+     * @param object $paymentTotals the payment totals
      */
     public function setPaymentTotals($paymentTotals)
     {
@@ -1355,7 +1361,7 @@ class Invoice
      *
      * For internal use. This field can be ignored in merchant implementations.
      *
-     * @param object $paymentSubtotals
+     * @param object $paymentSubtotals the payment subtotals
      */
     public function setPaymentSubTotals($paymentSubtotals)
     {
@@ -1383,7 +1389,7 @@ class Invoice
      * The key is the currency and the value is an amount indicated in the base unit
      * for each supported transactionCurrency.
      *
-     * @param object $paymentDisplaySubtotals
+     * @param object $paymentDisplaySubtotals Equivalent to price for each supported transactionCurrency
      */
     public function setPaymentDisplaySubTotals($paymentDisplaySubtotals)
     {
@@ -1413,7 +1419,7 @@ class Invoice
      * The key is the currency and the value is an amount
      * indicated in the base unit for each supported transactionCurrency.
      *
-     * @param object $paymentDisplaytotals
+     * @param object $paymentDisplaytotals The total amount that the purchaser should pay
      */
     public function setPaymentDisplayTotals($paymentDisplaytotals)
     {
@@ -1477,7 +1483,7 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @param $underpaidAmount
+     * @param int $underpaidAmount the underpaid amount
      */
     public function setUnderpaidAmount($underpaidAmount)
     {
@@ -1507,7 +1513,7 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @param $overpaidAmount
+     * @param int $overpaidAmount the overpaid amount
      */
     public function setOverpaidAmount($overpaidAmount)
     {
@@ -1543,7 +1549,8 @@ class Invoice
      * this support article
      * </a> for more information
      *
-     * @param MinerFees $minerFees
+     * @param MinerFees $minerFees The total amount of fees that the purchaser will pay
+     * to cover BitPay's UTXO sweep cost for an invoice
      */
     public function setMinerFees(MinerFees $minerFees)
     {
@@ -1569,7 +1576,7 @@ class Invoice
      * This boolean will be available on an invoice object once an invoice is paid
      * and indicate if the transaction was made with a wallet using the payment protocol (true) or peer to peer (false).
      *
-     * @param boolean $nonPayProPaymentReceived
+     * @param boolean $nonPayProPaymentReceived transaction was made with a wallet using the payment protocol
      */
     public function setNonPayProPaymentReceived(bool $nonPayProPaymentReceived)
     {
@@ -1595,7 +1602,7 @@ class Invoice
      * This object will be available on the invoice if a shopper signs in on an invoice using his BitPay ID.
      * See the following <a href="https://blog.bitpay.com/bitpay-dashboard-id/">blogpost</a> for more information.
      *
-     * @param Shopper $shopper
+     * @param Shopper $shopper the shopper
      */
     public function setShopper(Shopper $shopper)
     {
@@ -1621,7 +1628,7 @@ class Invoice
      * This field will be in the invoice object only if the invoice was generated from a bill, see the
      * <a href="https://bitpay.com/api/#rest-api-resources-bills">Bills</a> resource for more information
      *
-     * @param $billId
+     * @param string $billId the bill id
      */
     public function setBillId($billId)
     {
@@ -1645,7 +1652,7 @@ class Invoice
      *
      * For a refunded invoice, this object will contain the details of executed refunds for the corresponding invoice.
      *
-     * @param RefundInfo
+     * @param RefundInfo object which contain the details of executed refunds for the corresponding invoice.
      */
     public function setRefundInfo(RefundInfo $refundInfo)
     {
@@ -1677,7 +1684,7 @@ class Invoice
      * When using the extendedNotifications parameter,
      * the webhook also have a payload slightly different from the standard webhooks.
      *
-     * @param bool $extendedNotifications
+     * @param bool $extendedNotifications Allows merchants to get access to additional webhooks
      */
     public function setExtendedNotifications(bool $extendedNotifications)
     {
@@ -1707,7 +1714,7 @@ class Invoice
      * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD",
      * "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      *
-     * @param string $transactionCurrency
+     * @param string $transactionCurrency The currency used for the invoice transaction.
      */
     public function setTransactionCurrency($transactionCurrency)
     {
@@ -1733,7 +1740,7 @@ class Invoice
      * The total amount paid to the invoice in terms of the invoice transactionCurrency indicated
      * in the smallest possible unit for the corresponding transactionCurrency (e.g satoshis for BTC and BCH)
      *
-     * @param int $amountPaid
+     * @param int $amountPaid The total amount paid to the invoice
      */
     public function setAmountPaid($amountPaid)
     {
@@ -1761,7 +1768,7 @@ class Invoice
      * It will be updated with the total amount paid to the invoice
      * indicated in the base unit for the corresponding transactionCurrency
      *
-     * @param string $displayAmountPaid
+     * @param string $displayAmountPaid display amount paid
      */
     public function setDisplayAmountPaid($displayAmountPaid)
     {
@@ -1785,7 +1792,7 @@ class Invoice
      *
      * Exchange rates keyed by source and target currencies.
      *
-     * @param object $exchangeRates
+     * @param object $exchangeRates Exchange rates keyed by source and target currencies.
      */
     public function setExchangeRates($exchangeRates)
     {
@@ -1809,7 +1816,7 @@ class Invoice
      *
      * Payment protocol URL for selected wallet, defaults to BitPay URL if no wallet selected.
      *
-     * @param string $paymentString
+     * @param string $paymentString Payment protocol URL for selected wallet
      */
     public function setPaymentString(string $paymentString)
     {
@@ -1833,7 +1840,7 @@ class Invoice
      *
      * Link to bring user to BitPay ID flow, only present when bitpayIdRequired is true.
      *
-     * @param string $verificationLink
+     * @param string $verificationLink Link to bring user to BitPay ID flow
      */
     public function setVerificationLink(string $verificationLink)
     {
@@ -1857,7 +1864,7 @@ class Invoice
      *
      * Indicates whether or not the invoice was cancelled.
      *
-     * @param boolean $isCancelled
+     * @param boolean $isCancelled Indicates whether or not the invoice was cancelled.
      */
     public function setIsCancelled(bool $isCancelled)
     {

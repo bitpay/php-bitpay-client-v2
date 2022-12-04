@@ -66,7 +66,7 @@ class BillData
      * If set the true, BitPay will automatically issue recurring bills to the email address
      * provided once the status of the subscription is set to active.
      *
-     * @param bool $emailBill
+     * @param bool $emailBill automatically issue recurring bills to the email address
      */
     public function setEmailBill(bool $emailBill)
     {
@@ -86,7 +86,7 @@ class BillData
     /**
      * Sets Email addresses to which a copy of the recurring bill must be sent
      *
-     * @param array $cc
+     * @param array $cc Email addresses to which a copy of the recurring bill must be sent
      */
     public function setCc(array $cc)
     {
@@ -106,7 +106,7 @@ class BillData
     /**
      * Sets Recurring bill identifier, specified by merchant
      *
-     * @param string $number
+     * @param string $number Recurring bill identifier
      */
     public function setNumber(string $number)
     {
@@ -130,7 +130,7 @@ class BillData
      *
      * ISO 4217 3-character currency code. This is the currency associated with the price field
      *
-     * @param string $currency
+     * @param string $currency 3-character currency code
      * @throws BitPayException
      */
     public function setCurrency(string $currency)
@@ -155,7 +155,7 @@ class BillData
     /**
      * Sets Recurring Bill recipient's name
      *
-     * @param string $name
+     * @param string $name Recurring Bill recipient's name
      */
     public function setName(string $name)
     {
@@ -175,7 +175,7 @@ class BillData
     /**
      * Sets Recurring Bill recipient's address
      *
-     * @param string $address1
+     * @param string $address1 Recurring Bill recipient's address
      */
     public function setAddress1(string $address1)
     {
@@ -195,7 +195,7 @@ class BillData
     /**
      * Sets Recurring Bill recipient's address
      *
-     * @param string $address2
+     * @param string $address2 Recurring Bill recipient's address
      */
     public function setAddress2(string $address2)
     {
@@ -215,7 +215,7 @@ class BillData
     /**
      * Sets Recurring Bill recipient's city
      *
-     * @param string $city
+     * @param string $city Recurring Bill recipient's city
      */
     public function setCity(string $city)
     {
@@ -235,7 +235,7 @@ class BillData
     /**
      * Sets Recurring Bill recipient's state or province
      *
-     * @param string $state
+     * @param string $state Recurring Bill recipient's state or province
      */
     public function setState(string $state)
     {
@@ -255,7 +255,7 @@ class BillData
     /**
      * Sets Recurring Bill recipient's ZIP code
      *
-     * @param string $zip
+     * @param string $zip Recurring Bill recipient's ZIP code
      */
     public function setZip(string $zip)
     {
@@ -275,7 +275,7 @@ class BillData
     /**
      * Sets Recurring Bill recipient's country
      *
-     * @param string $country
+     * @param string $country Recurring Bill recipient's country
      */
     public function setCountry(string $country)
     {
@@ -295,7 +295,7 @@ class BillData
     /**
      * Sets Recurring Bill recipient's email address
      *
-     * @param string $email
+     * @param string $email Recurring Bill recipient's email address
      */
     public function setEmail(string $email)
     {
@@ -315,7 +315,7 @@ class BillData
     /**
      * Sets Recurring Bill recipient's phone
      *
-     * @param string $phone
+     * @param string $phone Recurring Bill recipient's phone
      */
     public function setPhone(string $phone)
     {
@@ -339,7 +339,7 @@ class BillData
      *
      * Date and time at which a bill is due, ISO-8601 format yyyy-mm-ddThh:mm:ssZ (UTC).
      *
-     * @param string $dueDate
+     * @param string $dueDate Date and time at which a bill is due
      */
     public function setDueDate(string $dueDate)
     {
@@ -363,7 +363,7 @@ class BillData
      *
      * If set to true, BitPay's processing fee will be included in the amount charged on the invoice
      *
-     * @param bool $passProcessingFee
+     * @param bool $passProcessingFee BitPay's processing fee will be included in the amount charged on the invoice
      */
     public function setPassProcessingFee(bool $passProcessingFee)
     {
@@ -387,7 +387,7 @@ class BillData
      *
      * Internal identifier for BitPay, this field can be ignored by the merchants.
      *
-     * @param string $merchant
+     * @param string $merchant Internal identifier for BitPay
      */
     public function setMerchant(string $merchant)
     {
@@ -427,7 +427,7 @@ class BillData
     /**
      * Sets List of line items
      *
-     * @param array $items
+     * @param array $items List of line items
      */
     public function setItems(array $items)
     {

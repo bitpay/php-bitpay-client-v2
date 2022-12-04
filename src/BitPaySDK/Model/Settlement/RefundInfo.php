@@ -86,7 +86,7 @@ class RefundInfo
     /**
      * Sets amounts.
      *
-     * @param array $amounts
+     * @param array $amounts the amounts
      */
     public function setAmounts(array $amounts)
     {
@@ -106,7 +106,7 @@ class RefundInfo
     /**
      * Sets reference.
      *
-     * @param string $reference
+     * @param string $reference the reference
      */
     public function setReference(string $reference)
     {

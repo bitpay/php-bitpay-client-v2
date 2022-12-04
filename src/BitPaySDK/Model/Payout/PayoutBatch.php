@@ -107,7 +107,7 @@ class PayoutBatch
     /**
      * Sets guid.
      *
-     * @param string $guid
+     * @param string $guid the guid
      */
     public function setGuid(string $guid)
     {
@@ -127,7 +127,7 @@ class PayoutBatch
     /**
      * Sets token.
      *
-     * @param string $token
+     * @param string $token Approved payout facade token
      */
     public function setToken(string $token)
     {
@@ -150,7 +150,7 @@ class PayoutBatch
     /**
      * Sets amount.
      *
-     * @param float $amount
+     * @param float $amount The payout amount in the requested currency
      */
     public function setAmount(float $amount)
     {
@@ -160,7 +160,7 @@ class PayoutBatch
     /**
      * Gets amount based on precision.
      *
-     * @param int $precision
+     * @param int $precision Number of decimal places
      */
     public function formatAmount(int $precision)
     {
@@ -180,7 +180,7 @@ class PayoutBatch
     /**
      * Sets currency.
      *
-     * @param string $currency
+     * @param string $currency Currency code set for the amount
      * @throws BitPayException
      */
     public function setCurrency(string $currency)
@@ -205,7 +205,7 @@ class PayoutBatch
     /**
      * Sets effective date.
      *
-     * @param string $effectiveDate
+     * @param string $effectiveDate Effective date and time (UTC) for the payout
      */
     public function setEffectiveDate(string $effectiveDate)
     {
@@ -235,7 +235,7 @@ class PayoutBatch
     /**
      * Sets instructions.
      *
-     * @param array $instructions
+     * @param array $instructions Array of JSON objects made of the following parameters
      */
     public function setInstructions(array $instructions)
     {
@@ -256,7 +256,7 @@ class PayoutBatch
     /**
      * Sets ledger currency.
      *
-     * @param string $ledgerCurrency
+     * @param string $ledgerCurrency Ledger currency code set for the payout
      * @throws BitPayException
      */
     public function setLedgerCurrency(string $ledgerCurrency)
@@ -284,7 +284,7 @@ class PayoutBatch
     /**
      * Sets reference.
      *
-     * @param string $reference
+     * @param string $reference Merchants unique identifier
      */
     public function setReference(string $reference)
     {
@@ -304,7 +304,7 @@ class PayoutBatch
     /**
      * Sets notification url.
      *
-     * @param string $notificationUrl
+     * @param string $notificationUrl URL to which BitPay sends webhook notifications
      */
     public function setNotificationURL(string $notificationUrl)
     {
@@ -324,7 +324,7 @@ class PayoutBatch
     /**
      * Sets notification email.
      *
-     * @param string $notificationEmail
+     * @param string $notificationEmail Merchant email address for notification of payout status change
      */
     public function setNotificationEmail(string $notificationEmail)
     {
@@ -344,7 +344,7 @@ class PayoutBatch
     /**
      * Sets email.
      *
-     * @param string $email
+     * @param string $email Email address of an active recipient
      */
     public function setEmail(string $email)
     {
@@ -364,7 +364,7 @@ class PayoutBatch
     /**
      * Sets Recipient ID.
      *
-     * @param string $recipientId
+     * @param string $recipientId Bitpay recipient id of an active recipient
      */
     public function setRecipientId(string $recipientId)
     {
@@ -384,7 +384,7 @@ class PayoutBatch
     /**
      * Sets Shopper ID.
      *
-     * @param string $shopperId
+     * @param string $shopperId unique id shopper
      */
     public function setShopperId(string $shopperId)
     {
@@ -404,7 +404,7 @@ class PayoutBatch
     /**
      * Sets label.
      *
-     * @param string $label
+     * @param string $label can be the customer name or unique payout reference
      */
     public function setLabel(string $label)
     {
@@ -424,7 +424,7 @@ class PayoutBatch
     /**
      * Sets message.
      *
-     * @param string $message
+     * @param string $message the message
      */
     public function setMessage(string $message)
     {
@@ -444,7 +444,7 @@ class PayoutBatch
     /**
      * Sets redirect url.
      *
-     * @param string $redirectUrl
+     * @param string $redirectUrl The shopper will be redirected to this URL
      */
     public function setRedirectUrl(string $redirectUrl)
     {
@@ -464,7 +464,7 @@ class PayoutBatch
     /**
      * Sets pricing method.
      *
-     * @param string $pricingMethod
+     * @param string $pricingMethod the pricing method
      */
     public function setPricingMethod(string $pricingMethod)
     {
@@ -487,7 +487,7 @@ class PayoutBatch
     /**
      * Sets ID.
      *
-     * @param string $id
+     * @param string $id the id
      */
     public function setId(string $id)
     {
@@ -507,7 +507,7 @@ class PayoutBatch
     /**
      * Sets account.
      *
-     * @param string $account
+     * @param string $account the account
      */
     public function setAccount(string $account)
     {
@@ -527,7 +527,7 @@ class PayoutBatch
     /**
      * Sets support phone.
      *
-     * @param string $supportPhone
+     * @param string $supportPhone the support phone
      */
     public function setSupportPhone(string $supportPhone)
     {
@@ -547,7 +547,7 @@ class PayoutBatch
     /**
      * Sets status.
      *
-     * @param string $status
+     * @param string $status Payout status
      */
     public function setStatus(string $status)
     {
@@ -567,7 +567,7 @@ class PayoutBatch
     /**
      * Sets percent fee
      *
-     * @param float $percentFee
+     * @param float $percentFee the percent fee
      */
     public function setPercentFee(float $percentFee)
     {
@@ -587,7 +587,7 @@ class PayoutBatch
     /**
      * Sets fee.
      *
-     * @param float $fee
+     * @param float $fee the fee
      */
     public function setFee(float $fee)
     {
@@ -607,7 +607,7 @@ class PayoutBatch
     /**
      * Sets deposit total.
      *
-     * @param float $depositTotal
+     * @param float $depositTotal the deposit total
      */
     public function setDepositTotal(float $depositTotal)
     {
@@ -627,7 +627,7 @@ class PayoutBatch
     /**
      * Sets BTC.
      *
-     * @param float|null $btc
+     * @param float|null $btc the BTC
      */
     public function setBtc(?float $btc)
     {
@@ -647,7 +647,7 @@ class PayoutBatch
     /**
      * Sets rate.
      *
-     * @param float $rate
+     * @param float $rate the rate
      */
     public function setRate(float $rate)
     {
@@ -667,7 +667,7 @@ class PayoutBatch
     /**
      * Sets request date.
      *
-     * @param string $requestDate
+     * @param string $requestDate Date and time (UTC) when BitPay received the payout
      */
     public function setRequestDate(string $requestDate)
     {
@@ -687,7 +687,7 @@ class PayoutBatch
     /**
      * Sets date executed.
      *
-     * @param string $dateExecuted
+     * @param string $dateExecuted Date and time (UTC) when BitPay executed the payout
      */
     public function setDateExecuted(string $dateExecuted)
     {
@@ -707,7 +707,7 @@ class PayoutBatch
     /**
      * Sets exchange rates.
      *
-     * @param $exchangeRates
+     * @param array $exchangeRates Exchange rates keyed by source and target currencies.
      */
     public function setExchangeRates($exchangeRates)
     {

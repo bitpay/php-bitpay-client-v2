@@ -90,7 +90,7 @@ class Payout
      * This token is actually derived from the API token -
      * used to submit the payout and is tied to the specific payout resource id created.
      *
-     * @param string $token
+     * @param string $token Resource token
      */
     public function setToken(string $token)
     {
@@ -113,7 +113,7 @@ class Payout
     /**
      * Sets amount of cryptocurrency sent to the requested address.
      *
-     * @param float $amount
+     * @param float $amount The amount of the payout in the indicated currency
      */
     public function setAmount(float $amount)
     {
@@ -123,7 +123,7 @@ class Payout
     /**
      * Change amount value based on precision rounding.
      *
-     * @param int $precision
+     * @param int $precision Number of decimal places
      */
     public function formatAmount(int $precision)
     {
@@ -143,7 +143,7 @@ class Payout
     /**
      * Sets currency code set for the batch amount (ISO 4217 3-character currency code).
      *
-     * @param string $currency
+     * @param string $currency currency code
      * @throws BitPayException
      */
     public function setCurrency(string $currency)
@@ -176,7 +176,7 @@ class Payout
      *
      * ISO-8601 format yyyy-mm-ddThh:mm:ssZ. If not provided, defaults to date and time of creation.
      *
-     * @param string $effectiveDate
+     * @param string $effectiveDate Effective date and time (UTC) for the payout
      */
     public function setEffectiveDate(string $effectiveDate)
     {
@@ -206,7 +206,7 @@ class Payout
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
      *
-     * @param string $ledgerCurrency
+     * @param string $ledgerCurrency Ledger currency code
      * @throws BitPayException
      */
     public function setLedgerCurrency(string $ledgerCurrency)
@@ -242,7 +242,7 @@ class Payout
      * Merchants can pass their own unique identifier in this field for reconciliation purpose.
      * Maximum string length is 100 characters.
      *
-     * @param string $reference
+     * @param string $reference the reference
      */
     public function setReference(string $reference)
     {
@@ -266,7 +266,7 @@ class Payout
      *
      * URL to which BitPay sends webhook notifications. HTTPS is mandatory.
      *
-     * @param string $notificationUrl
+     * @param string $notificationUrl URL to which BitPay sends webhook notifications
      */
     public function setNotificationURL(string $notificationUrl)
     {
@@ -290,7 +290,7 @@ class Payout
      *
      * Merchant email address for notification of payout status change.
      *
-     * @param string $notificationEmail
+     * @param string $notificationEmail Merchant email address for notification of payout status change
      */
     public function setNotificationEmail(string $notificationEmail)
     {
@@ -318,7 +318,7 @@ class Payout
      * when clicking on the Close button if a separate closeURL is not specified.
      * Be sure to include "http://" or "https://" in the url.
      *
-     * @param string $redirectUrl
+     * @param string $redirectUrl the redirect URL
      */
     public function setRedirectUrl(string $redirectUrl)
     {
@@ -338,7 +338,7 @@ class Payout
     /**
      * Sets account.
      *
-     * @param string $account
+     * @param string $account Bank account number of the merchant
      */
     public function setAccount(string $account)
     {
@@ -366,7 +366,7 @@ class Payout
      * Note: In the future, BitPay may allow recipients to update the email address tied to their personal account.
      * BitPay encourages the use of `recipientId` or `shopperId` when programatically creating payouts requests.
      *
-     * @param string $email
+     * @param string $email Email address of an active recipient
      */
     public function setEmail(string $email)
     {
@@ -386,7 +386,7 @@ class Payout
     /**
      * Sets BitPay recipient id. Assigned by BitPay for a given recipient email during the onboarding process.
      *
-     * @param string $recipientId
+     * @param string $recipientId BitPay recipient id
      */
     public function setRecipientId(string $recipientId)
     {
@@ -420,7 +420,7 @@ class Payout
      * BitPay personal accounts before completing the payment.
      * This can allow merchants to monitor the activity of a customer (deposits and payouts).
      *
-     * @param string $shopperId
+     * @param string $shopperId the unique id assigned by BitPay
      */
     public function setShopperId(string $shopperId)
     {
@@ -446,7 +446,7 @@ class Payout
      * For merchant use, pass through - can be the customer name or unique merchant reference assigned by
      * the merchant to the recipient.
      *
-     * @param string $label
+     * @param string $label customer name or unique merchant reference
      */
     public function setLabel(string $label)
     {
@@ -466,7 +466,7 @@ class Payout
     /**
      * Sets support phone.
      *
-     * @param string $supportPhone
+     * @param string $supportPhone the support phone
      */
     public function setSupportPhone(string $supportPhone)
     {
@@ -490,7 +490,7 @@ class Payout
      *
      * In case of error, this field will contain a description message. Set to `null` if the request is successful.
      *
-     * @param string $message
+     * @param string $message the description message
      */
     public function setMessage(string $message)
     {
@@ -510,7 +510,7 @@ class Payout
     /**
      * Sets percent fee.
      *
-     * @param float $percentFee
+     * @param float $percentFee the percent fee
      */
     public function setPercentFee(float $percentFee)
     {
@@ -530,7 +530,7 @@ class Payout
     /**
      * Sets fee.
      *
-     * @param float $fee
+     * @param float $fee the fee
      */
     public function setFee(float $fee)
     {
@@ -550,7 +550,7 @@ class Payout
     /**
      * Sets deposit total.
      *
-     * @param float $depositTotal
+     * @param float $depositTotal the deposit total
      */
     public function setDepositTotal(float $depositTotal)
     {
@@ -570,7 +570,7 @@ class Payout
     /**
      * Sets rate.
      *
-     * @param float $rate
+     * @param float $rate the rate
      */
     public function setRate(float $rate)
     {
@@ -590,7 +590,7 @@ class Payout
     /**
      * Sets btc.
      *
-     * @param float $btc
+     * @param float $btc the BTC
      */
     public function setBtc(float $btc)
     {
@@ -610,7 +610,7 @@ class Payout
     /**
      * Sets date and time (UTC) when BitPay executed the payout. ISO-8601 format yyyy-mm-ddThh:mm:ssZ.
      *
-     * @param string $dateExecuted
+     * @param string $dateExecuted Date and time (UTC) when BitPay executed the payout
      */
     public function setDateExecuted(string $dateExecuted)
     {
@@ -633,7 +633,7 @@ class Payout
     /**
      * Sets Payout request id.
      *
-     * @param string $id
+     * @param string $id Payout id
      */
     public function setId(string $id)
     {
@@ -687,7 +687,7 @@ class Payout
      *     <li>cancelled - when the merchant cancels a payout batch (only possible for requests in the status new</li>
      * </ul>
      *
-     * @param string $status
+     * @param string $status Payout status
      */
     public function setStatus(string $status)
     {
@@ -707,7 +707,7 @@ class Payout
     /**
      * Sets date and time (UTC) when BitPay received the batch. ISO-8601 format `yyyy-mm-ddThh:mm:ssZ`.
      *
-     * @param string $requestDate
+     * @param string $requestDate Date and time (UTC) when BitPay received the payout
      */
     public function setRequestDate(string $requestDate)
     {
@@ -727,7 +727,7 @@ class Payout
     /**
      * Sets exchange rates keyed by source and target currencies.
      *
-     * @param array $exchangeRates
+     * @param array $exchangeRates Exchange rates keyed by source and target currencies
      */
     public function setExchangeRates(array $exchangeRates)
     {
@@ -757,7 +757,7 @@ class Payout
     /**
      * Sets transactions. Contains the cryptocurrency transaction details for the executed payout request.
      *
-     * @param array $transactions
+     * @param array $transactions Contains the cryptocurrency transaction details for the executed payout
      */
     public function setTransactions(array $transactions)
     {

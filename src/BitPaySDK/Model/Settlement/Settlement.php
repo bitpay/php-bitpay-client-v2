@@ -51,7 +51,7 @@ class Settlement
      *
      * String identifying the settlement; this id will also be in the description of the corresponding bank settlement.
      *
-     * @param string $id
+     * @param string $id String identifying the settlement
      */
     public function setId(string $id)
     {
@@ -75,7 +75,7 @@ class Settlement
      *
      * String identifying the BitPay merchant. For internal use, this field can be ignored in merchant implementations.
      *
-     * @param string $accountId
+     * @param string $accountId String identifying the BitPay merchant
      */
     public function setAccountId(string $accountId)
     {
@@ -101,7 +101,7 @@ class Settlement
      * ISO 4217 3-character currency code. This is the currency associated with the settlement.
      * Supported settlement currencies are listed on https://bitpay.com/docs/settlement
      *
-     * @param string $currency
+     * @param string $currency 3-character currency code
      */
     public function setCurrency(string $currency)
     {
@@ -121,7 +121,7 @@ class Settlement
     /**
      * Sets Object containing the settlement info provided by the Merchant in his BitPay account settings
      *
-     * @param PayoutInfo $payoutInfo
+     * @param PayoutInfo $payoutInfo Object containing the settlement info provided by the Merchant
      */
     public function setPayoutInfo(PayoutInfo $payoutInfo)
     {
@@ -141,7 +141,7 @@ class Settlement
     /**
      * Sets Status of the settlement. Possible statuses are "new", "processing", "rejected" and "completed".
      *
-     * @param string $status
+     * @param string $status Status of the settlement
      */
     public function setStatus(string $status)
     {
@@ -165,7 +165,7 @@ class Settlement
      *
      * Timestamp when the settlement was created. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $dateCreated
+     * @param string $dateCreated timestamp when the settlement was created
      */
     public function setDateCreated(string $dateCreated)
     {
@@ -189,7 +189,7 @@ class Settlement
      *
      * Timestamp when the settlement was executed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $dateExecuted
+     * @param string $dateExecuted timestamp when the settlement was executed
      */
     public function setDateExecuted(string $dateExecuted)
     {
@@ -213,7 +213,7 @@ class Settlement
      *
      * Timestamp when the settlement was completed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $dateCompleted
+     * @param string $dateCompleted timestamp when the settlement was completed
      */
     public function setDateCompleted(string $dateCompleted)
     {
@@ -241,7 +241,7 @@ class Settlement
      * For the first settlement of an account the value will be the BitPay merchant account creation date.
      * UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $openingDate
+     * @param string $openingDate corresponds to the closingDate of the previous settlement executed
      */
     public function setOpeningDate(string $openingDate)
     {
@@ -265,7 +265,7 @@ class Settlement
      *
      * Date & time for last ledger entry used for the settlement. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $closingDate
+     * @param string $closingDate Date & time for last ledger entry used for the settlement
      */
     public function setClosingDate(string $closingDate)
     {
@@ -285,7 +285,7 @@ class Settlement
     /**
      * Sets Balance of the ledger at the openingDate
      *
-     * @param float $openingBalance
+     * @param float $openingBalance Balance of the ledger at the openingDate
      */
     public function setOpeningBalance(float $openingBalance)
     {
@@ -311,7 +311,7 @@ class Settlement
      * Sum of all ledger entries in the settlement, this means all the debits & credits
      * which happened between openingDate and closingDate
      *
-     * @param float $ledgerEntriesSum
+     * @param float $ledgerEntriesSum Sum of all ledger entries in the settlement
      */
     public function setLedgerEntriesSum(float $ledgerEntriesSum)
     {
@@ -347,7 +347,7 @@ class Settlement
      * Array of withholdings. Withholdings are kept on the ledger to be used later and thus withheld
      * from this settlement. Each withholding is a JSON object containing a code, amount and description field.
      *
-     * @param array $withHoldings
+     * @param array $withHoldings array of withholdings
      */
     public function setWithHoldings(array $withHoldings)
     {
@@ -367,7 +367,7 @@ class Settlement
     /**
      * Sets Sum of all amounts that are withheld from settlement
      *
-     * @param float $withHoldingsSum
+     * @param float $withHoldingsSum Sum of all amounts that are withheld from settlement
      */
     public function setWithHoldingsSum(float $withHoldingsSum)
     {
@@ -391,7 +391,7 @@ class Settlement
      *
      * totalAmount = openingBalance + ledgerEntriesSum - withholdingsSum
      *
-     * @param float $totalAmount
+     * @param float $totalAmount total amount sent to the merchant
      */
     public function setTotalAmount(float $totalAmount)
     {
@@ -427,7 +427,7 @@ class Settlement
      * The total sum of all ledger entries is reported in the field ledgerEntriesSum.
      * A description of all ledger codes can be found
      *
-     * @param array $ledgerEntries
+     * @param array $ledgerEntries Array of ledger entries
      */
     public function setLedgerEntries(array $ledgerEntries)
     {
@@ -453,7 +453,7 @@ class Settlement
      * This token is actually derived from the merchant facade token used during the query.
      * This token is required to fetch the reconciliation report
      *
-     * @param string $token
+     * @param string $token API token for the corresponding settlement resource
      */
     public function setToken(string $token)
     {
