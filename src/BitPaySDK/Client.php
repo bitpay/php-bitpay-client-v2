@@ -351,6 +351,19 @@ class Client
     }
 
     /**
+     * @param string $guid The BitPay refund Guid
+     * @return Refund BitPay Refund object with the associated Refund object.
+     * @throws BitPayException
+     * @throws RefundQueryException
+     */
+    public function getRefundByGuid(string $guid): Refund
+    {
+        $refundClient = $this->createRefundClient();
+
+        return $refundClient->getByGuid($guid);
+    }
+
+    /**
      * Send a refund notification.
      *
      * @param  string $refundId    A BitPay refund ID.
