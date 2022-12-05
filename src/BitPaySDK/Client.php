@@ -28,10 +28,6 @@ use BitPaySDK\Exceptions\PayoutCancellationException;
 use BitPaySDK\Exceptions\PayoutCreationException;
 use BitPaySDK\Exceptions\PayoutQueryException;
 use BitPaySDK\Exceptions\PayoutNotificationException;
-use BitPaySDK\Exceptions\PayoutBatchCreationException;
-use BitPaySDK\Exceptions\PayoutBatchQueryException;
-use BitPaySDK\Exceptions\PayoutBatchCancellationException;
-use BitPaySDK\Exceptions\PayoutBatchNotificationException;
 use BitPaySDK\Exceptions\RefundCreationException;
 use BitPaySDK\Exceptions\RefundUpdateException;
 use BitPaySDK\Exceptions\RefundCancellationException;
@@ -44,7 +40,6 @@ use BitPaySDK\Model\Invoice\Refund;
 use BitPaySDK\Model\Wallet\Wallet;
 use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Payout\Payout;
-use BitPaySDK\Model\Payout\PayoutBatch;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
 use BitPaySDK\Model\Rate\Rate;
@@ -65,25 +60,18 @@ use Symfony\Component\Yaml\Yaml;
  */
 class Client
 {
-    protected $tokenCache; // {facade, token}
-    protected $restCli = null;
+    protected $tokenCache;
+    protected $restCli;
     protected $util;
 
     /**
      * Client constructor.
      */
-    public function __construct()
+    public function __construct(RESTcli $restCli, Tokens $tokenCache, Util $util)
     {
-    }
-
-    /**
-     * Static constructor / factory
-     */
-    public static function create()
-    {
-        $instance = new self();
-
-        return $instance;
+        $this->restCli = $restCli;
+        $this->tokenCache = $tokenCache;
+        $this->util = $util;
     }
 
     /**
@@ -106,15 +94,13 @@ class Client
         ?string $proxy = null
     ): Client {
         try {
-            $instance = new self();
-
             $key = self::initKeys($privateKey, $privateKeySecret);
 
-            $instance->restCli = new RESTcli($environment, $key, $proxy);
-            $instance->tokenCache = $tokens;
-            $instance->util = new Util();
+            $restCli = new RESTcli($environment, $key, $proxy);
+            $tokenCache = $tokens;
+            $util = new Util();
 
-            return $instance;
+            return new Client($restCli, $tokenCache, $util);
         } catch (Exception $e) {
             throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
         }
@@ -130,19 +116,17 @@ class Client
     public static function createWithFile(string $configFilePath): Client
     {
         try {
-            $instance = new self();
-
             $configData = self::getConfigData($configFilePath);
             $env = $configData["BitPayConfiguration"]["Environment"];
             $config = $configData["BitPayConfiguration"]["EnvConfig"][$env];
 
             $key = self::initKeys($config['PrivateKeyPath'], $config['PrivateKeySecret']);
 
-            $instance->restCli = new RESTcli($env, $key, $config['proxy']);
-            $instance->tokenCache = new Tokens($config['ApiTokens']['merchant'], $config['ApiTokens']['payout']);
-            $instance->util = new Util();
+            $restCli = new RESTcli($env, $key, $config['proxy']);
+            $tokenCache = new Tokens($config['ApiTokens']['merchant'], $config['ApiTokens']['payout']);
+            $util = new Util();
 
-            return $instance;
+            return new Client($restCli, $tokenCache, $util);
         } catch (Exception $e) {
             throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
         }
@@ -729,87 +713,7 @@ class Client
     {
         $payoutClient = $this->createPayoutClient();
 
-        return $payoutClient->requestBatchNotification($payoutId);
-    }
-
-    /**
-     * Submit a BitPay Payout batch.
-     *
-     * @param  PayoutBatch $batch A PayoutBatch object with request parameters defined.
-     * @return PayoutBatch
-     * @throws PayoutBatchCreationException
-     */
-    public function submitPayoutBatch(PayoutBatch $batch): PayoutBatch
-    {
-        $payoutClient = $this->createPayoutClient();
-
-        return $payoutClient->submitBatch($batch);
-    }
-
-    /**
-     * Retrieve a BitPay payout batch by batch id using. The client must have been previously authorized for the
-     * payout facade.
-     *
-     * @param  string $payoutBatchId The id of the batch to retrieve.
-     * @return PayoutBatch
-     * @throws PayoutBatchQueryException
-     */
-    public function getPayoutBatch(string $payoutBatchId): PayoutBatch
-    {
-        $payoutClient = $this->createPayoutClient();
-
-        return $payoutClient->getBatch($payoutBatchId);
-    }
-
-    /**
-     * Retrieve a collection of BitPay payout batches.
-     *
-     * @param  string $startDate The start date to filter the Payout Batches.
-     * @param  string $endDate   The end date to filter the Payout Batches.
-     * @param  string $status    The status to filter the Payout Batches.
-     * @param  int    $limit     Maximum results that the query will return (useful for paging results).
-     * @param  int    $offset    The offset to filter the Payout Batches.
-     * @return PayoutBatch[]
-     * @throws PayoutBatchQueryException
-     */
-    public function getPayoutBatches(
-        string $startDate = null,
-        string $endDate = null,
-        string $status = null,
-        int $limit = null,
-        int $offset = null
-    ): array {
-        $payoutClient = $this->createPayoutClient();
-
-        return $payoutClient->getBatches($startDate, $endDate, $status, $limit, $offset);
-    }
-
-    /**
-     * Cancel a BitPay Payout batch.
-     *
-     * @param $batchId string The id of the batch to cancel.
-     * @return PayoutBatch A BitPay generated PayoutBatch object.
-     * @throws PayoutBatchCancellationException PayoutBatchCancellationException class
-     */
-    public function cancelPayoutBatch(string $payoutBatchId): bool
-    {
-        $payoutClient = $this->createPayoutClient();
-
-        return $payoutClient->cancelBatch($payoutBatchId);
-    }
-
-    /**
-     * Notify BitPay PayoutBatch.
-     *
-     * @param  string $payoutId The id of the PayoutBatch to notify.
-     * @return PayoutBatch[]
-     * @throws PayoutBatchNotificationException
-     */
-    public function requestPayoutBatchNotification(string $payoutBatchId): bool
-    {
-        $payoutClient = $this->createPayoutClient();
-
-        return $payoutClient->requestBatchNotification($payoutBatchId);
+        return $payoutClient->requestNotification($payoutId);
     }
 
     /**
@@ -925,13 +829,15 @@ class Client
     }
 
     /**
-     * @param string $privateKey
+     * @param string|null $privateKey
      * @param string|null $privateKeySecret
-     * @return \BitPayKeyUtils\KeyHelper\KeyInterface|PrivateKey|mixed
+     * @return string|null
      * @throws BitPayException
      */
-    private static function initKeys(string $privateKey, ?string $privateKeySecret)
+    private static function initKeys(?string $privateKey, ?string $privateKeySecret): ?PrivateKey
     {
+        $key = null;
+
         if (!file_exists($privateKey)) {
             $key = new PrivateKey("plainHex");
             $key->setHex($privateKey);
@@ -940,7 +846,7 @@ class Client
             }
         }
 
-        if (!isset($key)) {
+        if (!$key) {
             $storageEngine = new EncryptedFilesystemStorage($privateKeySecret);
             $key = $storageEngine->load($privateKey);
         }
@@ -953,7 +859,7 @@ class Client
      * @return array
      * @throws BitPayException
      */
-    private static function getConfigData($configFilePath)
+    private static function getConfigData(string $configFilePath): array
     {
         if (!file_exists($configFilePath)) {
             throw new BitPayException("Configuration file not found");
