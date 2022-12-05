@@ -16,6 +16,7 @@ class RefundInfo
     protected $_currency;
     protected $_amounts;
     protected $_reference;
+    protected $_refundRequestEid;
 
     public function __construct()
     {
@@ -114,19 +115,38 @@ class RefundInfo
     }
 
     /**
+     * Gets Refund Request Eid.
+     *
+     * @return string Request Eid
+     */
+    public function getRefundRequestEid(): ?string
+    {
+        return $this->_refundRequestEid;
+    }
+
+    /**
+     * Sets Refund Request Eid.
+     *
+     * @param string|null Refund Request Eid
+     */
+    public function setRefundRequestEid(?string $refundRequestEid): void
+    {
+        $this->_refundRequestEid = $refundRequestEid;
+    }
+
+    /**
      * Gets Refund info as array
      *
      * @return array refund info as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'supportRequest' => $this->getSupportRequest(),
-            'currency'       => $this->getCurrency(),
-            'amounts'        => $this->getAmounts(),
-            'reference'      => $this->getReference()
+        return [
+            'supportRequest'   => $this->getSupportRequest(),
+            'currency'         => $this->getCurrency(),
+            'amounts'          => $this->getAmounts(),
+            'reference'        => $this->getReference(),
+            'refundRequestEid' => $this->getRefundRequestEid()
         ];
-
-        return $elements;
     }
 }
