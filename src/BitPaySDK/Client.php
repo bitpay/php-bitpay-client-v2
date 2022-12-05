@@ -381,6 +381,21 @@ class Client
     }
 
     /**
+     * Cancel a previously submitted refund request on a BitPay invoice.
+     *
+     * @param  string $guid     The refund Guid for the refund to be canceled.
+     * @return Refund $refund   Cancelled refund Object.
+     * @throws RefundCancellationException
+     * @throws BitPayException
+     */
+    public function cancelRefundByGuid(string $guid): Refund
+    {
+        $refundClient = $this->createRefundClient();
+
+        return $refundClient->cancelByGuid($guid);
+    }
+
+    /**
      * Retrieve all supported wallets.
      *
      * @return Wallet[]
