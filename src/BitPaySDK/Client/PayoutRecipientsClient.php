@@ -22,13 +22,11 @@ class PayoutRecipientsClient
 {
     private Tokens $tokenCache;
     private RESTcli $restCli;
-    private Util $util;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli, Util $util)
+    public function __construct(Tokens $tokenCache, RESTcli $restCli)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;
-        $this->util = $util;
     }
 
     /**
@@ -42,7 +40,7 @@ class PayoutRecipientsClient
     {
         try {
             $recipients->setToken($this->tokenCache->getTokenByFacade(Facade::Payout));
-            $recipients->setGuid($this->util->guid());
+            $recipients->setGuid(Util::guid());
 
             $responseJson = $this->restCli->post("recipients", $recipients->toArray());
         } catch (BitPayException $e) {

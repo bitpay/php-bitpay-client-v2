@@ -4,7 +4,6 @@ namespace BitPaySDK;
 
 use BitPayKeyUtils\KeyHelper\PrivateKey;
 use BitPayKeyUtils\Storage\EncryptedFilesystemStorage;
-use BitPayKeyUtils\Util\Util;
 use BitPaySDK\Client\BillClient;
 use BitPaySDK\Client\InvoiceClient;
 use BitPaySDK\Client\LedgerClient;
@@ -62,16 +61,14 @@ class Client
 {
     protected $tokenCache;
     protected $restCli;
-    protected $util;
 
     /**
      * Client constructor.
      */
-    public function __construct(RESTcli $restCli, Tokens $tokenCache, Util $util)
+    public function __construct(RESTcli $restCli, Tokens $tokenCache)
     {
         $this->restCli = $restCli;
         $this->tokenCache = $tokenCache;
-        $this->util = $util;
     }
 
     /**
@@ -98,9 +95,8 @@ class Client
 
             $restCli = new RESTcli($environment, $key, $proxy);
             $tokenCache = $tokens;
-            $util = new Util();
 
-            return new Client($restCli, $tokenCache, $util);
+            return new Client($restCli, $tokenCache);
         } catch (Exception $e) {
             throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
         }
@@ -124,9 +120,8 @@ class Client
 
             $restCli = new RESTcli($env, $key, $config['proxy']);
             $tokenCache = new Tokens($config['ApiTokens']['merchant'], $config['ApiTokens']['payout']);
-            $util = new Util();
 
-            return new Client($restCli, $tokenCache, $util);
+            return new Client($restCli, $tokenCache);
         } catch (Exception $e) {
             throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
         }
@@ -887,14 +882,13 @@ class Client
         return $configData;
     }
 
-
     /**
      * Gets invoice client
      *
      * @return InvoiceClient the invoice client
      */
     protected function createInvoiceClient(): InvoiceClient {
-        return new InvoiceClient($this->tokenCache, $this->restCli, $this->util);
+        return new InvoiceClient($this->tokenCache, $this->restCli);
     }
 
     /**
@@ -948,7 +942,7 @@ class Client
      * @return PayoutRecipientsClient the payout recipients client
      */
     protected function createPayoutRecipientsClient(): PayoutRecipientsClient {
-        return new PayoutRecipientsClient($this->tokenCache, $this->restCli, $this->util);
+        return new PayoutRecipientsClient($this->tokenCache, $this->restCli);
     }
 
     /**

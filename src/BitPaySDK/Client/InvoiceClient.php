@@ -20,13 +20,11 @@ class InvoiceClient
 {
     private Tokens $tokenCache;
     private RESTcli $restCli;
-    private Util $util;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli, Util $util)
+    public function __construct(Tokens $tokenCache, RESTcli $restCli)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;
-        $this->util = $util;
     }
 
     /**
@@ -45,7 +43,7 @@ class InvoiceClient
     ): Invoice {
         try {
             $invoice->setToken($this->tokenCache->getTokenByFacade($facade));
-            $invoice->setGuid($this->util->guid());
+            $invoice->setGuid(Util::guid());
 
             $responseJson = $this->restCli->post("invoices", $invoice->toArray(), $signRequest);
         } catch (BitPayException $e) {
