@@ -8,8 +8,12 @@ use BitPaySDK\Exceptions\BillDeliveryException;
 use BitPaySDK\Exceptions\BillQueryException;
 use BitPaySDK\Exceptions\BillUpdateException;
 use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\LedgerQueryException;
 use BitPaySDK\Model\Bill\Bill;
+use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Facade;
+use BitPaySDK\Model\Ledger\Ledger;
+use BitPaySDK\Model\Ledger\LedgerEntry;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -529,7 +533,140 @@ class ClientTest extends TestCase
         $testedObject->deliverBill($exampleBillId, $exampleBillToken);
     }
 
-
+//    public function testGetLedger()
+//    {
+//        $exampleCurrency = Currency::BTC;
+//        $exampleStartDate = '2021-5-10';
+//        $exampleEndDate = '2021-5-31';
+//        $restCliMock = $this->getRestCliMock();
+//        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgerBalances.json');
+//
+//        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+//        $params["currency"] = $exampleCurrency;
+//        $params["startDate"] = $exampleStartDate;
+//        $params["endDate"] = $exampleEndDate;
+//
+//        $restCliMock
+//            ->expects($this->once())
+//            ->method('get')
+//            ->with("ledgers/" . $exampleCurrency, $params)
+//            ->willReturn($exampleResponse);
+//
+//        $testedObject = $this->createObject($restCliMock);
+//        $result = $testedObject->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
+//
+//        $this->assertIsArray($result);
+//        $this->assertEquals('EUR', $result[0]->getCurrency());
+//        $this->assertEquals('USD', $result[1]->getCurrency());
+//        $this->assertEquals('BTC', $result[2]->getCurrency());
+//        $this->assertInstanceOf(LedgerEntry::class, $result[0]);
+//    }
+//
+//    public function testGetLedgerShouldCatchRestCliException()
+//    {
+//        $restCliMock = $this->getRestCliMock();
+//        $restCliMock
+//            ->expects($this->once())
+//            ->method('get')
+//            ->willThrowException(new \Exception());
+//
+//        $testedObject = $this->createObject($restCliMock);
+//
+//        $this->expectException(LedgerQueryException::class);
+//        $exampleCurrency = Currency::BTC;
+//        $exampleStartDate = '2021-5-10';
+//        $exampleEndDate = '2021-5-31';
+//        $testedObject->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
+//    }
+//
+//    public function testGetLedgerShouldCatchRestCliBitPayException()
+//    {
+//        $restCliMock = $this->getRestCliMock();
+//        $restCliMock->expects($this->once())->method('get')->willThrowException(new BitPayException());
+//
+//        $testedObject = $this->createObject($restCliMock);
+//
+//        $this->expectException(LedgerQueryException::class);
+//        $exampleCurrency = Currency::BTC;
+//        $exampleStartDate = '2021-5-10';
+//        $exampleEndDate = '2021-5-31';
+//        $testedObject->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
+//    }
+//
+//    public function testGetLedgerShouldCatchJsonMapperException()
+//    {
+//        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+//
+//        $restCliMock = $this->getRestCliMock();
+//        $restCliMock
+//            ->expects($this->once())
+//            ->method('get')
+//            ->willReturn($badResponse);
+//
+//        $testedObject = $this->createObject($restCliMock);
+//
+//        $this->expectException(LedgerQueryException::class);
+//        $exampleCurrency = Currency::BTC;
+//        $exampleStartDate = '2021-5-10';
+//        $exampleEndDate = '2021-5-31';
+//        $testedObject->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
+//    }
+//
+//    public function testGetLedgers()
+//    {
+//        $restCliMock = $this->getRestCliMock();
+//        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+//        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgers.json');
+//
+//        $restCliMock
+//            ->expects($this->once())
+//            ->method('get')
+//            ->with("ledgers", $params)
+//            ->willReturn($exampleResponse);
+//
+//        $testedObject = $this->createObject($restCliMock);
+//
+//        $result = $testedObject->getLedgers();
+//
+//
+//        $this->assertIsArray($result);
+//        $this->assertInstanceOf(Ledger::class, $result[0]);
+//    }
+//
+//    public function testGetLedgersShouldCatchBitPayException()
+//    {
+//        $restCliMock = $this->getRestCliMock();
+//        $restCliMock->expects($this->once())->method('get')->willThrowException(new BitPayException());
+//
+//        $testedObject = $this->createObject($restCliMock);
+//
+//        $this->expectException(LedgerQueryException::class);
+//        $testedObject->getLedgers();
+//    }
+//
+//    public function testGetLedgersShouldCatchRestCliException()
+//    {
+//        $restCliMock = $this->getRestCliMock();
+//        $restCliMock->expects($this->once())->method('get')->willThrowException(new Exception());
+//
+//        $testedObject = $this->createObject($restCliMock);
+//
+//        $this->expectException(LedgerQueryException::class);
+//        $testedObject->getLedgers();
+//    }
+//
+//    public function testGetLedgersShouldCatchJsonMapperException()
+//    {
+//        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+//
+//        $restCliMock = $this->getRestCliMock();
+//        $restCliMock->expects($this->once())->method('get')->willReturn($badResponse);
+//
+//        $testedObject = $this->createObject($restCliMock);
+//
+//        $this->expectException(LedgerQueryException::class);
+//        $testedObject->getLedgers();
+//    }
 
 
 
