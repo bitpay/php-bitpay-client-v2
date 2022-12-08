@@ -314,6 +314,24 @@ class Client
     }
 
     /**
+     * Update the status of a BitPay invoice.
+     *
+     * @param  string $guid        BitPay refund Guid.
+     * @param  string $status      The new status for the refund to be updated.
+     * @return Refund $refund      Refund A BitPay generated Refund object.
+     * @throws RefundUpdateException
+     * @throws BitPayException
+     */
+    public function updateRefundByGuid(
+        string $guid,
+        string $status
+    ): Refund {
+        $refundClient = $this->createRefundClient();
+
+        return $refundClient->updateByGuid($guid, $status);
+    }
+
+    /**
      * Retrieve all refund requests on a BitPay invoice.
      *
      * @param  string $invoiceId   The BitPay invoice object having the associated refunds.
