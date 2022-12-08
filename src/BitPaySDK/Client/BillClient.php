@@ -167,7 +167,7 @@ class BillClient
     public function update(Bill $bill, string $billId): Bill
     {
         try {
-            $billToken = $this->getBill($bill->getId())->getToken();
+            $billToken = $this->get($bill->getId())->getToken();
             $bill->setToken($billToken);
 
             $responseJson = $this->restCli->update("bills/" . $billId, $bill->toArray());

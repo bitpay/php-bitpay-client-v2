@@ -28,7 +28,7 @@ class RatesTest extends TestCase
     public function testUpdate()
     {
         $rates = [new Rate(), 'test' => 'test'];
-        $bp = $this->getMockBuilder(Client::class)->getMock();
+        $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();
         $bp->method('getRates')->willReturn(new Rates($rates, $bp));
 
         $rates = new Rates($rates, $bp);
@@ -58,7 +58,7 @@ class RatesTest extends TestCase
         $rateMock->method('getRate')->willReturn(12);
 
         $rates = [$rateMock];
-        $bp = $this->getMockBuilder(Client::class)->getMock();
+        $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();
         $rates = new Rates($rates, $bp);
 
         $this->assertEquals($expectedValue, $rates->getRate('BTC'));
@@ -67,7 +67,7 @@ class RatesTest extends TestCase
     public function testToArray()
     {
         $rates = $this->createClassObject();
-        $ratesEmpty = new Rates([], $this->getMockBuilder(Client::class)->getMock());
+        $ratesEmpty = new Rates([], $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock());
         $ratesArray = $rates->toArray();
 
         $ratesEmptyArray = $ratesEmpty->toArray();
@@ -79,7 +79,7 @@ class RatesTest extends TestCase
     private function createClassObject()
     {
         $rates = [new Rate(), 'test' => 'test'];
-        $bp = $this->getMockBuilder(Client::class)->getMock();
+        $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();
 
         return new Rates($rates, $bp);
     }
