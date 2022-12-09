@@ -14,10 +14,14 @@ use BitPaySDK\Exceptions\PayoutRecipientCreationException;
 use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
 use BitPaySDK\Exceptions\PayoutRecipientQueryException;
 use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
+use BitPaySDK\Exceptions\RateQueryException;
 use BitPaySDK\Model\Bill\Bill;
+use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
+use BitPaySDK\Model\Rate\Rate;
+use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -1185,8 +1189,207 @@ class ClientTest extends TestCase
         $testedObject->requestPayoutRecipientNotification($exampleRecipientId);
     }
 
+    public function testGetRates()
+    {
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getRates.json');
 
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with('rates', null, false)
+            ->willReturn($exampleResponse);
 
+        $testedObject = $this->createObject($restCliMock);
+
+        $result = $testedObject->getRates();
+        $this->assertEquals('41248.11', $result->getRate('USD'));
+        $this->assertIsArray($result->getRates());
+        $this->assertInstanceOf(Rates::class, $result);
+    }
+
+    public function testGetRatesShouldHandleRestCliBitPayException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with('rates', null, false)
+            ->willThrowException(new BitPayException());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(RateQueryException::class);
+        $testedObject->getRates();
+    }
+
+    public function testGetRatesShouldHandleRestCliException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with('rates', null, false)
+            ->willThrowException(new Exception());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(RateQueryException::class);
+        $testedObject->getRates();
+    }
+
+    public function testGetRatesShouldHandleCorruptJson()
+    {
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with('rates', null, false)
+            ->willReturn($badResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(RateQueryException::class);
+        $testedObject->getRates();
+    }
+
+    public function testGetCurrencyRates()
+    {
+        $exampleCurrency = Currency::BTC;
+        $restCliMock = $this->getRestCliMock();
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getCurrencyRates.json');
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with('rates/' . $exampleCurrency, null, false)
+            ->willReturn($exampleResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $result = $testedObject->getCurrencyRates(Currency::BTC);
+        $this->assertEquals('41248.11', $result->getRate(Currency::USD));
+        $this->assertIsArray($result->getRates());
+        $this->assertInstanceOf(Rates::class, $result);
+    }
+
+    public function testGetCurrencyRatesShouldHandleRestCliBitPayException()
+    {
+        $exampleCurrency = Currency::USD;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with('rates/' . $exampleCurrency, null, false)
+            ->willThrowException(new BitPayException());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(RateQueryException::class);
+        $testedObject->getCurrencyRates(Currency::USD);
+    }
+
+    public function testGetCurrencyRatesShouldHandleRestCliException()
+    {
+        $exampleCurrency = Currency::USD;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with('rates/' . $exampleCurrency, null, false)
+            ->willThrowException(new Exception());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(RateQueryException::class);
+        $testedObject->getCurrencyRates(Currency::USD);
+    }
+
+    public function testGetCurrencyRatesShouldFailWhenDataInvalid()
+    {
+        $exampleCurrency = Currency::USD;
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with('rates/' . $exampleCurrency, null, false)
+            ->willReturn($badResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(RateQueryException::class);
+        $testedObject->getCurrencyRates(Currency::USD);
+    }
+
+    public function testGetCurrencyPairRate()
+    {
+        $baseCurrency = Currency::USD;
+        $currency = Currency::USD;
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getCurrencyPairRate.json');
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with('rates/' . $baseCurrency . '/' . $currency, null, false)
+            ->willReturn($exampleResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $result = $testedObject->getCurrencyPairRate($baseCurrency, $currency);
+        $this->assertEquals('41154.05', $result->getRate());
+        $this->assertEquals('US Dollar', $result->getName());
+        $this->assertEquals('USD', $result->getCode());
+        $this->assertInstanceOf(Rate::class, $result);
+    }
+
+    public function testGetCurrencyPairRateShouldCatchRestCliBitPayException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->willThrowException(new BitPayException());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(RateQueryException::class);
+        $testedObject->getCurrencyPairRate(Currency::BTC, Currency::USD);
+    }
+
+    public function testGetCurrencyPairRateShouldThrowExceptionWhenResponseIsException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->willThrowException(new \Exception());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(RateQueryException::class);
+        $testedObject->getCurrencyPairRate(Currency::BTC, Currency::USD);
+    }
+
+    public function testGetCurrencyPairRateShouldReturnExceptionWhenNoDataInJson()
+    {
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+        $restCliMock = $this->getRestCliMock();
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->willReturn($badResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(RateQueryException::class);
+        $testedObject->getCurrencyPairRate(Currency::BTC, Currency::USD);
+    }
 
 
 
