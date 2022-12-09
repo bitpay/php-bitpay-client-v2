@@ -283,13 +283,16 @@ class InvoiceClient
         $params["token"] = $invoice->getToken();
 
         try {
-            $response = $this->restCli->post("invoices/" . $invoiceId . "/notifications", $params);
-            return strtolower($response) === "success";
+            $responseJson = $this->restCli->post("invoices/" . $invoiceId . "/notifications", $params);
+            $decodedResponseJson = json_decode($responseJson) ?? '';
+            $result = strtolower($decodedResponseJson) == "success";
         } catch (Exception $e) {
             throw new InvoiceQueryException(
                 "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
             );
         }
+
+        return $result;
     }
 
     /**
