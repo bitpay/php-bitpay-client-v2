@@ -15,6 +15,7 @@ use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
 use BitPaySDK\Exceptions\PayoutRecipientQueryException;
 use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
 use BitPaySDK\Exceptions\RateQueryException;
+use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Facade;
@@ -22,6 +23,7 @@ use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
+use BitPaySDK\Model\Settlement\Settlement;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -1391,7 +1393,303 @@ class ClientTest extends TestCase
         $testedObject->getCurrencyPairRate(Currency::BTC, Currency::USD);
     }
 
+    public function testGetSettlements()
+    {
+        $currency = Currency::USD;
+        $dateStart = 'dateStart';
+        $dateEnd = 'dateEnd';
+        $status = 'status';
+        $limit = 1;
+        $offset = 1;
+        $restCliMock = $this->getRestCliMock();
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $params['dateStart'] = $dateStart;
+        $params['dateEnd'] = $dateEnd;
+        $params['currency'] = $currency;
+        $params['status'] = $status;
+        $params['limit'] = $limit;
+        $params['offset'] = $offset;
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getSettlementsResponse.json');
 
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements", $params)
+            ->willReturn($exampleResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $result = $testedObject->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
+        $this->assertIsArray($result);
+        $this->assertEquals('KBkdURgmE3Lsy9VTnavZHX', $result[0]->getId());
+        $this->assertEquals('processing', $result[0]->getStatus());
+        $this->assertEquals('RPWTabW8urd3xWv2To989v', $result[1]->getId());
+        $this->assertEquals('processing', $result[1]->getStatus());
+        $this->assertInstanceOf(Settlement::class, $result[0]);
+    }
+
+    public function testGetSettlementsShouldCatchRestCliBitPayException()
+    {
+        $currency = Currency::USD;
+        $dateStart = 'dateStart';
+        $dateEnd = 'dateEnd';
+        $status = 'status';
+        $limit = 1;
+        $offset = 1;
+        $restCliMock = $this->getRestCliMock();
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $params['dateStart'] = $dateStart;
+        $params['dateEnd'] = $dateEnd;
+        $params['currency'] = $currency;
+        $params['status'] = $status;
+        $params['limit'] = $limit;
+        $params['offset'] = $offset;
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements", $params)
+            ->willThrowException(new BitPayException());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(SettlementQueryException::class);
+        $testedObject->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
+    }
+
+    public function testGetSettlementsShouldCatchRestCliException()
+    {
+        $currency = Currency::USD;
+        $dateStart = 'dateStart';
+        $dateEnd = 'dateEnd';
+        $status = 'status';
+        $limit = 1;
+        $offset = 1;
+        $restCliMock = $this->getRestCliMock();
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $params['dateStart'] = $dateStart;
+        $params['dateEnd'] = $dateEnd;
+        $params['currency'] = $currency;
+        $params['status'] = $status;
+        $params['limit'] = $limit;
+        $params['offset'] = $offset;
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements", $params)
+            ->willThrowException(new Exception());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(SettlementQueryException::class);
+        $testedObject->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
+    }
+
+    public function testGetSettlementsShouldCatchJsonMapperException()
+    {
+        $currency = Currency::USD;
+        $dateStart = 'dateStart';
+        $dateEnd = 'dateEnd';
+        $status = 'status';
+        $limit = 1;
+        $offset = 1;
+        $restCliMock = $this->getRestCliMock();
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $params['dateStart'] = $dateStart;
+        $params['dateEnd'] = $dateEnd;
+        $params['currency'] = $currency;
+        $params['status'] = $status;
+        $params['limit'] = $limit;
+        $params['offset'] = $offset;
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements", $params)
+            ->willReturn($badResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(SettlementQueryException::class);
+        $testedObject->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
+    }
+
+    public function testGetSettlement()
+    {
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock = $this->getRestCliMock();
+        $settlementId = 'RPWTabW8urd3xWv2To989v';
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getSettlementResponse.json');
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements/" . $settlementId, $params)
+            ->willReturn($exampleResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $result = $testedObject->getSettlement($settlementId);
+        $this->assertEquals('RPWTabW8urd3xWv2To989v', $result->getId());
+        $this->assertEquals('EUR', $result->getCurrency());
+        $this->assertEquals(
+            '2GrR6GDeYxUFYM9sDKViy6nFFTy4Rjvm1SYdLBjK46jkeJdgUTRccRfhtwkhNcuZky',
+            $result->getToken()
+        );
+        $this->assertEquals('processing', $result->getStatus());
+        $this->assertInstanceOf(Settlement::class, $result);
+    }
+
+    public function testGetSettlementShouldHandleRestCliBitPayException()
+    {
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock = $this->getRestCliMock();
+        $settlementId = 'RPWTabW8urd3xWv2To989v';
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements/" . $settlementId, $params)
+            ->willThrowException(new BitPayException());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(SettlementQueryException::class);
+        $testedObject->getSettlement($settlementId);
+    }
+
+    public function testGetSettlementShouldHandleRestCliException()
+    {
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock = $this->getRestCliMock();
+        $settlementId = 'RPWTabW8urd3xWv2To989v';
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements/" . $settlementId, $params)
+            ->willThrowException(new Exception());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(SettlementQueryException::class);
+        $testedObject->getSettlement($settlementId);
+    }
+
+    public function testGetSettlementShouldCatchJsonMapperException()
+    {
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock = $this->getRestCliMock();
+        $settlementId = 'RPWTabW8urd3xWv2To989v';
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements/" . $settlementId, $params)
+            ->willReturn($badResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(SettlementQueryException::class);
+        $testedObject->getSettlement($settlementId);
+    }
+
+    public function testGetSettlementReconciliationReport()
+    {
+        $settlement = $this->createMock(Settlement::class);
+        $exampleToken = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $exampleId = 'RPWTabW8urd3xWv2To989v';
+        $settlement->method('getToken')->willReturn($exampleToken);
+        $settlement->method('getId')->willReturn($exampleId);
+        $params['token'] = $exampleToken;
+        $exampleResponse = file_get_contents(
+            __DIR__ . '/jsonResponse/getSettlementReconciliationReportResponse.json'
+        );
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
+            ->willReturn($exampleResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $result = $testedObject->getSettlementReconciliationReport($settlement);
+
+        $this->assertEquals('RvNuCTMAkURKimwgvSVEMP', $result->getId());
+        $this->assertEquals('processing', $result->getStatus());
+        $this->assertEquals('USD', $result->getCurrency());
+        $this->assertInstanceOf(Settlement::class, $result);
+    }
+
+    public function testGetSettlementReconciliationReportShouldCatchRestCliBitPayException()
+    {
+        $settlement = $this->createMock(Settlement::class);
+        $exampleToken = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $exampleId = 'RPWTabW8urd3xWv2To989v';
+        $settlement->method('getToken')->willReturn($exampleToken);
+        $settlement->method('getId')->willReturn($exampleId);
+        $params['token'] = $exampleToken;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
+            ->willThrowException(new BitPayException());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(SettlementQueryException::class);
+        $testedObject->getSettlementReconciliationReport($settlement);
+    }
+
+    public function testGetSettlementReconciliationReportShouldCatchRestCliException()
+    {
+        $settlement = $this->createMock(Settlement::class);
+        $exampleToken = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $exampleId = 'RPWTabW8urd3xWv2To989v';
+        $settlement->method('getToken')->willReturn($exampleToken);
+        $settlement->method('getId')->willReturn($exampleId);
+        $params['token'] = $exampleToken;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
+            ->willThrowException(new Exception());
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(SettlementQueryException::class);
+        $testedObject->getSettlementReconciliationReport($settlement);
+    }
+
+    public function testGetSettlementReconciliationReportShouldCatchJsonMapperException()
+    {
+        $settlement = $this->createMock(Settlement::class);
+        $exampleToken = 'testToken';
+        $exampleId = 'testId';
+        $settlement->method('getToken')->willReturn($exampleToken);
+        $settlement->method('getId')->willReturn($exampleId);
+        $params['token'] = $exampleToken;
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
+            ->willReturn($badResponse);
+
+        $testedObject = $this->createObject($restCliMock);
+
+        $this->expectException(SettlementQueryException::class);
+        $testedObject->getSettlementReconciliationReport($settlement);
+    }
 
 
 
