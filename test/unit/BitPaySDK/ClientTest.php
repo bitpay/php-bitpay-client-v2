@@ -166,11 +166,11 @@ class ClientTest extends TestCase
             $params['limit'],
             $params['offset']);
 
-        $invoiceToCompare = json_decode($successResponse, true);
+        $responseToCompare = json_decode($successResponse, true);
 
         $this->assertInstanceOf(Invoice::class, $result[0]);
-        $this->assertEquals($invoiceToCompare[0]['id'], $result[0]->getId());
-        $this->assertEquals($invoiceToCompare[0]['guid'], $result[0]->getGuid());
+        $this->assertEquals($responseToCompare[0]['id'], $result[0]->getId());
+        $this->assertEquals($responseToCompare[0]['guid'], $result[0]->getGuid());
     }
 
     /**
@@ -245,8 +245,19 @@ class ClientTest extends TestCase
         $params['token'] = self::UNIVERSAL_TOKEN;
         $expectedSuccessResponse = 'Success';
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects($this->once())->method('get')->with("invoices/" . self::TEST_INVOICE_ID, $params, true)->willReturn($this->getGetInvoiceExampleResponseString());
-        $restCliMock->expects($this->once())->method('post')->with('invoices/' . $invoiceId . '/notifications', $params)->willReturn($expectedSuccessResponse);
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("invoices/" . self::TEST_INVOICE_ID, $params, true)
+            ->willReturn($this->getGetInvoiceExampleResponseString());
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('post')
+            ->with('invoices/' . $invoiceId . '/notifications', $params)
+            ->willReturn($expectedSuccessResponse);
+
         $testedObject = $this->createObject($restCliMock);
 
         $result = $testedObject->requestInvoiceNotification($invoiceId);
@@ -304,7 +315,7 @@ class ClientTest extends TestCase
         $testedObject->requestInvoiceNotification(self::TEST_INVOICE_ID);
     }
 
-    public function testCancel()
+    public function testCancelInvoice()
     {
         $restCliMock = $this->getRestCliMock();
         $params = [
@@ -324,7 +335,7 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testCancelShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testCancelInvoiceShouldCatchRestCliExceptions(string $exceptionClass)
     {
         $restCliMock = $this->getRestCliMock();
         $params = [
@@ -338,7 +349,7 @@ class ClientTest extends TestCase
         $testedObject->cancelInvoice(self::TEST_INVOICE_ID, $params['forceCancel']);
     }
 
-    public function testCancelShouldCatchJsonMapperException()
+    public function testCancelInvoiceShouldCatchJsonMapperException()
     {
         $restCliMock = $this->getRestCliMock();
         $params = [
@@ -352,7 +363,7 @@ class ClientTest extends TestCase
         $testedObject->cancelInvoice(self::TEST_INVOICE_ID, $params['forceCancel']);
     }
 
-    public function testPay()
+    public function testPayInvoice()
     {
         $params['status'] = 'confirmed';
         $params['token'] = self::UNIVERSAL_TOKEN;
@@ -373,7 +384,7 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testPayShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testPayInvoiceShouldCatchRestCliExceptions(string $exceptionClass)
     {
         $params['status'] = 'confirmed';
         $params['token'] = self::UNIVERSAL_TOKEN;
@@ -386,7 +397,7 @@ class ClientTest extends TestCase
         $testedObject->payInvoice(self::TEST_INVOICE_ID, $params['status']);
     }
 
-    public function testPayShouldCatchJsonMapperException()
+    public function testPayInvoiceShouldCatchJsonMapperException()
     {
         $params['status'] = 'confirmed';
         $params['token'] = self::UNIVERSAL_TOKEN;
@@ -399,7 +410,7 @@ class ClientTest extends TestCase
         $testedObject->payInvoice(self::TEST_INVOICE_ID, $params['status']);
     }
 
-    public function testCreate()
+    public function testCreateInvoice()
     {
         $invoiceArray = json_decode($this->getGetInvoiceExampleResponseString(), true);
         $invoiceMock = $this->createMock(Invoice::class);
@@ -418,7 +429,7 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testCreateShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testCreateInvoiceShouldCatchRestCliExceptions(string $exceptionClass)
     {
         $invoiceArray = json_decode($this->getGetInvoiceExampleResponseString(), true);
         $invoiceMock = $this->createMock(Invoice::class);
@@ -432,7 +443,7 @@ class ClientTest extends TestCase
         $testedObject->createInvoice($invoiceMock);
     }
 
-    public function testCreateShouldCatchJsonMapperException()
+    public function testCreateInvoiceShouldCatchJsonMapperException()
     {
         $invoiceArray = json_decode($this->getGetInvoiceExampleResponseString(), true);
         $invoiceMock = $this->createMock(Invoice::class);
@@ -449,7 +460,7 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testUpdateShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testUpdateInvoiceShouldCatchRestCliExceptions(string $exceptionClass)
     {
         $params = [
             'token' => self::UNIVERSAL_TOKEN,
@@ -472,12 +483,12 @@ class ClientTest extends TestCase
             self::TEST_INVOICE_ID,
             $params['buyerSms'],
             $params['smsCode'],
-            '',
+            $params['buyerEmail'],
             $params['autoVerify']
         );
     }
 
-    public function testUpdateShouldCatchJsonMapperException()
+    public function testUpdateInvoiceShouldCatchJsonMapperException()
     {
         $params = [
             'token' => self::UNIVERSAL_TOKEN,
@@ -500,12 +511,12 @@ class ClientTest extends TestCase
             self::TEST_INVOICE_ID,
             $params['buyerSms'],
             $params['smsCode'],
-            '',
+            $params['buyerEmail'],
             $params['autoVerify']
         );
     }
 
-    public function testUpdateShouldThrowExceptionWhenBothBuyerEmailAndSmsProvided()
+    public function testUpdateInvoiceShouldThrowExceptionWhenBothBuyerEmailAndSmsProvided()
     {
         $params = [
             'buyerEmail' => 'test',
@@ -525,10 +536,9 @@ class ClientTest extends TestCase
         );
     }
 
-    public function testUpdateShouldThrowExceptionWhenNoSmsCodeProvided()
+    public function testUpdateInvoiceShouldThrowExceptionWhenNoSmsCodeProvided()
     {
         $params = [
-            'token' => self::UNIVERSAL_TOKEN,
             'buyerEmail' => '',
             'buyerSms' => 'buyerSms',
             'smsCode' => '',
@@ -546,16 +556,15 @@ class ClientTest extends TestCase
         );
     }
 
-    public function testUpdate()
+    public function testUpdateInvoice()
     {
         $params = [
             'token' => self::UNIVERSAL_TOKEN,
+            'buyerEmail' => null,
+            'buyerSms' => 'buyerSms',
+            'smsCode' => 'smsCode',
+            'autoVerify' => false
         ];
-
-        $params['buyerEmail'] = '';
-        $params['buyerSms'] = 'buyerSms';
-        $params['smsCode'] = 'smsCode';
-        $params['autoVerify'] = false;
 
         $successResponse = $this->getGetInvoiceExampleResponseString();
         $restCliMock = $this->getRestCliMock();
@@ -570,7 +579,7 @@ class ClientTest extends TestCase
             self::TEST_INVOICE_ID,
             $params['buyerSms'],
             $params['smsCode'],
-            '',
+            $params['buyerEmail'],
             $params['autoVerify']
         );
 
