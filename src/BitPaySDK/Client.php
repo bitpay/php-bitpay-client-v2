@@ -149,11 +149,11 @@ class Client
     /**
      * Update a BitPay invoice.
      *
-     * @param string $invoiceId       The id of the invoice to updated.
-     * @param string $buyerSms        The buyer's cell number.
-     * @param string $smsCode         The buyer's received verification code.
-     * @param string $buyerEmail      The buyer's email address.
-     * @param string $autoVerify      Skip the user verification on sandbox ONLY.
+     * @param string      $invoiceId       The id of the invoice to updated.
+     * @param string      $buyerSms        The buyer's cell number.
+     * @param string      $smsCode         The buyer's received verification code.
+     * @param string|null $buyerEmail      The buyer's email address.
+     * @param bool        $autoVerify      Skip the user verification on sandbox ONLY.
      * @return Invoice
      * @throws InvoiceUpdateException
      * @throws BitPayException
@@ -162,7 +162,7 @@ class Client
         string $invoiceId,
         string $buyerSms,
         string $smsCode,
-        string $buyerEmail,
+        ?string $buyerEmail,
         bool $autoVerify = false
     ): Invoice {
         $invoiceClient = $this->createInvoiceClient();

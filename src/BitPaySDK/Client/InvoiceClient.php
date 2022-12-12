@@ -76,11 +76,11 @@ class InvoiceClient
     /**
      * Update a BitPay invoice.
      *
-     * @param string $invoiceId       The id of the invoice to updated.
-     * @param string $buyerSms        The buyer's cell number.
-     * @param string $smsCode         The buyer's received verification code.
-     * @param string $buyerEmail      The buyer's email address.
-     * @param string $autoVerify      Skip the user verification on sandbox ONLY.
+     * @param string      $invoiceId The id of the invoice to updated.
+     * @param string      $buyerSms The buyer's cell number.
+     * @param string      $smsCode The buyer's received verification code.
+     * @param string|null $buyerEmail The buyer's email address.
+     * @param false       $autoVerify Skip the user verification on sandbox ONLY.
      * @return Invoice
      * @throws InvoiceUpdateException
      * @throws BitPayException
@@ -89,7 +89,7 @@ class InvoiceClient
         string $invoiceId,
         string $buyerSms,
         string $smsCode,
-        string $buyerEmail,
+        ?string $buyerEmail,
         bool $autoVerify = false
     ): Invoice {
         // Updating the invoice will require EITHER SMS or E-mail, but not both.
@@ -144,11 +144,11 @@ class InvoiceClient
      * Retrieve a BitPay invoice by invoice id using the specified facade.  The client must have been previously
      * authorized for the specified facade (the public facade requires no authorization).
      *
-     * @param string $invoiceId   The id of the invoice to retrieve.
-     * @param string $facade      The facade used to create it.
-     * @param string $signRequest Signed request.
+     * @param string $invoiceId The id of the invoice to retrieve.
+     * @param string $facade The facade used to create it.
+     * @param bool $signRequest Signed request.
      * @return Invoice
-     * @throws BitPayException
+     * @throws InvoiceQueryException
      */
     public function get(
         string $invoiceId,
@@ -390,12 +390,12 @@ class InvoiceClient
     /**
      * Check if buyerEmail or buyerSms is present, and not both.
      *
-     * @param string $buyerEmail The buyer's email address.
-     * @param string $buyerSms   The buyer's cell number.
+     * @param string|null $buyerEmail The buyer's email address.
+     * @param string      $buyerSms The buyer's cell number.
      *
      * @return bool
      */
-    private function buyerEmailOrSms(string $buyerEmail, string $buyerSms): bool
+    private function buyerEmailOrSms(?string $buyerEmail, string $buyerSms): bool
     {
         return (empty($buyerSms) && empty($buyerEmail)) || (!empty($buyerSms) && empty(!$buyerEmail));
     }
@@ -404,8 +404,9 @@ class InvoiceClient
      * Check if smsCode is required.
      *
      * @param bool   $autoVerify Skip the user verification on sandbox ONLY.
-     * @param string $buyerEmail The buyer's email address.
-     * @param string $smsCode    The buyer's received verification code.
+     * @param string $buyerSms The buyer's cell number.
+     * @param string $smsCode The buyer's received verification code.
+     * @return bool
      */
     private function isSmsCodeRequired(bool $autoVerify, string $buyerSms, string $smsCode): bool
     {
