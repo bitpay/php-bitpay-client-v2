@@ -18,12 +18,18 @@ use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
 use BitPaySDK\Exceptions\PayoutRecipientQueryException;
 use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
 use BitPaySDK\Exceptions\RateQueryException;
+use BitPaySDK\Exceptions\RefundCancellationException;
+use BitPaySDK\Exceptions\RefundCreationException;
+use BitPaySDK\Exceptions\RefundNotificationException;
+use BitPaySDK\Exceptions\RefundQueryException;
+use BitPaySDK\Exceptions\RefundUpdateException;
 use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Exceptions\SubscriptionCreationException;
 use BitPaySDK\Exceptions\SubscriptionQueryException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Facade;
+use BitPaySDK\Model\Invoice\Refund;
 use BitPaySDK\Model\Payout\Payout;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
@@ -42,6 +48,38 @@ class ClientTest extends TestCase
 {
     private const TOKEN = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
     private const CORRUPT_JSON_STRING = '{"code":"USD""name":"US Dollar","rate":21205.85}';
+    private const CORRECT_JSON_STRING = '[ { "currency": "EUR", "balance": 0 }, { "currency": "USD", "balance": 2389.82 }, { "currency": "BTC", "balance": 0.000287 } ]';
+    private const CANCEL_REFUND_JSON_STRING = '{
+        "id": "WoE46gSLkJQS48RJEiNw3L",
+        "invoice": "Hpqc63wvE1ZjzeeH4kEycF",
+        "reference": "Test refund",
+        "status": "cancelled",
+        "amount": 10,
+        "transactionCurrency": "BTC",
+        "transactionAmount": 0.000594,
+        "transactionRefundFee": 0.000002,
+        "currency": "USD",
+        "lastRefundNotification": "2021-08-29T20:45:35.368Z",
+        "refundFee": 0.04,
+        "immediate": false,
+        "buyerPaysRefundFee": false,
+        "requestDate": "2021-08-29T20:45:34.000Z"
+    }';
+    private const UPDATE_REFUND_JSON_STRING = '{"id": "WoE46gSLkJQS48RJEiNw3L",
+        "invoice": "Hpqc63wvE1ZjzeeH4kEycF",
+        "reference": "Test refund",
+        "status": "created",
+        "amount": 10,
+        "transactionCurrency": "BTC",
+        "transactionAmount": 0.000594,
+        "transactionRefundFee": 0.000002,
+        "currency": "USD",
+        "lastRefundNotification": "2021-08-29T20:45:35.368Z",
+        "refundFee": 0.04,
+        "immediate": false,
+        "buyerPaysRefundFee": false,
+        "requestDate": "2021-08-29T20:45:34.000Z"
+    }';
 
     /**
      * @throws BitPayException
@@ -2051,8 +2089,8 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('get')
             ->with("payouts/" . $payoutId, $params)
             ->willReturn($exampleResponse);
-        $testedObject = $this->getClient($restCliMock);
-        $result = $testedObject->getPayout($payoutId);
+        $client = $this->getClient($restCliMock);
+        $result = $client->getPayout($payoutId);
         $this->assertEquals(self::TOKEN, $result->getToken());
 
         $this->assertInstanceOf(Payout::class, $result);
@@ -2071,10 +2109,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('get')
             ->with("payouts/" . $payoutId, $params)
             ->willThrowException(new BitPayException());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutQueryException::class);
 
-        $testedObject->getPayout($payoutId);
+        $client->getPayout($payoutId);
     }
 
     public function testGetPayoutShouldHandleJsonMapperException()
@@ -2087,10 +2125,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('get')
             ->with("payouts/" . $payoutId, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutQueryException::class);
 
-        $testedObject->getPayout($payoutId);
+        $client->getPayout($payoutId);
     }
 
     /**
@@ -2106,10 +2144,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('get')
             ->with("payouts/" . $payoutId, $params)
             ->willThrowException(new Exception());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutQueryException::class);
 
-        $testedObject->getPayout($payoutId);
+        $client->getPayout($payoutId);
     }
 
     public function testGetPayouts()
@@ -2121,8 +2159,8 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('get')
             ->with("payouts", $params)
             ->willReturn($exampleResponse);
-        $testedObject = $this->getClient($restCliMock);
-        $result =   $testedObject->getPayouts(
+        $client = $this->getClient($restCliMock);
+        $result =   $client->getPayouts(
             $params['startDate'],
             $params['endDate'],
             $params['status'],
@@ -2148,10 +2186,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('get')
             ->with("payouts", $params)
             ->willThrowException(new BitPayException());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutQueryException::class);
 
-        $testedObject->getPayouts(
+        $client->getPayouts(
             $params['startDate'],
             $params['endDate'],
             $params['status'],
@@ -2169,10 +2207,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('get')
             ->with("payouts", $params)
             ->willThrowException(new Exception());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutQueryException::class);
 
-        $testedObject->getPayouts(
+        $client->getPayouts(
             $params['startDate'],
             $params['endDate'],
             $params['status'],
@@ -2190,10 +2228,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('get')
             ->with("payouts", $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutQueryException::class);
 
-        $testedObject->getPayouts(
+        $client->getPayouts(
             $params['startDate'],
             $params['endDate'],
             $params['status'],
@@ -2211,8 +2249,8 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('delete')
             ->with("payouts/" . $examplePayoutId, $params)
             ->willReturn('{"status":"success"}');
-        $testedObject = $this->getClient($restCliMock);
-        $result = $testedObject->cancelPayout($examplePayoutId);
+        $client = $this->getClient($restCliMock);
+        $result = $client->cancelPayout($examplePayoutId);
 
         $this->assertIsBool($result);
     }
@@ -2225,10 +2263,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('delete')
             ->with("payouts/" . $examplePayoutId, $params)
             ->willThrowException(new BitPayException());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutCancellationException::class);
 
-        $testedObject->cancelPayout($examplePayoutId);
+        $client->cancelPayout($examplePayoutId);
     }
 
     public function testCancelPayoutShouldCatchRestCliException()
@@ -2239,10 +2277,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('delete')
             ->with("payouts/" . $examplePayoutId, $params)
             ->willThrowException(new Exception());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutCancellationException::class);
 
-        $testedObject->cancelPayout($examplePayoutId);
+        $client->cancelPayout($examplePayoutId);
     }
 
     public function testCancelPayoutShouldCatchUnexistentPropertyError()
@@ -2253,10 +2291,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('delete')
             ->with("payouts/" . $examplePayoutId, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutCancellationException::class);
 
-        $testedObject->cancelPayout($examplePayoutId);
+        $client->cancelPayout($examplePayoutId);
     }
 
     public function testSubmitPayout()
@@ -2273,8 +2311,8 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('post')
             ->with("payouts", $payoutMock->toArray())
             ->willReturn('{ "currency": "EUR", "balance": 0 }');
-        $testedObject = $this->getClient($restCliMock);
-        $result = $testedObject->submitPayout($payoutMock);
+        $client = $this->getClient($restCliMock);
+        $result = $client->submitPayout($payoutMock);
 
         $this->assertEquals('EUR', $result->getCurrency());
         $this->assertInstanceOf(Payout::class, $result);
@@ -2294,10 +2332,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('post')
             ->with("payouts", $payoutMock->toArray())
             ->willThrowException(new BitPayException());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutCreationException::class);
 
-        $testedObject->submitPayout($payoutMock);
+        $client->submitPayout($payoutMock);
     }
 
     public function testSubmitPayoutShouldCatchRestCliException()
@@ -2314,10 +2352,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('post')
             ->with("payouts", $payoutMock->toArray())
             ->willThrowException(new Exception());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutCreationException::class);
 
-        $testedObject->submitPayout($payoutMock);
+        $client->submitPayout($payoutMock);
     }
 
     public function testSubmitPayoutShouldCatchJsonMapperException()
@@ -2334,10 +2372,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('post')
             ->with("payouts", $payoutMock->toArray())
             ->willReturn(self::CORRUPT_JSON_STRING);
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutCreationException::class);
 
-        $testedObject->submitPayout($payoutMock);
+        $client->submitPayout($payoutMock);
     }
 
     public function testRequestNotification()
@@ -2348,8 +2386,8 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('post')
             ->with("payouts/{$payoutId}/notifications", $content)
             ->willReturn('{ "status": "success", "data": {}, "message": null }');
-        $testedObject = $this->getClient($restCliMock);
-        $result = $testedObject->requestPayoutNotification($payoutId);
+        $client = $this->getClient($restCliMock);
+        $result = $client->requestPayoutNotification($payoutId);
 
         $this->assertTrue($result);
     }
@@ -2362,10 +2400,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('post')
             ->with("payouts/{$payoutId}/notifications", $content)
             ->willThrowException(new BitPayException());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutNotificationException::class);
 
-        $testedObject->requestPayoutNotification($payoutId);
+        $client->requestPayoutNotification($payoutId);
     }
 
     public function testRequestNotificationShouldCatchRestCliException()
@@ -2376,10 +2414,10 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('post')
             ->with("payouts/{$payoutId}/notifications", $content)
             ->willThrowException(new Exception());
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutNotificationException::class);
 
-        $testedObject->requestPayoutNotification($payoutId);
+        $client->requestPayoutNotification($payoutId);
     }
 
     public function testRequestNotificationShouldCatchJsonException()
@@ -2390,12 +2428,441 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())->method('post')
             ->with("payouts/{$payoutId}/notifications", $content)
             ->willReturn(self::CORRUPT_JSON_STRING);
-        $testedObject = $this->getClient($restCliMock);
+        $client = $this->getClient($restCliMock);
         $this->expectException(PayoutNotificationException::class);
 
-        $testedObject->requestPayoutNotification($payoutId);
+        $client->requestPayoutNotification($payoutId);
     }
 
+    public function testCreateRefund()
+    {
+        $params = $this->getInvoiceRefundParams();
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())
+            ->method('post')
+            ->with("refunds/", $params, true)
+            ->willReturn(file_get_contents('jsonResponse/createRefundResponse.json', true));
+        $client = $this->getClient($restCliMock);
+        /** @var Refund $result */
+        $result = $client->createRefund(
+            $params['invoiceId'],
+            $params['amount'],
+            $params['currency'],
+            $params['preview'],
+            $params['immediate'],
+            $params['buyerPaysRefundFee']
+        );
+
+        $this->assertSame('Eso8srxKJR5U71ahCspAAA', $result->getId());
+        $this->assertSame($params['invoiceId'], $result->getInvoice());
+    }
+
+    public function testCreateRefundShouldCatchRestCliBitPayException()
+    {
+        $params = $this->getInvoiceRefundParams();
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('post')
+            ->with("refunds/", $params, true)
+            ->willThrowException(new BitPayException());
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundCreationException::class);
+
+        $client->createRefund(
+            $params['invoiceId'],
+            $params['amount'],
+            $params['currency'],
+            $params['preview'],
+            $params['immediate'],
+            $params['buyerPaysRefundFee']
+        );
+    }
+
+    public function testCreateRefundShouldCatchRestCliException()
+    {
+        $params = $this->getInvoiceRefundParams();
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('post')
+            ->with("refunds/", $params, true)
+            ->willThrowException(new Exception());
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundCreationException::class);
+
+        $client->createRefund(
+            $params['invoiceId'],
+            $params['amount'],
+            $params['currency'],
+            $params['preview'],
+            $params['immediate'],
+            $params['buyerPaysRefundFee']
+        );
+    }
+
+    public function testCreateRefundShouldCatchJsonMapperException()
+    {
+        $params = $this->getInvoiceRefundParams();
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('post')->with("refunds/", $params, true)->willReturn(self::CORRUPT_JSON_STRING);
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundCreationException::class);
+
+        $client->createRefund(
+            $params['invoiceId'],
+            $params['amount'],
+            $params['currency'],
+            $params['preview'],
+            $params['immediate'],
+            $params['buyerPaysRefundFee']
+        );
+    }
+
+    public function testCancelRefund()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleRefundId = 'testId';
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('delete')
+            ->with("refunds/" . $exampleRefundId, $params)
+            ->willReturn(self::CANCEL_REFUND_JSON_STRING);
+
+        $client = $this->getClient($restCliMock);
+
+        $result = $client->cancelRefund($exampleRefundId);
+        $this->assertEquals('USD', $result->getCurrency());
+        $this->assertEquals(10, $result->getAmount());
+        $this->assertEquals('cancelled', $result->getStatus());
+        $this->assertInstanceOf(Refund::class, $result);
+    }
+
+    public function testCancelRefundShouldCatchRestCliBitPayException()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleRefundId = 'testId';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('delete')
+            ->with("refunds/" . $exampleRefundId, $params)
+            ->willThrowException(new BitPayException());
+
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundCancellationException::class);
+
+        $client->cancelRefund($exampleRefundId);
+    }
+
+    public function testCancelRefundShouldCatchRestCliException()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleRefundId = 'testId';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('delete')
+            ->with("refunds/" . $exampleRefundId, $params)
+            ->willThrowException(new Exception());
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(RefundCancellationException::class);
+        $client->cancelRefund($exampleRefundId);
+    }
+
+    public function testCancelRefundShouldCatchJsonMapperException()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleRefundId = 'testId';
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('delete')
+            ->with("refunds/" . $exampleRefundId, $params)
+            ->willReturn(self::CORRUPT_JSON_STRING);
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundCancellationException::class);
+
+        $client->cancelRefund($exampleRefundId);
+    }
+
+    public function testUpdateRefund()
+    {
+        $params['token'] = self::TOKEN;
+        $params['status'] = 'status';
+        $refundId = 'testId';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('update')
+            ->with("refunds/" . $refundId, $params)
+            ->willReturn(self::UPDATE_REFUND_JSON_STRING);
+
+        $client = $this->getClient($restCliMock);
+        $result = $client->updateRefund($refundId, $params['status']);
+
+        $this->assertInstanceOf(Refund::class, $result);
+    }
+
+    public function testUpdateRefundShouldCatchRestCliBitPayException()
+    {
+        $params['token'] = self::TOKEN;
+        $params['status'] = 'status';
+        $refundId = 'testId';
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('update')
+            ->with("refunds/" . $refundId, $params)
+            ->willThrowException(new BitPayException());
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundUpdateException::class);
+
+        $client->updateRefund($refundId, $params['status']);
+    }
+
+    public function testUpdateRefundShouldCatchRestCliException()
+    {
+        $params['token'] = self::TOKEN;
+        $params['status'] = 'status';
+        $refundId = 'testId';
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('update')
+            ->with("refunds/" . $refundId, $params)
+            ->willThrowException(new Exception());
+
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundUpdateException::class);
+        $client->updateRefund($refundId, $params['status']);
+    }
+
+    public function testUpdateRefundShouldCatchJsonMapperException()
+    {
+        $params['token'] = self::TOKEN;
+        $params['status'] = 'status';
+        $refundId = 'testId';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('update')
+            ->with("refunds/" . $refundId, $params)
+            ->willReturn(self::CORRUPT_JSON_STRING);
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundUpdateException::class);
+
+        $client->updateRefund($refundId, $params['status']);
+    }
+
+    public function testGetRefunds()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleInvoiceId = 'testId';
+        $params['invoiceId'] = $exampleInvoiceId;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')
+            ->with("refunds/", $params, true)
+            ->willReturn(self::CORRECT_JSON_STRING);
+        $client = $this->getClient($restCliMock);
+        $result = $client->getRefunds($exampleInvoiceId);
+
+        $this->assertIsArray($result);
+        $this->assertInstanceOf(Refund::class, $result[0]);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testGetRefundsShouldCatchRestCliBitPayException()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleInvoiceId = 'testId';
+        $params['invoiceId'] = $exampleInvoiceId;
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')
+            ->with("refunds/", $params, true)
+            ->willThrowException(new BitPayException());
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundQueryException::class);
+
+        $client->getRefunds($exampleInvoiceId);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testGetRefundsShouldCatchRestCliException()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleInvoiceId = 'testId';
+        $params['invoiceId'] = $exampleInvoiceId;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')
+            ->with("refunds/", $params, true)
+            ->willThrowException(new Exception());
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundQueryException::class);
+
+        $client->getRefunds($exampleInvoiceId);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testGetRefundsShouldCatchJsonMapperException()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleInvoiceId = 'testId';
+        $params['invoiceId'] = $exampleInvoiceId;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')
+            ->with("refunds/", $params, true)
+            ->willReturn(self::CORRUPT_JSON_STRING);
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundQueryException::class);
+
+        $client->getRefunds($exampleInvoiceId);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testGetRefund()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleRefundId = 'testId';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')
+            ->with("refunds/" . $exampleRefundId, $params, true)
+            ->willReturn(self::UPDATE_REFUND_JSON_STRING);
+
+        $client = $this->getClient($restCliMock);
+        $result = $client->getRefund($exampleRefundId);
+
+        $this->assertEquals('USD', $result->getCurrency());
+        $this->assertEquals(10, $result->getAmount());
+        $this->assertEquals('created', $result->getStatus());
+        $this->assertEquals('WoE46gSLkJQS48RJEiNw3L', $result->getId());
+        $this->assertInstanceOf(Refund::class, $result);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testGetRefundShouldCatchRestCliBitPayException()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleRefundId = 'testId';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')
+            ->with("refunds/" . $exampleRefundId, $params, true)
+            ->willThrowException(new BitPayException());
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(RefundQueryException::class);
+        $client->getRefund($exampleRefundId);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testGetRefundShouldCatchRestCliException()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleRefundId = 'testId';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')
+            ->with("refunds/" . $exampleRefundId, $params, true)
+            ->willThrowException(new Exception());
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(RefundQueryException::class);
+        $client->getRefund($exampleRefundId);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testGetRefundShouldCatchRestCliJsonMapperException()
+    {
+        $params['token'] = self::TOKEN;
+        $exampleRefundId = 'testId';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('get')
+            ->with("refunds/" . $exampleRefundId, $params, true)
+            ->willReturn(self::CORRUPT_JSON_STRING);
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(RefundQueryException::class);
+        $client->getRefund($exampleRefundId);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testSendRefundNotification()
+    {
+        $exampleRefundId = 'testId';
+        $params['token'] = self::TOKEN;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('post')
+            ->with("refunds/" . $exampleRefundId . "/notifications", $params, true)
+            ->willReturn('{"status":"success"}');
+        $client = $this->getClient($restCliMock);
+        $result = $client->sendRefundNotification($exampleRefundId);
+
+        $this->assertIsBool($result);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testSendRefundNotificationShouldCatchRestCliBitPayException()
+    {
+        $exampleRefundId = 'testId';
+        $params['token'] = self::TOKEN;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('post')
+            ->with("refunds/" . $exampleRefundId . "/notifications", $params, true)
+            ->willThrowException(new BitPayException());
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundNotificationException::class);
+
+        $client->sendRefundNotification($exampleRefundId);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testSendRefundNotificationShouldCatchRestCliException()
+    {
+        $exampleRefundId = 'testId';
+        $params['token'] = self::TOKEN;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('post')
+            ->with("refunds/" . $exampleRefundId . "/notifications", $params, true)
+            ->willThrowException(new Exception());
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundNotificationException::class);
+
+        $client->sendRefundNotification($exampleRefundId);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testSendRefundNotificationShouldCatchJsonMapperException()
+    {
+        $exampleRefundId = 'testId';
+        $params['token'] = self::TOKEN;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects($this->once())->method('post')
+            ->with("refunds/" . $exampleRefundId . "/notifications", $params, true)
+            ->willReturn(self::CORRUPT_JSON_STRING);
+        $client = $this->getClient($restCliMock);
+        $this->expectException(RefundNotificationException::class);
+
+        $client->sendRefundNotification($exampleRefundId);
+    }
 
 
 
@@ -2449,6 +2916,19 @@ class ClientTest extends TestCase
             'limit' => 1,
             'offset' => 1,
             'reference' => 'reference',
+        ];
+    }
+
+    private function getInvoiceRefundParams(): array
+    {
+        return [
+            'token' => self::TOKEN,
+            'invoiceId' => 'UZjwcYkWAKfTMn9J1yyfs4',
+            'amount' => 10.10,
+            'currency' => Currency::BTC,
+            'preview' => true,
+            'immediate' => false,
+            'buyerPaysRefundFee' => false
         ];
     }
 }
