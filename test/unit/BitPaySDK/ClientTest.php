@@ -16,6 +16,8 @@ use BitPaySDK\Exceptions\PayoutRecipientQueryException;
 use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
 use BitPaySDK\Exceptions\RateQueryException;
 use BitPaySDK\Exceptions\SettlementQueryException;
+use BitPaySDK\Exceptions\SubscriptionCreationException;
+use BitPaySDK\Exceptions\SubscriptionQueryException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Facade;
@@ -24,6 +26,7 @@ use BitPaySDK\Model\Payout\PayoutRecipients;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Model\Settlement\Settlement;
+use BitPaySDK\Model\Subscription\Subscription;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -112,7 +115,7 @@ class ClientTest extends TestCase
             ->with("bills", $billMock->toArray(), true)
             ->willReturn(file_get_contents(__DIR__ . '/jsonResponse/createBillResponse.json'));
 
-        $billClient = $this->createObject($restCliMock);
+        $billClient = $this->getClient($restCliMock);
         $createdBill = $billClient->createBill($billMock, Facade::Merchant);
 
         $this->assertEquals($expectedId, $createdBill->getId());
@@ -136,7 +139,7 @@ class ClientTest extends TestCase
             ->method('post')
             ->with("bills", $billMock->toArray(), true)
             ->willThrowException(new BitPayException());
-        $billClient = $this->createObject($restCliMock);
+        $billClient = $this->getClient($restCliMock);
 
         $this->expectException(BillCreationException::class);
 
@@ -160,10 +163,10 @@ class ClientTest extends TestCase
             ->with("bills", $billMock->toArray(), true)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillCreationException::class);
-        $testedObject->createBill($billMock, Facade::Merchant, true);
+        $client->createBill($billMock, Facade::Merchant, true);
     }
 
     public function testCreateBillShouldCatchJsonMapperException()
@@ -185,10 +188,10 @@ class ClientTest extends TestCase
             ->with("bills", $billMock->toArray(), true)
             ->willReturn($exampleBadResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillCreationException::class);
-        $testedObject->createBill($billMock, Facade::Merchant, true);
+        $client->createBill($billMock, Facade::Merchant, true);
     }
 
     public function testGetBill()
@@ -202,9 +205,9 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId, $params, true)
             ->willReturn(file_get_contents(__DIR__ . '/jsonResponse/getBill.json'));
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getBill($exampleBillId);
+        $result = $client->getBill($exampleBillId);
 
         $this->assertEquals(
             '6EBQR37MgDJPfEiLY3jtRq7eTP2aodR5V5wmXyyZhru5FM5yF4RCGKYQtnT7nhwHjA',
@@ -224,10 +227,10 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId, $params, true)
             ->willThrowException(new BillQueryException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillQueryException::class);
-        $testedObject->getBill($exampleBillId);
+        $client->getBill($exampleBillId);
     }
 
     public function testGetBillShouldCatchRestCliException()
@@ -241,10 +244,10 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId, $params, true)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(Exception::class);
-        $testedObject->getBill($exampleBillId);
+        $client->getBill($exampleBillId);
     }
 
     public function testGetBillShouldCatchJsonMapperException()
@@ -259,10 +262,10 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId, $params, true)
             ->willReturn($exampleBadResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillQueryException::class);
-        $testedObject->getBill($exampleBillId);
+        $client->getBill($exampleBillId);
     }
 
     public function testGetBills()
@@ -278,9 +281,9 @@ class ClientTest extends TestCase
             ->with("bills", $params)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getBills($status);
+        $result = $client->getBills($status);
         $this->assertIsArray($result);
         $this->assertEquals(
             '6EBQR37MgDJPfEiLY3jtRqBMYLg8XSDqhp2kp7VSDqCMHGHnsw4bqnnwQmtehzCvSo',
@@ -307,10 +310,10 @@ class ClientTest extends TestCase
             ->with("bills", $params)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillQueryException::class);
-        $testedObject->getBills($status);
+        $client->getBills($status);
     }
 
     public function testGetBillsShouldCatchRestCliBitPayException()
@@ -325,10 +328,10 @@ class ClientTest extends TestCase
             ->with("bills", $params)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillQueryException::class);
-        $testedObject->getBills($status);
+        $client->getBills($status);
     }
 
     /**
@@ -347,10 +350,10 @@ class ClientTest extends TestCase
             ->with("bills", $params)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillQueryException::class);
-        $testedObject->getBills($status);
+        $client->getBills($status);
     }
 
     public function testUpdateBill()
@@ -381,9 +384,9 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId, $params, true)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->updateBill($billMock, $exampleBillId);
+        $result = $client->updateBill($billMock, $exampleBillId);
         $this->assertInstanceOf(Bill::class, $result);
     }
 
@@ -414,10 +417,10 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId, $params, true)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillUpdateException::class);
-        $testedObject->updateBill($billMock, $exampleBillId);
+        $client->updateBill($billMock, $exampleBillId);
     }
 
     public function testUpdateBillShouldCatchRestCliException()
@@ -447,10 +450,10 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId, $params, true)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillUpdateException::class);
-        $testedObject->updateBill($billMock, $exampleBillId);
+        $client->updateBill($billMock, $exampleBillId);
     }
 
     public function testUpdateBillShouldCatchJsonMapperException()
@@ -482,10 +485,10 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId, $params, true)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillUpdateException::class);
-        $testedObject->updateBill($billMock, $exampleBillId);
+        $client->updateBill($billMock, $exampleBillId);
     }
 
     public function testDeliverBill()
@@ -501,9 +504,9 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId . '/deliveries', ['token' => $exampleBillToken])
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->deliverBill($exampleBillId, $exampleBillToken);
+        $result = $client->deliverBill($exampleBillId, $exampleBillToken);
         $this->assertIsString($result);
     }
 
@@ -519,10 +522,10 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId . '/deliveries', ['token' => $exampleBillToken])
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillDeliveryException::class);
-        $testedObject->deliverBill($exampleBillId, $exampleBillToken);
+        $client->deliverBill($exampleBillId, $exampleBillToken);
     }
 
     public function testDeliverBillShouldCatchRestCliException()
@@ -537,10 +540,10 @@ class ClientTest extends TestCase
             ->with("bills/" . $exampleBillId . '/deliveries', ['token' => $exampleBillToken])
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(BillDeliveryException::class);
-        $testedObject->deliverBill($exampleBillId, $exampleBillToken);
+        $client->deliverBill($exampleBillId, $exampleBillToken);
     }
 
 //    public function testGetLedger()
@@ -562,8 +565,8 @@ class ClientTest extends TestCase
 //            ->with("ledgers/" . $exampleCurrency, $params)
 //            ->willReturn($exampleResponse);
 //
-//        $testedObject = $this->createObject($restCliMock);
-//        $result = $testedObject->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
+//        $client = $this->createObject($restCliMock);
+//        $result = $client->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
 //
 //        $this->assertIsArray($result);
 //        $this->assertEquals('EUR', $result[0]->getCurrency());
@@ -580,13 +583,13 @@ class ClientTest extends TestCase
 //            ->method('get')
 //            ->willThrowException(new \Exception());
 //
-//        $testedObject = $this->createObject($restCliMock);
+//        $client = $this->createObject($restCliMock);
 //
 //        $this->expectException(LedgerQueryException::class);
 //        $exampleCurrency = Currency::BTC;
 //        $exampleStartDate = '2021-5-10';
 //        $exampleEndDate = '2021-5-31';
-//        $testedObject->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
+//        $client->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
 //    }
 //
 //    public function testGetLedgerShouldCatchRestCliBitPayException()
@@ -594,13 +597,13 @@ class ClientTest extends TestCase
 //        $restCliMock = $this->getRestCliMock();
 //        $restCliMock->expects($this->once())->method('get')->willThrowException(new BitPayException());
 //
-//        $testedObject = $this->createObject($restCliMock);
+//        $client = $this->createObject($restCliMock);
 //
 //        $this->expectException(LedgerQueryException::class);
 //        $exampleCurrency = Currency::BTC;
 //        $exampleStartDate = '2021-5-10';
 //        $exampleEndDate = '2021-5-31';
-//        $testedObject->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
+//        $client->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
 //    }
 //
 //    public function testGetLedgerShouldCatchJsonMapperException()
@@ -613,13 +616,13 @@ class ClientTest extends TestCase
 //            ->method('get')
 //            ->willReturn($badResponse);
 //
-//        $testedObject = $this->createObject($restCliMock);
+//        $client = $this->createObject($restCliMock);
 //
 //        $this->expectException(LedgerQueryException::class);
 //        $exampleCurrency = Currency::BTC;
 //        $exampleStartDate = '2021-5-10';
 //        $exampleEndDate = '2021-5-31';
-//        $testedObject->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
+//        $client->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
 //    }
 //
 //    public function testGetLedgers()
@@ -634,9 +637,9 @@ class ClientTest extends TestCase
 //            ->with("ledgers", $params)
 //            ->willReturn($exampleResponse);
 //
-//        $testedObject = $this->createObject($restCliMock);
+//        $client = $this->createObject($restCliMock);
 //
-//        $result = $testedObject->getLedgers();
+//        $result = $client->getLedgers();
 //
 //
 //        $this->assertIsArray($result);
@@ -648,10 +651,10 @@ class ClientTest extends TestCase
 //        $restCliMock = $this->getRestCliMock();
 //        $restCliMock->expects($this->once())->method('get')->willThrowException(new BitPayException());
 //
-//        $testedObject = $this->createObject($restCliMock);
+//        $client = $this->createObject($restCliMock);
 //
 //        $this->expectException(LedgerQueryException::class);
-//        $testedObject->getLedgers();
+//        $client->getLedgers();
 //    }
 //
 //    public function testGetLedgersShouldCatchRestCliException()
@@ -659,10 +662,10 @@ class ClientTest extends TestCase
 //        $restCliMock = $this->getRestCliMock();
 //        $restCliMock->expects($this->once())->method('get')->willThrowException(new Exception());
 //
-//        $testedObject = $this->createObject($restCliMock);
+//        $client = $this->createObject($restCliMock);
 //
 //        $this->expectException(LedgerQueryException::class);
-//        $testedObject->getLedgers();
+//        $client->getLedgers();
 //    }
 //
 //    public function testGetLedgersShouldCatchJsonMapperException()
@@ -672,10 +675,10 @@ class ClientTest extends TestCase
 //        $restCliMock = $this->getRestCliMock();
 //        $restCliMock->expects($this->once())->method('get')->willReturn($badResponse);
 //
-//        $testedObject = $this->createObject($restCliMock);
+//        $client = $this->createObject($restCliMock);
 //
 //        $this->expectException(LedgerQueryException::class);
-//        $testedObject->getLedgers();
+//        $client->getLedgers();
 //    }
 
     public function testSubmitPayoutRecipients()
@@ -696,9 +699,9 @@ class ClientTest extends TestCase
             ->with("recipients", $payoutRecipientsMock->toArray())
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->submitPayoutRecipients($payoutRecipientsMock);
+        $result = $client->submitPayoutRecipients($payoutRecipientsMock);
         $this->assertIsArray($result);
     }
 
@@ -719,10 +722,10 @@ class ClientTest extends TestCase
             ->with("recipients", $payoutRecipientsMock->toArray())
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientCreationException::class);
-        $testedObject->submitPayoutRecipients($payoutRecipientsMock);
+        $client->submitPayoutRecipients($payoutRecipientsMock);
     }
 
     public function testSubmitPayoutRecipientsShouldCatchRestCliException()
@@ -742,10 +745,10 @@ class ClientTest extends TestCase
             ->with("recipients", $payoutRecipientsMock->toArray())
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(Exception::class);
-        $testedObject->submitPayoutRecipients($payoutRecipientsMock);
+        $client->submitPayoutRecipients($payoutRecipientsMock);
     }
 
     /**
@@ -770,10 +773,10 @@ class ClientTest extends TestCase
             ->with("recipients", $payoutRecipientsMock->toArray())
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientCreationException::class);
-        $testedObject->submitPayoutRecipients($payoutRecipientsMock);
+        $client->submitPayoutRecipients($payoutRecipientsMock);
     }
 
     public function testGetPayoutRecipient()
@@ -789,9 +792,9 @@ class ClientTest extends TestCase
             ->with("recipients/" . $recipientId, $params)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getPayoutRecipient($recipientId);
+        $result = $client->getPayoutRecipient($recipientId);
         $this->assertInstanceOf(PayoutRecipient::class, $result);
     }
 
@@ -806,10 +809,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $recipientId, $params)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientQueryException::class);
-        $testedObject->getPayoutRecipient($recipientId);
+        $client->getPayoutRecipient($recipientId);
     }
 
     public function testGetPayoutRecipientShouldHandleRestCliException()
@@ -823,10 +826,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $recipientId, $params)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientQueryException::class);
-        $testedObject->getPayoutRecipient($recipientId);
+        $client->getPayoutRecipient($recipientId);
     }
 
     public function testGetPayoutRecipientShouldHandleJsonMapperException()
@@ -841,10 +844,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $recipientId, $params)
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutQueryException::class);
-        $testedObject->getPayoutRecipient($recipientId);
+        $client->getPayoutRecipient($recipientId);
     }
 
     public function testGetPayoutRecipients()
@@ -867,9 +870,9 @@ class ClientTest extends TestCase
             ->with("recipients", $params)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getPayoutRecipients($status, $limit, $offset);
+        $result = $client->getPayoutRecipients($status, $limit, $offset);
         $this->assertIsArray($result);
         $this->assertInstanceOf(PayoutRecipient::class, $result[0]);
     }
@@ -893,10 +896,10 @@ class ClientTest extends TestCase
             ->with("recipients", $params)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientQueryException::class);
-        $testedObject->getPayoutRecipients($status, $limit, $offset);
+        $client->getPayoutRecipients($status, $limit, $offset);
     }
 
     public function testGetPayoutRecipientsShouldHandleRestCliException()
@@ -918,10 +921,10 @@ class ClientTest extends TestCase
             ->with("recipients", $params)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientQueryException::class);
-        $testedObject->getPayoutRecipients($status, $limit, $offset);
+        $client->getPayoutRecipients($status, $limit, $offset);
     }
 
     public function testGetPayoutRecipientsShouldHandleJsonMapperException()
@@ -944,10 +947,10 @@ class ClientTest extends TestCase
             ->with("recipients", $params)
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientQueryException::class);
-        $testedObject->getPayoutRecipients($status, $limit, $offset);
+        $client->getPayoutRecipients($status, $limit, $offset);
     }
 
     public function testUpdatePayoutRecipient()
@@ -967,9 +970,9 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
+        $result = $client->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
         $this->assertInstanceOf(PayoutRecipient::class, $result);
     }
 
@@ -989,10 +992,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientUpdateException::class);
-        $testedObject->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
+        $client->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
     }
 
     public function testUpdatePayoutRecipientShouldCatchRestCliException()
@@ -1011,10 +1014,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientUpdateException::class);
-        $testedObject->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
+        $client->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
     }
 
     public function testUpdatePayoutRecipientShouldCatchJsonMapperException()
@@ -1035,10 +1038,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientUpdateException::class);
-        $testedObject->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
+        $client->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
     }
 
     public function testDeletePayoutRecipient()
@@ -1054,9 +1057,9 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId, $params)
             ->willReturn($successResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->deletePayoutRecipient($exampleRecipientId);
+        $result = $client->deletePayoutRecipient($exampleRecipientId);
         $this->assertIsBool($result);
         $this->assertTrue($result);
     }
@@ -1073,10 +1076,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId, $params)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientCancellationException::class);
-        $testedObject->deletePayoutRecipient($exampleRecipientId);
+        $client->deletePayoutRecipient($exampleRecipientId);
     }
 
     public function testDeletePayoutRecipientShouldCatchRestCliException()
@@ -1091,10 +1094,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId, $params)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientCancellationException::class);
-        $testedObject->deletePayoutRecipient($exampleRecipientId);
+        $client->deletePayoutRecipient($exampleRecipientId);
     }
 
     public function testDeletePayoutRecipientShouldCatchJsonDecodeException()
@@ -1110,10 +1113,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId, $params)
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientCancellationException::class);
-        $testedObject->deletePayoutRecipient($exampleRecipientId);
+        $client->deletePayoutRecipient($exampleRecipientId);
     }
 
     public function testRequestPayoutRecipientNotification()
@@ -1129,9 +1132,9 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId . '/notifications', $content)
             ->willReturn($successResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->requestPayoutRecipientNotification($exampleRecipientId);
+        $result = $client->requestPayoutRecipientNotification($exampleRecipientId);
         $this->assertIsBool($result);
         $this->assertTrue($result);
     }
@@ -1148,10 +1151,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId . '/notifications', $content)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientNotificationException::class);
-        $testedObject->requestPayoutRecipientNotification($exampleRecipientId);
+        $client->requestPayoutRecipientNotification($exampleRecipientId);
     }
 
     public function testRequestPayoutRecipientNotificationShouldCatchRestCliException()
@@ -1166,10 +1169,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId . '/notifications', $content)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientNotificationException::class);
-        $testedObject->requestPayoutRecipientNotification($exampleRecipientId);
+        $client->requestPayoutRecipientNotification($exampleRecipientId);
     }
 
     public function testRequestPayoutRecipientNotificationShouldCatchJsonDecodeException()
@@ -1185,10 +1188,10 @@ class ClientTest extends TestCase
             ->with("recipients/" . $exampleRecipientId . '/notifications', $content)
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(PayoutRecipientNotificationException::class);
-        $testedObject->requestPayoutRecipientNotification($exampleRecipientId);
+        $client->requestPayoutRecipientNotification($exampleRecipientId);
     }
 
     public function testGetRates()
@@ -1202,9 +1205,9 @@ class ClientTest extends TestCase
             ->with('rates', null, false)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getRates();
+        $result = $client->getRates();
         $this->assertEquals('41248.11', $result->getRate('USD'));
         $this->assertIsArray($result->getRates());
         $this->assertInstanceOf(Rates::class, $result);
@@ -1219,10 +1222,10 @@ class ClientTest extends TestCase
             ->with('rates', null, false)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(RateQueryException::class);
-        $testedObject->getRates();
+        $client->getRates();
     }
 
     public function testGetRatesShouldHandleRestCliException()
@@ -1234,10 +1237,10 @@ class ClientTest extends TestCase
             ->with('rates', null, false)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(RateQueryException::class);
-        $testedObject->getRates();
+        $client->getRates();
     }
 
     public function testGetRatesShouldHandleCorruptJson()
@@ -1250,10 +1253,10 @@ class ClientTest extends TestCase
             ->with('rates', null, false)
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(RateQueryException::class);
-        $testedObject->getRates();
+        $client->getRates();
     }
 
     public function testGetCurrencyRates()
@@ -1268,9 +1271,9 @@ class ClientTest extends TestCase
             ->with('rates/' . $exampleCurrency, null, false)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getCurrencyRates(Currency::BTC);
+        $result = $client->getCurrencyRates(Currency::BTC);
         $this->assertEquals('41248.11', $result->getRate(Currency::USD));
         $this->assertIsArray($result->getRates());
         $this->assertInstanceOf(Rates::class, $result);
@@ -1287,10 +1290,10 @@ class ClientTest extends TestCase
             ->with('rates/' . $exampleCurrency, null, false)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(RateQueryException::class);
-        $testedObject->getCurrencyRates(Currency::USD);
+        $client->getCurrencyRates(Currency::USD);
     }
 
     public function testGetCurrencyRatesShouldHandleRestCliException()
@@ -1304,10 +1307,10 @@ class ClientTest extends TestCase
             ->with('rates/' . $exampleCurrency, null, false)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(RateQueryException::class);
-        $testedObject->getCurrencyRates(Currency::USD);
+        $client->getCurrencyRates(Currency::USD);
     }
 
     public function testGetCurrencyRatesShouldFailWhenDataInvalid()
@@ -1322,10 +1325,10 @@ class ClientTest extends TestCase
             ->with('rates/' . $exampleCurrency, null, false)
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(RateQueryException::class);
-        $testedObject->getCurrencyRates(Currency::USD);
+        $client->getCurrencyRates(Currency::USD);
     }
 
     public function testGetCurrencyPairRate()
@@ -1340,9 +1343,9 @@ class ClientTest extends TestCase
             ->with('rates/' . $baseCurrency . '/' . $currency, null, false)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getCurrencyPairRate($baseCurrency, $currency);
+        $result = $client->getCurrencyPairRate($baseCurrency, $currency);
         $this->assertEquals('41154.05', $result->getRate());
         $this->assertEquals('US Dollar', $result->getName());
         $this->assertEquals('USD', $result->getCode());
@@ -1357,10 +1360,10 @@ class ClientTest extends TestCase
             ->method('get')
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(RateQueryException::class);
-        $testedObject->getCurrencyPairRate(Currency::BTC, Currency::USD);
+        $client->getCurrencyPairRate(Currency::BTC, Currency::USD);
     }
 
     public function testGetCurrencyPairRateShouldThrowExceptionWhenResponseIsException()
@@ -1371,10 +1374,10 @@ class ClientTest extends TestCase
             ->method('get')
             ->willThrowException(new \Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(RateQueryException::class);
-        $testedObject->getCurrencyPairRate(Currency::BTC, Currency::USD);
+        $client->getCurrencyPairRate(Currency::BTC, Currency::USD);
     }
 
     public function testGetCurrencyPairRateShouldReturnExceptionWhenNoDataInJson()
@@ -1387,10 +1390,10 @@ class ClientTest extends TestCase
             ->method('get')
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(RateQueryException::class);
-        $testedObject->getCurrencyPairRate(Currency::BTC, Currency::USD);
+        $client->getCurrencyPairRate(Currency::BTC, Currency::USD);
     }
 
     public function testGetSettlements()
@@ -1417,9 +1420,9 @@ class ClientTest extends TestCase
             ->with("settlements", $params)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
+        $result = $client->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
         $this->assertIsArray($result);
         $this->assertEquals('KBkdURgmE3Lsy9VTnavZHX', $result[0]->getId());
         $this->assertEquals('processing', $result[0]->getStatus());
@@ -1451,10 +1454,10 @@ class ClientTest extends TestCase
             ->with("settlements", $params)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(SettlementQueryException::class);
-        $testedObject->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
+        $client->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
     }
 
     public function testGetSettlementsShouldCatchRestCliException()
@@ -1480,10 +1483,10 @@ class ClientTest extends TestCase
             ->with("settlements", $params)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(SettlementQueryException::class);
-        $testedObject->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
+        $client->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
     }
 
     public function testGetSettlementsShouldCatchJsonMapperException()
@@ -1510,10 +1513,10 @@ class ClientTest extends TestCase
             ->with("settlements", $params)
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(SettlementQueryException::class);
-        $testedObject->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
+        $client->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
     }
 
     public function testGetSettlement()
@@ -1529,9 +1532,9 @@ class ClientTest extends TestCase
             ->with("settlements/" . $settlementId, $params)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getSettlement($settlementId);
+        $result = $client->getSettlement($settlementId);
         $this->assertEquals('RPWTabW8urd3xWv2To989v', $result->getId());
         $this->assertEquals('EUR', $result->getCurrency());
         $this->assertEquals(
@@ -1553,10 +1556,10 @@ class ClientTest extends TestCase
             ->with("settlements/" . $settlementId, $params)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(SettlementQueryException::class);
-        $testedObject->getSettlement($settlementId);
+        $client->getSettlement($settlementId);
     }
 
     public function testGetSettlementShouldHandleRestCliException()
@@ -1570,10 +1573,10 @@ class ClientTest extends TestCase
             ->with("settlements/" . $settlementId, $params)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(SettlementQueryException::class);
-        $testedObject->getSettlement($settlementId);
+        $client->getSettlement($settlementId);
     }
 
     public function testGetSettlementShouldCatchJsonMapperException()
@@ -1589,10 +1592,10 @@ class ClientTest extends TestCase
             ->with("settlements/" . $settlementId, $params)
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(SettlementQueryException::class);
-        $testedObject->getSettlement($settlementId);
+        $client->getSettlement($settlementId);
     }
 
     public function testGetSettlementReconciliationReport()
@@ -1614,9 +1617,9 @@ class ClientTest extends TestCase
             ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
             ->willReturn($exampleResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
-        $result = $testedObject->getSettlementReconciliationReport($settlement);
+        $result = $client->getSettlementReconciliationReport($settlement);
 
         $this->assertEquals('RvNuCTMAkURKimwgvSVEMP', $result->getId());
         $this->assertEquals('processing', $result->getStatus());
@@ -1640,10 +1643,10 @@ class ClientTest extends TestCase
             ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
             ->willThrowException(new BitPayException());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(SettlementQueryException::class);
-        $testedObject->getSettlementReconciliationReport($settlement);
+        $client->getSettlementReconciliationReport($settlement);
     }
 
     public function testGetSettlementReconciliationReportShouldCatchRestCliException()
@@ -1662,17 +1665,17 @@ class ClientTest extends TestCase
             ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
             ->willThrowException(new Exception());
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(SettlementQueryException::class);
-        $testedObject->getSettlementReconciliationReport($settlement);
+        $client->getSettlementReconciliationReport($settlement);
     }
 
     public function testGetSettlementReconciliationReportShouldCatchJsonMapperException()
     {
         $settlement = $this->createMock(Settlement::class);
-        $exampleToken = 'testToken';
-        $exampleId = 'testId';
+        $exampleToken = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $exampleId = 'RPWTabW8urd3xWv2To989v';
         $settlement->method('getToken')->willReturn($exampleToken);
         $settlement->method('getId')->willReturn($exampleId);
         $params['token'] = $exampleToken;
@@ -1685,10 +1688,347 @@ class ClientTest extends TestCase
             ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
             ->willReturn($badResponse);
 
-        $testedObject = $this->createObject($restCliMock);
+        $client = $this->getClient($restCliMock);
 
         $this->expectException(SettlementQueryException::class);
-        $testedObject->getSettlementReconciliationReport($settlement);
+        $client->getSettlementReconciliationReport($settlement);
+    }
+
+    public function testGetSubscriptions()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getSubscriptions.json');
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $status = 'draft';
+        $params['status'] = $status;
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions", $params)
+            ->willReturn($exampleResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $result = $client->getSubscriptions($status);
+
+        $this->assertIsArray($result);
+        $this->assertEquals('SeL33Hjyr3VmFHA5Skc4zy', $result[0]->getId());
+        $this->assertEquals('draft', $result[0]->getStatus());
+        $this->assertEquals('2021-05-21T12:29:54.428Z', $result[0]->getCreatedDate());
+    }
+
+    public function testGetSubscriptionsShouldHandleJsonMapperException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions", $params)
+            ->willReturn($badResponse);
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(SubscriptionQueryException::class);
+        $client->getSubscriptions();
+    }
+
+    public function testGetSubscriptionsShouldHandleRestCliBitPayException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions", $params)
+            ->willThrowException(new BitPayException());
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(SubscriptionQueryException::class);
+        $client->getSubscriptions();
+    }
+
+    public function testGetSubscriptionsShouldHandleRestCliException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions", $params)
+            ->willThrowException(new Exception());
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(SubscriptionQueryException::class);
+        $client->getSubscriptions();
+    }
+
+    public function testCreateSubscription()
+    {
+        $subscription = $this->createMock(Subscription::class);
+
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/createSubscription.json');
+        $restCliMock = $this->getRestCliMock();
+
+        $subscriptionToArray = [
+            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
+            'status' => 'draft',
+            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
+        ];
+        $subscription->method('toArray')->willReturn($subscriptionToArray);
+        $restCliMock->expects($this->once())->method('post')->willReturn($exampleResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $result = $client->createSubscription($subscription);
+        $this->assertInstanceOf(Subscription::class, $result);
+    }
+
+    public function testCreateSubscriptionShouldCatchRestCliBitPayException()
+    {
+        $subscription = $this->createMock(Subscription::class);
+
+        $restCliMock = $this->getRestCliMock();
+
+        $subscriptionToArray = [
+            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
+            'status' => 'draft',
+            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
+        ];
+        $subscription->method('toArray')->willReturn($subscriptionToArray);
+        $restCliMock->expects($this->once())->method('post')->willThrowException(new BitPayException());
+
+        $client = $this->getClient($restCliMock);
+        $this->expectException(SubscriptionCreationException::class);
+        $client->createSubscription($subscription);
+    }
+
+    public function testCreateSubscriptionShouldCatchRestCliException()
+    {
+        $subscription = $this->createMock(Subscription::class);
+
+        $restCliMock = $this->getRestCliMock();
+
+        $subscriptionToArray = [
+            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
+            'status' => 'draft',
+            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
+        ];
+        $subscription->method('toArray')->willReturn($subscriptionToArray);
+        $restCliMock->expects($this->once())->method('post')->willThrowException(new Exception());
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(SubscriptionCreationException::class);
+        $client->createSubscription($subscription);
+    }
+
+    public function testCreateSubscriptionShouldCatchJsonMapperException()
+    {
+        $subscription = $this->createMock(Subscription::class);
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+        $restCliMock = $this->getRestCliMock();
+
+        $subscriptionToArray = [
+            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
+            'status' => 'draft',
+            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
+        ];
+
+        $subscription->method('toArray')->willReturn($subscriptionToArray);
+        $restCliMock->expects($this->once())->method('post')->willReturn($badResponse);
+        $client = $this->getClient($restCliMock);
+        $this->expectException(SubscriptionCreationException::class);
+        $client->createSubscription($subscription);
+    }
+
+    public function testGetSubscription()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getSubscription.json');
+        $exampleSubscriptionId = 'SeL33Hjyr3VmFHA5Skc4zy';
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions/" . $exampleSubscriptionId, $params)
+            ->willReturn($exampleResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $result = $client->getSubscription($exampleSubscriptionId);
+
+        $this->assertInstanceOf(Subscription::class, $result);
+        $this->assertEquals('SeL33Hjyr3VmFHA5Skc4zy', $result->getId());
+        $this->assertEquals('draft', $result->getStatus());
+    }
+
+    public function testGetSubscriptionShouldHandleRestCliBitPayException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $exampleSubscriptionId = 'subscriptionId';
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions/" . $exampleSubscriptionId, $params)
+            ->willThrowException(new BitPayException());
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(SubscriptionQueryException::class);
+        $client->getSubscription($exampleSubscriptionId);
+    }
+
+    public function testGetSubscriptionShouldHandleRestCliException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $exampleSubscriptionId = 'subscriptionId';
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions/" . $exampleSubscriptionId, $params)
+            ->willThrowException(new Exception());
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(SubscriptionQueryException::class);
+        $client->getSubscription($exampleSubscriptionId);
+    }
+
+    public function testGetSubscriptionShouldHandleJsonMapperException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $exampleSubscriptionId = 'subscriptionId';
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions/" . $exampleSubscriptionId, $params)
+            ->willReturn($badResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(SubscriptionQueryException::class);
+        $client->getSubscription($exampleSubscriptionId);
+    }
+
+    public function testUpdateSubscription()
+    {
+        $subscription = $this->createMock(Subscription::class);
+        $restCliMock = $this->getRestCliMock();
+
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/updateSubscription.json');
+        $subscription->method('getId')->willReturn('SeL33Hjyr3VmFHA5Skc4zy');
+        $subscriptionToArray = [
+            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
+            'status' => 'draft',
+            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
+        ];
+        $subscription->method('toArray')->willReturn($subscriptionToArray);
+        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willReturn($exampleResponse);
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions/" . 'SeL33Hjyr3VmFHA5Skc4zy', $params)
+            ->willReturn($exampleResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $result = $client->updateSubscription($subscription, 'SeL33Hjyr3VmFHA5Skc4zy');
+
+        $this->assertInstanceOf(Subscription::class, $result);
+        $this->assertEquals(null, $result->getStatus());
+    }
+
+    public function testUpdateSubscriptionShouldCatchRestCliBitPayException()
+    {
+        $subscription = $this->createMock(Subscription::class);
+        $restCliMock = $this->getRestCliMock();
+
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/updateSubscription.json');
+        $exampleSubscriptionId = 'SeL33Hjyr3VmFHA5Skc4zy';
+
+        $subscription->method('getId')->willReturn($exampleSubscriptionId);
+        $subscriptionToArray = [
+            'id' => $exampleSubscriptionId,
+            'status' => 'status',
+            'token' => 'token',
+        ];
+        $subscription->method('toArray')->willReturn($subscriptionToArray);
+        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willThrowException(new BitPayException());
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions/" . $exampleSubscriptionId, $params)
+            ->willReturn($exampleResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(BitPayException::class);
+        $client->updateSubscription($subscription, $exampleSubscriptionId);
+    }
+
+    public function testUpdateSubscriptionShouldCatchRestCliException()
+    {
+        $subscription = $this->createMock(Subscription::class);
+        $restCliMock = $this->getRestCliMock();
+
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/updateSubscription.json');
+        $exampleSubscriptionId = 'SeL33Hjyr3VmFHA5Skc4zy';
+
+        $subscription->method('getId')->willReturn($exampleSubscriptionId);
+        $subscriptionToArray = [
+            'id' => $exampleSubscriptionId,
+            'status' => 'status',
+            'token' => 'token',
+        ];
+        $subscription->method('toArray')->willReturn($subscriptionToArray);
+        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willThrowException(new Exception());
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("subscriptions/" . $exampleSubscriptionId, $params)
+            ->willReturn($exampleResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(BitPayException::class);
+        $client->updateSubscription($subscription, $exampleSubscriptionId);
+    }
+
+    public function testUpdateSubscriptionShouldCatchJsonMapperException()
+    {
+        $subscription = $this->createMock(Subscription::class);
+        $restCliMock = $this->getRestCliMock();
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/updateSubscription.json');
+        $exampleSubscriptionId = 'SeL33Hjyr3VmFHA5Skc4zy';
+
+        $subscription->method('getId')->willReturn($exampleSubscriptionId);
+        $subscriptionToArray = [
+            'id' => $exampleSubscriptionId,
+            'status' => 'status',
+            'token' => 'token',
+        ];
+        $subscription->method('toArray')->willReturn($subscriptionToArray);
+        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willReturn($badResponse);
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(BitPayException::class);
+        $client->updateSubscription($subscription, $exampleSubscriptionId);
     }
 
 
@@ -1710,7 +2050,10 @@ class ClientTest extends TestCase
 
 
 
-    private function createObject(RESTcli $restCli)
+
+
+
+    private function getClient(RESTcli $restCli)
     {
         $testToken = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
 
