@@ -48,7 +48,11 @@ class ClientTest extends TestCase
 {
     private const TOKEN = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
     private const CORRUPT_JSON_STRING = '{"code":"USD""name":"US Dollar","rate":21205.85}';
-    private const CORRECT_JSON_STRING = '[ { "currency": "EUR", "balance": 0 }, { "currency": "USD", "balance": 2389.82 }, { "currency": "BTC", "balance": 0.000287 } ]';
+    private const CORRECT_JSON_STRING = '[ 
+        { "currency": "EUR", "balance": 0 }, 
+        { "currency": "USD", "balance": 2389.82 }, 
+        { "currency": "BTC", "balance": 0.000287 } 
+    ]';
     private const CANCEL_REFUND_JSON_STRING = '{
         "id": "WoE46gSLkJQS48RJEiNw3L",
         "invoice": "Hpqc63wvE1ZjzeeH4kEycF",
@@ -2863,25 +2867,6 @@ class ClientTest extends TestCase
 
         $client->sendRefundNotification($exampleRefundId);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private function getClient(RESTcli $restCli)
     {
