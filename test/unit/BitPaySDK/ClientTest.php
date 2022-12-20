@@ -31,6 +31,7 @@ use BitPaySDK\Exceptions\RefundUpdateException;
 use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Exceptions\SubscriptionCreationException;
 use BitPaySDK\Exceptions\SubscriptionQueryException;
+use BitPaySDK\Exceptions\WalletQueryException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Facade;
@@ -43,6 +44,7 @@ use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Model\Settlement\Settlement;
 use BitPaySDK\Model\Subscription\Subscription;
+use BitPaySDK\Model\Wallet\Wallet;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -3393,6 +3395,67 @@ class ClientTest extends TestCase
         $this->assertEquals($invoiceArray['id'], $result->getId());
         $this->assertEquals($invoiceArray['status'], $result->getStatus());
         $this->assertEquals($invoiceArray['guid'], $result->getGuid());
+    }
+
+    public function testGetSupportedWallets()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("supportedWallets/", null, false)
+            ->willReturn(file_get_contents(__DIR__.'/jsonResponse/getSupportedWalletsResponse.json'));
+
+        $client = $this->getClient($restCliMock);
+
+        $result = $client->getSupportedWallets();
+        $this->assertIsArray($result);
+        $this->assertInstanceOf(Wallet::class, $result[0]);
+    }
+
+    public function testGetSupportedWalletsShouldCatchRestCliBitPayException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("supportedWallets/", null, false)
+            ->willThrowException(new BitPayException());
+
+        $testedObject = $this->getClient($restCliMock);
+
+        $this->expectException(WalletQueryException::class);
+        $testedObject->getSupportedWallets();
+    }
+
+    public function testGetSupportedWalletsShouldCatchRestCliException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("supportedWallets/", null, false)
+            ->willThrowException(new Exception());
+
+        $testedObject = $this->getClient($restCliMock);
+
+        $this->expectException(WalletQueryException::class);
+        $testedObject->getSupportedWallets();
+    }
+
+    public function testGetSupportedWalletsShouldCatchJsonMapperException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('get')
+            ->with("supportedWallets/", null, false)
+            ->willReturn(self::CORRUPT_JSON_STRING);
+
+        $testedObject = $this->getClient($restCliMock);
+
+        $this->expectException(WalletQueryException::class);
+        $testedObject->getSupportedWallets();
     }
 
     public function exceptionClassProvider(): array
