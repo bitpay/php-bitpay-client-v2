@@ -160,9 +160,9 @@ class Client
      */
     public function updateInvoice(
         string $invoiceId,
-        string $buyerSms,
-        string $smsCode,
-        string $buyerEmail,
+        ?string $buyerSms,
+        ?string $smsCode,
+        ?string $buyerEmail,
         bool $autoVerify = false
     ): Invoice {
         $invoiceClient = $this->createInvoiceClient();
