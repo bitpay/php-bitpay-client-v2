@@ -539,7 +539,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects($this->once())->method('get')->with("invoices/" . $invoiceId, $params, true)->willReturn(self::CORRECT_JSON_STRING);
         $params['token'] = false;
-        $restCliMock->expects($this->once())->method('post')->with('invoices/' . $invoiceId . '/notifications', $params)->willReturn('string');
+        $restCliMock->expects($this->once())->method('post')->with('invoices/' . $invoiceId . '/notifications', $params)->willReturn('success');
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
