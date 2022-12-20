@@ -3411,6 +3411,10 @@ class ClientTest extends TestCase
         $result = $client->getSupportedWallets();
         $this->assertIsArray($result);
         $this->assertInstanceOf(Wallet::class, $result[0]);
+        $this->assertEquals('bitpay-wallet.png', $result[0]->getAvatar());
+        $this->assertEquals('copay-wallet.svg', $result[1]->getAvatar());
+        $this->assertEquals('BitPay', $result[0]->getDisplayName());
+        $this->assertEquals('Copay', $result[1]->getDisplayName());
     }
 
     public function testGetSupportedWalletsShouldCatchRestCliBitPayException()
