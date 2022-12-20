@@ -62,7 +62,7 @@ class RefundClient
         $params["preview"] = $preview;
         $params["immediate"] = $immediate;
         $params["buyerPaysRefundFee"] = $buyerPaysRefundFee;
-        $params['guid'] = $guid ?: Util::guid();
+        $params["guid"] = $guid ?: Util::guid();
 
         try {
             $responseJson = $this->restCli->post("refunds/", $params, true);
