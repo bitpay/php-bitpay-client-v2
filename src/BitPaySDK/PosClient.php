@@ -39,9 +39,8 @@ class PosClient extends Client
             $this->init();
             parent::__construct($this->RESTcli, new Tokens(null, null, $token));
         } catch (Exception $e) {
-            throw new BitPayException("failed to initialize BitPay Light Client (Config) : ".$e->getMessage());
+            throw new BitPayException("failed to initialize BitPay Light Client (Config) : " . $e->getMessage());
         }
-
     }
 
     /**
@@ -54,7 +53,7 @@ class PosClient extends Client
         try {
             $this->RESTcli = new RESTcli($this->env, new PrivateKey());
         } catch (Exception $e) {
-            throw new BitPayException("failed to build configuration : ". $e->getMessage());
+            throw new BitPayException("failed to build configuration : " . $e->getMessage());
         }
     }
 
@@ -70,9 +69,11 @@ class PosClient extends Client
         try {
             $responseJson = $this->RESTcli->get("currencies", null, false);
         } catch (BitPayException $e) {
-            throw new CurrencyQueryException("failed to serialize Currency object : ".$e->getMessage(), null, null, $e->getApiCode());
+            throw new CurrencyQueryException(
+                "failed to serialize Currency object : " . $e->getMessage(), null, null, $e->getApiCode()
+            );
         } catch (Exception $e) {
-            throw new CurrencyQueryException("failed to serialize Currency object : ".$e->getMessage());
+            throw new CurrencyQueryException("failed to serialize Currency object : " . $e->getMessage());
         }
 
         try {
@@ -85,7 +86,7 @@ class PosClient extends Client
 
         } catch (Exception $e) {
             throw new CurrencyQueryException(
-                "failed to deserialize BitPay server response (Currency) : ".$e->getMessage());
+                "failed to deserialize BitPay server response (Currency) : " . $e->getMessage());
         }
 
         return $currencies;

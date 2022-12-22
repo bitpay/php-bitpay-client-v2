@@ -27,7 +27,8 @@ interface Facade
     const Payout  = "payout";
 
     /**
-     * Limited to creating new invoice or bills and search specific invoices or bills based on their id for the merchant's organization
+     * Limited to creating new invoice or bills and search specific invoices
+     * or bills based on their id for the merchant's organization
      */
     const Pos  = "pos";
 }
