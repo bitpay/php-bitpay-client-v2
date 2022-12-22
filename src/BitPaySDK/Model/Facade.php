@@ -25,4 +25,9 @@ interface Facade
      * Access to this facade is not enabled by default.
      */
     const Payout  = "payout";
+
+    /**
+     * Limited to creating new invoice or bills and search specific invoices or bills based on their id for the merchant's organization
+     */
+    const Pos  = "pos";
 }
