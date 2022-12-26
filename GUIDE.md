@@ -153,6 +153,7 @@ php composer.phar require bitpay/sdk:^5.0
 ### Initializing your BitPay client
 
 Once you have the environment file (JSON or YML previously generated) you can initialize the client on two different ways:
+<li>Merchant/Payout Facade </li>
 
 ```php
 // Provide the full path to the env file which you have previously stored securely.
@@ -190,6 +191,38 @@ $bitpay = BitPaySDK\Client::create()->withData(
     "http://********.com:3128" //(optional) url and port of your proxy to forward requests through
 );
 ```
+
+<li>POS Facade</li>
+
+```php
+$posClient = new BitPaySDK\PosClient("CFJCZH3VitcEER9Uybx8LMvkPsSWzpSWvN4vhNEJp47b", BitPaySDK\Env::Test);
+$invoice = new Invoice(50.0, "USD");
+$invoice->setToken($bitpay->_token);
+$invoice->setOrderId("65f5090680f6");
+$invoice->setFullNotifications(true);
+$invoice->setExtendedNotifications(true);
+$invoice->setNotificationURL("https://hookbin.com/lJnJg9WW7MtG9GZlPVdj");
+$invoice->setRedirectURL("https://hookbin.com/lJnJg9WW7MtG9GZlPVdj");
+$invoice->setItemDesc("Ab tempora sed ut.");
+$invoice->setNotificationEmail("");
+
+$buyer = new Buyer();
+$buyer->setName("Bily Matthews");
+$buyer->setEmail("");
+$buyer->setAddress1("168 General Grove");
+$buyer->setAddress2("");
+$buyer->setCountry("AD");
+$buyer->setLocality("Port Horizon");
+$buyer->setNotify(true);
+$buyer->setPhone("+990123456789");
+$buyer->setPostalCode("KY7 1TH");
+$buyer->setRegion("New Port");
+
+$invoice->setBuyer($buyer);
+
+$basicInvoice = $posClient->createInvoice($invoice, \BitPaySDK\Model\Facade::Pos, false);
+```
+
 
 # Copyright
 

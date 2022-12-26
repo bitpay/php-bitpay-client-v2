@@ -21,14 +21,20 @@ class Tokens
     protected $payout;
 
     /**
+     * @var string|null
+     */
+    protected $pos;
+
+    /**
      * Tokens constructor.
      * @param string|null $merchant
      * @param string|null $payout
      */
-    public function __construct($merchant = null, $payout = null)
+    public function __construct($merchant = null, $payout = null, $pos = null)
     {
         $this->merchant = $merchant;
         $this->payout = $payout;
+        $this->pos = $pos;
     }
 
     public static function loadFromArray(array $tokens)
@@ -56,6 +62,9 @@ class Tokens
                 break;
             case Facade::Payout:
                 $token = $this->payout;
+                break;
+            case Facade::Pos:
+                $token = $this->pos;
                 break;
         }
 
