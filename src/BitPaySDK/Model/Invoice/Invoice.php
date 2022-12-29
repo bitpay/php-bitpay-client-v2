@@ -536,7 +536,7 @@ class Invoice
      * If not set, invoice will default to the account acceptanceWindow.
      * If account acceptanceWindow is not set, invoice will default to 15 minutes (900,000 milliseconds).
      *
-     * @return mixed
+     * @return float|null
      */
     public function getAcceptanceWindow()
     {
@@ -1228,7 +1228,7 @@ class Invoice
      * Information collected from the buyer during the process of paying an invoice.
      * Initially this object is empty.
      *
-     * @return object
+     * @return BuyerProvidedInfo|null
      */
     public function getBuyerProvidedInfo()
     {
@@ -1263,7 +1263,7 @@ class Invoice
      *
      * Object containing wallet-specific URLs for payment protocol.
      *
-     * @return object UniversalCodes
+     * @return UniversalCodes|null UniversalCodes
      */
     public function getUniversalCodes()
     {
@@ -1290,7 +1290,7 @@ class Invoice
      * If you disable a currency via the invoice parameter "paymentCurrencies",
      * this parameter will be set to "merchantDisabledByParam"
      *
-     * @return object
+     * @return SupportedTransactionCurrencies|null
      */
     public function getSupportedTransactionCurrencies()
     {
@@ -1462,7 +1462,7 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @return numeric
+     * @return int|null
      */
     public function getUnderpaidAmount()
     {
@@ -1477,7 +1477,7 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @param $underpaidAmount
+     * @param int $underpaidAmount
      */
     public function setUnderpaidAmount($underpaidAmount)
     {
@@ -1492,7 +1492,7 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @return numeric
+     * @return int|null
      */
     public function getOverpaidAmount()
     {
@@ -1507,7 +1507,7 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @param $overpaidAmount
+     * @param int $overpaidAmount
      */
     public function setOverpaidAmount($overpaidAmount)
     {
@@ -1720,7 +1720,7 @@ class Invoice
      * The total amount paid to the invoice in terms of the invoice transactionCurrency indicated
      * in the smallest possible unit for the corresponding transactionCurrency (e.g satoshis for BTC and BCH)
      *
-     * @return number
+     * @return int|null
      */
     public function getAmountPaid()
     {
