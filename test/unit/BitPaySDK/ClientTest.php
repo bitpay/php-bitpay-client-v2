@@ -2454,7 +2454,8 @@ class ClientTest extends TestCase
         $restCliMock->expects($this->once())
             ->method('post')
             ->with("refunds/", $params, true)
-            ->willReturn(file_get_contents('jsonResponse/createRefundResponse.json', true));
+            ->willReturn(file_get_contents(__DIR__ . '/jsonResponse/createRefundResponse.json', true));
+
         $client = $this->getClient($restCliMock);
         /** @var Refund $result */
         $result = $client->createRefund(
@@ -2463,11 +2464,12 @@ class ClientTest extends TestCase
             $params['currency'],
             $params['preview'],
             $params['immediate'],
-            $params['buyerPaysRefundFee']
+            $params['buyerPaysRefundFee'],
+            $params['guid']
         );
 
-        $this->assertSame('Eso8srxKJR5U71ahCspAAA', $result->getId());
-        $this->assertSame($params['invoiceId'], $result->getInvoice());
+        $this->assertEquals('Eso8srxKJR5U71ahCspAAA', $result->getId());
+        $this->assertEquals($params['invoiceId'], $result->getInvoice());
     }
 
     public function testCreateRefundShouldCatchRestCliBitPayException()
@@ -2486,7 +2488,8 @@ class ClientTest extends TestCase
             $params['currency'],
             $params['preview'],
             $params['immediate'],
-            $params['buyerPaysRefundFee']
+            $params['buyerPaysRefundFee'],
+            $params['guid']
         );
     }
 
@@ -2506,7 +2509,8 @@ class ClientTest extends TestCase
             $params['currency'],
             $params['preview'],
             $params['immediate'],
-            $params['buyerPaysRefundFee']
+            $params['buyerPaysRefundFee'],
+            $params['guid']
         );
     }
 
@@ -2524,7 +2528,8 @@ class ClientTest extends TestCase
             $params['currency'],
             $params['preview'],
             $params['immediate'],
-            $params['buyerPaysRefundFee']
+            $params['buyerPaysRefundFee'],
+            $params['guid']
         );
     }
 
@@ -3515,7 +3520,8 @@ class ClientTest extends TestCase
             'currency' => Currency::BTC,
             'preview' => true,
             'immediate' => false,
-            'buyerPaysRefundFee' => false
+            'buyerPaysRefundFee' => false,
+            'guid' => '3df73895-2531-e26a-3caa-098a746389b7'
         ];
     }
 }

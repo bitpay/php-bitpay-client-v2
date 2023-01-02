@@ -288,11 +288,12 @@ class Client
         string $currency,
         bool $preview = false,
         bool $immediate = false,
-        bool $buyerPaysRefundFee = false
+        bool $buyerPaysRefundFee = false,
+        ?string $guid = null
     ): Refund {
         $refundClient = $this->createRefundClient();
 
-        return $refundClient->create($invoiceId, $amount, $currency, $preview, $immediate, $buyerPaysRefundFee);
+        return $refundClient->create($invoiceId, $amount, $currency, $preview, $immediate, $buyerPaysRefundFee, $guid);
     }
 
     /**
