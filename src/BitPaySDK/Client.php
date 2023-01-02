@@ -149,11 +149,11 @@ class Client
     /**
      * Update a BitPay invoice.
      *
-     * @param string $invoiceId       The id of the invoice to updated.
-     * @param string $buyerSms        The buyer's cell number.
-     * @param string $smsCode         The buyer's received verification code.
-     * @param string $buyerEmail      The buyer's email address.
-     * @param string $autoVerify      Skip the user verification on sandbox ONLY.
+     * @param string      $invoiceId       The id of the invoice to updated.
+     * @param string      $buyerSms        The buyer's cell number.
+     * @param string      $smsCode         The buyer's received verification code.
+     * @param string|null $buyerEmail      The buyer's email address.
+     * @param bool        $autoVerify      Skip the user verification on sandbox ONLY.
      * @return Invoice
      * @throws InvoiceUpdateException
      * @throws BitPayException
@@ -314,6 +314,24 @@ class Client
     }
 
     /**
+     * Update the status of a BitPay invoice.
+     *
+     * @param  string $guid        BitPay refund Guid.
+     * @param  string $status      The new status for the refund to be updated.
+     * @return Refund $refund      Refund A BitPay generated Refund object.
+     * @throws RefundUpdateException
+     * @throws BitPayException
+     */
+    public function updateRefundByGuid(
+        string $guid,
+        string $status
+    ): Refund {
+        $refundClient = $this->createRefundClient();
+
+        return $refundClient->updateByGuid($guid, $status);
+    }
+
+    /**
      * Retrieve all refund requests on a BitPay invoice.
      *
      * @param  string $invoiceId   The BitPay invoice object having the associated refunds.
@@ -346,6 +364,19 @@ class Client
     }
 
     /**
+     * @param string $guid The BitPay refund Guid
+     * @return Refund BitPay Refund object with the associated Refund object.
+     * @throws BitPayException
+     * @throws RefundQueryException
+     */
+    public function getRefundByGuid(string $guid): Refund
+    {
+        $refundClient = $this->createRefundClient();
+
+        return $refundClient->getByGuid($guid);
+    }
+
+    /**
      * Send a refund notification.
      *
      * @param  string $refundId    A BitPay refund ID.
@@ -373,6 +404,21 @@ class Client
         $refundClient = $this->createRefundClient();
 
         return $refundClient->cancel($refundId);
+    }
+
+    /**
+     * Cancel a previously submitted refund request on a BitPay invoice.
+     *
+     * @param  string $guid     The refund Guid for the refund to be canceled.
+     * @return Refund $refund   Cancelled refund Object.
+     * @throws RefundCancellationException
+     * @throws BitPayException
+     */
+    public function cancelRefundByGuid(string $guid): Refund
+    {
+        $refundClient = $this->createRefundClient();
+
+        return $refundClient->cancelByGuid($guid);
     }
 
     /**

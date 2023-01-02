@@ -2,6 +2,7 @@
 
 namespace BitPaySDK\Client;
 
+use BitPayKeyUtils\Util\Util;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\RefundCancellationException;
 use BitPaySDK\Exceptions\RefundCreationException;
@@ -38,6 +39,8 @@ class RefundClient
      * @param  bool   $immediate          Whether funds should be removed from merchant ledger immediately on submission
      *                                    or at time of processing
      * @param  bool   $buyerPaysRefundFee Whether the buyer should pay the refund fee (default is merchant)
+     * @param  string|null $guid          Variable provided by the merchant and designed to be used by the merchant to
+     *                                    correlate the refund with a refund ID in their system (@since 7.2.0)
      * @return Refund $refund             An updated Refund Object
      * @throws RefundCreationException    RefundCreationException class
      * @throws BitPayException            BitPayException class
@@ -48,7 +51,8 @@ class RefundClient
         string $currency,
         bool $preview = false,
         bool $immediate = false,
-        bool $buyerPaysRefundFee = false
+        bool $buyerPaysRefundFee = false,
+        string $guid = null
     ): Refund {
         $params = [];
         $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
@@ -58,6 +62,7 @@ class RefundClient
         $params["preview"] = $preview;
         $params["immediate"] = $immediate;
         $params["buyerPaysRefundFee"] = $buyerPaysRefundFee;
+        $params["guid"] = $guid ?: Util::guid();
 
         try {
             $responseJson = $this->restCli->post("refunds/", $params, true);
@@ -107,6 +112,53 @@ class RefundClient
 
         try {
             $responseJson = $this->restCli->update("refunds/" . $refundId, $params);
+        } catch (BitPayException $e) {
+            throw new RefundUpdateException(
+                "failed to serialize refund object : " .
+                $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new RefundUpdateException("failed to serialize refund object : " . $e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $refund = $mapper->map(
+                json_decode($responseJson),
+                new Refund()
+            );
+        } catch (Exception $e) {
+            throw new RefundUpdateException(
+                "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
+            );
+        }
+
+        return $refund;
+    }
+
+    /**
+     * Update the status of a BitPay invoice.
+     *
+     * @param  string $guid        BitPay refund Guid.
+     * @param  string $status      The new status for the refund to be updated.
+     * @return Refund $refund      Refund A BitPay generated Refund object.
+     * @throws RefundUpdateException
+     * @throws BitPayException
+     * @since 7.2.0
+     */
+    public function updateByGuid(
+        string $guid,
+        string $status
+    ): Refund {
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["status"] = $status;
+
+        try {
+            $responseJson = $this->restCli->update("refunds/guid/" . $guid, $params);
         } catch (BitPayException $e) {
             throw new RefundUpdateException(
                 "failed to serialize refund object : " .
@@ -223,6 +275,49 @@ class RefundClient
     }
 
     /**
+     * Retrieve a previously made refund request on a BitPay invoice by guid.
+     *
+     * @param  string $guid The BitPay refund Guid.
+     * @return Refund $refund   BitPay Refund object with the associated Refund object.
+     * @throws RefundQueryException
+     * @throws BitPayException
+     * @since 7.2.0
+     */
+    public function getByGuid(string $guid): Refund
+    {
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+
+        try {
+            $responseJson = $this->restCli->get("refunds/guid/" . $guid, $params, true);
+        } catch (BitPayException $e) {
+            throw new RefundQueryException(
+                "failed to serialize refund object : " .
+                $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new RefundQueryException("failed to serialize refund object : " . $e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $refund = $mapper->map(
+                json_decode($responseJson),
+                new Refund()
+            );
+        } catch (Exception $e) {
+            throw new RefundQueryException(
+                "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
+            );
+        }
+
+        return $refund;
+    }
+
+    /**
      * Send a refund notification.
      *
      * @param  string $refundId    A BitPay refund ID.
@@ -276,6 +371,49 @@ class RefundClient
 
         try {
             $responseJson = $this->restCli->delete("refunds/" . $refundId, $params);
+        } catch (BitPayException $e) {
+            throw new RefundCancellationException(
+                "failed to serialize refund object : " .
+                $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new RefundCancellationException("failed to serialize refund object : " . $e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $refund = $mapper->map(
+                json_decode($responseJson),
+                new Refund()
+            );
+        } catch (Exception $e) {
+            throw new RefundCancellationException(
+                "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
+            );
+        }
+
+        return $refund;
+    }
+
+    /**
+     * Cancel a previously submitted refund request on a BitPay invoice.
+     *
+     * @param  string $guid     The refund Guid for the refund to be canceled.
+     * @return Refund $refund   Cancelled refund Object.
+     * @throws RefundCancellationException
+     * @throws BitPayException
+     * @since 7.2.0
+     */
+    public function cancelByGuid(string $guid): Refund
+    {
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+
+        try {
+            $responseJson = $this->restCli->delete("refunds/guid/" . $guid, $params);
         } catch (BitPayException $e) {
             throw new RefundCancellationException(
                 "failed to serialize refund object : " .
