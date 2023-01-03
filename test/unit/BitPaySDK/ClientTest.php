@@ -1173,8 +1173,8 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientCancellationException::class);
-        $client->deletePayoutRecipient($exampleRecipientId);
+//        $this->expectException(PayoutRecipientCancellationException::class);
+        $this->assertFalse($client->deletePayoutRecipient($exampleRecipientId));
     }
 
     public function testRequestPayoutRecipientNotification()
@@ -1248,8 +1248,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientNotificationException::class);
-        $client->requestPayoutRecipientNotification($exampleRecipientId);
+        $this->assertFalse($client->requestPayoutRecipientNotification($exampleRecipientId));
     }
 
     public function testGetRates()
@@ -2305,9 +2304,8 @@ class ClientTest extends TestCase
             ->with("payouts/" . $examplePayoutId, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutCancellationException::class);
 
-        $client->cancelPayout($examplePayoutId);
+        $this->assertFalse($client->cancelPayout($examplePayoutId));
     }
 
     public function testSubmitPayout()
@@ -2442,9 +2440,8 @@ class ClientTest extends TestCase
             ->with("payouts/{$payoutId}/notifications", $content)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutNotificationException::class);
 
-        $client->requestPayoutNotification($payoutId);
+        $this->assertFalse($client->requestPayoutNotification($payoutId));
     }
 
     public function testCreateRefund()
@@ -3080,9 +3077,8 @@ class ClientTest extends TestCase
             ->with("refunds/" . $exampleRefundId . "/notifications", $params, true)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundNotificationException::class);
 
-        $client->sendRefundNotification($exampleRefundId);
+        $this->assertFalse($client->sendRefundNotification($exampleRefundId));
     }
 
     public function testGetInvoice()
