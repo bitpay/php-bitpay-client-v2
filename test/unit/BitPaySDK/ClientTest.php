@@ -1163,7 +1163,7 @@ class ClientTest extends TestCase
     {
         $exampleRecipientId = 'X3icwc4tE8KJ5hEPNPpDXW';
         $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/success.json');
 
         $restCliMock = $this->getRestCliMock();
         $restCliMock
