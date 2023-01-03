@@ -160,8 +160,8 @@ class Client
      */
     public function updateInvoice(
         string $invoiceId,
-        string $buyerSms,
-        string $smsCode,
+        ?string $buyerSms,
+        ?string $smsCode,
         ?string $buyerEmail,
         bool $autoVerify = false
     ): Invoice {
@@ -288,11 +288,12 @@ class Client
         string $currency,
         bool $preview = false,
         bool $immediate = false,
-        bool $buyerPaysRefundFee = false
+        bool $buyerPaysRefundFee = false,
+        ?string $guid = null
     ): Refund {
         $refundClient = $this->createRefundClient();
 
-        return $refundClient->create($invoiceId, $amount, $currency, $preview, $immediate, $buyerPaysRefundFee);
+        return $refundClient->create($invoiceId, $amount, $currency, $preview, $immediate, $buyerPaysRefundFee, $guid);
     }
 
     /**
@@ -920,7 +921,8 @@ class Client
      *
      * @return InvoiceClient the invoice client
      */
-    protected function createInvoiceClient(): InvoiceClient {
+    protected function createInvoiceClient(): InvoiceClient
+    {
         return new InvoiceClient($this->tokenCache, $this->restCli);
     }
 
@@ -929,7 +931,8 @@ class Client
      *
      * @return RefundClient the refund client
      */
-    protected function createRefundClient(): RefundClient {
+    protected function createRefundClient(): RefundClient
+    {
         return new RefundClient($this->tokenCache, $this->restCli);
     }
 
@@ -938,7 +941,8 @@ class Client
      *
      * @return WalletClient the wallet client
      */
-    protected function createWalletClient(): WalletClient {
+    protected function createWalletClient(): WalletClient
+    {
         return new WalletClient($this->restCli);
     }
 
@@ -947,7 +951,8 @@ class Client
      *
      * @return BillClient the bill client
      */
-    protected function createBillClient(): BillClient {
+    protected function createBillClient(): BillClient
+    {
         return new BillClient($this->tokenCache, $this->restCli);
     }
 
@@ -956,7 +961,8 @@ class Client
      *
      * @return RateClient the rate client
      */
-    protected function createRateClient(): RateClient {
+    protected function createRateClient(): RateClient
+    {
         return new RateClient($this->restCli, $this);
     }
 
@@ -965,7 +971,8 @@ class Client
      *
      * @return LedgerClient the ledger client
      */
-    protected function createLedgerClient(): LedgerClient {
+    protected function createLedgerClient(): LedgerClient
+    {
         return new LedgerClient($this->tokenCache, $this->restCli);
     }
 
@@ -974,7 +981,8 @@ class Client
      *
      * @return PayoutRecipientsClient the payout recipients client
      */
-    protected function createPayoutRecipientsClient(): PayoutRecipientsClient {
+    protected function createPayoutRecipientsClient(): PayoutRecipientsClient
+    {
         return new PayoutRecipientsClient($this->tokenCache, $this->restCli);
     }
 
@@ -983,7 +991,8 @@ class Client
      *
      * @return PayoutClient the payout client
      */
-    protected function createPayoutClient(): PayoutClient {
+    protected function createPayoutClient(): PayoutClient
+    {
         return new PayoutClient($this->tokenCache, $this->restCli);
     }
 
@@ -992,7 +1001,8 @@ class Client
      *
      * @return SettlementsClient the settlements client
      */
-    protected function createSettlementsClient(): SettlementsClient {
+    protected function createSettlementsClient(): SettlementsClient
+    {
         return new SettlementsClient($this->tokenCache, $this->restCli);
     }
 
@@ -1001,7 +1011,8 @@ class Client
      *
      * @return SubscriptionClient the subscription clients
      */
-    protected function createSubscriptionClient(): SubscriptionClient {
+    protected function createSubscriptionClient(): SubscriptionClient
+    {
         return new SubscriptionClient($this->tokenCache, $this->restCli);
     }
 }

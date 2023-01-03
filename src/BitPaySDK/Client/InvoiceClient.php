@@ -87,8 +87,8 @@ class InvoiceClient
      */
     public function update(
         string $invoiceId,
-        string $buyerSms,
-        string $smsCode,
+        ?string $buyerSms,
+        ?string $smsCode,
         ?string $buyerEmail,
         bool $autoVerify = false
     ): Invoice {
@@ -391,11 +391,11 @@ class InvoiceClient
      * Check if buyerEmail or buyerSms is present, and not both.
      *
      * @param string|null $buyerEmail The buyer's email address.
-     * @param string      $buyerSms The buyer's cell number.
+     * @param string|null $buyerSms   The buyer's cell number.
      *
      * @return bool
      */
-    private function buyerEmailOrSms(?string $buyerEmail, string $buyerSms): bool
+    private function buyerEmailOrSms(?string $buyerEmail, ?string $buyerSms): bool
     {
         return (empty($buyerSms) && empty($buyerEmail)) || (!empty($buyerSms) && empty(!$buyerEmail));
     }
