@@ -3075,7 +3075,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects($this->once())->method('post')
             ->with("refunds/" . $exampleRefundId . "/notifications", $params, true)
-            ->willReturn(self::CORRUPT_JSON_STRING);
+            ->willReturn(file_get_contents(__DIR__ . '/jsonResponse/false.json', true));
         $client = $this->getClient($restCliMock);
 
         $this->assertFalse($client->sendRefundNotification($exampleRefundId));
