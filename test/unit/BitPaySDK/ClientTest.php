@@ -19,7 +19,6 @@ use BitPaySDK\Exceptions\PayoutNotificationException;
 use BitPaySDK\Exceptions\PayoutQueryException;
 use BitPaySDK\Exceptions\PayoutRecipientCancellationException;
 use BitPaySDK\Exceptions\PayoutRecipientCreationException;
-use BitPaySDK\Exceptions\PayoutRecipientException;
 use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
 use BitPaySDK\Exceptions\PayoutRecipientQueryException;
 use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
@@ -1174,7 +1173,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientException::class);
+        $this->expectException(PayoutRecipientCancellationException::class);
         $client->deletePayoutRecipient($exampleRecipientId);
     }
 
