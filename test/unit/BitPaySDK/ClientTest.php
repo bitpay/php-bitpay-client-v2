@@ -1162,7 +1162,7 @@ class ClientTest extends TestCase
     {
         $exampleRecipientId = 'X3icwc4tE8KJ5hEPNPpDXW';
         $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/false.json');
 
         $restCliMock = $this->getRestCliMock();
         $restCliMock
@@ -1237,7 +1237,7 @@ class ClientTest extends TestCase
     {
         $content['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
         $exampleRecipientId = 'X3icwc4tE8KJ5hEPNPpDXW';
-        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/false.json');
 
         $restCliMock = $this->getRestCliMock();
         $restCliMock
@@ -2302,7 +2302,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects($this->once())->method('delete')
             ->with("payouts/" . $examplePayoutId, $params)
-            ->willReturn(self::CORRUPT_JSON_STRING);
+            ->willReturn(file_get_contents(__DIR__ . '/jsonResponse/false.json', true));
         $client = $this->getClient($restCliMock);
 
         $this->assertFalse($client->cancelPayout($examplePayoutId));
@@ -2438,7 +2438,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects($this->once())->method('post')
             ->with("payouts/{$payoutId}/notifications", $content)
-            ->willReturn(self::CORRUPT_JSON_STRING);
+            ->willReturn(file_get_contents(__DIR__ . '/jsonResponse/false.json', true));
         $client = $this->getClient($restCliMock);
 
         $this->assertFalse($client->requestPayoutNotification($payoutId));
