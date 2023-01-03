@@ -284,8 +284,7 @@ class InvoiceClient
 
         try {
             $responseJson = $this->restCli->post("invoices/" . $invoiceId . "/notifications", $params);
-            $decodedResponseJson = json_decode($responseJson) ?? '';
-            $result = strtolower($decodedResponseJson) == "success";
+            $result = strtolower($responseJson) == "success";
         } catch (Exception $e) {
             throw new InvoiceQueryException(
                 "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
