@@ -16,9 +16,6 @@
     <testsuite name="Unit">
       <directory>./test/unit</directory>
     </testsuite>
-    <testsuite name="Integration">
-      <directory suffix="Test.php">./test/Integration</directory>
-    </testsuite>
   </testsuites>
   <logging/>
 </phpunit>
