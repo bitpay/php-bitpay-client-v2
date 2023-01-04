@@ -35,7 +35,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "BitPaySDK\\Test\\": "test/unit/BitPaySDK"
+      "BitPaySDK\\Test\\": "test/unit/BitPaySDK",
+      "BitPaySDK\\Integration\\": "test/Integration/BitPaySDK"
     }
   }
 }
