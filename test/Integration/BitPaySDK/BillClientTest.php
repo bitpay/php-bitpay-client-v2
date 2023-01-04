@@ -5,12 +5,9 @@ namespace BitPaySDK\Integration;
 
 use BitPayKeyUtils\KeyHelper\PrivateKey;
 use BitPaySDK\Client;
-use BitPaySDK\Env;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Bill\Item;
 use BitPaySDK\Model\Currency;
-use BitPaySDK\Tokens;
-use BitPaySDK\Util\RESTcli\RESTcli;
 use PHPUnit\Framework\TestCase;
 
 class BillClientTest extends TestCase

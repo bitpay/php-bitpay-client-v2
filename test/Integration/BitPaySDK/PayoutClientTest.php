@@ -24,7 +24,7 @@ class PayoutClientTest extends TestCase
         $currency = Currency::USD;
         $ledgerCurrency = Currency::USD;
         $payout = new Payout(10, $currency, $ledgerCurrency);
-        $payout->setEmail('w.kogut@sumoheavy.com');
+        $payout->setEmail('test1234@example.com');
 
         $this->expectException(PayoutCreationException::class);
         $this->client->submitPayout($payout);
