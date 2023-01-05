@@ -1173,7 +1173,6 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-//        $this->expectException(PayoutRecipientCancellationException::class);
         $this->assertFalse($client->deletePayoutRecipient($exampleRecipientId));
     }
 
