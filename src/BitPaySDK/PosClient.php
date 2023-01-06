@@ -1,4 +1,5 @@
 <?php
+
 namespace BitPaySDK;
 
 use BitPayKeyUtils\KeyHelper\PrivateKey;
@@ -70,7 +71,10 @@ class PosClient extends Client
             $responseJson = $this->RESTcli->get("currencies", null, false);
         } catch (BitPayException $e) {
             throw new CurrencyQueryException(
-                "failed to serialize Currency object : " . $e->getMessage(), null, null, $e->getApiCode()
+                "failed to serialize Currency object : " . $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
             );
         } catch (Exception $e) {
             throw new CurrencyQueryException("failed to serialize Currency object : " . $e->getMessage());
@@ -83,10 +87,10 @@ class PosClient extends Client
                 [],
                 Currency::class
             );
-
         } catch (Exception $e) {
             throw new CurrencyQueryException(
-                "failed to deserialize BitPay server response (Currency) : " . $e->getMessage());
+                "failed to deserialize BitPay server response (Currency) : " . $e->getMessage()
+            );
         }
 
         return $currencies;

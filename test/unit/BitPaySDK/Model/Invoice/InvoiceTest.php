@@ -488,7 +488,7 @@ class InvoiceTest extends TestCase
 
     public function testGetUnderpaidAmount()
     {
-        $expectedUnderpaidAmount = 'Test underpaid amount';
+        $expectedUnderpaidAmount = 10;
 
         $invoice = $this->createClassObject();
         $invoice->setUnderpaidAmount($expectedUnderpaidAmount);
@@ -497,7 +497,7 @@ class InvoiceTest extends TestCase
 
     public function testGetOverpaidAmount()
     {
-        $expectedOverpaidAmount = 'Test overpaid amount';
+        $expectedOverpaidAmount = 10;
 
         $invoice = $this->createClassObject();
         $invoice->setOverpaidAmount($expectedOverpaidAmount);

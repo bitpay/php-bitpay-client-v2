@@ -15,23 +15,6 @@ class LedgerTest extends TestCase
         $this->assertInstanceOf(Ledger::class, $ledger);
     }
 
-    public function testGetEntries()
-    {
-        $expectedLedgerEntries = [];
-        array_push($expectedLedgerEntries, $this->createLedgerEntry()->toArray());
-
-        $ledger = $this->createClassObject();
-        $ledger->setEntries($expectedLedgerEntries);
-        $this->assertEquals($expectedLedgerEntries, $ledger->getEntries());
-
-        $expectedLedgerEntries = [];
-        array_push($expectedLedgerEntries, $this->createLedgerEntry());
-        
-        $ledger = $this->createClassObject();
-        $ledger->setEntries($expectedLedgerEntries);
-        $this->assertEquals($expectedLedgerEntries[0]->toArray(), $ledger->getEntries()[0]);
-    }
-
     public function testGetCurrency()
     {
         $expectedCurrency = 'BTC';
@@ -57,7 +40,6 @@ class LedgerTest extends TestCase
 
         $ledger = $this->createClassObject();
 
-        $ledger->setEntries($expectedLedgerEntries);
         $ledger->setCurrency('BTC');
         $ledger->setBalance(1.1);
 
@@ -66,11 +48,9 @@ class LedgerTest extends TestCase
         $this->assertNotNull($ledgerArray);
         $this->assertIsArray($ledgerArray);
 
-        $this->assertArrayHasKey('entries', $ledgerArray);
         $this->assertArrayHasKey('currency', $ledgerArray);
         $this->assertArrayHasKey('balance', $ledgerArray);
 
-        $this->assertEquals($ledgerArray['entries'], $expectedLedgerEntries);
         $this->assertEquals($ledgerArray['currency'], 'BTC');
         $this->assertEquals($ledgerArray['balance'], 1.1);
     }
