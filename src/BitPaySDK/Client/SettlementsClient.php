@@ -7,7 +7,6 @@ use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Settlement\Settlement;
 use BitPaySDK\Tokens;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -72,7 +71,8 @@ class SettlementsClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
+            $mapper->bEnforceMapType = false;
             $settlements = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -114,7 +114,7 @@ class SettlementsClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
             $settlement = $mapper->map(
                 json_decode($responseJson),
                 new Settlement()
@@ -160,7 +160,7 @@ class SettlementsClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
             $reconciliationReport = $mapper->map(
                 json_decode($responseJson),
                 new Settlement()

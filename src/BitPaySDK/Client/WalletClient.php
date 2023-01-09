@@ -5,7 +5,6 @@ namespace BitPaySDK\Client;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\WalletQueryException;
 use BitPaySDK\Model\Wallet\Wallet;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -44,7 +43,8 @@ class WalletClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
+            $mapper->bEnforceMapType = false;
             $wallets = $mapper->mapArray(
                 json_decode($responseJson),
                 [],

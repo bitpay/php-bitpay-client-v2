@@ -10,7 +10,6 @@ use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Tokens;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -53,7 +52,8 @@ class BillClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
+            $mapper->bEnforceMapType = false;
             $bill = $mapper->map(
                 json_decode($responseJson),
                 new Bill()
@@ -97,7 +97,8 @@ class BillClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
+            $mapper->bEnforceMapType = false;
             $bill = $mapper->map(
                 json_decode($responseJson),
                 new Bill()
@@ -141,7 +142,8 @@ class BillClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
+            $mapper->bEnforceMapType = false;
             $bills = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -184,7 +186,8 @@ class BillClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
+            $mapper->bEnforceMapType = false;
             $bill = $mapper->map(
                 json_decode($responseJson),
                 $bill

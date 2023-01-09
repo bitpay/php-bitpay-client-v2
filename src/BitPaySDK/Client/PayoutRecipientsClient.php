@@ -14,7 +14,6 @@ use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
 use BitPaySDK\Tokens;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -57,7 +56,8 @@ class PayoutRecipientsClient
             );
         }
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
+            $mapper->bEnforceMapType = false;
             $recipients = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -100,7 +100,7 @@ class PayoutRecipientsClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
             $recipient = $mapper->map(
                 json_decode($responseJson),
                 new PayoutRecipient()
@@ -156,7 +156,8 @@ class PayoutRecipientsClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
+            $mapper->bEnforceMapType = false;
             $recipients = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -200,7 +201,7 @@ class PayoutRecipientsClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
             $recipient = $mapper->map(
                 json_decode($responseJson),
                 new PayoutRecipient()
