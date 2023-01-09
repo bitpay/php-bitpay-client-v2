@@ -65,7 +65,7 @@ use Symfony\Component\Yaml\Yaml;
  * Class Client
  * @package Bitpay
  * @author  Antonio Buedo
- * @version 7.1.0
+ * @version 7.2.0
  * See bitpay.com/api for more information.
  * date 15.11.2021
  */
