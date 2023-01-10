@@ -62,8 +62,8 @@ class CurrenciesTest extends TestCase
   public function testGetQr()
   {
     $expectedCurrencyQr = new CurrencyQr;
-    $expectedCurrencyQr->setType = 'BIP21';
-    $expectedCurrencyQr->setCollapsed = false;
+    $expectedCurrencyQr->setType('BIP21');
+    $expectedCurrencyQr->setCollapsed(false);
 
     $currencies = $this->createClassObject();
     $currencies->setQr($expectedCurrencyQr);
