@@ -8,7 +8,7 @@ use BitPaySDK\Exceptions\RateQueryException;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Tokens;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
+use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -46,7 +46,7 @@ class RateClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $rates = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -86,7 +86,7 @@ class RateClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $rates = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -127,7 +127,7 @@ class RateClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $rate = $mapper->map(
                 json_decode($responseJson),
                 new Rate()

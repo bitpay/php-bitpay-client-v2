@@ -11,7 +11,7 @@ use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Invoice\Refund;
 use PHPUnit\Framework\TestCase;
 
-class RefundClient extends TestCase
+class RefundClientTest extends TestCase
 {
     protected $client;
 
