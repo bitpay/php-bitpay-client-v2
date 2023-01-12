@@ -3394,6 +3394,9 @@ class ClientTest extends TestCase
         $this->assertEquals(true, $result->getIsCancelled());
     }
 
+    /**
+     * @dataProvider exceptionClassProvider
+     */
     public function testCancelInvoiceByGuidShouldCatchRestCliExceptions(string $exceptionClass)
     {
         $restCliMock = $this->getRestCliMock();
