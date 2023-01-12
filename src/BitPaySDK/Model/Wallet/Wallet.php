@@ -19,6 +19,7 @@ class Wallet
     protected $_paypro;
     protected $_currencies;
     protected $_image;
+    protected $_payPro;
 
     /**
      * Constructor, create a minimal request Wallet object.

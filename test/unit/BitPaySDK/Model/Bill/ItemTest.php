@@ -52,15 +52,15 @@ class ItemTest extends TestCase
     public function testCreateFromArray()
     {
         $testArrayItem = [
-            'test' => 'test',
-            'test2' => 'value2'
+            'description' => 'test',
+            'price' => 12
         ];
 
         $item = $this->createClassObject();
         $item = $item::createFromArray($testArrayItem);
 
-        $this->assertEquals('test', $item->_test);
-        $this->assertEquals('value2', $item->_test2);
+        $this->assertEquals('test', $item->getDescription());
+        $this->assertEquals(12, $item->getPrice());
     }
 
     public function testToArray()

@@ -44,7 +44,7 @@ class BillTest extends TestCase
     public function testSetItems()
     {
         $bill = $this->createClassObject();
-        $arrayWithoutObject = ['test' => 'gd'];
+        $arrayWithoutObject = ['description' => 'gd'];
 
         $createdObject = Item::createFromArray($arrayWithoutObject);
         $testArray = [new Item(), $createdObject];
