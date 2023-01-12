@@ -496,7 +496,7 @@ class Client
      */
     public function cancelInvoiceByGuid(
         string $guid,
-        bool   $forceCancel = false
+        bool $forceCancel = false
     ): Invoice {
         try {
             $params = [];
