@@ -7,7 +7,6 @@ use BitpaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use BitPaySDK\Exceptions\CurrencyQueryException;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
 use Exception;
 
 /**
@@ -81,7 +80,8 @@ class PosClient extends Client
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = new \JsonMapper();
+            $mapper->bEnforceMapType = false;
             $currencies = $mapper->mapArray(
                 json_decode($responseJson),
                 [],

@@ -1014,7 +1014,7 @@ class ClientTest extends TestCase
     public function testUpdatePayoutRecipient()
     {
         $exampleRecipientId = 'X3icwc4tE8KJ5hEPNPpDXW';
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getPayoutRecipients.json');
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getPayoutRecipient.json');
         $payoutRecipientMock = $this->createMock(PayoutRecipient::class);
         $payoutRecipientToArray = [
             'token' => 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb',

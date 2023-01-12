@@ -7,7 +7,7 @@ use BitPaySDK\Exceptions\LedgerQueryException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Tokens;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
+use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -60,7 +60,7 @@ class LedgerClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $ledger = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -101,7 +101,7 @@ class LedgerClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $ledgers = $mapper->mapArray(
                 json_decode($responseJson),
                 [],

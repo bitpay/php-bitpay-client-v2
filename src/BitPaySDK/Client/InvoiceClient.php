@@ -12,7 +12,7 @@ use BitPaySDK\Exceptions\InvoiceUpdateException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Tokens;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
+use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -59,7 +59,7 @@ class InvoiceClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $invoice = $mapper->map(
                 json_decode($responseJson),
                 new Invoice()
@@ -126,7 +126,7 @@ class InvoiceClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $invoice = $mapper->map(
                 json_decode($responseJson),
                 new Invoice()
@@ -173,7 +173,7 @@ class InvoiceClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $invoice = $mapper->map(
                 json_decode($responseJson),
                 new Invoice()
@@ -240,7 +240,7 @@ class InvoiceClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $invoices = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -327,7 +327,7 @@ class InvoiceClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $invoice = $mapper->map(
                 json_decode($responseJson),
                 new Invoice()
@@ -372,7 +372,7 @@ class InvoiceClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $invoice = $mapper->map(
                 json_decode($responseJson),
                 new Invoice()
