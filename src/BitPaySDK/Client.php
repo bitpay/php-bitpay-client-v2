@@ -487,6 +487,53 @@ class Client
     }
 
     /**
+     * Cancel a BitPay invoice by GUID.
+     *
+     * @param  string   $guid The guid of the invoice to cancel.
+     * @return Invoice  $invoice   Cancelled invoice object.
+     * @throws InvoiceCancellationException
+     * @throws BitPayException
+     */
+    public function cancelInvoiceByGuid(
+        string $guid,
+        bool   $forceCancel = false
+    ): Invoice {
+        try {
+            $params = [];
+            $params["token"] = $this->_tokenCache->getTokenByFacade(Facade::Merchant);
+            if ($forceCancel) {
+                $params["forceCancel"] = $forceCancel;
+            }
+
+            $responseJson = $this->_RESTcli->delete("invoices/guid/" . $guid, $params);
+        } catch (BitPayException $e) {
+            throw new InvoiceCancellationException(
+                "failed to serialize Invoice object : " .
+                $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new InvoiceCancellationException("failed to serialize Invoice object : " . $e->getMessage());
+        }
+
+        try {
+            $mapper = new JsonMapper();
+            $invoice = $mapper->map(
+                json_decode($responseJson),
+                new Invoice()
+            );
+        } catch (Exception $e) {
+            throw new InvoiceCancellationException(
+                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
+            );
+        }
+
+        return $invoice;
+    }
+
+    /**
      * Pay an invoice with a mock transaction
      *
      * @param  string $invoiceId The id of the invoice.
