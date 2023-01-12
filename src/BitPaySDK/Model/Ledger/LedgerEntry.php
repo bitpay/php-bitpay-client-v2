@@ -297,7 +297,7 @@ class LedgerEntry
     /**
      * Sets buyer fields
      *
-     * @param $buyerFields Buyer the buyer
+     * @param Buyer $buyerFields the buyer
      */
     public function setBuyerFields($buyerFields)
     {

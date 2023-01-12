@@ -10,7 +10,7 @@ use BitPaySDK\Exceptions\PayoutQueryException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Payout\Payout;
 use BitPaySDK\Tokens;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
+use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -53,7 +53,7 @@ class PayoutClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $payout = $mapper->map(
                 json_decode($responseJson),
                 new Payout()
@@ -95,7 +95,7 @@ class PayoutClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $payout = $mapper->map(
                 json_decode($responseJson),
                 new Payout()
@@ -166,7 +166,7 @@ class PayoutClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $payouts = $mapper->mapArray(
                 json_decode($responseJson),
                 [],

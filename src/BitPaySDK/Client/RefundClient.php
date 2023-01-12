@@ -12,7 +12,7 @@ use BitPaySDK\Exceptions\RefundUpdateException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Refund;
 use BitPaySDK\Tokens;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
+use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -79,7 +79,7 @@ class RefundClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $refund = $mapper->map(
                 json_decode($responseJson),
                 new Refund()
@@ -125,7 +125,7 @@ class RefundClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $refund = $mapper->map(
                 json_decode($responseJson),
                 new Refund()
@@ -172,7 +172,7 @@ class RefundClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $refund = $mapper->map(
                 json_decode($responseJson),
                 new Refund()
@@ -216,7 +216,7 @@ class RefundClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $refunds = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -260,7 +260,7 @@ class RefundClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $refund = $mapper->map(
                 json_decode($responseJson),
                 new Refund()
@@ -303,7 +303,7 @@ class RefundClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $refund = $mapper->map(
                 json_decode($responseJson),
                 new Refund()
@@ -384,7 +384,7 @@ class RefundClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $refund = $mapper->map(
                 json_decode($responseJson),
                 new Refund()
@@ -427,7 +427,7 @@ class RefundClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $refund = $mapper->map(
                 json_decode($responseJson),
                 new Refund()

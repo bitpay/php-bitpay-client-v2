@@ -9,7 +9,7 @@ use BitPaySDK\Exceptions\SubscriptionUpdateException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Subscription\Subscription;
 use BitPaySDK\Tokens;
-use BitPaySDK\Util\JsonMapper\JsonMapper;
+use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
@@ -50,7 +50,7 @@ class SubscriptionClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $subscription = $mapper->map(
                 json_decode($responseJson),
                 new Subscription()
@@ -92,7 +92,7 @@ class SubscriptionClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $subscription = $mapper->map(
                 json_decode($responseJson),
                 new Subscription()
@@ -136,7 +136,7 @@ class SubscriptionClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $subscriptions = $mapper->mapArray(
                 json_decode($responseJson),
                 [],
@@ -179,7 +179,7 @@ class SubscriptionClient
         }
 
         try {
-            $mapper = new JsonMapper();
+            $mapper = JsonMapperFactory::create();
             $subscription = $mapper->map(
                 json_decode($responseJson),
                 $subscription
