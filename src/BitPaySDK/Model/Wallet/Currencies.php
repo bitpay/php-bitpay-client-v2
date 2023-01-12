@@ -20,6 +20,7 @@ class Currencies
     protected $_qr;
     protected $_withdrawalFee;
     protected $_walletConnect;
+    protected $_currencies;
 
     public function __construct()
     {

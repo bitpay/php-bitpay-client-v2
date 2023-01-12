@@ -86,6 +86,8 @@ class Invoice
     protected $_displayAmountPaid;
     protected $_exchangeRates;
     protected $_bitpayIdRequired;
+    protected $_paymentDisplaytotals;
+    protected $_paymentDisplaySubtotals;
 
     /**
      * Constructor, create a minimal request Invoice object.
