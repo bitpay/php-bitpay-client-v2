@@ -57,6 +57,7 @@ class ClientTest extends TestCase
     private const TOKEN = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
     private const CORRUPT_JSON_STRING = '{"code":"USD""name":"US Dollar","rate":21205.85}';
     private const TEST_INVOICE_ID = 'UZjwcYkWAKfTMn9J1yyfs4';
+    private const TEST_INVOICE_GUID = 'chc9kj52-04g0-4b6f-941d-3a844e352758';
     private const CORRECT_JSON_STRING = '[ 
         { "currency": "EUR", "balance": 0 }, 
         { "currency": "USD", "balance": 2389.82 }, 
@@ -3368,6 +3369,67 @@ class ClientTest extends TestCase
 
         $this->expectException(InvoiceCancellationException::class);
         $testedObject->cancelInvoice(self::TEST_INVOICE_ID, $params['forceCancel']);
+    }
+
+    public function testCancelInvoiceByGuid()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $params = [
+            'token' => self::TOKEN,
+            'forceCancel' => true
+        ];
+        $invoice = json_decode(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
+        $invoice->isCancelled = true;
+        $restCliMock
+            ->expects($this->once())
+            ->method('delete')
+            ->with("invoices/guid/" . self::TEST_INVOICE_GUID, $params)
+            ->willReturn(json_encode($invoice));
+
+        $testedObject = $this->getClient($restCliMock);
+
+        $result = $testedObject->cancelInvoiceByGuid(self::TEST_INVOICE_GUID, $params['forceCancel']);
+        $this->assertEquals(self::TEST_INVOICE_GUID, $result->getGuid());
+        $this->assertEquals(self::TEST_INVOICE_ID, $result->getId());
+        $this->assertEquals(true, $result->getIsCancelled());
+    }
+
+    public function testCancelInvoiceByGuidShouldCatchRestCliExceptions(string $exceptionClass)
+    {
+        $restCliMock = $this->getRestCliMock();
+        $params = [
+            'token' => self::TOKEN,
+            'forceCancel' => true
+        ];
+        $restCliMock
+            ->expects($this->once())
+            ->method('delete')
+            ->with("invoices/guid/" . self::TEST_INVOICE_GUID, $params)
+            ->willThrowException(new $exceptionClass());
+
+        $testedObject = $this->getClient($restCliMock);
+
+        $this->expectException(InvoiceCancellationException::class);
+        $testedObject->cancelInvoiceByGuid(self::TEST_INVOICE_GUID, $params['forceCancel']);
+    }
+
+    public function testCancelInvoiceByGuidShouldCatchJsonMapperException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $params = [
+            'token' => self::TOKEN,
+            'forceCancel' => true
+        ];
+        $restCliMock
+            ->expects($this->once())
+            ->method('delete')
+            ->with("invoices/guid/" . self::TEST_INVOICE_GUID, $params)
+            ->willReturn('corruptJson');
+
+        $testedObject = $this->getClient($restCliMock);
+
+        $this->expectException(InvoiceCancellationException::class);
+        $testedObject->cancelInvoiceByGuid(self::TEST_INVOICE_GUID, $params['forceCancel']);
     }
 
     public function testPayInvoice()
