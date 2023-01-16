@@ -17,7 +17,8 @@
     "guzzlehttp/guzzle": "^7.0",
     "ext-json": "*",
     "ext-reflection": "*",
-    "symfony/yaml": "^5.4 || ^6.0 || ^6.1 || ^6.2"
+    "symfony/yaml": "^5.4 || ^6.0 || ^6.1 || ^6.2",
+    "netresearch/jsonmapper": "^4.1"
   },
   "authors": [
     {
