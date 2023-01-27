@@ -532,6 +532,110 @@ class ClientTest extends TestCase
     /**
      * @depends testWithFileJsonConfig
      */
+    public function testCancelInvoiceByGuid($testedObject)
+    {
+        $params['token'] = $this->getMerchantTokenFromFile();
+        $params['forceCancel'] = true;
+        $guid = 'chc9kj52-04g0-4b6f-941d-3a844e352758';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('delete')
+            ->with('invoices/guid/' . $guid, $params)
+            ->willReturn(file_get_contents('json/getInvoice.json', true));
+        $setRestCli = function () use ($restCliMock) {
+            $this->_RESTcli = $restCliMock;
+        };
+        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+        $doSetRestCli();
+
+        $result = $testedObject->cancelInvoiceByGuid($guid, true);
+        $this->assertInstanceOf(Invoice::class, $result);
+        $this->assertEquals('UZjwcYkWAKfTMn9J1yyfs4', $result->getId());
+        $this->assertEquals('USD', $result->getCurrency());
+        $this->assertEquals(12.0, $result->getPrice());
+        $this->assertEquals('new', $result->getStatus());
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testCancelInvoiceByGuidShouldCatchRestCliBitPayException($testedObject)
+    {
+        $params['token'] = $this->getMerchantTokenFromFile();
+        $params['forceCancel'] = true;
+        $guid = 'chc9kj52-04g0-4b6f-941d-3a844e352758';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('delete')
+            ->with('invoices/guid/' . $guid, $params)
+            ->willThrowException(new BitPayException());
+        $setRestCli = function () use ($restCliMock) {
+            $this->_RESTcli = $restCliMock;
+        };
+        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+        $doSetRestCli();
+
+        $this->expectException(InvoiceCancellationException::class);
+        $testedObject->cancelInvoiceByGuid($guid, true);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testCancelInvoiceByGuidShouldCatchRestCliException($testedObject)
+    {
+        $params['token'] = $this->getMerchantTokenFromFile();
+        $params['forceCancel'] = true;
+        $guid = 'chc9kj52-04g0-4b6f-941d-3a844e352758';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('delete')
+            ->with('invoices/guid/' . $guid, $params)
+            ->willThrowException(new Exception());
+        $setRestCli = function () use ($restCliMock) {
+            $this->_RESTcli = $restCliMock;
+        };
+        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+        $doSetRestCli();
+
+        $this->expectException(InvoiceCancellationException::class);
+        $testedObject->cancelInvoiceByGuid($guid, true);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testCancelInvoiceByGuidShouldCatchJsonMapperException($testedObject)
+    {
+        $params['token'] = $this->getMerchantTokenFromFile();
+        $params['forceCancel'] = true;
+        $guid = 'chc9kj52-04g0-4b6f-941d-3a844e352758';
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects($this->once())
+            ->method('delete')
+            ->with('invoices/guid/' . $guid, $params)
+            ->willReturn(self::CORRUPT_JSON_STRING);
+        $setRestCli = function () use ($restCliMock) {
+            $this->_RESTcli = $restCliMock;
+        };
+        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+        $doSetRestCli();
+
+        $this->expectException(InvoiceCancellationException::class);
+        $testedObject->cancelInvoiceByGuid($guid, true);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
     public function testRequestInvoiceNotification($testedObject)
     {
         $invoiceId = 'testId';
