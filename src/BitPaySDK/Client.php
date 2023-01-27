@@ -249,6 +249,23 @@ class Client
     }
 
     /**
+     * Cancel a BitPay invoice.
+     *
+     * @param  string $guid The guid of the invoice to cancel.
+     * @return Invoice $invoice Cancelled invoice object.
+     * @throws InvoiceCancellationException
+     * @throws BitPayException
+     */
+    public function cancelInvoiceByGuid(
+        string $guid,
+        bool $forceCancel = false
+    ): Invoice {
+        $invoiceClient = $this->createInvoiceClient();
+
+        return $invoiceClient->cancelByGuid($guid, $forceCancel);
+    }
+
+    /**
      * Pay an invoice with a mock transaction
      *
      * @param  string $invoiceId The id of the invoice.
