@@ -16,27 +16,27 @@ use BitPaySDK\Model\Currency;
  */
 class Bill
 {
-    protected $_currency;
-    protected $_token = "";
-    protected $_email;
-    protected $_items;
-    protected $_number;
-    protected $_name;
-    protected $_address1;
-    protected $_address2;
-    protected $_city;
-    protected $_state;
-    protected $_zip;
-    protected $_country;
-    protected $_cc;
-    protected $_phone;
-    protected $_dueDate;
-    protected $_passProcessingFee;
-    protected $_status;
-    protected $_url;
-    protected $_createDate;
-    protected $_id;
-    protected $_merchant;
+    protected $currency;
+    protected $token = "";
+    protected $email;
+    protected $items;
+    protected $number;
+    protected $name;
+    protected $address1;
+    protected $address2;
+    protected $city;
+    protected $state;
+    protected $zip;
+    protected $country;
+    protected $cc;
+    protected $phone;
+    protected $dueDate;
+    protected $passProcessingFee;
+    protected $status;
+    protected $url;
+    protected $createDate;
+    protected $id;
+    protected $merchant;
 
     /**
      * Constructor, create a minimal request Bill object.
@@ -52,10 +52,10 @@ class Bill
         string $email = null,
         array $items = null
     ) {
-        $this->_number = $number;
-        $this->_currency = $currency;
-        $this->_email = $email;
-        $this->_items = $items;
+        $this->number = $number;
+        $this->currency = $currency;
+        $this->email = $email;
+        $this->items = $items;
     }
 
     /**
@@ -68,7 +68,7 @@ class Bill
      */
     public function getToken()
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -81,7 +81,7 @@ class Bill
      */
     public function setToken(string $token)
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     /**
@@ -93,7 +93,7 @@ class Bill
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -110,7 +110,7 @@ class Bill
             throw new BitPayException("currency code must be a type of Model.Currency");
         }
 
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -120,7 +120,7 @@ class Bill
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -130,7 +130,7 @@ class Bill
      */
     public function setEmail(string $email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
@@ -140,7 +140,7 @@ class Bill
      */
     public function getItems()
     {
-        return $this->_items;
+        return $this->items;
     }
 
     /**
@@ -152,7 +152,7 @@ class Bill
     {
         $items = [];
 
-        foreach ($this->_items as $item) {
+        foreach ($this->items as $item) {
             if ($item instanceof Item) {
                 array_push($items, $item->toArray());
             } else {
@@ -179,7 +179,7 @@ class Bill
                 array_push($itemsArray, Item::createFromArray((array)$item));
             }
         }
-        $this->_items = $itemsArray;
+        $this->items = $itemsArray;
     }
 
     /**
@@ -191,7 +191,7 @@ class Bill
      */
     public function getNumber()
     {
-        return $this->_number;
+        return $this->number;
     }
 
     /**
@@ -203,7 +203,7 @@ class Bill
      */
     public function setNumber(string $number)
     {
-        $this->_number = $number;
+        $this->number = $number;
     }
 
     /**
@@ -213,7 +213,7 @@ class Bill
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -223,7 +223,7 @@ class Bill
      */
     public function setName(string $name)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -233,7 +233,7 @@ class Bill
      */
     public function getAddress1()
     {
-        return $this->_address1;
+        return $this->address1;
     }
 
     /**
@@ -243,7 +243,7 @@ class Bill
      */
     public function setAddress1(string $address1)
     {
-        $this->_address1 = $address1;
+        $this->address1 = $address1;
     }
 
     /**
@@ -253,7 +253,7 @@ class Bill
      */
     public function getAddress2()
     {
-        return $this->_address2;
+        return $this->address2;
     }
 
     /**
@@ -263,7 +263,7 @@ class Bill
      */
     public function setAddress2(string $address2)
     {
-        $this->_address2 = $address2;
+        $this->address2 = $address2;
     }
 
     /**
@@ -273,7 +273,7 @@ class Bill
      */
     public function getCity()
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
@@ -283,7 +283,7 @@ class Bill
      */
     public function setCity(string $city)
     {
-        $this->_city = $city;
+        $this->city = $city;
     }
 
     /**
@@ -293,7 +293,7 @@ class Bill
      */
     public function getState()
     {
-        return $this->_state;
+        return $this->state;
     }
 
     /**
@@ -303,7 +303,7 @@ class Bill
      */
     public function setState(string $state)
     {
-        $this->_state = $state;
+        $this->state = $state;
     }
 
     /**
@@ -313,7 +313,7 @@ class Bill
      */
     public function getZip()
     {
-        return $this->_zip;
+        return $this->zip;
     }
 
     /**
@@ -323,7 +323,7 @@ class Bill
      */
     public function setZip(string $zip)
     {
-        $this->_zip = $zip;
+        $this->zip = $zip;
     }
 
     /**
@@ -333,7 +333,7 @@ class Bill
      */
     public function getCountry()
     {
-        return $this->_country;
+        return $this->country;
     }
 
     /**
@@ -343,7 +343,7 @@ class Bill
      */
     public function setCountry(string $country)
     {
-        $this->_country = $country;
+        $this->country = $country;
     }
 
     /**
@@ -355,7 +355,7 @@ class Bill
      */
     public function getCc()
     {
-        return $this->_cc;
+        return $this->cc;
     }
 
     /**
@@ -367,7 +367,7 @@ class Bill
      */
     public function setCc(array $cc)
     {
-        $this->_cc = $cc;
+        $this->cc = $cc;
     }
 
     /**
@@ -377,7 +377,7 @@ class Bill
      */
     public function getPhone()
     {
-        return $this->_phone;
+        return $this->phone;
     }
 
     /**
@@ -387,7 +387,7 @@ class Bill
      */
     public function setPhone(string $phone)
     {
-        $this->_phone = $phone;
+        $this->phone = $phone;
     }
 
     /**
@@ -399,7 +399,7 @@ class Bill
      */
     public function getDueDate()
     {
-        return $this->_dueDate;
+        return $this->dueDate;
     }
 
     /**
@@ -411,7 +411,7 @@ class Bill
      */
     public function setDueDate(string $dueDate)
     {
-        $this->_dueDate = $dueDate;
+        $this->dueDate = $dueDate;
     }
 
     /**
@@ -421,7 +421,7 @@ class Bill
      */
     public function getPassProcessingFee()
     {
-        return $this->_passProcessingFee;
+        return $this->passProcessingFee;
     }
 
     /**
@@ -433,7 +433,7 @@ class Bill
      */
     public function setPassProcessingFee(bool $passProcessingFee)
     {
-        $this->_passProcessingFee = $passProcessingFee;
+        $this->passProcessingFee = $passProcessingFee;
     }
 
     /**
@@ -445,7 +445,7 @@ class Bill
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -457,7 +457,7 @@ class Bill
      */
     public function setStatus(string $status)
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -469,7 +469,7 @@ class Bill
      */
     public function getUrl()
     {
-        return $this->_url;
+        return $this->url;
     }
 
     /**
@@ -481,7 +481,7 @@ class Bill
      */
     public function setUrl(string $url)
     {
-        $this->_url = $url;
+        $this->url = $url;
     }
 
     /**
@@ -493,7 +493,7 @@ class Bill
      */
     public function getCreateDate()
     {
-        return $this->_createDate;
+        return $this->createDate;
     }
 
     /**
@@ -505,7 +505,7 @@ class Bill
      */
     public function setCreateDate(string $createDate)
     {
-        $this->_createDate = $createDate;
+        $this->createDate = $createDate;
     }
 
     /**
@@ -517,7 +517,7 @@ class Bill
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -529,7 +529,7 @@ class Bill
      */
     public function setId(string $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -541,7 +541,7 @@ class Bill
      */
     public function getMerchant()
     {
-        return $this->_merchant;
+        return $this->merchant;
     }
 
     /**
@@ -553,7 +553,7 @@ class Bill
      */
     public function setMerchant(string $merchant)
     {
-        $this->_merchant = $merchant;
+        $this->merchant = $merchant;
     }
 
     /**

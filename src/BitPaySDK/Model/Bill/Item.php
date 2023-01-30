@@ -12,10 +12,10 @@ namespace BitPaySDK\Model\Bill;
  */
 class Item
 {
-    protected $_id;
-    protected $_description;
-    protected $_price;
-    protected $_quantity;
+    protected $id;
+    protected $description;
+    protected $price;
+    protected $quantity;
 
     public function __construct()
     {
@@ -28,7 +28,7 @@ class Item
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -38,7 +38,7 @@ class Item
      */
     public function setId(string $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -48,7 +48,7 @@ class Item
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -58,7 +58,7 @@ class Item
      */
     public function setDescription(string $description)
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
@@ -68,7 +68,7 @@ class Item
      */
     public function getPrice()
     {
-        return $this->_price;
+        return $this->price;
     }
 
     /**
@@ -78,7 +78,7 @@ class Item
      */
     public function setPrice(float $price)
     {
-        $this->_price = $price;
+        $this->price = $price;
     }
 
     /**
@@ -88,7 +88,7 @@ class Item
      */
     public function getQuantity()
     {
-        return $this->_quantity;
+        return $this->quantity;
     }
 
     /**
@@ -98,7 +98,7 @@ class Item
      */
     public function setQuantity(int $quantity)
     {
-        $this->_quantity = $quantity;
+        $this->quantity = $quantity;
     }
 
     /**
@@ -110,7 +110,7 @@ class Item
         $instance = new self();
 
         foreach ($item as $key => $value) {
-            $instance->{'_' . $key} = $value;
+            $instance->{$key} = $value;
         }
 
         return $instance;
