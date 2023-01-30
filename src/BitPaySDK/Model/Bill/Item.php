@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
@@ -12,10 +13,10 @@ namespace BitPaySDK\Model\Bill;
  */
 class Item
 {
-    protected $id;
-    protected $description;
-    protected $price;
-    protected $quantity;
+    protected ?string $id;
+    protected ?string $description;
+    protected ?float $price;
+    protected ?int $quantity;
 
     public function __construct()
     {
@@ -24,9 +25,9 @@ class Item
     /**
      * Gets id.
      *
-     * @return string the id
+     * @return string|null the id
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -36,7 +37,7 @@ class Item
      *
      * @param string $id the id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -44,9 +45,9 @@ class Item
     /**
      * Gets Line item description
      *
-     * @return string the description
+     * @return string|null the description
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -56,7 +57,7 @@ class Item
      *
      * @param string $description the description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -64,9 +65,9 @@ class Item
     /**
      * Gets Line item unit price for the corresponding currency
      *
-     * @return float the price
+     * @return float|null the price
      */
-    public function getPrice()
+    public function getPrice(): ?float
     {
         return $this->price;
     }
@@ -76,7 +77,7 @@ class Item
      *
      * @param float $price the price
      */
-    public function setPrice(float $price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
@@ -84,9 +85,9 @@ class Item
     /**
      * Gets Line item number of units
      *
-     * @return int the quantity
+     * @return int|null the quantity
      */
-    public function getQuantity()
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
@@ -96,7 +97,7 @@ class Item
      *
      * @param int $quantity the quantity
      */
-    public function setQuantity(int $quantity)
+    public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
     }
@@ -105,7 +106,7 @@ class Item
      * @param array $item List of line items
      * @return Item
      */
-    public static function createFromArray(array $item)
+    public static function createFromArray(array $item): Item
     {
         $instance = new self();
 
@@ -121,7 +122,7 @@ class Item
      *
      * @return array item data as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'id'          => $this->getId(),

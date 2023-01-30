@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
@@ -16,35 +17,35 @@ use BitPaySDK\Model\Currency;
  */
 class Bill
 {
-    protected $currency;
-    protected $token = "";
-    protected $email;
-    protected $items;
-    protected $number;
-    protected $name;
-    protected $address1;
-    protected $address2;
-    protected $city;
-    protected $state;
-    protected $zip;
-    protected $country;
-    protected $cc;
-    protected $phone;
-    protected $dueDate;
-    protected $passProcessingFee;
-    protected $status;
-    protected $url;
-    protected $createDate;
-    protected $id;
-    protected $merchant;
+    protected ?string $currency;
+    protected string $token = "";
+    protected ?string $email;
+    protected ?array $items;
+    protected ?string $number;
+    protected ?string $name;
+    protected ?string $address1;
+    protected ?string $address2;
+    protected ?string $city;
+    protected ?string $state;
+    protected ?string $zip;
+    protected ?string $country;
+    protected ?array $cc;
+    protected ?string $phone;
+    protected ?string $dueDate;
+    protected ?bool $passProcessingFee;
+    protected ?string $status;
+    protected ?string $url;
+    protected ?string $createDate;
+    protected ?string $id;
+    protected ?string $merchant;
 
     /**
      * Constructor, create a minimal request Bill object.
      *
-     * @param $number   string A string for tracking purposes.
-     * @param $currency string The three digit currency type used to compute the bill's amount.
-     * @param $email    string The email address of the receiver for this bill.
-     * @param $items    array The list of items to add to this bill.
+     * @param string|null $number string A string for tracking purposes.
+     * @param string|null $currency string The three digit currency type used to compute the bill's amount.
+     * @param string|null $email string The email address of the receiver for this bill.
+     * @param array|null $items array The list of items to add to this bill.
      */
     public function __construct(
         string $number = null,
@@ -66,7 +67,7 @@ class Bill
      *
      * @return string the token
      */
-    public function getToken()
+    public function getToken(): string
     {
         return $this->token;
     }
@@ -79,7 +80,7 @@ class Bill
      *
      * @param string $token the token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
         $this->token = $token;
     }
@@ -89,9 +90,9 @@ class Bill
      *
      * ISO 4217 3-character currency code. This is the currency associated with the price field
      *
-     * @return string the bill currency
+     * @return string|null the bill currency
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -104,7 +105,7 @@ class Bill
      * @param string $currency the currency
      * @throws BitPayException
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
         if (!Currency::isValid($currency)) {
             throw new BitPayException("currency code must be a type of Model.Currency");
@@ -116,9 +117,9 @@ class Bill
     /**
      * Gets bill email
      *
-     * @return string the email
+     * @return string|null the email
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -128,7 +129,7 @@ class Bill
      *
      * @param string $email the email
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -136,9 +137,9 @@ class Bill
     /**
      * Gets items from bill
      *
-     * @return array items object from bill
+     * @return array|null items object from bill
      */
-    public function getItems()
+    public function getItems(): ?array
     {
         return $this->items;
     }
@@ -146,9 +147,9 @@ class Bill
     /**
      * Gets items as array from bill
      *
-     * @return array items as array from bill
+     * @return array|null items as array from bill
      */
-    public function getItemsAsArray()
+    public function getItemsAsArray(): ?array
     {
         $items = [];
 
@@ -168,7 +169,7 @@ class Bill
      *
      * @param array $items items in bill
      */
-    public function setItems(array $items)
+    public function setItems(array $items): void
     {
         $itemsArray = [];
 
@@ -179,6 +180,7 @@ class Bill
                 array_push($itemsArray, Item::createFromArray((array)$item));
             }
         }
+
         $this->items = $itemsArray;
     }
 
@@ -187,9 +189,9 @@ class Bill
      *
      * Bill identifier, specified by merchant
      *
-     * @return string the number
+     * @return string|null the number
      */
-    public function getNumber()
+    public function getNumber(): ?string
     {
         return $this->number;
     }
@@ -201,7 +203,7 @@ class Bill
      *
      * @param string $number the number
      */
-    public function setNumber(string $number)
+    public function setNumber(string $number): void
     {
         $this->number = $number;
     }
@@ -209,9 +211,9 @@ class Bill
     /**
      * Gets Bill recipient's name
      *
-     * @return string the name
+     * @return string|null the name
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -221,7 +223,7 @@ class Bill
      *
      * @param string $name the name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -229,9 +231,9 @@ class Bill
     /**
      * Gets Bill recipient's address
      *
-     * @return string the address1
+     * @return string|null the address1
      */
-    public function getAddress1()
+    public function getAddress1(): ?string
     {
         return $this->address1;
     }
@@ -241,7 +243,7 @@ class Bill
      *
      * @param string $address1
      */
-    public function setAddress1(string $address1)
+    public function setAddress1(string $address1): void
     {
         $this->address1 = $address1;
     }
@@ -249,9 +251,9 @@ class Bill
     /**
      * Gets Bill recipient's address
      *
-     * @return string the address2
+     * @return string|null the address2
      */
-    public function getAddress2()
+    public function getAddress2(): ?string
     {
         return $this->address2;
     }
@@ -261,7 +263,7 @@ class Bill
      *
      * @param string $address2
      */
-    public function setAddress2(string $address2)
+    public function setAddress2(string $address2): void
     {
         $this->address2 = $address2;
     }
@@ -269,9 +271,9 @@ class Bill
     /**
      * Gets Bill recipient's city
      *
-     * @return string the city
+     * @return string|null the city
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -281,7 +283,7 @@ class Bill
      *
      * @param string $city
      */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -289,9 +291,9 @@ class Bill
     /**
      * Gets Bill recipient's state or province
      *
-     * @return string the state
+     * @return string|null the state
      */
-    public function getState()
+    public function getState(): ?string
     {
         return $this->state;
     }
@@ -301,7 +303,7 @@ class Bill
      *
      * @param string $state
      */
-    public function setState(string $state)
+    public function setState(string $state): void
     {
         $this->state = $state;
     }
@@ -309,9 +311,9 @@ class Bill
     /**
      * Gets Bill recipient's ZIP code
      *
-     * @return string the zip
+     * @return string|null the zip
      */
-    public function getZip()
+    public function getZip(): ?string
     {
         return $this->zip;
     }
@@ -321,7 +323,7 @@ class Bill
      *
      * @param string $zip
      */
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -329,9 +331,9 @@ class Bill
     /**
      * Gets Bill recipient's country
      *
-     * @return string the country
+     * @return string|null the country
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -341,7 +343,7 @@ class Bill
      *
      * @param string $country
      */
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
@@ -351,9 +353,9 @@ class Bill
      *
      * Email addresses to which a copy of the bill must be sent
      *
-     * @return array the cc
+     * @return array|null the cc
      */
-    public function getCc()
+    public function getCc(): ?array
     {
         return $this->cc;
     }
@@ -365,7 +367,7 @@ class Bill
      *
      * @param array $cc
      */
-    public function setCc(array $cc)
+    public function setCc(array $cc): void
     {
         $this->cc = $cc;
     }
@@ -373,9 +375,9 @@ class Bill
     /**
      * Gets Bill recipient's phone number
      *
-     * @return string the phone
+     * @return string|null the phone
      */
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
@@ -385,7 +387,7 @@ class Bill
      *
      * @param string $phone
      */
-    public function setPhone(string $phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
@@ -395,9 +397,9 @@ class Bill
      *
      * Date and time at which a bill is due, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
-     * @return string the number
+     * @return string|null the number
      */
-    public function getDueDate()
+    public function getDueDate(): ?string
     {
         return $this->dueDate;
     }
@@ -409,7 +411,7 @@ class Bill
      *
      * @param string $dueDate
      */
-    public function setDueDate(string $dueDate)
+    public function setDueDate(string $dueDate): void
     {
         $this->dueDate = $dueDate;
     }
@@ -417,9 +419,9 @@ class Bill
     /**
      * Gets bill pass processing fee
      *
-     * @return bool the pass processing fee
+     * @return bool|null the pass processing fee
      */
-    public function getPassProcessingFee()
+    public function getPassProcessingFee(): ?bool
     {
         return $this->passProcessingFee;
     }
@@ -431,7 +433,7 @@ class Bill
      *
      * @param bool $passProcessingFee
      */
-    public function setPassProcessingFee(bool $passProcessingFee)
+    public function setPassProcessingFee(bool $passProcessingFee): void
     {
         $this->passProcessingFee = $passProcessingFee;
     }
@@ -441,9 +443,9 @@ class Bill
      *
      * Can "draft", "sent", "new", "paid", or "complete"
      *
-     * @return string the status
+     * @return string|null the status
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -455,7 +457,7 @@ class Bill
      *
      * @param string $status
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
@@ -465,9 +467,9 @@ class Bill
      *
      * Web address of bill
      *
-     * @return string the url
+     * @return string|null the url
      */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->url;
     }
@@ -479,7 +481,7 @@ class Bill
      *
      * @param string $url
      */
-    public function setUrl(string $url)
+    public function setUrl(string $url): void
     {
         $this->url = $url;
     }
@@ -489,9 +491,9 @@ class Bill
      *
      * Date and time of Bill creation, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
-     * @return string the create date
+     * @return string|null the creation date
      */
-    public function getCreateDate()
+    public function getCreateDate(): ?string
     {
         return $this->createDate;
     }
@@ -503,7 +505,7 @@ class Bill
      *
      * @param string $createDate
      */
-    public function setCreateDate(string $createDate)
+    public function setCreateDate(string $createDate): void
     {
         $this->createDate = $createDate;
     }
@@ -513,9 +515,9 @@ class Bill
      *
      * Bill resource id
      *
-     * @return string the id
+     * @return string|null the id
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -527,7 +529,7 @@ class Bill
      *
      * @param string $id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -537,9 +539,9 @@ class Bill
      *
      * Internal identifier for BitPay, this field can be ignored by the merchants.
      *
-     * @return string the merchant
+     * @return string|null the merchant
      */
-    public function getMerchant()
+    public function getMerchant(): ?string
     {
         return $this->merchant;
     }
@@ -551,7 +553,7 @@ class Bill
      *
      * @param string $merchant
      */
-    public function setMerchant(string $merchant)
+    public function setMerchant(string $merchant): void
     {
         $this->merchant = $merchant;
     }
@@ -561,7 +563,7 @@ class Bill
      *
      * @return array bill data as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'currency'          => $this->getCurrency(),
