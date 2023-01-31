@@ -17,8 +17,8 @@ use BitPaySDK\Model\Currency;
  */
 class Rates
 {
-    protected $_bp;
-    protected $_rates;
+    protected Client $bp;
+    protected array $rates;
 
     /**
      * Rates constructor.
@@ -28,8 +28,8 @@ class Rates
      */
     public function __construct(array $rates, Client $bp)
     {
-        $this->_bp = $bp;
-        $this->_rates = $rates;
+        $this->bp = $bp;
+        $this->rates = $rates;
     }
 
     /**
@@ -37,11 +37,11 @@ class Rates
      *
      * @return array
      */
-    public function getRates()
+    public function getRates(): array
     {
         $rates = [];
 
-        foreach ($this->_rates as $rate) {
+        foreach ($this->rates as $rate) {
             if ($rate instanceof Rate) {
                 array_push($rates, $rate->toArray());
             } else {
@@ -57,9 +57,9 @@ class Rates
      *
      * @throws BitPayException
      */
-    public function update()
+    public function update(): void
     {
-        $this->_rates = $this->_bp->getRates()->getRates();
+        $this->rates = $this->bp->getRates()->getRates();
     }
 
     /**
@@ -69,7 +69,7 @@ class Rates
      * @return float|null
      * @throws BitPayException
      */
-    public function getRate(string $currencyCode)
+    public function getRate(string $currencyCode): ?float
     {
         $val = null;
 
@@ -77,7 +77,7 @@ class Rates
             throw new BitPayException("currency code must be a type of Model.Currency");
         }
 
-        foreach ($this->_rates as $rateObj) {
+        foreach ($this->rates as $rateObj) {
             if ($rateObj->getCode() == $currencyCode) {
                 $val = $rateObj->getRate();
                 break;
@@ -92,7 +92,7 @@ class Rates
      *
      * @return array[]
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'rates' => $this->getRates(),

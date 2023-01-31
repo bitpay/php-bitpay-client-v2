@@ -9,9 +9,9 @@ namespace BitPaySDK\Model\Rate;
 
 class Rate
 {
-    protected $_name;
-    protected $_code;
-    protected $_rate;
+    protected $name;
+    protected $code;
+    protected $rate;
 
     public function __construct()
     {
@@ -24,7 +24,7 @@ class Rate
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -34,7 +34,7 @@ class Rate
      */
     public function setName(string $name)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -44,7 +44,7 @@ class Rate
      */
     public function getCode()
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -54,7 +54,7 @@ class Rate
      */
     public function setCode(string $code)
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -64,7 +64,7 @@ class Rate
      */
     public function getRate()
     {
-        return $this->_rate;
+        return $this->rate;
     }
 
     /**
@@ -74,7 +74,7 @@ class Rate
      */
     public function setRate(float $rate)
     {
-        $this->_rate = $rate;
+        $this->rate = $rate;
     }
 
     /**
