@@ -16,78 +16,76 @@ use BitPaySDK\Model\Currency;
  */
 class Invoice
 {
-    protected $_currency;
+    protected $currency;
 
-    protected $_guid  = "";
-    protected $_token = "";
+    protected $guid  = "";
+    protected $token = "";
 
-    protected $_price;
-    protected $_posData;
-    protected $_notificationURL   = "";
-    protected $_transactionSpeed  = "";
-    protected $_fullNotifications = false;
-    protected $_notificationEmail = "";
-    protected $_redirectURL       = "";
-    protected $_orderId           = "";
-    protected $_itemDesc          = "";
-    protected $_itemCode          = "";
-    protected $_physical          = false;
-    protected $_paymentCurrencies;
-    protected $_paymentSubtotals;
-    protected $_paymentTotals;
-    protected $_paymentDisplayTotals;
-    protected $_paymentDisplaySubTotals;
-    protected $_paymentCodes;
-    protected $_paymentString;
-    protected $_verificationLink;
-    protected $_acceptanceWindow;
-    protected $_buyer;
-    protected $_refundAddresses;
-    protected $_closeURL   = "";
-    protected $_autoRedirect  = false;
-    protected $_jsonPayProRequired;
-    protected $_buyerEmail;
-    protected $_buyerSms;
+    protected $price;
+    protected $posData;
+    protected $notificationURL   = "";
+    protected $transactionSpeed  = "";
+    protected $fullNotifications = false;
+    protected $notificationEmail = "";
+    protected $redirectURL       = "";
+    protected $orderId           = "";
+    protected $itemDesc          = "";
+    protected $itemCode          = "";
+    protected $physical          = false;
+    protected $paymentCurrencies;
+    protected $paymentSubtotals;
+    protected $paymentTotals;
+    protected $paymentCodes;
+    protected $paymentString;
+    protected $verificationLink;
+    protected $acceptanceWindow;
+    protected $buyer;
+    protected $refundAddresses;
+    protected $closeURL   = "";
+    protected $autoRedirect  = false;
+    protected $jsonPayProRequired;
+    protected $buyerEmail;
+    protected $buyerSms;
 
-    protected $_merchantName;
-    protected $_selectedTransactionCurrency;
-    protected $_forcedBuyerSelectedWallet;
-    protected $_forcedBuyerSelectedTransactionCurrency;
-    protected $_itemizedDetails;
+    protected $merchantName;
+    protected $selectedTransactionCurrency;
+    protected $forcedBuyerSelectedWallet;
+    protected $forcedBuyerSelectedTransactionCurrency;
+    protected $itemizedDetails;
 
-    protected $_id;
-    protected $_url;
-    protected $_status;
-    protected $_lowFeeDetected;
-    protected $_invoiceTime;
-    protected $_expirationTime;
-    protected $_currentTime;
-    protected $_transactions;
-    protected $_exceptionStatus;
-    protected $_targetConfirmations;
-    protected $_refundAddressRequestPending;
-    protected $_buyerProvidedEmail;
-    protected $_buyerProvidedInfo;
-    protected $_transactionDetails;
-    protected $_universalCodes;
-    protected $_supportedTransactionCurrencies;
-    protected $_minerFees;
-    protected $_nonPayProPaymentReceived;
-    protected $_shopper;
-    protected $_billId;
-    protected $_refundInfo;
-    protected $_extendedNotifications = false;
-    protected $_isCancelled;
+    protected $id;
+    protected $url;
+    protected $status;
+    protected $lowFeeDetected;
+    protected $invoiceTime;
+    protected $expirationTime;
+    protected $currentTime;
+    protected $transactions;
+    protected $exceptionStatus;
+    protected $targetConfirmations;
+    protected $refundAddressRequestPending;
+    protected $buyerProvidedEmail;
+    protected $buyerProvidedInfo;
+    protected $transactionDetails;
+    protected $universalCodes;
+    protected $supportedTransactionCurrencies;
+    protected $minerFees;
+    protected $nonPayProPaymentReceived;
+    protected $shopper;
+    protected $billId;
+    protected $refundInfo;
+    protected $extendedNotifications = false;
+    protected $isCancelled;
 
-    protected $_transactionCurrency;
-    protected $_underpaidAmount;
-    protected $_overpaidAmount;
-    protected $_amountPaid;
-    protected $_displayAmountPaid;
-    protected $_exchangeRates;
-    protected $_bitpayIdRequired;
-    protected $_paymentDisplaytotals;
-    protected $_paymentDisplaySubtotals;
+    protected $transactionCurrency;
+    protected $underpaidAmount;
+    protected $overpaidAmount;
+    protected $amountPaid;
+    protected $displayAmountPaid;
+    protected $exchangeRates;
+    protected $bitpayIdRequired;
+    protected $paymentDisplaytotals;
+    protected $paymentDisplaySubtotals;
 
     /**
      * Constructor, create a minimal request Invoice object.
@@ -97,17 +95,17 @@ class Invoice
      */
     public function __construct(float $price = null, string $currency = null)
     {
-        $this->_price = $price;
-        $this->_currency = $currency;
-        $this->_buyer = new Buyer();
-        $this->_buyerProvidedInfo = new BuyerProvidedInfo();
-        $this->_universalCodes = new UniversalCodes();
-        $this->_supportedTransactionCurrencies = new SupportedTransactionCurrencies();
-        $this->_minerFees = new MinerFees();
-        $this->_shopper = new Shopper();
-        $this->_refundInfo = new RefundInfo();
-        $this->_itemizedDetails = new ItemizedDetails();
-        $this->_transactionDetails = new TransactionDetails();
+        $this->price = $price;
+        $this->currency = $currency;
+        $this->buyer = new Buyer();
+        $this->buyerProvidedInfo = new BuyerProvidedInfo();
+        $this->universalCodes = new UniversalCodes();
+        $this->supportedTransactionCurrencies = new SupportedTransactionCurrencies();
+        $this->minerFees = new MinerFees();
+        $this->shopper = new Shopper();
+        $this->refundInfo = new RefundInfo();
+        $this->itemizedDetails = new ItemizedDetails();
+        $this->transactionDetails = new TransactionDetails();
     }
 
     // API fields
@@ -124,7 +122,7 @@ class Invoice
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     // Required fields
@@ -147,7 +145,7 @@ class Invoice
             throw new BitPayException("currency code must be a type of Model.Currency");
         }
 
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -161,7 +159,7 @@ class Invoice
      */
     public function getGuid()
     {
-        return $this->_guid;
+        return $this->guid;
     }
 
     /**
@@ -175,7 +173,7 @@ class Invoice
      */
     public function setGuid(string $guid)
     {
-        $this->_guid = $guid;
+        $this->guid = $guid;
     }
 
     /**
@@ -188,7 +186,7 @@ class Invoice
      */
     public function getToken()
     {
-        return $this->_token;
+        return $this->token;
     }
 
     // Optional fields
@@ -204,7 +202,7 @@ class Invoice
      */
     public function setToken(string $token)
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     /**
@@ -216,7 +214,7 @@ class Invoice
      */
     public function getPrice()
     {
-        return $this->_price;
+        return $this->price;
     }
 
     /**
@@ -229,7 +227,7 @@ class Invoice
      */
     public function setPrice(float $price)
     {
-        $this->_price = $price;
+        $this->price = $price;
     }
 
     /**
@@ -243,7 +241,7 @@ class Invoice
      */
     public function getPosData()
     {
-        return $this->_posData;
+        return $this->posData;
     }
 
     /**
@@ -257,7 +255,7 @@ class Invoice
      */
     public function setPosData(string $posData)
     {
-        $this->_posData = $posData;
+        $this->posData = $posData;
     }
 
     /**
@@ -267,7 +265,7 @@ class Invoice
      */
     public function getNotificationURL()
     {
-        return $this->_notificationURL;
+        return $this->notificationURL;
     }
 
     /**
@@ -277,7 +275,7 @@ class Invoice
      */
     public function setNotificationURL(string $notificationURL)
     {
-        $this->_notificationURL = $notificationURL;
+        $this->notificationURL = $notificationURL;
     }
 
     /**
@@ -294,7 +292,7 @@ class Invoice
      */
     public function getTransactionSpeed()
     {
-        return $this->_transactionSpeed;
+        return $this->transactionSpeed;
     }
 
     /**
@@ -311,7 +309,7 @@ class Invoice
      */
     public function setTransactionSpeed(string $transactionSpeed)
     {
-        $this->_transactionSpeed = $transactionSpeed;
+        $this->transactionSpeed = $transactionSpeed;
     }
 
     /**
@@ -328,7 +326,7 @@ class Invoice
      */
     public function getFullNotifications()
     {
-        return $this->_fullNotifications;
+        return $this->fullNotifications;
     }
 
     /**
@@ -345,7 +343,7 @@ class Invoice
      */
     public function setFullNotifications(bool $fullNotifications)
     {
-        $this->_fullNotifications = $fullNotifications;
+        $this->fullNotifications = $fullNotifications;
     }
 
     /**
@@ -357,7 +355,7 @@ class Invoice
      */
     public function getNotificationEmail()
     {
-        return $this->_notificationEmail;
+        return $this->notificationEmail;
     }
 
     /**
@@ -369,7 +367,7 @@ class Invoice
      */
     public function setNotificationEmail(string $notificationEmail)
     {
-        $this->_notificationEmail = $notificationEmail;
+        $this->notificationEmail = $notificationEmail;
     }
 
     /**
@@ -382,7 +380,7 @@ class Invoice
      */
     public function getRedirectURL()
     {
-        return $this->_redirectURL;
+        return $this->redirectURL;
     }
 
     /**
@@ -396,7 +394,7 @@ class Invoice
      */
     public function setRedirectURL(string $redirectURL)
     {
-        $this->_redirectURL = $redirectURL;
+        $this->redirectURL = $redirectURL;
     }
 
     /**
@@ -409,7 +407,7 @@ class Invoice
      */
     public function getOrderId()
     {
-        return $this->_orderId;
+        return $this->orderId;
     }
 
     /**
@@ -422,7 +420,7 @@ class Invoice
      */
     public function setOrderId(string $orderId)
     {
-        $this->_orderId = $orderId;
+        $this->orderId = $orderId;
     }
 
 
@@ -435,7 +433,7 @@ class Invoice
      */
     public function getItemDesc()
     {
-        return $this->_itemDesc;
+        return $this->itemDesc;
     }
 
 
@@ -448,7 +446,7 @@ class Invoice
      */
     public function setItemDesc(string $itemDesc)
     {
-        $this->_itemDesc = $itemDesc;
+        $this->itemDesc = $itemDesc;
     }
 
     /**
@@ -460,7 +458,7 @@ class Invoice
      */
     public function getItemCode()
     {
-        return $this->_itemCode;
+        return $this->itemCode;
     }
 
     /**
@@ -472,7 +470,7 @@ class Invoice
      */
     public function setItemCode(string $itemCode)
     {
-        $this->_itemCode = $itemCode;
+        $this->itemCode = $itemCode;
     }
 
     /**
@@ -484,7 +482,7 @@ class Invoice
      */
     public function getPhysical()
     {
-        return $this->_physical;
+        return $this->physical;
     }
 
     /**
@@ -496,7 +494,7 @@ class Invoice
      */
     public function setPhysical(bool $physical)
     {
-        $this->_physical = $physical;
+        $this->physical = $physical;
     }
 
     /**
@@ -512,7 +510,7 @@ class Invoice
      */
     public function getPaymentCurrencies()
     {
-        return $this->_paymentCurrencies;
+        return $this->paymentCurrencies;
     }
 
     /**
@@ -528,7 +526,7 @@ class Invoice
      */
     public function setPaymentCurrencies(array $paymentCurrencies)
     {
-        $this->_paymentCurrencies = $paymentCurrencies;
+        $this->paymentCurrencies = $paymentCurrencies;
     }
 
     /**
@@ -542,7 +540,7 @@ class Invoice
      */
     public function getAcceptanceWindow(): ?float
     {
-        return $this->_acceptanceWindow;
+        return $this->acceptanceWindow;
     }
 
 
@@ -555,7 +553,7 @@ class Invoice
      */
     public function getCloseURL()
     {
-        return $this->_closeURL;
+        return $this->closeURL;
     }
 
     /**
@@ -568,7 +566,7 @@ class Invoice
      */
     public function setCloseURL(string $closeURL)
     {
-        $this->_closeURL = $closeURL;
+        $this->closeURL = $closeURL;
     }
 
     /**
@@ -581,7 +579,7 @@ class Invoice
      */
     public function getAutoRedirect()
     {
-        return $this->_autoRedirect;
+        return $this->autoRedirect;
     }
 
     /**
@@ -594,7 +592,7 @@ class Invoice
      */
     public function setAutoRedirect(bool $autoRedirect)
     {
-        $this->_autoRedirect = $autoRedirect;
+        $this->autoRedirect = $autoRedirect;
     }
 
     /**
@@ -609,7 +607,7 @@ class Invoice
      */
     public function getJsonPayProRequired()
     {
-        return $this->_jsonPayProRequired;
+        return $this->jsonPayProRequired;
     }
 
     /**
@@ -624,7 +622,7 @@ class Invoice
      */
     public function setJsonPayProRequired(bool $jsonPayProRequired)
     {
-        $this->_jsonPayProRequired = $jsonPayProRequired;
+        $this->jsonPayProRequired = $jsonPayProRequired;
     }
 
     /**
@@ -638,7 +636,7 @@ class Invoice
      */
     public function getBitpayIdRequired()
     {
-        return $this->_bitpayIdRequired;
+        return $this->bitpayIdRequired;
     }
 
     /**
@@ -652,7 +650,7 @@ class Invoice
      */
     public function setBitpayIdRequired(bool $bitpayIdRequired)
     {
-        $this->_bitpayIdRequired = $bitpayIdRequired;
+        $this->bitpayIdRequired = $bitpayIdRequired;
     }
 
     /**
@@ -664,7 +662,7 @@ class Invoice
      */
     public function getMerchantName()
     {
-        return $this->_merchantName;
+        return $this->merchantName;
     }
 
     /**
@@ -676,7 +674,7 @@ class Invoice
      */
     public function setMerchantName(string $merchantName)
     {
-        $this->_merchantName = $merchantName;
+        $this->merchantName = $merchantName;
     }
 
     /**
@@ -691,7 +689,7 @@ class Invoice
      */
     public function getSelectedTransactionCurrency()
     {
-        return $this->_selectedTransactionCurrency;
+        return $this->selectedTransactionCurrency;
     }
 
     /**
@@ -707,7 +705,7 @@ class Invoice
      */
     public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
     {
-        $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
+        $this->selectedTransactionCurrency = $selectedTransactionCurrency;
     }
 
     /**
@@ -719,7 +717,7 @@ class Invoice
      */
     public function getForcedBuyerSelectedWallet()
     {
-        return $this->_forcedBuyerSelectedWallet;
+        return $this->forcedBuyerSelectedWallet;
     }
 
     /**
@@ -731,7 +729,7 @@ class Invoice
      */
     public function setForcedBuyerSelectedWallet(string $forcedBuyerSelectedWallet)
     {
-        $this->_forcedBuyerSelectedWallet = $forcedBuyerSelectedWallet;
+        $this->forcedBuyerSelectedWallet = $forcedBuyerSelectedWallet;
     }
 
     /**
@@ -743,7 +741,7 @@ class Invoice
      */
     public function getForcedBuyerSelectedTransactionCurrency()
     {
-        return $this->_forcedBuyerSelectedTransactionCurrency;
+        return $this->forcedBuyerSelectedTransactionCurrency;
     }
 
     /**
@@ -755,7 +753,7 @@ class Invoice
      */
     public function setForcedBuyerSelectedTransactionCurrency(string $forcedBuyerSelectedTransactionCurrency)
     {
-        $this->_forcedBuyerSelectedTransactionCurrency = $forcedBuyerSelectedTransactionCurrency;
+        $this->forcedBuyerSelectedTransactionCurrency = $forcedBuyerSelectedTransactionCurrency;
     }
 
     /**
@@ -767,7 +765,7 @@ class Invoice
      */
     public function getItemizedDetails()
     {
-        return $this->_itemizedDetails;
+        return $this->itemizedDetails;
     }
 
     /**
@@ -789,7 +787,7 @@ class Invoice
             }
         }
 
-        $this->_itemizedDetails = $itemsArray;
+        $this->itemizedDetails = $itemsArray;
     }
 
     /**
@@ -803,7 +801,7 @@ class Invoice
      */
     public function setAcceptanceWindow(float $acceptanceWindow)
     {
-        $this->_acceptanceWindow = $acceptanceWindow;
+        $this->acceptanceWindow = $acceptanceWindow;
     }
 
     /**
@@ -815,7 +813,7 @@ class Invoice
      */
     public function getBuyer()
     {
-        return $this->_buyer;
+        return $this->buyer;
     }
 
     /**
@@ -827,7 +825,7 @@ class Invoice
      */
     public function setBuyer(Buyer $buyer)
     {
-        $this->_buyer = $buyer;
+        $this->buyer = $buyer;
     }
 
     /**
@@ -840,7 +838,7 @@ class Invoice
      */
     public function getBuyerEmail()
     {
-        return $this->_buyerEmail;
+        return $this->buyerEmail;
     }
 
     /**
@@ -853,7 +851,7 @@ class Invoice
      */
     public function setBuyerEmail(string $buyerEmail)
     {
-        $this->_buyerEmail = $buyerEmail;
+        $this->buyerEmail = $buyerEmail;
     }
 
     /**
@@ -867,7 +865,7 @@ class Invoice
      */
     public function getBuyerSms()
     {
-        return $this->_buyerSms;
+        return $this->buyerSms;
     }
 
     /**
@@ -881,7 +879,7 @@ class Invoice
      */
     public function setBuyerSms(string $buyerSms)
     {
-        $this->_buyerSms = $buyerSms;
+        $this->buyerSms = $buyerSms;
     }
 
     // Response fields
@@ -898,7 +896,7 @@ class Invoice
      */
     public function getRefundAddresses()
     {
-        return $this->_refundAddresses;
+        return $this->refundAddresses;
     }
 
     /**
@@ -912,7 +910,7 @@ class Invoice
      */
     public function setRefundAddresses(array $refundAddresses)
     {
-        $this->_refundAddresses = $refundAddresses;
+        $this->refundAddresses = $refundAddresses;
     }
 
     /**
@@ -922,7 +920,7 @@ class Invoice
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -932,7 +930,7 @@ class Invoice
      */
     public function setId($id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -944,7 +942,7 @@ class Invoice
      */
     public function getUrl()
     {
-        return $this->_url;
+        return $this->url;
     }
 
     /**
@@ -956,7 +954,7 @@ class Invoice
      */
     public function setUrl($url)
     {
-        $this->_url = $url;
+        $this->url = $url;
     }
 
     /**
@@ -971,7 +969,7 @@ class Invoice
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -986,7 +984,7 @@ class Invoice
      */
     public function setStatus($status)
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -999,7 +997,7 @@ class Invoice
      */
     public function getLowFeeDetected()
     {
-        return $this->_lowFeeDetected;
+        return $this->lowFeeDetected;
     }
 
     /**
@@ -1012,7 +1010,7 @@ class Invoice
      */
     public function setLowFeeDetected($lowFeeDetected)
     {
-        $this->_lowFeeDetected = $lowFeeDetected;
+        $this->lowFeeDetected = $lowFeeDetected;
     }
 
     /**
@@ -1022,7 +1020,7 @@ class Invoice
      */
     public function getInvoiceTime()
     {
-        return $this->_invoiceTime;
+        return $this->invoiceTime;
     }
 
     /**
@@ -1032,7 +1030,7 @@ class Invoice
      */
     public function setInvoiceTime($invoiceTime)
     {
-        $this->_invoiceTime = $invoiceTime;
+        $this->invoiceTime = $invoiceTime;
     }
 
     /**
@@ -1042,7 +1040,7 @@ class Invoice
      */
     public function getExpirationTime()
     {
-        return $this->_expirationTime;
+        return $this->expirationTime;
     }
 
     /**
@@ -1052,7 +1050,7 @@ class Invoice
      */
     public function setExpirationTime($expirationTime)
     {
-        $this->_expirationTime = $expirationTime;
+        $this->expirationTime = $expirationTime;
     }
 
     /**
@@ -1062,7 +1060,7 @@ class Invoice
      */
     public function getCurrentTime()
     {
-        return $this->_currentTime;
+        return $this->currentTime;
     }
 
     /**
@@ -1072,7 +1070,7 @@ class Invoice
      */
     public function setCurrentTime($currentTime)
     {
-        $this->_currentTime = $currentTime;
+        $this->currentTime = $currentTime;
     }
 
     /**
@@ -1084,7 +1082,7 @@ class Invoice
      */
     public function getTransactions()
     {
-        return $this->_transactions;
+        return $this->transactions;
     }
 
     /**
@@ -1096,7 +1094,7 @@ class Invoice
      */
     public function setTransactions($transactions)
     {
-        $this->_transactions = $transactions;
+        $this->transactions = $transactions;
     }
 
     /**
@@ -1112,7 +1110,7 @@ class Invoice
      */
     public function getExceptionStatus()
     {
-        return $this->_exceptionStatus;
+        return $this->exceptionStatus;
     }
 
     /**
@@ -1128,7 +1126,7 @@ class Invoice
      */
     public function setExceptionStatus($exceptionStatus)
     {
-        $this->_exceptionStatus = $exceptionStatus;
+        $this->exceptionStatus = $exceptionStatus;
     }
 
     /**
@@ -1143,7 +1141,7 @@ class Invoice
      */
     public function getTargetConfirmations()
     {
-        return $this->_targetConfirmations;
+        return $this->targetConfirmations;
     }
 
     /**
@@ -1159,7 +1157,7 @@ class Invoice
      */
     public function setTargetConfirmations($targetConfirmations)
     {
-        $this->_targetConfirmations = $targetConfirmations;
+        $this->targetConfirmations = $targetConfirmations;
     }
 
     /**
@@ -1175,7 +1173,7 @@ class Invoice
      */
     public function getRefundAddressRequestPending()
     {
-        return $this->_refundAddressRequestPending;
+        return $this->refundAddressRequestPending;
     }
 
     /**
@@ -1192,7 +1190,7 @@ class Invoice
      */
     public function setRefundAddressRequestPending($refundAddressRequestPending)
     {
-        $this->_refundAddressRequestPending = $refundAddressRequestPending;
+        $this->refundAddressRequestPending = $refundAddressRequestPending;
     }
 
     /**
@@ -1208,7 +1206,7 @@ class Invoice
      */
     public function getBuyerProvidedEmail()
     {
-        return $this->_buyerProvidedEmail;
+        return $this->buyerProvidedEmail;
     }
 
     /**
@@ -1225,7 +1223,7 @@ class Invoice
      */
     public function setBuyerProvidedEmail($buyerProvidedEmail)
     {
-        $this->_buyerProvidedEmail = $buyerProvidedEmail;
+        $this->buyerProvidedEmail = $buyerProvidedEmail;
     }
 
     /**
@@ -1238,7 +1236,7 @@ class Invoice
      */
     public function getBuyerProvidedInfo(): ?BuyerProvidedInfo
     {
-        return $this->_buyerProvidedInfo;
+        return $this->buyerProvidedInfo;
     }
 
     /**
@@ -1252,17 +1250,17 @@ class Invoice
      */
     public function setBuyerProvidedInfo(BuyerProvidedInfo $buyerProvidedInfo)
     {
-        $this->_buyerProvidedInfo = $buyerProvidedInfo;
+        $this->buyerProvidedInfo = $buyerProvidedInfo;
     }
 
     public function getTransactionDetails()
     {
-        return $this->_transactionDetails;
+        return $this->transactionDetails;
     }
 
     public function setTransactionDetails(TransactionDetails $transactionDetails)
     {
-        $this->_transactionDetails = $transactionDetails;
+        $this->transactionDetails = $transactionDetails;
     }
 
     /**
@@ -1274,7 +1272,7 @@ class Invoice
      */
     public function getUniversalCodes(): ?UniversalCodes
     {
-        return $this->_universalCodes;
+        return $this->universalCodes;
     }
 
     /**
@@ -1284,7 +1282,7 @@ class Invoice
      */
     public function setUniversalCodes(UniversalCodes $universalCodes)
     {
-        $this->_universalCodes = $universalCodes;
+        $this->universalCodes = $universalCodes;
     }
 
     /**
@@ -1301,7 +1299,7 @@ class Invoice
      */
     public function getSupportedTransactionCurrencies()
     {
-        return $this->_supportedTransactionCurrencies;
+        return $this->supportedTransactionCurrencies;
     }
 
     /**
@@ -1319,7 +1317,7 @@ class Invoice
      */
     public function setSupportedTransactionCurrencies(SupportedTransactionCurrencies $supportedTransactionCurrencies)
     {
-        $this->_supportedTransactionCurrencies = $supportedTransactionCurrencies;
+        $this->supportedTransactionCurrencies = $supportedTransactionCurrencies;
     }
 
     /**
@@ -1331,7 +1329,7 @@ class Invoice
      */
     public function getPaymentTotals()
     {
-        return $this->_paymentTotals;
+        return $this->paymentTotals;
     }
 
     /**
@@ -1343,7 +1341,7 @@ class Invoice
      */
     public function setPaymentTotals($paymentTotals)
     {
-        $this->_paymentTotals = $paymentTotals;
+        $this->paymentTotals = $paymentTotals;
     }
 
     /**
@@ -1355,7 +1353,7 @@ class Invoice
      */
     public function getPaymentSubTotals()
     {
-        return $this->_paymentSubtotals;
+        return $this->paymentSubtotals;
     }
 
     /**
@@ -1367,7 +1365,7 @@ class Invoice
      */
     public function setPaymentSubTotals($paymentSubtotals)
     {
-        $this->_paymentSubtotals = $paymentSubtotals;
+        $this->paymentSubtotals = $paymentSubtotals;
     }
 
     /**
@@ -1381,7 +1379,7 @@ class Invoice
      */
     public function getPaymentDisplaySubTotals()
     {
-        return $this->_paymentDisplaySubtotals;
+        return $this->paymentDisplaySubtotals;
     }
 
     /**
@@ -1395,7 +1393,7 @@ class Invoice
      */
     public function setPaymentDisplaySubTotals($paymentDisplaySubtotals)
     {
-        $this->_paymentDisplaySubtotals = $paymentDisplaySubtotals;
+        $this->paymentDisplaySubtotals = $paymentDisplaySubtotals;
     }
 
     /**
@@ -1410,7 +1408,7 @@ class Invoice
      */
     public function getPaymentDisplayTotals()
     {
-        return $this->_paymentDisplaytotals;
+        return $this->paymentDisplaytotals;
     }
 
     /**
@@ -1425,7 +1423,7 @@ class Invoice
      */
     public function setPaymentDisplayTotals($paymentDisplaytotals)
     {
-        $this->_paymentDisplaytotals = $paymentDisplaytotals;
+        $this->paymentDisplaytotals = $paymentDisplaytotals;
     }
 
     /**
@@ -1442,7 +1440,7 @@ class Invoice
      */
     public function getPaymentCodes()
     {
-        return $this->_paymentCodes;
+        return $this->paymentCodes;
     }
 
     /**
@@ -1459,7 +1457,7 @@ class Invoice
      */
     public function setPaymentCodes($paymentCodes)
     {
-        $this->_paymentCodes = $paymentCodes;
+        $this->paymentCodes = $paymentCodes;
     }
 
     /**
@@ -1474,7 +1472,7 @@ class Invoice
      */
     public function getUnderpaidAmount(): ?int
     {
-        return $this->_underpaidAmount;
+        return $this->underpaidAmount;
     }
 
     /**
@@ -1489,7 +1487,7 @@ class Invoice
      */
     public function setUnderpaidAmount(int $underpaidAmount)
     {
-        $this->_underpaidAmount = $underpaidAmount;
+        $this->underpaidAmount = $underpaidAmount;
     }
 
     /**
@@ -1504,7 +1502,7 @@ class Invoice
      */
     public function getOverpaidAmount(): ?int
     {
-        return $this->_overpaidAmount;
+        return $this->overpaidAmount;
     }
 
     /**
@@ -1519,7 +1517,7 @@ class Invoice
      */
     public function setOverpaidAmount(int $overpaidAmount)
     {
-        $this->_overpaidAmount = $overpaidAmount;
+        $this->overpaidAmount = $overpaidAmount;
     }
 
     /**
@@ -1537,7 +1535,7 @@ class Invoice
      */
     public function getMinerFees()
     {
-        return $this->_minerFees;
+        return $this->minerFees;
     }
 
     /**
@@ -1556,7 +1554,7 @@ class Invoice
      */
     public function setMinerFees(MinerFees $minerFees)
     {
-        $this->_minerFees = $minerFees;
+        $this->minerFees = $minerFees;
     }
 
     /**
@@ -1569,7 +1567,7 @@ class Invoice
      */
     public function getNonPayProPaymentReceived()
     {
-        return $this->_nonPayProPaymentReceived;
+        return $this->nonPayProPaymentReceived;
     }
 
     /**
@@ -1582,7 +1580,7 @@ class Invoice
      */
     public function setNonPayProPaymentReceived(bool $nonPayProPaymentReceived)
     {
-        $this->_nonPayProPaymentReceived = $nonPayProPaymentReceived;
+        $this->nonPayProPaymentReceived = $nonPayProPaymentReceived;
     }
 
     /**
@@ -1595,7 +1593,7 @@ class Invoice
      */
     public function getShopper()
     {
-        return $this->_shopper;
+        return $this->shopper;
     }
 
     /**
@@ -1608,7 +1606,7 @@ class Invoice
      */
     public function setShopper(Shopper $shopper)
     {
-        $this->_shopper = $shopper;
+        $this->shopper = $shopper;
     }
 
     /**
@@ -1621,7 +1619,7 @@ class Invoice
      */
     public function getBillId()
     {
-        return $this->_billId;
+        return $this->billId;
     }
 
     /**
@@ -1634,7 +1632,7 @@ class Invoice
      */
     public function setBillId($billId)
     {
-        $this->_billId = $billId;
+        $this->billId = $billId;
     }
 
     /**
@@ -1646,7 +1644,7 @@ class Invoice
      */
     public function getRefundInfo()
     {
-        return $this->_refundInfo;
+        return $this->refundInfo;
     }
 
     /**
@@ -1658,7 +1656,7 @@ class Invoice
      */
     public function setRefundInfo(RefundInfo $refundInfo)
     {
-        $this->_refundInfo = $refundInfo;
+        $this->refundInfo = $refundInfo;
     }
 
     /**
@@ -1674,7 +1672,7 @@ class Invoice
      */
     public function getExtendedNotifications()
     {
-        return $this->_extendedNotifications;
+        return $this->extendedNotifications;
     }
 
     /**
@@ -1690,7 +1688,7 @@ class Invoice
      */
     public function setExtendedNotifications(bool $extendedNotifications)
     {
-        $this->_extendedNotifications = $extendedNotifications;
+        $this->extendedNotifications = $extendedNotifications;
     }
 
     /**
@@ -1705,7 +1703,7 @@ class Invoice
      */
     public function getTransactionCurrency()
     {
-        return $this->_transactionCurrency;
+        return $this->transactionCurrency;
     }
 
     /**
@@ -1720,7 +1718,7 @@ class Invoice
      */
     public function setTransactionCurrency($transactionCurrency)
     {
-        $this->_transactionCurrency = $transactionCurrency;
+        $this->transactionCurrency = $transactionCurrency;
     }
 
     /**
@@ -1733,7 +1731,7 @@ class Invoice
      */
     public function getAmountPaid(): ?int
     {
-        return $this->_amountPaid;
+        return $this->amountPaid;
     }
 
     /**
@@ -1746,7 +1744,7 @@ class Invoice
      */
     public function setAmountPaid($amountPaid)
     {
-        $this->_amountPaid = $amountPaid;
+        $this->amountPaid = $amountPaid;
     }
 
     /**
@@ -1760,7 +1758,7 @@ class Invoice
      */
     public function getDisplayAmountPaid()
     {
-        return $this->_displayAmountPaid;
+        return $this->displayAmountPaid;
     }
 
     /**
@@ -1774,7 +1772,7 @@ class Invoice
      */
     public function setDisplayAmountPaid($displayAmountPaid)
     {
-        $this->_displayAmountPaid = $displayAmountPaid;
+        $this->displayAmountPaid = $displayAmountPaid;
     }
 
     /**
@@ -1786,7 +1784,7 @@ class Invoice
      */
     public function getExchangeRates()
     {
-        return $this->_exchangeRates;
+        return $this->exchangeRates;
     }
 
     /**
@@ -1798,7 +1796,7 @@ class Invoice
      */
     public function setExchangeRates($exchangeRates)
     {
-        $this->_exchangeRates = $exchangeRates;
+        $this->exchangeRates = $exchangeRates;
     }
 
     /**
@@ -1810,7 +1808,7 @@ class Invoice
      */
     public function getPaymentString()
     {
-        return $this->_paymentString;
+        return $this->paymentString;
     }
 
     /**
@@ -1822,7 +1820,7 @@ class Invoice
      */
     public function setPaymentString(string $paymentString)
     {
-        $this->_paymentString = $paymentString;
+        $this->paymentString = $paymentString;
     }
 
     /**
@@ -1834,7 +1832,7 @@ class Invoice
      */
     public function getVerificationLink()
     {
-        return $this->_verificationLink;
+        return $this->verificationLink;
     }
 
     /**
@@ -1846,7 +1844,7 @@ class Invoice
      */
     public function setVerificationLink(string $verificationLink)
     {
-        $this->_verificationLink = $verificationLink;
+        $this->verificationLink = $verificationLink;
     }
 
     /**
@@ -1858,7 +1856,7 @@ class Invoice
      */
     public function getIsCancelled()
     {
-        return $this->_isCancelled;
+        return $this->isCancelled;
     }
 
     /**
@@ -1870,7 +1868,7 @@ class Invoice
      */
     public function setIsCancelled(bool $isCancelled)
     {
-        $this->_isCancelled = $isCancelled;
+        $this->isCancelled = $isCancelled;
     }
 
     /**

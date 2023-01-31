@@ -1,65 +1,64 @@
 <?php
+declare(strict_types=1);
 
 namespace BitPaySDK\Model\Invoice;
 
 class TransactionDetails
 {
-    protected $_amount;
-    protected $_description;
-    protected $_isFee;
+    protected ?float $amount;
+    protected ?string $description;
+    protected ?bool $isFee;
 
     /**
      * Constructs a TransactionDetails object.
      *
-     * @param float  $amount      The amount of the transaction.
-     * @param string $description The three digit currency string.
-     * @param bool   $isFee       Designates if the amount is a fee.
+     * @param float|null $amount The amount of the transaction.
+     * @param string|null $description The three digit currency string.
+     * @param bool $isFee Designates if the amount is a fee.
      */
     public function __construct(?float $amount = null, ?string $description = null, ?bool $isFee = null)
     {
-        $this->_amount = $amount;
-        $this->_description = $description;
-        $this->_isFee = $isFee;
+        $this->amount = $amount;
+        $this->description = $description;
+        $this->isFee = $isFee;
     }
 
     public function getAmount(): ?float
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     public function setAmount(float $amount)
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     public function getDescription(): ?string
     {
-        return $this->_description;
+        return $this->description;
     }
 
     public function setDescription(string $description)
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     public function getIsFee(): ?bool
     {
-        return $this->_isFee;
+        return $this->isFee;
     }
 
     public function setIsFee(bool $isFee)
     {
-        $this->_isFee = $isFee;
+        $this->isFee = $isFee;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-        'amount'        => $this->getAmount(),
-        'description'   => $this->getDescription(),
-        'isFee'         => $this->getIsFee()
+        return [
+            'amount'        => $this->getAmount(),
+            'description'   => $this->getDescription(),
+            'isFee'         => $this->getIsFee()
         ];
-
-        return $elements;
     }
 }

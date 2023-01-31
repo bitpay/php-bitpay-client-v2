@@ -9,23 +9,23 @@ namespace BitPaySDK\Model\Invoice;
 
 class Refund
 {
-    protected $_guid;
-    protected $_refundEmail;
-    protected $_amount;
-    protected $_currency;
-    protected $_token;
-    protected $_id;
-    protected $_requestDate;
-    protected $_status;
-    protected $_params;
-    protected $_invoiceId;
-    protected $_preview;
-    protected $_immediate;
-    protected $_buyerPaysRefundFee;
-    protected $_refundFee;
-    protected $_reference;
-    protected $_lastRefundNotification;
-    protected $_invoice;
+    protected $guid;
+    protected $refundEmail;
+    protected $amount;
+    protected $currency;
+    protected $token;
+    protected $id;
+    protected $requestDate;
+    protected $status;
+    protected $params;
+    protected $invoiceId;
+    protected $preview;
+    protected $immediate;
+    protected $buyerPaysRefundFee;
+    protected $refundFee;
+    protected $reference;
+    protected $lastRefundNotification;
+    protected $invoice;
 
     /**
      * Constructor, create Refund object
@@ -41,11 +41,11 @@ class Refund
         string $currency = "",
         string $token = ""
     ) {
-        $this->_refundEmail = $refundEmail;
-        $this->_amount = $amount;
-        $this->_currency = $currency;
-        $this->_token = $token;
-        $this->_params = new RefundParams();
+        $this->refundEmail = $refundEmail;
+        $this->amount = $amount;
+        $this->currency = $currency;
+        $this->token = $token;
+        $this->params = new RefundParams();
     }
 
     // Request fields
@@ -59,7 +59,7 @@ class Refund
      */
     public function getGuid()
     {
-        return $this->_guid;
+        return $this->guid;
     }
 
     /**
@@ -69,7 +69,7 @@ class Refund
      */
     public function setGuid(string $guid)
     {
-        $this->_guid = $guid;
+        $this->guid = $guid;
     }
 
     /**
@@ -81,7 +81,7 @@ class Refund
      */
     public function getReference()
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
@@ -91,7 +91,7 @@ class Refund
      */
     public function setReference(string $reference)
     {
-        $this->_reference = $reference;
+        $this->reference = $reference;
     }
 
     /**
@@ -101,7 +101,7 @@ class Refund
      */
     public function getRefundEmail()
     {
-        return $this->_refundEmail;
+        return $this->refundEmail;
     }
 
     /**
@@ -111,7 +111,7 @@ class Refund
      */
     public function setRefundEmail(string $refundEmail)
     {
-        $this->_refundEmail = $refundEmail;
+        $this->refundEmail = $refundEmail;
     }
 
     /**
@@ -121,7 +121,7 @@ class Refund
      */
     public function getAmount()
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -131,7 +131,7 @@ class Refund
      */
     public function setAmount(float $amount)
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -141,7 +141,7 @@ class Refund
      */
     public function getToken()
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -151,7 +151,7 @@ class Refund
      */
     public function setToken(string $token)
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     /**
@@ -161,7 +161,7 @@ class Refund
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -171,7 +171,7 @@ class Refund
      */
     public function setCurrency(string $currency)
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -181,7 +181,7 @@ class Refund
      */
     public function getPreview()
     {
-        return $this->_preview;
+        return $this->preview;
     }
 
     /**
@@ -191,7 +191,7 @@ class Refund
      */
     public function setPreview(bool $preview)
     {
-        $this->_preview = $preview;
+        $this->preview = $preview;
     }
 
     /**
@@ -201,7 +201,7 @@ class Refund
      */
     public function getInvoiceId()
     {
-        return $this->_invoiceId;
+        return $this->invoiceId;
     }
 
     /**
@@ -211,7 +211,7 @@ class Refund
      */
     public function setInvoiceId(string $invoiceId)
     {
-        $this->_invoiceId = $invoiceId;
+        $this->invoiceId = $invoiceId;
     }
 
     // Response fields
@@ -224,7 +224,7 @@ class Refund
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -234,7 +234,7 @@ class Refund
      */
     public function setId(string $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -244,7 +244,7 @@ class Refund
      */
     public function getRequestDate()
     {
-        return $this->_requestDate;
+        return $this->requestDate;
     }
 
     /**
@@ -254,7 +254,7 @@ class Refund
      */
     public function setRequestDate(string $requestDate)
     {
-        $this->_requestDate = $requestDate;
+        $this->requestDate = $requestDate;
     }
 
     /**
@@ -264,7 +264,7 @@ class Refund
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -274,7 +274,7 @@ class Refund
      */
     public function setStatus(string $status)
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -284,7 +284,7 @@ class Refund
      */
     public function getParams()
     {
-        return $this->_params;
+        return $this->params;
     }
 
     /**
@@ -294,7 +294,7 @@ class Refund
      */
     public function setParams(RefundParams $params)
     {
-        $this->_params = $params;
+        $this->params = $params;
     }
 
     /**
@@ -305,7 +305,7 @@ class Refund
      */
     public function getImmediate()
     {
-        return $this->_immediate;
+        return $this->immediate;
     }
 
     /**
@@ -315,7 +315,7 @@ class Refund
      */
     public function setImmediate(bool $immediate)
     {
-        $this->_immediate = $immediate;
+        $this->immediate = $immediate;
     }
 
     /**
@@ -325,7 +325,7 @@ class Refund
      */
     public function getRefundFee()
     {
-        return $this->_refundFee;
+        return $this->refundFee;
     }
 
     /**
@@ -335,7 +335,7 @@ class Refund
      */
     public function setRefundFee(float $refundFee)
     {
-        $this->_refundFee = $refundFee;
+        $this->refundFee = $refundFee;
     }
 
     /**
@@ -345,7 +345,7 @@ class Refund
      */
     public function getLastRefundNotification()
     {
-        return $this->_lastRefundNotification;
+        return $this->lastRefundNotification;
     }
 
     /**
@@ -355,7 +355,7 @@ class Refund
      */
     public function setLastRefundNotification(string $lastRefundNotification)
     {
-        $this->_lastRefundNotification = $lastRefundNotification;
+        $this->lastRefundNotification = $lastRefundNotification;
     }
 
     /**
@@ -365,7 +365,7 @@ class Refund
      */
     public function getInvoice()
     {
-        return $this->_invoice;
+        return $this->invoice;
     }
 
     /**
@@ -375,7 +375,7 @@ class Refund
      */
     public function setInvoice(string $invoice)
     {
-        $this->_invoice = $invoice;
+        $this->invoice = $invoice;
     }
 
     /**
@@ -386,7 +386,7 @@ class Refund
      */
     public function getBuyerPaysRefundFee()
     {
-        return $this->_buyerPaysRefundFee;
+        return $this->buyerPaysRefundFee;
     }
 
     /**
@@ -396,7 +396,7 @@ class Refund
      */
     public function setBuyerPaysRefundFee(bool $buyerPaysRefundFee)
     {
-        $this->_buyerPaysRefundFee = $buyerPaysRefundFee;
+        $this->buyerPaysRefundFee = $buyerPaysRefundFee;
     }
 
     /**

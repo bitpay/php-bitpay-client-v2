@@ -4,9 +4,9 @@ namespace BitPaySDK\Model\Invoice;
 
 class MinerFeesItem
 {
-    protected $_satoshisPerByte;
-    protected $_totalFee;
-    protected $_fiatAmount = null;
+    protected $satoshisPerByte;
+    protected $totalFee;
+    protected $fiatAmount = null;
 
     public function __construct()
     {
@@ -14,32 +14,32 @@ class MinerFeesItem
 
     public function getSatoshisPerByte()
     {
-        return $this->_satoshisPerByte;
+        return $this->satoshisPerByte;
     }
 
     public function setSatoshisPerByte(float $satoshisPerByte)
     {
-        $this->_satoshisPerByte = $satoshisPerByte;
+        $this->satoshisPerByte = $satoshisPerByte;
     }
 
     public function getTotalFee()
     {
-        return $this->_totalFee;
+        return $this->totalFee;
     }
 
     public function setTotalFee(float $totalFee)
     {
-        $this->_totalFee = $totalFee;
+        $this->totalFee = $totalFee;
     }
 
     public function getFiatAmount()
     {
-        return $this->_fiatAmount;
+        return $this->fiatAmount;
     }
 
     public function setFiatAmount(?float $fiatAmount)
     {
-        $this->_fiatAmount = $fiatAmount;
+        $this->fiatAmount = $fiatAmount;
     }
 
     public function toArray()

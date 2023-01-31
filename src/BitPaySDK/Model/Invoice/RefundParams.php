@@ -12,14 +12,14 @@ namespace BitPaySDK\Model\Invoice;
  */
 class RefundParams
 {
-    protected $_requesterType        = "";
-    protected $_requesterEmail       = "";
-    protected $_amount               = 0.0;
-    protected $_currency             = "";
-    protected $_email                = "";
-    protected $_purchaserNotifyEmail = "";
-    protected $_refundAddress        = "";
-    protected $_supportRequestEid    = "";
+    protected $requesterType        = "";
+    protected $requesterEmail       = "";
+    protected $amount               = 0.0;
+    protected $currency             = "";
+    protected $email                = "";
+    protected $purchaserNotifyEmail = "";
+    protected $refundAddress        = "";
+    protected $supportRequestEid    = "";
 
     public function __construct()
     {
@@ -34,7 +34,7 @@ class RefundParams
      */
     public function getRequesterType()
     {
-        return $this->_requesterType;
+        return $this->requesterType;
     }
 
     /**
@@ -47,7 +47,7 @@ class RefundParams
      */
     public function setRequesterType(string $requesterType)
     {
-        $this->_requesterType = $requesterType;
+        $this->requesterType = $requesterType;
     }
 
     /**
@@ -57,7 +57,7 @@ class RefundParams
      */
     public function getRequesterEmail()
     {
-        return $this->_requesterEmail;
+        return $this->requesterEmail;
     }
 
     /**
@@ -67,7 +67,7 @@ class RefundParams
      */
     public function setRequesterEmail(string $requesterEmail)
     {
-        $this->_requesterEmail = $requesterEmail;
+        $this->requesterEmail = $requesterEmail;
     }
 
     /**
@@ -77,7 +77,7 @@ class RefundParams
      */
     public function getAmount()
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -87,7 +87,7 @@ class RefundParams
      */
     public function setAmount(float $amount)
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -99,7 +99,7 @@ class RefundParams
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -111,7 +111,7 @@ class RefundParams
      */
     public function setCurrency(string $currency)
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -121,7 +121,7 @@ class RefundParams
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -131,7 +131,7 @@ class RefundParams
      */
     public function setEmail(string $email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
@@ -144,7 +144,7 @@ class RefundParams
      */
     public function getPurchaserNotifyEmail()
     {
-        return $this->_purchaserNotifyEmail;
+        return $this->purchaserNotifyEmail;
     }
 
     /**
@@ -157,7 +157,7 @@ class RefundParams
      */
     public function setPurchaserNotifyEmail(string $purchaserNotifyEmail)
     {
-        $this->_purchaserNotifyEmail = $purchaserNotifyEmail;
+        $this->purchaserNotifyEmail = $purchaserNotifyEmail;
     }
 
     /**
@@ -169,7 +169,7 @@ class RefundParams
      */
     public function getRefundAddress()
     {
-        return $this->_refundAddress;
+        return $this->refundAddress;
     }
 
     /**
@@ -181,7 +181,7 @@ class RefundParams
      */
     public function setRefundAddress(string $refundAddress)
     {
-        $this->_refundAddress = $refundAddress;
+        $this->refundAddress = $refundAddress;
     }
 
     /**
@@ -193,7 +193,7 @@ class RefundParams
      */
     public function getSupportRequestEid()
     {
-        return $this->_supportRequestEid;
+        return $this->supportRequestEid;
     }
 
     /**
@@ -205,7 +205,7 @@ class RefundParams
      */
     public function setSupportRequestEid(string $supportRequestEid)
     {
-        $this->_supportRequestEid = $supportRequestEid;
+        $this->supportRequestEid = $supportRequestEid;
     }
 
     /**

@@ -12,13 +12,13 @@ namespace BitPaySDK\Model\Invoice;
  */
 class BuyerProvidedInfo
 {
-    protected $_name;
-    protected $_phoneNumber;
-    protected $_selectedWallet;
-    protected $_emailAddress;
-    protected $_selectedTransactionCurrency;
-    protected $_sms;
-    protected $_smsVerified;
+    protected $name;
+    protected $phoneNumber;
+    protected $selectedWallet;
+    protected $emailAddress;
+    protected $selectedTransactionCurrency;
+    protected $sms;
+    protected $smsVerified;
 
     public function __construct()
     {
@@ -33,7 +33,7 @@ class BuyerProvidedInfo
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -45,7 +45,7 @@ class BuyerProvidedInfo
      */
     public function setName($name)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -57,7 +57,7 @@ class BuyerProvidedInfo
      */
     public function getPhoneNumber()
     {
-        return $this->_phoneNumber;
+        return $this->phoneNumber;
     }
 
     /**
@@ -69,7 +69,7 @@ class BuyerProvidedInfo
      */
     public function setPhoneNumber($phoneNumber)
     {
-        $this->_phoneNumber = $phoneNumber;
+        $this->phoneNumber = $phoneNumber;
     }
 
     /**
@@ -81,7 +81,7 @@ class BuyerProvidedInfo
      */
     public function getSelectedWallet()
     {
-        return $this->_selectedWallet;
+        return $this->selectedWallet;
     }
 
     /**
@@ -93,7 +93,7 @@ class BuyerProvidedInfo
      */
     public function setSelectedWallet(string $selectedWallet)
     {
-        $this->_selectedWallet = $selectedWallet;
+        $this->selectedWallet = $selectedWallet;
     }
 
     /**
@@ -106,7 +106,7 @@ class BuyerProvidedInfo
      */
     public function getEmailAddress()
     {
-        return $this->_emailAddress;
+        return $this->emailAddress;
     }
 
     /**
@@ -119,7 +119,7 @@ class BuyerProvidedInfo
      */
     public function setEmailAddress($emailAddress)
     {
-        $this->_emailAddress = $emailAddress;
+        $this->emailAddress = $emailAddress;
     }
 
     /**
@@ -133,7 +133,7 @@ class BuyerProvidedInfo
      */
     public function getSelectedTransactionCurrency()
     {
-        return $this->_selectedTransactionCurrency;
+        return $this->selectedTransactionCurrency;
     }
 
     /**
@@ -147,7 +147,7 @@ class BuyerProvidedInfo
      */
     public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
     {
-        $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
+        $this->selectedTransactionCurrency = $selectedTransactionCurrency;
     }
 
     /**
@@ -160,7 +160,7 @@ class BuyerProvidedInfo
      */
     public function getSms()
     {
-        return $this->_sms;
+        return $this->sms;
     }
 
     /**
@@ -173,7 +173,7 @@ class BuyerProvidedInfo
      */
     public function setSms(string $sms)
     {
-        $this->_sms = $sms;
+        $this->sms = $sms;
     }
 
     /**
@@ -183,17 +183,17 @@ class BuyerProvidedInfo
      */
     public function getSmsVerified()
     {
-        return $this->_smsVerified;
+        return $this->smsVerified;
     }
 
     /**
      * Sets verification status of SMS (ie. have they passed the challenge).
      *
-     * @param bool $smsVerfied the sms verified
+     * @param bool $smsVerified the sms verified
      */
-    public function setSmsVerified(bool $smsVerfied)
+    public function setSmsVerified(bool $smsVerified)
     {
-        $this->_smsVerified = $smsVerfied;
+        $this->smsVerified = $smsVerified;
     }
 
     /**

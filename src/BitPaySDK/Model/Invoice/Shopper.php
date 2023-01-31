@@ -13,7 +13,7 @@ namespace BitPaySDK\Model\Invoice;
  */
 class Shopper
 {
-    protected $_user;
+    protected $user;
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ class Shopper
      */
     public function getUser()
     {
-        return $this->_user;
+        return $this->user;
     }
 
     /**
@@ -42,7 +42,7 @@ class Shopper
      */
     public function setUser(string $user)
     {
-        $this->_user = $user;
+        $this->user = $user;
     }
 
     /**

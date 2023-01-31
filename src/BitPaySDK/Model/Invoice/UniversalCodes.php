@@ -12,8 +12,8 @@ namespace BitPaySDK\Model\Invoice;
  */
 class UniversalCodes
 {
-    protected $_paymentString;
-    protected $_verificationLink;
+    protected $paymentString;
+    protected $verificationLink;
 
     public function __construct()
     {
@@ -28,7 +28,7 @@ class UniversalCodes
      */
     public function getPaymentString()
     {
-        return $this->_paymentString;
+        return $this->paymentString;
     }
 
     /**
@@ -40,7 +40,7 @@ class UniversalCodes
      */
     public function setPaymentString(string $paymentString)
     {
-        $this->_paymentString = $paymentString;
+        $this->paymentString = $paymentString;
     }
 
     /**
@@ -52,7 +52,7 @@ class UniversalCodes
      */
     public function getVerificationLink()
     {
-        return $this->_verificationLink;
+        return $this->verificationLink;
     }
 
     /**
@@ -64,7 +64,7 @@ class UniversalCodes
      */
     public function setVerificationLink(string $verificationLink)
     {
-        $this->_verificationLink = $verificationLink;
+        $this->verificationLink = $verificationLink;
     }
 
     /**

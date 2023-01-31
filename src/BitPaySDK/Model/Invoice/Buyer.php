@@ -14,16 +14,16 @@ namespace BitPaySDK\Model\Invoice;
  */
 class Buyer
 {
-    protected $_name;
-    protected $_address1;
-    protected $_address2;
-    protected $_locality;
-    protected $_region;
-    protected $_postalCode;
-    protected $_country;
-    protected $_email;
-    protected $_phone;
-    protected $_notify;
+    protected $name;
+    protected $address1;
+    protected $address2;
+    protected $locality;
+    protected $region;
+    protected $postalCode;
+    protected $country;
+    protected $email;
+    protected $phone;
+    protected $notify;
 
     public function __construct()
     {
@@ -36,7 +36,7 @@ class Buyer
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -46,7 +46,7 @@ class Buyer
      */
     public function setName(string $name)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -56,7 +56,7 @@ class Buyer
      */
     public function getAddress1()
     {
-        return $this->_address1;
+        return $this->address1;
     }
 
     /**
@@ -66,7 +66,7 @@ class Buyer
      */
     public function setAddress1(string $address1)
     {
-        $this->_address1 = $address1;
+        $this->address1 = $address1;
     }
 
     /**
@@ -76,7 +76,7 @@ class Buyer
      */
     public function getAddress2()
     {
-        return $this->_address2;
+        return $this->address2;
     }
 
     /**
@@ -86,7 +86,7 @@ class Buyer
      */
     public function setAddress2(string $address2)
     {
-        $this->_address2 = $address2;
+        $this->address2 = $address2;
     }
 
     /**
@@ -96,7 +96,7 @@ class Buyer
      */
     public function getLocality()
     {
-        return $this->_locality;
+        return $this->locality;
     }
 
     /**
@@ -106,7 +106,7 @@ class Buyer
      */
     public function setLocality(string $locality)
     {
-        $this->_locality = $locality;
+        $this->locality = $locality;
     }
 
     /**
@@ -116,7 +116,7 @@ class Buyer
      */
     public function getRegion()
     {
-        return $this->_region;
+        return $this->region;
     }
 
     /**
@@ -126,7 +126,7 @@ class Buyer
      */
     public function setRegion(string $region)
     {
-        $this->_region = $region;
+        $this->region = $region;
     }
 
     /**
@@ -136,7 +136,7 @@ class Buyer
      */
     public function getPostalCode()
     {
-        return $this->_postalCode;
+        return $this->postalCode;
     }
 
     /**
@@ -146,7 +146,7 @@ class Buyer
      */
     public function setPostalCode(string $postalCode)
     {
-        $this->_postalCode = $postalCode;
+        $this->postalCode = $postalCode;
     }
 
     /**
@@ -158,7 +158,7 @@ class Buyer
      */
     public function getCountry()
     {
-        return $this->_country;
+        return $this->country;
     }
 
     /**
@@ -168,7 +168,7 @@ class Buyer
      */
     public function setCountry(string $country)
     {
-        $this->_country = $country;
+        $this->country = $country;
     }
 
     /**
@@ -180,7 +180,7 @@ class Buyer
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -192,7 +192,7 @@ class Buyer
      */
     public function setEmail(string $email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
@@ -202,7 +202,7 @@ class Buyer
      */
     public function getPhone()
     {
-        return $this->_phone;
+        return $this->phone;
     }
 
     /**
@@ -212,7 +212,7 @@ class Buyer
      */
     public function setPhone(string $phone)
     {
-        $this->_phone = $phone;
+        $this->phone = $phone;
     }
 
     /**
@@ -224,7 +224,7 @@ class Buyer
      */
     public function getNotify()
     {
-        return $this->_notify;
+        return $this->notify;
     }
 
     /**
@@ -236,7 +236,7 @@ class Buyer
      */
     public function setNotify(bool $notify)
     {
-        $this->_notify = $notify;
+        $this->notify = $notify;
     }
 
     /**

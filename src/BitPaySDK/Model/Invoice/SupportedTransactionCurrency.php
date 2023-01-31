@@ -18,8 +18,8 @@ namespace BitPaySDK\Model\Invoice;
  */
 class SupportedTransactionCurrency
 {
-    protected $_enabled;
-    protected $_reason;
+    protected $enabled;
+    protected $reason;
 
     /**
      * SupportedTransactionCurrency constructor.
@@ -35,7 +35,7 @@ class SupportedTransactionCurrency
      */
     public function setEnabled(bool $enabled)
     {
-        $this->_enabled = $enabled;
+        $this->enabled = $enabled;
     }
 
     /**
@@ -45,7 +45,7 @@ class SupportedTransactionCurrency
      */
     public function getEnabled()
     {
-        return $this->_enabled;
+        return $this->enabled;
     }
 
     /**
@@ -55,7 +55,7 @@ class SupportedTransactionCurrency
      */
     public function setReason(string $reason)
     {
-        $this->_reason = $reason;
+        $this->reason = $reason;
     }
 
     /**
@@ -65,7 +65,7 @@ class SupportedTransactionCurrency
      */
     public function getReason()
     {
-        return $this->_reason;
+        return $this->reason;
     }
 
     /**

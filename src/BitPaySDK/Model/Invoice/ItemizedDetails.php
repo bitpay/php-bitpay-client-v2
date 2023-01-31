@@ -9,9 +9,9 @@ namespace BitPaySDK\Model\Invoice;
 
 class ItemizedDetails
 {
-    protected $_amount;
-    protected $_description;
-    protected $_isFee;
+    protected $amount;
+    protected $description;
+    protected $isFee;
 
     public function __construct()
     {
@@ -24,7 +24,7 @@ class ItemizedDetails
      */
     public function getAmount()
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -34,7 +34,7 @@ class ItemizedDetails
      */
     public function setAmount(float $amount)
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -46,7 +46,7 @@ class ItemizedDetails
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -56,7 +56,7 @@ class ItemizedDetails
      */
     public function setDescription(string $description)
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
@@ -68,7 +68,7 @@ class ItemizedDetails
      */
     public function getIsFee()
     {
-        return $this->_isFee;
+        return $this->isFee;
     }
 
     /**
@@ -80,7 +80,7 @@ class ItemizedDetails
      */
     public function setIsFee(bool $isFee)
     {
-        $this->_isFee = $isFee;
+        $this->isFee = $isFee;
     }
 
     /**

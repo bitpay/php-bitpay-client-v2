@@ -17,32 +17,32 @@ namespace BitPaySDK\Model\Invoice;
  */
 class MinerFees
 {
-    protected $_btc;
-    protected $_bch;
-    protected $_eth;
-    protected $_usdc;
-    protected $_gusd;
-    protected $_pax;
-    protected $_busd;
-    protected $_xrp;
-    protected $_doge;
-    protected $_ltc;
+    protected $btc;
+    protected $bch;
+    protected $eth;
+    protected $usdc;
+    protected $gusd;
+    protected $pax;
+    protected $busd;
+    protected $xrp;
+    protected $doge;
+    protected $ltc;
 
     /**
      * MinerFees constructor.
      */
     public function __construct()
     {
-        $this->_btc = new MinerFeesItem();
-        $this->_bch = new MinerFeesItem();
-        $this->_eth = new MinerFeesItem();
-        $this->_usdc = new MinerFeesItem();
-        $this->_gusd = new MinerFeesItem();
-        $this->_pax = new MinerFeesItem();
-        $this->_busd = new MinerFeesItem();
-        $this->_xrp = new MinerFeesItem();
-        $this->_doge = new MinerFeesItem();
-        $this->_ltc = new MinerFeesItem();
+        $this->btc = new MinerFeesItem();
+        $this->bch = new MinerFeesItem();
+        $this->eth = new MinerFeesItem();
+        $this->usdc = new MinerFeesItem();
+        $this->gusd = new MinerFeesItem();
+        $this->pax = new MinerFeesItem();
+        $this->busd = new MinerFeesItem();
+        $this->xrp = new MinerFeesItem();
+        $this->doge = new MinerFeesItem();
+        $this->ltc = new MinerFeesItem();
     }
 
     /**
@@ -52,7 +52,7 @@ class MinerFees
      */
     public function getBTC()
     {
-        return $this->_btc;
+        return $this->btc;
     }
 
     /**
@@ -62,7 +62,7 @@ class MinerFees
      */
     public function setBTC(MinerFeesItem $btc)
     {
-        $this->_btc = $btc;
+        $this->btc = $btc;
     }
 
     /**
@@ -72,7 +72,7 @@ class MinerFees
      */
     public function getBCH()
     {
-        return $this->_bch;
+        return $this->bch;
     }
 
     /**
@@ -82,7 +82,7 @@ class MinerFees
      */
     public function setBCH(MinerFeesItem $bch)
     {
-        $this->_bch = $bch;
+        $this->bch = $bch;
     }
 
     /**
@@ -92,7 +92,7 @@ class MinerFees
      */
     public function getETH()
     {
-        return $this->_eth;
+        return $this->eth;
     }
 
     /**
@@ -102,7 +102,7 @@ class MinerFees
      */
     public function setETH(MinerFeesItem $eth)
     {
-        $this->_eth = $eth;
+        $this->eth = $eth;
     }
 
     /**
@@ -112,7 +112,7 @@ class MinerFees
      */
     public function getUSDC()
     {
-        return $this->_usdc;
+        return $this->usdc;
     }
 
     /**
@@ -122,7 +122,7 @@ class MinerFees
      */
     public function setUSDC(MinerFeesItem $usdc)
     {
-        $this->_usdc = $usdc;
+        $this->usdc = $usdc;
     }
 
     /**
@@ -132,7 +132,7 @@ class MinerFees
      */
     public function getGUSD()
     {
-        return $this->_gusd;
+        return $this->gusd;
     }
 
     /**
@@ -142,7 +142,7 @@ class MinerFees
      */
     public function setGUSD(MinerFeesItem $gusd)
     {
-        $this->_gusd = $gusd;
+        $this->gusd = $gusd;
     }
 
     /**
@@ -152,7 +152,7 @@ class MinerFees
      */
     public function getPAX()
     {
-        return $this->_pax;
+        return $this->pax;
     }
 
     /**
@@ -162,7 +162,7 @@ class MinerFees
      */
     public function setPAX(MinerFeesItem $pax)
     {
-        $this->_pax = $pax;
+        $this->pax = $pax;
     }
 
     /**
@@ -172,7 +172,7 @@ class MinerFees
      */
     public function getBUSD()
     {
-        return $this->_busd;
+        return $this->busd;
     }
 
     /**
@@ -182,7 +182,7 @@ class MinerFees
      */
     public function setBUSD(MinerFeesItem $busd)
     {
-        $this->_busd = $busd;
+        $this->busd = $busd;
     }
 
     /**
@@ -192,7 +192,7 @@ class MinerFees
      */
     public function getXRP()
     {
-        return $this->_xrp;
+        return $this->xrp;
     }
 
     /**
@@ -202,7 +202,7 @@ class MinerFees
      */
     public function setXRP(MinerFeesItem $xrp)
     {
-        $this->_xrp = $xrp;
+        $this->xrp = $xrp;
     }
 
     /**
@@ -212,7 +212,7 @@ class MinerFees
      */
     public function getDOGE()
     {
-        return $this->_doge;
+        return $this->doge;
     }
 
     /**
@@ -222,7 +222,7 @@ class MinerFees
      */
     public function setDOGE(MinerFeesItem $doge)
     {
-        $this->_doge = $doge;
+        $this->doge = $doge;
     }
 
     /**
@@ -232,7 +232,7 @@ class MinerFees
      */
     public function getLTC()
     {
-        return $this->_ltc;
+        return $this->ltc;
     }
 
     /**
@@ -242,7 +242,7 @@ class MinerFees
      */
     public function setLTC(MinerFeesItem $ltc)
     {
-        $this->_ltc = $ltc;
+        $this->ltc = $ltc;
     }
 
     /**

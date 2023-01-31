@@ -12,9 +12,9 @@ namespace BitPaySDK\Model\Invoice;
  */
 class RefundInfo
 {
-    protected $_supportRequest;
-    protected $_currency;
-    protected $_amounts;
+    protected $supportRequest;
+    protected $currency;
+    protected $amounts;
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ class RefundInfo
      */
     public function getSupportRequest()
     {
-        return $this->_supportRequest;
+        return $this->supportRequest;
     }
 
     /**
@@ -41,7 +41,7 @@ class RefundInfo
      */
     public function setSupportRequest(string $supportRequest)
     {
-        $this->_supportRequest = $supportRequest;
+        $this->supportRequest = $supportRequest;
     }
 
     /**
@@ -54,7 +54,7 @@ class RefundInfo
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -67,7 +67,7 @@ class RefundInfo
      */
     public function setCurrency(string $currency)
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -82,7 +82,7 @@ class RefundInfo
      */
     public function getAmounts()
     {
-        return $this->_amounts;
+        return $this->amounts;
     }
 
     /**
@@ -97,7 +97,7 @@ class RefundInfo
      */
     public function setAmounts(array $amounts)
     {
-        $this->_amounts = $amounts;
+        $this->amounts = $amounts;
     }
 
     /**
