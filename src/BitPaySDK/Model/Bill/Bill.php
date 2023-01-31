@@ -17,27 +17,27 @@ use BitPaySDK\Model\Currency;
  */
 class Bill
 {
-    protected ?string $currency;
-    protected string $token = "";
-    protected ?string $email;
-    protected ?array $items;
-    protected ?string $number;
-    protected ?string $name;
-    protected ?string $address1;
-    protected ?string $address2;
-    protected ?string $city;
-    protected ?string $state;
-    protected ?string $zip;
-    protected ?string $country;
-    protected ?array $cc;
-    protected ?string $phone;
-    protected ?string $dueDate;
-    protected ?bool $passProcessingFee;
-    protected ?string $status;
-    protected ?string $url;
-    protected ?string $createDate;
-    protected ?string $id;
-    protected ?string $merchant;
+    protected $currency;
+    protected $token = "";
+    protected $email;
+    protected $items;
+    protected $number;
+    protected $name;
+    protected $address1;
+    protected $address2;
+    protected $city;
+    protected $state;
+    protected $zip;
+    protected $country;
+    protected $cc;
+    protected $phone;
+    protected $dueDate;
+    protected $passProcessingFee;
+    protected $status;
+    protected $url;
+    protected $createDate;
+    protected $id;
+    protected $merchant;
 
     /**
      * Constructor, create a minimal request Bill object.

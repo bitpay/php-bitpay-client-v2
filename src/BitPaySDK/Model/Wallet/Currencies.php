@@ -12,19 +12,19 @@ namespace BitPaySDK\Model\Wallet;
  */
 class Currencies
 {
-    protected $_code;
-    protected $_p2p;
-    protected $_dappBrowser;
-    protected $_image;
-    protected $_payPro;
-    protected $_qr;
-    protected $_withdrawalFee;
-    protected $_walletConnect;
-    protected $_currencies;
+    protected $code;
+    protected $p2p;
+    protected $dappBrowser;
+    protected $image;
+    protected $payPro;
+    protected $qr;
+    protected $withdrawalFee;
+    protected $walletConnect;
+    protected $currencies;
 
     public function __construct()
     {
-        $this->_currencies = new CurrencyQr();
+        $this->currencies = new CurrencyQr();
     }
 
     /**
@@ -36,7 +36,7 @@ class Currencies
      */
     public function getCode()
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -48,7 +48,7 @@ class Currencies
      */
     public function setCode(string $code)
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -60,7 +60,7 @@ class Currencies
      */
     public function getP2p()
     {
-        return $this->_p2p;
+        return $this->p2p;
     }
 
     /**
@@ -72,7 +72,7 @@ class Currencies
      */
     public function setP2p(bool $p2p)
     {
-        $this->_p2p = $p2p;
+        $this->p2p = $p2p;
     }
 
     /**
@@ -84,7 +84,7 @@ class Currencies
      */
     public function getDappBrowser()
     {
-        return $this->_dappBrowser;
+        return $this->dappBrowser;
     }
 
     /**
@@ -96,7 +96,7 @@ class Currencies
      */
     public function setDappBrowser(bool $dappBrowser)
     {
-        $this->_dappBrowser = $dappBrowser;
+        $this->dappBrowser = $dappBrowser;
     }
 
     /**
@@ -106,7 +106,7 @@ class Currencies
      */
     public function getImage()
     {
-        return $this->_image;
+        return $this->image;
     }
 
     /**
@@ -116,7 +116,7 @@ class Currencies
      */
     public function setImage(string $image)
     {
-        $this->_image = $image;
+        $this->image = $image;
     }
 
     /**
@@ -128,7 +128,7 @@ class Currencies
      */
     public function getPayPro()
     {
-        return $this->_payPro;
+        return $this->payPro;
     }
 
     /**
@@ -140,7 +140,7 @@ class Currencies
      */
     public function setPayPro(bool $payPro)
     {
-        $this->_payPro = $payPro;
+        $this->payPro = $payPro;
     }
 
     /**
@@ -152,7 +152,7 @@ class Currencies
      */
     public function getQr()
     {
-        return $this->_qr;
+        return $this->qr;
     }
 
     /**
@@ -164,7 +164,7 @@ class Currencies
      */
     public function setQr(CurrencyQr $qr)
     {
-        $this->_qr = $qr;
+        $this->qr = $qr;
     }
 
     /**
@@ -174,7 +174,7 @@ class Currencies
      */
     public function getWithdrawalFee()
     {
-        return $this->_withdrawalFee;
+        return $this->withdrawalFee;
     }
 
     /**
@@ -184,7 +184,7 @@ class Currencies
      */
     public function setWithdrawalFee(string $withdrawalFee)
     {
-        $this->_withdrawalFee = $withdrawalFee;
+        $this->withdrawalFee = $withdrawalFee;
     }
 
     /**
@@ -196,7 +196,7 @@ class Currencies
      */
     public function getWalletConnect()
     {
-        return $this->_walletConnect;
+        return $this->walletConnect;
     }
 
     /**
@@ -208,7 +208,7 @@ class Currencies
      */
     public function setWalletConnect(bool $walletConnect)
     {
-        $this->_walletConnect = $walletConnect;
+        $this->walletConnect = $walletConnect;
     }
 
     /**
@@ -218,7 +218,7 @@ class Currencies
      */
     public function toArray()
     {
-        $elements = [
+        return [
             'code'            => $this->getCode(),
             'p2p'             => $this->getP2p(),
             'dappBrowser'     => $this->getDappBrowser(),
@@ -228,7 +228,5 @@ class Currencies
             'withdrawalFee'   => $this->getWithdrawalFee(),
             'walletConnect'   => $this->getWalletConnect()
         ];
-
-        return $elements;
     }
 }

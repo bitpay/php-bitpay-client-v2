@@ -13,13 +13,12 @@ namespace BitPaySDK\Model\Wallet;
  */
 class Wallet
 {
-    protected $_key;
-    protected $_displayName;
-    protected $_avatar;
-    protected $_paypro;
-    protected $_currencies;
-    protected $_image;
-    protected $_payPro;
+    protected $key;
+    protected $displayName;
+    protected $avatar;
+    protected $currencies;
+    protected $image;
+    protected $payPro;
 
     /**
      * Constructor, create a minimal request Wallet object.
@@ -28,7 +27,7 @@ class Wallet
     */
     public function __construct()
     {
-        $this->_currencies = new Currencies();
+        $this->currencies = new Currencies();
     }
 
     /**
@@ -38,7 +37,7 @@ class Wallet
      */
     public function getKey()
     {
-        return $this->_key;
+        return $this->key;
     }
 
     /**
@@ -48,7 +47,7 @@ class Wallet
      */
     public function setKey(string $key)
     {
-        $this->_key = $key;
+        $this->key = $key;
     }
 
     /**
@@ -60,7 +59,7 @@ class Wallet
      */
     public function getDisplayName()
     {
-        return $this->_displayName;
+        return $this->displayName;
     }
 
     /**
@@ -72,7 +71,7 @@ class Wallet
      */
     public function setDisplayName(string $displayName)
     {
-        $this->_displayName = $displayName;
+        $this->displayName = $displayName;
     }
 
     /**
@@ -84,7 +83,7 @@ class Wallet
      */
     public function getAvatar()
     {
-        return $this->_avatar;
+        return $this->avatar;
     }
 
     /**
@@ -96,7 +95,7 @@ class Wallet
      */
     public function setAvatar(string $avatar)
     {
-        $this->_avatar = $avatar;
+        $this->avatar = $avatar;
     }
 
     /**
@@ -108,7 +107,7 @@ class Wallet
      */
     public function getPayPro()
     {
-        return $this->_payPro;
+        return $this->payPro;
     }
 
     /**
@@ -120,7 +119,7 @@ class Wallet
      */
     public function setPayPro(bool $payPro)
     {
-        $this->_payPro = $payPro;
+        $this->payPro = $payPro;
     }
 
     /**
@@ -132,7 +131,7 @@ class Wallet
      */
     public function getCurrencies()
     {
-        return $this->_currencies;
+        return $this->currencies;
     }
 
     /**
@@ -144,7 +143,7 @@ class Wallet
      */
     public function setCurrencies(Currencies $currencies)
     {
-        $this->_currencies = $currencies;
+        $this->currencies = $currencies;
     }
 
     /**
@@ -156,7 +155,7 @@ class Wallet
      */
     public function getImage()
     {
-        return $this->_image;
+        return $this->image;
     }
 
     /**
@@ -168,7 +167,7 @@ class Wallet
      */
     public function setImage(string $image)
     {
-        $this->_image = $image;
+        $this->image = $image;
     }
 
     /**
@@ -178,7 +177,7 @@ class Wallet
      */
     public function toArray()
     {
-        $elements = [
+        return [
             'key'         => $this->getKey(),
             'displayName' => $this->getDisplayName(),
             'avatar'      => $this->getAvatar(),
@@ -186,7 +185,5 @@ class Wallet
             'currencies'  => $this->getCurrencies()->toArray(),
             'image'       => $this->getImage()
         ];
-
-        return $elements;
     }
 }

@@ -12,8 +12,8 @@ namespace BitPaySDK\Model\Wallet;
  */
 class CurrencyQr
 {
-    protected $_type;
-    protected $_collapsed;
+    protected $type;
+    protected $collapsed;
 
     public function __construct()
     {
@@ -28,7 +28,7 @@ class CurrencyQr
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -40,7 +40,7 @@ class CurrencyQr
      */
     public function setType(string $type)
     {
-        $this->_type = $type;
+        $this->type = $type;
     }
 
     /**
@@ -52,7 +52,7 @@ class CurrencyQr
      */
     public function getCollapsed()
     {
-        return $this->_collapsed;
+        return $this->collapsed;
     }
 
     /**
@@ -64,7 +64,7 @@ class CurrencyQr
      */
     public function setCollapsed(bool $collapsed)
     {
-        $this->_collapsed = $collapsed;
+        $this->collapsed = $collapsed;
     }
 
     /**
@@ -74,11 +74,9 @@ class CurrencyQr
      */
     public function toArray()
     {
-        $elements = [
+        return [
             'type'          => $this->getType(),
             'collapsed'     => $this->getCollapsed(),
         ];
-
-        return $elements;
     }
 }

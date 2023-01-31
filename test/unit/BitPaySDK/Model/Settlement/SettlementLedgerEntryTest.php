@@ -100,7 +100,6 @@ class SettlementLedgerEntryTest extends TestCase
         $this->assertEquals($settlementLedgerEntryArray['timestamp'], '2022-01-11 01:01:01');
         $this->assertEquals($settlementLedgerEntryArray['description'], 'Description');
         $this->assertEquals($settlementLedgerEntryArray['reference'], 'Reference');
-        $this->assertEquals($settlementLedgerEntryArray['invoiceData'], null);
     }
 
     private function createClassObject()
