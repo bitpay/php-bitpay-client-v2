@@ -9,29 +9,27 @@ namespace BitPaySDK\Model\Ledger;
 
 class LedgerEntry
 {
-    protected $_type;
-    protected $_amount;
-    protected $_code;
-    protected $_timestamp;
-    protected $_currency;
-    protected $_txType;
-    protected $_scale;
-    protected $_id;
-    protected $_supportRequest;
-    protected $_description;
-    protected $_invoiceId;
-    /**
-     * @var Buyer
-     */
-    protected $_buyerFields;
+    protected $type;
+    protected $amount;
+    protected $code;
+    protected $timestamp;
+    protected $currency;
+    protected $txType;
+    protected $scale;
+    protected $id;
+    protected $supportRequest;
+    protected $description;
+    protected $invoiceId;
 
-    protected $_invoiceAmount;
-    protected $_invoiceCurrency;
-    protected $_transactionCurrency;
+    protected $buyerFields;
+
+    protected $invoiceAmount;
+    protected $invoiceCurrency;
+    protected $transactionCurrency;
 
     public function __construct()
     {
-        $this->_buyerFields = new Buyer();
+        $this->buyerFields = new Buyer();
     }
 
     /**
@@ -44,7 +42,7 @@ class LedgerEntry
      */
     public function getType()
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -57,7 +55,7 @@ class LedgerEntry
      */
     public function setType(string $type)
     {
-        $this->_type = $type;
+        $this->type = $type;
     }
 
     /**
@@ -68,7 +66,7 @@ class LedgerEntry
      */
     public function getAmount()
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -79,7 +77,7 @@ class LedgerEntry
      */
     public function setAmount(string $amount)
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -92,7 +90,7 @@ class LedgerEntry
      */
     public function getCode()
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -105,7 +103,7 @@ class LedgerEntry
      */
     public function setCode(string $code)
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -115,7 +113,7 @@ class LedgerEntry
      */
     public function getTimestamp()
     {
-        return $this->_timestamp;
+        return $this->timestamp;
     }
 
     /**
@@ -125,7 +123,7 @@ class LedgerEntry
      */
     public function setTimestamp(string $timestamp)
     {
-        $this->_timestamp = $timestamp;
+        $this->timestamp = $timestamp;
     }
 
     /**
@@ -135,7 +133,7 @@ class LedgerEntry
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -145,7 +143,7 @@ class LedgerEntry
      */
     public function setCurrency(string $currency)
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -157,7 +155,7 @@ class LedgerEntry
      */
     public function getTxType()
     {
-        return $this->_txType;
+        return $this->txType;
     }
 
     /**
@@ -169,7 +167,7 @@ class LedgerEntry
      */
     public function setTxType(string $txType)
     {
-        $this->_txType = $txType;
+        $this->txType = $txType;
     }
 
     /**
@@ -181,7 +179,7 @@ class LedgerEntry
      */
     public function getScale()
     {
-        return $this->_scale;
+        return $this->scale;
     }
 
     /**
@@ -193,7 +191,7 @@ class LedgerEntry
      */
     public function setScale(string $scale)
     {
-        $this->_scale = $scale;
+        $this->scale = $scale;
     }
 
     /**
@@ -203,7 +201,7 @@ class LedgerEntry
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -213,7 +211,7 @@ class LedgerEntry
      */
     public function setId(string $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -223,7 +221,7 @@ class LedgerEntry
      */
     public function getSupportRequest()
     {
-        return $this->_supportRequest;
+        return $this->supportRequest;
     }
 
     /**
@@ -233,7 +231,7 @@ class LedgerEntry
      */
     public function setSupportRequest(string $supportRequest)
     {
-        $this->_supportRequest = $supportRequest;
+        $this->supportRequest = $supportRequest;
     }
 
     /**
@@ -246,7 +244,7 @@ class LedgerEntry
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -259,7 +257,7 @@ class LedgerEntry
      */
     public function setDescription(string $description)
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
@@ -269,7 +267,7 @@ class LedgerEntry
      */
     public function getInvoiceId()
     {
-        return $this->_invoiceId;
+        return $this->invoiceId;
     }
 
     /**
@@ -279,7 +277,7 @@ class LedgerEntry
      */
     public function setInvoiceId(string $invoiceId)
     {
-        $this->_invoiceId = $invoiceId;
+        $this->invoiceId = $invoiceId;
     }
 
     /**
@@ -291,7 +289,7 @@ class LedgerEntry
      */
     public function getBuyerFields()
     {
-        return $this->_buyerFields;
+        return $this->buyerFields;
     }
 
     /**
@@ -301,7 +299,7 @@ class LedgerEntry
      */
     public function setBuyerFields($buyerFields)
     {
-        $this->_buyerFields = $buyerFields;
+        $this->buyerFields = $buyerFields;
     }
 
     /**
@@ -311,7 +309,7 @@ class LedgerEntry
      */
     public function getInvoiceAmount()
     {
-        return $this->_invoiceAmount;
+        return $this->invoiceAmount;
     }
 
     /**
@@ -321,7 +319,7 @@ class LedgerEntry
      */
     public function setInvoiceAmount(float $invoiceAmount)
     {
-        $this->_invoiceAmount = $invoiceAmount;
+        $this->invoiceAmount = $invoiceAmount;
     }
 
     /**
@@ -331,7 +329,7 @@ class LedgerEntry
      */
     public function getInvoiceCurrency()
     {
-        return $this->_invoiceCurrency;
+        return $this->invoiceCurrency;
     }
 
     /**
@@ -341,7 +339,7 @@ class LedgerEntry
      */
     public function setInvoiceCurrency(string $invoiceCurrency)
     {
-        $this->_invoiceCurrency = $invoiceCurrency;
+        $this->invoiceCurrency = $invoiceCurrency;
     }
 
     /**
@@ -351,7 +349,7 @@ class LedgerEntry
      */
     public function getTransactionCurrency()
     {
-        return $this->_transactionCurrency;
+        return $this->transactionCurrency;
     }
 
     /**
@@ -361,7 +359,7 @@ class LedgerEntry
      */
     public function setTransactionCurrency(string $transactionCurrency)
     {
-        $this->_transactionCurrency = $transactionCurrency;
+        $this->transactionCurrency = $transactionCurrency;
     }
 
     /**

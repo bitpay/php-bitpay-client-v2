@@ -9,8 +9,8 @@ namespace BitPaySDK\Model\Ledger;
 
 class Ledger
 {
-    protected $_currency;
-    protected $_balance;
+    protected $currency;
+    protected $balance;
 
     public function __construct()
     {
@@ -23,7 +23,7 @@ class Ledger
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -33,7 +33,7 @@ class Ledger
      */
     public function setCurrency(string $currency)
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -43,7 +43,7 @@ class Ledger
      */
     public function getBalance()
     {
-        return $this->_balance;
+        return $this->balance;
     }
 
     /**
@@ -53,7 +53,7 @@ class Ledger
      */
     public function setBalance(float $balance)
     {
-        $this->_balance = $balance;
+        $this->balance = $balance;
     }
 
     /**
@@ -63,11 +63,9 @@ class Ledger
      */
     public function toArray()
     {
-        $elements = [
+        return [
             'currency' => $this->getCurrency(),
             'balance'  => $this->getBalance(),
         ];
-
-        return $elements;
     }
 }

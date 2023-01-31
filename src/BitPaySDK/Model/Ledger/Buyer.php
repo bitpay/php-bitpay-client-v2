@@ -9,16 +9,16 @@ namespace BitPaySDK\Model\Ledger;
 
 class Buyer
 {
-    protected $_name;
-    protected $_address1;
-    protected $_address2;
-    protected $_city;
-    protected $_state;
-    protected $_zip;
-    protected $_country;
-    protected $_phone;
-    protected $_notify;
-    protected $_email;
+    protected $name;
+    protected $address1;
+    protected $address2;
+    protected $city;
+    protected $state;
+    protected $zip;
+    protected $country;
+    protected $phone;
+    protected $notify;
+    protected $email;
 
     public function __construct()
     {
@@ -31,7 +31,7 @@ class Buyer
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -41,7 +41,7 @@ class Buyer
      */
     public function setName(string $name)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -51,7 +51,7 @@ class Buyer
      */
     public function getAddress1()
     {
-        return $this->_address1;
+        return $this->address1;
     }
 
     /**
@@ -61,7 +61,7 @@ class Buyer
      */
     public function setAddress1(string $address1)
     {
-        $this->_address1 = $address1;
+        $this->address1 = $address1;
     }
 
     /**
@@ -71,7 +71,7 @@ class Buyer
      */
     public function getAddress2()
     {
-        return $this->_address2;
+        return $this->address2;
     }
 
     /**
@@ -81,7 +81,7 @@ class Buyer
      */
     public function setAddress2(string $address2)
     {
-        $this->_address2 = $address2;
+        $this->address2 = $address2;
     }
 
     /**
@@ -91,7 +91,7 @@ class Buyer
      */
     public function getCity()
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
@@ -101,7 +101,7 @@ class Buyer
      */
     public function setCity(string $city)
     {
-        $this->_city = $city;
+        $this->city = $city;
     }
 
     /**
@@ -111,7 +111,7 @@ class Buyer
      */
     public function getState()
     {
-        return $this->_state;
+        return $this->state;
     }
 
     /**
@@ -121,7 +121,7 @@ class Buyer
      */
     public function setState(string $state)
     {
-        $this->_state = $state;
+        $this->state = $state;
     }
 
     /**
@@ -131,7 +131,7 @@ class Buyer
      */
     public function getZip()
     {
-        return $this->_zip;
+        return $this->zip;
     }
 
     /**
@@ -141,7 +141,7 @@ class Buyer
      */
     public function setZip(string $zip)
     {
-        $this->_zip = $zip;
+        $this->zip = $zip;
     }
 
     /**
@@ -151,7 +151,7 @@ class Buyer
      */
     public function getCountry()
     {
-        return $this->_country;
+        return $this->country;
     }
 
     /**
@@ -161,7 +161,7 @@ class Buyer
      */
     public function setCountry(string $country)
     {
-        $this->_country = $country;
+        $this->country = $country;
     }
 
     /**
@@ -171,7 +171,7 @@ class Buyer
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -181,7 +181,7 @@ class Buyer
      */
     public function setEmail(string $email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
@@ -191,7 +191,7 @@ class Buyer
      */
     public function getPhone()
     {
-        return $this->_phone;
+        return $this->phone;
     }
 
     /**
@@ -201,7 +201,7 @@ class Buyer
      */
     public function setPhone(string $phone)
     {
-        $this->_phone = $phone;
+        $this->phone = $phone;
     }
 
     /**
@@ -211,7 +211,7 @@ class Buyer
      */
     public function getNotify()
     {
-        return $this->_notify;
+        return $this->notify;
     }
 
     /**
@@ -221,7 +221,7 @@ class Buyer
      */
     public function setNotify(bool $notify)
     {
-        $this->_notify = $notify;
+        $this->notify = $notify;
     }
 
     /**
