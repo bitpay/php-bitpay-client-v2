@@ -198,18 +198,18 @@ class Currency
     const ZMW = "ZMW";
     const ZWL = "ZWL";
 
-    protected $_code;
-    protected $_symbol;
-    protected $_precision;
-    protected $_currentlySettled;
-    protected $_name;
-    protected $_plural;
-    protected $_alts;
-    protected $_minimum;
-    protected $_sanctioned;
-    protected $_decimals;
-    protected $_payoutFields;
-    protected $_settlementMinimum;
+    protected $code;
+    protected $symbol;
+    protected $precision;
+    protected $currentlySettled;
+    protected $name;
+    protected $plural;
+    protected $alts;
+    protected $minimum;
+    protected $sanctioned;
+    protected $decimals;
+    protected $payoutFields;
+    protected $settlementMinimum;
 
     /**
      * Currency validation
@@ -239,7 +239,7 @@ class Currency
      */
     public function getCode()
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -249,7 +249,7 @@ class Currency
      */
     public function setCode(string $code)
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -259,7 +259,7 @@ class Currency
      */
     public function getSymbol()
     {
-        return $this->_symbol;
+        return $this->symbol;
     }
 
     /**
@@ -269,7 +269,7 @@ class Currency
      */
     public function setSymbol(string $symbol = null)
     {
-        $this->_symbol = $symbol;
+        $this->symbol = $symbol;
     }
 
     /**
@@ -279,7 +279,7 @@ class Currency
      */
     public function getPrecision()
     {
-        return $this->_precision;
+        return $this->precision;
     }
 
     /**
@@ -289,7 +289,7 @@ class Currency
      */
     public function setPrecision(int $precision)
     {
-        $this->_precision = $precision;
+        $this->precision = $precision;
     }
 
     /**
@@ -299,7 +299,7 @@ class Currency
      */
     public function getCurrentlySettled()
     {
-        return $this->_currentlySettled;
+        return $this->currentlySettled;
     }
 
     /**
@@ -309,7 +309,7 @@ class Currency
      */
     public function setCurrentlySettled(bool $currentlySettled)
     {
-        $this->_currentlySettled = $currentlySettled;
+        $this->currentlySettled = $currentlySettled;
     }
 
     /**
@@ -319,7 +319,7 @@ class Currency
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -329,7 +329,7 @@ class Currency
      */
     public function setName(string $name)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -339,7 +339,7 @@ class Currency
      */
     public function getPlural()
     {
-        return $this->_plural;
+        return $this->plural;
     }
 
     /**
@@ -349,7 +349,7 @@ class Currency
      */
     public function setPlural(string $plural)
     {
-        $this->_plural = $plural;
+        $this->plural = $plural;
     }
 
     /**
@@ -359,7 +359,7 @@ class Currency
      */
     public function getAlts()
     {
-        return $this->_alts;
+        return $this->alts;
     }
 
     /**
@@ -369,7 +369,7 @@ class Currency
      */
     public function setAlts(string $alts)
     {
-        $this->_alts = $alts;
+        $this->alts = $alts;
     }
 
     /**
@@ -379,7 +379,7 @@ class Currency
      */
     public function getMinimum()
     {
-        return $this->_minimum;
+        return $this->minimum;
     }
 
     /**
@@ -389,7 +389,7 @@ class Currency
      */
     public function setMinimum(string $minimum)
     {
-        $this->_minimum = $minimum;
+        $this->minimum = $minimum;
     }
 
     /**
@@ -399,7 +399,7 @@ class Currency
      */
     public function getSanctioned()
     {
-        return $this->_sanctioned;
+        return $this->sanctioned;
     }
 
     /**
@@ -409,7 +409,7 @@ class Currency
      */
     public function setSanctioned(bool $sanctioned)
     {
-        $this->_sanctioned = $sanctioned;
+        $this->sanctioned = $sanctioned;
     }
 
     /**
@@ -419,7 +419,7 @@ class Currency
      */
     public function getDecimals()
     {
-        return $this->_decimals;
+        return $this->decimals;
     }
 
     /**
@@ -429,7 +429,7 @@ class Currency
      */
     public function setDecimals(string $decimals)
     {
-        $this->_decimals = $decimals;
+        $this->decimals = $decimals;
     }
 
     /**
@@ -439,7 +439,7 @@ class Currency
      */
     public function getPayoutFields()
     {
-        return $this->_payoutFields;
+        return $this->payoutFields;
     }
 
     /**
@@ -449,7 +449,7 @@ class Currency
      */
     public function setPayoutFields(array $payoutFields)
     {
-        $this->_payoutFields = $payoutFields;
+        $this->payoutFields = $payoutFields;
     }
 
     /**
@@ -459,7 +459,7 @@ class Currency
      */
     public function getSettlementMinimum()
     {
-        return $this->_settlementMinimum;
+        return $this->settlementMinimum;
     }
 
     /**
@@ -469,7 +469,7 @@ class Currency
      */
     public function setSettlementMinimum(array $settlementMinimum)
     {
-        $this->_settlementMinimum = $settlementMinimum;
+        $this->settlementMinimum = $settlementMinimum;
     }
 
     /**
