@@ -12,23 +12,23 @@ namespace BitPaySDK\Model\Settlement;
  */
 class Settlement
 {
-    protected $_id;
-    protected $_accountId;
-    protected $_currency;
-    protected $_payoutInfo;
-    protected $_status;
-    protected $_dateCreated;
-    protected $_dateExecuted;
-    protected $_dateCompleted;
-    protected $_openingDate;
-    protected $_closingDate;
-    protected $_openingBalance;
-    protected $_ledgerEntriesSum;
-    protected $_withHoldings;
-    protected $_withHoldingsSum;
-    protected $_totalAmount;
-    protected $_ledgerEntries;
-    protected $_token;
+    protected $id;
+    protected $accountId;
+    protected $currency;
+    protected $payoutInfo;
+    protected $status;
+    protected $dateCreated;
+    protected $dateExecuted;
+    protected $dateCompleted;
+    protected $openingDate;
+    protected $closingDate;
+    protected $openingBalance;
+    protected $ledgerEntriesSum;
+    protected $withHoldings;
+    protected $withHoldingsSum;
+    protected $totalAmount;
+    protected $ledgerEntries;
+    protected $token;
 
     public function __construct()
     {
@@ -43,7 +43,7 @@ class Settlement
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -55,7 +55,7 @@ class Settlement
      */
     public function setId(string $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -67,7 +67,7 @@ class Settlement
      */
     public function getAccountId()
     {
-        return $this->_accountId;
+        return $this->accountId;
     }
 
     /**
@@ -79,7 +79,7 @@ class Settlement
      */
     public function setAccountId(string $accountId)
     {
-        $this->_accountId = $accountId;
+        $this->accountId = $accountId;
     }
 
     /**
@@ -92,7 +92,7 @@ class Settlement
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -105,7 +105,7 @@ class Settlement
      */
     public function setCurrency(string $currency)
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -115,7 +115,7 @@ class Settlement
      */
     public function getPayoutInfo()
     {
-        return $this->_payoutInfo;
+        return $this->payoutInfo;
     }
 
     /**
@@ -125,7 +125,7 @@ class Settlement
      */
     public function setPayoutInfo(PayoutInfo $payoutInfo)
     {
-        $this->_payoutInfo = $payoutInfo;
+        $this->payoutInfo = $payoutInfo;
     }
 
     /**
@@ -135,7 +135,7 @@ class Settlement
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -145,7 +145,7 @@ class Settlement
      */
     public function setStatus(string $status)
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -157,7 +157,7 @@ class Settlement
      */
     public function getDateCreated()
     {
-        return $this->_dateCreated;
+        return $this->dateCreated;
     }
 
     /**
@@ -169,7 +169,7 @@ class Settlement
      */
     public function setDateCreated(string $dateCreated)
     {
-        $this->_dateCreated = $dateCreated;
+        $this->dateCreated = $dateCreated;
     }
 
     /**
@@ -181,7 +181,7 @@ class Settlement
      */
     public function getDateExecuted()
     {
-        return $this->_dateExecuted;
+        return $this->dateExecuted;
     }
 
     /**
@@ -193,7 +193,7 @@ class Settlement
      */
     public function setDateExecuted(string $dateExecuted)
     {
-        $this->_dateExecuted = $dateExecuted;
+        $this->dateExecuted = $dateExecuted;
     }
 
     /**
@@ -205,7 +205,7 @@ class Settlement
      */
     public function getDateCompleted()
     {
-        return $this->_dateCompleted;
+        return $this->dateCompleted;
     }
 
     /**
@@ -217,7 +217,7 @@ class Settlement
      */
     public function setDateCompleted(string $dateCompleted)
     {
-        $this->_dateCompleted = $dateCompleted;
+        $this->dateCompleted = $dateCompleted;
     }
 
     /**
@@ -231,7 +231,7 @@ class Settlement
      */
     public function getOpeningDate()
     {
-        return $this->_openingDate;
+        return $this->openingDate;
     }
 
     /**
@@ -245,7 +245,7 @@ class Settlement
      */
     public function setOpeningDate(string $openingDate)
     {
-        $this->_openingDate = $openingDate;
+        $this->openingDate = $openingDate;
     }
 
     /**
@@ -257,7 +257,7 @@ class Settlement
      */
     public function getClosingDate()
     {
-        return $this->_closingDate;
+        return $this->closingDate;
     }
 
     /**
@@ -269,7 +269,7 @@ class Settlement
      */
     public function setClosingDate(string $closingDate)
     {
-        $this->_closingDate = $closingDate;
+        $this->closingDate = $closingDate;
     }
 
     /**
@@ -279,7 +279,7 @@ class Settlement
      */
     public function getOpeningBalance()
     {
-        return $this->_openingBalance;
+        return $this->openingBalance;
     }
 
     /**
@@ -289,7 +289,7 @@ class Settlement
      */
     public function setOpeningBalance(float $openingBalance)
     {
-        $this->_openingBalance = $openingBalance;
+        $this->openingBalance = $openingBalance;
     }
 
     /**
@@ -302,7 +302,7 @@ class Settlement
      */
     public function getLedgerEntriesSum()
     {
-        return $this->_ledgerEntriesSum;
+        return $this->ledgerEntriesSum;
     }
 
     /**
@@ -315,7 +315,7 @@ class Settlement
      */
     public function setLedgerEntriesSum(float $ledgerEntriesSum)
     {
-        $this->_ledgerEntriesSum = $ledgerEntriesSum;
+        $this->ledgerEntriesSum = $ledgerEntriesSum;
     }
 
     /**
@@ -330,7 +330,7 @@ class Settlement
     {
         $withHoldings = [];
 
-        foreach ($this->_withHoldings as $withHolding) {
+        foreach ($this->withHoldings as $withHolding) {
             if ($withHolding instanceof WithHoldings) {
                 array_push($withHoldings, $withHolding->toArray());
             } else {
@@ -351,7 +351,7 @@ class Settlement
      */
     public function setWithHoldings(array $withHoldings)
     {
-        $this->_withHoldings = $withHoldings;
+        $this->withHoldings = $withHoldings;
     }
 
     /**
@@ -361,7 +361,7 @@ class Settlement
      */
     public function getWithHoldingsSum()
     {
-        return $this->_withHoldingsSum;
+        return $this->withHoldingsSum;
     }
 
     /**
@@ -371,7 +371,7 @@ class Settlement
      */
     public function setWithHoldingsSum(float $withHoldingsSum)
     {
-        $this->_withHoldingsSum = $withHoldingsSum;
+        $this->withHoldingsSum = $withHoldingsSum;
     }
 
     /**
@@ -383,7 +383,7 @@ class Settlement
      */
     public function getTotalAmount()
     {
-        return $this->_totalAmount;
+        return $this->totalAmount;
     }
 
     /**
@@ -395,7 +395,7 @@ class Settlement
      */
     public function setTotalAmount(float $totalAmount)
     {
-        $this->_totalAmount = $totalAmount;
+        $this->totalAmount = $totalAmount;
     }
 
     /**
@@ -410,7 +410,7 @@ class Settlement
     {
         $ledgerEntries = [];
 
-        foreach ($this->_ledgerEntries as $ledgerEntrie) {
+        foreach ($this->ledgerEntries as $ledgerEntrie) {
             if ($ledgerEntrie instanceof SettlementLedgerEntry) {
                 array_push($ledgerEntries, $ledgerEntrie->toArray());
             } else {
@@ -431,7 +431,7 @@ class Settlement
      */
     public function setLedgerEntries(array $ledgerEntries)
     {
-        $this->_ledgerEntries = $ledgerEntries;
+        $this->ledgerEntries = $ledgerEntries;
     }
 
     /**
@@ -444,7 +444,7 @@ class Settlement
      */
     public function getToken()
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -457,7 +457,7 @@ class Settlement
      */
     public function setToken(string $token)
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     /**
@@ -467,27 +467,24 @@ class Settlement
      */
     public function toArray()
     {
-        $elements =
-            [
-                'id'               => $this->getId(),
-                'accountId'        => $this->getAccountId(),
-                'currency'         => $this->getCurrency(),
-                'payoutInfo'       => $this->getPayoutInfo(),
-                'status'           => $this->getStatus(),
-                'dateCreated'      => $this->getDateCreated(),
-                'dateExecuted'     => $this->getDateExecuted(),
-                'dateCompleted'    => $this->getDateCompleted(),
-                'openingDate'      => $this->getOpeningDate(),
-                'closingDate'      => $this->getClosingDate(),
-                'openingBalance'   => $this->getOpeningBalance(),
-                'ledgerEntriesSum' => $this->getLedgerEntriesSum(),
-                'withHoldings'     => $this->getWithHoldings(),
-                'withHoldingsSum'  => $this->getWithHoldingsSum(),
-                'totalAmount'      => $this->getTotalAmount(),
-                'ledgerEntries'    => $this->getLedgerEntries(),
-                'token'            => $this->getToken(),
-            ];
-
-        return $elements;
+        return [
+            'id'               => $this->getId(),
+            'accountId'        => $this->getAccountId(),
+            'currency'         => $this->getCurrency(),
+            'payoutInfo'       => $this->getPayoutInfo(),
+            'status'           => $this->getStatus(),
+            'dateCreated'      => $this->getDateCreated(),
+            'dateExecuted'     => $this->getDateExecuted(),
+            'dateCompleted'    => $this->getDateCompleted(),
+            'openingDate'      => $this->getOpeningDate(),
+            'closingDate'      => $this->getClosingDate(),
+            'openingBalance'   => $this->getOpeningBalance(),
+            'ledgerEntriesSum' => $this->getLedgerEntriesSum(),
+            'withHoldings'     => $this->getWithHoldings(),
+            'withHoldingsSum'  => $this->getWithHoldingsSum(),
+            'totalAmount'      => $this->getTotalAmount(),
+            'ledgerEntries'    => $this->getLedgerEntries(),
+            'token'            => $this->getToken(),
+        ];
     }
 }

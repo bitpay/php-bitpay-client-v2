@@ -12,30 +12,30 @@ namespace BitPaySDK\Model\Settlement;
  */
 class PayoutInfo
 {
-    protected $_name;
-    protected $_account;
-    protected $_routing;
-    protected $_merchantEin;
-    protected $_label;
-    protected $_bankCountry;
-    protected $_bank;
-    protected $_swift;
-    protected $_address;
-    protected $_city;
-    protected $_postal;
-    protected $_sort;
-    protected $_wire;
-    protected $_bankName;
-    protected $_bankAddress;
-    protected $_bankAddress2;
-    protected $_iban;
-    protected $_additionalInformation;
-    protected $_accountHolderName;
-    protected $_accountHolderAddress;
-    protected $_accountHolderAddress2;
-    protected $_accountHolderPostalCode;
-    protected $_accountHolderCity;
-    protected $_accountHolderCountry;
+    protected $name;
+    protected $account;
+    protected $routing;
+    protected $merchantEin;
+    protected $label;
+    protected $bankCountry;
+    protected $bank;
+    protected $swift;
+    protected $address;
+    protected $city;
+    protected $postal;
+    protected $sort;
+    protected $wire;
+    protected $bankName;
+    protected $bankAddress;
+    protected $bankAddress2;
+    protected $iban;
+    protected $additionalInformation;
+    protected $accountHolderName;
+    protected $accountHolderAddress;
+    protected $accountHolderAddress2;
+    protected $accountHolderPostalCode;
+    protected $accountHolderCity;
+    protected $accountHolderCountry;
 
     public function __construct()
     {
@@ -48,7 +48,7 @@ class PayoutInfo
      */
     public function getAccount()
     {
-        return $this->_account;
+        return $this->account;
     }
 
     /**
@@ -58,7 +58,7 @@ class PayoutInfo
      */
     public function setAccount(string $account)
     {
-        $this->_account = $account;
+        $this->account = $account;
     }
 
     /**
@@ -70,7 +70,7 @@ class PayoutInfo
      */
     public function getRouting()
     {
-        return $this->_routing;
+        return $this->routing;
     }
 
     /**
@@ -80,7 +80,7 @@ class PayoutInfo
      */
     public function setRouting(string $routing)
     {
-        $this->_routing = $routing;
+        $this->routing = $routing;
     }
 
     /**
@@ -92,7 +92,7 @@ class PayoutInfo
      */
     public function getMerchantEin()
     {
-        return $this->_merchantEin;
+        return $this->merchantEin;
     }
 
     /**
@@ -102,7 +102,7 @@ class PayoutInfo
      */
     public function setMerchantEin(string $merchantEin)
     {
-        $this->_merchantEin = $merchantEin;
+        $this->merchantEin = $merchantEin;
     }
 
     /**
@@ -114,7 +114,7 @@ class PayoutInfo
      */
     public function getLabel()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -124,7 +124,7 @@ class PayoutInfo
      */
     public function setLabel(string $label)
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
@@ -134,7 +134,7 @@ class PayoutInfo
      */
     public function getBankCountry()
     {
-        return $this->_bankCountry;
+        return $this->bankCountry;
     }
 
     /**
@@ -144,7 +144,7 @@ class PayoutInfo
      */
     public function setBankCountry(string $bankCountry)
     {
-        $this->_bankCountry = $bankCountry;
+        $this->bankCountry = $bankCountry;
     }
 
     /**
@@ -154,7 +154,7 @@ class PayoutInfo
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -164,7 +164,7 @@ class PayoutInfo
      */
     public function setName(string $name)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -174,7 +174,7 @@ class PayoutInfo
      */
     public function getBank()
     {
-        return $this->_bank;
+        return $this->bank;
     }
 
     /**
@@ -184,7 +184,7 @@ class PayoutInfo
      */
     public function setBank(string $bank)
     {
-        $this->_bank = $bank;
+        $this->bank = $bank;
     }
 
     /**
@@ -194,7 +194,7 @@ class PayoutInfo
      */
     public function getSwift()
     {
-        return $this->_swift;
+        return $this->swift;
     }
 
     /**
@@ -204,7 +204,7 @@ class PayoutInfo
      */
     public function setSwift(string $swift)
     {
-        $this->_swift = $swift;
+        $this->swift = $swift;
     }
 
     /**
@@ -221,7 +221,7 @@ class PayoutInfo
      */
     public function getAddress()
     {
-        return $this->_address;
+        return $this->address;
     }
 
     /**
@@ -231,7 +231,7 @@ class PayoutInfo
      */
     public function setAddress(string $address)
     {
-        $this->_address = $address;
+        $this->address = $address;
     }
 
     /**
@@ -241,7 +241,7 @@ class PayoutInfo
      */
     public function getCity()
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
@@ -251,7 +251,7 @@ class PayoutInfo
      */
     public function setCity(string $city)
     {
-        $this->_city = $city;
+        $this->city = $city;
     }
 
     /**
@@ -261,7 +261,7 @@ class PayoutInfo
      */
     public function getPostal()
     {
-        return $this->_postal;
+        return $this->postal;
     }
 
     /**
@@ -271,7 +271,7 @@ class PayoutInfo
      */
     public function setPostal(string $postal)
     {
-        $this->_postal = $postal;
+        $this->postal = $postal;
     }
 
     /**
@@ -283,7 +283,7 @@ class PayoutInfo
      */
     public function getSort()
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -293,7 +293,7 @@ class PayoutInfo
      */
     public function setSort(string $sort)
     {
-        $this->_sort = $sort;
+        $this->sort = $sort;
     }
 
     /**
@@ -306,7 +306,7 @@ class PayoutInfo
      */
     public function getWire()
     {
-        return $this->_wire;
+        return $this->wire;
     }
 
     /**
@@ -316,7 +316,7 @@ class PayoutInfo
      */
     public function setWire(string $wire)
     {
-        $this->_wire = $wire;
+        $this->wire = $wire;
     }
 
     /**
@@ -328,7 +328,7 @@ class PayoutInfo
      */
     public function getBankName()
     {
-        return $this->_bankName;
+        return $this->bankName;
     }
 
     /**
@@ -338,7 +338,7 @@ class PayoutInfo
      */
     public function setBankName(string $bankName)
     {
-        $this->_bankName = $bankName;
+        $this->bankName = $bankName;
     }
 
     /**
@@ -350,7 +350,7 @@ class PayoutInfo
      */
     public function getBankAddress()
     {
-        return $this->_bankAddress;
+        return $this->bankAddress;
     }
 
     /**
@@ -360,7 +360,7 @@ class PayoutInfo
      */
     public function setBankAddress(string $bankAddress)
     {
-        $this->_bankAddress = $bankAddress;
+        $this->bankAddress = $bankAddress;
     }
 
     /**
@@ -372,7 +372,7 @@ class PayoutInfo
      */
     public function getBankAddress2()
     {
-        return $this->_bankAddress2;
+        return $this->bankAddress2;
     }
 
     /**
@@ -382,7 +382,7 @@ class PayoutInfo
      */
     public function setBankAddress2(string $bankAddress2)
     {
-        $this->_bankAddress2 = $bankAddress2;
+        $this->bankAddress2 = $bankAddress2;
     }
 
     /**
@@ -395,7 +395,7 @@ class PayoutInfo
      */
     public function getIban()
     {
-        return $this->_iban;
+        return $this->iban;
     }
 
     /**
@@ -406,7 +406,7 @@ class PayoutInfo
      */
     public function setIban(string $iban)
     {
-        $this->_iban = $iban;
+        $this->iban = $iban;
     }
 
     /**
@@ -419,7 +419,7 @@ class PayoutInfo
      */
     public function getAdditionalInformation()
     {
-        return $this->_additionalInformation;
+        return $this->additionalInformation;
     }
 
     /**
@@ -429,7 +429,7 @@ class PayoutInfo
      */
     public function setAdditionalInformation(string $additionalInformation)
     {
-        $this->_additionalInformation = $additionalInformation;
+        $this->additionalInformation = $additionalInformation;
     }
 
     /**
@@ -439,7 +439,7 @@ class PayoutInfo
      */
     public function getAccountHolderName()
     {
-        return $this->_accountHolderName;
+        return $this->accountHolderName;
     }
 
     /**
@@ -449,7 +449,7 @@ class PayoutInfo
      */
     public function setAccountHolderName(string $accountHolderName)
     {
-        $this->_accountHolderName = $accountHolderName;
+        $this->accountHolderName = $accountHolderName;
     }
 
     /**
@@ -459,7 +459,7 @@ class PayoutInfo
      */
     public function getAccountHolderAddress()
     {
-        return $this->_accountHolderAddress;
+        return $this->accountHolderAddress;
     }
 
     /**
@@ -469,7 +469,7 @@ class PayoutInfo
      */
     public function setAccountHolderAddress(string $accountHolderAddress)
     {
-        $this->_accountHolderAddress = $accountHolderAddress;
+        $this->accountHolderAddress = $accountHolderAddress;
     }
 
     /**
@@ -479,7 +479,7 @@ class PayoutInfo
      */
     public function getAccountHolderAddress2()
     {
-        return $this->_accountHolderAddress2;
+        return $this->accountHolderAddress2;
     }
 
     /**
@@ -489,7 +489,7 @@ class PayoutInfo
      */
     public function setAccountHolderAddress2(string $accountHolderAddress2)
     {
-        $this->_accountHolderAddress2 = $accountHolderAddress2;
+        $this->accountHolderAddress2 = $accountHolderAddress2;
     }
 
     /**
@@ -499,7 +499,7 @@ class PayoutInfo
      */
     public function getAccountHolderPostalCode()
     {
-        return $this->_accountHolderPostalCode;
+        return $this->accountHolderPostalCode;
     }
 
     /**
@@ -509,7 +509,7 @@ class PayoutInfo
      */
     public function setAccountHolderPostalCode(string $accountHolderPostalCode)
     {
-        $this->_accountHolderPostalCode = $accountHolderPostalCode;
+        $this->accountHolderPostalCode = $accountHolderPostalCode;
     }
 
     /**
@@ -519,7 +519,7 @@ class PayoutInfo
      */
     public function getAccountHolderCity()
     {
-        return $this->_accountHolderCity;
+        return $this->accountHolderCity;
     }
 
     /**
@@ -529,7 +529,7 @@ class PayoutInfo
      */
     public function setAccountHolderCity(string $accountHolderCity)
     {
-        $this->_accountHolderCity = $accountHolderCity;
+        $this->accountHolderCity = $accountHolderCity;
     }
 
     /**
@@ -539,7 +539,7 @@ class PayoutInfo
      */
     public function getAccountHolderCountry()
     {
-        return $this->_accountHolderCountry;
+        return $this->accountHolderCountry;
     }
 
     /**
@@ -549,7 +549,7 @@ class PayoutInfo
      */
     public function setAccountHolderCountry(string $accountHolderCountry)
     {
-        $this->_accountHolderCountry = $accountHolderCountry;
+        $this->accountHolderCountry = $accountHolderCountry;
     }
 
     /**
@@ -559,7 +559,7 @@ class PayoutInfo
      */
     public function toArray()
     {
-        $elements = [
+        return [
             'label'                   => $this->getLabel(),
             'bankCountry'             => $this->getBankCountry(),
             'name'                    => $this->getName(),
@@ -581,7 +581,5 @@ class PayoutInfo
             'accountHolderCity'       => $this->getAccountHolderCity(),
             'accountHolderCountry'    => $this->getAccountHolderCountry(),
         ];
-
-        return $elements;
     }
 }

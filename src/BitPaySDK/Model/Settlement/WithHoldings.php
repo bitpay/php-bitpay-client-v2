@@ -15,12 +15,12 @@ namespace BitPaySDK\Model\Settlement;
  */
 class WithHoldings
 {
-    protected $_amount;
-    protected $_code;
-    protected $_description;
-    protected $_notes;
-    protected $_label;
-    protected $_bankCountry;
+    protected $amount;
+    protected $code;
+    protected $description;
+    protected $notes;
+    protected $label;
+    protected $bankCountry;
 
     /**
      * WithHoldings constructor.
@@ -36,7 +36,7 @@ class WithHoldings
      */
     public function getAmount()
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -46,7 +46,7 @@ class WithHoldings
      */
     public function setAmount(float $amount)
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -56,7 +56,7 @@ class WithHoldings
      */
     public function getCode()
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -66,7 +66,7 @@ class WithHoldings
      */
     public function setCode(string $code)
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -76,7 +76,7 @@ class WithHoldings
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -86,7 +86,7 @@ class WithHoldings
      */
     public function setDescription(string $description)
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
@@ -96,7 +96,7 @@ class WithHoldings
      */
     public function getNotes()
     {
-        return $this->_notes;
+        return $this->notes;
     }
 
     /**
@@ -106,7 +106,7 @@ class WithHoldings
      */
     public function setNotes(string $notes)
     {
-        $this->_notes = $notes;
+        $this->notes = $notes;
     }
 
     /**
@@ -116,7 +116,7 @@ class WithHoldings
      */
     public function getLabel()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -126,7 +126,7 @@ class WithHoldings
      */
     public function setLabel(string $label)
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
@@ -136,7 +136,7 @@ class WithHoldings
      */
     public function getBankCountry()
     {
-        return $this->_bankCountry;
+        return $this->bankCountry;
     }
 
     /**
@@ -146,7 +146,7 @@ class WithHoldings
      */
     public function setBankCountry(string $bankCountry)
     {
-        $this->_bankCountry = $bankCountry;
+        $this->bankCountry = $bankCountry;
     }
 
     /**
@@ -156,16 +156,13 @@ class WithHoldings
      */
     public function toArray()
     {
-        $elements =
-            [
-                'amount'      => $this->getAmount(),
-                'code'        => $this->getCode(),
-                'description' => $this->getDescription(),
-                'notes'       => $this->getNotes(),
-                'label'       => $this->getLabel(),
-                'bankCountry' => $this->getBankCountry(),
-            ];
-
-        return $elements;
+        return [
+            'amount'      => $this->getAmount(),
+            'code'        => $this->getCode(),
+            'description' => $this->getDescription(),
+            'notes'       => $this->getNotes(),
+            'label'       => $this->getLabel(),
+            'bankCountry' => $this->getBankCountry(),
+        ];
     }
 }

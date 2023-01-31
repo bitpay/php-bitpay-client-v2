@@ -12,10 +12,10 @@ namespace BitPaySDK\Model\Settlement;
  */
 class RefundInfo
 {
-    protected $_supportRequest;
-    protected $_currency;
-    protected $_amounts;
-    protected $_reference;
+    protected $supportRequest;
+    protected $currency;
+    protected $amounts;
+    protected $reference;
 
     public function __construct()
     {
@@ -30,7 +30,7 @@ class RefundInfo
      */
     public function getSupportRequest()
     {
-        return $this->_supportRequest;
+        return $this->supportRequest;
     }
 
     /**
@@ -42,7 +42,7 @@ class RefundInfo
      */
     public function setSupportRequest(string $supportRequest)
     {
-        $this->_supportRequest = $supportRequest;
+        $this->supportRequest = $supportRequest;
     }
 
     /**
@@ -55,7 +55,7 @@ class RefundInfo
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -68,7 +68,7 @@ class RefundInfo
      */
     public function setCurrency(string $currency)
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -80,7 +80,7 @@ class RefundInfo
      */
     public function getAmounts()
     {
-        return $this->_amounts;
+        return $this->amounts;
     }
 
     /**
@@ -90,7 +90,7 @@ class RefundInfo
      */
     public function setAmounts(array $amounts)
     {
-        $this->_amounts = $amounts;
+        $this->amounts = $amounts;
     }
 
     /**
@@ -100,7 +100,7 @@ class RefundInfo
      */
     public function getReference()
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
@@ -110,7 +110,7 @@ class RefundInfo
      */
     public function setReference(string $reference)
     {
-        $this->_reference = $reference;
+        $this->reference = $reference;
     }
 
     /**
@@ -120,13 +120,11 @@ class RefundInfo
      */
     public function toArray()
     {
-        $elements = [
+        return [
             'supportRequest' => $this->getSupportRequest(),
             'currency'       => $this->getCurrency(),
             'amounts'        => $this->getAmounts(),
             'reference'      => $this->getReference()
         ];
-
-        return $elements;
     }
 }

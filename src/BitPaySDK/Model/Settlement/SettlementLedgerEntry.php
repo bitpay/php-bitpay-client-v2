@@ -9,17 +9,17 @@ namespace BitPaySDK\Model\Settlement;
 
 class SettlementLedgerEntry
 {
-    protected $_code;
-    protected $_invoiceId;
-    protected $_amount;
-    protected $_timestamp;
-    protected $_description;
-    protected $_reference;
-    protected $_invoiceData;
+    protected $code;
+    protected $invoiceId;
+    protected $amount;
+    protected $timestamp;
+    protected $description;
+    protected $reference;
+    protected $invoiceData;
 
     public function __construct()
     {
-        $this->_invoiceData = new InvoiceData();
+        $this->invoiceData = new InvoiceData();
     }
 
     /**
@@ -31,7 +31,7 @@ class SettlementLedgerEntry
      */
     public function getCode()
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -43,7 +43,7 @@ class SettlementLedgerEntry
      */
     public function setCode(int $code)
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -53,7 +53,7 @@ class SettlementLedgerEntry
      */
     public function getInvoiceId()
     {
-        return $this->_invoiceId;
+        return $this->invoiceId;
     }
 
     /**
@@ -63,7 +63,7 @@ class SettlementLedgerEntry
      */
     public function setInvoiceId(string $invoiceId)
     {
-        $this->_invoiceId = $invoiceId;
+        $this->invoiceId = $invoiceId;
     }
 
     /**
@@ -75,7 +75,7 @@ class SettlementLedgerEntry
      */
     public function getAmount()
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -87,7 +87,7 @@ class SettlementLedgerEntry
      */
     public function setAmount(float $amount)
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -97,7 +97,7 @@ class SettlementLedgerEntry
      */
     public function getTimestamp()
     {
-        return $this->_timestamp;
+        return $this->timestamp;
     }
 
     /**
@@ -107,7 +107,7 @@ class SettlementLedgerEntry
      */
     public function setTimestamp(string $timestamp)
     {
-        $this->_timestamp = $timestamp;
+        $this->timestamp = $timestamp;
     }
 
     /**
@@ -120,7 +120,7 @@ class SettlementLedgerEntry
      */
     public function getDescription()
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -133,7 +133,7 @@ class SettlementLedgerEntry
      */
     public function setDescription(string $description)
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
@@ -143,7 +143,7 @@ class SettlementLedgerEntry
      */
     public function getReference()
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
@@ -153,7 +153,7 @@ class SettlementLedgerEntry
      */
     public function setReference(string $reference)
     {
-        $this->_reference = $reference;
+        $this->reference = $reference;
     }
 
     /**
@@ -165,7 +165,7 @@ class SettlementLedgerEntry
      */
     public function getInvoiceData()
     {
-        return $this->_invoiceData;
+        return $this->invoiceData;
     }
 
     /**
@@ -177,7 +177,7 @@ class SettlementLedgerEntry
      */
     public function setInvoiceData(InvoiceData $invoiceData)
     {
-        $this->_invoiceData = $invoiceData;
+        $this->invoiceData = $invoiceData;
     }
 
     /**
@@ -187,7 +187,7 @@ class SettlementLedgerEntry
      */
     public function toArray()
     {
-        $elements = [
+        return [
             'code'        => $this->getCode(),
             'invoiceId'   => $this->getInvoiceId(),
             'amount'      => $this->getAmount(),
@@ -196,7 +196,5 @@ class SettlementLedgerEntry
             'reference'   => $this->getReference(),
             'invoiceData' => $this->getInvoiceData()->toArray(),
         ];
-
-        return $elements;
     }
 }
