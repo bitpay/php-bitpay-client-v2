@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
@@ -13,9 +14,9 @@ namespace BitPaySDK\Model\Payout;
  */
 class PayoutRecipients
 {
-    protected $_guid  = '';
-    protected $_recipients = [];
-    protected $_token      = '';
+    protected array $recipients = [];
+    protected string $guid  = '';
+    protected string $token      = '';
 
     /**
      * Constructor, create an recipient-full request PayoutBatch object.
@@ -24,7 +25,7 @@ class PayoutRecipients
      */
     public function __construct(array $recipients = [])
     {
-        $this->_recipients = $recipients;
+        $this->recipients = $recipients;
     }
 
     // API fields
@@ -35,9 +36,9 @@ class PayoutRecipients
      *
      * @return string
      */
-    public function getGuid()
+    public function getGuid(): string
     {
-        return $this->_guid;
+        return $this->guid;
     }
 
     /**
@@ -45,9 +46,9 @@ class PayoutRecipients
      *
      * @param string $guid
      */
-    public function setGuid(string $guid)
+    public function setGuid(string $guid): void
     {
-        $this->_guid = $guid;
+        $this->guid = $guid;
     }
 
     /**
@@ -55,9 +56,9 @@ class PayoutRecipients
      *
      * @return string
      */
-    public function getToken()
+    public function getToken(): string
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -65,9 +66,9 @@ class PayoutRecipients
      *
      * @param string $token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     // Required fields
@@ -78,11 +79,11 @@ class PayoutRecipients
      *
      * @return array
      */
-    public function getRecipients()
+    public function getRecipients(): array
     {
         $recipients = [];
 
-        foreach ($this->_recipients as $recipient) {
+        foreach ($this->recipients as $recipient) {
             if ($recipient instanceof PayoutRecipient) {
                 array_push($recipients, $recipient->toArray());
             } else {
@@ -98,9 +99,9 @@ class PayoutRecipients
      *
      * @param array $recipients
      */
-    public function setRecipients(array $recipients)
+    public function setRecipients(array $recipients): void
     {
-        $this->_recipients = $recipients;
+        $this->recipients = $recipients;
     }
 
     /**
@@ -108,7 +109,7 @@ class PayoutRecipients
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'guid'       => $this->getGuid(),

@@ -13,18 +13,18 @@ namespace BitPaySDK\Model\Payout;
  */
 class PayoutRecipient
 {
-    protected $_email;
-    protected $_guid;
-    protected $_label;
-    protected $_reference;
-    protected $_notificationURL;
+    protected $email;
+    protected $guid;
+    protected $label;
+    protected $reference;
+    protected $notificationURL;
 
-    protected $_account;
-    protected $_status;
-    protected $_id;
-    protected $_shopperId;
-    protected $_token;
-    protected $_supportPhone;
+    protected $account;
+    protected $status;
+    protected $id;
+    protected $shopperId;
+    protected $token;
+    protected $supportPhone;
 
     /**
      * Constructor, create a minimal Recipient object.
@@ -36,9 +36,9 @@ class PayoutRecipient
      */
     public function __construct(string $email = null, string $label = null, string $notificationURL = null)
     {
-        $this->_email = $email;
-        $this->_label = $label;
-        $this->_notificationURL = $notificationURL;
+        $this->email = $email;
+        $this->label = $label;
+        $this->notificationURL = $notificationURL;
     }
 
     // Required fields
@@ -51,7 +51,7 @@ class PayoutRecipient
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -61,7 +61,7 @@ class PayoutRecipient
      */
     public function setEmail(?string $email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     // Optional fields
@@ -74,7 +74,7 @@ class PayoutRecipient
      */
     public function getGuid()
     {
-        return $this->_guid;
+        return $this->guid;
     }
 
     /**
@@ -84,7 +84,7 @@ class PayoutRecipient
      */
     public function setGuid(string $guid)
     {
-        $this->_guid = $guid;
+        $this->guid = $guid;
     }
 
     /**
@@ -94,7 +94,7 @@ class PayoutRecipient
      */
     public function getLabel()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -104,7 +104,7 @@ class PayoutRecipient
      */
     public function setLabel(?string $label)
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
@@ -114,7 +114,7 @@ class PayoutRecipient
      */
     public function getReference()
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
@@ -124,7 +124,7 @@ class PayoutRecipient
      */
     public function setReference(string $reference)
     {
-        $this->_reference = $reference;
+        $this->reference = $reference;
     }
 
     /**
@@ -134,7 +134,7 @@ class PayoutRecipient
      */
     public function getNotificationURL()
     {
-        return $this->_notificationURL;
+        return $this->notificationURL;
     }
 
     /**
@@ -144,7 +144,7 @@ class PayoutRecipient
      */
     public function setNotificationURL(?string $notificationURL)
     {
-        $this->_notificationURL = $notificationURL;
+        $this->notificationURL = $notificationURL;
     }
 
     // Response fields
@@ -157,7 +157,7 @@ class PayoutRecipient
      */
     public function getAccount()
     {
-        return $this->_account;
+        return $this->account;
     }
 
     /**
@@ -167,7 +167,7 @@ class PayoutRecipient
      */
     public function setAccount(string $account)
     {
-        $this->_account = $account;
+        $this->account = $account;
     }
 
     /**
@@ -177,7 +177,7 @@ class PayoutRecipient
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -187,7 +187,7 @@ class PayoutRecipient
      */
     public function setStatus(string $status)
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -197,7 +197,7 @@ class PayoutRecipient
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -207,7 +207,7 @@ class PayoutRecipient
      */
     public function setId(?string $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -217,7 +217,7 @@ class PayoutRecipient
      */
     public function getShopperId()
     {
-        return $this->_shopperId;
+        return $this->shopperId;
     }
 
     /**
@@ -227,7 +227,7 @@ class PayoutRecipient
      */
     public function setShopperId(?string $shopperId)
     {
-        $this->_shopperId = $shopperId;
+        $this->shopperId = $shopperId;
     }
 
     /**
@@ -237,7 +237,7 @@ class PayoutRecipient
      */
     public function getToken()
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -247,7 +247,7 @@ class PayoutRecipient
      */
     public function setToken(string $token)
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     /**
@@ -257,7 +257,7 @@ class PayoutRecipient
      */
     public function getSupportPhone()
     {
-        return $this->_supportPhone;
+        return $this->supportPhone;
     }
 
     /**
@@ -267,7 +267,7 @@ class PayoutRecipient
      */
     public function setSupportPhone(string $supportPhone)
     {
-        $this->_supportPhone = $supportPhone;
+        $this->supportPhone = $supportPhone;
     }
 
     /**

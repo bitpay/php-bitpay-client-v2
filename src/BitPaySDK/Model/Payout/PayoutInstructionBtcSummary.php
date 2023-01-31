@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
@@ -13,8 +14,8 @@ namespace BitPaySDK\Model\Payout;
  */
 class PayoutInstructionBtcSummary
 {
-    protected $_paid;
-    protected $_unpaid;
+    protected float $paid;
+    protected float $unpaid;
 
     /**
      * PayoutInstructionBtcSummary constructor.
@@ -23,8 +24,8 @@ class PayoutInstructionBtcSummary
      */
     public function __construct(float $paid, float $unpaid)
     {
-        $this->_paid = $paid;
-        $this->_unpaid = $unpaid;
+        $this->paid = $paid;
+        $this->unpaid = $unpaid;
     }
 
     /**
@@ -32,9 +33,9 @@ class PayoutInstructionBtcSummary
      *
      * @return float
      */
-    public function getPaid()
+    public function getPaid(): float
     {
-        return $this->_paid;
+        return $this->paid;
     }
 
     /**
@@ -42,9 +43,9 @@ class PayoutInstructionBtcSummary
      *
      * @return float
      */
-    public function getUnpaid()
+    public function getUnpaid(): float
     {
-        return $this->_unpaid;
+        return $this->unpaid;
     }
 
     /**
@@ -52,13 +53,11 @@ class PayoutInstructionBtcSummary
      *
      * @return float[]
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
+        return [
             'paid'   => $this->getPaid(),
             'unpaid' => $this->getUnpaid(),
         ];
-
-        return $elements;
     }
 }

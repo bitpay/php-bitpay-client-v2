@@ -16,19 +16,16 @@ use BitPaySDK\Exceptions\PayoutBatchCreationException;
  */
 class PayoutInstruction
 {
-    protected $_amount;
-    protected $_email;
-    protected $_recipientId;
-    protected $_shopperId;
-    protected $_label = '';
-    protected $_id;
+    protected $amount;
+    protected $email;
+    protected $recipientId;
+    protected $shopperId;
+    protected $label = '';
+    protected $id;
 
-    /**
-     * @var PayoutInstructionBtcSummary
-     */
-    protected $_btc;
-    protected $_transactions;
-    protected $_status;
+    protected $btc;
+    protected $transactions;
+    protected $status;
 
     /**
      * Constructor, create a PayoutInstruction object.
@@ -44,13 +41,13 @@ class PayoutInstruction
         $this->setAmount($amount);
         switch ($method) {
             case RecipientReferenceMethod::EMAIL:
-                $this->_email = $methodValue;
+                $this->email = $methodValue;
                 break;
             case RecipientReferenceMethod::RECIPIENT_ID:
-                $this->_recipientId = $methodValue;
+                $this->recipientId = $methodValue;
                 break;
             case RecipientReferenceMethod::SHOPPER_ID:
-                $this->_shopperId = $methodValue;
+                $this->shopperId = $methodValue;
                 break;
             default:
                 throw new PayoutBatchCreationException("\$method code must be a type of RecipientReferenceMethod");
@@ -65,7 +62,7 @@ class PayoutInstruction
      */
     public function getAmount()
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -80,7 +77,7 @@ class PayoutInstruction
             throw new BitPayException("Instruction amount should be 5 or higher.");
         }
 
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
 
@@ -91,7 +88,7 @@ class PayoutInstruction
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -101,7 +98,7 @@ class PayoutInstruction
      */
     public function setEmail(string $email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
 
@@ -114,7 +111,7 @@ class PayoutInstruction
      */
     public function getRecipientId()
     {
-        return $this->_recipientId;
+        return $this->recipientId;
     }
 
     /**
@@ -124,7 +121,7 @@ class PayoutInstruction
      */
     public function setRecipientId(string $recipientId)
     {
-        $this->_recipientId = $recipientId;
+        $this->recipientId = $recipientId;
     }
 
     /**
@@ -138,7 +135,7 @@ class PayoutInstruction
      */
     public function getShopperId()
     {
-        return $this->_shopperId;
+        return $this->shopperId;
     }
 
     /**
@@ -149,7 +146,7 @@ class PayoutInstruction
      */
     public function setShopperId(string $shopperId)
     {
-        $this->_shopperId = $shopperId;
+        $this->shopperId = $shopperId;
     }
 
     /**
@@ -162,7 +159,7 @@ class PayoutInstruction
      */
     public function getLabel()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -172,7 +169,7 @@ class PayoutInstruction
      */
     public function setLabel(string $label)
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     // Response fields
@@ -185,7 +182,7 @@ class PayoutInstruction
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -195,7 +192,7 @@ class PayoutInstruction
      */
     public function setId(string $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -205,7 +202,7 @@ class PayoutInstruction
      */
     public function getBtc()
     {
-        return $this->_btc ? $this->_btc->toArray() : null;
+        return $this->btc ? $this->btc->toArray() : null;
     }
 
     /**
@@ -215,7 +212,7 @@ class PayoutInstruction
      */
     public function setBtc(PayoutInstructionBtcSummary $btc)
     {
-        $this->_btc = $btc;
+        $this->btc = $btc;
     }
 
     /**
@@ -225,7 +222,7 @@ class PayoutInstruction
      */
     public function getTransactions()
     {
-        return $this->_transactions;
+        return $this->transactions;
     }
 
     /**
@@ -235,7 +232,7 @@ class PayoutInstruction
      */
     public function setTransactions(array $transactions)
     {
-        $this->_transactions = $transactions;
+        $this->transactions = $transactions;
     }
 
     /**
@@ -245,7 +242,7 @@ class PayoutInstruction
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -255,7 +252,7 @@ class PayoutInstruction
      */
     public function setStatus(string $status)
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**

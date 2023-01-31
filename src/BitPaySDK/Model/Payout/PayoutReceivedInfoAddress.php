@@ -13,12 +13,12 @@ namespace BitPaySDK\Model\Payout;
  */
 class PayoutReceivedInfoAddress
 {
-    protected $_address1;
-    protected $_address2;
-    protected $_locality;
-    protected $_region;
-    protected $_postalCode;
-    protected $_country;
+    protected $address1;
+    protected $address2;
+    protected $locality;
+    protected $region;
+    protected $postalCode;
+    protected $country;
 
     /**
      * PayoutReceivedInfoAddress constructor.
@@ -34,7 +34,7 @@ class PayoutReceivedInfoAddress
      */
     public function getAddress1()
     {
-        return $this->_address1;
+        return $this->address1;
     }
 
     /**
@@ -44,7 +44,7 @@ class PayoutReceivedInfoAddress
      */
     public function setAddress1(string $address1)
     {
-        $this->_address1 = $address1;
+        $this->address1 = $address1;
     }
 
     /**
@@ -54,7 +54,7 @@ class PayoutReceivedInfoAddress
      */
     public function getAddress2()
     {
-        return $this->_address2;
+        return $this->address2;
     }
 
     /**
@@ -64,7 +64,7 @@ class PayoutReceivedInfoAddress
      */
     public function setAddress2(string $address2)
     {
-        $this->_address2 = $address2;
+        $this->address2 = $address2;
     }
 
     /**
@@ -74,7 +74,7 @@ class PayoutReceivedInfoAddress
      */
     public function getLocality()
     {
-        return $this->_locality;
+        return $this->locality;
     }
 
     /**
@@ -84,7 +84,7 @@ class PayoutReceivedInfoAddress
      */
     public function setLocality(string $locality)
     {
-        $this->_locality = $locality;
+        $this->locality = $locality;
     }
 
     /**
@@ -94,7 +94,7 @@ class PayoutReceivedInfoAddress
      */
     public function getRegion()
     {
-        return $this->_region;
+        return $this->region;
     }
 
     /**
@@ -104,7 +104,7 @@ class PayoutReceivedInfoAddress
      */
     public function setRegion(string $region)
     {
-        $this->_region = $region;
+        $this->region = $region;
     }
 
     /**
@@ -114,7 +114,7 @@ class PayoutReceivedInfoAddress
      */
     public function getPostalCode()
     {
-        return $this->_postalCode;
+        return $this->postalCode;
     }
 
     /**
@@ -124,7 +124,7 @@ class PayoutReceivedInfoAddress
      */
     public function setPostalCode(string $postalCode)
     {
-        $this->_postalCode = $postalCode;
+        $this->postalCode = $postalCode;
     }
 
     /**
@@ -134,7 +134,7 @@ class PayoutReceivedInfoAddress
      */
     public function getCountry()
     {
-        return $this->_country;
+        return $this->country;
     }
 
     /**
@@ -144,7 +144,7 @@ class PayoutReceivedInfoAddress
      */
     public function setCountry(string $country)
     {
-        $this->_country = $country;
+        $this->country = $country;
     }
 
     /**

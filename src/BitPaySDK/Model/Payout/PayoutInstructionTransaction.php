@@ -9,9 +9,9 @@ namespace BitPaySDK\Model\Payout;
 
 class PayoutInstructionTransaction
 {
-    protected $_txid;
-    protected $_amount;
-    protected $_date;
+    protected $txid;
+    protected $amount;
+    protected $date;
 
     public function __construct()
     {
@@ -24,7 +24,7 @@ class PayoutInstructionTransaction
      */
     public function getTxid()
     {
-        return $this->_txid;
+        return $this->txid;
     }
 
     /**
@@ -34,7 +34,7 @@ class PayoutInstructionTransaction
      */
     public function setTxid(string $txid)
     {
-        $this->_txid = $txid;
+        $this->txid = $txid;
     }
 
     /**
@@ -44,7 +44,7 @@ class PayoutInstructionTransaction
      */
     public function getAmount()
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -54,7 +54,7 @@ class PayoutInstructionTransaction
      */
     public function setAmount(float $amount)
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -65,7 +65,7 @@ class PayoutInstructionTransaction
      */
     public function getDate()
     {
-        return $this->_date;
+        return $this->date;
     }
 
     /**
@@ -76,7 +76,7 @@ class PayoutInstructionTransaction
      */
     public function setDate(string $date)
     {
-        $this->_date = $date;
+        $this->date = $date;
     }
 
     /**
@@ -86,12 +86,10 @@ class PayoutInstructionTransaction
      */
     public function toArray()
     {
-        $elements = [
+        return [
             'txid'   => $this->getTxid(),
             'amount' => $this->getAmount(),
             'date'   => $this->getDate(),
         ];
-
-        return $elements;
     }
 }

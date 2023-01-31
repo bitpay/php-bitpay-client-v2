@@ -16,36 +16,36 @@ use BitPaySDK\Model\Currency;
  */
 class Payout
 {
-    protected $_token = '';
+    protected $token = '';
 
-    protected $_amount       = 0.0;
-    protected $_currency     = '';
-    protected $_effectiveDate;
-    protected $_ledgerCurrency = '';
+    protected $amount       = 0.0;
+    protected $currency     = '';
+    protected $effectiveDate;
+    protected $ledgerCurrency = '';
 
-    protected $_reference         = '';
-    protected $_notificationUrl   = '';
-    protected $_notificationEmail = '';
-    protected $_redirectUrl = '';
-    protected $_account = '';
-    protected $_email = '';
-    protected $_recipientId = '';
-    protected $_shopperId = '';
-    protected $_label = '';
-    protected $_supportPhone = '';
-    protected $_message = '';
-    protected $_percentFee = 0.0;
-    protected $_fee = 0.0;
-    protected $_depositTotal = 0.0;
-    protected $_rate = 0.0;
-    protected $_btc = 0.0;
-    protected $_dateExecuted;
+    protected $reference         = '';
+    protected $notificationUrl   = '';
+    protected $notificationEmail = '';
+    protected $redirectUrl = '';
+    protected $account = '';
+    protected $email = '';
+    protected $recipientId = '';
+    protected $shopperId = '';
+    protected $label = '';
+    protected $supportPhone = '';
+    protected $message = '';
+    protected $percentFee = 0.0;
+    protected $fee = 0.0;
+    protected $depositTotal = 0.0;
+    protected $rate = 0.0;
+    protected $btc = 0.0;
+    protected $dateExecuted;
 
-    protected $_id;
-    protected $_status;
-    protected $_requestDate;
-    protected $_exchangeRates;
-    protected $_transactions;
+    protected $id;
+    protected $status;
+    protected $requestDate;
+    protected $exchangeRates;
+    protected $transactions;
 
     /**
      * Constructor, create a request Payout object.
@@ -60,10 +60,10 @@ class Payout
      */
     public function __construct(float $amount = null, string $currency = null, string $ledgerCurrency = null)
     {
-        $this->_amount = $amount;
-        $this->_currency = $currency;
-        $this->_ledgerCurrency = $ledgerCurrency;
-        $this->_transactions = new PayoutTransaction();
+        $this->amount = $amount;
+        $this->currency = $currency;
+        $this->ledgerCurrency = $ledgerCurrency;
+        $this->transactions = new PayoutTransaction();
     }
 
     // API fields
@@ -81,7 +81,7 @@ class Payout
      */
     public function getToken()
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -94,7 +94,7 @@ class Payout
      */
     public function setToken(string $token)
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     // Required fields
@@ -107,7 +107,7 @@ class Payout
      */
     public function getAmount()
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -117,7 +117,7 @@ class Payout
      */
     public function setAmount(float $amount)
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -127,7 +127,7 @@ class Payout
      */
     public function formatAmount(int $precision)
     {
-        $this->_amount = round($this->_amount, $precision);
+        $this->amount = round($this->amount, $precision);
     }
 
     /**
@@ -137,7 +137,7 @@ class Payout
      */
     public function getCurrency()
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -152,7 +152,7 @@ class Payout
             throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -168,7 +168,7 @@ class Payout
      */
     public function getEffectiveDate()
     {
-        return $this->_effectiveDate;
+        return $this->effectiveDate;
     }
 
     /**
@@ -180,7 +180,7 @@ class Payout
      */
     public function setEffectiveDate(string $effectiveDate)
     {
-        $this->_effectiveDate = $effectiveDate;
+        $this->effectiveDate = $effectiveDate;
     }
 
     /**
@@ -196,7 +196,7 @@ class Payout
      */
     public function getLedgerCurrency()
     {
-        return $this->_ledgerCurrency;
+        return $this->ledgerCurrency;
     }
 
     /**
@@ -215,7 +215,7 @@ class Payout
             throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
-        $this->_ledgerCurrency = $ledgerCurrency;
+        $this->ledgerCurrency = $ledgerCurrency;
     }
 
     // Optional fields
@@ -232,7 +232,7 @@ class Payout
      */
     public function getReference()
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
@@ -246,7 +246,7 @@ class Payout
      */
     public function setReference(string $reference)
     {
-        $this->_reference = $reference;
+        $this->reference = $reference;
     }
 
     /**
@@ -258,7 +258,7 @@ class Payout
      */
     public function getNotificationURL()
     {
-        return $this->_notificationUrl;
+        return $this->notificationUrl;
     }
 
     /**
@@ -270,7 +270,7 @@ class Payout
      */
     public function setNotificationURL(string $notificationUrl)
     {
-        $this->_notificationUrl = $notificationUrl;
+        $this->notificationUrl = $notificationUrl;
     }
 
     /**
@@ -282,7 +282,7 @@ class Payout
      */
     public function getNotificationEmail()
     {
-        return $this->_notificationEmail;
+        return $this->notificationEmail;
     }
 
     /**
@@ -294,7 +294,7 @@ class Payout
      */
     public function setNotificationEmail(string $notificationEmail)
     {
-        $this->_notificationEmail = $notificationEmail;
+        $this->notificationEmail = $notificationEmail;
     }
 
     /**
@@ -308,7 +308,7 @@ class Payout
      */
     public function getRedirectUrl()
     {
-        return $this->_redirectUrl;
+        return $this->redirectUrl;
     }
 
     /**
@@ -322,7 +322,7 @@ class Payout
      */
     public function setRedirectUrl(string $redirectUrl)
     {
-        $this->_redirectUrl = $redirectUrl;
+        $this->redirectUrl = $redirectUrl;
     }
 
     /**
@@ -332,7 +332,7 @@ class Payout
      */
     public function getAccount()
     {
-        return $this->_account;
+        return $this->account;
     }
 
     /**
@@ -342,7 +342,7 @@ class Payout
      */
     public function setAccount(string $account)
     {
-        $this->_account = $account;
+        $this->account = $account;
     }
 
     /**
@@ -356,7 +356,7 @@ class Payout
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -370,7 +370,7 @@ class Payout
      */
     public function setEmail(string $email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
@@ -380,7 +380,7 @@ class Payout
      */
     public function getRecipientId()
     {
-        return $this->_recipientId;
+        return $this->recipientId;
     }
 
     /**
@@ -390,7 +390,7 @@ class Payout
      */
     public function setRecipientId(string $recipientId)
     {
-        $this->_recipientId = $recipientId;
+        $this->recipientId = $recipientId;
     }
 
     /**
@@ -407,7 +407,7 @@ class Payout
      */
     public function getShopperId()
     {
-        return $this->_shopperId;
+        return $this->shopperId;
     }
 
     /**
@@ -424,7 +424,7 @@ class Payout
      */
     public function setShopperId(string $shopperId)
     {
-        $this->_shopperId = $shopperId;
+        $this->shopperId = $shopperId;
     }
 
     /**
@@ -437,7 +437,7 @@ class Payout
      */
     public function getLabel()
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -450,7 +450,7 @@ class Payout
      */
     public function setLabel(string $label)
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
@@ -460,7 +460,7 @@ class Payout
      */
     public function getSupportPhone()
     {
-        return $this->_supportPhone;
+        return $this->supportPhone;
     }
 
     /**
@@ -470,7 +470,7 @@ class Payout
      */
     public function setSupportPhone(string $supportPhone)
     {
-        $this->_supportPhone = $supportPhone;
+        $this->supportPhone = $supportPhone;
     }
 
     /**
@@ -482,7 +482,7 @@ class Payout
      */
     public function getMessage()
     {
-        return $this->_message;
+        return $this->message;
     }
 
     /**
@@ -494,7 +494,7 @@ class Payout
      */
     public function setMessage(string $message)
     {
-        $this->_message = $message;
+        $this->message = $message;
     }
 
     /**
@@ -504,7 +504,7 @@ class Payout
      */
     public function getPercentFee()
     {
-        return $this->_percentFee;
+        return $this->percentFee;
     }
 
     /**
@@ -514,7 +514,7 @@ class Payout
      */
     public function setPercentFee(float $percentFee)
     {
-        $this->_percentFee = $percentFee;
+        $this->percentFee = $percentFee;
     }
 
     /**
@@ -524,7 +524,7 @@ class Payout
      */
     public function getFee()
     {
-        return $this->_fee;
+        return $this->fee;
     }
 
     /**
@@ -534,7 +534,7 @@ class Payout
      */
     public function setFee(float $fee)
     {
-        $this->_fee = $fee;
+        $this->fee = $fee;
     }
 
     /**
@@ -544,7 +544,7 @@ class Payout
      */
     public function getDepositTotal()
     {
-        return $this->_depositTotal;
+        return $this->depositTotal;
     }
 
     /**
@@ -554,7 +554,7 @@ class Payout
      */
     public function setDepositTotal(float $depositTotal)
     {
-        $this->_depositTotal = $depositTotal;
+        $this->depositTotal = $depositTotal;
     }
 
     /**
@@ -564,7 +564,7 @@ class Payout
      */
     public function getRate()
     {
-        return $this->_rate;
+        return $this->rate;
     }
 
     /**
@@ -574,7 +574,7 @@ class Payout
      */
     public function setRate(float $rate)
     {
-        $this->_rate = $rate;
+        $this->rate = $rate;
     }
 
     /**
@@ -584,7 +584,7 @@ class Payout
      */
     public function getBtc()
     {
-        return $this->_btc;
+        return $this->btc;
     }
 
     /**
@@ -594,7 +594,7 @@ class Payout
      */
     public function setBtc(float $btc)
     {
-        $this->_btc = $btc;
+        $this->btc = $btc;
     }
 
     /**
@@ -604,7 +604,7 @@ class Payout
      */
     public function getDateExecuted()
     {
-        return $this->_dateExecuted;
+        return $this->dateExecuted;
     }
 
     /**
@@ -614,7 +614,7 @@ class Payout
      */
     public function setDateExecuted(string $dateExecuted)
     {
-        $this->_dateExecuted = $dateExecuted;
+        $this->dateExecuted = $dateExecuted;
     }
 
     // Response fields
@@ -627,7 +627,7 @@ class Payout
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -637,7 +637,7 @@ class Payout
      */
     public function setId(string $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -664,7 +664,7 @@ class Payout
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -691,7 +691,7 @@ class Payout
      */
     public function setStatus(string $status)
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -701,7 +701,7 @@ class Payout
      */
     public function getRequestDate()
     {
-        return $this->_requestDate;
+        return $this->requestDate;
     }
 
     /**
@@ -711,7 +711,7 @@ class Payout
      */
     public function setRequestDate(string $requestDate)
     {
-        $this->_requestDate = $requestDate;
+        $this->requestDate = $requestDate;
     }
 
     /**
@@ -721,7 +721,7 @@ class Payout
      */
     public function getExchangeRates()
     {
-        return $this->_exchangeRates;
+        return $this->exchangeRates;
     }
 
     /**
@@ -731,7 +731,7 @@ class Payout
      */
     public function setExchangeRates(array $exchangeRates)
     {
-        $this->_exchangeRates = $exchangeRates;
+        $this->exchangeRates = $exchangeRates;
     }
 
     /**
@@ -743,7 +743,7 @@ class Payout
     {
         $transactions = [];
 
-        foreach ($this->_transactions as $transaction) {
+        foreach ($this->transactions as $transaction) {
             if ($transaction instanceof PayoutTransaction) {
                 array_push($transactions, $transaction->toArray());
             } else {
@@ -761,7 +761,7 @@ class Payout
      */
     public function setTransactions(array $transactions)
     {
-        $this->_transactions = $transactions;
+        $this->transactions = $transactions;
     }
 
     /**

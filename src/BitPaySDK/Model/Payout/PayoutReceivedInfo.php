@@ -13,8 +13,8 @@ namespace BitPaySDK\Model\Payout;
  */
 class PayoutReceivedInfo
 {
-    protected $_name;
-    protected $_email;
+    protected $name;
+    protected $email;
 
     /**
      * @var PayoutReceivedInfoAddress
@@ -35,7 +35,7 @@ class PayoutReceivedInfo
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -45,7 +45,7 @@ class PayoutReceivedInfo
      */
     public function setName(string $name)
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -55,7 +55,7 @@ class PayoutReceivedInfo
      */
     public function getEmail()
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -65,7 +65,7 @@ class PayoutReceivedInfo
      */
     public function setEmail(string $email)
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
