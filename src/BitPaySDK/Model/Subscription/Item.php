@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
@@ -9,15 +10,15 @@ namespace BitPaySDK\Model\Subscription;
 
 class Item
 {
-    protected $_description;
-    protected $_price;
-    protected $_quantity;
+    protected string $description;
+    protected float $price;
+    protected int $quantity;
 
     public function __construct(float $price = 0.0, int $quantity = 0, string $description = "")
     {
-        $this->_price = $price;
-        $this->_quantity = $quantity;
-        $this->_description = $description;
+        $this->price = $price;
+        $this->quantity = $quantity;
+        $this->description = $description;
     }
 
     /**
@@ -25,9 +26,9 @@ class Item
      *
      * @return string the Line item description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -35,9 +36,9 @@ class Item
      *
      * @param string $description the Line item description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
@@ -45,9 +46,9 @@ class Item
      *
      * @return float the price
      */
-    public function getPrice()
+    public function getPrice(): float
     {
-        return $this->_price;
+        return $this->price;
     }
 
     /**
@@ -55,9 +56,9 @@ class Item
      *
      * @param float $price the price
      */
-    public function setPrice(float $price)
+    public function setPrice(float $price): void
     {
-        $this->_price = $price;
+        $this->price = $price;
     }
 
     /**
@@ -65,9 +66,9 @@ class Item
      *
      * @return int the quantity
      */
-    public function getQuantity()
+    public function getQuantity(): int
     {
-        return $this->_quantity;
+        return $this->quantity;
     }
 
     /**
@@ -75,21 +76,21 @@ class Item
      *
      * @param int $quantity the quantity
      */
-    public function setQuantity(int $quantity)
+    public function setQuantity(int $quantity): void
     {
-        $this->_quantity = $quantity;
+        $this->quantity = $quantity;
     }
 
     /**
      * @param array $item List of line items
      * @return Item
      */
-    public static function createFromArray(array $item)
+    public static function createFromArray(array $item): Item
     {
         $instance = new self();
 
         foreach ($item as $key => $value) {
-            $instance->{'_' . $key} = $value;
+            $instance->{$key} = $value;
         }
 
         return $instance;
@@ -100,7 +101,7 @@ class Item
      *
      * @return array Item as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'description' => $this->getDescription(),

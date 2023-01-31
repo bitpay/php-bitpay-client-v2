@@ -12,20 +12,17 @@ namespace BitPaySDK\Model\Subscription;
  */
 class Subscription
 {
-    protected $_id;
-    protected $_status;
-    /**
-     * @var BillData
-     */
-    protected $_billData;
-    protected $_schedule;
-    protected $_nextDelivery;
-    protected $_createdDate;
-    protected $_token;
+    protected $id;
+    protected $status;
+    protected $billData;
+    protected $schedule;
+    protected $nextDelivery;
+    protected $createdDate;
+    protected $token;
 
     public function __construct()
     {
-        $this->_billData = new BillData('', '', '', []);
+        $this->billData = new BillData('', '', '', []);
     }
 
     /**
@@ -35,7 +32,7 @@ class Subscription
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -45,7 +42,7 @@ class Subscription
      */
     public function setId(string $id)
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -57,7 +54,7 @@ class Subscription
      */
     public function getStatus()
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -70,7 +67,7 @@ class Subscription
      */
     public function setStatus(string $status)
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -80,7 +77,7 @@ class Subscription
      */
     public function getBillData()
     {
-        return $this->_billData;
+        return $this->billData;
     }
 
     /**
@@ -91,7 +88,7 @@ class Subscription
      */
     public function setBillData(BillData $billData)
     {
-        $this->_billData = $billData;
+        $this->billData = $billData;
     }
 
     /**
@@ -105,7 +102,7 @@ class Subscription
      */
     public function getSchedule()
     {
-        return $this->_schedule;
+        return $this->schedule;
     }
 
     /**
@@ -119,7 +116,7 @@ class Subscription
      */
     public function setSchedule(string $schedule)
     {
-        $this->_schedule = $schedule;
+        $this->schedule = $schedule;
     }
 
     /**
@@ -132,7 +129,7 @@ class Subscription
      */
     public function getNextDelivery()
     {
-        return $this->_nextDelivery;
+        return $this->nextDelivery;
     }
 
     /**
@@ -145,7 +142,7 @@ class Subscription
      */
     public function setNextDelivery(string $nextDelivery)
     {
-        $this->_nextDelivery = $nextDelivery;
+        $this->nextDelivery = $nextDelivery;
     }
 
     /**
@@ -155,7 +152,7 @@ class Subscription
      */
     public function getCreatedDate()
     {
-        return $this->_createdDate;
+        return $this->createdDate;
     }
 
     /**
@@ -165,7 +162,7 @@ class Subscription
      */
     public function setCreatedDate(string $createdDate)
     {
-        $this->_createdDate = $createdDate;
+        $this->createdDate = $createdDate;
     }
 
     /**
@@ -178,7 +175,7 @@ class Subscription
      */
     public function getToken()
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -191,7 +188,7 @@ class Subscription
      */
     public function setToken(string $token)
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     /**
