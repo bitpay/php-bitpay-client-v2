@@ -13,10 +13,10 @@ namespace BitPaySDK\Model\Bill;
  */
 class Item
 {
-    protected $id;
-    protected $description;
-    protected $price;
-    protected $quantity;
+    protected ?string $id = null;
+    protected ?string $description = null;
+    protected ?float $price = null;
+    protected ?int $quantity = null;
 
     public function __construct()
     {

@@ -17,27 +17,27 @@ use BitPaySDK\Model\Currency;
  */
 class Bill
 {
-    protected $currency;
-    protected $token = "";
-    protected $email;
-    protected $items;
-    protected $number;
-    protected $name;
-    protected $address1;
-    protected $address2;
-    protected $city;
-    protected $state;
-    protected $zip;
-    protected $country;
-    protected $cc;
-    protected $phone;
-    protected $dueDate;
-    protected $passProcessingFee;
-    protected $status;
-    protected $url;
-    protected $createDate;
-    protected $id;
-    protected $merchant;
+    protected ?string $currency= null;
+    protected ?string $token = null;
+    protected ?string $email= null;
+    protected ?array $items= null;
+    protected ?string $number= null;
+    protected ?string $name= null;
+    protected ?string $address1= null;
+    protected ?string $address2= null;
+    protected ?string $city= null;
+    protected ?string $state= null;
+    protected ?string $zip= null;
+    protected ?string $country= null;
+    protected ?array $cc= null;
+    protected ?string $phone= null;
+    protected ?string $dueDate= null;
+    protected ?bool $passProcessingFee= null;
+    protected ?string $status= null;
+    protected ?string $url= null;
+    protected ?string $createDate= null;
+    protected ?string $id= null;
+    protected ?string $merchant= null;
 
     /**
      * Constructor, create a minimal request Bill object.
@@ -65,9 +65,9 @@ class Bill
      * API token for bill resource. This token is actually derived from the API token used to
      * create the bill and is tied to the specific resource id created.
      *
-     * @return string the token
+     * @return string|null the token
      */
-    public function getToken(): string
+    public function getToken(): ?string
     {
         return $this->token;
     }
