@@ -335,7 +335,7 @@ class InvoiceTest extends TestCase
 
     public function testGetInvoiceTime()
     {
-        $expectedInvoiceTime = '01:01:01';
+        $expectedInvoiceTime = 1620669854224;
 
         $invoice = $this->createClassObject();
         $invoice->setInvoiceTime($expectedInvoiceTime);
@@ -362,7 +362,7 @@ class InvoiceTest extends TestCase
 
     public function testGetTransactions()
     {
-        $expectedTransaction = 'Test transaction';
+        $expectedTransaction = [];
 
         $invoice = $this->createClassObject();
         $invoice->setTransactions($expectedTransaction);
@@ -380,7 +380,7 @@ class InvoiceTest extends TestCase
 
     public function testGetTargetConfirmations()
     {
-        $expectedTargetConfirmation = 'Test target confirmation';
+        $expectedTargetConfirmation = 6;
 
         $invoice = $this->createClassObject();
         $invoice->setTargetConfirmations($expectedTargetConfirmation);
@@ -389,7 +389,7 @@ class InvoiceTest extends TestCase
 
     public function testGetRefundAddressRequestPending()
     {
-        $expectedRefundAddressRequestPending = 'Test Refund Address Request Pending';
+        $expectedRefundAddressRequestPending = false;
 
         $invoice = $this->createClassObject();
         $invoice->setRefundAddressRequestPending($expectedRefundAddressRequestPending);
@@ -650,10 +650,9 @@ class InvoiceTest extends TestCase
         $this->assertArrayHasKey('invoiceTime', $invoiceArray);
         $this->assertArrayHasKey('expirationTime', $invoiceArray);
         $this->assertArrayHasKey('currentTime', $invoiceArray);
-        $this->assertArrayHasKey('transactions', $invoiceArray);
         $this->assertArrayHasKey('exceptionStatus', $invoiceArray);
         $this->assertArrayHasKey('targetConfirmations', $invoiceArray);
-        $this->assertArrayHasKey('refundAddressRequestPending', $invoiceArray);
+//        $this->assertArrayHasKey('refundAddressRequestPending', $invoiceArray);
         $this->assertArrayHasKey('buyerProvidedEmail', $invoiceArray);
         $this->assertArrayHasKey('billId', $invoiceArray);
         $this->assertArrayHasKey('extendedNotifications', $invoiceArray);
@@ -694,13 +693,11 @@ class InvoiceTest extends TestCase
         $this->assertEquals($invoiceArray['url'], 'http://test.com');
         $this->assertEquals($invoiceArray['status'], 'pending');
         $this->assertEquals($invoiceArray['lowFeeDetected'], 'Low fee detected');
-        $this->assertEquals($invoiceArray['invoiceTime'], '01:01:01');
+        $this->assertEquals($invoiceArray['invoiceTime'], 1620734545366);
         $this->assertEquals($invoiceArray['expirationTime'], '01:01:01');
         $this->assertEquals($invoiceArray['currentTime'], '01:01:01');
-        $this->assertEquals($invoiceArray['transactions'], 'Transactions');
         $this->assertEquals($invoiceArray['exceptionStatus'], 'Exception status');
-        $this->assertEquals($invoiceArray['targetConfirmations'], 'Target confirmations');
-        $this->assertEquals($invoiceArray['refundAddressRequestPending'], 'Refund address request pending');
+        $this->assertEquals($invoiceArray['targetConfirmations'], 6);
         $this->assertEquals($invoiceArray['buyerProvidedEmail'], 'test@email.com');
         $this->assertEquals($invoiceArray['billId'], '34');
         $this->assertTrue($invoiceArray['extendedNotifications']);
@@ -727,7 +724,8 @@ class InvoiceTest extends TestCase
         $this->assertNotNull($invoiceArray);
         $this->assertIsArray($invoiceArray);
 
-        $this->assertArrayNotHasKey('currency', $invoiceArray);
+        $this->assertArrayNotHasKey('transactions', $invoiceArray);
+        $this->assertArrayNotHasKey('refundAddressRequestPending', $invoiceArray);
     }
 
     private function createClassObject()
@@ -760,13 +758,13 @@ class InvoiceTest extends TestCase
         $invoice->setUrl('http://test.com');
         $invoice->setStatus('pending');
         $invoice->setLowFeeDetected('Low fee detected');
-        $invoice->setInvoiceTime('01:01:01');
+        $invoice->setInvoiceTime(1620734545366);
         $invoice->setExpirationTime('01:01:01');
         $invoice->setCurrentTime('01:01:01');
-        $invoice->setTransactions('Transactions');
+        $invoice->setTransactions([]);
         $invoice->setExceptionStatus('Exception status');
-        $invoice->setTargetConfirmations('Target confirmations');
-        $invoice->setRefundAddressRequestPending('Refund address request pending');
+        $invoice->setTargetConfirmations(6);
+        $invoice->setRefundAddressRequestPending(false);
         $invoice->setBuyerProvidedEmail('test@email.com');
         $invoice->setBillId('34');
         $invoice->setExtendedNotifications(true);
