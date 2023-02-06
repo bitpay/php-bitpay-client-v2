@@ -24,9 +24,9 @@ class UniversalCodes
      *
      * Payment protocol URL for selected wallet, defaults to BitPay URL if no wallet selected.
      *
-     * @return string the payment string
+     * @return string|null the payment string
      */
-    public function getPaymentString()
+    public function getPaymentString(): ?string
     {
         return $this->paymentString;
     }
@@ -38,7 +38,7 @@ class UniversalCodes
      *
      * @param string $paymentString the payment string
      */
-    public function setPaymentString(string $paymentString)
+    public function setPaymentString(string $paymentString): void
     {
         $this->paymentString = $paymentString;
     }
@@ -48,9 +48,9 @@ class UniversalCodes
      *
      * Link to bring user to BitPay ID flow, only present when bitpayIdRequired is true.
      *
-     * @return string
+     * @return string|null
      */
-    public function getVerificationLink()
+    public function getVerificationLink(): ?string
     {
         return $this->verificationLink;
     }
@@ -62,7 +62,7 @@ class UniversalCodes
      *
      * @param string $verificationLink the verification link
      */
-    public function setVerificationLink(string $verificationLink)
+    public function setVerificationLink(string $verificationLink): void
     {
         $this->verificationLink = $verificationLink;
     }
@@ -72,13 +72,11 @@ class UniversalCodes
      *
      * @return array universal codes as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'paymentString'               => $this->getPaymentString(),
-            'verificationLink'            => $this->getVerificationLink(),
+        return [
+            'paymentString' => $this->getPaymentString(),
+            'verificationLink' => $this->getVerificationLink(),
         ];
-
-        return $elements;
     }
 }

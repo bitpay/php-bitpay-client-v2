@@ -5,17 +5,17 @@ namespace BitPaySDK\Model\Invoice;
 
 class RefundWebhook
 {
-    protected $id;
-    protected $invoice;
-    protected $supportRequest;
-    protected $status;
-    protected $amount;
-    protected $currency;
-    protected $lastRefundNotification;
-    protected $refundFee;
-    protected $immediate;
-    protected $buyerPaysRefundFee;
-    protected $requestDate;
+    protected string $id;
+    protected string $invoice;
+    protected string $supportRequest;
+    protected string $status;
+    protected float $amount;
+    protected string $currency;
+    protected string $lastRefundNotification;
+    protected float $refundFee;
+    protected bool $immediate;
+    protected bool $buyerPaysRefundFee;
+    protected string $requestDate;
 
     public function __construct()
     {
@@ -133,20 +133,19 @@ class RefundWebhook
 
     public function toArray(): array
     {
-        $elements = [
-            'id'                     => $this->getId(),
-            'invoice'                => $this->getInvoice(),
-            'supportRequest'         => $this->getSupportRequest(),
-            'status'                 => $this->getStatus(),
-            'amount'                 => $this->getAmount(),
-            'currency'               => $this->getCurrency(),
+        return [
+            'id' => $this->getId(),
+            'invoice' => $this->getInvoice(),
+            'supportRequest' => $this->getSupportRequest(),
+            'status' => $this->getStatus(),
+            'amount' => $this->getAmount(),
+            'currency' => $this->getCurrency(),
             'lastRefundNotification' => $this->getLastRefundNotification(),
-            'refundFee'              => $this->getRefundFee(),
-            'immediate'              => $this->getImmediate(),
-            'buyerPaysRefundFee'     => $this->getBuyerPaysRefundFee(),
-            'requestDate'            => $this->getRequestDate()
+            'refundFee' => $this->getRefundFee(),
+            'immediate' => $this->getImmediate(),
+            'buyerPaysRefundFee' => $this->getBuyerPaysRefundFee(),
+            'requestDate' => $this->getRequestDate()
         ];
 
-        return $elements;
     }
 }

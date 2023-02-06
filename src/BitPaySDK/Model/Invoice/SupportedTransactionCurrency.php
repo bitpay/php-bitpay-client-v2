@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -18,8 +20,8 @@ namespace BitPaySDK\Model\Invoice;
  */
 class SupportedTransactionCurrency
 {
-    protected $enabled;
-    protected $reason;
+    protected ?bool $enabled = null;
+    protected ?string $reason = null;
 
     /**
      * SupportedTransactionCurrency constructor.
@@ -33,7 +35,7 @@ class SupportedTransactionCurrency
      *
      * @param bool $enabled
      */
-    public function setEnabled(bool $enabled)
+    public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
     }
@@ -43,7 +45,7 @@ class SupportedTransactionCurrency
      *
      * @return bool|null
      */
-    public function getEnabled()
+    public function getEnabled(): ?bool
     {
         return $this->enabled;
     }
@@ -53,7 +55,7 @@ class SupportedTransactionCurrency
      *
      * @param string $reason
      */
-    public function setReason(string $reason)
+    public function setReason(string $reason): void
     {
         $this->reason = $reason;
     }
@@ -63,7 +65,7 @@ class SupportedTransactionCurrency
      *
      * @return string|null
      */
-    public function getReason()
+    public function getReason(): ?string
     {
         return $this->reason;
     }
@@ -73,11 +75,11 @@ class SupportedTransactionCurrency
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'enabled' => $this->getEnabled(),
-            'reason'  => $this->getReason()
+            'reason' => $this->getReason()
         ];
 
         foreach ($elements as $key => $value) {

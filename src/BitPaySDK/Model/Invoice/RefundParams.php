@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -12,14 +14,14 @@ namespace BitPaySDK\Model\Invoice;
  */
 class RefundParams
 {
-    protected $requesterType        = "";
-    protected $requesterEmail       = "";
-    protected $amount               = 0.0;
-    protected $currency             = "";
-    protected $email                = "";
-    protected $purchaserNotifyEmail = "";
-    protected $refundAddress        = "";
-    protected $supportRequestEid    = "";
+    protected ?string $requesterType = null;
+    protected ?string $requesterEmail = null;
+    protected ?float $amount = null;
+    protected ?string $currency = null;
+    protected ?string $email = null;
+    protected ?string $purchaserNotifyEmail = null;
+    protected ?string $refundAddress = null;
+    protected ?string $supportRequestEid = null;
 
     public function __construct()
     {
@@ -30,9 +32,9 @@ class RefundParams
      *
      * Set to "purchaser"
      *
-     * @return string requester type
+     * @return string|null requester type
      */
-    public function getRequesterType()
+    public function getRequesterType(): ?string
     {
         return $this->requesterType;
     }
@@ -45,7 +47,7 @@ class RefundParams
      * @param string $requesterType the requester type
      * @return void
      */
-    public function setRequesterType(string $requesterType)
+    public function setRequesterType(string $requesterType): void
     {
         $this->requesterType = $requesterType;
     }
@@ -53,9 +55,9 @@ class RefundParams
     /**
      * Gets Purchaser's email address stored on the invoice
      *
-     * @return string purchaser's email address stored on the invoice
+     * @return string|null purchaser's email address stored on the invoice
      */
-    public function getRequesterEmail()
+    public function getRequesterEmail(): ?string
     {
         return $this->requesterEmail;
     }
@@ -65,7 +67,7 @@ class RefundParams
      *
      * @param string $requesterEmail purchaser's email address stored on the invoice
      */
-    public function setRequesterEmail(string $requesterEmail)
+    public function setRequesterEmail(string $requesterEmail): void
     {
         $this->requesterEmail = $requesterEmail;
     }
@@ -73,9 +75,9 @@ class RefundParams
     /**
      * Gets Amount to be refunded in the currency indicated in the refund object.
      *
-     * @return float the amounts
+     * @return float|null the amounts
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -85,7 +87,7 @@ class RefundParams
      *
      * @param float $amount the amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
         $this->amount = $amount;
     }
@@ -95,9 +97,9 @@ class RefundParams
      *
      * Reference currency used for the refund, usually the same as the currency used to create the invoice.
      *
-     * @return string the currency
+     * @return string|null the currency
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -109,7 +111,7 @@ class RefundParams
      *
      * @param string $currency the currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -117,9 +119,9 @@ class RefundParams
     /**
      * Gets Purchaser's email address stored on the invoice
      *
-     * @return string purchaser's email address stored on the invoice
+     * @return string|null purchaser's email address stored on the invoice
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -129,7 +131,7 @@ class RefundParams
      *
      * @param string $email purchaser's email address stored on the invoice
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -140,9 +142,9 @@ class RefundParams
      * Email address to which the refund link was sent.
      * This is equal to the refundEmail used when submitting the refund request.
      *
-     * @return string the purchaser notify email
+     * @return string|null the purchaser notify email
      */
-    public function getPurchaserNotifyEmail()
+    public function getPurchaserNotifyEmail(): ?string
     {
         return $this->purchaserNotifyEmail;
     }
@@ -155,7 +157,7 @@ class RefundParams
      *
      * @param string $purchaserNotifyEmail the purchaser notify email
      */
-    public function setPurchaserNotifyEmail(string $purchaserNotifyEmail)
+    public function setPurchaserNotifyEmail(string $purchaserNotifyEmail): void
     {
         $this->purchaserNotifyEmail = $purchaserNotifyEmail;
     }
@@ -165,9 +167,9 @@ class RefundParams
      *
      * Contains the cryptocurrency address provided by the customer via the refund link which was emailed to him.
      *
-     * @return string the refund address
+     * @return string|null the refund address
      */
-    public function getRefundAddress()
+    public function getRefundAddress(): ?string
     {
         return $this->refundAddress;
     }
@@ -179,7 +181,7 @@ class RefundParams
      *
      * @param string $refundAddress the refund address
      */
-    public function setRefundAddress(string $refundAddress)
+    public function setRefundAddress(string $refundAddress): void
     {
         $this->refundAddress = $refundAddress;
     }
@@ -189,9 +191,9 @@ class RefundParams
      *
      * Contains the refund requestId.
      *
-     * @return string the support request eid
+     * @return string|null the support request eid
      */
-    public function getSupportRequestEid()
+    public function getSupportRequestEid(): ?string
     {
         return $this->supportRequestEid;
     }
@@ -203,7 +205,7 @@ class RefundParams
      *
      * @param string $supportRequestEid the support request eid
      */
-    public function setSupportRequestEid(string $supportRequestEid)
+    public function setSupportRequestEid(string $supportRequestEid): void
     {
         $this->supportRequestEid = $supportRequestEid;
     }
@@ -213,18 +215,16 @@ class RefundParams
      *
      * @return array RefundParams as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'requesterType'        => $this->getRequesterType(),
-            'requesterEmail'       => $this->getRequesterEmail(),
-            'amount'               => $this->getAmount(),
-            'currency'             => $this->getCurrency(),
-            'email'                => $this->getEmail(),
+        return [
+            'requesterType' => $this->getRequesterType(),
+            'requesterEmail' => $this->getRequesterEmail(),
+            'amount' => $this->getAmount(),
+            'currency' => $this->getCurrency(),
+            'email' => $this->getEmail(),
             'purchaserNotifyEmail' => $this->getPurchaserNotifyEmail(),
-            'refundAddress'        => $this->getRefundAddress(),
+            'refundAddress' => $this->getRefundAddress(),
         ];
-
-        return $elements;
     }
 }

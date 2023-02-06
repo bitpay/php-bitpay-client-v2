@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -9,9 +11,9 @@ namespace BitPaySDK\Model\Invoice;
 
 class ItemizedDetails
 {
-    protected $amount;
-    protected $description;
-    protected $isFee;
+    protected ?float $amount;
+    protected ?string $description;
+    protected ?bool $isFee;
 
     public function __construct()
     {
@@ -20,9 +22,9 @@ class ItemizedDetails
     /**
      * Gets The amount of currency.
      *
-     * @return float the amount
+     * @return float|null the amount
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -32,7 +34,7 @@ class ItemizedDetails
      *
      * @param float $amount the amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
         $this->amount = $amount;
     }
@@ -42,9 +44,9 @@ class ItemizedDetails
      *
      * Display string for the item.
      *
-     * @return string the description
+     * @return string|null the description
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -54,7 +56,7 @@ class ItemizedDetails
      *
      * @param string $description the description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -64,9 +66,9 @@ class ItemizedDetails
      *
      * Indicates whether or not the item is considered a fee/tax or part of the main purchase.
      *
-     * @return bool is fee
+     * @return bool|null is fee
      */
-    public function getIsFee()
+    public function getIsFee(): ?bool
     {
         return $this->isFee;
     }
@@ -78,7 +80,7 @@ class ItemizedDetails
      *
      * @param bool $isFee is fee
      */
-    public function setIsFee(bool $isFee)
+    public function setIsFee(bool $isFee): void
     {
         $this->isFee = $isFee;
     }
@@ -88,7 +90,7 @@ class ItemizedDetails
      *
      * @return array item details data as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'amount'        => $this->getAmount(),

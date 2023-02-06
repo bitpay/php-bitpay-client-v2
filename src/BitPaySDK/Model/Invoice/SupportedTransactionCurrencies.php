@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -16,13 +18,13 @@ namespace BitPaySDK\Model\Invoice;
  */
 class SupportedTransactionCurrencies
 {
-    protected $btc;
-    protected $bch;
-    protected $eth;
-    protected $usdc;
-    protected $gusd;
-    protected $pax;
-    protected $xrp;
+    protected SupportedTransactionCurrency $btc;
+    protected SupportedTransactionCurrency $bch;
+    protected SupportedTransactionCurrency $eth;
+    protected SupportedTransactionCurrency $usdc;
+    protected SupportedTransactionCurrency $gusd;
+    protected SupportedTransactionCurrency $pax;
+    protected SupportedTransactionCurrency $xrp;
 
     /**
      * SupportedTransactionCurrencies constructor.
@@ -43,7 +45,7 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getBTC()
+    public function getBTC(): SupportedTransactionCurrency
     {
         return $this->btc;
     }
@@ -53,7 +55,7 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $btc
      */
-    public function setBTC(SupportedTransactionCurrency $btc)
+    public function setBTC(SupportedTransactionCurrency $btc): void
     {
         $this->btc = $btc;
     }
@@ -63,7 +65,7 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getBCH()
+    public function getBCH(): SupportedTransactionCurrency
     {
         return $this->bch;
     }
@@ -73,7 +75,7 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $bch
      */
-    public function setBCH(SupportedTransactionCurrency $bch)
+    public function setBCH(SupportedTransactionCurrency $bch): void
     {
         $this->bch = $bch;
     }
@@ -83,7 +85,7 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getETH()
+    public function getETH(): SupportedTransactionCurrency
     {
         return $this->eth;
     }
@@ -93,7 +95,7 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $eth
      */
-    public function setETH(SupportedTransactionCurrency $eth)
+    public function setETH(SupportedTransactionCurrency $eth): void
     {
         $this->eth = $eth;
     }
@@ -103,7 +105,7 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getUSDC()
+    public function getUSDC(): SupportedTransactionCurrency
     {
         return $this->usdc;
     }
@@ -113,7 +115,7 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $usdc
      */
-    public function setUSDC(SupportedTransactionCurrency $usdc)
+    public function setUSDC(SupportedTransactionCurrency $usdc): void
     {
         $this->usdc = $usdc;
     }
@@ -123,7 +125,7 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getGUSD()
+    public function getGUSD(): SupportedTransactionCurrency
     {
         return $this->gusd;
     }
@@ -133,7 +135,7 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $gusd
      */
-    public function setGUSD(SupportedTransactionCurrency $gusd)
+    public function setGUSD(SupportedTransactionCurrency $gusd): void
     {
         $this->gusd = $gusd;
     }
@@ -143,7 +145,7 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getPAX()
+    public function getPAX(): SupportedTransactionCurrency
     {
         return $this->pax;
     }
@@ -153,7 +155,7 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $pax
      */
-    public function setPAX(SupportedTransactionCurrency $pax)
+    public function setPAX(SupportedTransactionCurrency $pax): void
     {
         $this->pax = $pax;
     }
@@ -163,7 +165,7 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getXRP()
+    public function getXRP(): SupportedTransactionCurrency
     {
         return $this->xrp;
     }
@@ -173,7 +175,7 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $xrp
      */
-    public function setXRP(SupportedTransactionCurrency $xrp)
+    public function setXRP(SupportedTransactionCurrency $xrp): void
     {
         $this->xrp = $xrp;
     }
@@ -183,7 +185,7 @@ class SupportedTransactionCurrencies
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'btc'  => $this->getBTC()->toArray(),
