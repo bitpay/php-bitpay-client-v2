@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -9,16 +11,16 @@ namespace BitPaySDK\Model\Ledger;
 
 class Buyer
 {
-    protected $name;
-    protected $address1;
-    protected $address2;
-    protected $city;
-    protected $state;
-    protected $zip;
-    protected $country;
-    protected $phone;
-    protected $notify;
-    protected $email;
+    protected ?string $name = null;
+    protected ?string $address1 = null;
+    protected ?string $address2 = null;
+    protected ?string $city = null;
+    protected ?string $state = null;
+    protected ?string $zip = null;
+    protected ?string $country = null;
+    protected ?string $phone = null;
+    protected ?bool $notify = null;
+    protected ?string $email = null;
 
     public function __construct()
     {
@@ -27,9 +29,9 @@ class Buyer
     /**
      * Gets name
      *
-     * @return string the name
+     * @return string|null the name
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -39,7 +41,7 @@ class Buyer
      *
      * @param string $name the name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -47,9 +49,9 @@ class Buyer
     /**
      * Gets address 1
      *
-     * @return string the address1
+     * @return string|null the address1
      */
-    public function getAddress1()
+    public function getAddress1(): ?string
     {
         return $this->address1;
     }
@@ -59,7 +61,7 @@ class Buyer
      *
      * @param string $address1
      */
-    public function setAddress1(string $address1)
+    public function setAddress1(string $address1): void
     {
         $this->address1 = $address1;
     }
@@ -67,9 +69,9 @@ class Buyer
     /**
      * Gets address2
      *
-     * @return string the address2
+     * @return string|null the address2
      */
-    public function getAddress2()
+    public function getAddress2(): ?string
     {
         return $this->address2;
     }
@@ -79,7 +81,7 @@ class Buyer
      *
      * @param string $address2 the address2
      */
-    public function setAddress2(string $address2)
+    public function setAddress2(string $address2): void
     {
         $this->address2 = $address2;
     }
@@ -87,9 +89,9 @@ class Buyer
     /**
      * Gets city
      *
-     * @return string the city
+     * @return string|null the city
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -99,7 +101,7 @@ class Buyer
      *
      * @param string $city the city
      */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -107,9 +109,9 @@ class Buyer
     /**
      * Gets state
      *
-     * @return string the state
+     * @return string|null the state
      */
-    public function getState()
+    public function getState(): ?string
     {
         return $this->state;
     }
@@ -119,7 +121,7 @@ class Buyer
      *
      * @param string $state the state
      */
-    public function setState(string $state)
+    public function setState(string $state): void
     {
         $this->state = $state;
     }
@@ -127,9 +129,9 @@ class Buyer
     /**
      * Gets zip
      *
-     * @return string the zip
+     * @return string|null the zip
      */
-    public function getZip()
+    public function getZip(): ?string
     {
         return $this->zip;
     }
@@ -139,7 +141,7 @@ class Buyer
      *
      * @param string $zip the zip
      */
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -147,9 +149,9 @@ class Buyer
     /**
      * Gets country
      *
-     * @return string the country
+     * @return string|null the country
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -159,7 +161,7 @@ class Buyer
      *
      * @param string $country the country
      */
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
@@ -167,9 +169,9 @@ class Buyer
     /**
      * Gets email
      *
-     * @return string the email
+     * @return string|null the email
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -179,7 +181,7 @@ class Buyer
      *
      * @param string $email the email
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -187,9 +189,9 @@ class Buyer
     /**
      * Gets phone
      *
-     * @return string the phone
+     * @return string|null the phone
      */
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
@@ -199,7 +201,7 @@ class Buyer
      *
      * @param string $phone the phone
      */
-    public function setPhone(string $phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
@@ -207,9 +209,9 @@ class Buyer
     /**
      * Gets notify
      *
-     * @return bool notify
+     * @return bool|null notify
      */
-    public function getNotify()
+    public function getNotify(): ?bool
     {
         return $this->notify;
     }
@@ -219,7 +221,7 @@ class Buyer
      *
      * @param bool $notify notify
      */
-    public function setNotify(bool $notify)
+    public function setNotify(bool $notify): void
     {
         $this->notify = $notify;
     }
@@ -229,7 +231,7 @@ class Buyer
      *
      * @return array Buyer as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'name'     => $this->getName(),

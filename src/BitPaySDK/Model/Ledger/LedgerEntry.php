@@ -9,23 +9,21 @@ namespace BitPaySDK\Model\Ledger;
 
 class LedgerEntry
 {
-    protected $type;
-    protected $amount;
-    protected $code;
-    protected $timestamp;
-    protected $currency;
-    protected $txType;
-    protected $scale;
-    protected $id;
-    protected $supportRequest;
-    protected $description;
-    protected $invoiceId;
-
-    protected $buyerFields;
-
-    protected $invoiceAmount;
-    protected $invoiceCurrency;
-    protected $transactionCurrency;
+    protected ?string $type = null;
+    protected ?string $amount = null;
+    protected ?string $code = null;
+    protected ?string $timestamp = null;
+    protected ?string $currency = null;
+    protected ?string $txType = null;
+    protected ?string $scale = null;
+    protected ?string $id = null;
+    protected ?string $supportRequest = null;
+    protected ?string $description = null;
+    protected ?string $invoiceId = null;
+    protected Buyer $buyerFields;
+    protected ?float $invoiceAmount = null;
+    protected ?string $invoiceCurrency = null;
+    protected ?string $transactionCurrency = null;
 
     public function __construct()
     {
@@ -38,9 +36,9 @@ class LedgerEntry
      * Contains the Ledger entry name.
      * See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes
      *
-     * @return string the type
+     * @return string|null the type
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -53,7 +51,7 @@ class LedgerEntry
      *
      * @param string $type the type
      */
-    public function setType(string $type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
@@ -62,9 +60,9 @@ class LedgerEntry
      * Gets Ledger entry amount, relative to the scale.
      * The decimal amount can be obtained by dividing the amount field by the scale parameter.
      *
-     * @return string
+     * @return string|null
      */
-    public function getAmount()
+    public function getAmount(): ?string
     {
         return $this->amount;
     }
@@ -75,7 +73,7 @@ class LedgerEntry
      *
      * @param string $amount the amount
      */
-    public function setAmount(string $amount)
+    public function setAmount(string $amount): void
     {
         $this->amount = $amount;
     }
@@ -86,9 +84,9 @@ class LedgerEntry
      * Contains the Ledger entry code.
      * See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes
      *
-     * @return string the code
+     * @return string|null the code
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -101,7 +99,7 @@ class LedgerEntry
      *
      * @param string $code the code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
         $this->code = $code;
     }
@@ -109,9 +107,9 @@ class LedgerEntry
     /**
      * Gets Date and time of the ledger entry (UTC). ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @return string the timestamp
+     * @return string|null the timestamp
      */
-    public function getTimestamp()
+    public function getTimestamp(): ?string
     {
         return $this->timestamp;
     }
@@ -121,7 +119,7 @@ class LedgerEntry
      *
      * @param string $timestamp the timestamp
      */
-    public function setTimestamp(string $timestamp)
+    public function setTimestamp(string $timestamp): void
     {
         $this->timestamp = $timestamp;
     }
@@ -129,9 +127,9 @@ class LedgerEntry
     /**
      * Gets Ledger entry currency for the corresponding amount
      *
-     * @return string the currency
+     * @return string|null the currency
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -141,7 +139,7 @@ class LedgerEntry
      *
      * @param string $currency the currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -151,9 +149,9 @@ class LedgerEntry
      *
      * [DEPRECRATED] see type
      *
-     * @return string the txType
+     * @return string|null the txType
      */
-    public function getTxType()
+    public function getTxType(): ?string
     {
         return $this->txType;
     }
@@ -165,7 +163,7 @@ class LedgerEntry
      *
      * @param string $txType the txType
      */
-    public function setTxType(string $txType)
+    public function setTxType(string $txType): void
     {
         $this->txType = $txType;
     }
@@ -175,9 +173,9 @@ class LedgerEntry
      *
      * Power of 10 used for conversion
      *
-     * @return string the scale
+     * @return string|null the scale
      */
-    public function getScale()
+    public function getScale(): ?string
     {
         return $this->scale;
     }
@@ -189,7 +187,7 @@ class LedgerEntry
      *
      * @param string $scale the scale
      */
-    public function setScale(string $scale)
+    public function setScale(string $scale): void
     {
         $this->scale = $scale;
     }
@@ -197,9 +195,9 @@ class LedgerEntry
     /**
      * Gets Ledger resource Id
      *
-     * @return string the id
+     * @return string|null the id
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -209,7 +207,7 @@ class LedgerEntry
      *
      * @param string $id the id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -217,9 +215,9 @@ class LedgerEntry
     /**
      * Gets The refund requestId
      *
-     * @return string the support request
+     * @return string|null the support request
      */
-    public function getSupportRequest()
+    public function getSupportRequest(): ?string
     {
         return $this->supportRequest;
     }
@@ -229,7 +227,7 @@ class LedgerEntry
      *
      * @param string $supportRequest the support request
      */
-    public function setSupportRequest(string $supportRequest)
+    public function setSupportRequest(string $supportRequest): void
     {
         $this->supportRequest = $supportRequest;
     }
@@ -240,9 +238,9 @@ class LedgerEntry
      * Ledger entry description. Also contains an id depending on the type of entry
      * (for instance payout id, settlement id, invoice orderId etc...)
      *
-     * @return string the description
+     * @return string|null the description
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -255,7 +253,7 @@ class LedgerEntry
      *
      * @param string $description the description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -263,9 +261,9 @@ class LedgerEntry
     /**
      * Gets BitPay invoice Id
      *
-     * @return string the invoice id
+     * @return string|null the invoice id
      */
-    public function getInvoiceId()
+    public function getInvoiceId(): ?string
     {
         return $this->invoiceId;
     }
@@ -275,7 +273,7 @@ class LedgerEntry
      *
      * @param string $invoiceId the invoice id
      */
-    public function setInvoiceId(string $invoiceId)
+    public function setInvoiceId(string $invoiceId): void
     {
         $this->invoiceId = $invoiceId;
     }
@@ -287,7 +285,7 @@ class LedgerEntry
      *
      * @return Buyer
      */
-    public function getBuyerFields()
+    public function getBuyerFields(): Buyer
     {
         return $this->buyerFields;
     }
@@ -297,7 +295,7 @@ class LedgerEntry
      *
      * @param Buyer $buyerFields the buyer
      */
-    public function setBuyerFields($buyerFields)
+    public function setBuyerFields(Buyer $buyerFields): void
     {
         $this->buyerFields = $buyerFields;
     }
@@ -305,9 +303,9 @@ class LedgerEntry
     /**
      * Gets Invoice price in the invoice original currency
      *
-     * @return float the invoice amount
+     * @return float|null the invoice amount
      */
-    public function getInvoiceAmount()
+    public function getInvoiceAmount(): ?float
     {
         return $this->invoiceAmount;
     }
@@ -317,7 +315,7 @@ class LedgerEntry
      *
      * @param float $invoiceAmount the invoice amount
      */
-    public function setInvoiceAmount(float $invoiceAmount)
+    public function setInvoiceAmount(float $invoiceAmount): void
     {
         $this->invoiceAmount = $invoiceAmount;
     }
@@ -325,9 +323,9 @@ class LedgerEntry
     /**
      * Gets Currency used for invoice creation
      *
-     * @return string the invoice currency
+     * @return string|null the invoice currency
      */
-    public function getInvoiceCurrency()
+    public function getInvoiceCurrency(): ?string
     {
         return $this->invoiceCurrency;
     }
@@ -337,7 +335,7 @@ class LedgerEntry
      *
      * @param string $invoiceCurrency the invoice currency
      */
-    public function setInvoiceCurrency(string $invoiceCurrency)
+    public function setInvoiceCurrency(string $invoiceCurrency): void
     {
         $this->invoiceCurrency = $invoiceCurrency;
     }
@@ -345,9 +343,9 @@ class LedgerEntry
     /**
      * Gets Cryptocurrency selected by the consumer when paying an invoice.
      *
-     * @return string the transaction currency
+     * @return string|null the transaction currency
      */
-    public function getTransactionCurrency()
+    public function getTransactionCurrency(): ?string
     {
         return $this->transactionCurrency;
     }
@@ -357,7 +355,7 @@ class LedgerEntry
      *
      * @param string $transactionCurrency the transaction currency
      */
-    public function setTransactionCurrency(string $transactionCurrency)
+    public function setTransactionCurrency(string $transactionCurrency): void
     {
         $this->transactionCurrency = $transactionCurrency;
     }
@@ -367,7 +365,7 @@ class LedgerEntry
      *
      * @return array LedgerEntry as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'type'                => $this->getType(),
