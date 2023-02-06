@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -12,8 +14,8 @@ namespace BitPaySDK\Model\Wallet;
  */
 class CurrencyQr
 {
-    protected $type;
-    protected $collapsed;
+    protected ?string $type = null;
+    protected ?bool $collapsed = null;
 
     public function __construct()
     {
@@ -24,9 +26,9 @@ class CurrencyQr
      *
      * The type of QR code to use (ex. BIP21, ADDRESS, BIP72b, BIP681, BIP681b, etc)
      *
-     * @return string The type of QR code to use
+     * @return string|null The type of QR code to use
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -38,7 +40,7 @@ class CurrencyQr
      *
      * @param string $type The type of QR code to use
      */
-    public function setType(string $type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
@@ -48,9 +50,9 @@ class CurrencyQr
      *
      * UI hint for BitPay invoice, generally not relevant to customer integrations
      *
-     * @return bool the collapsed
+     * @return bool|null the collapsed
      */
-    public function getCollapsed()
+    public function getCollapsed(): ?bool
     {
         return $this->collapsed;
     }
@@ -62,7 +64,7 @@ class CurrencyQr
      *
      * @param bool $collapsed the collapsed
      */
-    public function setCollapsed(bool $collapsed)
+    public function setCollapsed(bool $collapsed): void
     {
         $this->collapsed = $collapsed;
     }
@@ -72,11 +74,11 @@ class CurrencyQr
      *
      * @return array CurrencyQr as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            'type'          => $this->getType(),
-            'collapsed'     => $this->getCollapsed(),
+            'type' => $this->getType(),
+            'collapsed' => $this->getCollapsed(),
         ];
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -12,15 +14,15 @@ namespace BitPaySDK\Model\Wallet;
  */
 class Currencies
 {
-    protected $code;
-    protected $p2p;
-    protected $dappBrowser;
-    protected $image;
-    protected $payPro;
-    protected $qr;
-    protected $withdrawalFee;
-    protected $walletConnect;
-    protected $currencies;
+    protected ?string $code = null;
+    protected ?bool $p2p = null;
+    protected ?bool $dappBrowser = null;
+    protected ?string $image = null;
+    protected ?bool $payPro = null;
+    protected ?CurrencyQr $qr = null;
+    protected ?string $withdrawalFee = null;
+    protected ?bool $walletConnect = null;
+    protected CurrencyQr $currencies;
 
     public function __construct()
     {
@@ -32,9 +34,9 @@ class Currencies
      *
      * Identifying code for the currency
      *
-     * @return string the code
+     * @return string|null the code
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -46,7 +48,7 @@ class Currencies
      *
      * @param string $code the code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
         $this->code = $code;
     }
@@ -56,9 +58,9 @@ class Currencies
      *
      * Indicates that this is a peer to peer (p2p) payment method (as opposed to payment protocol)
      *
-     * @return bool the p2p
+     * @return bool|null the p2p
      */
-    public function getP2p()
+    public function getP2p(): ?bool
     {
         return $this->p2p;
     }
@@ -70,7 +72,7 @@ class Currencies
      *
      * @param bool $p2p the p2p
      */
-    public function setP2p(bool $p2p)
+    public function setP2p(bool $p2p): void
     {
         $this->p2p = $p2p;
     }
@@ -80,9 +82,9 @@ class Currencies
      *
      * Indicates that this payment method operates via a browser plugin interacting with the invoice
      *
-     * @return bool the dapp browser
+     * @return bool|null the dapp browser
      */
-    public function getDappBrowser()
+    public function getDappBrowser(): ?bool
     {
         return $this->dappBrowser;
     }
@@ -94,7 +96,7 @@ class Currencies
      *
      * @param bool $dappBrowser the dapp browser
      */
-    public function setDappBrowser(bool $dappBrowser)
+    public function setDappBrowser(bool $dappBrowser): void
     {
         $this->dappBrowser = $dappBrowser;
     }
@@ -102,9 +104,9 @@ class Currencies
     /**
      * Gets URL that displays currency image
      *
-     * @return string the image url
+     * @return string|null the image url
      */
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }
@@ -114,7 +116,7 @@ class Currencies
      *
      * @param string $image the image url
      */
-    public function setImage(string $image)
+    public function setImage(string $image): void
     {
         $this->image = $image;
     }
@@ -124,9 +126,9 @@ class Currencies
      *
      * Whether or not BitPay Payment Protocol is supported on this particular currency option
      *
-     * @return bool the pay pro
+     * @return bool|null the pay pro
      */
-    public function getPayPro()
+    public function getPayPro(): ?bool
     {
         return $this->payPro;
     }
@@ -138,7 +140,7 @@ class Currencies
      *
      * @param bool $payPro the pay pro
      */
-    public function setPayPro(bool $payPro)
+    public function setPayPro(bool $payPro): void
     {
         $this->payPro = $payPro;
     }
@@ -148,9 +150,9 @@ class Currencies
      *
      * Object containing QR code related information to show for this payment method
      *
-     * @return CurrencyQr the qr
+     * @return CurrencyQr|null the qr
      */
-    public function getQr()
+    public function getQr(): ?CurrencyQr
     {
         return $this->qr;
     }
@@ -162,7 +164,7 @@ class Currencies
      *
      * @param CurrencyQr $qr the currency qr
      */
-    public function setQr(CurrencyQr $qr)
+    public function setQr(CurrencyQr $qr): void
     {
         $this->qr = $qr;
     }
@@ -170,9 +172,9 @@ class Currencies
     /**
      * Gets Custodial wallet withdrawal fee
      *
-     * @return string the withdrawal fee
+     * @return string|null the withdrawal fee
      */
-    public function getWithdrawalFee()
+    public function getWithdrawalFee(): ?string
     {
         return $this->withdrawalFee;
     }
@@ -182,7 +184,7 @@ class Currencies
      *
      * @param string $withdrawalFee the withdrawal fee
      */
-    public function setWithdrawalFee(string $withdrawalFee)
+    public function setWithdrawalFee(string $withdrawalFee): void
     {
         $this->withdrawalFee = $withdrawalFee;
     }
@@ -192,9 +194,9 @@ class Currencies
      *
      * Whether or not this wallet supports walletConnect
      *
-     * @return bool the wallet connect
+     * @return bool|null the wallet connect
      */
-    public function getWalletConnect()
+    public function getWalletConnect(): ?bool
     {
         return $this->walletConnect;
     }
@@ -206,7 +208,7 @@ class Currencies
      *
      * @param bool $walletConnect the wallet connect
      */
-    public function setWalletConnect(bool $walletConnect)
+    public function setWalletConnect(bool $walletConnect): void
     {
         $this->walletConnect = $walletConnect;
     }
@@ -216,17 +218,17 @@ class Currencies
      *
      * @return array Currencies as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            'code'            => $this->getCode(),
-            'p2p'             => $this->getP2p(),
-            'dappBrowser'     => $this->getDappBrowser(),
-            'image'           => $this->getImage(),
-            'paypro'          => $this->getPayPro(),
-            'qr'              => $this->getQr()->toArray(),
-            'withdrawalFee'   => $this->getWithdrawalFee(),
-            'walletConnect'   => $this->getWalletConnect()
+            'code' => $this->getCode(),
+            'p2p' => $this->getP2p(),
+            'dappBrowser' => $this->getDappBrowser(),
+            'image' => $this->getImage(),
+            'paypro' => $this->getPayPro(),
+            'qr' => $this->getQr()->toArray(),
+            'withdrawalFee' => $this->getWithdrawalFee(),
+            'walletConnect' => $this->getWalletConnect()
         ];
     }
 }
