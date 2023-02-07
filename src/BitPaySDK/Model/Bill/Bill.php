@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-/**
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
