@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -16,16 +18,15 @@ use BitPaySDK\Exceptions\PayoutBatchCreationException;
  */
 class PayoutInstruction
 {
-    protected $amount;
-    protected $email;
-    protected $recipientId;
-    protected $shopperId;
-    protected $label = '';
-    protected $id;
-
-    protected $btc;
-    protected $transactions;
-    protected $status;
+    protected float $amount;
+    protected ?string $email = null;
+    protected ?string $recipientId = null;
+    protected ?string $shopperId = null;
+    protected ?string $label = '';
+    protected ?string $id = null;
+    protected ?PayoutInstructionBtcSummary $btc = null;
+    protected ?array $transactions = null;
+    protected ?string $status = null;
 
     /**
      * Constructor, create a PayoutInstruction object.
@@ -35,6 +36,7 @@ class PayoutInstruction
      * @param $methodValue string value for the choosen target method.
      *
      * @throws PayoutBatchCreationException BitPayException class
+     * @throws BitPayException
      */
     public function __construct(float $amount, int $method, string $methodValue)
     {
@@ -51,7 +53,6 @@ class PayoutInstruction
                 break;
             default:
                 throw new PayoutBatchCreationException("\$method code must be a type of RecipientReferenceMethod");
-                break;
         }
     }
 
@@ -60,7 +61,7 @@ class PayoutInstruction
      *
      * @return float
      */
-    public function getAmount()
+    public function getAmount(): float
     {
         return $this->amount;
     }
@@ -71,7 +72,7 @@ class PayoutInstruction
      * @param float $amount
      * @throws BitPayException
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
         if ($amount < 5) {
             throw new BitPayException("Instruction amount should be 5 or higher.");
@@ -84,9 +85,9 @@ class PayoutInstruction
     /**
      * Gets email address of an active recipient
      *
-     * @return string
+     * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -96,7 +97,7 @@ class PayoutInstruction
      *
      * @param string $email
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -107,9 +108,9 @@ class PayoutInstruction
      * a given recipient email during the onboarding process
      * (see <a href="https://bitpay.com/api/#rest-api-resources-recipients">Recipients resource</a>)
      *
-     * @return string
+     * @return string|null
      */
-    public function getRecipientId()
+    public function getRecipientId(): ?string
     {
         return $this->recipientId;
     }
@@ -119,7 +120,7 @@ class PayoutInstruction
      *
      * @param string $recipientId
      */
-    public function setRecipientId(string $recipientId)
+    public function setRecipientId(string $recipientId): void
     {
         $this->recipientId = $recipientId;
     }
@@ -131,9 +132,9 @@ class PayoutInstruction
      * if the customer signed in with their BitPay personal account before completing the payment.
      * This can allow merchants to monitor the activity of a customer (deposits & payouts)
      *
-     * @return string
+     * @return string|null
      */
-    public function getShopperId()
+    public function getShopperId(): ?string
     {
         return $this->shopperId;
     }
@@ -144,7 +145,7 @@ class PayoutInstruction
      *
      * @param string $shopperId
      */
-    public function setShopperId(string $shopperId)
+    public function setShopperId(string $shopperId): void
     {
         $this->shopperId = $shopperId;
     }
@@ -155,9 +156,9 @@ class PayoutInstruction
      * For merchant use, pass through - can be the customer name or unique merchant reference assigned
      * by the merchant to to the recipient
      *
-     * @return string
+     * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -167,7 +168,7 @@ class PayoutInstruction
      *
      * @param string $label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
@@ -178,9 +179,9 @@ class PayoutInstruction
     /**
      * Get payout id
      *
-     * @return string
+     * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -190,7 +191,7 @@ class PayoutInstruction
      *
      * @param string $id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
         $this->id = $id;
     }
@@ -200,7 +201,7 @@ class PayoutInstruction
      *
      * @return array|null
      */
-    public function getBtc()
+    public function getBtc(): ?array
     {
         return $this->btc ? $this->btc->toArray() : null;
     }
@@ -210,7 +211,7 @@ class PayoutInstruction
      *
      * @param PayoutInstructionBtcSummary $btc
      */
-    public function setBtc(PayoutInstructionBtcSummary $btc)
+    public function setBtc(PayoutInstructionBtcSummary $btc): void
     {
         $this->btc = $btc;
     }
@@ -218,9 +219,9 @@ class PayoutInstruction
     /**
      * Gets cryptocurrency transaction details for the executed payout
      *
-     * @return array
+     * @return array|null
      */
-    public function getTransactions()
+    public function getTransactions(): ?array
     {
         return $this->transactions;
     }
@@ -230,7 +231,7 @@ class PayoutInstruction
      *
      * @param array $transactions
      */
-    public function setTransactions(array $transactions)
+    public function setTransactions(array $transactions): void
     {
         $this->transactions = $transactions;
     }
@@ -238,9 +239,9 @@ class PayoutInstruction
     /**
      * Gets payout status
      *
-     * @return string
+     * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -250,7 +251,7 @@ class PayoutInstruction
      *
      * @param string $status
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
@@ -260,7 +261,7 @@ class PayoutInstruction
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'amount'       => $this->getAmount(),

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -13,18 +15,17 @@ namespace BitPaySDK\Model\Payout;
  */
 class PayoutRecipient
 {
-    protected $email;
-    protected $guid;
-    protected $label;
-    protected $reference;
-    protected $notificationURL;
-
-    protected $account;
-    protected $status;
-    protected $id;
-    protected $shopperId;
-    protected $token;
-    protected $supportPhone;
+    protected ?string $email = null;
+    protected ?string $guid = null;
+    protected ?string $label = null;
+    protected ?string $reference = null;
+    protected ?string $notificationURL = null;
+    protected ?string $account = null;
+    protected ?string $status = null;
+    protected ?string $id = null;
+    protected ?string $shopperId = null;
+    protected ?string $token = null;
+    protected ?string $supportPhone = null;
 
     /**
      * Constructor, create a minimal Recipient object.
@@ -49,7 +50,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -59,7 +60,7 @@ class PayoutRecipient
      *
      * @param string|null $email
      */
-    public function setEmail(?string $email)
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
@@ -72,7 +73,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getGuid()
+    public function getGuid(): ?string
     {
         return $this->guid;
     }
@@ -82,7 +83,7 @@ class PayoutRecipient
      *
      * @param string $guid
      */
-    public function setGuid(string $guid)
+    public function setGuid(string $guid): void
     {
         $this->guid = $guid;
     }
@@ -92,7 +93,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -102,7 +103,7 @@ class PayoutRecipient
      *
      * @param string|null $label
      */
-    public function setLabel(?string $label)
+    public function setLabel(?string $label): void
     {
         $this->label = $label;
     }
@@ -112,7 +113,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getReference()
+    public function getReference(): ?string
     {
         return $this->reference;
     }
@@ -122,7 +123,7 @@ class PayoutRecipient
      *
      * @param string $reference
      */
-    public function setReference(string $reference)
+    public function setReference(string $reference): void
     {
         $this->reference = $reference;
     }
@@ -132,7 +133,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getNotificationURL()
+    public function getNotificationURL(): ?string
     {
         return $this->notificationURL;
     }
@@ -142,7 +143,7 @@ class PayoutRecipient
      *
      * @param string|null $notificationURL
      */
-    public function setNotificationURL(?string $notificationURL)
+    public function setNotificationURL(?string $notificationURL): void
     {
         $this->notificationURL = $notificationURL;
     }
@@ -155,7 +156,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getAccount()
+    public function getAccount(): ?string
     {
         return $this->account;
     }
@@ -165,7 +166,7 @@ class PayoutRecipient
      *
      * @param string $account
      */
-    public function setAccount(string $account)
+    public function setAccount(string $account): void
     {
         $this->account = $account;
     }
@@ -175,7 +176,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -185,7 +186,7 @@ class PayoutRecipient
      *
      * @param string $status
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
         $this->status = $status;
     }
@@ -195,7 +196,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -205,7 +206,7 @@ class PayoutRecipient
      *
      * @param string|null $id
      */
-    public function setId(?string $id)
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }
@@ -215,7 +216,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getShopperId()
+    public function getShopperId(): ?string
     {
         return $this->shopperId;
     }
@@ -225,7 +226,7 @@ class PayoutRecipient
      *
      * @param string|null $shopperId
      */
-    public function setShopperId(?string $shopperId)
+    public function setShopperId(?string $shopperId): void
     {
         $this->shopperId = $shopperId;
     }
@@ -235,7 +236,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getToken()
+    public function getToken(): ?string
     {
         return $this->token;
     }
@@ -245,7 +246,7 @@ class PayoutRecipient
      *
      * @param string $token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
         $this->token = $token;
     }
@@ -255,7 +256,7 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getSupportPhone()
+    public function getSupportPhone(): ?string
     {
         return $this->supportPhone;
     }
@@ -265,7 +266,7 @@ class PayoutRecipient
      *
      * @param string $supportPhone
      */
-    public function setSupportPhone(string $supportPhone)
+    public function setSupportPhone(string $supportPhone): void
     {
         $this->supportPhone = $supportPhone;
     }
@@ -275,20 +276,20 @@ class PayoutRecipient
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
-            'email'           => $this->getEmail(),
-            'guid'            => $this->getGuid(),
-            'label'           => $this->getLabel(),
-            'reference'       => $this->getReference(),
+            'email' => $this->getEmail(),
+            'guid' => $this->getGuid(),
+            'label' => $this->getLabel(),
+            'reference' => $this->getReference(),
             'notificationURL' => $this->getNotificationURL(),
-            'account'         => $this->getAccount(),
-            'status'          => $this->getStatus(),
-            'id'              => $this->getId(),
-            'shopperId'       => $this->getShopperId(),
-            'token'           => $this->getToken(),
-            'supportPhone'    => $this->getSupportPhone()
+            'account' => $this->getAccount(),
+            'status' => $this->getStatus(),
+            'id' => $this->getId(),
+            'shopperId' => $this->getShopperId(),
+            'token' => $this->getToken(),
+            'supportPhone' => $this->getSupportPhone()
         ];
 
         foreach ($elements as $key => $value) {

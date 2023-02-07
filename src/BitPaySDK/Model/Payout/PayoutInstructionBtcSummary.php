@@ -56,7 +56,7 @@ class PayoutInstructionBtcSummary
     public function toArray(): array
     {
         return [
-            'paid'   => $this->getPaid(),
+            'paid' => $this->getPaid(),
             'unpaid' => $this->getUnpaid(),
         ];
     }
