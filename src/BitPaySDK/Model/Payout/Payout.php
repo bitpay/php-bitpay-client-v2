@@ -19,10 +19,10 @@ use BitPaySDK\Model\Currency;
 class Payout
 {
     protected string $token = '';
-    protected float $amount       = 0.0;
-    protected string $currency     = '';
+    protected ?float $amount       = null;
+    protected ?string $currency     = null;
     protected ?string $effectiveDate = null;
-    protected string $ledgerCurrency = '';
+    protected ?string $ledgerCurrency = null;
     protected string $reference         = '';
     protected string $notificationUrl   = '';
     protected string $notificationEmail = '';
@@ -101,9 +101,9 @@ class Payout
     /**
      * Gets amount of cryptocurrency sent to the requested address.
      *
-     * @return float
+     * @return float|null
      */
-    public function getAmount(): float
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -131,9 +131,9 @@ class Payout
     /**
      * Gets currency code set for the batch amount (ISO 4217 3-character currency code).
      *
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -188,11 +188,11 @@ class Payout
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
      *
+     * @return string|null
      * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">Supported ledger currency codes</a>
      *
-     * @return string
      */
-    public function getLedgerCurrency(): string
+    public function getLedgerCurrency(): ?string
     {
         return $this->ledgerCurrency;
     }
