@@ -147,6 +147,5 @@ class RefundWebhook
             'buyerPaysRefundFee' => $this->getBuyerPaysRefundFee(),
             'requestDate' => $this->getRequestDate()
         ];
-
     }
 }
