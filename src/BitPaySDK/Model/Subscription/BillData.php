@@ -12,7 +12,7 @@ namespace BitPaySDK\Model\Subscription;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
-/**
+/*
  * Object containing the recurring billing information
  */
 class BillData
