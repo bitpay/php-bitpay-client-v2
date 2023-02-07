@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -12,15 +14,15 @@ namespace BitPaySDK\Model\Settlement;
  */
 class InvoiceData
 {
-    protected $orderId;
-    protected $date;
-    protected $price;
-    protected $currency;
-    protected $transactionCurrency;
-    protected $overPaidAmount;
-    protected $payoutPercentage;
-    protected $btcPrice;
-    protected $refundInfo;
+    protected ?string $orderId = null;
+    protected ?string $date = null;
+    protected ?float $price = null;
+    protected ?string $currency = null;
+    protected ?string $transactionCurrency = null;
+    protected ?float $overPaidAmount = null;
+    protected ?float $payoutPercentage = null;
+    protected ?float $btcPrice = null;
+    protected ?RefundInfo $refundInfo = null;
 
     public function __construct()
     {
@@ -29,9 +31,9 @@ class InvoiceData
     /**
      * Gets Invoice orderId provided during invoice creation.
      *
-     * @return string the order id
+     * @return string|null the order id
      */
-    public function getOrderId()
+    public function getOrderId(): ?string
     {
         return $this->orderId;
     }
@@ -41,7 +43,7 @@ class InvoiceData
      *
      * @param string $orderId the order id
      */
-    public function setOrderId(string $orderId)
+    public function setOrderId(string $orderId): void
     {
         $this->orderId = $orderId;
     }
@@ -49,9 +51,9 @@ class InvoiceData
     /**
      * Gets Date at which the invoice was created (UTC). ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @return string the date
+     * @return string|null the date
      */
-    public function getDate()
+    public function getDate(): ?string
     {
         return $this->date;
     }
@@ -61,7 +63,7 @@ class InvoiceData
      *
      * @param string $date the date
      */
-    public function setDate(string $date)
+    public function setDate(string $date): void
     {
         $this->date = $date;
     }
@@ -69,9 +71,9 @@ class InvoiceData
     /**
      * Gets Invoice price in the invoice original currency
      *
-     * @return float the price
+     * @return float|null the price
      */
-    public function getPrice()
+    public function getPrice(): ?float
     {
         return $this->price;
     }
@@ -81,7 +83,7 @@ class InvoiceData
      *
      * @param float $price the price
      */
-    public function setPrice(float $price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
@@ -89,9 +91,9 @@ class InvoiceData
     /**
      * Gets Invoice currency
      *
-     * @return string the Invoice currency
+     * @return string|null the Invoice currency
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
@@ -101,7 +103,7 @@ class InvoiceData
      *
      * @param string $currency the Invoice currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -109,9 +111,9 @@ class InvoiceData
     /**
      * Gets Cryptocurrency selected by the consumer when paying the invoice.
      *
-     * @return string the transaction currency
+     * @return string|null the transaction currency
      */
-    public function getTransactionCurrency()
+    public function getTransactionCurrency(): ?string
     {
         return $this->transactionCurrency;
     }
@@ -121,7 +123,7 @@ class InvoiceData
      *
      * @param string $transactionCurrency the transaction currency
      */
-    public function setTransactionCurrency(string $transactionCurrency)
+    public function setTransactionCurrency(string $transactionCurrency): void
     {
         $this->transactionCurrency = $transactionCurrency;
     }
@@ -129,9 +131,9 @@ class InvoiceData
     /**
      * Gets over paid amount
      *
-     * @return float the over paid amount
+     * @return float|null the over paid amount
      */
-    public function getOverPaidAmount()
+    public function getOverPaidAmount(): ?float
     {
         return $this->overPaidAmount;
     }
@@ -141,7 +143,7 @@ class InvoiceData
      *
      * @param float $overPaidAmount the over paid amount
      */
-    public function setOverPaidAmount(float $overPaidAmount)
+    public function setOverPaidAmount(float $overPaidAmount): void
     {
         $this->overPaidAmount = $overPaidAmount;
     }
@@ -149,9 +151,9 @@ class InvoiceData
     /**
      * Gets The payout percentage defined by the merchant on his BitPay account settings
      *
-     * @return float the payout percentage
+     * @return float|null the payout percentage
      */
-    public function getPayoutPercentage()
+    public function getPayoutPercentage(): ?float
     {
         return $this->payoutPercentage;
     }
@@ -161,7 +163,7 @@ class InvoiceData
      *
      * @param float $payoutPercentage the payout percentage
      */
-    public function setPayoutPercentage(float $payoutPercentage)
+    public function setPayoutPercentage(float $payoutPercentage): void
     {
         $this->payoutPercentage = $payoutPercentage;
     }
@@ -169,9 +171,9 @@ class InvoiceData
     /**
      * Gets BTC price
      *
-     * @return float the btc price
+     * @return float|null the btc price
      */
-    public function getBtcPrice()
+    public function getBtcPrice(): ?float
     {
         return $this->btcPrice;
     }
@@ -181,7 +183,7 @@ class InvoiceData
      *
      * @param float $btcPrice the btc price
      */
-    public function setBtcPrice(float $btcPrice)
+    public function setBtcPrice(float $btcPrice): void
     {
         $this->btcPrice = $btcPrice;
     }
@@ -189,9 +191,9 @@ class InvoiceData
     /**
      * Gets Object containing information about the refund executed for the invoice
      *
-     * @return RefundInfo
+     * @return RefundInfo|null
      */
-    public function getRefundInfo()
+    public function getRefundInfo(): ?RefundInfo
     {
         return $this->refundInfo;
     }
@@ -201,7 +203,7 @@ class InvoiceData
      *
      * @param RefundInfo $refundInfo
      */
-    public function setRefundInfo(RefundInfo $refundInfo)
+    public function setRefundInfo(RefundInfo $refundInfo): void
     {
         $this->refundInfo = $refundInfo;
     }
@@ -214,13 +216,13 @@ class InvoiceData
     public function toArray(): array
     {
         return [
-            'orderId'             => $this->getOrderId(),
-            'date'                => $this->getDate(),
-            'price'               => $this->getPrice(),
-            'currency'            => $this->getCurrency(),
+            'orderId' => $this->getOrderId(),
+            'date' => $this->getDate(),
+            'price' => $this->getPrice(),
+            'currency' => $this->getCurrency(),
             'transactionCurrency' => $this->getTransactionCurrency(),
-            'payoutPercentage'    => $this->getPayoutPercentage(),
-            'refundInfo'          => $this->getRefundInfo()->toArray(),
+            'payoutPercentage' => $this->getPayoutPercentage(),
+            'refundInfo' => $this->getRefundInfo()->toArray(),
         ];
     }
 }

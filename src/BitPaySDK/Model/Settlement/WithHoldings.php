@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -15,12 +17,12 @@ namespace BitPaySDK\Model\Settlement;
  */
 class WithHoldings
 {
-    protected $amount;
-    protected $code;
-    protected $description;
-    protected $notes;
-    protected $label;
-    protected $bankCountry;
+    protected ?float $amount = null;
+    protected ?string $code = null;
+    protected ?string $description = null;
+    protected ?string $notes = null;
+    protected ?string $label = null;
+    protected ?string $bankCountry = null;
 
     /**
      * WithHoldings constructor.
@@ -34,7 +36,7 @@ class WithHoldings
      *
      * @return float|null
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -44,7 +46,7 @@ class WithHoldings
      *
      * @param float $amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
         $this->amount = $amount;
     }
@@ -54,7 +56,7 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -64,7 +66,7 @@ class WithHoldings
      *
      * @param string $code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
         $this->code = $code;
     }
@@ -74,7 +76,7 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -84,7 +86,7 @@ class WithHoldings
      *
      * @param string $description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -94,7 +96,7 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getNotes()
+    public function getNotes(): ?string
     {
         return $this->notes;
     }
@@ -104,7 +106,7 @@ class WithHoldings
      *
      * @param string $notes
      */
-    public function setNotes(string $notes)
+    public function setNotes(string $notes): void
     {
         $this->notes = $notes;
     }
@@ -114,7 +116,7 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -124,7 +126,7 @@ class WithHoldings
      *
      * @param string $label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
@@ -134,7 +136,7 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getBankCountry()
+    public function getBankCountry(): ?string
     {
         return $this->bankCountry;
     }
@@ -144,7 +146,7 @@ class WithHoldings
      *
      * @param string $bankCountry
      */
-    public function setBankCountry(string $bankCountry)
+    public function setBankCountry(string $bankCountry): void
     {
         $this->bankCountry = $bankCountry;
     }
@@ -154,14 +156,14 @@ class WithHoldings
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            'amount'      => $this->getAmount(),
-            'code'        => $this->getCode(),
+            'amount' => $this->getAmount(),
+            'code' => $this->getCode(),
             'description' => $this->getDescription(),
-            'notes'       => $this->getNotes(),
-            'label'       => $this->getLabel(),
+            'notes' => $this->getNotes(),
+            'label' => $this->getLabel(),
             'bankCountry' => $this->getBankCountry(),
         ];
     }
