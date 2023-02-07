@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -15,23 +17,23 @@ use BitPaySDK\Model\Currency;
  */
 class BillData
 {
-    protected $emailBill;
-    protected $cc;
-    protected $number;
-    protected $currency;
-    protected $name;
-    protected $address1;
-    protected $address2;
-    protected $city;
-    protected $state;
-    protected $zip;
-    protected $country;
-    protected $email;
-    protected $phone;
-    protected $dueDate;
-    protected $passProcessingFee;
-    protected $items;
-    protected $merchant;
+    protected ?bool $emailBill = null;
+    protected ?array $cc = null;
+    protected ?string $number = null;
+    protected string $currency;
+    protected ?string $name = null;
+    protected ?string $address1 = null;
+    protected ?string $address2 = null;
+    protected ?string $city = null;
+    protected ?string $state = null;
+    protected ?string $zip = null;
+    protected ?string $country = null;
+    protected string $email;
+    protected ?string $phone = null;
+    protected string $dueDate;
+    protected ?bool $passProcessingFee = null;
+    protected array $items;
+    protected ?string $merchant = null;
 
     /**
      * @param string $currency
@@ -53,9 +55,9 @@ class BillData
      * If set the true, BitPay will automatically issue recurring bills to the email address
      * provided once the status of the subscription is set to active.
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getEmailBill()
+    public function getEmailBill(): ?bool
     {
         return $this->emailBill;
     }
@@ -68,7 +70,7 @@ class BillData
      *
      * @param bool $emailBill
      */
-    public function setEmailBill(bool $emailBill)
+    public function setEmailBill(bool $emailBill): void
     {
         $this->emailBill = $emailBill;
     }
@@ -76,9 +78,9 @@ class BillData
     /**
      * Gets Email addresses to which a copy of the recurring bill must be sent
      *
-     * @return array
+     * @return array|null
      */
-    public function getCc()
+    public function getCc(): ?array
     {
         return $this->cc;
     }
@@ -88,7 +90,7 @@ class BillData
      *
      * @param array $cc
      */
-    public function setCc(array $cc)
+    public function setCc(array $cc): void
     {
         $this->cc = $cc;
     }
@@ -96,9 +98,9 @@ class BillData
     /**
      * Gets Recurring bill identifier, specified by merchant
      *
-     * @return string
+     * @return string|null
      */
-    public function getNumber()
+    public function getNumber(): ?string
     {
         return $this->number;
     }
@@ -108,7 +110,7 @@ class BillData
      *
      * @param string $number
      */
-    public function setNumber(string $number)
+    public function setNumber(string $number): void
     {
         $this->number = $number;
     }
@@ -120,7 +122,7 @@ class BillData
      *
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -133,7 +135,7 @@ class BillData
      * @param string $currency
      * @throws BitPayException
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
         if (!Currency::isValid($currency)) {
             throw new BitPayException("currency code must be a type of Model.Currency");
@@ -145,9 +147,9 @@ class BillData
     /**
      * Gets Recurring Bill recipient's name
      *
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -157,7 +159,7 @@ class BillData
      *
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -165,9 +167,9 @@ class BillData
     /**
      * Gets Recurring Bill recipient's address
      *
-     * @return string
+     * @return string|null
      */
-    public function getAddress1()
+    public function getAddress1(): ?string
     {
         return $this->address1;
     }
@@ -177,7 +179,7 @@ class BillData
      *
      * @param string $address1
      */
-    public function setAddress1(string $address1)
+    public function setAddress1(string $address1): void
     {
         $this->address1 = $address1;
     }
@@ -185,9 +187,9 @@ class BillData
     /**
      * Gets Recurring Bill recipient's address
      *
-     * @return string
+     * @return string|null
      */
-    public function getAddress2()
+    public function getAddress2(): ?string
     {
         return $this->address2;
     }
@@ -197,7 +199,7 @@ class BillData
      *
      * @param string $address2
      */
-    public function setAddress2(string $address2)
+    public function setAddress2(string $address2): void
     {
         $this->address2 = $address2;
     }
@@ -205,9 +207,9 @@ class BillData
     /**
      * Gets Recurring Bill recipient's city
      *
-     * @return string
+     * @return string|null
      */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
@@ -217,7 +219,7 @@ class BillData
      *
      * @param string $city
      */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -225,9 +227,9 @@ class BillData
     /**
      * Gets Recurring Bill recipient's state or province
      *
-     * @return string
+     * @return string|null
      */
-    public function getState()
+    public function getState(): ?string
     {
         return $this->state;
     }
@@ -237,7 +239,7 @@ class BillData
      *
      * @param string $state
      */
-    public function setState(string $state)
+    public function setState(string $state): void
     {
         $this->state = $state;
     }
@@ -245,9 +247,9 @@ class BillData
     /**
      * Gets Recurring Bill recipient's ZIP code
      *
-     * @return string
+     * @return string|null
      */
-    public function getZip()
+    public function getZip(): ?string
     {
         return $this->zip;
     }
@@ -257,7 +259,7 @@ class BillData
      *
      * @param string $zip
      */
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -265,9 +267,9 @@ class BillData
     /**
      * Gets Recurring Bill recipient's country
      *
-     * @return string
+     * @return string|null
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->country;
     }
@@ -277,7 +279,7 @@ class BillData
      *
      * @param string $country
      */
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
@@ -287,7 +289,7 @@ class BillData
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -297,7 +299,7 @@ class BillData
      *
      * @param string $email
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -305,9 +307,9 @@ class BillData
     /**
      * Gets Recurring Bill recipient's phone
      *
-     * @return string
+     * @return string|null
      */
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
@@ -317,7 +319,7 @@ class BillData
      *
      * @param string $phone
      */
-    public function setPhone(string $phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
@@ -329,7 +331,7 @@ class BillData
      *
      * @return string
      */
-    public function getDueDate()
+    public function getDueDate(): string
     {
         return $this->dueDate;
     }
@@ -341,7 +343,7 @@ class BillData
      *
      * @param string $dueDate
      */
-    public function setDueDate(string $dueDate)
+    public function setDueDate(string $dueDate): void
     {
         $this->dueDate = $dueDate;
     }
@@ -351,9 +353,9 @@ class BillData
      *
      * If set to true, BitPay's processing fee will be included in the amount charged on the invoice
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getPassProcessingFee()
+    public function getPassProcessingFee(): ?bool
     {
         return $this->passProcessingFee;
     }
@@ -365,7 +367,7 @@ class BillData
      *
      * @param bool $passProcessingFee
      */
-    public function setPassProcessingFee(bool $passProcessingFee)
+    public function setPassProcessingFee(bool $passProcessingFee): void
     {
         $this->passProcessingFee = $passProcessingFee;
     }
@@ -375,9 +377,9 @@ class BillData
      *
      * Internal identifier for BitPay, this field can be ignored by the merchants.
      *
-     * @return string
+     * @return string|null
      */
-    public function getMerchant()
+    public function getMerchant(): ?string
     {
         return $this->merchant;
     }
@@ -389,7 +391,7 @@ class BillData
      *
      * @param string $merchant
      */
-    public function setMerchant(string $merchant)
+    public function setMerchant(string $merchant): void
     {
         $this->merchant = $merchant;
     }
@@ -399,7 +401,7 @@ class BillData
      *
      * @return array
      */
-    public function getItems()
+    public function getItems(): array
     {
         return $this->items;
     }
@@ -409,7 +411,7 @@ class BillData
      *
      * @return array
      */
-    public function getItemsAsArray()
+    public function getItemsAsArray(): array
     {
         $items = [];
 
@@ -429,7 +431,7 @@ class BillData
      *
      * @param array $items
      */
-    public function setItems(array $items)
+    public function setItems(array $items): void
     {
         $itemsArray = [];
 
@@ -448,7 +450,7 @@ class BillData
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'emailBill'         => $this->getEmailBill(),
