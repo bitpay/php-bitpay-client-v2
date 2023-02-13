@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -16,36 +18,33 @@ use BitPaySDK\Model\Currency;
  */
 class Payout
 {
-    protected $_token = '';
-
-    protected $_amount       = 0.0;
-    protected $_currency     = '';
-    protected $_effectiveDate;
-    protected $_ledgerCurrency = '';
-
-    protected $_reference         = '';
-    protected $_notificationUrl   = '';
-    protected $_notificationEmail = '';
-    protected $_redirectUrl = '';
-    protected $_account = '';
-    protected $_email = '';
-    protected $_recipientId = '';
-    protected $_shopperId = '';
-    protected $_label = '';
-    protected $_supportPhone = '';
-    protected $_message = '';
-    protected $_percentFee = 0.0;
-    protected $_fee = 0.0;
-    protected $_depositTotal = 0.0;
-    protected $_rate = 0.0;
-    protected $_btc = 0.0;
-    protected $_dateExecuted;
-
-    protected $_id;
-    protected $_status;
-    protected $_requestDate;
-    protected $_exchangeRates;
-    protected $_transactions;
+    protected string $token = '';
+    protected ?float $amount       = null;
+    protected ?string $currency     = null;
+    protected ?string $effectiveDate = null;
+    protected ?string $ledgerCurrency = null;
+    protected string $reference         = '';
+    protected string $notificationUrl   = '';
+    protected string $notificationEmail = '';
+    protected string $redirectUrl = '';
+    protected string $account = '';
+    protected string $email = '';
+    protected string $recipientId = '';
+    protected string $shopperId = '';
+    protected string $label = '';
+    protected string $supportPhone = '';
+    protected string $message = '';
+    protected float $percentFee = 0.0;
+    protected float $fee = 0.0;
+    protected float $depositTotal = 0.0;
+    protected float $rate = 0.0;
+    protected float  $btc = 0.0;
+    protected ?string $dateExecuted = null;
+    protected ?string $id = null;
+    protected ?string $status = null;
+    protected ?string $requestDate = null;
+    protected ?array $exchangeRates = null;
+    protected ?array $transactions = null;
 
     /**
      * Constructor, create a request Payout object.
@@ -60,10 +59,9 @@ class Payout
      */
     public function __construct(float $amount = null, string $currency = null, string $ledgerCurrency = null)
     {
-        $this->_amount = $amount;
-        $this->_currency = $currency;
-        $this->_ledgerCurrency = $ledgerCurrency;
-        $this->_transactions = new PayoutTransaction();
+        $this->amount = $amount;
+        $this->currency = $currency;
+        $this->ledgerCurrency = $ledgerCurrency;
     }
 
     // API fields
@@ -79,9 +77,9 @@ class Payout
      *
      * @return string
      */
-    public function getToken()
+    public function getToken(): string
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -92,9 +90,9 @@ class Payout
      *
      * @param string $token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     // Required fields
@@ -105,9 +103,9 @@ class Payout
      *
      * @return float|null
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -115,9 +113,9 @@ class Payout
      *
      * @param float $amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -125,9 +123,9 @@ class Payout
      *
      * @param int $precision
      */
-    public function formatAmount(int $precision)
+    public function formatAmount(int $precision): void
     {
-        $this->_amount = round($this->_amount, $precision);
+        $this->amount = round($this->amount, $precision);
     }
 
     /**
@@ -135,9 +133,9 @@ class Payout
      *
      * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -152,7 +150,7 @@ class Payout
             throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -166,9 +164,9 @@ class Payout
      * @return string|null
      *
      */
-    public function getEffectiveDate()
+    public function getEffectiveDate(): ?string
     {
-        return $this->_effectiveDate;
+        return $this->effectiveDate;
     }
 
     /**
@@ -178,9 +176,9 @@ class Payout
      *
      * @param string $effectiveDate
      */
-    public function setEffectiveDate(string $effectiveDate)
+    public function setEffectiveDate(string $effectiveDate): void
     {
-        $this->_effectiveDate = $effectiveDate;
+        $this->effectiveDate = $effectiveDate;
     }
 
     /**
@@ -190,13 +188,13 @@ class Payout
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
      *
+     * @return string|null
      * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">Supported ledger currency codes</a>
      *
-     * @return string|null
      */
-    public function getLedgerCurrency()
+    public function getLedgerCurrency(): ?string
     {
-        return $this->_ledgerCurrency;
+        return $this->ledgerCurrency;
     }
 
     /**
@@ -209,13 +207,13 @@ class Payout
      * @param string $ledgerCurrency
      * @throws BitPayException
      */
-    public function setLedgerCurrency(string $ledgerCurrency)
+    public function setLedgerCurrency(string $ledgerCurrency): void
     {
         if (!Currency::isValid($ledgerCurrency)) {
             throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
-        $this->_ledgerCurrency = $ledgerCurrency;
+        $this->ledgerCurrency = $ledgerCurrency;
     }
 
     // Optional fields
@@ -230,9 +228,9 @@ class Payout
      *
      * @return string
      */
-    public function getReference()
+    public function getReference(): string
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
@@ -244,9 +242,9 @@ class Payout
      *
      * @param string $reference
      */
-    public function setReference(string $reference)
+    public function setReference(string $reference): void
     {
-        $this->_reference = $reference;
+        $this->reference = $reference;
     }
 
     /**
@@ -256,9 +254,9 @@ class Payout
      *
      * @return string
      */
-    public function getNotificationURL()
+    public function getNotificationURL(): string
     {
-        return $this->_notificationUrl;
+        return $this->notificationUrl;
     }
 
     /**
@@ -268,9 +266,9 @@ class Payout
      *
      * @param string $notificationUrl
      */
-    public function setNotificationURL(string $notificationUrl)
+    public function setNotificationURL(string $notificationUrl): void
     {
-        $this->_notificationUrl = $notificationUrl;
+        $this->notificationUrl = $notificationUrl;
     }
 
     /**
@@ -280,9 +278,9 @@ class Payout
      *
      * @return string
      */
-    public function getNotificationEmail()
+    public function getNotificationEmail(): string
     {
-        return $this->_notificationEmail;
+        return $this->notificationEmail;
     }
 
     /**
@@ -292,9 +290,9 @@ class Payout
      *
      * @param string $notificationEmail
      */
-    public function setNotificationEmail(string $notificationEmail)
+    public function setNotificationEmail(string $notificationEmail): void
     {
-        $this->_notificationEmail = $notificationEmail;
+        $this->notificationEmail = $notificationEmail;
     }
 
     /**
@@ -306,9 +304,9 @@ class Payout
      *
      * @return string
      */
-    public function getRedirectUrl()
+    public function getRedirectUrl(): string
     {
-        return $this->_redirectUrl;
+        return $this->redirectUrl;
     }
 
     /**
@@ -320,9 +318,9 @@ class Payout
      *
      * @param string $redirectUrl
      */
-    public function setRedirectUrl(string $redirectUrl)
+    public function setRedirectUrl(string $redirectUrl): void
     {
-        $this->_redirectUrl = $redirectUrl;
+        $this->redirectUrl = $redirectUrl;
     }
 
     /**
@@ -330,9 +328,9 @@ class Payout
      *
      * @return string
      */
-    public function getAccount()
+    public function getAccount(): string
     {
-        return $this->_account;
+        return $this->account;
     }
 
     /**
@@ -340,9 +338,9 @@ class Payout
      *
      * @param string $account
      */
-    public function setAccount(string $account)
+    public function setAccount(string $account): void
     {
-        $this->_account = $account;
+        $this->account = $account;
     }
 
     /**
@@ -354,9 +352,9 @@ class Payout
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -368,9 +366,9 @@ class Payout
      *
      * @param string $email
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
@@ -378,9 +376,9 @@ class Payout
      *
      * @return string
      */
-    public function getRecipientId()
+    public function getRecipientId(): string
     {
-        return $this->_recipientId;
+        return $this->recipientId;
     }
 
     /**
@@ -388,9 +386,9 @@ class Payout
      *
      * @param string $recipientId
      */
-    public function setRecipientId(string $recipientId)
+    public function setRecipientId(string $recipientId): void
     {
-        $this->_recipientId = $recipientId;
+        $this->recipientId = $recipientId;
     }
 
     /**
@@ -405,9 +403,9 @@ class Payout
      *
      * @return string
      */
-    public function getShopperId()
+    public function getShopperId(): string
     {
-        return $this->_shopperId;
+        return $this->shopperId;
     }
 
     /**
@@ -422,9 +420,9 @@ class Payout
      *
      * @param string $shopperId
      */
-    public function setShopperId(string $shopperId)
+    public function setShopperId(string $shopperId): void
     {
-        $this->_shopperId = $shopperId;
+        $this->shopperId = $shopperId;
     }
 
     /**
@@ -435,9 +433,9 @@ class Payout
      *
      * @return string
      */
-    public function getLabel()
+    public function getLabel(): string
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -448,9 +446,9 @@ class Payout
      *
      * @param string $label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
@@ -458,9 +456,9 @@ class Payout
      *
      * @return string
      */
-    public function getSupportPhone()
+    public function getSupportPhone(): string
     {
-        return $this->_supportPhone;
+        return $this->supportPhone;
     }
 
     /**
@@ -468,9 +466,9 @@ class Payout
      *
      * @param string $supportPhone
      */
-    public function setSupportPhone(string $supportPhone)
+    public function setSupportPhone(string $supportPhone): void
     {
-        $this->_supportPhone = $supportPhone;
+        $this->supportPhone = $supportPhone;
     }
 
     /**
@@ -480,9 +478,9 @@ class Payout
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
-        return $this->_message;
+        return $this->message;
     }
 
     /**
@@ -492,9 +490,9 @@ class Payout
      *
      * @param string $message
      */
-    public function setMessage(string $message)
+    public function setMessage(string $message): void
     {
-        $this->_message = $message;
+        $this->message = $message;
     }
 
     /**
@@ -502,9 +500,9 @@ class Payout
      *
      * @return float
      */
-    public function getPercentFee()
+    public function getPercentFee(): float
     {
-        return $this->_percentFee;
+        return $this->percentFee;
     }
 
     /**
@@ -512,9 +510,9 @@ class Payout
      *
      * @param float $percentFee
      */
-    public function setPercentFee(float $percentFee)
+    public function setPercentFee(float $percentFee): void
     {
-        $this->_percentFee = $percentFee;
+        $this->percentFee = $percentFee;
     }
 
     /**
@@ -522,9 +520,9 @@ class Payout
      *
      * @return float
      */
-    public function getFee()
+    public function getFee(): float
     {
-        return $this->_fee;
+        return $this->fee;
     }
 
     /**
@@ -532,9 +530,9 @@ class Payout
      *
      * @param float $fee
      */
-    public function setFee(float $fee)
+    public function setFee(float $fee): void
     {
-        $this->_fee = $fee;
+        $this->fee = $fee;
     }
 
     /**
@@ -542,9 +540,9 @@ class Payout
      *
      * @return float
      */
-    public function getDepositTotal()
+    public function getDepositTotal(): float
     {
-        return $this->_depositTotal;
+        return $this->depositTotal;
     }
 
     /**
@@ -552,9 +550,9 @@ class Payout
      *
      * @param float $depositTotal
      */
-    public function setDepositTotal(float $depositTotal)
+    public function setDepositTotal(float $depositTotal): void
     {
-        $this->_depositTotal = $depositTotal;
+        $this->depositTotal = $depositTotal;
     }
 
     /**
@@ -562,9 +560,9 @@ class Payout
      *
      * @return float
      */
-    public function getRate()
+    public function getRate(): float
     {
-        return $this->_rate;
+        return $this->rate;
     }
 
     /**
@@ -572,9 +570,9 @@ class Payout
      *
      * @param float $rate
      */
-    public function setRate(float $rate)
+    public function setRate(float $rate): void
     {
-        $this->_rate = $rate;
+        $this->rate = $rate;
     }
 
     /**
@@ -582,9 +580,9 @@ class Payout
      *
      * @return float
      */
-    public function getBtc()
+    public function getBtc(): float
     {
-        return $this->_btc;
+        return $this->btc;
     }
 
     /**
@@ -592,9 +590,9 @@ class Payout
      *
      * @param float $btc
      */
-    public function setBtc(float $btc)
+    public function setBtc(float $btc): void
     {
-        $this->_btc = $btc;
+        $this->btc = $btc;
     }
 
     /**
@@ -602,9 +600,9 @@ class Payout
      *
      * @return string|null
      */
-    public function getDateExecuted()
+    public function getDateExecuted(): ?string
     {
-        return $this->_dateExecuted;
+        return $this->dateExecuted;
     }
 
     /**
@@ -612,9 +610,9 @@ class Payout
      *
      * @param string $dateExecuted
      */
-    public function setDateExecuted(string $dateExecuted)
+    public function setDateExecuted(string $dateExecuted): void
     {
-        $this->_dateExecuted = $dateExecuted;
+        $this->dateExecuted = $dateExecuted;
     }
 
     // Response fields
@@ -625,9 +623,9 @@ class Payout
      *
      * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -635,9 +633,9 @@ class Payout
      *
      * @param string $id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -662,9 +660,9 @@ class Payout
      *
      * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -689,9 +687,9 @@ class Payout
      *
      * @param string $status
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -699,9 +697,9 @@ class Payout
      *
      * @return string|null
      */
-    public function getRequestDate()
+    public function getRequestDate(): ?string
     {
-        return $this->_requestDate;
+        return $this->requestDate;
     }
 
     /**
@@ -709,9 +707,9 @@ class Payout
      *
      * @param string $requestDate
      */
-    public function setRequestDate(string $requestDate)
+    public function setRequestDate(string $requestDate): void
     {
-        $this->_requestDate = $requestDate;
+        $this->requestDate = $requestDate;
     }
 
     /**
@@ -719,9 +717,9 @@ class Payout
      *
      * @return array|null
      */
-    public function getExchangeRates()
+    public function getExchangeRates(): ?array
     {
-        return $this->_exchangeRates;
+        return $this->exchangeRates;
     }
 
     /**
@@ -729,9 +727,9 @@ class Payout
      *
      * @param array $exchangeRates
      */
-    public function setExchangeRates(array $exchangeRates)
+    public function setExchangeRates(array $exchangeRates): void
     {
-        $this->_exchangeRates = $exchangeRates;
+        $this->exchangeRates = $exchangeRates;
     }
 
     /**
@@ -739,11 +737,11 @@ class Payout
      *
      * @return array
      */
-    public function getTransactions()
+    public function getTransactions(): array
     {
         $transactions = [];
 
-        foreach ($this->_transactions as $transaction) {
+        foreach ($this->transactions as $transaction) {
             if ($transaction instanceof PayoutTransaction) {
                 array_push($transactions, $transaction->toArray());
             } else {
@@ -759,9 +757,9 @@ class Payout
      *
      * @param array $transactions
      */
-    public function setTransactions(array $transactions)
+    public function setTransactions(array $transactions): void
     {
-        $this->_transactions = $transactions;
+        $this->transactions = $transactions;
     }
 
     /**
@@ -769,7 +767,7 @@ class Payout
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'token'             => $this->getToken(),

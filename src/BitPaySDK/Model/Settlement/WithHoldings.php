@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -15,12 +17,12 @@ namespace BitPaySDK\Model\Settlement;
  */
 class WithHoldings
 {
-    protected $_amount;
-    protected $_code;
-    protected $_description;
-    protected $_notes;
-    protected $_label;
-    protected $_bankCountry;
+    protected ?float $amount = null;
+    protected ?string $code = null;
+    protected ?string $description = null;
+    protected ?string $notes = null;
+    protected ?string $label = null;
+    protected ?string $bankCountry = null;
 
     /**
      * WithHoldings constructor.
@@ -34,9 +36,9 @@ class WithHoldings
      *
      * @return float|null
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -44,9 +46,9 @@ class WithHoldings
      *
      * @param float $amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -54,9 +56,9 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -64,9 +66,9 @@ class WithHoldings
      *
      * @param string $code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -74,9 +76,9 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -84,9 +86,9 @@ class WithHoldings
      *
      * @param string $description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
@@ -94,9 +96,9 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getNotes()
+    public function getNotes(): ?string
     {
-        return $this->_notes;
+        return $this->notes;
     }
 
     /**
@@ -104,9 +106,9 @@ class WithHoldings
      *
      * @param string $notes
      */
-    public function setNotes(string $notes)
+    public function setNotes(string $notes): void
     {
-        $this->_notes = $notes;
+        $this->notes = $notes;
     }
 
     /**
@@ -114,9 +116,9 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -124,9 +126,9 @@ class WithHoldings
      *
      * @param string $label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
@@ -134,9 +136,9 @@ class WithHoldings
      *
      * @return string|null
      */
-    public function getBankCountry()
+    public function getBankCountry(): ?string
     {
-        return $this->_bankCountry;
+        return $this->bankCountry;
     }
 
     /**
@@ -144,9 +146,9 @@ class WithHoldings
      *
      * @param string $bankCountry
      */
-    public function setBankCountry(string $bankCountry)
+    public function setBankCountry(string $bankCountry): void
     {
-        $this->_bankCountry = $bankCountry;
+        $this->bankCountry = $bankCountry;
     }
 
     /**
@@ -154,18 +156,15 @@ class WithHoldings
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements =
-            [
-                'amount'      => $this->getAmount(),
-                'code'        => $this->getCode(),
-                'description' => $this->getDescription(),
-                'notes'       => $this->getNotes(),
-                'label'       => $this->getLabel(),
-                'bankCountry' => $this->getBankCountry(),
-            ];
-
-        return $elements;
+        return [
+            'amount' => $this->getAmount(),
+            'code' => $this->getCode(),
+            'description' => $this->getDescription(),
+            'notes' => $this->getNotes(),
+            'label' => $this->getLabel(),
+            'bankCountry' => $this->getBankCountry(),
+        ];
     }
 }

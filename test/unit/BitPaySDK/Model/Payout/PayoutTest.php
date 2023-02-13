@@ -286,12 +286,13 @@ class PayoutTest extends TestCase
   public function testToArrayEmptyKey()
   {
     $payout = $this->createClassObject();
+    $this->objectSetters($payout);
     $payoutArray = $payout->toArray();
 
     $this->assertNotNull($payoutArray);
     $this->assertIsArray($payoutArray);
 
-    $this->assertArrayNotHasKey('token', $payoutArray);
+    $this->assertArrayNotHasKey('supportPhone', $payoutArray);
   }
 
   private function createClassObject()

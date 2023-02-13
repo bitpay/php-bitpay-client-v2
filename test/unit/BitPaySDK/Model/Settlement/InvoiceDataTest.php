@@ -118,7 +118,7 @@ class InvoiceDataTest extends TestCase
         $this->assertEquals($invoiceDataArray['currency'], 'BTC');
         $this->assertEquals($invoiceDataArray['transactionCurrency'], 'BTC');
         $this->assertEquals($invoiceDataArray['payoutPercentage'], 15);
-        $this->assertEquals($invoiceDataArray['refundInfo'], null);
+        $this->assertEquals($invoiceDataArray['refundInfo'], []);
     }
 
     private function createClassObject()

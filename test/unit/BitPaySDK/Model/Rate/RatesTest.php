@@ -36,7 +36,7 @@ class RatesTest extends TestCase
         $reflection = new ReflectionClass(Rates::class);
         $rates->update();
 
-        $reflectionTest = $reflection->getProperty('_rates')->setAccessible(true);
+        $reflectionTest = $reflection->getProperty('rates')->setAccessible(true);
 
         $this->assertEquals(null, $reflectionTest);
     }
@@ -55,7 +55,7 @@ class RatesTest extends TestCase
 
         $rateMock = $this->getMockBuilder(Rate::class)->disableOriginalConstructor()->getMock();
         $rateMock->method('getCode')->willReturn('BTC');
-        $rateMock->method('getRate')->willReturn(12);
+        $rateMock->method('getRate')->willReturn(12.0);
 
         $rates = [$rateMock];
         $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();

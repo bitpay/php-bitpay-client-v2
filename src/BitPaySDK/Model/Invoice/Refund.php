@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -9,23 +11,23 @@ namespace BitPaySDK\Model\Invoice;
 
 class Refund
 {
-    protected $_guid;
-    protected $_refundEmail;
-    protected $_amount;
-    protected $_currency;
-    protected $_token;
-    protected $_id;
-    protected $_requestDate;
-    protected $_status;
-    protected $_params;
-    protected $_invoiceId;
-    protected $_preview;
-    protected $_immediate;
-    protected $_buyerPaysRefundFee;
-    protected $_refundFee;
-    protected $_reference;
-    protected $_lastRefundNotification;
-    protected $_invoice;
+    protected ?string $guid = null;
+    protected string $refundEmail;
+    protected float $amount;
+    protected string $currency;
+    protected string $token;
+    protected ?string $id = null;
+    protected ?string $requestDate = null;
+    protected ?string $status = null;
+    protected ?RefundParams $params = null;
+    protected ?string $invoiceId = null;
+    protected ?bool $preview = null;
+    protected ?bool $immediate = null;
+    protected ?bool $buyerPaysRefundFee = null;
+    protected ?float $refundFee = null;
+    protected ?string $reference = null;
+    protected ?string $lastRefundNotification = null;
+    protected ?string $invoice = null;
 
     /**
      * Constructor, create Refund object
@@ -41,11 +43,11 @@ class Refund
         string $currency = "",
         string $token = ""
     ) {
-        $this->_refundEmail = $refundEmail;
-        $this->_amount = $amount;
-        $this->_currency = $currency;
-        $this->_token = $token;
-        $this->_params = new RefundParams();
+        $this->refundEmail = $refundEmail;
+        $this->amount = $amount;
+        $this->currency = $currency;
+        $this->token = $token;
+        $this->params = new RefundParams();
     }
 
     // Request fields
@@ -55,11 +57,11 @@ class Refund
      * Gets a passthru variable provided by the merchant and designed to be used by the merchant to correlate
      * the invoice with an order ID in their system
      *
-     * @return string
+     * @return string|null
      */
-    public function getGuid()
+    public function getGuid(): ?string
     {
-        return $this->_guid;
+        return $this->guid;
     }
 
     /**
@@ -67,9 +69,9 @@ class Refund
      *
      * @param string $guid
      */
-    public function setGuid(string $guid)
+    public function setGuid(string $guid): void
     {
-        $this->_guid = $guid;
+        $this->guid = $guid;
     }
 
     /**
@@ -77,21 +79,21 @@ class Refund
      * It will be passed-through on each response for you to identify the refund in your system.
      * Maximum string length is 100 characters
      *
-     * @return string
+     * @return string|null
      */
-    public function getReference()
+    public function getReference(): ?string
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
      * Sets reference label for refund
      *
-     * @param string $reference
+     * @param string $reference: void
      */
-    public function setReference(string $reference)
+    public function setReference(string $reference): void
     {
-        $this->_reference = $reference;
+        $this->reference = $reference;
     }
 
     /**
@@ -99,9 +101,9 @@ class Refund
      *
      * @return string
      */
-    public function getRefundEmail()
+    public function getRefundEmail(): string
     {
-        return $this->_refundEmail;
+        return $this->refundEmail;
     }
 
     /**
@@ -109,9 +111,9 @@ class Refund
      *
      * @param string $refundEmail
      */
-    public function setRefundEmail(string $refundEmail)
+    public function setRefundEmail(string $refundEmail): void
     {
-        $this->_refundEmail = $refundEmail;
+        $this->refundEmail = $refundEmail;
     }
 
     /**
@@ -119,9 +121,9 @@ class Refund
      *
      * @return float
      */
-    public function getAmount()
+    public function getAmount(): float
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -129,9 +131,9 @@ class Refund
      *
      * @param float $amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -139,9 +141,9 @@ class Refund
      *
      * @return string
      */
-    public function getToken()
+    public function getToken(): string
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -149,9 +151,9 @@ class Refund
      *
      * @param string $token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     /**
@@ -159,9 +161,9 @@ class Refund
      *
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): string
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -169,19 +171,19 @@ class Refund
      *
      * @param string $currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
      * Whether to create the refund request as a preview
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getPreview()
+    public function getPreview(): ?bool
     {
-        return $this->_preview;
+        return $this->preview;
     }
 
     /**
@@ -189,19 +191,19 @@ class Refund
      *
      * @param bool $preview
      */
-    public function setPreview(bool $preview)
+    public function setPreview(bool $preview): void
     {
-        $this->_preview = $preview;
+        $this->preview = $preview;
     }
 
     /**
      * Gets the ID of the invoice to refund
      *
-     * @return string
+     * @return string|null
      */
-    public function getInvoiceId()
+    public function getInvoiceId(): ?string
     {
-        return $this->_invoiceId;
+        return $this->invoiceId;
     }
 
     /**
@@ -209,9 +211,9 @@ class Refund
      *
      * @param string $invoiceId
      */
-    public function setInvoiceId(string $invoiceId)
+    public function setInvoiceId(string $invoiceId): void
     {
-        $this->_invoiceId = $invoiceId;
+        $this->invoiceId = $invoiceId;
     }
 
     // Response fields
@@ -220,11 +222,11 @@ class Refund
     /**
      * Gets the ID of the refund
      *
-     * @return string
+     * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -232,19 +234,19 @@ class Refund
      *
      * @param string $id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
      * Gets the date the refund was requested
      *
-     * @return string
+     * @return string|null
      */
-    public function getRequestDate()
+    public function getRequestDate(): ?string
     {
-        return $this->_requestDate;
+        return $this->requestDate;
     }
 
     /**
@@ -252,19 +254,19 @@ class Refund
      *
      * @param string $requestDate
      */
-    public function setRequestDate(string $requestDate)
+    public function setRequestDate(string $requestDate): void
     {
-        $this->_requestDate = $requestDate;
+        $this->requestDate = $requestDate;
     }
 
     /**
      * Gets the refund lifecycle status of the request
      *
-     * @return string
+     * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -272,19 +274,19 @@ class Refund
      *
      * @param string $status
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
      * Gets object containing the refund request parameters
      *
-     * @return RefundParams
+     * @return RefundParams|null
      */
-    public function getParams()
+    public function getParams(): ?RefundParams
     {
-        return $this->_params;
+        return $this->params;
     }
 
     /**
@@ -292,20 +294,20 @@ class Refund
      *
      * @param RefundParams $params
      */
-    public function setParams(RefundParams $params)
+    public function setParams(RefundParams $params): void
     {
-        $this->_params = $params;
+        $this->params = $params;
     }
 
     /**
      * Gets whether the funds should be removed from merchant ledger immediately
      * on submission or at the time of processing
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getImmediate()
+    public function getImmediate(): ?bool
     {
-        return $this->_immediate;
+        return $this->immediate;
     }
 
     /**
@@ -313,19 +315,19 @@ class Refund
      *
      * @param bool $immediate
      */
-    public function setImmediate(bool $immediate)
+    public function setImmediate(bool $immediate): void
     {
-        $this->_immediate = $immediate;
+        $this->immediate = $immediate;
     }
 
     /**
      * Gets the amount of refund fee expressed in terms of pricing currency
      *
-     * @return float
+     * @return float|null
      */
-    public function getRefundFee()
+    public function getRefundFee(): ?float
     {
-        return $this->_refundFee;
+        return $this->refundFee;
     }
 
     /**
@@ -333,19 +335,19 @@ class Refund
      *
      * @param float $refundFee
      */
-    public function setRefundFee(float $refundFee)
+    public function setRefundFee(float $refundFee): void
     {
-        $this->_refundFee = $refundFee;
+        $this->refundFee = $refundFee;
     }
 
     /**
      * Gets the last time notification of buyer was attempted
      *
-     * @return string
+     * @return string|null
      */
-    public function getLastRefundNotification()
+    public function getLastRefundNotification(): ?string
     {
-        return $this->_lastRefundNotification;
+        return $this->lastRefundNotification;
     }
 
     /**
@@ -353,19 +355,19 @@ class Refund
      *
      * @param string $lastRefundNotification
      */
-    public function setLastRefundNotification(string $lastRefundNotification)
+    public function setLastRefundNotification(string $lastRefundNotification): void
     {
-        $this->_lastRefundNotification = $lastRefundNotification;
+        $this->lastRefundNotification = $lastRefundNotification;
     }
 
     /**
      * Gets the ID of the invoice being refunded
      *
-     * @return string
+     * @return string|null
      */
-    public function getInvoice()
+    public function getInvoice(): ?string
     {
-        return $this->_invoice;
+        return $this->invoice;
     }
 
     /**
@@ -373,20 +375,20 @@ class Refund
      *
      * @param string $invoice
      */
-    public function setInvoice(string $invoice)
+    public function setInvoice(string $invoice): void
     {
-        $this->_invoice = $invoice;
+        $this->invoice = $invoice;
     }
 
     /**
      * Gets whether the buyer should pay the refund fee rather
      * than the merchant
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getBuyerPaysRefundFee()
+    public function getBuyerPaysRefundFee(): ?bool
     {
-        return $this->_buyerPaysRefundFee;
+        return $this->buyerPaysRefundFee;
     }
 
     /**
@@ -394,9 +396,9 @@ class Refund
      *
      * @param bool $buyerPaysRefundFee
      */
-    public function setBuyerPaysRefundFee(bool $buyerPaysRefundFee)
+    public function setBuyerPaysRefundFee(bool $buyerPaysRefundFee): void
     {
-        $this->_buyerPaysRefundFee = $buyerPaysRefundFee;
+        $this->buyerPaysRefundFee = $buyerPaysRefundFee;
     }
 
     /**
@@ -404,28 +406,26 @@ class Refund
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'guid'                     => $this->getGuid(),
-            'refundEmail'              => $this->getRefundEmail(),
-            'amount'                   => $this->getAmount(),
-            'currency'                 => $this->getCurrency(),
-            'token'                    => $this->getToken(),
-            'id'                       => $this->getId(),
-            'requestDate'              => $this->getRequestDate(),
-            'status'                   => $this->getStatus(),
-            'params'                   => $this->getParams()->toArray(),
-            'invoiceId'                => $this->getInvoiceId(),
-            'preview'                  => $this->getPreview(),
-            'immediate'                => $this->getImmediate(),
-            'refundFee'                => $this->getRefundFee(),
-            'invoice'                  => $this->getInvoice(),
-            'buyerPaysRefundFee'       => $this->getBuyerPaysRefundFee(),
-            'reference'                => $this->getReference(),
-            'lastRefundNotification'   => $this->getLastRefundNotification()
+        return [
+            'guid' => $this->getGuid(),
+            'refundEmail' => $this->getRefundEmail(),
+            'amount' => $this->getAmount(),
+            'currency' => $this->getCurrency(),
+            'token' => $this->getToken(),
+            'id' => $this->getId(),
+            'requestDate' => $this->getRequestDate(),
+            'status' => $this->getStatus(),
+            'params' => $this->getParams()->toArray(),
+            'invoiceId' => $this->getInvoiceId(),
+            'preview' => $this->getPreview(),
+            'immediate' => $this->getImmediate(),
+            'refundFee' => $this->getRefundFee(),
+            'invoice' => $this->getInvoice(),
+            'buyerPaysRefundFee' => $this->getBuyerPaysRefundFee(),
+            'reference' => $this->getReference(),
+            'lastRefundNotification' => $this->getLastRefundNotification()
         ];
-
-        return $elements;
     }
 }

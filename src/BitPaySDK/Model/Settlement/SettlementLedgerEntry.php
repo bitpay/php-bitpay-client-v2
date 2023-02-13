@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -9,17 +11,17 @@ namespace BitPaySDK\Model\Settlement;
 
 class SettlementLedgerEntry
 {
-    protected $_code;
-    protected $_invoiceId;
-    protected $_amount;
-    protected $_timestamp;
-    protected $_description;
-    protected $_reference;
-    protected $_invoiceData;
+    protected ?int $code = null;
+    protected ?string $invoiceId = null;
+    protected ?float $amount = null;
+    protected ?string $timestamp = null;
+    protected ?string $description = null;
+    protected ?string $reference = null;
+    protected InvoiceData $invoiceData;
 
     public function __construct()
     {
-        $this->_invoiceData = new InvoiceData();
+        $this->invoiceData = new InvoiceData();
     }
 
     /**
@@ -27,11 +29,11 @@ class SettlementLedgerEntry
      *
      * Contains the Ledger entry code
      *
-     * @return int the code
+     * @return int|null the code
      */
-    public function getCode()
+    public function getCode(): ?int
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -41,19 +43,19 @@ class SettlementLedgerEntry
      *
      * @param int $code the code
      */
-    public function setCode(int $code)
+    public function setCode(int $code): void
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
      * Gets BitPay invoice Id
      *
-     * @return string BitPay invoice Id
+     * @return string|null BitPay invoice Id
      */
-    public function getInvoiceId()
+    public function getInvoiceId(): ?string
     {
-        return $this->_invoiceId;
+        return $this->invoiceId;
     }
 
     /**
@@ -61,9 +63,9 @@ class SettlementLedgerEntry
      *
      * @param string $invoiceId BitPay invoice Id
      */
-    public function setInvoiceId(string $invoiceId)
+    public function setInvoiceId(string $invoiceId): void
     {
-        $this->_invoiceId = $invoiceId;
+        $this->invoiceId = $invoiceId;
     }
 
     /**
@@ -71,11 +73,11 @@ class SettlementLedgerEntry
      *
      * Amount for the ledger entry. Can be positive of negative depending on the type of entry (debit or credit)
      *
-     * @return float the amount
+     * @return float|null the amount
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -85,19 +87,19 @@ class SettlementLedgerEntry
      *
      * @param float $amount the amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
      * Gets Date and time of the ledger entry (UTC). ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @return string the timestamp
+     * @return string|null the timestamp
      */
-    public function getTimestamp()
+    public function getTimestamp(): ?string
     {
-        return $this->_timestamp;
+        return $this->timestamp;
     }
 
     /**
@@ -105,9 +107,9 @@ class SettlementLedgerEntry
      *
      * @param string $timestamp the timestamp
      */
-    public function setTimestamp(string $timestamp)
+    public function setTimestamp(string $timestamp): void
     {
-        $this->_timestamp = $timestamp;
+        $this->timestamp = $timestamp;
     }
 
     /**
@@ -116,11 +118,11 @@ class SettlementLedgerEntry
      * This field often contains an id depending on the type of entry
      * (for instance payout id, settlement id, invoice orderId etc...)
      *
-     * @return string the description
+     * @return string|null the description
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -131,19 +133,19 @@ class SettlementLedgerEntry
      *
      * @param string $description the description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
      * Gets reference
      *
-     * @return string the reference
+     * @return string|null the reference
      */
-    public function getReference()
+    public function getReference(): ?string
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
@@ -151,9 +153,9 @@ class SettlementLedgerEntry
      *
      * @param string $reference the reference
      */
-    public function setReference(string $reference)
+    public function setReference(string $reference): void
     {
-        $this->_reference = $reference;
+        $this->reference = $reference;
     }
 
     /**
@@ -163,9 +165,9 @@ class SettlementLedgerEntry
      *
      * @return InvoiceData
      */
-    public function getInvoiceData()
+    public function getInvoiceData(): InvoiceData
     {
-        return $this->_invoiceData;
+        return $this->invoiceData;
     }
 
     /**
@@ -175,9 +177,9 @@ class SettlementLedgerEntry
      *
      * @param InvoiceData $invoiceData
      */
-    public function setInvoiceData(InvoiceData $invoiceData)
+    public function setInvoiceData(InvoiceData $invoiceData): void
     {
-        $this->_invoiceData = $invoiceData;
+        $this->invoiceData = $invoiceData;
     }
 
     /**
@@ -185,18 +187,16 @@ class SettlementLedgerEntry
      *
      * @return array SettlementLedgerEntry as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'code'        => $this->getCode(),
-            'invoiceId'   => $this->getInvoiceId(),
-            'amount'      => $this->getAmount(),
-            'timestamp'   => $this->getTimestamp(),
+        return [
+            'code' => $this->getCode(),
+            'invoiceId' => $this->getInvoiceId(),
+            'amount' => $this->getAmount(),
+            'timestamp' => $this->getTimestamp(),
             'description' => $this->getDescription(),
-            'reference'   => $this->getReference(),
+            'reference' => $this->getReference(),
             'invoiceData' => $this->getInvoiceData()->toArray(),
         ];
-
-        return $elements;
     }
 }

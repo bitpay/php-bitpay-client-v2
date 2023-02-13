@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -9,8 +11,8 @@ namespace BitPaySDK\Model\Ledger;
 
 class Ledger
 {
-    protected $_currency;
-    protected $_balance;
+    protected ?string $currency = null;
+    protected ?float $balance = null;
 
     public function __construct()
     {
@@ -19,11 +21,11 @@ class Ledger
     /**
      * Gets Ledger currency
      *
-     * @return string the Ledger currency
+     * @return string|null the Ledger currency
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -31,19 +33,19 @@ class Ledger
      *
      * @param string $currency the Ledger currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
      * Gets Ledger balance in the corresponding currency
      *
-     * @return float the Ledger balance
+     * @return float|null the Ledger balance
      */
-    public function getBalance()
+    public function getBalance(): ?float
     {
-        return $this->_balance;
+        return $this->balance;
     }
 
     /**
@@ -51,9 +53,9 @@ class Ledger
      *
      * @param float $balance the Ledger balance
      */
-    public function setBalance(float $balance)
+    public function setBalance(float $balance): void
     {
-        $this->_balance = $balance;
+        $this->balance = $balance;
     }
 
     /**
@@ -61,13 +63,11 @@ class Ledger
      *
      * @return array Ledger as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
+        return [
             'currency' => $this->getCurrency(),
             'balance'  => $this->getBalance(),
         ];
-
-        return $elements;
     }
 }

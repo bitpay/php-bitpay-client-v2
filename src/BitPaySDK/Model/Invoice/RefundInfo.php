@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -12,9 +14,9 @@ namespace BitPaySDK\Model\Invoice;
  */
 class RefundInfo
 {
-    protected $_supportRequest;
-    protected $_currency;
-    protected $_amounts;
+    protected ?string $supportRequest = null;
+    protected ?string $currency = null;
+    protected ?array $amounts = null;
 
     public function __construct()
     {
@@ -25,11 +27,11 @@ class RefundInfo
      *
      * For a refunded invoice, this field will contain the refund requestId once executed.
      *
-     * @return string the support request
+     * @return string|null the support request
      */
-    public function getSupportRequest()
+    public function getSupportRequest(): ?string
     {
-        return $this->_supportRequest;
+        return $this->supportRequest;
     }
 
     /**
@@ -39,9 +41,9 @@ class RefundInfo
      *
      * @param string $supportRequest the support request
      */
-    public function setSupportRequest(string $supportRequest)
+    public function setSupportRequest(string $supportRequest): void
     {
-        $this->_supportRequest = $supportRequest;
+        $this->supportRequest = $supportRequest;
     }
 
     /**
@@ -50,11 +52,11 @@ class RefundInfo
      * For a refunded invoice, this field will contain the base currency selected for the refund.
      * Typically the same as the invoice currency.
      *
-     * @return string the currency
+     * @return string|null the currency
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -65,9 +67,9 @@ class RefundInfo
      *
      * @param string $currency the currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -78,11 +80,11 @@ class RefundInfo
      * and the equivalent refunded amount from the invoice in the given currency
      * (thus linked to the amount debited from the merchant account to cover the refund)
      *
-     * @return array the amounts
+     * @return array|null the amounts
      */
-    public function getAmounts()
+    public function getAmounts(): ?array
     {
-        return $this->_amounts;
+        return $this->amounts;
     }
 
     /**
@@ -95,9 +97,9 @@ class RefundInfo
      *
      * @param array $amounts the amounts
      */
-    public function setAmounts(array $amounts)
+    public function setAmounts(array $amounts): void
     {
-        $this->_amounts = $amounts;
+        $this->amounts = $amounts;
     }
 
     /**
@@ -105,7 +107,7 @@ class RefundInfo
      *
      * @return array refund info as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'supportRequest' => $this->getSupportRequest(),

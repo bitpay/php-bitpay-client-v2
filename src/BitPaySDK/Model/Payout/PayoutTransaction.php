@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -12,9 +14,9 @@ namespace BitPaySDK\Model\Payout;
  */
 class PayoutTransaction
 {
-    protected $_txid;
-    protected $_amount;
-    protected $_date;
+    protected ?string $txid = null;
+    protected ?float $amount = null;
+    protected ?string $date = null;
 
     public function __construct()
     {
@@ -23,11 +25,11 @@ class PayoutTransaction
     /**
      * Gets Cryptocurrency transaction hash for the executed payout.
      *
-     * @return string the tax id
+     * @return string|null the tax id
      */
-    public function getTxid()
+    public function getTxid(): ?string
     {
-        return $this->_txid;
+        return $this->txid;
     }
 
     /**
@@ -35,19 +37,19 @@ class PayoutTransaction
      *
      * @param string $txid the tax id
      */
-    public function setTxid(string $txid)
+    public function setTxid(string $txid): void
     {
-        $this->_txid = $txid;
+        $this->txid = $txid;
     }
 
     /**
      * Gets Amount of cryptocurrency sent to the requested address.
      *
-     * @return float the amount
+     * @return float|null the amount
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
@@ -55,20 +57,20 @@ class PayoutTransaction
      *
      * @param float $amount the amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
      * Gets Date and time (UTC) when the cryptocurrency transaction is broadcasted.
      * ISO-8601 format yyyy-mm-ddThh:mm:ssZ.
      *
-     * @return string the date
+     * @return string|null the date
      */
-    public function getDate()
+    public function getDate(): ?string
     {
-        return $this->_date;
+        return $this->date;
     }
 
     /**
@@ -77,9 +79,9 @@ class PayoutTransaction
      *
      * @param string $date the date
      */
-    public function setDate(string $date)
+    public function setDate(string $date): void
     {
-        $this->_date = $date;
+        $this->date = $date;
     }
 
     /**
@@ -87,14 +89,12 @@ class PayoutTransaction
      *
      * @return array PayoutTransaction as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'txid'   => $this->getTxid(),
+        return [
+            'txid' => $this->getTxid(),
             'amount' => $this->getAmount(),
-            'date'   => $this->getDate(),
+            'date' => $this->getDate(),
         ];
-
-        return $elements;
     }
 }
