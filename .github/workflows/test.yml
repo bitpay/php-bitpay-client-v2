@@ -5,6 +5,9 @@ on:
     types:
       - opened
       - reopened
+  push:
+    branches:
+      - '*'
 
 jobs:
   phpunit:
