@@ -16,7 +16,7 @@ class BillClientTest extends TestCase
 
     public function setUp(): void
     {
-        $this->client = Client::createWithFile('src/BitPaySDK/config.yml');
+        $this->client = Client::createWithFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . Config::BITPAY_CONFIG_FILE);
     }
 
     public function testCreate(): void
