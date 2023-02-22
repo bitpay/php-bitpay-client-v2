@@ -7,6 +7,7 @@
 
 namespace BitPaySDK\Model\Subscription;
 
+#[\AllowDynamicProperties]
 class Item
 {
     protected $_description;
