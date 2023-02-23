@@ -91,9 +91,9 @@ class BuyerProvidedInfo
      *
      * This field contains the name of the cryptocurrency wallet selected by the shopper to complete the payment.
      *
-     * @param string $selectedWallet the selected wallet
+     * @param string|null $selectedWallet the selected wallet
      */
-    public function setSelectedWallet(string $selectedWallet): void
+    public function setSelectedWallet(?string $selectedWallet): void
     {
         $this->selectedWallet = $selectedWallet;
     }
