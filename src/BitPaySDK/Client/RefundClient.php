@@ -42,7 +42,8 @@ class RefundClient
      *                                    or at time of processing
      * @param bool $buyerPaysRefundFee Whether the buyer should pay the refund fee (default is merchant)
      * @param string|null $guid Variable provided by the merchant and designed to be used by the merchant to
-     *                                    correlate the refund with a refund ID in their system (@return Refund $refund             An updated Refund Object
+     *                                    correlate the refund with a refund ID in their system
+     * @return Refund $refund             An updated Refund Object
      * @throws RefundCreationException    RefundCreationException class
      * @throws BitPayException            BitPayException class*@throws Exception
      * @throws Exception
