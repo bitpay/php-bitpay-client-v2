@@ -50,7 +50,10 @@ class Invoice
     protected ?string $selectedTransactionCurrency = null;
     protected ?string $forcedBuyerSelectedWallet = null;
     protected ?string $forcedBuyerSelectedTransactionCurrency = null;
-    protected array|ItemizedDetails $itemizedDetails;
+    /**
+     * @var ItemizedDetails[]
+     */
+    protected array $itemizedDetails = [];
     protected ?string $id = null;
     protected ?string $url = null;
     protected ?string $status = null;
@@ -101,7 +104,7 @@ class Invoice
         $this->minerFees = new MinerFees();
         $this->shopper = new Shopper();
         $this->refundInfo = new RefundInfo();
-        $this->itemizedDetails = new ItemizedDetails();
+        $this->itemizedDetails = [new ItemizedDetails()];
         $this->transactionDetails = new TransactionDetails();
     }
 
@@ -743,9 +746,9 @@ class Invoice
      *
      * Object containing line item details for display.
      *
-     * @return ItemizedDetails|array
+     * @return ItemizedDetails[]
      */
-    public function getItemizedDetails(): ItemizedDetails|array
+    public function getItemizedDetails(): array
     {
         return $this->itemizedDetails;
     }
@@ -763,9 +766,13 @@ class Invoice
 
         foreach ($itemizedDetails as $item) {
             if ($item instanceof ItemizedDetails) {
-                $itemsArray[] = $item->toArray();
-            } else {
                 $itemsArray[] = $item;
+            } else {
+                $itemizedDetails = new ItemizedDetails();
+                $itemizedDetails->setAmount($item['amount'] ?? null);
+                $itemizedDetails->setDescription($item['description'] ?? null);
+                $itemizedDetails->setIsFee($item['isFee'] ?? null);
+                $itemsArray[] = $itemizedDetails;
             }
         }
 

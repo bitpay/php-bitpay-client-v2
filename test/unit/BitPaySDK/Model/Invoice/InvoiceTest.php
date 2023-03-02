@@ -244,13 +244,10 @@ class InvoiceTest extends TestCase
 
     public function testGetItemizedDetailsAsArray()
     {
-        $expectedArray = [
-            'amount' => 1,
-            'description' => 'testDescription',
-            'isFee' => true
-        ];
         $expectedItemizedDetails = $this->getMockBuilder(ItemizedDetails::class)->disableOriginalConstructor()->getMock();
-        $expectedItemizedDetails->method('toArray')->willReturn($expectedArray);
+        $expectedItemizedDetails->method('getAmount')->willReturn(1.2);
+        $expectedItemizedDetails->method('getDescription')->willReturn('test description');
+        $expectedItemizedDetails->method('getIsFee')->willReturn(true);
 
         $invoice = $this->createClassObject();
         $invoice->setItemizedDetails([$expectedItemizedDetails]);
@@ -259,10 +256,9 @@ class InvoiceTest extends TestCase
         $this->assertNotNull($invoice->getItemizedDetails());
 
         foreach ($invoice->getItemizedDetails() as $item) {
-            $this->assertArrayHasKey('amount', $item);
-            $this->assertArrayHasKey('description', $item);
-            $this->assertArrayHasKey('isFee', $item);
-            $this->assertEquals($expectedArray, $item);
+            $this->assertEquals(1.2, $item->getAmount());
+            $this->assertEquals('test description', $item->getDescription());
+            $this->assertTrue($item->getIsFee());
         }
     }
 

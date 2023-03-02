@@ -11,9 +11,9 @@ namespace BitPaySDK\Model\Invoice;
 
 class ItemizedDetails
 {
-    protected ?float $amount;
-    protected ?string $description;
-    protected ?bool $isFee;
+    protected ?float $amount = null;
+    protected ?string $description = null;
+    protected ?bool $isFee = null;
 
     public function __construct()
     {
@@ -32,9 +32,9 @@ class ItemizedDetails
     /**
      * Sets The amount of currency.
      *
-     * @param float $amount the amount
+     * @param float|null $amount the amount
      */
-    public function setAmount(float $amount): void
+    public function setAmount(?float $amount): void
     {
         $this->amount = $amount;
     }
@@ -54,9 +54,9 @@ class ItemizedDetails
     /**
      * Sets string for the item.
      *
-     * @param string $description the description
+     * @param string|null $description the description
      */
-    public function setDescription(string $description): void
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
@@ -78,9 +78,9 @@ class ItemizedDetails
      *
      * Gets Indicates whether or not the item is considered a fee/tax or part of the main purchase.
      *
-     * @param bool $isFee is fee
+     * @param bool|null $isFee is fee
      */
-    public function setIsFee(bool $isFee): void
+    public function setIsFee(?bool $isFee): void
     {
         $this->isFee = $isFee;
     }
