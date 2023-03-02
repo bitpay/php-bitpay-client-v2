@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
@@ -198,18 +200,18 @@ class Currency
     const ZMW = "ZMW";
     const ZWL = "ZWL";
 
-    protected $code;
-    protected $symbol;
-    protected $precision;
-    protected $currentlySettled;
-    protected $name;
-    protected $plural;
-    protected $alts;
-    protected $minimum;
-    protected $sanctioned;
-    protected $decimals;
-    protected $payoutFields;
-    protected $settlementMinimum;
+    protected ?string $code = null;
+    protected ?string $symbol = null;
+    protected ?int $precision = null;
+    protected ?bool $currentlySettled = null;
+    protected ?string $name = null;
+    protected ?string $plural = null;
+    protected ?string $alts = null;
+    protected ?string $minimum = null;
+    protected ?bool $sanctioned = null;
+    protected ?string $decimals = null;
+    protected array $payoutFields = [];
+    protected array $settlementMinimum = [];
 
     /**
      * Currency validation
@@ -217,13 +219,13 @@ class Currency
      * @param string $value the currency value
      * @return bool
      */
-    public static function isValid($value)
+    public static function isValid(string $value): bool
     {
         try {
             $reflect = new ReflectionClass(Currency::class);
 
             return array_key_exists($value, $reflect->getConstants());
-        } catch (Exception $e) {
+        } catch (Exception) {
             return false;
         }
     }
@@ -235,9 +237,9 @@ class Currency
     /**
      * Get ISO 4217 3-character currency code
      *
-     * @return string the code
+     * @return string|null the code
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -247,7 +249,7 @@ class Currency
      *
      * @param string $code the code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
         $this->code = $code;
     }
@@ -255,9 +257,9 @@ class Currency
     /**
      * Display symbol
      *
-     * @return string the symbol
+     * @return string|null the symbol
      */
-    public function getSymbol()
+    public function getSymbol(): ?string
     {
         return $this->symbol;
     }
@@ -267,7 +269,7 @@ class Currency
      *
      * @param string|null $symbol
      */
-    public function setSymbol(string $symbol = null)
+    public function setSymbol(?string $symbol = null): void
     {
         $this->symbol = $symbol;
     }
@@ -275,9 +277,9 @@ class Currency
     /**
      * Number of decimal places
      *
-     * @return int the precision
+     * @return int|null the precision
      */
-    public function getPrecision()
+    public function getPrecision(): ?int
     {
         return $this->precision;
     }
@@ -287,7 +289,7 @@ class Currency
      *
      * @param int $precision the precision
      */
-    public function setPrecision(int $precision)
+    public function setPrecision(int $precision): void
     {
         $this->precision = $precision;
     }
@@ -295,9 +297,9 @@ class Currency
     /**
      * Gets currently settled value
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getCurrentlySettled()
+    public function getCurrentlySettled(): ?bool
     {
         return $this->currentlySettled;
     }
@@ -307,7 +309,7 @@ class Currency
      *
      * @param bool $currentlySettled
      */
-    public function setCurrentlySettled(bool $currentlySettled)
+    public function setCurrentlySettled(bool $currentlySettled): void
     {
         $this->currentlySettled = $currentlySettled;
     }
@@ -315,9 +317,9 @@ class Currency
     /**
      * Gets currency name
      *
-     * @return string the name
+     * @return string|null the name
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -327,7 +329,7 @@ class Currency
      *
      * @param string $name the name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -335,9 +337,9 @@ class Currency
     /**
      * Gets English plural form
      *
-     * @return string the plural form
+     * @return string|null the plural form
      */
-    public function getPlural()
+    public function getPlural(): ?string
     {
         return $this->plural;
     }
@@ -347,7 +349,7 @@ class Currency
      *
      * @param string $plural the plural form
      */
-    public function setPlural(string $plural)
+    public function setPlural(string $plural): void
     {
         $this->plural = $plural;
     }
@@ -355,9 +357,9 @@ class Currency
     /**
      * Gets alternative currency name(s)
      *
-     * @return string the alts
+     * @return string|null the alts
      */
-    public function getAlts()
+    public function getAlts(): ?string
     {
         return $this->alts;
     }
@@ -367,7 +369,7 @@ class Currency
      *
      * @param string $alts the alts
      */
-    public function setAlts(string $alts)
+    public function setAlts(string $alts): void
     {
         $this->alts = $alts;
     }
@@ -375,9 +377,9 @@ class Currency
     /**
      * Gets minimum supported value when creating an invoice, bill or payout for instance
      *
-     * @return string the minimum
+     * @return string|null the minimum
      */
-    public function getMinimum()
+    public function getMinimum(): ?string
     {
         return $this->minimum;
     }
@@ -387,7 +389,7 @@ class Currency
      *
      * @param string $minimum the minimum
      */
-    public function setMinimum(string $minimum)
+    public function setMinimum(string $minimum): void
     {
         $this->minimum = $minimum;
     }
@@ -395,9 +397,9 @@ class Currency
     /**
      * Gets if the currency is linked to a sanctionned country
      *
-     * @return bool the sanctioned
+     * @return bool|null the sanctioned
      */
-    public function getSanctioned()
+    public function getSanctioned(): ?bool
     {
         return $this->sanctioned;
     }
@@ -407,7 +409,7 @@ class Currency
      *
      * @param bool $sanctioned the sanctioned
      */
-    public function setSanctioned(bool $sanctioned)
+    public function setSanctioned(bool $sanctioned): void
     {
         $this->sanctioned = $sanctioned;
     }
@@ -415,9 +417,9 @@ class Currency
     /**
      * Gets decimal precision
      *
-     * @return string decimals
+     * @return string|null decimals
      */
-    public function getDecimals()
+    public function getDecimals(): ?string
     {
         return $this->decimals;
     }
@@ -427,7 +429,7 @@ class Currency
      *
      * @param string $decimals decimals
      */
-    public function setDecimals(string $decimals)
+    public function setDecimals(string $decimals): void
     {
         $this->decimals = $decimals;
     }
@@ -437,7 +439,7 @@ class Currency
      *
      * @return array the payout fields
      */
-    public function getPayoutFields()
+    public function getPayoutFields(): array
     {
         return $this->payoutFields;
     }
@@ -447,7 +449,7 @@ class Currency
      *
      * @param array $payoutFields the payout fields
      */
-    public function setPayoutFields(array $payoutFields)
+    public function setPayoutFields(array $payoutFields): void
     {
         $this->payoutFields = $payoutFields;
     }
@@ -457,7 +459,7 @@ class Currency
      *
      * @return array the settlement minimum
      */
-    public function getSettlementMinimum()
+    public function getSettlementMinimum(): array
     {
         return $this->settlementMinimum;
     }
@@ -467,7 +469,7 @@ class Currency
      *
      * @param array $settlementMinimum the settlement minimum
      */
-    public function setSettlementMinimum(array $settlementMinimum)
+    public function setSettlementMinimum(array $settlementMinimum): void
     {
         $this->settlementMinimum = $settlementMinimum;
     }
@@ -477,7 +479,7 @@ class Currency
      *
      * @return array currency data as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'code'              => $this->getCode(),

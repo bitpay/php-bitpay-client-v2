@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitPaySDK\Client;
 
 use BitPaySDK\Exceptions\BitPayException;
@@ -112,12 +114,12 @@ class PayoutClient
     /**
      * Retrieve a collection of BitPay payouts.
      *
-     * @param  string $startDate The start date to filter the Payout Batches.
-     * @param  string $endDate   The end date to filter the Payout Batches.
-     * @param  string $status    The status to filter the Payout Batches.
-     * @param  string $reference The optional reference specified at payout request creation.
-     * @param  int    $limit     Maximum results that the query will return (useful for paging results).
-     * @param  int    $offset    Number of results to offset (ex. skip 10 will give you results
+     * @param string|null $startDate The start date to filter the Payout Batches.
+     * @param string|null $endDate The end date to filter the Payout Batches.
+     * @param string|null $status The status to filter the Payout Batches.
+     * @param string|null $reference The optional reference specified at payout request creation.
+     * @param int|null $limit Maximum results that the query will return (useful for paging results).
+     * @param int|null $offset Number of results to offset (ex. skip 10 will give you results
      *                           starting with the 11th result).
      * @return Payout[]
      * @throws PayoutQueryException
@@ -184,8 +186,8 @@ class PayoutClient
     /**
      * Cancel a BitPay Payout.
      *
-     * @param  string $payoutId The id of the payout to cancel.
-     * @return Payout
+     * @param string $payoutId The id of the payout to cancel.
+     * @return bool
      * @throws PayoutCancellationException
      */
     public function cancel(string $payoutId): bool
@@ -221,8 +223,8 @@ class PayoutClient
     /**
      * Notify BitPay Payout.
      *
-     * @param  string $payoutId The id of the Payout to notify.
-     * @return Payout[]
+     * @param string $payoutId The id of the Payout to notify.
+     * @return bool
      * @throws PayoutNotificationException BitPayException class
      */
     public function requestNotification(string $payoutId): bool

@@ -49,9 +49,9 @@ class Payout
     /**
      * Constructor, create a request Payout object.
      *
-     * @param $amount            float The amount for which the payout will be created.
-     * @param $currency          string The three digit currency string for the PayoutBatch to use.
-     * @param $ledgerCurrency    string Ledger currency code set for the payout request (ISO 4217 3-character
+     * @param float|null $amount float The amount for which the payout will be created.
+     * @param string|null $currency string The three digit currency string for the PayoutBatch to use.
+     * @param string|null $ledgerCurrency string Ledger currency code set for the payout request (ISO 4217 3-character
      *                           currency code), it indicates on which ledger the payout request will be
      *                           recorded. If not provided in the request, this parameter will be set by
      *                           default to the active ledger currency on your account, e.g. your settlement
@@ -743,9 +743,9 @@ class Payout
 
         foreach ($this->transactions as $transaction) {
             if ($transaction instanceof PayoutTransaction) {
-                array_push($transactions, $transaction->toArray());
+                $transactions[] = $transaction->toArray();
             } else {
-                array_push($transactions, $transaction);
+                $transactions[] = $transaction;
             }
         }
 

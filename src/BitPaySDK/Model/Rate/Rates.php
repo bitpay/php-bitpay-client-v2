@@ -45,9 +45,9 @@ class Rates
 
         foreach ($this->rates as $rate) {
             if ($rate instanceof Rate) {
-                array_push($rates, $rate->toArray());
+                $rates[] = $rate->toArray();
             } else {
-                array_push($rates, $rate);
+                $rates[] = $rate;
             }
         }
 

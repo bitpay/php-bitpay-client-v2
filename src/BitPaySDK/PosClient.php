@@ -8,6 +8,7 @@ use BitPaySDK\Model\Currency;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use BitPaySDK\Exceptions\CurrencyQueryException;
 use Exception;
+use JsonMapper;
 
 /**
  * Class Client
@@ -19,9 +20,9 @@ use Exception;
  */
 class PosClient extends Client
 {
-    protected $env;
-    protected $token;
-    protected $RESTcli = null;
+    protected string $env;
+    protected Tokens $token;
+    protected RESTcli $RESTcli;
 
     /**
      * Constructor for the BitPay SDK to use with the POS facade.
@@ -48,7 +49,7 @@ class PosClient extends Client
      *
      * @throws BitPayException BitPayException class
      */
-    private function init()
+    private function init(): void
     {
         try {
             $this->RESTcli = new RESTcli($this->env, new PrivateKey());
@@ -80,7 +81,7 @@ class PosClient extends Client
         }
 
         try {
-            $mapper = new \JsonMapper();
+            $mapper = new JsonMapper();
             $mapper->bEnforceMapType = false;
             $currencies = $mapper->mapArray(
                 json_decode($responseJson),

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitPaySDK\Client;
 
 use BitPayKeyUtils\Util\Util;
@@ -33,7 +35,7 @@ class PayoutRecipientsClient
      * Submit BitPay Payout Recipients.
      *
      * @param  PayoutRecipients $recipients A PayoutRecipients object with request parameters defined.
-     * @return PayoutRevipients[]           A list of BitPay PayoutRecipients objects.
+     * @return array A list of BitPay PayoutRecipients objects.
      * @throws PayoutRecipientCreationException
      */
     public function submit(PayoutRecipients $recipients): array
@@ -78,7 +80,7 @@ class PayoutRecipientsClient
      *
      * @param  string $recipientId The id of the recipient to retrieve.
      * @return PayoutRecipient
-     * @throws PayoutQueryException
+     * @throws PayoutQueryException|PayoutRecipientQueryException
      */
     public function get(string $recipientId): PayoutRecipient
     {
@@ -121,7 +123,7 @@ class PayoutRecipientsClient
      * @param  int|null    $limit  Maximum results that the query will return (useful for paging results).
      * @param  int|null    $offset Number of results to offset (ex. skip 10 will give you results
      *                             starting with the 11th result).
-     * @return BitPayRecipient[]
+     * @return array
      * @throws BitPayException
      */
     public function getPayoutRecipients(string $status = null, int $limit = null, int $offset = null): array

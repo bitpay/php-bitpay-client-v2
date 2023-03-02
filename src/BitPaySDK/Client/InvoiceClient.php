@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitPaySDK\Client;
 
 use BitPayKeyUtils\Util\Util;
@@ -76,14 +78,13 @@ class InvoiceClient
     /**
      * Update a BitPay invoice.
      *
-     * @param string      $invoiceId The id of the invoice to updated.
-     * @param string      $buyerSms The buyer's cell number.
-     * @param string      $smsCode The buyer's received verification code.
+     * @param string $invoiceId The id of the invoice to updated.
+     * @param string|null $buyerSms The buyer's cell number.
+     * @param string|null $smsCode The buyer's received verification code.
      * @param string|null $buyerEmail The buyer's email address.
-     * @param false       $autoVerify Skip the user verification on sandbox ONLY.
+     * @param false $autoVerify Skip the user verification on sandbox ONLY.
      * @return Invoice
      * @throws InvoiceUpdateException
-     * @throws BitPayException
      */
     public function update(
         string $invoiceId,

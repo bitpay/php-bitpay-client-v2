@@ -86,9 +86,9 @@ class PayoutRecipients
 
         foreach ($this->recipients as $recipient) {
             if ($recipient instanceof PayoutRecipient) {
-                array_push($recipients, $recipient->toArray());
+                $recipients[] = $recipient->toArray();
             } else {
-                array_push($recipients, $recipient);
+                $recipients[] = $recipient;
             }
         }
 

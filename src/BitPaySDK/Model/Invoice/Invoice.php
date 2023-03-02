@@ -33,9 +33,9 @@ class Invoice
     protected ?string $itemCode = null;
     protected bool $physical = false;
     protected ?array $paymentCurrencies = null;
-    protected $paymentSubtotals = null;
-    protected $paymentTotals = null;
-    protected $paymentCodes = null;
+    protected ?array $paymentSubTotals = null;
+    protected ?array $paymentTotals = null;
+    protected ?array $paymentCodes = null;
     protected ?string $paymentString = null;
     protected ?string $verificationLink = null;
     protected ?float $acceptanceWindow = null;
@@ -50,7 +50,7 @@ class Invoice
     protected ?string $selectedTransactionCurrency = null;
     protected ?string $forcedBuyerSelectedWallet = null;
     protected ?string $forcedBuyerSelectedTransactionCurrency = null;
-    protected $itemizedDetails = null;
+    protected array|ItemizedDetails $itemizedDetails;
     protected ?string $id = null;
     protected ?string $url = null;
     protected ?string $status = null;
@@ -79,16 +79,16 @@ class Invoice
     protected ?int $overpaidAmount = null;
     protected ?int $amountPaid = null;
     protected ?string $displayAmountPaid = null;
-    protected $exchangeRates = null;
+    protected ?array $exchangeRates = null;
     protected ?bool $bitpayIdRequired = null;
-    protected $paymentDisplaytotals = null;
-    protected $paymentDisplaySubtotals = null;
+    protected ?array $paymentDisplayTotals = null;
+    protected ?array $paymentDisplaySubTotals = null;
 
     /**
      * Constructor, create a minimal request Invoice object.
      *
-     * @param $price float The amount for which the invoice will be created.
-     * @param $currency string three digit currency type used to compute the invoice bitcoin amount.
+     * @param float|null $price float The amount for which the invoice will be created.
+     * @param string|null $currency string three digit currency type used to compute the invoice bitcoin amount.
      */
     public function __construct(float $price = null, string $currency = null)
     {
@@ -743,9 +743,9 @@ class Invoice
      *
      * Object containing line item details for display.
      *
-     * @return ItemizedDetails
+     * @return ItemizedDetails|array
      */
-    public function getItemizedDetails()
+    public function getItemizedDetails(): ItemizedDetails|array
     {
         return $this->itemizedDetails;
     }
@@ -763,9 +763,9 @@ class Invoice
 
         foreach ($itemizedDetails as $item) {
             if ($item instanceof ItemizedDetails) {
-                array_push($itemsArray, $item->toArray());
+                $itemsArray[] = $item->toArray();
             } else {
-                array_push($itemsArray, $item);
+                $itemsArray[] = $item;
             }
         }
 
@@ -1329,9 +1329,9 @@ class Invoice
      *
      * For internal use - This field can be ignored in merchant implementations.
      *
-     * @return object
+     * @return array|null the payment totals
      */
-    public function getPaymentTotals()
+    public function getPaymentTotals(): ?array
     {
         return $this->paymentTotals;
     }
@@ -1341,9 +1341,9 @@ class Invoice
      *
      * For internal use - This field can be ignored in merchant implementations.
      *
-     * @param object $paymentTotals the payment totals
+     * @param array|null $paymentTotals the payment totals
      */
-    public function setPaymentTotals($paymentTotals)
+    public function setPaymentTotals(?array $paymentTotals)
     {
         $this->paymentTotals = $paymentTotals;
     }
@@ -1353,11 +1353,11 @@ class Invoice
      *
      * For internal use. This field can be ignored in merchant implementations.
      *
-     * @return object
+     * @return array|null the payment subtotals
      */
-    public function getPaymentSubTotals()
+    public function getPaymentSubTotals(): ?array
     {
-        return $this->paymentSubtotals;
+        return $this->paymentSubTotals;
     }
 
     /**
@@ -1365,11 +1365,11 @@ class Invoice
      *
      * For internal use. This field can be ignored in merchant implementations.
      *
-     * @param object $paymentSubtotals the payment subtotals
+     * @param array|null $paymentSubTotals the payment subtotals
      */
-    public function setPaymentSubTotals($paymentSubtotals)
+    public function setPaymentSubTotals(?array $paymentSubTotals)
     {
-        $this->paymentSubtotals = $paymentSubtotals;
+        $this->paymentSubTotals = $paymentSubTotals;
     }
 
     /**
@@ -1379,11 +1379,11 @@ class Invoice
      * The key is the currency and the value is an amount indicated in the base unit
      * for each supported transactionCurrency.
      *
-     * @return object
+     * @return array|null Equivalent to price for each supported transactionCurrency
      */
-    public function getPaymentDisplaySubTotals()
+    public function getPaymentDisplaySubTotals(): ?array
     {
-        return $this->paymentDisplaySubtotals;
+        return $this->paymentDisplaySubTotals;
     }
 
     /**
@@ -1393,11 +1393,11 @@ class Invoice
      * The key is the currency and the value is an amount indicated in the base unit
      * for each supported transactionCurrency.
      *
-     * @param object $paymentDisplaySubtotals Equivalent to price for each supported transactionCurrency
+     * @param array|null $paymentDisplaySubTotals Equivalent to price for each supported transactionCurrency
      */
-    public function setPaymentDisplaySubTotals($paymentDisplaySubtotals)
+    public function setPaymentDisplaySubTotals(?array $paymentDisplaySubTotals)
     {
-        $this->paymentDisplaySubtotals = $paymentDisplaySubtotals;
+        $this->paymentDisplaySubTotals = $paymentDisplaySubTotals;
     }
 
     /**
@@ -1408,11 +1408,11 @@ class Invoice
      * The key is the currency and the value is an amount
      * indicated in the base unit for each supported transactionCurrency.
      *
-     * @return object
+     * @return array|null The total amount that the purchaser should pay
      */
-    public function getPaymentDisplayTotals()
+    public function getPaymentDisplayTotals(): ?array
     {
-        return $this->paymentDisplaytotals;
+        return $this->paymentDisplayTotals;
     }
 
     /**
@@ -1423,11 +1423,11 @@ class Invoice
      * The key is the currency and the value is an amount
      * indicated in the base unit for each supported transactionCurrency.
      *
-     * @param object $paymentDisplaytotals The total amount that the purchaser should pay
+     * @param array|null $paymentDisplayTotals The total amount that the purchaser should pay
      */
-    public function setPaymentDisplayTotals($paymentDisplaytotals)
+    public function setPaymentDisplayTotals(?array $paymentDisplayTotals)
     {
-        $this->paymentDisplaytotals = $paymentDisplaytotals;
+        $this->paymentDisplayTotals = $paymentDisplayTotals;
     }
 
     /**
@@ -1440,9 +1440,9 @@ class Invoice
      * For "ETH", "GUSD", "PAX", "BUSD", "USDC", "DAI" and "WBTC"- EIP681 is supported
      * For "XRP" - RIP681, BIP72b and BIP73 is supported
      *
-     * @return object
+     * @return array|null
      */
-    public function getPaymentCodes()
+    public function getPaymentCodes(): ?array
     {
         return $this->paymentCodes;
     }
@@ -1457,9 +1457,9 @@ class Invoice
      * For "ETH", "GUSD", "PAX", "BUSD", "USDC", "DAI" and "WBTC"- EIP681 is supported
      * For "XRP" - RIP681, BIP72b and BIP73 is supported
      *
-     * @param object
+     * @param array|null $paymentCodes
      */
-    public function setPaymentCodes($paymentCodes)
+    public function setPaymentCodes(?array $paymentCodes)
     {
         $this->paymentCodes = $paymentCodes;
     }
@@ -1784,9 +1784,9 @@ class Invoice
      *
      * Exchange rates keyed by source and target currencies.
      *
-     * @return object
+     * @return array|null
      */
-    public function getExchangeRates()
+    public function getExchangeRates(): ?array
     {
         return $this->exchangeRates;
     }
@@ -1796,9 +1796,9 @@ class Invoice
      *
      * Exchange rates keyed by source and target currencies.
      *
-     * @param object $exchangeRates Exchange rates keyed by source and target currencies.
+     * @param array|null $exchangeRates Exchange rates keyed by source and target currencies.
      */
-    public function setExchangeRates($exchangeRates): void
+    public function setExchangeRates(?array $exchangeRates): void
     {
         $this->exchangeRates = $exchangeRates;
     }

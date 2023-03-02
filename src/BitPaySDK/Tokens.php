@@ -12,32 +12,34 @@ use Exception;
 class Tokens
 {
     /**
-     * @var
+     * @var string|null
      */
-    protected $merchant;
-    /**
-     * @var
-     */
-    protected $payout;
+    protected ?string $merchant;
 
     /**
      * @var string|null
      */
-    protected $pos;
+    protected ?string $payout;
+
+    /**
+     * @var string|null
+     */
+    protected ?string $pos;
 
     /**
      * Tokens constructor.
      * @param string|null $merchant
      * @param string|null $payout
+     * @param string|null $pos
      */
-    public function __construct($merchant = null, $payout = null, $pos = null)
+    public function __construct(?string $merchant = null, ?string $payout = null, ?string $pos = null)
     {
         $this->merchant = $merchant;
         $this->payout = $payout;
         $this->pos = $pos;
     }
 
-    public static function loadFromArray(array $tokens)
+    public static function loadFromArray(array $tokens): Tokens
     {
         $instance = new self();
 
@@ -50,10 +52,10 @@ class Tokens
 
     /**
      * @param $facade
-     * @return string
+     * @return string|null
      * @throws Exception
      */
-    public function getTokenByFacade($facade)
+    public function getTokenByFacade($facade): ?string
     {
         $token = null;
         switch ($facade) {
@@ -76,25 +78,25 @@ class Tokens
     }
 
     /**
-     * @param $merchant
+     * @param string $merchant
      */
-    public function setMerchantToken($merchant)
+    public function setMerchantToken(string $merchant)
     {
         $this->merchant = $merchant;
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getPayoutToken()
+    public function getPayoutToken(): ?string
     {
         return $this->payout;
     }
 
     /**
-     * @param $payout
+     * @param string $payout
      */
-    public function setPayoutToken($payout)
+    public function setPayoutToken(string $payout): void
     {
         $this->payout = $payout;
     }
