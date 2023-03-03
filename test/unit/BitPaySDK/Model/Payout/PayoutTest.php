@@ -34,7 +34,10 @@ class PayoutTest extends TestCase
     $this->assertEquals($expectedAmount, $payout->getAmount());
   }
 
-  public function testGetCurrency()
+    /**
+     * @throws BitPayException
+     */
+    public function testGetCurrency()
   {
     $expectedCurrency = Currency::USD;
 
@@ -62,7 +65,10 @@ class PayoutTest extends TestCase
     $this->assertEquals($expectedEffectiveDate, $payout->getEffectiveDate());
   }
 
-  public function testGetLedgerCurrency()
+    /**
+     * @throws BitPayException
+     */
+    public function testGetLedgerCurrency()
   {
     $expectedLedgerCurrency = 'GBP';
 
@@ -92,7 +98,7 @@ class PayoutTest extends TestCase
 
   public function testGetNotificationUrl()
   {
-    $expectedNotificationUrl = 'http://example.com';
+    $expectedNotificationUrl = 'https://example.com';
 
     $bill = $this->createClassObject();
     $bill->setNotificationUrl($expectedNotificationUrl);
@@ -220,7 +226,10 @@ class PayoutTest extends TestCase
     $this->assertEquals($expectedFormattedAmount, $payout->getAmount());
   }
 
-  public function testToArray()
+    /**
+     * @throws BitPayException
+     */
+    public function testToArray()
   {
     $payout = $this->createClassObject();
     $this->objectSetters($payout);
@@ -230,9 +239,6 @@ class PayoutTest extends TestCase
     $payoutTransaction->setTxid('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
     $payoutTransaction->setAmount(0.000254);
     $payoutTransaction->setDate('2021-05-27T11:04:23.155Z');
-
-    $transactions = [];
-    array_push($transactions, $payoutTransaction);
 
     $this->assertNotNull($payoutArray);
     $this->assertIsArray($payoutArray);
@@ -256,34 +262,37 @@ class PayoutTest extends TestCase
     $this->assertArrayHasKey('exchangeRates', $payoutArray);
     $this->assertArrayHasKey('transactions', $payoutArray);
 
-    $this->assertEquals($payoutArray['token'], '6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL');
-    $this->assertEquals($payoutArray['amount'], 10.0);
-    $this->assertEquals($payoutArray['currency'], Currency::USD);
-    $this->assertEquals($payoutArray['effectiveDate'], '2021-05-27T09:00:00.000Z');
-    $this->assertEquals($payoutArray['ledgerCurrency'], Currency::GBP);
-    $this->assertEquals($payoutArray['reference'], 'payout_20210527');
-    $this->assertEquals($payoutArray['notificationURL'], 'http://example.com');
-    $this->assertEquals($payoutArray['notificationEmail'], 'test@test.com');
-    $this->assertEquals($payoutArray['email'], 'test@test.com');
-    $this->assertEquals($payoutArray['recipientId'], 'LDxRZCGq174SF8AnQpdBPB');
-    $this->assertEquals($payoutArray['shopperId'], '7qohDf2zZnQK5Qanj8oyC2');
-    $this->assertEquals($payoutArray['label'], 'My label');
-    $this->assertEquals($payoutArray['message'], 'My message');
-    $this->assertEquals($payoutArray['id'], 'JMwv8wQCXANoU2ZZQ9a9GH');
-    $this->assertEquals($payoutArray['status'], 'success');
-    $this->assertEquals($payoutArray['requestDate'], '2021-05-27T10:47:37.834Z');
-    $this->assertEquals($payoutArray['exchangeRates'], [
+    $this->assertEquals('6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL', $payoutArray['token']);
+    $this->assertEquals(10.0, $payoutArray['amount']);
+    $this->assertEquals(Currency::USD, $payoutArray['currency']);
+    $this->assertEquals('2021-05-27T09:00:00.000Z', $payoutArray['effectiveDate']);
+    $this->assertEquals(Currency::GBP, $payoutArray['ledgerCurrency']);
+    $this->assertEquals('payout_20210527', $payoutArray['reference']);
+    $this->assertEquals('https://example.com', $payoutArray['notificationURL']);
+    $this->assertEquals('test@test.com', $payoutArray['notificationEmail']);
+    $this->assertEquals('test@test.com', $payoutArray['email']);
+    $this->assertEquals('LDxRZCGq174SF8AnQpdBPB', $payoutArray['recipientId']);
+    $this->assertEquals('7qohDf2zZnQK5Qanj8oyC2', $payoutArray['shopperId']);
+    $this->assertEquals('My label', $payoutArray['label']);
+    $this->assertEquals('My message', $payoutArray['message']);
+    $this->assertEquals('JMwv8wQCXANoU2ZZQ9a9GH', $payoutArray['id']);
+    $this->assertEquals('success', $payoutArray['status']);
+    $this->assertEquals('2021-05-27T10:47:37.834Z', $payoutArray['requestDate']);
+    $this->assertEquals([
       'BTC' => [
         'USD' => 39390.47,
         'GBP' => 27883.962246420004
       ]
-    ]);
-    $this->assertEquals($payoutArray['transactions'][0]['txid'], 'db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
-    $this->assertEquals($payoutArray['transactions'][0]['amount'], 0.000254);
-    $this->assertEquals($payoutArray['transactions'][0]['date'], '2021-05-27T11:04:23.155Z');
+    ], $payoutArray['exchangeRates']);
+    $this->assertEquals('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057', $payoutArray['transactions'][0]['txid']);
+    $this->assertEquals(0.000254, $payoutArray['transactions'][0]['amount']);
+    $this->assertEquals('2021-05-27T11:04:23.155Z', $payoutArray['transactions'][0]['date']);
   }
 
-  public function testToArrayEmptyKey()
+    /**
+     * @throws BitPayException
+     */
+    public function testToArrayEmptyKey()
   {
     $payout = $this->createClassObject();
     $this->objectSetters($payout);
@@ -295,12 +304,15 @@ class PayoutTest extends TestCase
     $this->assertArrayNotHasKey('supportPhone', $payoutArray);
   }
 
-  private function createClassObject()
+  private function createClassObject(): Payout
   {
     return new Payout();
   }
 
-  private function objectSetters(Payout $payout)
+    /**
+     * @throws BitPayException
+     */
+    private function objectSetters(Payout $payout)
   {
     $payoutTransaction = new PayoutTransaction();
     $payoutTransaction->setTxid('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
@@ -308,15 +320,18 @@ class PayoutTest extends TestCase
     $payoutTransaction->setDate('2021-05-27T11:04:23.155Z');
 
     $transactions = [];
-    array_push($transactions, $payoutTransaction);
+    $transactions[] = $payoutTransaction;
     
     $payout->setToken('6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL');
     $payout->setAmount(10.0);
     $payout->setCurrency(Currency::USD);
     $payout->setEffectiveDate('2021-05-27T09:00:00.000Z');
-    $payout->setLedgerCurrency(Currency::GBP);
-    $payout->setReference('payout_20210527');
-    $payout->setNotificationURL('http://example.com');
+      try {
+          $payout->setLedgerCurrency(Currency::GBP);
+      } catch (BitPayException) {
+      }
+      $payout->setReference('payout_20210527');
+    $payout->setNotificationURL('https://example.com');
     $payout->setNotificationEmail('test@test.com');
     $payout->setEmail('test@test.com');
     $payout->setRecipientId('LDxRZCGq174SF8AnQpdBPB');

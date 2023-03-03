@@ -1,6 +1,6 @@
 <?php
 
-namespace BitPaySDK\Test;
+namespace BitPaySDK\Test\Model\Wallet;
 
 use BitPaySDK\Model\Wallet\CurrencyQr;
 use PHPUnit\Framework\TestCase;
@@ -24,11 +24,9 @@ class CurrencyQrTest extends TestCase
 
   public function testGetCollapsed()
   {
-    $expectedCollapsed = false;
-
     $currencyQr = $this->createClassObject();
-    $currencyQr->setCollapsed($expectedCollapsed);
-    $this->assertEquals($expectedCollapsed, $currencyQr->getCollapsed());
+    $currencyQr->setCollapsed(false);
+    $this->assertFalse($currencyQr->getCollapsed());
   }
 
   public function testToArray()
@@ -43,11 +41,11 @@ class CurrencyQrTest extends TestCase
     $this->assertArrayHasKey('type', $currencyQrArray);
     $this->assertArrayHasKey('collapsed', $currencyQrArray);
 
-    $this->AssertEquals($currencyQrArray['type'], 'BIP21');
-    $this->AssertEquals($currencyQrArray['collapsed'], false);
+    $this->assertEquals('BIP21', $currencyQrArray['type']);
+    $this->assertEquals(false, $currencyQrArray['collapsed']);
   }
 
-  private function createClassObject()
+  private function createClassObject(): CurrencyQr
   {
     return new CurrencyQr();
   }

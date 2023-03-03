@@ -25,6 +25,9 @@ class RatesTest extends TestCase
         $this->assertIsArray($ratesArray);
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testUpdate()
     {
         $rates = [new Rate(), 'test' => 'test'];
@@ -49,6 +52,9 @@ class RatesTest extends TestCase
         $rates->getRate('ELO');
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testGetRate()
     {
         $expectedValue = 12;
@@ -76,7 +82,7 @@ class RatesTest extends TestCase
         $this->assertArrayNotHasKey('rates', $ratesEmptyArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Rates
     {
         $rates = [new Rate(), 'test' => 'test'];
         $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();

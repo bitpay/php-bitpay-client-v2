@@ -102,16 +102,16 @@ class RefundParamsTest extends TestCase
         $this->assertArrayHasKey('purchaserNotifyEmail', $refundParamsArray);
         $this->assertArrayHasKey('refundAddress', $refundParamsArray);
 
-        $this->assertEquals($refundParamsArray['requesterType'], 'Requester type');
-        $this->assertEquals($refundParamsArray['requesterEmail'], 'test@email.com');
-        $this->assertEquals($refundParamsArray['amount'], 15);
-        $this->assertEquals($refundParamsArray['currency'], 'BTC');
-        $this->assertEquals($refundParamsArray['email'], 'test@email.com');
-        $this->assertEquals($refundParamsArray['purchaserNotifyEmail'], 'test@email.com');
-        $this->assertEquals($refundParamsArray['refundAddress'], 'Refund address');
+        $this->assertEquals('Requester type', $refundParamsArray['requesterType']);
+        $this->assertEquals('test@email.com', $refundParamsArray['requesterEmail']);
+        $this->assertEquals(15, $refundParamsArray['amount']);
+        $this->assertEquals('BTC', $refundParamsArray['currency']);
+        $this->assertEquals('test@email.com', $refundParamsArray['email']);
+        $this->assertEquals('test@email.com', $refundParamsArray['purchaserNotifyEmail']);
+        $this->assertEquals('Refund address', $refundParamsArray['refundAddress']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): RefundParams
     {
         return new RefundParams();
     }

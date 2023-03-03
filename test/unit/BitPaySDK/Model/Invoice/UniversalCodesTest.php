@@ -43,11 +43,11 @@ class UniversalCodesTest extends TestCase
         $this->assertArrayHasKey('paymentString', $universalCodesArray);
         $this->assertArrayHasKey('verificationLink', $universalCodesArray);
 
-        $this->assertEquals($universalCodesArray['paymentString'], 'Test payment string');
-        $this->assertEquals($universalCodesArray['verificationLink'], 'http://test.com');
+        $this->assertEquals('Test payment string', $universalCodesArray['paymentString']);
+        $this->assertEquals('http://test.com', $universalCodesArray['verificationLink']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): UniversalCodes
     {
         return new UniversalCodes();
     }

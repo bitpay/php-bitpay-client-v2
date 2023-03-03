@@ -51,12 +51,12 @@ class ItemizedDetailsTest extends TestCase
         $this->assertArrayHasKey('description', $itemizedDetailsArray);
         $this->assertArrayHasKey('isFee', $itemizedDetailsArray);
 
-        $this->assertEquals($itemizedDetailsArray['amount'], 15.5);
-        $this->assertEquals($itemizedDetailsArray['description'], 'Test description');
-        $this->assertEquals($itemizedDetailsArray['isFee'], true);
+        $this->assertEquals(15.5, $itemizedDetailsArray['amount']);
+        $this->assertEquals('Test description', $itemizedDetailsArray['description']);
+        $this->assertEquals(true, $itemizedDetailsArray['isFee']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): ItemizedDetails
     {
         return new ItemizedDetails();
     }

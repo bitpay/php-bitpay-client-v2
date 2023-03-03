@@ -32,7 +32,7 @@ class ShopperTest extends TestCase
         $this->assertIsArray($shopperArray);
 
         $this->assertArrayHasKey('user', $shopperArray);
-        $this->assertEquals($shopperArray['user'], 'Test user');
+        $this->assertEquals('Test user', $shopperArray['user']);
     }
 
     public function testToArrayEmptyUser()
@@ -42,7 +42,7 @@ class ShopperTest extends TestCase
         $this->assertArrayNotHasKey('user', $shopperArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Shopper
     {
         return new Shopper();
     }
