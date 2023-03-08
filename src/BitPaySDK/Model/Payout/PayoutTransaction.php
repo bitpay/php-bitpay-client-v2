@@ -37,7 +37,7 @@ class PayoutTransaction
      *
      * @param string $txid the tax id
      */
-    public function setTxid(string $txid): void
+    public function setTxid(?string $txid): void
     {
         $this->txid = $txid;
     }
@@ -57,7 +57,7 @@ class PayoutTransaction
      *
      * @param float $amount the amount
      */
-    public function setAmount(float $amount): void
+    public function setAmount(?float $amount): void
     {
         $this->amount = $amount;
     }
@@ -79,7 +79,7 @@ class PayoutTransaction
      *
      * @param string $date the date
      */
-    public function setDate(string $date): void
+    public function setDate(?string $date): void
     {
         $this->date = $date;
     }
