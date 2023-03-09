@@ -112,16 +112,16 @@ class InvoiceDataTest extends TestCase
         $this->assertArrayHasKey('payoutPercentage', $invoiceDataArray);
         $this->assertArrayHasKey('refundInfo', $invoiceDataArray);
 
-        $this->assertEquals($invoiceDataArray['orderId'], '1');
-        $this->assertEquals($invoiceDataArray['date'], '2022-01-01');
-        $this->assertEquals($invoiceDataArray['price'], 12.9);
-        $this->assertEquals($invoiceDataArray['currency'], 'BTC');
-        $this->assertEquals($invoiceDataArray['transactionCurrency'], 'BTC');
-        $this->assertEquals($invoiceDataArray['payoutPercentage'], 15);
-        $this->assertEquals($invoiceDataArray['refundInfo'], []);
+        $this->assertEquals('1', $invoiceDataArray['orderId']);
+        $this->assertEquals('2022-01-01', $invoiceDataArray['date']);
+        $this->assertEquals(12.9, $invoiceDataArray['price']);
+        $this->assertEquals('BTC', $invoiceDataArray['currency']);
+        $this->assertEquals('BTC', $invoiceDataArray['transactionCurrency']);
+        $this->assertEquals(15, $invoiceDataArray['payoutPercentage']);
+        $this->assertEquals([], $invoiceDataArray['refundInfo']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): InvoiceData
     {
         return new InvoiceData();
     }

@@ -88,12 +88,12 @@ class PayoutReceivedInfoAddressTest extends TestCase
     $this->assertArrayHasKey('postalCode', $payoutReceivedInfoAddressArray);
     $this->assertArrayHasKey('country', $payoutReceivedInfoAddressArray);
 
-    $this->assertEquals($payoutReceivedInfoAddressArray['address1'], '123 Main St.');
-    $this->assertEquals($payoutReceivedInfoAddressArray['address2'], '#4');
-    $this->assertEquals($payoutReceivedInfoAddressArray['locality'], 'Locality Name');
-    $this->assertEquals($payoutReceivedInfoAddressArray['region'], 'Region Name');
-    $this->assertEquals($payoutReceivedInfoAddressArray['postalCode'], '00000');
-    $this->assertEquals($payoutReceivedInfoAddressArray['country'], 'US');
+    $this->assertEquals('123 Main St.', $payoutReceivedInfoAddressArray['address1']);
+    $this->assertEquals('#4', $payoutReceivedInfoAddressArray['address2']);
+    $this->assertEquals('Locality Name', $payoutReceivedInfoAddressArray['locality']);
+    $this->assertEquals('Region Name', $payoutReceivedInfoAddressArray['region']);
+    $this->assertEquals('00000', $payoutReceivedInfoAddressArray['postalCode']);
+    $this->assertEquals('US', $payoutReceivedInfoAddressArray['country']);
   }
 
   public function testToArrayEmptyKey()
@@ -104,7 +104,7 @@ class PayoutReceivedInfoAddressTest extends TestCase
     $this->assertArrayNotHasKey('address1', $payoutReceivedInfoAddressArray);
   }
 
-  private function createClassObject()
+  private function createClassObject(): PayoutReceivedInfoAddress
   {
     return new PayoutReceivedInfoAddress();
   }

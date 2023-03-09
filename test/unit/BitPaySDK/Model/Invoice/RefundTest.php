@@ -189,25 +189,25 @@ class RefundTest extends TestCase
         $this->assertArrayHasKey('reference', $refundArray);
         $this->assertArrayHasKey('lastRefundNotification', $refundArray);
 
-        $this->assertEquals($refundArray['guid'], 'Guid');
-        $this->assertEquals($refundArray['refundEmail'], 'test@email.com');
-        $this->assertEquals($refundArray['amount'], 11.1);
-        $this->assertEquals($refundArray['currency'], 'BTC');
-        $this->assertEquals($refundArray['token'], 'Token');
-        $this->assertEquals($refundArray['id'], '1');
-        $this->assertEquals($refundArray['requestDate'], '2022-01-01');
-        $this->assertEquals($refundArray['status'], 'pending');
-        $this->assertEquals($refundArray['invoiceId'], '11');
-        $this->assertEquals($refundArray['preview'], true);
-        $this->assertEquals($refundArray['immediate'], true);
-        $this->assertEquals($refundArray['refundFee'], 1.0);
-        $this->assertEquals($refundArray['invoice'], 'Invoice');
-        $this->assertEquals($refundArray['buyerPaysRefundFee'], true);
-        $this->assertEquals($refundArray['reference'], 'Reference');
-        $this->assertEquals($refundArray['lastRefundNotification'], 'Last refunded notification');
+        $this->assertEquals('Guid', $refundArray['guid']);
+        $this->assertEquals('test@email.com', $refundArray['refundEmail']);
+        $this->assertEquals(11.1, $refundArray['amount']);
+        $this->assertEquals('BTC', $refundArray['currency']);
+        $this->assertEquals('Token', $refundArray['token']);
+        $this->assertEquals('1', $refundArray['id']);
+        $this->assertEquals('2022-01-01', $refundArray['requestDate']);
+        $this->assertEquals('pending', $refundArray['status']);
+        $this->assertEquals('11', $refundArray['invoiceId']);
+        $this->assertEquals(true, $refundArray['preview']);
+        $this->assertEquals(true, $refundArray['immediate']);
+        $this->assertEquals(1.0, $refundArray['refundFee']);
+        $this->assertEquals('Invoice', $refundArray['invoice']);
+        $this->assertEquals(true, $refundArray['buyerPaysRefundFee']);
+        $this->assertEquals('Reference', $refundArray['reference']);
+        $this->assertEquals('Last refunded notification', $refundArray['lastRefundNotification']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Refund
     {
         return new Refund();
     }

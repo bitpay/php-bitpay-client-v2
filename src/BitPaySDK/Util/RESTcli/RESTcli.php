@@ -20,7 +20,6 @@ use GuzzleHttp\Exception\InvalidArgumentException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\TooManyRedirectsException;
-use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Response as Response;
 use GuzzleHttp\RequestOptions as RequestOptions;
 
@@ -33,24 +32,24 @@ class RESTcli
     /**
      * @var GuzzleHttpClient
      */
-    protected $client;
+    protected GuzzleHttpClient $client;
     /**
      * @var string
      */
-    protected $baseUrl;
+    protected string $baseUrl;
     /**
      * @var PrivateKey
      */
-    protected $ecKey;
+    protected PrivateKey $ecKey;
     /**
      * @var string
      */
-    protected $identity;
+    protected string $identity;
 
     /**
      * @var string
      */
-    protected $proxy;
+    protected string $proxy;
 
     /**
      * RESTcli constructor.
@@ -72,7 +71,7 @@ class RESTcli
      *
      * @throws BitPayException
      */
-    public function init()
+    public function init(): void
     {
         try {
             $this->identity = $this->ecKey->getPublicKey()->__toString();
@@ -107,7 +106,7 @@ class RESTcli
      * @return string (json)
      * @throws BitPayException
      */
-    public function post($uri, array $formData = [], $signatureRequired = true): string
+    public function post($uri, array $formData = [], bool $signatureRequired = true): string
     {
         try {
             $fullURL = $this->baseUrl . $uri;
@@ -131,15 +130,13 @@ class RESTcli
                 'POST',
                 $fullURL,
                 [
-                $options[RequestOptions::SYNCHRONOUS] = false,
+                false,
                 'headers'            => $headers,
                 RequestOptions::JSON => $formData,
                 ]
             )->wait();
 
-            $responseJson = $this->responseToJsonString($response);
-
-            return $responseJson;
+            return $this->responseToJsonString($response);
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
             throw new BitPayException(
@@ -175,7 +172,7 @@ class RESTcli
      * @return string (json)
      * @throws BitPayException
      */
-    public function get($uri, array $parameters = null, $signatureRequired = true): string
+    public function get($uri, array $parameters = null, bool $signatureRequired = true): string
     {
         try {
             $fullURL = $this->baseUrl . $uri;
@@ -209,9 +206,7 @@ class RESTcli
                 ]
             )->wait();
 
-            $responseJson = $this->responseToJsonString($response);
-
-            return $responseJson;
+            return $this->responseToJsonString($response);
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
             throw new BitPayException(
@@ -277,9 +272,7 @@ class RESTcli
                 ]
             )->wait();
 
-            $responseJson = $this->responseToJsonString($response);
-
-            return $responseJson;
+            return $this->responseToJsonString($response);
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
             throw new BitPayException(
@@ -341,9 +334,7 @@ class RESTcli
                 ]
             )->wait();
 
-            $responseJson = $this->responseToJsonString($response);
-
-            return $responseJson;
+            return $this->responseToJsonString($response);
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
             throw new BitPayException(
@@ -376,12 +367,10 @@ class RESTcli
      * @param Response $response
      * @return string
      * @throws BitPayException
+     * @throws Exception
      */
     public function responseToJsonString(Response $response): string
     {
-        if ($response == null) {
-            throw new Exception("Error: HTTP response is null");
-        }
 
         try {
             $body = json_decode($response->getBody()->getContents(), true);

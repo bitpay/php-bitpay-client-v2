@@ -49,9 +49,9 @@ class Payout
     /**
      * Constructor, create a request Payout object.
      *
-     * @param $amount            float The amount for which the payout will be created.
-     * @param $currency          string The three digit currency string for the PayoutBatch to use.
-     * @param $ledgerCurrency    string Ledger currency code set for the payout request (ISO 4217 3-character
+     * @param float|null $amount float The amount for which the payout will be created.
+     * @param string|null $currency string The three digit currency string for the PayoutBatch to use.
+     * @param string|null $ledgerCurrency string Ledger currency code set for the payout request (ISO 4217 3-character
      *                           currency code), it indicates on which ledger the payout request will be
      *                           recorded. If not provided in the request, this parameter will be set by
      *                           default to the active ledger currency on your account, e.g. your settlement
@@ -735,31 +735,35 @@ class Payout
     /**
      * Gets transactions. Contains the cryptocurrency transaction details for the executed payout request.
      *
-     * @return array
+     * @return PayoutTransaction[]
      */
     public function getTransactions(): array
     {
-        $transactions = [];
-
-        foreach ($this->transactions as $transaction) {
-            if ($transaction instanceof PayoutTransaction) {
-                array_push($transactions, $transaction->toArray());
-            } else {
-                array_push($transactions, $transaction);
-            }
-        }
-
-        return $transactions;
+        return $this->transactions;
     }
 
     /**
      * Sets transactions. Contains the cryptocurrency transaction details for the executed payout request.
      *
-     * @param array $transactions
+     * * @param array $transactions
      */
     public function setTransactions(array $transactions): void
     {
-        $this->transactions = $transactions;
+        $transactionsArray = [];
+
+        foreach ($transactions as $transaction) {
+            if ($transaction instanceof PayoutTransaction) {
+                $transactionsArray[] = $transaction;
+            } else {
+                $newTransaction = new PayoutTransaction();
+                $newTransaction->setAmount($transaction['amount'] ?? null);
+                $newTransaction->setDate($transaction['date'] ?? null);
+                $newTransaction->setTxid($transaction['txid'] ?? null);
+                $transactionsArray[] = $newTransaction;
+            }
+        }
+
+        $this->transactions = $transactionsArray;
     }
 
     /**

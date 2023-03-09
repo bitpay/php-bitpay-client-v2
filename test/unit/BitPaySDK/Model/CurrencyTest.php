@@ -50,18 +50,18 @@ class CurrencyTest extends TestCase
         $this->assertArrayHasKey('decimals', $currencyArray);
         $this->assertArrayHasKey('payoutFields', $currencyArray);
         $this->assertArrayHasKey('settlementMinimum', $currencyArray);
-        $this->assertEquals($currencyArray['code'], 'BTC');
-        $this->assertEquals($currencyArray['symbol'], 'Symbol');
-        $this->assertEquals($currencyArray['precision'], 1);
-        $this->assertEquals($currencyArray['currentlySettled'], true);
-        $this->assertEquals($currencyArray['name'], 'Bitcoin');
-        $this->assertEquals($currencyArray['plural'], 'plural');
-        $this->assertEquals($currencyArray['alts'], 'alts');
-        $this->assertEquals($currencyArray['minimum'], 'minimum');
-        $this->assertEquals($currencyArray['sanctioned'], true);
-        $this->assertEquals($currencyArray['decimals'], 'decimals');
-        $this->assertEquals($currencyArray['payoutFields'], ['test']);
-        $this->assertEquals($currencyArray['settlementMinimum'], ['test']);
+        $this->assertEquals('BTC', $currencyArray['code']);
+        $this->assertEquals('Symbol', $currencyArray['symbol']);
+        $this->assertEquals(1, $currencyArray['precision']);
+        $this->assertEquals(true, $currencyArray['currentlySettled']);
+        $this->assertEquals('Bitcoin', $currencyArray['name']);
+        $this->assertEquals('plural', $currencyArray['plural']);
+        $this->assertEquals('alts', $currencyArray['alts']);
+        $this->assertEquals('minimum', $currencyArray['minimum']);
+        $this->assertEquals(true, $currencyArray['sanctioned']);
+        $this->assertEquals('decimals', $currencyArray['decimals']);
+        $this->assertEquals(['test'], $currencyArray['payoutFields']);
+        $this->assertEquals(['test'], $currencyArray['settlementMinimum']);
     }
 
     public function testGetCode()
@@ -148,7 +148,7 @@ class CurrencyTest extends TestCase
         $this->assertEquals(['test'], $currency->getSettlementMinimum());
     }
 
-    private function createClassObject()
+    private function createClassObject(): Currency
     {
         return new Currency();
     }

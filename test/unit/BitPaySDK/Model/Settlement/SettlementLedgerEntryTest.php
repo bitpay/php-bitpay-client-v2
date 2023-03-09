@@ -94,15 +94,15 @@ class SettlementLedgerEntryTest extends TestCase
         $this->assertArrayHasKey('reference', $settlementLedgerEntryArray);
         $this->assertArrayHasKey('invoiceData', $settlementLedgerEntryArray);
 
-        $this->assertEquals($settlementLedgerEntryArray['code'], 567);
-        $this->assertEquals($settlementLedgerEntryArray['invoiceId'], '14');
-        $this->assertEquals($settlementLedgerEntryArray['amount'], 55.5);
-        $this->assertEquals($settlementLedgerEntryArray['timestamp'], '2022-01-11 01:01:01');
-        $this->assertEquals($settlementLedgerEntryArray['description'], 'Description');
-        $this->assertEquals($settlementLedgerEntryArray['reference'], 'Reference');
+        $this->assertEquals(567, $settlementLedgerEntryArray['code']);
+        $this->assertEquals('14', $settlementLedgerEntryArray['invoiceId']);
+        $this->assertEquals(55.5, $settlementLedgerEntryArray['amount']);
+        $this->assertEquals('2022-01-11 01:01:01', $settlementLedgerEntryArray['timestamp']);
+        $this->assertEquals('Description', $settlementLedgerEntryArray['description']);
+        $this->assertEquals('Reference', $settlementLedgerEntryArray['reference']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): SettlementLedgerEntry
     {
         return new SettlementLedgerEntry();
     }

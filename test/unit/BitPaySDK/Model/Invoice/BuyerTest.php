@@ -121,15 +121,15 @@ class BuyerTest extends TestCase
         $this->assertArrayHasKey('phone', $buyerArray);
         $this->assertArrayHasKey('notify', $buyerArray);
 
-        $this->assertEquals($buyerArray['name'], 'Test name');
-        $this->assertEquals($buyerArray['address1'], 'Address 1');
-        $this->assertEquals($buyerArray['address2'], 'Address 2');
-        $this->assertEquals($buyerArray['locality'], 'Tavares');
-        $this->assertEquals($buyerArray['region'], 'Test region');
-        $this->assertEquals($buyerArray['postalCode'], '12345');
-        $this->assertEquals($buyerArray['country'], 'USA');
-        $this->assertEquals($buyerArray['email'], 'test@email.com');
-        $this->assertEquals($buyerArray['phone'], '123456789');
+        $this->assertEquals('Test name', $buyerArray['name']);
+        $this->assertEquals('Address 1', $buyerArray['address1']);
+        $this->assertEquals('Address 2', $buyerArray['address2']);
+        $this->assertEquals('Tavares', $buyerArray['locality']);
+        $this->assertEquals('Test region', $buyerArray['region']);
+        $this->assertEquals('12345', $buyerArray['postalCode']);
+        $this->assertEquals('USA', $buyerArray['country']);
+        $this->assertEquals('test@email.com', $buyerArray['email']);
+        $this->assertEquals('123456789', $buyerArray['phone']);
         $this->assertTrue($buyerArray['notify']);
     }
 
@@ -145,7 +145,7 @@ class BuyerTest extends TestCase
         $this->assertArrayNotHasKey('name', $buyerArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Buyer
     {
         return new Buyer();
     }

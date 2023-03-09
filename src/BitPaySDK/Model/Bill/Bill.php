@@ -156,9 +156,9 @@ class Bill
 
         foreach ($this->items as $item) {
             if ($item instanceof Item) {
-                array_push($items, $item->toArray());
+                $items[] = $item->toArray();
             } else {
-                array_push($items, $item);
+                $items[] = $item;
             }
         }
 
@@ -176,9 +176,9 @@ class Bill
 
         foreach ($items as $item) {
             if ($item instanceof Item) {
-                array_push($itemsArray, $item);
+                $itemsArray[] = $item;
             } else {
-                array_push($itemsArray, Item::createFromArray((array)$item));
+                $itemsArray[] = Item::createFromArray((array)$item);
             }
         }
 

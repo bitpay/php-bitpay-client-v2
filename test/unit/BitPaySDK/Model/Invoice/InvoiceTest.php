@@ -33,6 +33,9 @@ class InvoiceTest extends TestCase
         $invoice->setCurrency($expectedCurrency);
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testGetCurrency()
     {
         $expectedCurrency = 'BTC';
@@ -241,13 +244,10 @@ class InvoiceTest extends TestCase
 
     public function testGetItemizedDetailsAsArray()
     {
-        $expectedArray = [
-            'amount' => 1,
-            'description' => 'testDescription',
-            'isFee' => true
-        ];
         $expectedItemizedDetails = $this->getMockBuilder(ItemizedDetails::class)->disableOriginalConstructor()->getMock();
-        $expectedItemizedDetails->method('toArray')->willReturn($expectedArray);
+        $expectedItemizedDetails->method('getAmount')->willReturn(1.2);
+        $expectedItemizedDetails->method('getDescription')->willReturn('test description');
+        $expectedItemizedDetails->method('getIsFee')->willReturn(true);
 
         $invoice = $this->createClassObject();
         $invoice->setItemizedDetails([$expectedItemizedDetails]);
@@ -256,10 +256,9 @@ class InvoiceTest extends TestCase
         $this->assertNotNull($invoice->getItemizedDetails());
 
         foreach ($invoice->getItemizedDetails() as $item) {
-            $this->assertArrayHasKey('amount', $item);
-            $this->assertArrayHasKey('description', $item);
-            $this->assertArrayHasKey('isFee', $item);
-            $this->assertEquals($expectedArray, $item);
+            $this->assertEquals(1.2, $item->getAmount());
+            $this->assertEquals('test description', $item->getDescription());
+            $this->assertTrue($item->getIsFee());
         }
     }
 
@@ -389,11 +388,9 @@ class InvoiceTest extends TestCase
 
     public function testGetRefundAddressRequestPending()
     {
-        $expectedRefundAddressRequestPending = false;
-
         $invoice = $this->createClassObject();
-        $invoice->setRefundAddressRequestPending($expectedRefundAddressRequestPending);
-        $this->assertEquals($expectedRefundAddressRequestPending, $invoice->getRefundAddressRequestPending());
+        $invoice->setRefundAddressRequestPending(false);
+        $this->assertFalse($invoice->getRefundAddressRequestPending());
     }
 
     public function testGetBuyerProvidedEmail()
@@ -443,7 +440,19 @@ class InvoiceTest extends TestCase
 
     public function testGetPaymentTotals()
     {
-        $expectedPaymentTotals = 'Test payment totals';
+        $expectedPaymentTotals = [
+            "BTC" => 70200,
+            "BCH" => 11495400,
+            "ETH" => 9327000000000000,
+            "GUSD" => 1200,
+            "PAX" => 12000000000000000000,
+            "BUSD" => 12000000000000000000,
+            "USDC" => 12000000,
+            "DOGE" => 13219659000,
+            "LTC" => 20332100,
+            "MATIC" => 12502605000000000000,
+            "USDC_m" => 12000000
+        ];
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentTotals($expectedPaymentTotals);
@@ -452,7 +461,19 @@ class InvoiceTest extends TestCase
 
     public function testGetPaymentSubTotals()
     {
-        $expectedPaymentSubTotals = 'Test payment sub totals';
+        $expectedPaymentSubTotals = [
+            "BTC" => 70100,
+            "BCH" => 11495400,
+            "ETH" => 9327000000000000,
+            "GUSD" => 1200,
+            "PAX" => 12000000000000000000,
+            "BUSD" => 12000000000000000000,
+            "USDC" => 12000000,
+            "DOGE" => 13219659000,
+            "LTC" => 20332100,
+            "MATIC" => 12502605000000000000,
+            "USDC_m" => 12000000
+        ];
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentSubTotals($expectedPaymentSubTotals);
@@ -461,7 +482,19 @@ class InvoiceTest extends TestCase
 
     public function testGetPaymentDisplaySubTotals()
     {
-        $expectedPaymentDisplaySubTotals = 'Test payment display sub totals';
+        $expectedPaymentDisplaySubTotals = [
+            "BTC" => "0.000701",
+            "BCH" => "0.114954",
+            "ETH" => "0.009327",
+            "GUSD" => "12.00",
+            "PAX" => "12.00",
+            "BUSD" => "12.00",
+            "USDC" => "12.00",
+            "DOGE" => "132.196590",
+            "LTC" => "0.203321",
+            "MATIC" => "12.502605",
+            "USDC_m" => "12.00"
+        ];
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentDisplaySubTotals($expectedPaymentDisplaySubTotals);
@@ -470,7 +503,19 @@ class InvoiceTest extends TestCase
 
     public function testGetPaymentDisplayTotals()
     {
-        $expectedPaymentDisplayTotals = 'Test payment display totals';
+        $expectedPaymentDisplayTotals = [
+            "BTC" => "0.000702",
+            "BCH" => "0.114954",
+            "ETH" => "0.009327",
+            "GUSD" => "12.00",
+            "PAX" => "12.00",
+            "BUSD" => "12.00",
+            "USDC" => "12.00",
+            "DOGE" => "132.196590",
+            "LTC" => "0.203321",
+            "MATIC" => "12.502605",
+            "USDC_m" => "12.00"
+        ];
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentDisplayTotals($expectedPaymentDisplayTotals);
@@ -479,7 +524,45 @@ class InvoiceTest extends TestCase
 
     public function testGetPaymentCodes()
     {
-        $expectedPaymentCodes = 'Test payment codes';
+        $expectedPaymentCodes = [
+            'BTC' => [
+                "BIP72b" => "bitcoin:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4",
+                "BIP73"=> "https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "BCH" => [
+                "BIP72b" => "bitcoincash:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4",
+                "BIP73" => "https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "ETH" => [
+                "EIP681" => "ethereum:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "GUSD" => [
+                "EIP681b" => "ethereum:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "PAX" => [
+                "EIP681b" => "ethereum:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "BUSD" => [
+                "EIP681b" => "ethereum:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "USDC" => [
+                "EIP681b" => "ethereum:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "DOGE" => [
+                "BIP72b" => "dogecoin:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4",
+                "BIP73" => "https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "LTC" => [
+                "BIP72b" => "litecoin:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4",
+                "BIP73" => "https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "MATIC" => [
+                "EIP681" => "matic:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ],
+            "USDC_m" => [
+                "EIP681b" => "matic:?r=https://test.bitpay.com/i/UZjwcYkWAKfTMn9J1yyfs4"
+            ]
+        ];
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentCodes($expectedPaymentCodes);
@@ -583,7 +666,7 @@ class InvoiceTest extends TestCase
 
     public function testGetExchangeRates()
     {
-        $expectedExchangeRates = 'Test exchange rates';
+        $expectedExchangeRates = $this->getExampleExchangeRates();
 
         $invoice = $this->createClassObject();
         $invoice->setExchangeRates($expectedExchangeRates);
@@ -615,6 +698,9 @@ class InvoiceTest extends TestCase
         $this->assertFalse($invoice->getIsCancelled());
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testToArray()
     {
         $invoice = $this->createClassObject();
@@ -670,50 +756,50 @@ class InvoiceTest extends TestCase
         $this->assertArrayHasKey('buyerSms', $invoiceArray);
         $this->assertArrayHasKey('forcedBuyerSelectedTransactionCurrency', $invoiceArray);
 
-        $this->assertEquals($invoiceArray['currency'], 'BTC');
-        $this->assertEquals($invoiceArray['guid'], 'Test guid');
-        $this->assertEquals($invoiceArray['token'], '4h2h7kee5eh2hh4');
-        $this->assertEquals($invoiceArray['price'], 355.3);
-        $this->assertEquals($invoiceArray['posData'], 'Test pos data');
-        $this->assertEquals($invoiceArray['notificationURL'], 'http://test.com');
-        $this->assertEquals($invoiceArray['transactionSpeed'], 'Test transaction speed');
+        $this->assertEquals('BTC', $invoiceArray['currency']);
+        $this->assertEquals('Test guid', $invoiceArray['guid']);
+        $this->assertEquals('4h2h7kee5eh2hh4', $invoiceArray['token']);
+        $this->assertEquals(355.3, $invoiceArray['price']);
+        $this->assertEquals('Test pos data', $invoiceArray['posData']);
+        $this->assertEquals('http://test.com', $invoiceArray['notificationURL']);
+        $this->assertEquals('Test transaction speed', $invoiceArray['transactionSpeed']);
         $this->assertTrue($invoiceArray['fullNotifications']);
-        $this->assertEquals($invoiceArray['notificationEmail'], 'test@email.com');
-        $this->assertEquals($invoiceArray['redirectURL'], 'http://test.com');
-        $this->assertEquals($invoiceArray['orderId'], '34');
-        $this->assertEquals($invoiceArray['itemDesc'], 'Test item desc');
-        $this->assertEquals($invoiceArray['itemCode'], 'Test item code');
+        $this->assertEquals('test@email.com', $invoiceArray['notificationEmail']);
+        $this->assertEquals('http://test.com', $invoiceArray['redirectURL']);
+        $this->assertEquals('34', $invoiceArray['orderId']);
+        $this->assertEquals('Test item desc', $invoiceArray['itemDesc']);
+        $this->assertEquals('Test item code', $invoiceArray['itemCode']);
         $this->assertTrue($invoiceArray['physical']);
-        $this->assertEquals($invoiceArray['paymentCurrencies'], ['BTC']);
-        $this->assertEquals($invoiceArray['acceptanceWindow'], 1.1);
-        $this->assertEquals($invoiceArray['closeURL'], 'http://test.com');
+        $this->assertEquals(['BTC'], $invoiceArray['paymentCurrencies']);
+        $this->assertEquals(1.1, $invoiceArray['acceptanceWindow']);
+        $this->assertEquals('http://test.com', $invoiceArray['closeURL']);
         $this->assertTrue($invoiceArray['autoRedirect']);
-        $this->assertEquals($invoiceArray['refundAddresses'], ['Test refund address']);
-        $this->assertEquals($invoiceArray['id'], '12');
-        $this->assertEquals($invoiceArray['url'], 'http://test.com');
-        $this->assertEquals($invoiceArray['status'], 'pending');
-        $this->assertEquals($invoiceArray['lowFeeDetected'], 'Low fee detected');
-        $this->assertEquals($invoiceArray['invoiceTime'], 1620734545366);
-        $this->assertEquals($invoiceArray['expirationTime'], '01:01:01');
-        $this->assertEquals($invoiceArray['currentTime'], '01:01:01');
-        $this->assertEquals($invoiceArray['exceptionStatus'], 'Exception status');
-        $this->assertEquals($invoiceArray['targetConfirmations'], 6);
-        $this->assertEquals($invoiceArray['buyerProvidedEmail'], 'test@email.com');
-        $this->assertEquals($invoiceArray['billId'], '34');
+        $this->assertEquals(['Test refund address'], $invoiceArray['refundAddresses']);
+        $this->assertEquals('12', $invoiceArray['id']);
+        $this->assertEquals('http://test.com', $invoiceArray['url']);
+        $this->assertEquals('pending', $invoiceArray['status']);
+        $this->assertEquals('Low fee detected', $invoiceArray['lowFeeDetected']);
+        $this->assertEquals(1620734545366, $invoiceArray['invoiceTime']);
+        $this->assertEquals('01:01:01', $invoiceArray['expirationTime']);
+        $this->assertEquals('01:01:01', $invoiceArray['currentTime']);
+        $this->assertEquals('Exception status', $invoiceArray['exceptionStatus']);
+        $this->assertEquals(6, $invoiceArray['targetConfirmations']);
+        $this->assertEquals('test@email.com', $invoiceArray['buyerProvidedEmail']);
+        $this->assertEquals('34', $invoiceArray['billId']);
         $this->assertTrue($invoiceArray['extendedNotifications']);
-        $this->assertEquals($invoiceArray['transactionCurrency'], 'BTC');
-        $this->assertEquals($invoiceArray['amountPaid'], 12);
-        $this->assertEquals($invoiceArray['exchangeRates'], 'ExchangeRates');
-        $this->assertEquals($invoiceArray['merchantName'], 'Merchant name');
-        $this->assertEquals($invoiceArray['selectedTransactionCurrency'], 'BTC');
+        $this->assertEquals('BTC', $invoiceArray['transactionCurrency']);
+        $this->assertEquals(12, $invoiceArray['amountPaid']);
+        $this->assertEquals($this->getExampleExchangeRates(), $invoiceArray['exchangeRates']);
+        $this->assertEquals('Merchant name', $invoiceArray['merchantName']);
+        $this->assertEquals('BTC', $invoiceArray['selectedTransactionCurrency']);
         $this->assertTrue($invoiceArray['bitpayIdRequired']);
-        $this->assertEquals($invoiceArray['forcedBuyerSelectedWallet'], 'Forced Buyer Selected Wallet');
-        $this->assertEquals($invoiceArray['paymentString'], 'Payment string');
-        $this->assertEquals($invoiceArray['verificationLink'], 'http://test.com');
+        $this->assertEquals('Forced Buyer Selected Wallet', $invoiceArray['forcedBuyerSelectedWallet']);
+        $this->assertEquals('Payment string', $invoiceArray['paymentString']);
+        $this->assertEquals('http://test.com', $invoiceArray['verificationLink']);
         $this->assertTrue($invoiceArray['isCancelled']);
-        $this->assertEquals($invoiceArray['buyerEmail'], 'test@email.com');
-        $this->assertEquals($invoiceArray['buyerSms'], 'Buyer sms');
-        $this->assertEquals($invoiceArray['forcedBuyerSelectedTransactionCurrency'], 'BTC');
+        $this->assertEquals('test@email.com', $invoiceArray['buyerEmail']);
+        $this->assertEquals('Buyer sms', $invoiceArray['buyerSms']);
+        $this->assertEquals('BTC', $invoiceArray['forcedBuyerSelectedTransactionCurrency']);
     }
 
     public function testToArrayEmptyKey()
@@ -728,11 +814,14 @@ class InvoiceTest extends TestCase
         $this->assertArrayNotHasKey('refundAddressRequestPending', $invoiceArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Invoice
     {
         return new Invoice();
     }
 
+    /**
+     * @throws BitPayException
+     */
     private function setObjectSetters(Invoice $invoice)
     {
         $invoice->setCurrency('BTC');
@@ -770,7 +859,7 @@ class InvoiceTest extends TestCase
         $invoice->setExtendedNotifications(true);
         $invoice->setTransactionCurrency('BTC');
         $invoice->setAmountPaid(12);
-        $invoice->setExchangeRates('ExchangeRates');
+        $invoice->setExchangeRates($this->getExampleExchangeRates());
         $invoice->setMerchantName('Merchant name');
         $invoice->setSelectedTransactionCurrency('BTC');
         $invoice->setBitpayIdRequired(true);
@@ -781,5 +870,157 @@ class InvoiceTest extends TestCase
         $invoice->setBuyerEmail('test@email.com');
         $invoice->setBuyerSms('Buyer sms');
         $invoice->setForcedBuyerSelectedTransactionCurrency('BTC');
+    }
+
+    /**
+     * @return array
+     */
+    private function getExampleExchangeRates(): array
+    {
+        return [
+            "BTC" => [
+                "USD" => 17120.09,
+                "BCH" => 163.84429131974352,
+                "ETH" => 13.299739755292292,
+                "GUSD" => 17120.09,
+                "PAX" => 17120.09,
+                "BUSD" => 17120.09,
+                "USDC" => 17120.09,
+                "DOGE" => 188443.27083844703,
+                "LTC" => 289.92531752751904,
+                "MATIC" => 17878.1223893066,
+                "USDC_m" => 17120.09
+            ],
+            "BCH" => [
+                "USD" => 104.38999999999999,
+                "BTC" => 0.006097902914889888,
+                "ETH" => 0.08109535832200428,
+                "GUSD" => 104.38999999999999,
+                "PAX" => 104.38999999999999,
+                "BUSD" => 104.38999999999999,
+                "USDC" => 104.38999999999999,
+                "DOGE" => 1149.0356092068141,
+                "LTC" => 1.7678238780694326,
+                "MATIC" => 109.01211361737676,
+                "USDC_m" => 104.38999999999999
+            ],
+            "ETH" => [
+                "USD" => 1286.54,
+                "BTC" => 0.07515275424966411,
+                "BCH" => 12.312565795769931,
+                "GUSD" => 1286.54,
+                "PAX" => 1286.54,
+                "BUSD" => 1286.54,
+                "USDC" => 1286.54,
+                "DOGE" => 14161.129156709787,
+                "LTC" => 21.787298899237936,
+                "MATIC" => 1343.5045948203842,
+                "USDC_m" => 1286.54
+            ],
+            "GUSD" => [
+                "USD" => 1,
+                "BTC" => 5.8414627022606464E-5,
+                "BCH" => 0.009570293808019907,
+                "ETH" => 7.768498737618955E-4,
+                "PAX" => 1,
+                "BUSD" => 1,
+                "USDC" => 1,
+                "DOGE" => 11.007142534790825,
+                "LTC" => 0.01693480101608806,
+                "MATIC" => 1.0442773600668336,
+                "USDC_m" => 1
+            ],
+            "PAX" => [
+                "USD" => 1,
+                "BTC" => 5.8414627022606464E-5,
+                "BCH" => 0.009570293808019907,
+                "ETH" => 7.768498737618955E-4,
+                "GUSD" => 1,
+                "BUSD" => 1,
+                "USDC" => 1,
+                "DOGE" => 11.007142534790825,
+                "LTC" => 0.01693480101608806,
+                "MATIC" => 1.0442773600668336,
+                "USDC_m" => 1
+            ],
+            "BUSD" => [
+                "USD" => 1,
+                "BTC" => 5.8414627022606464E-5,
+                "BCH" => 0.009570293808019907,
+                "ETH" => 7.768498737618955E-4,
+                "GUSD" => 1,
+                "PAX" => 1,
+                "USDC" => 1,
+                "DOGE" => 11.007142534790825,
+                "LTC" => 0.01693480101608806,
+                "MATIC" => 1.0442773600668336,
+                "USDC_m" => 1
+            ],
+            "USDC" => [
+                "USD" => 1,
+                "BTC" => 5.8414627022606464E-5,
+                "BCH" => 0.009570293808019907,
+                "ETH" => 7.768498737618955E-4,
+                "GUSD" => 1,
+                "PAX" => 1,
+                "BUSD" => 1,
+                "DOGE" => 11.007142534790825,
+                "LTC" => 0.01693480101608806,
+                "MATIC" => 1.0442773600668336,
+                "USDC_m" => 1
+            ],
+            "DOGE" => [
+                "USD" => 0.09077389999999999,
+                "BTC" => 5.302523511887377E-6,
+                "BCH" => 8.687328930998182E-4,
+                "ETH" => 7.051769275587492E-5,
+                "GUSD" => 0.09077389999999999,
+                "PAX" => 0.09077389999999999,
+                "BUSD" => 0.09077389999999999,
+                "USDC" => 0.09077389999999999,
+                "LTC" => 0.0015372379339542762,
+                "MATIC" => 0.09479312865497075,
+                "USDC_m" => 0.09077389999999999
+            ],
+            "LTC" => [
+                "USD" => 59.02,
+                "BTC" => 0.0034476312868742336,
+                "BCH" => 0.5648387405493349,
+                "ETH" => 0.04584967954942708,
+                "GUSD" => 59.02,
+                "PAX" => 59.02,
+                "BUSD" => 59.02,
+                "USDC" => 59.02,
+                "DOGE" => 649.6415524033546,
+                "MATIC" => 61.63324979114453,
+                "USDC_m" => 59.02
+            ],
+            "MATIC" => [
+                "USD" => 0.9597999999999999,
+                "BTC" => 5.6066359016297676E-5,
+                "BCH" => 0.009185567996937507,
+                "ETH" => 7.456205088366673E-4,
+                "GUSD" => 0.9597999999999999,
+                "PAX" => 0.9597999999999999,
+                "BUSD" => 0.9597999999999999,
+                "USDC" => 0.9597999999999999,
+                "DOGE" => 10.564655404892232,
+                "LTC" => 0.016254022015241322,
+                "USDC_m" => 0.9597999999999999
+            ],
+            "USDC_m" => [
+                "USD" => 1,
+                "BTC" => 5.8414627022606464E-5,
+                "BCH" => 0.009570293808019907,
+                "ETH" => 7.768498737618955E-4,
+                "GUSD" => 1,
+                "PAX" => 1,
+                "BUSD" => 1,
+                "USDC" => 1,
+                "DOGE" => 11.007142534790825,
+                "LTC" => 0.01693480101608806,
+                "MATIC" => 1.0442773600668336
+            ]
+        ];
     }
 }

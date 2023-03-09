@@ -84,11 +84,9 @@ class BuyerProvidedInfoTest extends TestCase
 
     public function testGetSmsVerified()
     {
-        $expectedSmsVerified = true;
-
         $buyerProvidedInfo = $this->createClassObject();
-        $buyerProvidedInfo->setSmsVerified($expectedSmsVerified);
-        $this->assertEquals($expectedSmsVerified, $buyerProvidedInfo->getSmsVerified());
+        $buyerProvidedInfo->setSmsVerified(true);
+        $this->assertTrue($buyerProvidedInfo->getSmsVerified());
     }
 
     public function testToArray()
@@ -109,13 +107,13 @@ class BuyerProvidedInfoTest extends TestCase
         $this->assertArrayHasKey('sms', $buyerProvidedInfoArray);
         $this->assertArrayHasKey('smsVerified', $buyerProvidedInfoArray);
 
-        $this->assertEquals($buyerProvidedInfoArray['name'], 'Test User');
-        $this->assertEquals($buyerProvidedInfoArray['phoneNumber'], '1112223333');
-        $this->assertEquals($buyerProvidedInfoArray['selectedWallet'], 'bitpay');
-        $this->assertEquals($buyerProvidedInfoArray['emailAddress'], 'example@bitpay.com');
-        $this->assertEquals($buyerProvidedInfoArray['selectedTransactionCurrency'], 'BTC');
-        $this->assertEquals($buyerProvidedInfoArray['sms'], '4445556666');
-        $this->assertEquals($buyerProvidedInfoArray['smsVerified'], true);
+        $this->assertEquals('Test User', $buyerProvidedInfoArray['name']);
+        $this->assertEquals('1112223333', $buyerProvidedInfoArray['phoneNumber']);
+        $this->assertEquals('bitpay', $buyerProvidedInfoArray['selectedWallet']);
+        $this->assertEquals('example@bitpay.com', $buyerProvidedInfoArray['emailAddress']);
+        $this->assertEquals('BTC', $buyerProvidedInfoArray['selectedTransactionCurrency']);
+        $this->assertEquals('4445556666', $buyerProvidedInfoArray['sms']);
+        $this->assertEquals(true, $buyerProvidedInfoArray['smsVerified']);
     }
 
     public function testToArrayEmptyKey()
@@ -130,7 +128,7 @@ class BuyerProvidedInfoTest extends TestCase
         $this->assertArrayNotHasKey('name', $buyerProvidedInfoArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): BuyerProvidedInfo
     {
         return new BuyerProvidedInfo();
     }

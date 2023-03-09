@@ -59,8 +59,8 @@ use Symfony\Component\Yaml\Yaml;
  */
 class Client
 {
-    protected $tokenCache;
-    protected $restCli;
+    protected Tokens $tokenCache;
+    protected RESTcli $restCli;
 
     /**
      * Client constructor.
@@ -149,14 +149,14 @@ class Client
     /**
      * Update a BitPay invoice.
      *
-     * @param string      $invoiceId       The id of the invoice to updated.
-     * @param string      $buyerSms        The buyer's cell number.
-     * @param string      $smsCode         The buyer's received verification code.
-     * @param string|null $buyerEmail      The buyer's email address.
-     * @param bool        $autoVerify      Skip the user verification on sandbox ONLY.
+     * @param string $invoiceId The id of the invoice to updated.
+     * @param string|null $buyerSms The buyer's cell number.
+     * @param string|null $smsCode The buyer's received verification code.
+     * @param string|null $buyerEmail The buyer's email address.
+     * @param bool $autoVerify Skip the user verification on sandbox ONLY.
      * @return Invoice
-     * @throws InvoiceUpdateException
      * @throws BitPayException
+     * @throws InvoiceUpdateException
      */
     public function updateInvoice(
         string $invoiceId,
@@ -174,11 +174,11 @@ class Client
      * Retrieve a BitPay invoice by invoice id using the specified facade.  The client must have been previously
      * authorized for the specified facade (the public facade requires no authorization).
      *
-     * @param string $invoiceId   The id of the invoice to retrieve.
-     * @param string $facade      The facade used to create it.
-     * @param string $signRequest Signed request.
+     * @param string $invoiceId The id of the invoice to retrieve.
+     * @param string $facade The facade used to create it.
+     * @param bool $signRequest Signed request.
      * @return Invoice
-     * @throws BitPayException
+     * @throws InvoiceQueryException
      */
     public function getInvoice(
         string $invoiceId,
@@ -577,10 +577,10 @@ class Client
     /**
      * Retrieve a list of ledgers by date range using the merchant facade.
      *
-     * @param  string $currency  The three digit currency string for the ledger to retrieve.
-     * @param  string $startDate The first date for the query filter.
-     * @param  string $endDate   The last date for the query filter.
-     * @return Ledger            A Ledger object populated with the BitPay ledger entries list.
+     * @param string $currency The three digit currency string for the ledger to retrieve.
+     * @param string $startDate The first date for the query filter.
+     * @param string $endDate The last date for the query filter.
+     * @return array A Ledger object populated with the BitPay ledger entries list.
      * @throws BitPayException
      */
     public function getLedger(string $currency, string $startDate, string $endDate): array
@@ -607,7 +607,7 @@ class Client
      * Submit BitPay Payout Recipients.
      *
      * @param  PayoutRecipients $recipients A PayoutRecipients object with request parameters defined.
-     * @return PayoutRevipients[]           A list of BitPay PayoutRecipients objects.
+     * @return PayoutRecipient[]       A list of BitPay PayoutRecipients objects.
      * @throws PayoutRecipientCreationException
      */
     public function submitPayoutRecipients(PayoutRecipients $recipients): array
@@ -639,7 +639,7 @@ class Client
      * @param  int|null    $limit  Maximum results that the query will return (useful for paging results).
      * @param  int|null    $offset Number of results to offset (ex. skip 10 will give you results
      *                             starting with the 11th result).
-     * @return BitPayRecipient[]
+     * @return PayoutRecipient[]
      * @throws BitPayException
      */
     public function getPayoutRecipients(string $status = null, int $limit = null, int $offset = null): array
@@ -724,12 +724,12 @@ class Client
     /**
      * Retrieve a collection of BitPay payouts.
      *
-     * @param  string $startDate The start date to filter the Payout Batches.
-     * @param  string $endDate   The end date to filter the Payout Batches.
-     * @param  string $status    The status to filter the Payout Batches.
-     * @param  string $reference The optional reference specified at payout request creation.
-     * @param  int    $limit     Maximum results that the query will return (useful for paging results).
-     * @param  int    $offset    Number of results to offset (ex. skip 10 will give you results
+     * @param string|null $startDate The start date to filter the Payout Batches.
+     * @param string|null $endDate The end date to filter the Payout Batches.
+     * @param string|null $status The status to filter the Payout Batches.
+     * @param string|null $reference The optional reference specified at payout request creation.
+     * @param int|null $limit Maximum results that the query will return (useful for paging results).
+     * @param int|null $offset Number of results to offset (ex. skip 10 will give you results
      *                           starting with the 11th result).
      * @return Payout[]
      * @throws PayoutQueryException
@@ -750,8 +750,8 @@ class Client
     /**
      * Cancel a BitPay Payout.
      *
-     * @param  string $payoutId The id of the payout to cancel.
-     * @return Payout
+     * @param string $payoutId The id of the payout to cancel.
+     * @return bool
      * @throws PayoutCancellationException
      */
     public function cancelPayout(string $payoutId): bool
@@ -764,8 +764,8 @@ class Client
     /**
      * Notify BitPay Payout.
      *
-     * @param  string $payoutId The id of the Payout to notify.
-     * @return Payout[]
+     * @param string $payoutId The id of the Payout to notify.
+     * @return bool
      * @throws PayoutNotificationException BitPayException class
      */
     public function requestPayoutNotification(string $payoutId): bool
@@ -783,9 +783,9 @@ class Client
      * @param $currency  string The three digit currency string for the ledger to retrieve.
      * @param $dateStart string The start date for the query.
      * @param $dateEnd   string The end date for the query.
-     * @param $status    string Can be `processing`, `completed`, or `failed`.
-     * @param $limit     int Maximum number of settlements to retrieve.
-     * @param $offset    int Offset for paging.
+     * @param string|null $status string Can be `processing`, `completed`, or `failed`.
+     * @param int|null $limit int Maximum number of settlements to retrieve.
+     * @param int|null $offset int Offset for paging.
      * @return Settlement[]
      * @throws BitPayException
      */
@@ -890,8 +890,9 @@ class Client
     /**
      * @param string|null $privateKey
      * @param string|null $privateKeySecret
-     * @return string|null
+     * @return PrivateKey|null
      * @throws BitPayException
+     * @throws Exception
      */
     private static function initKeys(?string $privateKey, ?string $privateKeySecret): ?PrivateKey
     {
@@ -914,7 +915,7 @@ class Client
     }
 
     /**
-     * @param $configFilePath
+     * @param string $configFilePath
      * @return array
      * @throws BitPayException
      */

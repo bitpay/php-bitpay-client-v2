@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitPaySDK\Client;
 
 use BitPaySDK\Exceptions\BitPayException;
@@ -27,14 +29,14 @@ class SettlementsClient
      * The `limit` and `offset` parameters
      * specify pages for large query sets.
      *
-     * @param $currency  string The three digit currency string for the ledger to retrieve.
-     * @param $dateStart string The start date for the query.
-     * @param $dateEnd   string The end date for the query.
-     * @param $status    string Can be `processing`, `completed`, or `failed`.
-     * @param $limit     int Maximum number of settlements to retrieve.
-     * @param $offset    int Offset for paging.
+     * @param string $currency The three digit currency string for the ledger to retrieve.
+     * @param string $dateStart  The start date for the query.
+     * @param string $dateEnd The end date for the query.
+     * @param string|null $status string Can be `processing`, `completed`, or `failed`.
+     * @param int|null $limit int Maximum number of settlements to retrieve.
+     * @param int|null $offset int Offset for paging.
      * @return Settlement[]
-     * @throws BitPayException
+     * @throws SettlementQueryException
      */
     public function getSettlements(
         string $currency,

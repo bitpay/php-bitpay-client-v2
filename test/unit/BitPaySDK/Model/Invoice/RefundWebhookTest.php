@@ -1,6 +1,6 @@
 <?php
 
-namespace BitPaySDK\Test;
+namespace BitPaySDK\Test\Model\Invoice;
 
 use BitPaySDK\Model\Invoice\RefundWebhook;
 use PHPUnit\Framework\TestCase;
@@ -87,20 +87,16 @@ class RefundWebhookTest extends TestCase
 
   public function testImmediate()
   {
-    $expectedImmediate = false;
-
     $refundWebhook = $this->createClassObject();
-    $refundWebhook->setImmediate($expectedImmediate);
-    $this->assertEquals($expectedImmediate, $refundWebhook->getImmediate());
+    $refundWebhook->setImmediate(false);
+    $this->assertFalse($refundWebhook->getImmediate());
   }
 
   public function testGetBuyerPaysRefundFee()
   {
-    $expectedBuyerPaysRefundFee = true;
-
     $refundWebhook = $this->createClassObject();
-    $refundWebhook->setBuyerPaysRefundFee($expectedBuyerPaysRefundFee);
-    $this->assertEquals($expectedBuyerPaysRefundFee, $refundWebhook->getBuyerPaysRefundFee());
+    $refundWebhook->setBuyerPaysRefundFee(true);
+    $this->assertTrue($refundWebhook->getBuyerPaysRefundFee());
   }
 
   public function testGetRequestDate()
@@ -134,20 +130,20 @@ class RefundWebhookTest extends TestCase
     $this->assertArrayHasKey('buyerPaysRefundFee', $refundWebhookArray);
     $this->assertArrayHasKey('requestDate', $refundWebhookArray);
 
-    $this->assertEquals($refundWebhookArray['id'], 'GZBBLcsgQamua3PN8GX92s');
-    $this->assertEquals($refundWebhookArray['invoice'], 'Wp9cpGphCz7cSeFh6MSYpb');
-    $this->assertEquals($refundWebhookArray['supportRequest'], 'XuuYtZfTw7G99Ws3z38kWZ');
-    $this->assertEquals($refundWebhookArray['status'], 'pending');
-    $this->assertEquals($refundWebhookArray['amount'], 6);
-    $this->assertEquals($refundWebhookArray['currency'], 'USD');
-    $this->assertEquals($refundWebhookArray['lastRefundNotification'], '2022-01-11T16:58:23.967Z');
-    $this->assertEquals($refundWebhookArray['refundFee'], 2.31);
-    $this->assertEquals($refundWebhookArray['immediate'], false);
-    $this->assertEquals($refundWebhookArray['buyerPaysRefundFee'], true);
-    $this->assertEquals($refundWebhookArray['requestDate'], '2022-01-11T16:58:23.000Z');
+    $this->assertEquals('GZBBLcsgQamua3PN8GX92s', $refundWebhookArray['id']);
+    $this->assertEquals('Wp9cpGphCz7cSeFh6MSYpb', $refundWebhookArray['invoice']);
+    $this->assertEquals('XuuYtZfTw7G99Ws3z38kWZ', $refundWebhookArray['supportRequest']);
+    $this->assertEquals('pending', $refundWebhookArray['status']);
+    $this->assertEquals(6, $refundWebhookArray['amount']);
+    $this->assertEquals('USD', $refundWebhookArray['currency']);
+    $this->assertEquals('2022-01-11T16:58:23.967Z', $refundWebhookArray['lastRefundNotification']);
+    $this->assertEquals(2.31, $refundWebhookArray['refundFee']);
+    $this->assertEquals(false, $refundWebhookArray['immediate']);
+    $this->assertEquals(true, $refundWebhookArray['buyerPaysRefundFee']);
+    $this->assertEquals('2022-01-11T16:58:23.000Z', $refundWebhookArray['requestDate']);
   }
 
-  private function createClassObject()
+  private function createClassObject(): RefundWebhook
   {
     return new RefundWebhook();
   }
