@@ -19,12 +19,12 @@ use BitPaySDK\Model\Currency;
 class Payout
 {
     protected string $token = '';
-    protected ?float $amount       = null;
-    protected ?string $currency     = null;
+    protected ?float $amount = null;
+    protected ?string $currency = null;
     protected ?string $effectiveDate = null;
     protected ?string $ledgerCurrency = null;
-    protected string $reference         = '';
-    protected string $notificationUrl   = '';
+    protected string $reference = '';
+    protected string $notificationUrl = '';
     protected string $notificationEmail = '';
     protected string $redirectUrl = '';
     protected string $account = '';
@@ -38,7 +38,7 @@ class Payout
     protected float $fee = 0.0;
     protected float $depositTotal = 0.0;
     protected float $rate = 0.0;
-    protected float  $btc = 0.0;
+    protected float $btc = 0.0;
     protected ?string $dateExecuted = null;
     protected ?string $id = null;
     protected ?string $status = null;
@@ -160,9 +160,9 @@ class Payout
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
      *
-     * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">Supported ledger currency codes</a>
      * @return string|null
      *
+     * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">Supported ledger currency codes</a>
      */
     public function getEffectiveDate(): ?string
     {
@@ -739,20 +739,6 @@ class Payout
      */
     public function getTransactions(): array
     {
-        $transactionsArray = [];
-
-        foreach ($this->transactions as $transaction) {
-            if ($transaction instanceof PayoutTransaction) {
-                $transactionsArray[] = $transaction;
-            } else {
-                $payoutTransaction = new PayoutTransaction();
-                $payoutTransaction->setAmount($transaction['amount'] ?? null);
-                $payoutTransaction->setDate($transaction['date'] ?? null);
-                $payoutTransaction->setTxid($transaction['txid'] ?? null);
-                $transactionsArray[] = $payoutTransaction;
-            }
-        }
-
         return $this->transactions;
     }
 
@@ -763,7 +749,27 @@ class Payout
      */
     public function setTransactions(array $transactions): void
     {
-        $this->transactions = $transactions;
+        if (empty($transactions)) {
+            $this->transactions = [];
+
+            return;
+        }
+
+        $transactionsArray = [];
+
+        foreach ($transactions as $transaction) {
+            if ($transaction instanceof PayoutTransaction) {
+                $transactionsArray[] = $transaction;
+            } else {
+                $payoutTransaction = new PayoutTransaction();
+                $payoutTransaction->setAmount($transaction->amount ?? null);
+                $payoutTransaction->setDate($transaction->date ?? null);
+                $payoutTransaction->setTxid($transaction->txid ?? null);
+                $transactionsArray[] = $payoutTransaction;
+            }
+        }
+
+        $this->transactions = $transactionsArray;
     }
 
     /**
@@ -774,33 +780,33 @@ class Payout
     public function toArray(): array
     {
         $elements = [
-            'token'             => $this->getToken(),
-            'amount'            => $this->getAmount(),
-            'currency'          => $this->getCurrency(),
-            'effectiveDate'     => $this->getEffectiveDate(),
-            'ledgerCurrency'    => $this->getLedgerCurrency(),
-            'reference'         => $this->getReference(),
-            'notificationURL'   => $this->getNotificationURL(),
+            'token' => $this->getToken(),
+            'amount' => $this->getAmount(),
+            'currency' => $this->getCurrency(),
+            'effectiveDate' => $this->getEffectiveDate(),
+            'ledgerCurrency' => $this->getLedgerCurrency(),
+            'reference' => $this->getReference(),
+            'notificationURL' => $this->getNotificationURL(),
             'notificationEmail' => $this->getNotificationEmail(),
-            'redirectUrl'       => $this->getRedirectUrl(),
-            'account'           => $this->getAccount(),
-            'email'             => $this->getEmail(),
-            'recipientId'       => $this->getRecipientId(),
-            'shopperId'         => $this->getShopperId(),
-            'label'             => $this->getLabel(),
-            'supportPhone'      => $this->getSupportPhone(),
-            'message'           => $this->getMessage(),
-            'percentFee'        => $this->getPercentFee(),
-            'fee'               => $this->getFee(),
-            'depositTotal'      => $this->getDepositTotal(),
-            'rate'              => $this->getRate(),
-            'btc'               => $this->getBtc(),
-            'dateExecuted'      => $this->getDateExecuted(),
-            'id'                => $this->getId(),
-            'status'            => $this->getStatus(),
-            'requestDate'       => $this->getRequestDate(),
-            'exchangeRates'     => $this->getExchangeRates(),
-            'transactions'      => $this->getTransactions()
+            'redirectUrl' => $this->getRedirectUrl(),
+            'account' => $this->getAccount(),
+            'email' => $this->getEmail(),
+            'recipientId' => $this->getRecipientId(),
+            'shopperId' => $this->getShopperId(),
+            'label' => $this->getLabel(),
+            'supportPhone' => $this->getSupportPhone(),
+            'message' => $this->getMessage(),
+            'percentFee' => $this->getPercentFee(),
+            'fee' => $this->getFee(),
+            'depositTotal' => $this->getDepositTotal(),
+            'rate' => $this->getRate(),
+            'btc' => $this->getBtc(),
+            'dateExecuted' => $this->getDateExecuted(),
+            'id' => $this->getId(),
+            'status' => $this->getStatus(),
+            'requestDate' => $this->getRequestDate(),
+            'exchangeRates' => $this->getExchangeRates(),
+            'transactions' => $this->getTransactions()
         ];
 
         foreach ($elements as $key => $value) {

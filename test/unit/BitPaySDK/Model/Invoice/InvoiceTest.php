@@ -253,7 +253,7 @@ class InvoiceTest extends TestCase
         $expectedItemizedDetails->method('toArray')->willReturn($expectedArray);
 
         $invoice = $this->createClassObject();
-        $invoice->setItemizedDetails($expectedArray);
+        $invoice->setItemizedDetails([$expectedArray]);
 
         $this->assertIsArray($invoice->getItemizedDetails());
         $this->assertNotNull($invoice->getItemizedDetails());
