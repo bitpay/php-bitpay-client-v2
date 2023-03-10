@@ -735,35 +735,31 @@ class Payout
     /**
      * Gets transactions. Contains the cryptocurrency transaction details for the executed payout request.
      *
-     * @return PayoutTransaction[]
+     * @return array
      */
     public function getTransactions(): array
     {
-        return $this->transactions;
+        $transactions = [];
+
+        foreach ($this->transactions as $transaction) {
+            if ($transaction instanceof PayoutTransaction) {
+                $transactions[] = $transaction->toArray();
+            } else {
+                $transactions[] = $transaction;
+            }
+        }
+
+        return $transactions;
     }
 
     /**
      * Sets transactions. Contains the cryptocurrency transaction details for the executed payout request.
      *
-     * * @param array $transactions
+     * @param array $transactions
      */
     public function setTransactions(array $transactions): void
     {
-        $transactionsArray = [];
-
-        foreach ($transactions as $transaction) {
-            if ($transaction instanceof PayoutTransaction) {
-                $transactionsArray[] = $transaction;
-            } else {
-                $newTransaction = new PayoutTransaction();
-                $newTransaction->setAmount($transaction['amount'] ?? null);
-                $newTransaction->setDate($transaction['date'] ?? null);
-                $newTransaction->setTxid($transaction['txid'] ?? null);
-                $transactionsArray[] = $newTransaction;
-            }
-        }
-
-        $this->transactions = $transactionsArray;
+        $this->transactions = $transactions;
     }
 
     /**

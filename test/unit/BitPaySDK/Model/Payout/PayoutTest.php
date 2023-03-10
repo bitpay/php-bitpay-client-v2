@@ -202,18 +202,17 @@ class PayoutTest extends TestCase
 
   public function testGetTransactions()
   {
-    $expectedTransactions = $this->getMockBuilder(PayoutTransaction::class)
-        ->disableOriginalConstructor()
-        ->getMock();
-
-    $expectedTransactions->method('getTxid')->willReturn('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
-    $expectedTransactions->method('getAmount')->willReturn(0.000254);
-    $expectedTransactions->method('getDate')->willReturn('2021-05-27T11:04:23.155Z');
+    $expectedTransactions = [
+      [
+        'txid' => 'db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057',
+        'amount' => 0.000254,
+        'date' => '2021-05-27T11:04:23.155Z'
+      ]
+    ];
 
     $payout = $this->createClassObject();
-    $payout->setTransactions([$expectedTransactions]);
-
-    $this->assertEquals([$expectedTransactions], $payout->getTransactions());
+    $payout->setTransactions($expectedTransactions);
+    $this->assertEquals($expectedTransactions, $payout->getTransactions());
   }
 
   public function testFormatAmount()
@@ -285,10 +284,9 @@ class PayoutTest extends TestCase
         'GBP' => 27883.962246420004
       ]
     ], $payoutArray['exchangeRates']);
-
-    $this->assertEquals('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057', $payoutArray['transactions'][0]->getTxid());
-    $this->assertEquals(0.000254, $payoutArray['transactions'][0]->getAmount());
-    $this->assertEquals('2021-05-27T11:04:23.155Z', $payoutArray['transactions'][0]->getDate());
+    $this->assertEquals('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057', $payoutArray['transactions'][0]['txid']);
+    $this->assertEquals(0.000254, $payoutArray['transactions'][0]['amount']);
+    $this->assertEquals('2021-05-27T11:04:23.155Z', $payoutArray['transactions'][0]['date']);
   }
 
     /**
