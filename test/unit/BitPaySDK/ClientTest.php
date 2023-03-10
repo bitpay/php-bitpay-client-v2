@@ -3484,7 +3484,7 @@ class ClientTest extends TestCase
 
     public function testCreateInvoice()
     {
-        $invoiceArray = json_decode(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'), true);
+        $invoiceArray = json_decode(file_get_contents(__DIR__.'/jsonResponse/createInvoiceResponse.json'), true);
         $invoiceMock = $this->createMock(Invoice::class);
         $invoiceMock->expects($this->once())->method('toArray')->willReturn($invoiceArray);
 
@@ -3493,7 +3493,7 @@ class ClientTest extends TestCase
             ->expects($this->once())
             ->method('post')
             ->with('invoices', $invoiceArray, true)
-            ->willReturn(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
+            ->willReturn(file_get_contents(__DIR__.'/jsonResponse/createInvoiceResponse.json'));
 
         $testedObject = $this->getClient($restCliMock);
         $result = $testedObject->createInvoice($invoiceMock);

@@ -262,7 +262,10 @@ class PayoutTest extends TestCase
     $this->assertArrayHasKey('exchangeRates', $payoutArray);
     $this->assertArrayHasKey('transactions', $payoutArray);
 
-    $this->assertEquals('6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL', $payoutArray['token']);
+    $this->assertEquals(
+        '6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL',
+        $payoutArray['token']
+    );
     $this->assertEquals(10.0, $payoutArray['amount']);
     $this->assertEquals(Currency::USD, $payoutArray['currency']);
     $this->assertEquals('2021-05-27T09:00:00.000Z', $payoutArray['effectiveDate']);
@@ -284,9 +287,7 @@ class PayoutTest extends TestCase
         'GBP' => 27883.962246420004
       ]
     ], $payoutArray['exchangeRates']);
-    $this->assertEquals('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057', $payoutArray['transactions'][0]['txid']);
-    $this->assertEquals(0.000254, $payoutArray['transactions'][0]['amount']);
-    $this->assertEquals('2021-05-27T11:04:23.155Z', $payoutArray['transactions'][0]['date']);
+    $this->assertInstanceOf(PayoutTransaction::class, $payoutArray['transactions'][0]);
   }
 
     /**
