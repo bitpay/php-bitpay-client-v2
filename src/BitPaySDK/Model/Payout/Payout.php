@@ -745,11 +745,11 @@ class Payout
             if ($transaction instanceof PayoutTransaction) {
                 $transactionsArray[] = $transaction;
             } else {
-                $test = new PayoutTransaction();
-                $test->setAmount($transaction['amount'] ?? null);
-                $test->setDate($transaction['date'] ?? null);
-                $test->setTxid($transaction['txid'] ?? null);
-                $transactionsArray[] = $test;
+                $payoutTransaction = new PayoutTransaction();
+                $payoutTransaction->setAmount($transaction['amount'] ?? null);
+                $payoutTransaction->setDate($transaction['date'] ?? null);
+                $payoutTransaction->setTxid($transaction['txid'] ?? null);
+                $transactionsArray[] = $payoutTransaction;
             }
         }
 

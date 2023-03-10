@@ -756,11 +756,11 @@ class Invoice
             if ($item instanceof ItemizedDetails) {
                 $itemsArray[] = $item;
             } else {
-                $test = new ItemizedDetails();
-                $test->setAmount($item['amount'] ?? null);
-                $test->setIsFee($item['isFee'] ?? null);
-                $test->setDescription($item['description'] ?? null);
-                $itemsArray[] = $test;
+                $newItemizedDetails = new ItemizedDetails();
+                $newItemizedDetails->setAmount($item['amount'] ?? null);
+                $newItemizedDetails->setIsFee($item['isFee'] ?? null);
+                $newItemizedDetails->setDescription($item['description'] ?? null);
+                $itemsArray[] = $newItemizedDetails;
             }
         }
 
