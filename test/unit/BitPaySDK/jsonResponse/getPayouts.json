@@ -20,7 +20,13 @@
     "effectiveDate": "2021-05-27T09:00:00.000Z",
     "requestDate": "2021-05-27T10:47:37.834Z",
     "status": "complete",
-    "transactions": [],
+    "transactions": [
+      {
+        "txid": "db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057",
+        "amount": 0.000254,
+        "date": "2021-05-27T11:04:23.155Z"
+      }
+    ],
     "token": "9pVLfvdjt59q1JiY2JEsf2uzeeEpSqDwwfRAzuFr9CcrxZX25rTnP6HdRhsMBGLArz"
   },
   {

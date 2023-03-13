@@ -35,7 +35,7 @@ class PayoutTransaction
     /**
      * Sets Cryptocurrency transaction hash for the executed payout.
      *
-     * @param string $txid the tax id
+     * @param string|null $txid the tax id
      */
     public function setTxid(?string $txid): void
     {
@@ -55,7 +55,7 @@ class PayoutTransaction
     /**
      * Sets Amount of cryptocurrency sent to the requested address.
      *
-     * @param float $amount the amount
+     * @param float|null $amount the amount
      */
     public function setAmount(?float $amount): void
     {
@@ -77,7 +77,7 @@ class PayoutTransaction
      * Sets Date and time (UTC) when the cryptocurrency transaction is broadcasted.
      * ISO-8601 format yyyy-mm-ddThh:mm:ssZ.
      *
-     * @param string $date the date
+     * @param string|null $date the date
      */
     public function setDate(?string $date): void
     {

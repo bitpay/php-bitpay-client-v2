@@ -762,17 +762,21 @@ class Invoice
      */
     public function setItemizedDetails(array $itemizedDetails): void
     {
-        $itemsArray = [];
+        if (empty($itemizedDetails)) {
+            $this->itemizedDetails = [];
+
+            return;
+        }
 
         foreach ($itemizedDetails as $item) {
             if ($item instanceof ItemizedDetails) {
                 $itemsArray[] = $item;
             } else {
-                $itemizedDetails = new ItemizedDetails();
-                $itemizedDetails->setAmount($item['amount'] ?? null);
-                $itemizedDetails->setDescription($item['description'] ?? null);
-                $itemizedDetails->setIsFee($item['isFee'] ?? null);
-                $itemsArray[] = $itemizedDetails;
+                $newItemizedDetails = new ItemizedDetails();
+                $newItemizedDetails->setAmount($item->amount ?? null);
+                $newItemizedDetails->setIsFee($item->isFee ?? null);
+                $newItemizedDetails->setDescription($item->description ?? null);
+                $itemsArray[] = $newItemizedDetails;
             }
         }
 
