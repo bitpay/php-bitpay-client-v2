@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -13,13 +15,9 @@ namespace BitPaySDK\Model\Payout;
  */
 class PayoutReceivedInfo
 {
-    protected $_name;
-    protected $_email;
-
-    /**
-     * @var PayoutReceivedInfoAddress
-     * */
-    protected $_address;
+    protected ?string $name = null;
+    protected ?string $email = null;
+    protected ?PayoutReceivedInfoAddress $address = null;
 
     /**
      * PayoutReceivedInfo constructor.
@@ -33,9 +31,9 @@ class PayoutReceivedInfo
      *
      * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -43,9 +41,9 @@ class PayoutReceivedInfo
      *
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -53,9 +51,9 @@ class PayoutReceivedInfo
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -63,9 +61,9 @@ class PayoutReceivedInfo
      *
      * @param string $email
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
@@ -73,9 +71,9 @@ class PayoutReceivedInfo
      *
      * @return PayoutReceivedInfoAddress|null
      */
-    public function getAddress()
+    public function getAddress(): ?PayoutReceivedInfoAddress
     {
-        return $this->_address;
+        return $this->address;
     }
 
     /**
@@ -83,9 +81,9 @@ class PayoutReceivedInfo
      *
      * @param PayoutReceivedInfoAddress $address
      */
-    public function setAddress(PayoutReceivedInfoAddress $address)
+    public function setAddress(PayoutReceivedInfoAddress $address): void
     {
-        $this->_address = $address;
+        $this->address = $address;
     }
 
     /**
@@ -93,7 +91,7 @@ class PayoutReceivedInfo
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         /**
          * @todo In a future version, instead of removing values that are not
@@ -102,8 +100,8 @@ class PayoutReceivedInfo
          *       elements that are not set. This should be done universally.
          */
         $elements = [
-            'name'    => $this->getName(),
-            'email'   => $this->getEmail(),
+            'name' => $this->getName(),
+            'email' => $this->getEmail(),
             'address' => $this->getAddress()->toArray(),
         ];
 

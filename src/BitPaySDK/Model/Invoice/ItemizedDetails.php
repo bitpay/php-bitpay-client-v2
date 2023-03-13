@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -9,9 +11,9 @@ namespace BitPaySDK\Model\Invoice;
 
 class ItemizedDetails
 {
-    protected $_amount;
-    protected $_description;
-    protected $_isFee;
+    protected ?float $amount = null;
+    protected ?string $description = null;
+    protected ?bool $isFee = null;
 
     public function __construct()
     {
@@ -20,21 +22,21 @@ class ItemizedDetails
     /**
      * Gets The amount of currency.
      *
-     * @return float the amount
+     * @return float|null the amount
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
      * Sets The amount of currency.
      *
-     * @param float $amount the amount
+     * @param float|null $amount the amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(?float $amount): void
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
@@ -42,21 +44,21 @@ class ItemizedDetails
      *
      * Display string for the item.
      *
-     * @return string the description
+     * @return string|null the description
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
      * Sets string for the item.
      *
-     * @param string $description the description
+     * @param string|null $description the description
      */
-    public function setDescription(string $description)
+    public function setDescription(?string $description): void
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
@@ -64,11 +66,11 @@ class ItemizedDetails
      *
      * Indicates whether or not the item is considered a fee/tax or part of the main purchase.
      *
-     * @return bool is fee
+     * @return bool|null is fee
      */
-    public function getIsFee()
+    public function getIsFee(): ?bool
     {
-        return $this->_isFee;
+        return $this->isFee;
     }
 
     /**
@@ -76,11 +78,11 @@ class ItemizedDetails
      *
      * Gets Indicates whether or not the item is considered a fee/tax or part of the main purchase.
      *
-     * @param bool $isFee is fee
+     * @param bool|null $isFee is fee
      */
-    public function setIsFee(bool $isFee)
+    public function setIsFee(?bool $isFee): void
     {
-        $this->_isFee = $isFee;
+        $this->isFee = $isFee;
     }
 
     /**
@@ -88,7 +90,7 @@ class ItemizedDetails
      *
      * @return array item details data as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'amount'        => $this->getAmount(),

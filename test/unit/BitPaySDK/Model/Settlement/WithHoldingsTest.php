@@ -83,15 +83,15 @@ class WithHoldingsTest extends TestCase
         $this->assertArrayHasKey('label', $withHoldingsArray);
         $this->assertArrayHasKey('bankCountry', $withHoldingsArray);
 
-        $this->assertEquals($withHoldingsArray['amount'], 10.5);
-        $this->assertEquals($withHoldingsArray['code'], 'BTC');
-        $this->assertEquals($withHoldingsArray['description'], 'Description');
-        $this->assertEquals($withHoldingsArray['notes'], 'Note');
-        $this->assertEquals($withHoldingsArray['label'], 'Label');
-        $this->assertEquals($withHoldingsArray['bankCountry'], 'USA');
+        $this->assertEquals(10.5, $withHoldingsArray['amount']);
+        $this->assertEquals('BTC', $withHoldingsArray['code']);
+        $this->assertEquals('Description', $withHoldingsArray['description']);
+        $this->assertEquals('Note', $withHoldingsArray['notes']);
+        $this->assertEquals('Label', $withHoldingsArray['label']);
+        $this->assertEquals('USA', $withHoldingsArray['bankCountry']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): WithHoldings
     {
         return new WithHoldings();
     }

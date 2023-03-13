@@ -53,11 +53,11 @@ class RefundInfoTest extends TestCase
         $this->assertArrayHasKey('currency', $refundInfoArray);
         $this->assertArrayNotHasKey('amounts', $refundInfoArray);
 
-        $this->assertEquals($refundInfoArray['supportRequest'], 'Test support request');
-        $this->assertEquals($refundInfoArray['currency'], 'BTC');
+        $this->assertEquals('Test support request', $refundInfoArray['supportRequest']);
+        $this->assertEquals('BTC', $refundInfoArray['currency']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): RefundInfo
     {
         return new RefundInfo();
     }

@@ -25,6 +25,9 @@ class RatesTest extends TestCase
         $this->assertIsArray($ratesArray);
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testUpdate()
     {
         $rates = [new Rate(), 'test' => 'test'];
@@ -36,7 +39,7 @@ class RatesTest extends TestCase
         $reflection = new ReflectionClass(Rates::class);
         $rates->update();
 
-        $reflectionTest = $reflection->getProperty('_rates')->setAccessible(true);
+        $reflectionTest = $reflection->getProperty('rates')->setAccessible(true);
 
         $this->assertEquals(null, $reflectionTest);
     }
@@ -49,13 +52,16 @@ class RatesTest extends TestCase
         $rates->getRate('ELO');
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testGetRate()
     {
         $expectedValue = 12;
 
         $rateMock = $this->getMockBuilder(Rate::class)->disableOriginalConstructor()->getMock();
         $rateMock->method('getCode')->willReturn('BTC');
-        $rateMock->method('getRate')->willReturn(12);
+        $rateMock->method('getRate')->willReturn(12.0);
 
         $rates = [$rateMock];
         $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();
@@ -76,7 +82,7 @@ class RatesTest extends TestCase
         $this->assertArrayNotHasKey('rates', $ratesEmptyArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Rates
     {
         $rates = [new Rate(), 'test' => 'test'];
         $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();

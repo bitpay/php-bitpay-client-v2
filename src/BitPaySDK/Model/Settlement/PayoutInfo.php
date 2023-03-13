@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -12,30 +14,30 @@ namespace BitPaySDK\Model\Settlement;
  */
 class PayoutInfo
 {
-    protected $_name;
-    protected $_account;
-    protected $_routing;
-    protected $_merchantEin;
-    protected $_label;
-    protected $_bankCountry;
-    protected $_bank;
-    protected $_swift;
-    protected $_address;
-    protected $_city;
-    protected $_postal;
-    protected $_sort;
-    protected $_wire;
-    protected $_bankName;
-    protected $_bankAddress;
-    protected $_bankAddress2;
-    protected $_iban;
-    protected $_additionalInformation;
-    protected $_accountHolderName;
-    protected $_accountHolderAddress;
-    protected $_accountHolderAddress2;
-    protected $_accountHolderPostalCode;
-    protected $_accountHolderCity;
-    protected $_accountHolderCountry;
+    protected ?string $name = null;
+    protected ?string $account = null;
+    protected ?string $routing = null;
+    protected ?string $merchantEin = null;
+    protected ?string $label = null;
+    protected ?string $bankCountry = null;
+    protected ?string $bank = null;
+    protected ?string $swift = null;
+    protected ?string $address = null;
+    protected ?string $city = null;
+    protected ?string $postal = null;
+    protected ?string $sort = null;
+    protected ?string $wire = null;
+    protected ?string $bankName = null;
+    protected ?string $bankAddress = null;
+    protected ?string $bankAddress2 = null;
+    protected ?string $iban = null;
+    protected ?string $additionalInformation = null;
+    protected ?string $accountHolderName = null;
+    protected ?string $accountHolderAddress = null;
+    protected ?string $accountHolderAddress2 = null;
+    protected ?string $accountHolderPostalCode = null;
+    protected ?string $accountHolderCity = null;
+    protected ?string $accountHolderCountry = null;
 
     public function __construct()
     {
@@ -44,11 +46,11 @@ class PayoutInfo
     /**
      * Gets Bank account number of the merchant
      *
-     * @return string the bank account number
+     * @return string|null the bank account number
      */
-    public function getAccount()
+    public function getAccount(): ?string
     {
-        return $this->_account;
+        return $this->account;
     }
 
     /**
@@ -56,9 +58,9 @@ class PayoutInfo
      *
      * @param string $account the bank account number
      */
-    public function setAccount(string $account)
+    public function setAccount(string $account): void
     {
-        $this->_account = $account;
+        $this->account = $account;
     }
 
     /**
@@ -66,11 +68,11 @@ class PayoutInfo
      *
      * for merchants receiving USD settlements via local ACH, this field contains the ABA provided by the merchant
      *
-     * @return string the routing
+     * @return string|null the routing
      */
-    public function getRouting()
+    public function getRouting(): ?string
     {
-        return $this->_routing;
+        return $this->routing;
     }
 
     /**
@@ -78,9 +80,9 @@ class PayoutInfo
      *
      * @param string $routing the routing
      */
-    public function setRouting(string $routing)
+    public function setRouting(string $routing): void
     {
-        $this->_routing = $routing;
+        $this->routing = $routing;
     }
 
     /**
@@ -88,11 +90,11 @@ class PayoutInfo
      *
      * for merchants receiving USD settlements via local ACH, this field contains the merchant's EIN
      *
-     * @return string the merchant ein
+     * @return string|null the merchant ein
      */
-    public function getMerchantEin()
+    public function getMerchantEin(): ?string
     {
-        return $this->_merchantEin;
+        return $this->merchantEin;
     }
 
     /**
@@ -100,9 +102,9 @@ class PayoutInfo
      *
      * @param string $merchantEin the merchant ein
      */
-    public function setMerchantEin(string $merchantEin)
+    public function setMerchantEin(string $merchantEin): void
     {
-        $this->_merchantEin = $merchantEin;
+        $this->merchantEin = $merchantEin;
     }
 
     /**
@@ -110,11 +112,11 @@ class PayoutInfo
      *
      * As indicated by the merchant in his settlement settings
      *
-     * @return string the label
+     * @return string|null the label
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -122,19 +124,19 @@ class PayoutInfo
      *
      * @param string $label the label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
-        $this->_label = $label;
+        $this->label = $label;
     }
 
     /**
      * Gets Country where the merchant's bank account is located
      *
-     * @return string the bank country
+     * @return string|null the bank country
      */
-    public function getBankCountry()
+    public function getBankCountry(): ?string
     {
-        return $this->_bankCountry;
+        return $this->bankCountry;
     }
 
     /**
@@ -142,19 +144,19 @@ class PayoutInfo
      *
      * @param string $bankCountry the bank country
      */
-    public function setBankCountry(string $bankCountry)
+    public function setBankCountry(string $bankCountry): void
     {
-        $this->_bankCountry = $bankCountry;
+        $this->bankCountry = $bankCountry;
     }
 
     /**
      * Gets account holder name
      *
-     * @return string the name
+     * @return string|null the name
      */
-    public function getName()
+    public function getName(): ?string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -162,19 +164,19 @@ class PayoutInfo
      *
      * @param string $name the name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
      * Gets Name of the bank used by the merchant
      *
-     * @return string the bank
+     * @return string|null the bank
      */
-    public function getBank()
+    public function getBank(): ?string
     {
-        return $this->_bank;
+        return $this->bank;
     }
 
     /**
@@ -182,19 +184,19 @@ class PayoutInfo
      *
      * @param string $bank the bank
      */
-    public function setBank(string $bank)
+    public function setBank(string $bank): void
     {
-        $this->_bank = $bank;
+        $this->bank = $bank;
     }
 
     /**
      * Gets SWIFT/BIC code of the merchant's bank.
      *
-     * @return string the swift
+     * @return string|null the swift
      */
-    public function getSwift()
+    public function getSwift(): ?string
     {
-        return $this->_swift;
+        return $this->swift;
     }
 
     /**
@@ -202,9 +204,9 @@ class PayoutInfo
      *
      * @param string $swift the swift
      */
-    public function setSwift(string $swift)
+    public function setSwift(string $swift): void
     {
-        $this->_swift = $swift;
+        $this->swift = $swift;
     }
 
     /**
@@ -217,11 +219,11 @@ class PayoutInfo
      * and Ripple (XRP). If the settlement currency used is AUD, GBP, NZD, MXN, ZAR -
      * this field is used to indicate the address of the merchant's bank
      *
-     * @return string the address
+     * @return string|null the address
      */
-    public function getAddress()
+    public function getAddress(): ?string
     {
-        return $this->_address;
+        return $this->address;
     }
 
     /**
@@ -229,19 +231,19 @@ class PayoutInfo
      *
      * @param string $address the address
      */
-    public function setAddress(string $address)
+    public function setAddress(string $address): void
     {
-        $this->_address = $address;
+        $this->address = $address;
     }
 
     /**
      * Gets City of the merchant bank, field return if the settlement currency is
      *
-     * @return string the city
+     * @return string|null the city
      */
-    public function getCity()
+    public function getCity(): ?string
     {
-        return $this->_city;
+        return $this->city;
     }
 
     /**
@@ -249,19 +251,19 @@ class PayoutInfo
      *
      * @param string $city the city
      */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
-        $this->_city = $city;
+        $this->city = $city;
     }
 
     /**
      * Gets Postal code of the merchant bank, field return if the settlement currency is
      *
-     * @return string the postal
+     * @return string|null the postal
      */
-    public function getPostal()
+    public function getPostal(): ?string
     {
-        return $this->_postal;
+        return $this->postal;
     }
 
     /**
@@ -269,9 +271,9 @@ class PayoutInfo
      *
      * @param string $postal the postal
      */
-    public function setPostal(string $postal)
+    public function setPostal(string $postal): void
     {
-        $this->_postal = $postal;
+        $this->postal = $postal;
     }
 
     /**
@@ -279,11 +281,11 @@ class PayoutInfo
      *
      * used to pass country specific bank fields: BSB for AUD
      *
-     * @return string
+     * @return string|null
      */
-    public function getSort()
+    public function getSort(): ?string
     {
-        return $this->_sort;
+        return $this->sort;
     }
 
     /**
@@ -291,9 +293,9 @@ class PayoutInfo
      *
      * @param string $sort the sort
      */
-    public function setSort(string $sort)
+    public function setSort(string $sort): void
     {
-        $this->_sort = $sort;
+        $this->sort = $sort;
     }
 
     /**
@@ -302,11 +304,11 @@ class PayoutInfo
      * If set to true, this means BitPay will be settling the account using an international transfer via the SWIFT
      * network instead of local settlement methods like ACH(United States) or SEPA (European Economic Area)
      *
-     * @return string the wire
+     * @return string|null the wire
      */
-    public function getWire()
+    public function getWire(): ?string
     {
-        return $this->_wire;
+        return $this->wire;
     }
 
     /**
@@ -314,9 +316,9 @@ class PayoutInfo
      *
      * @param string $wire the wire
      */
-    public function setWire(string $wire)
+    public function setWire(string $wire): void
     {
-        $this->_wire = $wire;
+        $this->wire = $wire;
     }
 
     /**
@@ -324,11 +326,11 @@ class PayoutInfo
      *
      * Name of the bank used by the merchant. Field returned if "wire": true in the "payoutInfo" object
      *
-     * @return string the bank name
+     * @return string|null the bank name
      */
-    public function getBankName()
+    public function getBankName(): ?string
     {
-        return $this->_bankName;
+        return $this->bankName;
     }
 
     /**
@@ -336,9 +338,9 @@ class PayoutInfo
      *
      * @param string $bankName the bank name
      */
-    public function setBankName(string $bankName)
+    public function setBankName(string $bankName): void
     {
-        $this->_bankName = $bankName;
+        $this->bankName = $bankName;
     }
 
     /**
@@ -346,11 +348,11 @@ class PayoutInfo
      *
      * Address of the merchant's bank. Field returned if "wire": true in the "payoutInfo" object
      *
-     * @return string the bank address
+     * @return string|null the bank address
      */
-    public function getBankAddress()
+    public function getBankAddress(): ?string
     {
-        return $this->_bankAddress;
+        return $this->bankAddress;
     }
 
     /**
@@ -358,9 +360,9 @@ class PayoutInfo
      *
      * @param string $bankAddress the bank address
      */
-    public function setBankAddress(string $bankAddress)
+    public function setBankAddress(string $bankAddress): void
     {
-        $this->_bankAddress = $bankAddress;
+        $this->bankAddress = $bankAddress;
     }
 
     /**
@@ -368,11 +370,11 @@ class PayoutInfo
      *
      * Address of the merchant's bank. Field returned if "wire": true in the "payoutInfo" object
      *
-     * @return string the bank address2
+     * @return string|null the bank address2
      */
-    public function getBankAddress2()
+    public function getBankAddress2(): ?string
     {
-        return $this->_bankAddress2;
+        return $this->bankAddress2;
     }
 
     /**
@@ -380,9 +382,9 @@ class PayoutInfo
      *
      * @param string $bankAddress2 the bank address2
      */
-    public function setBankAddress2(string $bankAddress2)
+    public function setBankAddress2(string $bankAddress2): void
     {
-        $this->_bankAddress2 = $bankAddress2;
+        $this->bankAddress2 = $bankAddress2;
     }
 
     /**
@@ -391,11 +393,11 @@ class PayoutInfo
      * The merchant's bank account number, in the IBAN (International Bank Account Number) format.
      * Field returned if "wire": true in the "payoutInfo" object
      *
-     * @return string the iban
+     * @return string|null the iban
      */
-    public function getIban()
+    public function getIban(): ?string
     {
-        return $this->_iban;
+        return $this->iban;
     }
 
     /**
@@ -404,9 +406,9 @@ class PayoutInfo
      * @param string $iban the iban
      * @return void
      */
-    public function setIban(string $iban)
+    public function setIban(string $iban): void
     {
-        $this->_iban = $iban;
+        $this->iban = $iban;
     }
 
     /**
@@ -415,11 +417,11 @@ class PayoutInfo
      * When providing the settlement info via the dashboard, this field can be used by the merchant to provide
      * additional information about the receiving bank. Field returned if "wire": true in the "payoutInfo" object
      *
-     * @return string the additional information
+     * @return string|null the additional information
      */
-    public function getAdditionalInformation()
+    public function getAdditionalInformation(): ?string
     {
-        return $this->_additionalInformation;
+        return $this->additionalInformation;
     }
 
     /**
@@ -427,19 +429,19 @@ class PayoutInfo
      *
      * @param string $additionalInformation the additional information
      */
-    public function setAdditionalInformation(string $additionalInformation)
+    public function setAdditionalInformation(string $additionalInformation): void
     {
-        $this->_additionalInformation = $additionalInformation;
+        $this->additionalInformation = $additionalInformation;
     }
 
     /**
      * Gets Bank account holder name
      *
-     * @return string the bank account holder name
+     * @return string|null the bank account holder name
      */
-    public function getAccountHolderName()
+    public function getAccountHolderName(): ?string
     {
-        return $this->_accountHolderName;
+        return $this->accountHolderName;
     }
 
     /**
@@ -447,19 +449,19 @@ class PayoutInfo
      *
      * @param string $accountHolderName the bank account holder name
      */
-    public function setAccountHolderName(string $accountHolderName)
+    public function setAccountHolderName(string $accountHolderName): void
     {
-        $this->_accountHolderName = $accountHolderName;
+        $this->accountHolderName = $accountHolderName;
     }
 
     /**
      * Gets Bank account holder address
      *
-     * @return string the bank account holder address
+     * @return string|null the bank account holder address
      */
-    public function getAccountHolderAddress()
+    public function getAccountHolderAddress(): ?string
     {
-        return $this->_accountHolderAddress;
+        return $this->accountHolderAddress;
     }
 
     /**
@@ -467,19 +469,19 @@ class PayoutInfo
      *
      * @param string $accountHolderAddress the bank account holder address
      */
-    public function setAccountHolderAddress(string $accountHolderAddress)
+    public function setAccountHolderAddress(string $accountHolderAddress): void
     {
-        $this->_accountHolderAddress = $accountHolderAddress;
+        $this->accountHolderAddress = $accountHolderAddress;
     }
 
     /**
      * Gets Bank account holder address2
      *
-     * @return string the bank account holder address2
+     * @return string|null the bank account holder address2
      */
-    public function getAccountHolderAddress2()
+    public function getAccountHolderAddress2(): ?string
     {
-        return $this->_accountHolderAddress2;
+        return $this->accountHolderAddress2;
     }
 
     /**
@@ -487,19 +489,19 @@ class PayoutInfo
      *
      * @param string $accountHolderAddress2 the bank account holder address2
      */
-    public function setAccountHolderAddress2(string $accountHolderAddress2)
+    public function setAccountHolderAddress2(string $accountHolderAddress2): void
     {
-        $this->_accountHolderAddress2 = $accountHolderAddress2;
+        $this->accountHolderAddress2 = $accountHolderAddress2;
     }
 
     /**
      * Gets Bank account holder postal code
      *
-     * @return string the bank account holder postal code
+     * @return string|null the bank account holder postal code
      */
-    public function getAccountHolderPostalCode()
+    public function getAccountHolderPostalCode(): ?string
     {
-        return $this->_accountHolderPostalCode;
+        return $this->accountHolderPostalCode;
     }
 
     /**
@@ -507,19 +509,19 @@ class PayoutInfo
      *
      * @param string $accountHolderPostalCode the bank account holder postal code
      */
-    public function setAccountHolderPostalCode(string $accountHolderPostalCode)
+    public function setAccountHolderPostalCode(string $accountHolderPostalCode): void
     {
-        $this->_accountHolderPostalCode = $accountHolderPostalCode;
+        $this->accountHolderPostalCode = $accountHolderPostalCode;
     }
 
     /**
      * Gets Bank account holder city
      *
-     * @return string the bank account holder city
+     * @return string|null the bank account holder city
      */
-    public function getAccountHolderCity()
+    public function getAccountHolderCity(): ?string
     {
-        return $this->_accountHolderCity;
+        return $this->accountHolderCity;
     }
 
     /**
@@ -527,19 +529,19 @@ class PayoutInfo
      *
      * @param string $accountHolderCity the bank account holder city
      */
-    public function setAccountHolderCity(string $accountHolderCity)
+    public function setAccountHolderCity(string $accountHolderCity): void
     {
-        $this->_accountHolderCity = $accountHolderCity;
+        $this->accountHolderCity = $accountHolderCity;
     }
 
     /**
      * Gets Bank account holder country
      *
-     * @return string the bank account holder country
+     * @return string|null the bank account holder country
      */
-    public function getAccountHolderCountry()
+    public function getAccountHolderCountry(): ?string
     {
-        return $this->_accountHolderCountry;
+        return $this->accountHolderCountry;
     }
 
     /**
@@ -547,9 +549,9 @@ class PayoutInfo
      *
      * @param string $accountHolderCountry the bank account holder country
      */
-    public function setAccountHolderCountry(string $accountHolderCountry)
+    public function setAccountHolderCountry(string $accountHolderCountry): void
     {
-        $this->_accountHolderCountry = $accountHolderCountry;
+        $this->accountHolderCountry = $accountHolderCountry;
     }
 
     /**
@@ -557,31 +559,29 @@ class PayoutInfo
      *
      * @return array PayoutInfo as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'label'                   => $this->getLabel(),
-            'bankCountry'             => $this->getBankCountry(),
-            'name'                    => $this->getName(),
-            'bank'                    => $this->getBank(),
-            'swift'                   => $this->getSwift(),
-            'address'                 => $this->getAddress(),
-            'city'                    => $this->getCity(),
-            'postal'                  => $this->getPostal(),
-            'sort'                    => $this->getSort(),
-            'wire'                    => $this->getWire(),
-            'bankName'                => $this->getBankName(),
-            'bankAddress'             => $this->getBankAddress(),
-            'iban'                    => $this->getIban(),
-            'additionalInformation'   => $this->getAdditionalInformation(),
-            'accountHolderName'       => $this->getAccountHolderName(),
-            'accountHolderAddress'    => $this->getAccountHolderAddress(),
-            'accountHolderAddress2'   => $this->getAccountHolderAddress2(),
+        return [
+            'label' => $this->getLabel(),
+            'bankCountry' => $this->getBankCountry(),
+            'name' => $this->getName(),
+            'bank' => $this->getBank(),
+            'swift' => $this->getSwift(),
+            'address' => $this->getAddress(),
+            'city' => $this->getCity(),
+            'postal' => $this->getPostal(),
+            'sort' => $this->getSort(),
+            'wire' => $this->getWire(),
+            'bankName' => $this->getBankName(),
+            'bankAddress' => $this->getBankAddress(),
+            'iban' => $this->getIban(),
+            'additionalInformation' => $this->getAdditionalInformation(),
+            'accountHolderName' => $this->getAccountHolderName(),
+            'accountHolderAddress' => $this->getAccountHolderAddress(),
+            'accountHolderAddress2' => $this->getAccountHolderAddress2(),
             'accountHolderPostalCode' => $this->getAccountHolderPostalCode(),
-            'accountHolderCity'       => $this->getAccountHolderCity(),
-            'accountHolderCountry'    => $this->getAccountHolderCountry(),
+            'accountHolderCity' => $this->getAccountHolderCity(),
+            'accountHolderCountry' => $this->getAccountHolderCountry(),
         ];
-
-        return $elements;
     }
 }

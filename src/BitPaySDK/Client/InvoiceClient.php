@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitPaySDK\Client;
 
 use BitPayKeyUtils\Util\Util;
@@ -76,14 +78,13 @@ class InvoiceClient
     /**
      * Update a BitPay invoice.
      *
-     * @param string      $invoiceId The id of the invoice to updated.
-     * @param string      $buyerSms The buyer's cell number.
-     * @param string      $smsCode The buyer's received verification code.
+     * @param string $invoiceId The id of the invoice to updated.
+     * @param string|null $buyerSms The buyer's cell number.
+     * @param string|null $smsCode The buyer's received verification code.
      * @param string|null $buyerEmail The buyer's email address.
-     * @param false       $autoVerify Skip the user verification on sandbox ONLY.
+     * @param false $autoVerify Skip the user verification on sandbox ONLY.
      * @return Invoice
      * @throws InvoiceUpdateException
-     * @throws BitPayException
      */
     public function update(
         string $invoiceId,
@@ -314,6 +315,53 @@ class InvoiceClient
             }
 
             $responseJson = $this->restCli->delete("invoices/" . $invoiceId, $params);
+        } catch (BitPayException $e) {
+            throw new InvoiceCancellationException(
+                "failed to serialize Invoice object : " .
+                $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new InvoiceCancellationException("failed to serialize Invoice object : " . $e->getMessage());
+        }
+
+        try {
+            $mapper = JsonMapperFactory::create();
+            $invoice = $mapper->map(
+                json_decode($responseJson),
+                new Invoice()
+            );
+        } catch (Exception $e) {
+            throw new InvoiceCancellationException(
+                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
+            );
+        }
+
+        return $invoice;
+    }
+
+    /**
+     * Cancel a BitPay invoice.
+     *
+     * @param string $guid The guid of the invoice to cancel.
+     * @return Invoice $invoice Cancelled invoice object.
+     * @throws InvoiceCancellationException
+     * @throws BitPayException
+     */
+    public function cancelByGuid(
+        string $guid,
+        bool $forceCancel = false
+    ): Invoice {
+        try {
+            $params = [];
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            if ($forceCancel) {
+                $params["forceCancel"] = $forceCancel;
+            }
+
+            $responseJson = $this->restCli->delete("invoices/guid/" . $guid, $params);
         } catch (BitPayException $e) {
             throw new InvoiceCancellationException(
                 "failed to serialize Invoice object : " .

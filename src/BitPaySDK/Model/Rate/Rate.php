@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -9,9 +11,9 @@ namespace BitPaySDK\Model\Rate;
 
 class Rate
 {
-    protected $_name;
-    protected $_code;
-    protected $_rate;
+    protected ?string $name = null;
+    protected ?string $code = null;
+    protected ?float $rate = null;
 
     public function __construct()
     {
@@ -20,11 +22,11 @@ class Rate
     /**
      * Gets detailed currency name
      *
-     * @return string the name
+     * @return string|null the name
      */
-    public function getName()
+    public function getName(): ?string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -32,19 +34,19 @@ class Rate
      *
      * @param string $name the name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
      * Gets ISO 4217 3-character currency code
      *
-     * @return string the code
+     * @return string|null the code
      */
-    public function getCode()
+    public function getCode(): ?string
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -52,19 +54,19 @@ class Rate
      *
      * @param string $code the code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
      * Gets rate for the requested baseCurrency /currency pair
      *
-     * @return float the rate
+     * @return float|null the rate
      */
-    public function getRate()
+    public function getRate(): ?float
     {
-        return $this->_rate;
+        return $this->rate;
     }
 
     /**
@@ -72,9 +74,9 @@ class Rate
      *
      * @param float $rate the rate
      */
-    public function setRate(float $rate)
+    public function setRate(float $rate): void
     {
-        $this->_rate = $rate;
+        $this->rate = $rate;
     }
 
     /**
@@ -82,7 +84,7 @@ class Rate
      *
      * @return array Rate as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'name' => $this->getName(),

@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -16,26 +18,26 @@ namespace BitPaySDK\Model\Invoice;
  */
 class SupportedTransactionCurrencies
 {
-    protected $_btc;
-    protected $_bch;
-    protected $_eth;
-    protected $_usdc;
-    protected $_gusd;
-    protected $_pax;
-    protected $_xrp;
+    protected SupportedTransactionCurrency $btc;
+    protected SupportedTransactionCurrency $bch;
+    protected SupportedTransactionCurrency $eth;
+    protected SupportedTransactionCurrency $usdc;
+    protected SupportedTransactionCurrency $gusd;
+    protected SupportedTransactionCurrency $pax;
+    protected SupportedTransactionCurrency $xrp;
 
     /**
      * SupportedTransactionCurrencies constructor.
      */
     public function __construct()
     {
-        $this->_btc = new SupportedTransactionCurrency();
-        $this->_bch = new SupportedTransactionCurrency();
-        $this->_eth = new SupportedTransactionCurrency();
-        $this->_usdc = new SupportedTransactionCurrency();
-        $this->_gusd = new SupportedTransactionCurrency();
-        $this->_pax = new SupportedTransactionCurrency();
-        $this->_xrp = new SupportedTransactionCurrency();
+        $this->btc = new SupportedTransactionCurrency();
+        $this->bch = new SupportedTransactionCurrency();
+        $this->eth = new SupportedTransactionCurrency();
+        $this->usdc = new SupportedTransactionCurrency();
+        $this->gusd = new SupportedTransactionCurrency();
+        $this->pax = new SupportedTransactionCurrency();
+        $this->xrp = new SupportedTransactionCurrency();
     }
 
     /**
@@ -43,9 +45,9 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getBTC()
+    public function getBTC(): SupportedTransactionCurrency
     {
-        return $this->_btc;
+        return $this->btc;
     }
 
     /**
@@ -53,9 +55,9 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $btc
      */
-    public function setBTC(SupportedTransactionCurrency $btc)
+    public function setBTC(SupportedTransactionCurrency $btc): void
     {
-        $this->_btc = $btc;
+        $this->btc = $btc;
     }
 
     /**
@@ -63,9 +65,9 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getBCH()
+    public function getBCH(): SupportedTransactionCurrency
     {
-        return $this->_bch;
+        return $this->bch;
     }
 
     /**
@@ -73,9 +75,9 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $bch
      */
-    public function setBCH(SupportedTransactionCurrency $bch)
+    public function setBCH(SupportedTransactionCurrency $bch): void
     {
-        $this->_bch = $bch;
+        $this->bch = $bch;
     }
 
     /**
@@ -83,9 +85,9 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getETH()
+    public function getETH(): SupportedTransactionCurrency
     {
-        return $this->_eth;
+        return $this->eth;
     }
 
     /**
@@ -93,9 +95,9 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $eth
      */
-    public function setETH(SupportedTransactionCurrency $eth)
+    public function setETH(SupportedTransactionCurrency $eth): void
     {
-        $this->_eth = $eth;
+        $this->eth = $eth;
     }
 
     /**
@@ -103,9 +105,9 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getUSDC()
+    public function getUSDC(): SupportedTransactionCurrency
     {
-        return $this->_usdc;
+        return $this->usdc;
     }
 
     /**
@@ -113,9 +115,9 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $usdc
      */
-    public function setUSDC(SupportedTransactionCurrency $usdc)
+    public function setUSDC(SupportedTransactionCurrency $usdc): void
     {
-        $this->_usdc = $usdc;
+        $this->usdc = $usdc;
     }
 
     /**
@@ -123,9 +125,9 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getGUSD()
+    public function getGUSD(): SupportedTransactionCurrency
     {
-        return $this->_gusd;
+        return $this->gusd;
     }
 
     /**
@@ -133,9 +135,9 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $gusd
      */
-    public function setGUSD(SupportedTransactionCurrency $gusd)
+    public function setGUSD(SupportedTransactionCurrency $gusd): void
     {
-        $this->_gusd = $gusd;
+        $this->gusd = $gusd;
     }
 
     /**
@@ -143,9 +145,9 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getPAX()
+    public function getPAX(): SupportedTransactionCurrency
     {
-        return $this->_pax;
+        return $this->pax;
     }
 
     /**
@@ -153,9 +155,9 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $pax
      */
-    public function setPAX(SupportedTransactionCurrency $pax)
+    public function setPAX(SupportedTransactionCurrency $pax): void
     {
-        $this->_pax = $pax;
+        $this->pax = $pax;
     }
 
     /**
@@ -163,9 +165,9 @@ class SupportedTransactionCurrencies
      *
      * @return SupportedTransactionCurrency
      */
-    public function getXRP()
+    public function getXRP(): SupportedTransactionCurrency
     {
-        return $this->_xrp;
+        return $this->xrp;
     }
 
     /**
@@ -173,9 +175,9 @@ class SupportedTransactionCurrencies
      *
      * @param SupportedTransactionCurrency $xrp
      */
-    public function setXRP(SupportedTransactionCurrency $xrp)
+    public function setXRP(SupportedTransactionCurrency $xrp): void
     {
-        $this->_xrp = $xrp;
+        $this->xrp = $xrp;
     }
 
     /**
@@ -183,7 +185,7 @@ class SupportedTransactionCurrencies
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'btc'  => $this->getBTC()->toArray(),

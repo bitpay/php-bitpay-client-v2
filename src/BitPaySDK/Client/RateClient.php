@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitPaySDK\Client;
 
 use BitPaySDK\Client;
@@ -7,7 +9,6 @@ use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\RateQueryException;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
-use BitPaySDK\Tokens;
 use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;

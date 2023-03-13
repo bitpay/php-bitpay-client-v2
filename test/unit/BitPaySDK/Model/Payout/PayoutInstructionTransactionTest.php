@@ -58,12 +58,12 @@ class PayoutInstructionTransactionTest extends TestCase
     $this->assertArrayHasKey('amount', $payoutInstructionTransactionArray);
     $this->assertArrayHasKey('date', $payoutInstructionTransactionArray);
 
-    $this->assertEquals($payoutInstructionTransactionArray['txid'], 'db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
-    $this->assertEquals($payoutInstructionTransactionArray['amount'], 0.000254);
-    $this->assertEquals($payoutInstructionTransactionArray['date'], '2021-05-27T11:04:23.155Z');
+    $this->assertEquals('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057', $payoutInstructionTransactionArray['txid']);
+    $this->assertEquals(0.000254, $payoutInstructionTransactionArray['amount']);
+    $this->assertEquals('2021-05-27T11:04:23.155Z', $payoutInstructionTransactionArray['date']);
   }
 
-  private function createClassObject()
+  private function createClassObject(): PayoutInstructionTransaction
   {
     return new PayoutInstructionTransaction();
   }

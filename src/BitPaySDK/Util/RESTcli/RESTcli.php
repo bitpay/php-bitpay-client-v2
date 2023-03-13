@@ -20,7 +20,6 @@ use GuzzleHttp\Exception\InvalidArgumentException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\TooManyRedirectsException;
-use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Response as Response;
 use GuzzleHttp\RequestOptions as RequestOptions;
 
@@ -33,24 +32,24 @@ class RESTcli
     /**
      * @var GuzzleHttpClient
      */
-    protected $_client;
+    protected GuzzleHttpClient $client;
     /**
      * @var string
      */
-    protected $_baseUrl;
+    protected string $baseUrl;
     /**
      * @var PrivateKey
      */
-    protected $_ecKey;
+    protected PrivateKey $ecKey;
     /**
      * @var string
      */
-    protected $_identity;
+    protected string $identity;
 
     /**
      * @var string
      */
-    protected $_proxy;
+    protected string $proxy;
 
     /**
      * RESTcli constructor.
@@ -61,9 +60,9 @@ class RESTcli
      */
     public function __construct(string $environment, PrivateKey $ecKey, ?string $proxy = null)
     {
-        $this->_ecKey = $ecKey;
-        $this->_baseUrl = $environment == Env::Test ? Env::TestUrl : Env::ProdUrl;
-        $this->_proxy = $proxy !== null ? trim($proxy) : '';
+        $this->ecKey = $ecKey;
+        $this->baseUrl = $environment == Env::Test ? Env::TestUrl : Env::ProdUrl;
+        $this->proxy = $proxy !== null ? trim($proxy) : '';
         $this->init();
     }
 
@@ -72,12 +71,12 @@ class RESTcli
      *
      * @throws BitPayException
      */
-    public function init()
+    public function init(): void
     {
         try {
-            $this->_identity = $this->_ecKey->getPublicKey()->__toString();
+            $this->identity = $this->ecKey->getPublicKey()->__toString();
             $config = [
-                'base_url' => $this->_baseUrl,
+                'base_url' => $this->baseUrl,
                 'defaults' => [
                     'headers' => [
                         'x-accept-version'           => Env::BitpayApiVersion,
@@ -88,11 +87,11 @@ class RESTcli
                 ],
             ];
 
-            if ($this->_proxy !== '') {
-                $config['proxy'] = $this->_proxy;
+            if ($this->proxy !== '') {
+                $config['proxy'] = $this->proxy;
             }
 
-            $this->_client = new GuzzleHttpClient($config);
+            $this->client = new GuzzleHttpClient($config);
         } catch (Exception $e) {
             throw new BitPayException("RESTcli init failed : " . $e->getMessage());
         }
@@ -107,10 +106,10 @@ class RESTcli
      * @return string (json)
      * @throws BitPayException
      */
-    public function post($uri, array $formData = [], $signatureRequired = true): string
+    public function post($uri, array $formData = [], bool $signatureRequired = true): string
     {
         try {
-            $fullURL = $this->_baseUrl . $uri;
+            $fullURL = $this->baseUrl . $uri;
             $headers = [
                 'Content-Type'               => 'application/json',
                 'x-accept-version'           => Env::BitpayApiVersion,
@@ -120,26 +119,24 @@ class RESTcli
             ];
 
             if ($signatureRequired) {
-                $headers['x-signature'] = $this->_ecKey->sign($fullURL . json_encode($formData));
-                $headers['x-identity'] = $this->_identity;
+                $headers['x-signature'] = $this->ecKey->sign($fullURL . json_encode($formData));
+                $headers['x-identity'] = $this->identity;
             }
 
             /**
              * @var Response
              */
-            $response = $this->_client->requestAsync(
+            $response = $this->client->requestAsync(
                 'POST',
                 $fullURL,
                 [
-                $options[RequestOptions::SYNCHRONOUS] = false,
+                false,
                 'headers'            => $headers,
                 RequestOptions::JSON => $formData,
                 ]
             )->wait();
 
-            $responseJson = $this->responseToJsonString($response);
-
-            return $responseJson;
+            return $this->responseToJsonString($response);
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
             throw new BitPayException(
@@ -175,10 +172,10 @@ class RESTcli
      * @return string (json)
      * @throws BitPayException
      */
-    public function get($uri, array $parameters = null, $signatureRequired = true): string
+    public function get($uri, array $parameters = null, bool $signatureRequired = true): string
     {
         try {
-            $fullURL = $this->_baseUrl . $uri;
+            $fullURL = $this->baseUrl . $uri;
             $headers = [
                 'Content-Type'               => 'application/json',
                 'x-accept-version'           => Env::BitpayApiVersion,
@@ -192,14 +189,14 @@ class RESTcli
             }
 
             if ($signatureRequired) {
-                $headers['x-signature'] = $this->_ecKey->sign($fullURL);
-                $headers['x-identity'] = $this->_identity;
+                $headers['x-signature'] = $this->ecKey->sign($fullURL);
+                $headers['x-identity'] = $this->identity;
             }
 
             /**
              * @var Response
              */
-            $response = $this->_client->requestAsync(
+            $response = $this->client->requestAsync(
                 'GET',
                 $fullURL,
                 [
@@ -209,9 +206,7 @@ class RESTcli
                 ]
             )->wait();
 
-            $responseJson = $this->responseToJsonString($response);
-
-            return $responseJson;
+            return $this->responseToJsonString($response);
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
             throw new BitPayException(
@@ -249,7 +244,7 @@ class RESTcli
     public function delete($uri, array $parameters = null): string
     {
         try {
-            $fullURL = $this->_baseUrl . $uri;
+            $fullURL = $this->baseUrl . $uri;
             if ($parameters) {
                 $fullURL .= '?' . http_build_query($parameters);
             }
@@ -260,14 +255,14 @@ class RESTcli
                 'x-bitpay-api-frame'         => Env::BitpayApiFrame,
                 'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
                 'Content-Type'               => 'application/json',
-                'x-signature'                => $this->_ecKey->sign($fullURL),
-                'x-identity'                 => $this->_identity,
+                'x-signature'                => $this->ecKey->sign($fullURL),
+                'x-identity'                 => $this->identity,
             ];
 
             /**
              * @var Response
              */
-            $response = $this->_client->requestAsync(
+            $response = $this->client->requestAsync(
                 'DELETE',
                 $fullURL,
                 [
@@ -277,9 +272,7 @@ class RESTcli
                 ]
             )->wait();
 
-            $responseJson = $this->responseToJsonString($response);
-
-            return $responseJson;
+            return $this->responseToJsonString($response);
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
             throw new BitPayException(
@@ -317,21 +310,21 @@ class RESTcli
     public function update($uri, array $formData = []): string
     {
         try {
-            $fullURL = $this->_baseUrl . $uri;
+            $fullURL = $this->baseUrl . $uri;
             $headers = [
                 'x-accept-version'           => Env::BitpayApiVersion,
                 'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
                 'x-bitpay-api-frame'         => Env::BitpayApiFrame,
                 'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
                 'Content-Type'               => 'application/json',
-                'x-signature'                => $this->_ecKey->sign($fullURL . json_encode($formData)),
-                'x-identity'                 => $this->_identity,
+                'x-signature'                => $this->ecKey->sign($fullURL . json_encode($formData)),
+                'x-identity'                 => $this->identity,
             ];
 
             /**
              * @var Response
              */
-            $response = $this->_client->requestAsync(
+            $response = $this->client->requestAsync(
                 'PUT',
                 $fullURL,
                 [
@@ -341,9 +334,7 @@ class RESTcli
                 ]
             )->wait();
 
-            $responseJson = $this->responseToJsonString($response);
-
-            return $responseJson;
+            return $this->responseToJsonString($response);
         } catch (BadResponseException $e) {
             $errorJson = $this->responseToJsonString($e->getResponse());
             throw new BitPayException(
@@ -376,16 +367,14 @@ class RESTcli
      * @param Response $response
      * @return string
      * @throws BitPayException
+     * @throws Exception
      */
     public function responseToJsonString(Response $response): string
     {
-        if ($response == null) {
-            throw new Exception("Error: HTTP response is null");
-        }
 
         try {
             $body = json_decode($response->getBody()->getContents(), true);
-            if ($this->_proxy !== '' && !is_array($body)) {
+            if ($this->proxy !== '' && !is_array($body)) {
                 throw new BitPayException(
                     "Please check your proxy settings, HTTP Code:" .
                     $response->getStatusCode() .

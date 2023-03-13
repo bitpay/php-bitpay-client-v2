@@ -14,7 +14,7 @@ class InvoiceClientTest extends TestCase
 
     public function setUp(): void
     {
-        $this->client = Client::createWithFile('src/BitPaySDK/config.yml');
+        $this->client = Client::createWithFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . Config::BITPAY_CONFIG_FILE);
     }
 
     public function testCreateInvoice(): void
@@ -82,6 +82,18 @@ class InvoiceClientTest extends TestCase
         $this->assertEquals('expired', $cancelInvoice->getStatus());
     }
 
+    public function testCancelInvoiceByGuid()
+    {
+        $invoice = $this->getInvoiceExample();
+        $baseInvoice = $this->client->createInvoice($invoice);
+        $baseInvoice = $this->client->cancelInvoiceByGuid($baseInvoice->getGuid());
+
+        $this->assertEquals('expired', $baseInvoice->getStatus());
+        $this->assertEquals(50.0, $baseInvoice->getPrice());
+        $this->assertInstanceOf(Invoice::class, $baseInvoice);
+        $this->assertNotNull($baseInvoice);
+    }
+
     public function testPayInvoice(): void
     {
         $invoice = $this->getInvoiceExample();
@@ -98,7 +110,7 @@ class InvoiceClientTest extends TestCase
         $invoice->setExtendedNotifications(true);
         $invoice->setNotificationURL("https://test/lJnJg9WW7MtG9GZlPVdj");
         $invoice->setRedirectURL("https://test/lJnJg9WW7MtG9GZlPVdj");
-        $invoice->setItemDesc("Ab tempora sed ut.");
+        $invoice->setItemDesc("Created by PHP Integration test");
         $invoice->setNotificationEmail("");
         $invoice->setBuyerSms('+12223334445');
 

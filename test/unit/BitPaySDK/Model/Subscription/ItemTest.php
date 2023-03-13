@@ -66,12 +66,12 @@ class ItemTest extends TestCase
         $this->assertArrayNotHasKey('description', $itemArray);
         $this->assertArrayHasKey('price', $itemArray);
         $this->assertArrayHasKey('quantity', $itemArray);
-        $this->assertEquals($itemArray['price'], 100.50);
-        $this->assertEquals($itemArray['quantity'], 5);
+        $this->assertEquals(100.50, $itemArray['price']);
+        $this->assertEquals(5, $itemArray['quantity']);
     }
 
 
-    private function createClassObject()
+    private function createClassObject(): Item
     {
         return new Item();
     }

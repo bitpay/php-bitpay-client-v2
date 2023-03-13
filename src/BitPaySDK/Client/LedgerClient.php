@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitPaySDK\Client;
 
 use BitPaySDK\Exceptions\BitPayException;
@@ -25,11 +27,11 @@ class LedgerClient
     /**
      * Retrieve a list of ledgers by date range using the merchant facade.
      *
-     * @param  string $currency  The three digit currency string for the ledger to retrieve.
-     * @param  string $startDate The first date for the query filter.
-     * @param  string $endDate   The last date for the query filter.
-     * @return Ledger            A Ledger object populated with the BitPay ledger entries list.
-     * @throws BitPayException
+     * @param string $currency The three digit currency string for the ledger to retrieve.
+     * @param string $startDate The first date for the query filter.
+     * @param string $endDate The last date for the query filter.
+     * @return array A Ledger object populated with the BitPay ledger entries list.
+     * @throws LedgerQueryException
      */
     public function get(string $currency, string $startDate, string $endDate): array
     {

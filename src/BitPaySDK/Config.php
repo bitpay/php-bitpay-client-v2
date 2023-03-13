@@ -11,18 +11,18 @@ class Config
     /**
      * @var
      */
-    protected $_environment;
+    protected $environment;
     /**
      * @var
      */
-    protected $_envConfig;
+    protected $envConfig;
 
     /**
      * @return mixed
      */
     public function getEnvironment()
     {
-        return $this->_environment;
+        return $this->environment;
     }
 
     /**
@@ -30,7 +30,7 @@ class Config
      */
     public function setEnvironment($environment)
     {
-        $this->_environment = $environment;
+        $this->environment = $environment;
     }
 
     /**
@@ -38,7 +38,7 @@ class Config
      */
     public function getEnvConfig()
     {
-        return $this->_envConfig;
+        return $this->envConfig;
     }
 
     /**
@@ -46,6 +46,6 @@ class Config
      */
     public function setEnvConfig($envConfig)
     {
-        $this->_envConfig = $envConfig;
+        $this->envConfig = $envConfig;
     }
 }

@@ -53,12 +53,12 @@ class RateTest extends TestCase
         $this->assertArrayHasKey('code', $rateArray);
         $this->assertArrayHasKey('rate', $rateArray);
 
-        $this->assertEquals($rateArray['name'], 'Bitcoin');
-        $this->assertEquals($rateArray['code'], 'BTC');
-        $this->assertEquals($rateArray['rate'], 1.0);
+        $this->assertEquals('Bitcoin', $rateArray['name']);
+        $this->assertEquals('BTC', $rateArray['code']);
+        $this->assertEquals(1.0, $rateArray['rate']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Rate
     {
         return new Rate();
     }

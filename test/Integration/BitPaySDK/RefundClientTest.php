@@ -17,19 +17,18 @@ class RefundClientTest extends TestCase
 
     public function setUp(): void
     {
-        $this->client = Client::createWithFile('src/BitPaySDK/config.yml');
+        $this->client = Client::createWithFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . Config::BITPAY_CONFIG_FILE);
     }
 
     public function testCreateRefund(): void
     {
         $invoice = $this->getInvoiceExample();
         $baseInvoice = $this->client->createInvoice($invoice);
-        $baseInvoice = $this->client->payInvoice($baseInvoice->getId());
-        $refund = $this->client->createRefund($baseInvoice->getId(), 50.0, Currency::USD, true);
+        $baseInvoice = $this->client->payInvoice($baseInvoice->getId(), 'complete');
+        $refund = $this->client->createRefund($baseInvoice->getId(), 50.0, Currency::USD);
 
         $this->assertEquals(50.0, $refund->getAmount());
         $this->assertEquals('USD', $refund->getCurrency());
-        $this->assertEquals('preview', $refund->getStatus());
     }
 
     public function testCreateRefundShouldCatchRestCliException(): void
@@ -45,7 +44,7 @@ class RefundClientTest extends TestCase
     {
         $dateStart = date('Y-m-d', strtotime("-30 day"));
         $dateEnd = date("Y-m-d", strtotime("+1 day"));
-        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'confirmed', null, 1);
+        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'complete', null, 1);
         $refunds = $this->client->getRefunds($invoices[0]->getId());
         $refund = $this->client->updateRefund($refunds[0]->getId(), 'created');
 
@@ -57,13 +56,13 @@ class RefundClientTest extends TestCase
     {
         $dateStart = date('Y-m-d', strtotime("-30 day"));
         $dateEnd = date("Y-m-d", strtotime("+1 day"));
-        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'confirmed', null, 1);
+        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'complete', null, 1);
         $refunds = $this->client->getRefunds($invoices[0]->getId());
 
         $this->assertCount(1, $refunds);
         $this->assertNotNull($refunds);
         $this->assertTrue(is_array($refunds));
-        $this->assertEquals('confirmed', $invoices[0]->getStatus());
+        $this->assertEquals('complete', $invoices[0]->getStatus());
         $this->assertEquals('created', $refunds[0]->getStatus());
     }
 
@@ -71,12 +70,12 @@ class RefundClientTest extends TestCase
     {
         $dateStart = date('Y-m-d', strtotime("-30 day"));
         $dateEnd = date("Y-m-d", strtotime("+1 day"));
-        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'confirmed', null, 1);
+        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'complete', null, 1);
         $refunds = $this->client->getRefunds($invoices[0]->getId());
         $refund = $this->client->getRefund($refunds[0]->getId());
 
         $this->assertInstanceOf(Refund::class, $refund);
-        $this->assertEquals('confirmed', $invoices[0]->getStatus());
+        $this->assertEquals('complete', $invoices[0]->getStatus());
         $this->assertCount(1, $invoices);
         $this->assertEquals('created', $refund->getStatus());
     }
@@ -85,7 +84,7 @@ class RefundClientTest extends TestCase
     {
         $dateStart = date('Y-m-d', strtotime("-30 day"));
         $dateEnd = date("Y-m-d", strtotime("+1 day"));
-        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'confirmed', null, 1);
+        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'complete', null, 1);
         $refunds = $this->client->getRefunds($invoices[0]->getId());
 
         $this->assertTrue($this->client->sendRefundNotification($refunds[0]->getId()));
@@ -95,7 +94,7 @@ class RefundClientTest extends TestCase
     {
         $dateStart = date('Y-m-d', strtotime("-30 day"));
         $dateEnd = date("Y-m-d", strtotime("+1 day"));
-        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'confirmed', null, 1);
+        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'complete', null, 1);
         $refunds = $this->client->getRefunds($invoices[0]->getId());
         $refundId = $refunds[0]->getId();
         $refund = $this->client->cancelRefund($refundId);
@@ -112,7 +111,7 @@ class RefundClientTest extends TestCase
         $invoice->setExtendedNotifications(true);
         $invoice->setNotificationURL("https://test/lJnJg9WW7MtG9GZlPVdj");
         $invoice->setRedirectURL("https://test/lJnJg9WW7MtG9GZlPVdj");
-        $invoice->setItemDesc("Ab tempora sed ut.");
+        $invoice->setItemDesc("Created by PHP Integration test");
         $invoice->setNotificationEmail("");
 
         $buyer = new Buyer();

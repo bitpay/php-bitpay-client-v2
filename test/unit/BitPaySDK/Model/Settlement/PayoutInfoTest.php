@@ -259,29 +259,29 @@ class PayoutInfoTest extends TestCase
         $this->assertArrayHasKey('accountHolderCity', $payoutInfoArray);
         $this->assertArrayHasKey('accountHolderCountry', $payoutInfoArray);
 
-        $this->assertEquals($payoutInfoArray['label'], 'Label');
-        $this->assertEquals($payoutInfoArray['bankCountry'], 'USA');
-        $this->assertEquals($payoutInfoArray['name'], 'Name');
-        $this->assertEquals($payoutInfoArray['bank'], 'Bank');
-        $this->assertEquals($payoutInfoArray['swift'], 'Swift');
-        $this->assertEquals($payoutInfoArray['address'], 'Address');
-        $this->assertEquals($payoutInfoArray['city'], 'Miami');
-        $this->assertEquals($payoutInfoArray['postal'], '12345');
-        $this->assertEquals($payoutInfoArray['sort'], 'Sort');
-        $this->assertEquals($payoutInfoArray['wire'], 'Wire');
-        $this->assertEquals($payoutInfoArray['bankName'], 'Bank name');
-        $this->assertEquals($payoutInfoArray['bankAddress'], 'Bank address');
-        $this->assertEquals($payoutInfoArray['iban'], 'KW81CBKU00000000000012345601013');
-        $this->assertEquals($payoutInfoArray['additionalInformation'], 'Additional information');
-        $this->assertEquals($payoutInfoArray['accountHolderName'], 'Account holder name');
-        $this->assertEquals($payoutInfoArray['accountHolderAddress'], 'Account holder address');
-        $this->assertEquals($payoutInfoArray['accountHolderAddress2'], 'Account holder address2');
-        $this->assertEquals($payoutInfoArray['accountHolderPostalCode'], 'Account holder postal code');
-        $this->assertEquals($payoutInfoArray['accountHolderCity'], 'Account holder city');
-        $this->assertEquals($payoutInfoArray['accountHolderCountry'], 'Account holder country');
+        $this->assertEquals('Label', $payoutInfoArray['label']);
+        $this->assertEquals('USA', $payoutInfoArray['bankCountry']);
+        $this->assertEquals('Name', $payoutInfoArray['name']);
+        $this->assertEquals('Bank', $payoutInfoArray['bank']);
+        $this->assertEquals('Swift', $payoutInfoArray['swift']);
+        $this->assertEquals('Address', $payoutInfoArray['address']);
+        $this->assertEquals('Miami', $payoutInfoArray['city']);
+        $this->assertEquals('12345', $payoutInfoArray['postal']);
+        $this->assertEquals('Sort', $payoutInfoArray['sort']);
+        $this->assertEquals('Wire', $payoutInfoArray['wire']);
+        $this->assertEquals('Bank name', $payoutInfoArray['bankName']);
+        $this->assertEquals('Bank address', $payoutInfoArray['bankAddress']);
+        $this->assertEquals('KW81CBKU00000000000012345601013', $payoutInfoArray['iban']);
+        $this->assertEquals('Additional information', $payoutInfoArray['additionalInformation']);
+        $this->assertEquals('Account holder name', $payoutInfoArray['accountHolderName']);
+        $this->assertEquals('Account holder address', $payoutInfoArray['accountHolderAddress']);
+        $this->assertEquals('Account holder address2', $payoutInfoArray['accountHolderAddress2']);
+        $this->assertEquals('Account holder postal code', $payoutInfoArray['accountHolderPostalCode']);
+        $this->assertEquals('Account holder city', $payoutInfoArray['accountHolderCity']);
+        $this->assertEquals('Account holder country', $payoutInfoArray['accountHolderCountry']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): PayoutInfo
     {
         return new PayoutInfo();
     }

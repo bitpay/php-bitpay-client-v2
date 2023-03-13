@@ -97,7 +97,7 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $this->assertArrayNotHasKey('btc', $supportedTransactionCurrenciesArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): SupportedTransactionCurrencies
     {
         return new SupportedTransactionCurrencies();
     }

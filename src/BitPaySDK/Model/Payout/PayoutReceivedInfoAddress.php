@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -13,12 +15,12 @@ namespace BitPaySDK\Model\Payout;
  */
 class PayoutReceivedInfoAddress
 {
-    protected $_address1;
-    protected $_address2;
-    protected $_locality;
-    protected $_region;
-    protected $_postalCode;
-    protected $_country;
+    protected ?string $address1 = null;
+    protected ?string $address2 = null;
+    protected ?string $locality = null;
+    protected ?string $region = null;
+    protected ?string $postalCode = null;
+    protected ?string $country = null;
 
     /**
      * PayoutReceivedInfoAddress constructor.
@@ -32,9 +34,9 @@ class PayoutReceivedInfoAddress
      *
      * @return string|null
      */
-    public function getAddress1()
+    public function getAddress1(): ?string
     {
-        return $this->_address1;
+        return $this->address1;
     }
 
     /**
@@ -42,9 +44,9 @@ class PayoutReceivedInfoAddress
      *
      * @param string $address1
      */
-    public function setAddress1(string $address1)
+    public function setAddress1(string $address1): void
     {
-        $this->_address1 = $address1;
+        $this->address1 = $address1;
     }
 
     /**
@@ -52,9 +54,9 @@ class PayoutReceivedInfoAddress
      *
      * @return string|null
      */
-    public function getAddress2()
+    public function getAddress2(): ?string
     {
-        return $this->_address2;
+        return $this->address2;
     }
 
     /**
@@ -62,9 +64,9 @@ class PayoutReceivedInfoAddress
      *
      * @param string $address2
      */
-    public function setAddress2(string $address2)
+    public function setAddress2(string $address2): void
     {
-        $this->_address2 = $address2;
+        $this->address2 = $address2;
     }
 
     /**
@@ -72,9 +74,9 @@ class PayoutReceivedInfoAddress
      *
      * @return string|null
      */
-    public function getLocality()
+    public function getLocality(): ?string
     {
-        return $this->_locality;
+        return $this->locality;
     }
 
     /**
@@ -82,9 +84,9 @@ class PayoutReceivedInfoAddress
      *
      * @param string $locality
      */
-    public function setLocality(string $locality)
+    public function setLocality(string $locality): void
     {
-        $this->_locality = $locality;
+        $this->locality = $locality;
     }
 
     /**
@@ -92,9 +94,9 @@ class PayoutReceivedInfoAddress
      *
      * @return string|null
      */
-    public function getRegion()
+    public function getRegion(): ?string
     {
-        return $this->_region;
+        return $this->region;
     }
 
     /**
@@ -102,9 +104,9 @@ class PayoutReceivedInfoAddress
      *
      * @param string $region
      */
-    public function setRegion(string $region)
+    public function setRegion(string $region): void
     {
-        $this->_region = $region;
+        $this->region = $region;
     }
 
     /**
@@ -112,9 +114,9 @@ class PayoutReceivedInfoAddress
      *
      * @return string|null
      */
-    public function getPostalCode()
+    public function getPostalCode(): ?string
     {
-        return $this->_postalCode;
+        return $this->postalCode;
     }
 
     /**
@@ -122,9 +124,9 @@ class PayoutReceivedInfoAddress
      *
      * @param string $postalCode
      */
-    public function setPostalCode(string $postalCode)
+    public function setPostalCode(string $postalCode): void
     {
-        $this->_postalCode = $postalCode;
+        $this->postalCode = $postalCode;
     }
 
     /**
@@ -132,9 +134,9 @@ class PayoutReceivedInfoAddress
      *
      * @return string|null
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
-        return $this->_country;
+        return $this->country;
     }
 
     /**
@@ -142,9 +144,9 @@ class PayoutReceivedInfoAddress
      *
      * @param string $country
      */
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
-        $this->_country = $country;
+        $this->country = $country;
     }
 
     /**
@@ -152,15 +154,15 @@ class PayoutReceivedInfoAddress
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
-            'address1'   => $this->getAddress1(),
-            'address2'   => $this->getAddress2(),
-            'locality'   => $this->getLocality(),
-            'region'     => $this->getRegion(),
+            'address1' => $this->getAddress1(),
+            'address2' => $this->getAddress2(),
+            'locality' => $this->getLocality(),
+            'region' => $this->getRegion(),
             'postalCode' => $this->getPostalCode(),
-            'country'    => $this->getCountry(),
+            'country' => $this->getCountry(),
         ];
 
         foreach ($elements as $key => $value) {

@@ -50,6 +50,9 @@ class BillDataTest extends TestCase
         $billData->setCurrency($expectedCurrency);
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testGetCurrency()
     {
         $expectedCurrency = 'BTC';
@@ -216,26 +219,26 @@ class BillDataTest extends TestCase
         $this->assertArrayHasKey('items', $billDataArray);
         $this->assertArrayHasKey('merchant', $billDataArray);
 
-        $this->assertEquals($billDataArray['cc'], ['']);
-        $this->assertEquals($billDataArray['number'], '123456789');
-        $this->assertEquals($billDataArray['currency'], 'BTC');
-        $this->assertEquals($billDataArray['name'], 'Test name');
-        $this->assertEquals($billDataArray['address1'], 'Address1');
-        $this->assertEquals($billDataArray['address2'], 'Address2');
-        $this->assertEquals($billDataArray['city'], 'Miami');
-        $this->assertEquals($billDataArray['state'], 'AB');
-        $this->assertEquals($billDataArray['zip'], '12345');
-        $this->assertEquals($billDataArray['country'], 'USA');
-        $this->assertEquals($billDataArray['email'], 'test@email.com');
-        $this->assertEquals($billDataArray['phone'], '123456789');
-        $this->assertEquals($billDataArray['dueDate'], '2022-01-01');
+        $this->assertEquals([''], $billDataArray['cc']);
+        $this->assertEquals('123456789', $billDataArray['number']);
+        $this->assertEquals('BTC', $billDataArray['currency']);
+        $this->assertEquals('Test name', $billDataArray['name']);
+        $this->assertEquals('Address1', $billDataArray['address1']);
+        $this->assertEquals('Address2', $billDataArray['address2']);
+        $this->assertEquals('Miami', $billDataArray['city']);
+        $this->assertEquals('AB', $billDataArray['state']);
+        $this->assertEquals('12345', $billDataArray['zip']);
+        $this->assertEquals('USA', $billDataArray['country']);
+        $this->assertEquals('test@email.com', $billDataArray['email']);
+        $this->assertEquals('123456789', $billDataArray['phone']);
+        $this->assertEquals('2022-01-01', $billDataArray['dueDate']);
         $this->assertTrue($billDataArray['passProcessingFee']);
-        $this->assertEquals($billDataArray['items'], ['test']);
-        $this->assertEquals($billDataArray['merchant'], 'Test merchant');
+        $this->assertEquals(['test'], $billDataArray['items']);
+        $this->assertEquals('Test merchant', $billDataArray['merchant']);
     }
 
 
-    private function createClassObject()
+    private function createClassObject(): BillData
     {
         return new BillData('BTC', 'test@email.com', '2022-01-01', ['test' => 'test']);
     }
