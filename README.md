@@ -19,6 +19,11 @@ To get up and running with our PHP library quickly, follow [the guide](https://b
 * https://github.com/bitpay/php-bitpay-client-v2/issues
 * https://support.bitpay.com
 
+### Requirements
+
+- PHP version: 8.0 / 8.1 / 8.2
+- PHP extensions: json, reflection
+
 ## Contribute
 
 To contribute to this project, please fork and submit a pull request.
