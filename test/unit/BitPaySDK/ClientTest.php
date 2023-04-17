@@ -3,6 +3,15 @@
 namespace BitPaySDK\Test;
 
 use BitPaySDK\Client;
+use BitPaySDK\Client\BillClient;
+use BitPaySDK\Client\InvoiceClient;
+use BitPaySDK\Client\LedgerClient;
+use BitPaySDK\Client\PayoutClient;
+use BitPaySDK\Client\PayoutRecipientsClient;
+use BitPaySDK\Client\RateClient;
+use BitPaySDK\Client\RefundClient;
+use BitPaySDK\Client\SettlementClient;
+use BitPaySDK\Client\WalletClient;
 use BitPaySDK\Exceptions\BillCreationException;
 use BitPaySDK\Exceptions\BillDeliveryException;
 use BitPaySDK\Exceptions\BillQueryException;
@@ -50,6 +59,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 use BitPaySDK\Env;
 use BitPaySDK\Tokens;
+use ReflectionProperty;
 
 
 class ClientTest extends TestCase
@@ -96,13 +106,39 @@ class ClientTest extends TestCase
     }';
 
     /**
+     * @throws \ReflectionException
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $listOfClientsToClear = [
+            BillClient::class,
+            InvoiceClient::class,
+            LedgerClient::class,
+            PayoutClient::class,
+            PayoutRecipientsClient::class,
+            RateClient::class,
+            RefundClient::class,
+            SettlementClient::class,
+            WalletClient::class
+        ];
+
+        foreach ($listOfClientsToClear as $className) {
+            $refProperty = new \ReflectionProperty($className, 'instance');
+            $refProperty->setAccessible(true);
+            $refProperty->setValue(null);
+        }
+    }
+
+    /**
      * @throws BitPayException
      */
     public function testWithData()
     {
         $tokens = $this->createMock(Tokens::class);
         $result = $this->getTestedClassInstance()::createWithData(
-            Env::Test,
+            Env::TEST,
             __DIR__ . '/../../../examples/bitpay_private_test.key',
             $tokens,
             'YourMasterPassword'
@@ -118,7 +154,7 @@ class ClientTest extends TestCase
         $this->expectException(BitPayException::class);
 
         $instance::createWithData(
-            Env::Test,
+            Env::TEST,
             __DIR__ . '/../../../examples/bitpay_private_test.key',
             $tokens,
             'badPassword'
@@ -131,7 +167,7 @@ class ClientTest extends TestCase
     public function testWithFileJsonConfig(): Client
     {
         $instance = $this->getTestedClassInstance();
-        $result = $instance::createWithFile(__DIR__ . '/../../../examples/BitPay.config.json');
+        $result = $instance::createWithFile(__DIR__ . '/../../../examples/BitPay.config-example.json');
         $this->assertInstanceOf(Client::class, $result);
         return $result;
     }
@@ -142,7 +178,7 @@ class ClientTest extends TestCase
     public function testWithFileYmlConfig()
     {
         $instance = $this->getTestedClassInstance();
-        $result = $instance::createWithFile(__DIR__ . '/../../../examples/BitPay.config.yml');
+        $result = $instance::createWithFile(__DIR__ . '/../../../examples/BitPay.config-example.yml');
         $this->assertInstanceOf(Client::class, $result);
     }
 
@@ -175,7 +211,7 @@ class ClientTest extends TestCase
             ->willReturn(file_get_contents(__DIR__ . '/jsonResponse/createBillResponse.json'));
 
         $billClient = $this->getClient($restCliMock);
-        $createdBill = $billClient->createBill($billMock, Facade::Merchant);
+        $createdBill = $billClient->createBill($billMock, Facade::MERCHANT);
 
         $this->assertEquals($expectedId, $createdBill->getId());
         $this->assertEquals($expectedStatus, $createdBill->getStatus());
@@ -202,7 +238,7 @@ class ClientTest extends TestCase
 
         $this->expectException(BillCreationException::class);
 
-        $billClient->createBill($billMock, Facade::Merchant);
+        $billClient->createBill($billMock, Facade::MERCHANT);
     }
 
     public function testCreateBillShouldCatchRestCliException()
@@ -225,7 +261,7 @@ class ClientTest extends TestCase
         $client = $this->getClient($restCliMock);
 
         $this->expectException(BillCreationException::class);
-        $client->createBill($billMock, Facade::Merchant, true);
+        $client->createBill($billMock, Facade::MERCHANT, true);
     }
 
     public function testCreateBillShouldCatchJsonMapperException()
@@ -250,7 +286,7 @@ class ClientTest extends TestCase
         $client = $this->getClient($restCliMock);
 
         $this->expectException(BillCreationException::class);
-        $client->createBill($billMock, Facade::Merchant, true);
+        $client->createBill($billMock, Facade::MERCHANT, true);
     }
 
     public function testGetBill()
@@ -1751,343 +1787,6 @@ class ClientTest extends TestCase
         $client->getSettlementReconciliationReport($settlement);
     }
 
-    public function testGetSubscriptions()
-    {
-        $restCliMock = $this->getRestCliMock();
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getSubscriptions.json');
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $status = 'draft';
-        $params['status'] = $status;
-
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions", $params)
-            ->willReturn($exampleResponse);
-
-        $client = $this->getClient($restCliMock);
-
-        $result = $client->getSubscriptions($status);
-
-        $this->assertIsArray($result);
-        $this->assertEquals('SeL33Hjyr3VmFHA5Skc4zy', $result[0]->getId());
-        $this->assertEquals('draft', $result[0]->getStatus());
-        $this->assertEquals('2021-05-21T12:29:54.428Z', $result[0]->getCreatedDate());
-    }
-
-    public function testGetSubscriptionsShouldHandleJsonMapperException()
-    {
-        $restCliMock = $this->getRestCliMock();
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
-
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions", $params)
-            ->willReturn($badResponse);
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(SubscriptionQueryException::class);
-        $client->getSubscriptions();
-    }
-
-    public function testGetSubscriptionsShouldHandleRestCliBitPayException()
-    {
-        $restCliMock = $this->getRestCliMock();
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions", $params)
-            ->willThrowException(new BitPayException());
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(SubscriptionQueryException::class);
-        $client->getSubscriptions();
-    }
-
-    public function testGetSubscriptionsShouldHandleRestCliException()
-    {
-        $restCliMock = $this->getRestCliMock();
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions", $params)
-            ->willThrowException(new Exception());
-
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(SubscriptionQueryException::class);
-        $client->getSubscriptions();
-    }
-
-    public function testCreateSubscription()
-    {
-        $subscription = $this->createMock(Subscription::class);
-
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/createSubscription.json');
-        $restCliMock = $this->getRestCliMock();
-
-        $subscriptionToArray = [
-            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
-            'status' => 'draft',
-            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
-        ];
-        $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->expects($this->once())->method('post')->willReturn($exampleResponse);
-
-        $client = $this->getClient($restCliMock);
-
-        $result = $client->createSubscription($subscription);
-        $this->assertInstanceOf(Subscription::class, $result);
-    }
-
-    public function testCreateSubscriptionShouldCatchRestCliBitPayException()
-    {
-        $subscription = $this->createMock(Subscription::class);
-
-        $restCliMock = $this->getRestCliMock();
-
-        $subscriptionToArray = [
-            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
-            'status' => 'draft',
-            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
-        ];
-        $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->expects($this->once())->method('post')->willThrowException(new BitPayException());
-
-        $client = $this->getClient($restCliMock);
-        $this->expectException(SubscriptionCreationException::class);
-        $client->createSubscription($subscription);
-    }
-
-    public function testCreateSubscriptionShouldCatchRestCliException()
-    {
-        $subscription = $this->createMock(Subscription::class);
-
-        $restCliMock = $this->getRestCliMock();
-
-        $subscriptionToArray = [
-            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
-            'status' => 'draft',
-            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
-        ];
-        $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->expects($this->once())->method('post')->willThrowException(new Exception());
-
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(SubscriptionCreationException::class);
-        $client->createSubscription($subscription);
-    }
-
-    public function testCreateSubscriptionShouldCatchJsonMapperException()
-    {
-        $subscription = $this->createMock(Subscription::class);
-        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
-        $restCliMock = $this->getRestCliMock();
-
-        $subscriptionToArray = [
-            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
-            'status' => 'draft',
-            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
-        ];
-
-        $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->expects($this->once())->method('post')->willReturn($badResponse);
-        $client = $this->getClient($restCliMock);
-        $this->expectException(SubscriptionCreationException::class);
-        $client->createSubscription($subscription);
-    }
-
-    public function testGetSubscription()
-    {
-        $restCliMock = $this->getRestCliMock();
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getSubscription.json');
-        $exampleSubscriptionId = 'SeL33Hjyr3VmFHA5Skc4zy';
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions/" . $exampleSubscriptionId, $params)
-            ->willReturn($exampleResponse);
-
-        $client = $this->getClient($restCliMock);
-
-        $result = $client->getSubscription($exampleSubscriptionId);
-
-        $this->assertInstanceOf(Subscription::class, $result);
-        $this->assertEquals('SeL33Hjyr3VmFHA5Skc4zy', $result->getId());
-        $this->assertEquals('draft', $result->getStatus());
-    }
-
-    public function testGetSubscriptionShouldHandleRestCliBitPayException()
-    {
-        $restCliMock = $this->getRestCliMock();
-        $exampleSubscriptionId = 'subscriptionId';
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions/" . $exampleSubscriptionId, $params)
-            ->willThrowException(new BitPayException());
-
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(SubscriptionQueryException::class);
-        $client->getSubscription($exampleSubscriptionId);
-    }
-
-    public function testGetSubscriptionShouldHandleRestCliException()
-    {
-        $restCliMock = $this->getRestCliMock();
-        $exampleSubscriptionId = 'subscriptionId';
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions/" . $exampleSubscriptionId, $params)
-            ->willThrowException(new Exception());
-
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(SubscriptionQueryException::class);
-        $client->getSubscription($exampleSubscriptionId);
-    }
-
-    public function testGetSubscriptionShouldHandleJsonMapperException()
-    {
-        $restCliMock = $this->getRestCliMock();
-        $exampleSubscriptionId = 'subscriptionId';
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions/" . $exampleSubscriptionId, $params)
-            ->willReturn($badResponse);
-
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(SubscriptionQueryException::class);
-        $client->getSubscription($exampleSubscriptionId);
-    }
-
-    public function testUpdateSubscription()
-    {
-        $subscription = $this->createMock(Subscription::class);
-        $restCliMock = $this->getRestCliMock();
-
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/updateSubscription.json');
-        $subscription->method('getId')->willReturn('SeL33Hjyr3VmFHA5Skc4zy');
-        $subscriptionToArray = [
-            'id' => 'SeL33Hjyr3VmFHA5Skc4zy',
-            'status' => 'draft',
-            'token' => '85yxWk7aEgPdJME6zTkXkAGA3K13MtXf3WHqvtBvyhw3ycfEebJ5WMBRZHXsssSBvn',
-        ];
-        $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willReturn($exampleResponse);
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions/" . 'SeL33Hjyr3VmFHA5Skc4zy', $params)
-            ->willReturn($exampleResponse);
-
-        $client = $this->getClient($restCliMock);
-
-        $result = $client->updateSubscription($subscription, 'SeL33Hjyr3VmFHA5Skc4zy');
-
-        $this->assertInstanceOf(Subscription::class, $result);
-        $this->assertEquals(null, $result->getStatus());
-    }
-
-    public function testUpdateSubscriptionShouldCatchRestCliBitPayException()
-    {
-        $subscription = $this->createMock(Subscription::class);
-        $restCliMock = $this->getRestCliMock();
-
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/updateSubscription.json');
-        $exampleSubscriptionId = 'SeL33Hjyr3VmFHA5Skc4zy';
-
-        $subscription->method('getId')->willReturn($exampleSubscriptionId);
-        $subscriptionToArray = [
-            'id' => $exampleSubscriptionId,
-            'status' => 'status',
-            'token' => 'token',
-        ];
-        $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willThrowException(new BitPayException());
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions/" . $exampleSubscriptionId, $params)
-            ->willReturn($exampleResponse);
-
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(BitPayException::class);
-        $client->updateSubscription($subscription, $exampleSubscriptionId);
-    }
-
-    public function testUpdateSubscriptionShouldCatchRestCliException()
-    {
-        $subscription = $this->createMock(Subscription::class);
-        $restCliMock = $this->getRestCliMock();
-
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/updateSubscription.json');
-        $exampleSubscriptionId = 'SeL33Hjyr3VmFHA5Skc4zy';
-
-        $subscription->method('getId')->willReturn($exampleSubscriptionId);
-        $subscriptionToArray = [
-            'id' => $exampleSubscriptionId,
-            'status' => 'status',
-            'token' => 'token',
-        ];
-        $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willThrowException(new Exception());
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $restCliMock
-            ->expects($this->once())
-            ->method('get')
-            ->with("subscriptions/" . $exampleSubscriptionId, $params)
-            ->willReturn($exampleResponse);
-
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(BitPayException::class);
-        $client->updateSubscription($subscription, $exampleSubscriptionId);
-    }
-
-    public function testUpdateSubscriptionShouldCatchJsonMapperException()
-    {
-        $subscription = $this->createMock(Subscription::class);
-        $restCliMock = $this->getRestCliMock();
-        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/updateSubscription.json');
-        $exampleSubscriptionId = 'SeL33Hjyr3VmFHA5Skc4zy';
-
-        $subscription->method('getId')->willReturn($exampleSubscriptionId);
-        $subscriptionToArray = [
-            'id' => $exampleSubscriptionId,
-            'status' => 'status',
-            'token' => 'token',
-        ];
-        $subscription->method('toArray')->willReturn($subscriptionToArray);
-        $restCliMock->expects($this->once())->method('update')->withAnyParameters()->willReturn($badResponse);
-        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $restCliMock->expects($this->once())->method('get')->with("subscriptions/" . $exampleSubscriptionId, $params)->willReturn($exampleResponse);
-
-        $client = $this->getClient($restCliMock);
-
-        $this->expectException(BitPayException::class);
-        $client->updateSubscription($subscription, $exampleSubscriptionId);
-    }
-
     /**
      * @depends testWithFileJsonConfig
      */
@@ -3093,7 +2792,7 @@ class ClientTest extends TestCase
             ->willReturn(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
 
         $testedObject = $this->getClient($restCliMock);
-        $result = $testedObject->getInvoice($exampleInvoiceObject->id, Facade::Merchant, true);
+        $result = $testedObject->getInvoice($exampleInvoiceObject->id, Facade::MERCHANT, true);
 
         $this->assertEquals($exampleInvoiceObject->id, $result->getId());
         $this->assertEquals($exampleInvoiceObject->amountPaid, $result->getAmountPaid());
@@ -3117,7 +2816,7 @@ class ClientTest extends TestCase
         $testedObject = $this->getClient($restCliMock);
         $this->expectException(InvoiceQueryException::class);
 
-        $testedObject->getInvoice($exampleInvoiceObject->id, Facade::Merchant, true);
+        $testedObject->getInvoice($exampleInvoiceObject->id, Facade::MERCHANT, true);
     }
 
     public function testGetInvoiceShouldCatchJsonMapperException()
@@ -3134,7 +2833,7 @@ class ClientTest extends TestCase
         $testedObject = $this->getClient($restCliMock);
         $this->expectException(InvoiceQueryException::class);
 
-        $testedObject->getInvoice($exampleInvoiceObject->id, Facade::Merchant, true);
+        $testedObject->getInvoice($exampleInvoiceObject->id, Facade::MERCHANT, true);
     }
 
     public function testGetInvoices()

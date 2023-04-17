@@ -33,11 +33,9 @@ class Invoice
     protected ?string $itemCode = null;
     protected bool $physical = false;
     protected ?array $paymentCurrencies = null;
-    protected ?array $paymentSubTotals = null;
+    protected ?array $paymentSubtotals = null;
     protected ?array $paymentTotals = null;
     protected ?array $paymentCodes = null;
-    protected ?string $paymentString = null;
-    protected ?string $verificationLink = null;
     protected ?float $acceptanceWindow = null;
     protected ?Buyer $buyer = null;
     protected ?array $refundAddresses = null;
@@ -67,7 +65,6 @@ class Invoice
     protected ?bool $refundAddressRequestPending = null;
     protected ?string $buyerProvidedEmail = null;
     protected ?BuyerProvidedInfo $buyerProvidedInfo = null;
-    protected ?TransactionDetails $transactionDetails = null;
     protected ?UniversalCodes $universalCodes = null;
     protected ?SupportedTransactionCurrencies $supportedTransactionCurrencies = null;
     protected ?MinerFees $minerFees = null;
@@ -105,7 +102,6 @@ class Invoice
         $this->shopper = new Shopper();
         $this->refundInfo = new RefundInfo();
         $this->itemizedDetails = [new ItemizedDetails()];
-        $this->transactionDetails = new TransactionDetails();
     }
 
     // API fields
@@ -1261,23 +1257,6 @@ class Invoice
     }
 
     /**
-     * @return TransactionDetails|null
-     */
-    public function getTransactionDetails(): ?TransactionDetails
-    {
-        return $this->transactionDetails;
-    }
-
-    /**
-     * @param TransactionDetails $transactionDetails
-     * @return void
-     */
-    public function setTransactionDetails(TransactionDetails $transactionDetails)
-    {
-        $this->transactionDetails = $transactionDetails;
-    }
-
-    /**
      * Gets universalCodes
      *
      * Object containing wallet-specific URLs for payment protocol.
@@ -1366,9 +1345,9 @@ class Invoice
      *
      * @return array|null the payment subtotals
      */
-    public function getPaymentSubTotals(): ?array
+    public function getPaymentSubtotals(): ?array
     {
-        return $this->paymentSubTotals;
+        return $this->paymentSubtotals;
     }
 
     /**
@@ -1376,11 +1355,11 @@ class Invoice
      *
      * For internal use. This field can be ignored in merchant implementations.
      *
-     * @param array|null $paymentSubTotals the payment subtotals
+     * @param array|null $paymentSubtotals the payment subtotals
      */
-    public function setPaymentSubTotals(?array $paymentSubTotals)
+    public function setPaymentSubtotals(?array $paymentSubtotals)
     {
-        $this->paymentSubTotals = $paymentSubTotals;
+        $this->paymentSubtotals = $paymentSubtotals;
     }
 
     /**
@@ -1815,54 +1794,6 @@ class Invoice
     }
 
     /**
-     * Gets paymentString
-     *
-     * Payment protocol URL for selected wallet, defaults to BitPay URL if no wallet selected.
-     *
-     * @return string|null
-     */
-    public function getPaymentString(): ?string
-    {
-        return $this->paymentString;
-    }
-
-    /**
-     * Sets paymentString
-     *
-     * Payment protocol URL for selected wallet, defaults to BitPay URL if no wallet selected.
-     *
-     * @param string $paymentString Payment protocol URL for selected wallet
-     */
-    public function setPaymentString(string $paymentString): void
-    {
-        $this->paymentString = $paymentString;
-    }
-
-    /**
-     * Gets verificationLink
-     *
-     * Link to bring user to BitPay ID flow, only present when bitpayIdRequired is true.
-     *
-     * @return string|null
-     */
-    public function getVerificationLink(): ?string
-    {
-        return $this->verificationLink;
-    }
-
-    /**
-     * Sets verificationLink
-     *
-     * Link to bring user to BitPay ID flow, only present when bitpayIdRequired is true.
-     *
-     * @param string $verificationLink Link to bring user to BitPay ID flow
-     */
-    public function setVerificationLink(string $verificationLink): void
-    {
-        $this->verificationLink = $verificationLink;
-    }
-
-    /**
      * Gets isCancelled
      *
      * Indicates whether or not the invoice was cancelled.
@@ -1927,7 +1858,6 @@ class Invoice
             'refundAddressRequestPending'    => $this->getRefundAddressRequestPending(),
             'buyerProvidedEmail'             => $this->getBuyerProvidedEmail(),
             'buyerProvidedInfo'              => $this->getBuyerProvidedInfo()->toArray(),
-            'transactionDetails'             => $this->getTransactionDetails()->toArray(),
             'universalCodes'                 => $this->getUniversalCodes()->toArray(),
             'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()->toArray(),
             'minerFees'                      => $this->getMinerFees()->toArray(),
@@ -1942,8 +1872,6 @@ class Invoice
             'selectedTransactionCurrency'    => $this->getSelectedTransactionCurrency(),
             'bitpayIdRequired'               => $this->getBitpayIdRequired(),
             'forcedBuyerSelectedWallet'      => $this->getForcedBuyerSelectedWallet(),
-            'paymentString'                  => $this->getPaymentString(),
-            'verificationLink'               => $this->getVerificationLink(),
             'isCancelled'                    => $this->getIsCancelled(),
             'buyerEmail'                     => $this->getBuyerEmail(),
             'buyerSms'                       => $this->getBuyerSms(),

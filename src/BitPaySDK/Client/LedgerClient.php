@@ -15,13 +15,30 @@ use Exception;
 
 class LedgerClient
 {
+    private static ?self $instance = null;
     private Tokens $tokenCache;
     private RESTcli $restCli;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli)
+    private function __construct(Tokens $tokenCache, RESTcli $restCli)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;
+    }
+
+    /**
+     * Factory method for Ledger Client.
+     *
+     * @param Tokens $tokenCache
+     * @param RESTcli $restCli
+     * @return static
+     */
+    public static function getInstance(Tokens $tokenCache, RESTcli $restCli): self
+    {
+        if (!self::$instance) {
+            self::$instance = new self($tokenCache, $restCli);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -37,7 +54,7 @@ class LedgerClient
     {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
             if ($currency) {
                 $params["currency"] = $currency;
             }
@@ -87,7 +104,7 @@ class LedgerClient
     {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
 
             $responseJson = $this->restCli->get("ledgers", $params);
         } catch (BitPayException $e) {

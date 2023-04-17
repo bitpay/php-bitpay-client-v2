@@ -29,6 +29,8 @@ class MinerFees
     protected MinerFeesItem $xrp;
     protected MinerFeesItem $doge;
     protected MinerFeesItem $ltc;
+    protected MinerFeesItem $dai;
+    protected MinerFeesItem $wbtc;
 
     /**
      * MinerFees constructor.
@@ -45,6 +47,8 @@ class MinerFees
         $this->xrp = new MinerFeesItem();
         $this->doge = new MinerFeesItem();
         $this->ltc = new MinerFeesItem();
+        $this->dai = new MinerFeesItem();
+        $this->wbtc = new MinerFeesItem();
     }
 
     /**
@@ -248,6 +252,46 @@ class MinerFees
     }
 
     /**
+     * Gets DAI.
+     *
+     * @return MinerFeesItem
+     */
+    public function getDAI(): MinerFeesItem
+    {
+        return $this->dai;
+    }
+
+    /**
+     * Sets DAI.
+     *
+     * @param MinerFeesItem $dai
+     */
+    public function setDAI(MinerFeesItem $dai): void
+    {
+        $this->dai = $dai;
+    }
+
+    /**
+     * Gets WBTC.
+     *
+     * @return MinerFeesItem
+     */
+    public function getWBTC(): MinerFeesItem
+    {
+        return $this->wbtc;
+    }
+
+    /**
+     * Sets WBTC.
+     *
+     * @param MinerFeesItem $wbtc
+     */
+    public function setWBTC(MinerFeesItem $wbtc): void
+    {
+        $this->wbtc = $wbtc;
+    }
+
+    /**
      * Return array with details for currencies.
      *
      * @return array
@@ -265,6 +309,8 @@ class MinerFees
             'xrp'  => $this->getXRP()->toArray(),
             'doge' => $this->getDOGE()->toArray(),
             'ltc'  => $this->getLTC()->toArray(),
+            'dai'  => $this->getDAI()->toArray(),
+            'wbtc'  => $this->getWBTC()->toArray(),
         ];
 
         foreach ($elements as $key => $value) {

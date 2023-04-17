@@ -32,12 +32,12 @@ class RatesTest extends TestCase
     {
         $rates = [new Rate(), 'test' => 'test'];
         $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();
-        $bp->method('getRates')->willReturn(new Rates($rates, $bp));
+        $bp->method('getRates')->willReturn(new Rates($rates));
 
-        $rates = new Rates($rates, $bp);
+        $rates = new Rates($rates);
 
         $reflection = new ReflectionClass(Rates::class);
-        $rates->update();
+        $rates->update($bp);
 
         $reflectionTest = $reflection->getProperty('rates')->setAccessible(true);
 
@@ -64,8 +64,7 @@ class RatesTest extends TestCase
         $rateMock->method('getRate')->willReturn(12.0);
 
         $rates = [$rateMock];
-        $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();
-        $rates = new Rates($rates, $bp);
+        $rates = new Rates($rates);
 
         $this->assertEquals($expectedValue, $rates->getRate('BTC'));
     }
@@ -85,8 +84,7 @@ class RatesTest extends TestCase
     private function createClassObject(): Rates
     {
         $rates = [new Rate(), 'test' => 'test'];
-        $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();
 
-        return new Rates($rates, $bp);
+        return new Rates($rates);
     }
 }

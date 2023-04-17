@@ -24,21 +24,16 @@ class Payout
     protected ?string $effectiveDate = null;
     protected ?string $ledgerCurrency = null;
     protected string $reference = '';
-    protected string $notificationUrl = '';
+    protected string $notificationURL = '';
     protected string $notificationEmail = '';
-    protected string $redirectUrl = '';
-    protected string $account = '';
+    protected string $accountId = '';
     protected string $email = '';
     protected string $recipientId = '';
     protected string $shopperId = '';
     protected string $label = '';
-    protected string $supportPhone = '';
     protected string $message = '';
-    protected float $percentFee = 0.0;
-    protected float $fee = 0.0;
-    protected float $depositTotal = 0.0;
-    protected float $rate = 0.0;
-    protected float $btc = 0.0;
+    protected ?string $groupId = null;
+    protected ?int $code = null;
     protected ?string $dateExecuted = null;
     protected ?string $id = null;
     protected ?string $status = null;
@@ -256,7 +251,7 @@ class Payout
      */
     public function getNotificationURL(): string
     {
-        return $this->notificationUrl;
+        return $this->notificationURL;
     }
 
     /**
@@ -264,11 +259,11 @@ class Payout
      *
      * URL to which BitPay sends webhook notifications. HTTPS is mandatory.
      *
-     * @param string $notificationUrl
+     * @param string $notificationURL
      */
-    public function setNotificationURL(string $notificationUrl): void
+    public function setNotificationURL(string $notificationURL): void
     {
-        $this->notificationUrl = $notificationUrl;
+        $this->notificationURL = $notificationURL;
     }
 
     /**
@@ -296,51 +291,25 @@ class Payout
     }
 
     /**
-     * Gets redirect url.
-     *
-     * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or
-     * when clicking on the Close button if a separate closeURL is not specified.
-     * Be sure to include "http://" or "https://" in the url.
+     * Gets BitPay account id that is associated to the payout,
+     * assigned by BitPay for a given account during the onboarding process.
      *
      * @return string
      */
-    public function getRedirectUrl(): string
+    public function getAccountId(): string
     {
-        return $this->redirectUrl;
+        return $this->accountId;
     }
 
     /**
-     * Sets redirect url.
+     * Sets BitPay account id that is associated to the payout,
+     * assigned by BitPay for a given account during the onboarding process.
      *
-     * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or
-     * when clicking on the Close button if a separate closeURL is not specified.
-     * Be sure to include "http://" or "https://" in the url.
-     *
-     * @param string $redirectUrl
+     * @param string $accountId
      */
-    public function setRedirectUrl(string $redirectUrl): void
+    public function setAccountId(string $accountId): void
     {
-        $this->redirectUrl = $redirectUrl;
-    }
-
-    /**
-     * Gets account.
-     *
-     * @return string
-     */
-    public function getAccount(): string
-    {
-        return $this->account;
-    }
-
-    /**
-     * Sets account.
-     *
-     * @param string $account
-     */
-    public function setAccount(string $account): void
-    {
-        $this->account = $account;
+        $this->accountId = $accountId;
     }
 
     /**
@@ -452,26 +421,6 @@ class Payout
     }
 
     /**
-     * Gets support phone.
-     *
-     * @return string
-     */
-    public function getSupportPhone(): string
-    {
-        return $this->supportPhone;
-    }
-
-    /**
-     * Sets support phone.
-     *
-     * @param string $supportPhone
-     */
-    public function setSupportPhone(string $supportPhone): void
-    {
-        $this->supportPhone = $supportPhone;
-    }
-
-    /**
      * Gets message.
      *
      * In case of error, this field will contain a description message. Set to `null` if the request is successful.
@@ -496,103 +445,43 @@ class Payout
     }
 
     /**
-     * Gets percent fee.
+     * Gets group id.
      *
-     * @return float
+     * @return string|null
      */
-    public function getPercentFee(): float
+    public function getGroupId(): ?string
     {
-        return $this->percentFee;
+        return $this->groupId;
     }
 
     /**
-     * Sets percent fee.
+     * Sets group id.
      *
-     * @param float $percentFee
+     * @param string|null $groupId
      */
-    public function setPercentFee(float $percentFee): void
+    public function setGroupId(?string $groupId): void
     {
-        $this->percentFee = $percentFee;
+        $this->groupId = $groupId;
     }
 
     /**
-     * Gets fee.
+     * This field will be returned in case of error and contain an error code.
      *
-     * @return float
+     * @return int|null
      */
-    public function getFee(): float
+    public function getCode(): ?int
     {
-        return $this->fee;
+        return $this->code;
     }
 
     /**
-     * Sets fee.
+     * Sets error code.
      *
-     * @param float $fee
+     * @param int|null $code
      */
-    public function setFee(float $fee): void
+    public function setCode(?int $code): void
     {
-        $this->fee = $fee;
-    }
-
-    /**
-     * Gets deposit total.
-     *
-     * @return float
-     */
-    public function getDepositTotal(): float
-    {
-        return $this->depositTotal;
-    }
-
-    /**
-     * Sets deposit total.
-     *
-     * @param float $depositTotal
-     */
-    public function setDepositTotal(float $depositTotal): void
-    {
-        $this->depositTotal = $depositTotal;
-    }
-
-    /**
-     * Gets rate.
-     *
-     * @return float
-     */
-    public function getRate(): float
-    {
-        return $this->rate;
-    }
-
-    /**
-     * Sets rate.
-     *
-     * @param float $rate
-     */
-    public function setRate(float $rate): void
-    {
-        $this->rate = $rate;
-    }
-
-    /**
-     * Gets btc.
-     *
-     * @return float
-     */
-    public function getBtc(): float
-    {
-        return $this->btc;
-    }
-
-    /**
-     * Sets btc.
-     *
-     * @param float $btc
-     */
-    public function setBtc(float $btc): void
-    {
-        $this->btc = $btc;
+        $this->code = $code;
     }
 
     /**
@@ -788,19 +677,14 @@ class Payout
             'reference' => $this->getReference(),
             'notificationURL' => $this->getNotificationURL(),
             'notificationEmail' => $this->getNotificationEmail(),
-            'redirectUrl' => $this->getRedirectUrl(),
-            'account' => $this->getAccount(),
+            'accountId' => $this->getAccountId(),
             'email' => $this->getEmail(),
             'recipientId' => $this->getRecipientId(),
             'shopperId' => $this->getShopperId(),
             'label' => $this->getLabel(),
-            'supportPhone' => $this->getSupportPhone(),
             'message' => $this->getMessage(),
-            'percentFee' => $this->getPercentFee(),
-            'fee' => $this->getFee(),
-            'depositTotal' => $this->getDepositTotal(),
-            'rate' => $this->getRate(),
-            'btc' => $this->getBtc(),
+            'groupId' => $this->getGroupId(),
+            'code' => $this->getCode(),
             'dateExecuted' => $this->getDateExecuted(),
             'id' => $this->getId(),
             'status' => $this->getStatus(),

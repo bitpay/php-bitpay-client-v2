@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Client;
 
-use BitPaySDK\Client;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\RateQueryException;
 use BitPaySDK\Model\Rate\Rate;
@@ -15,13 +14,27 @@ use Exception;
 
 class RateClient
 {
+    private static ?self $instance = null;
     private RESTcli $restCli;
-    private Client $client;
 
-    public function __construct(RESTcli $restCli, Client $client)
+    private function __construct(RESTcli $restCli)
     {
         $this->restCli = $restCli;
-        $this->client = $client;
+    }
+
+    /**
+     * Factory method for Rate Client.
+     *
+     * @param RESTcli $restCli
+     * @return static
+     */
+    public static function getInstance(RESTcli $restCli): self
+    {
+        if (!self::$instance) {
+            self::$instance = new self($restCli);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -49,9 +62,9 @@ class RateClient
         try {
             $mapper = JsonMapperFactory::create();
             $rates = $mapper->mapArray(
-                json_decode($responseJson),
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Rate\Rate'
+                Rate::class
             );
         } catch (Exception $e) {
             throw new RateQueryException(
@@ -59,7 +72,7 @@ class RateClient
             );
         }
 
-        return new Rates($rates, $this->client);
+        return new Rates($rates);
     }
 
     /**
@@ -89,9 +102,9 @@ class RateClient
         try {
             $mapper = JsonMapperFactory::create();
             $rates = $mapper->mapArray(
-                json_decode($responseJson),
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Rate\Rate'
+                Rate::class
             );
         } catch (Exception $e) {
             throw new RateQueryException(
@@ -99,7 +112,7 @@ class RateClient
             );
         }
 
-        return new Rates($rates, $this->client);
+        return new Rates($rates);
     }
 
     /**
@@ -130,7 +143,7 @@ class RateClient
         try {
             $mapper = JsonMapperFactory::create();
             $rate = $mapper->map(
-                json_decode($responseJson),
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Rate()
             );
         } catch (Exception $e) {

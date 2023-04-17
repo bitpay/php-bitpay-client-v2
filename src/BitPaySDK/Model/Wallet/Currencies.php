@@ -22,11 +22,9 @@ class Currencies
     protected ?CurrencyQr $qr = null;
     protected ?string $withdrawalFee = null;
     protected ?bool $walletConnect = null;
-    protected CurrencyQr $currencies;
 
     public function __construct()
     {
-        $this->currencies = new CurrencyQr();
     }
 
     /**

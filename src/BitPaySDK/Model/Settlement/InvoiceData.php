@@ -21,7 +21,6 @@ class InvoiceData
     protected ?string $transactionCurrency = null;
     protected ?float $overPaidAmount = null;
     protected ?float $payoutPercentage = null;
-    protected ?float $btcPrice = null;
     protected ?RefundInfo $refundInfo = null;
 
     public function __construct()
@@ -166,26 +165,6 @@ class InvoiceData
     public function setPayoutPercentage(float $payoutPercentage): void
     {
         $this->payoutPercentage = $payoutPercentage;
-    }
-
-    /**
-     * Gets BTC price
-     *
-     * @return float|null the btc price
-     */
-    public function getBtcPrice(): ?float
-    {
-        return $this->btcPrice;
-    }
-
-    /**
-     * Sets BTC price
-     *
-     * @param float $btcPrice the btc price
-     */
-    public function setBtcPrice(float $btcPrice): void
-    {
-        $this->btcPrice = $btcPrice;
     }
 
     /**

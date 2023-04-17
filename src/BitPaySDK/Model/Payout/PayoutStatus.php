@@ -16,40 +16,40 @@ interface PayoutStatus
     /**
      * New status.
      */
-    const New        = 'new';
+    public const NEW = 'new';
 
     /**
      * Funded status.
      */
-    const Funded     = 'funded';
+    public const FUNDED = 'funded';
 
     /**
      * Processing status
      */
-    const Processing = 'processing';
+    public const PROCESSING = 'processing';
 
     /**
      * Complete status
      */
-    const Complete   = 'complete';
+    public const COMPLETE   = 'complete';
 
     /**
      * Failed status.
      */
-    const Failed     = 'failed';
+    public const FAILED = 'failed';
 
     /**
      * Cancelled status.
      */
-    const Cancelled  = 'cancelled';
+    public const CANCELLED = 'cancelled';
 
     /**
      * Paid status.
      */
-    const Paid       = 'paid';
+    public const PAID = 'paid';
 
     /**
      * Unpaid status.
      */
-    const Unpaid     = 'unpaid';
+    public const UNPAID = 'unpaid';
 }

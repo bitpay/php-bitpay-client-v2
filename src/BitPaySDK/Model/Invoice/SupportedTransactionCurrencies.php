@@ -25,6 +25,10 @@ class SupportedTransactionCurrencies
     protected SupportedTransactionCurrency $gusd;
     protected SupportedTransactionCurrency $pax;
     protected SupportedTransactionCurrency $xrp;
+    protected SupportedTransactionCurrency $busd;
+    protected SupportedTransactionCurrency $doge;
+    protected SupportedTransactionCurrency $ltc;
+    protected SupportedTransactionCurrency $wbtc;
 
     /**
      * SupportedTransactionCurrencies constructor.
@@ -38,6 +42,10 @@ class SupportedTransactionCurrencies
         $this->gusd = new SupportedTransactionCurrency();
         $this->pax = new SupportedTransactionCurrency();
         $this->xrp = new SupportedTransactionCurrency();
+        $this->busd = new SupportedTransactionCurrency();
+        $this->doge = new SupportedTransactionCurrency();
+        $this->ltc = new SupportedTransactionCurrency();
+        $this->wbtc = new SupportedTransactionCurrency();
     }
 
     /**
@@ -181,6 +189,86 @@ class SupportedTransactionCurrencies
     }
 
     /**
+     * Gets BUSD.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getBUSD(): SupportedTransactionCurrency
+    {
+        return $this->busd;
+    }
+
+    /**
+     * Sets BUSD.
+     *
+     * @param SupportedTransactionCurrency $busd
+     */
+    public function setBUSD(SupportedTransactionCurrency $busd): void
+    {
+        $this->busd = $busd;
+    }
+
+    /**
+     * Gets DOGE.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getDOGE(): SupportedTransactionCurrency
+    {
+        return $this->doge;
+    }
+
+    /**
+     * Sets DOGE.
+     *
+     * @param SupportedTransactionCurrency $doge
+     */
+    public function setDOGE(SupportedTransactionCurrency $doge): void
+    {
+        $this->doge = $doge;
+    }
+
+    /**
+     * Gets LTC.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getLTC(): SupportedTransactionCurrency
+    {
+        return $this->ltc;
+    }
+
+    /**
+     * Sets LTC.
+     *
+     * @param SupportedTransactionCurrency $ltc
+     */
+    public function setLTC(SupportedTransactionCurrency $ltc): void
+    {
+        $this->ltc = $ltc;
+    }
+
+    /**
+     * Gets WBTC.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getWBTC(): SupportedTransactionCurrency
+    {
+        return $this->wbtc;
+    }
+
+    /**
+     * Sets WBTC.
+     *
+     * @param SupportedTransactionCurrency $wbtc
+     */
+    public function setWBTC(SupportedTransactionCurrency $wbtc): void
+    {
+        $this->wbtc = $wbtc;
+    }
+
+    /**
      * Return array with details for currencies.
      *
      * @return array
@@ -194,7 +282,11 @@ class SupportedTransactionCurrencies
             'usdc' => $this->getUSDC()->toArray(),
             'gusd' => $this->getGUSD()->toArray(),
             'pax'  => $this->getPAX()->toArray(),
-            'xrp'  => $this->getXRP()->toArray()
+            'xrp'  => $this->getXRP()->toArray(),
+            'busd' => $this->getBUSD()->toArray(),
+            'doge' => $this->getDOGE()->toArray(),
+            'ltc' => $this->getLTC()->toArray(),
+            'wbtc' => $this->getWBTC()->toArray(),
         ];
 
         foreach ($elements as $key => $value) {

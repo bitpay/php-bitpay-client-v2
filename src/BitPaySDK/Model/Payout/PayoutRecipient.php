@@ -18,14 +18,11 @@ class PayoutRecipient
     protected ?string $email = null;
     protected ?string $guid = null;
     protected ?string $label = null;
-    protected ?string $reference = null;
     protected ?string $notificationURL = null;
-    protected ?string $account = null;
     protected ?string $status = null;
     protected ?string $id = null;
     protected ?string $shopperId = null;
     protected ?string $token = null;
-    protected ?string $supportPhone = null;
 
     /**
      * Constructor, create a minimal Recipient object.
@@ -109,26 +106,6 @@ class PayoutRecipient
     }
 
     /**
-     * Gets reference.
-     *
-     * @return string|null
-     */
-    public function getReference(): ?string
-    {
-        return $this->reference;
-    }
-
-    /**
-     * Sets reference.
-     *
-     * @param string $reference
-     */
-    public function setReference(string $reference): void
-    {
-        $this->reference = $reference;
-    }
-
-    /**
      * Gets notification url.
      *
      * @return string|null
@@ -150,26 +127,6 @@ class PayoutRecipient
 
     // Response fields
     //
-
-    /**
-     * Gets account.
-     *
-     * @return string|null
-     */
-    public function getAccount(): ?string
-    {
-        return $this->account;
-    }
-
-    /**
-     * Sets account.
-     *
-     * @param string $account
-     */
-    public function setAccount(string $account): void
-    {
-        $this->account = $account;
-    }
 
     /**
      * Gets status.
@@ -252,26 +209,6 @@ class PayoutRecipient
     }
 
     /**
-     * Gets support phone.
-     *
-     * @return string|null
-     */
-    public function getSupportPhone(): ?string
-    {
-        return $this->supportPhone;
-    }
-
-    /**
-     * Sets support phone.
-     *
-     * @param string $supportPhone
-     */
-    public function setSupportPhone(string $supportPhone): void
-    {
-        $this->supportPhone = $supportPhone;
-    }
-
-    /**
      * Return an array with values of all fields.
      *
      * @return array
@@ -282,14 +219,11 @@ class PayoutRecipient
             'email' => $this->getEmail(),
             'guid' => $this->getGuid(),
             'label' => $this->getLabel(),
-            'reference' => $this->getReference(),
             'notificationURL' => $this->getNotificationURL(),
-            'account' => $this->getAccount(),
             'status' => $this->getStatus(),
             'id' => $this->getId(),
             'shopperId' => $this->getShopperId(),
             'token' => $this->getToken(),
-            'supportPhone' => $this->getSupportPhone()
         ];
 
         foreach ($elements as $key => $value) {

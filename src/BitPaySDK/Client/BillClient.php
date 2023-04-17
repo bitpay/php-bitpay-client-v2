@@ -18,13 +18,30 @@ use Exception;
 
 class BillClient
 {
+    private static ?self $instance = null;
     private Tokens $tokenCache;
     private RESTcli $restCli;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli)
+    private function __construct(Tokens $tokenCache, RESTcli $restCli)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;
+    }
+
+    /**
+     * Factory method for Bill Client.
+     *
+     * @param Tokens $tokenCache
+     * @param RESTcli $restCli
+     * @return static
+     */
+    public static function getInstance(Tokens $tokenCache, RESTcli $restCli): self
+    {
+        if (!self::$instance) {
+            self::$instance = new self($tokenCache, $restCli);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -36,7 +53,7 @@ class BillClient
      * @return Bill
      * @throws BitPayException
      */
-    public function create(Bill $bill, string $facade = Facade::Merchant, bool $signRequest = true): Bill
+    public function create(Bill $bill, string $facade = Facade::MERCHANT, bool $signRequest = true): Bill
     {
         try {
             $bill->setToken($this->tokenCache->getTokenByFacade($facade));
@@ -78,7 +95,7 @@ class BillClient
      * @return Bill
      * @throws BitPayException
      */
-    public function get(string $billId, string $facade = Facade::Merchant, bool $signRequest = true): Bill
+    public function get(string $billId, string $facade = Facade::MERCHANT, bool $signRequest = true): Bill
     {
 
         try {
@@ -124,7 +141,7 @@ class BillClient
     {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
             if ($status) {
                 $params["status"] = $status;
             }

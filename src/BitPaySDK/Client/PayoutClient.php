@@ -18,13 +18,30 @@ use Exception;
 
 class PayoutClient
 {
+    private static ?self $instance = null;
     private Tokens $tokenCache;
     private RESTcli $restCli;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli)
+    private function __construct(Tokens $tokenCache, RESTcli $restCli)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;
+    }
+
+    /**
+     * Factory method for Payout Client.
+     *
+     * @param Tokens $tokenCache
+     * @param RESTcli $restCli
+     * @return static
+     */
+    public static function getInstance(Tokens $tokenCache, RESTcli $restCli): self
+    {
+        if (!self::$instance) {
+            self::$instance = new self($tokenCache, $restCli);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -37,7 +54,7 @@ class PayoutClient
     public function submit(Payout $payout): Payout
     {
         try {
-            $payout->setToken($this->tokenCache->getTokenByFacade(Facade::Payout));
+            $payout->setToken($this->tokenCache->getTokenByFacade(Facade::PAYOUT));
 
             $payout->formatAmount(2);
 
@@ -81,7 +98,7 @@ class PayoutClient
     {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Payout);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
 
             $responseJson = $this->restCli->get("payouts/" . $payoutId, $params);
         } catch (BitPayException $e) {
@@ -134,7 +151,7 @@ class PayoutClient
     ): array {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Payout);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
             if ($startDate) {
                 $params["startDate"] = $startDate;
             }
@@ -194,7 +211,7 @@ class PayoutClient
     {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Payout);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
 
             $responseJson = $this->restCli->delete("payouts/" . $payoutId, $params);
         } catch (BitPayException $e) {
@@ -231,7 +248,7 @@ class PayoutClient
     {
         try {
             $content = [];
-            $content["token"] = $this->tokenCache->getTokenByFacade(Facade::Payout);
+            $content["token"] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
 
             $responseJson = $this->restCli->post("payouts/" . $payoutId . "/notifications", $content);
         } catch (BitPayException $e) {

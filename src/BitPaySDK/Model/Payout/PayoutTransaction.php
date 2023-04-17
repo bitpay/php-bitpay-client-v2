@@ -17,6 +17,7 @@ class PayoutTransaction
     protected ?string $txid = null;
     protected ?float $amount = null;
     protected ?string $date = null;
+    protected ?string $confirmations = null;
 
     public function __construct()
     {
@@ -85,6 +86,26 @@ class PayoutTransaction
     }
 
     /**
+     * Gets the number of confirmations the transaction has received.
+     *
+     * @return string|null
+     */
+    public function getConfirmations(): ?string
+    {
+        return $this->confirmations;
+    }
+
+    /**
+     * Sets the number of confirmations the transaction has received.
+     *
+     * @param string|null $confirmations
+     */
+    public function setConfirmations(?string $confirmations): void
+    {
+        $this->confirmations = $confirmations;
+    }
+
+    /**
      * Gets PayoutTransaction as array
      *
      * @return array PayoutTransaction as array
@@ -95,6 +116,7 @@ class PayoutTransaction
             'txid' => $this->getTxid(),
             'amount' => $this->getAmount(),
             'date' => $this->getDate(),
+            'confirmations' => $this->getConfirmations()
         ];
     }
 }

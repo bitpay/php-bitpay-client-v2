@@ -77,15 +77,6 @@ class InvoiceDataTest extends TestCase
         $this->assertEquals($expectedPayoutPercentage, $invoiceData->getPayoutPercentage());
     }
 
-    public function testGetBtcPrice()
-    {
-        $expectedBtcPrice = 50000;
-
-        $invoiceData = $this->createClassObject();
-        $invoiceData->setBtcPrice($expectedBtcPrice);
-        $this->assertEquals($expectedBtcPrice, $invoiceData->getBtcPrice());
-    }
-
     public function testGetRefundInfo()
     {
         $expectedRefundInfo = $this->getMockBuilder(RefundInfo::class)->getMock();
