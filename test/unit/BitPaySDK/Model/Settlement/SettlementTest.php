@@ -196,26 +196,26 @@ class SettlementTest extends TestCase
         $this->assertArrayHasKey('ledgerEntries', $settlementArray);
         $this->assertArrayHasKey('token', $settlementArray);
 
-        $this->assertEquals($settlementArray['id'], '11');
-        $this->assertEquals($settlementArray['accountId'], '12');
-        $this->assertEquals($settlementArray['currency'], 'BTC');
+        $this->assertEquals('11', $settlementArray['id']);
+        $this->assertEquals('12', $settlementArray['accountId']);
+        $this->assertEquals('BTC', $settlementArray['currency']);
         $this->assertEquals($settlementArray['payoutInfo'], new PayoutInfo());
-        $this->assertEquals($settlementArray['status'], 'pending');
-        $this->assertEquals($settlementArray['dateCreated'], '2022-01-01');
-        $this->assertEquals($settlementArray['dateExecuted'], '2022-01-01');
-        $this->assertEquals($settlementArray['dateCompleted'], '2022-01-01');
-        $this->assertEquals($settlementArray['openingDate'], '2022-01-01');
-        $this->assertEquals($settlementArray['closingDate'], '2022-01-01');
-        $this->assertEquals($settlementArray['openingBalance'], 15.0);
-        $this->assertEquals($settlementArray['ledgerEntriesSum'], 12.2);
-        $this->assertEquals($settlementArray['withHoldings'], ['test']);
-        $this->assertEquals($settlementArray['withHoldingsSum'], 15);
-        $this->assertEquals($settlementArray['totalAmount'], 30);
-        $this->assertEquals($settlementArray['ledgerEntries'], ['test']);
-        $this->assertEquals($settlementArray['token'], '5u3cc2c7b');
+        $this->assertEquals('pending', $settlementArray['status']);
+        $this->assertEquals('2022-01-01', $settlementArray['dateCreated']);
+        $this->assertEquals('2022-01-01', $settlementArray['dateExecuted']);
+        $this->assertEquals('2022-01-01', $settlementArray['dateCompleted']);
+        $this->assertEquals('2022-01-01', $settlementArray['openingDate']);
+        $this->assertEquals('2022-01-01', $settlementArray['closingDate']);
+        $this->assertEquals(15.0, $settlementArray['openingBalance']);
+        $this->assertEquals(12.2, $settlementArray['ledgerEntriesSum']);
+        $this->assertEquals(['test'], $settlementArray['withHoldings']);
+        $this->assertEquals(15, $settlementArray['withHoldingsSum']);
+        $this->assertEquals(30, $settlementArray['totalAmount']);
+        $this->assertEquals(['test'], $settlementArray['ledgerEntries']);
+        $this->assertEquals('5u3cc2c7b', $settlementArray['token']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Settlement
     {
         return new Settlement();
     }

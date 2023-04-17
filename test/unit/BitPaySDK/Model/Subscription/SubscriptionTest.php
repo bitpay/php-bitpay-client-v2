@@ -96,14 +96,14 @@ class SubscriptionTest extends TestCase
         $this->assertArrayHasKey('createdDate', $subscriptionArray);
         $this->assertArrayHasKey('token', $subscriptionArray);
 
-        $this->assertEquals($subscriptionArray['id'], '1');
-        $this->assertEquals($subscriptionArray['status'], 'pending');
-        $this->assertEquals($subscriptionArray['nextDelivery'], '2022-01-01');
-        $this->assertEquals($subscriptionArray['createdDate'], '2022-01-01');
-        $this->assertEquals($subscriptionArray['token'], 'g73mv29b2b4njg23');
+        $this->assertEquals('1', $subscriptionArray['id']);
+        $this->assertEquals('pending', $subscriptionArray['status']);
+        $this->assertEquals('2022-01-01', $subscriptionArray['nextDelivery']);
+        $this->assertEquals('2022-01-01', $subscriptionArray['createdDate']);
+        $this->assertEquals('g73mv29b2b4njg23', $subscriptionArray['token']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Subscription
     {
         return new Subscription();
     }

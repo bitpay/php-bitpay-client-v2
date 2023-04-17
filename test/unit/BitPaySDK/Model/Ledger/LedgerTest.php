@@ -35,9 +35,6 @@ class LedgerTest extends TestCase
 
     public function testToArray()
     {
-        $expectedLedgerEntries = [];
-        array_push($expectedLedgerEntries, $this->createLedgerEntry()->toArray());
-
         $ledger = $this->createClassObject();
 
         $ledger->setCurrency('BTC');
@@ -51,16 +48,16 @@ class LedgerTest extends TestCase
         $this->assertArrayHasKey('currency', $ledgerArray);
         $this->assertArrayHasKey('balance', $ledgerArray);
 
-        $this->assertEquals($ledgerArray['currency'], 'BTC');
-        $this->assertEquals($ledgerArray['balance'], 1.1);
+        $this->assertEquals('BTC', $ledgerArray['currency']);
+        $this->assertEquals(1.1, $ledgerArray['balance']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Ledger
     {
         return new Ledger();
     }
 
-    private function createLedgerEntry()
+    private function createLedgerEntry(): LedgerEntry
     {
         $ledgerEntry = new LedgerEntry;
         $ledgerEntry->setType('TestType');

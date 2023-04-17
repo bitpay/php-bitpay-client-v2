@@ -1,6 +1,6 @@
 <?php
 
-namespace BitPaySDK\Test;
+namespace BitPaySDK\Test\Model\Invoice;
 
 use BitPaySDK\Model\Invoice\SupportedTransactionCurrency;
 use PHPUnit\Framework\TestCase;
@@ -15,11 +15,9 @@ class SupportedTransactionCurrencyTest extends TestCase
 
   public function testGetEnabled()
   {
-    $expectedEnabled = true;
-
     $supportedTransactionCurrency = $this->createClassObject();
     $supportedTransactionCurrency->setEnabled(true);
-    $this->assertEquals($expectedEnabled, $supportedTransactionCurrency->getEnabled());
+    $this->assertTrue($supportedTransactionCurrency->getEnabled());
   }
 
   public function testGetReason()
@@ -44,8 +42,8 @@ class SupportedTransactionCurrencyTest extends TestCase
     $this->assertArrayHasKey('enabled', $supportedTransactionCurrencyArray);
     $this->assertArrayHasKey('reason', $supportedTransactionCurrencyArray);
 
-    $this->assertEquals($supportedTransactionCurrencyArray['enabled'], true);
-    $this->assertEquals($supportedTransactionCurrencyArray['reason'], "My reason");
+    $this->assertEquals(true, $supportedTransactionCurrencyArray['enabled']);
+    $this->assertEquals("My reason", $supportedTransactionCurrencyArray['reason']);
   }
 
   public function testToArrayEmptyKey()
@@ -60,7 +58,7 @@ class SupportedTransactionCurrencyTest extends TestCase
     $this->assertArrayNotHasKey('enabled', $supportedTransactionCurrencyArray);
   }
 
-  private function createClassObject()
+  private function createClassObject(): SupportedTransactionCurrency
   {
     return new SupportedTransactionCurrency();
   }

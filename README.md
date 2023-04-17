@@ -12,12 +12,17 @@ Our Lite version will most likely be all you need to integrate to your site, ava
 
 ## Getting Started
 
-To get up and running with our PHP library quickly, follow [The GUIDE](https://github.com/bitpay/php-bitpay-client-v2/blob/master/GUIDE.md)
+To get up and running with our PHP library quickly, follow [the guide](https://bitpay.readme.io/reference/php-full-sdk-getting-started)
 
 ## Support
 
 * https://github.com/bitpay/php-bitpay-client-v2/issues
 * https://support.bitpay.com
+
+### Requirements
+
+- PHP version: 8.0 / 8.1 / 8.2
+- PHP extensions: json, reflection
 
 ## Unit Tests
 ```php

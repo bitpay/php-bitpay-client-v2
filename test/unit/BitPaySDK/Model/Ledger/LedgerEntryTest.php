@@ -173,23 +173,23 @@ class LedgerEntryTest extends TestCase
         $this->assertArrayHasKey('invoiceCurrency', $ledgerEntryArray);
         $this->assertArrayHasKey('transactionCurrency', $ledgerEntryArray);
 
-        $this->assertEquals($ledgerEntryArray['type'], 'TestType');
-        $this->assertEquals($ledgerEntryArray['amount'], '1');
-        $this->assertEquals($ledgerEntryArray['code'], 'abc123');
-        $this->assertEquals($ledgerEntryArray['timestamp'], '2020-01-01 18:10:10');
-        $this->assertEquals($ledgerEntryArray['currency'], 'BTC');
-        $this->assertEquals($ledgerEntryArray['txType'], 'TxType');
-        $this->assertEquals($ledgerEntryArray['scale'], 'Test scale');
-        $this->assertEquals($ledgerEntryArray['id'], '1');
-        $this->assertEquals($ledgerEntryArray['supportRequest'], 'Test support request');
-        $this->assertEquals($ledgerEntryArray['description'], 'Test description');
-        $this->assertEquals($ledgerEntryArray['invoiceId'], '1');
-        $this->assertEquals($ledgerEntryArray['invoiceAmount'], 20.7);
-        $this->assertEquals($ledgerEntryArray['invoiceCurrency'], 'BTC');
-        $this->assertEquals($ledgerEntryArray['transactionCurrency'], 'BTC');
+        $this->assertEquals('TestType', $ledgerEntryArray['type']);
+        $this->assertEquals('1', $ledgerEntryArray['amount']);
+        $this->assertEquals('abc123', $ledgerEntryArray['code']);
+        $this->assertEquals('2020-01-01 18:10:10', $ledgerEntryArray['timestamp']);
+        $this->assertEquals('BTC', $ledgerEntryArray['currency']);
+        $this->assertEquals('TxType', $ledgerEntryArray['txType']);
+        $this->assertEquals('Test scale', $ledgerEntryArray['scale']);
+        $this->assertEquals('1', $ledgerEntryArray['id']);
+        $this->assertEquals('Test support request', $ledgerEntryArray['supportRequest']);
+        $this->assertEquals('Test description', $ledgerEntryArray['description']);
+        $this->assertEquals('1', $ledgerEntryArray['invoiceId']);
+        $this->assertEquals(20.7, $ledgerEntryArray['invoiceAmount']);
+        $this->assertEquals('BTC', $ledgerEntryArray['invoiceCurrency']);
+        $this->assertEquals('BTC', $ledgerEntryArray['transactionCurrency']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): LedgerEntry
     {
         return new LedgerEntry();
     }

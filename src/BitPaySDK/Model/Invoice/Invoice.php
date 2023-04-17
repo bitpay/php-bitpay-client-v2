@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -16,98 +18,94 @@ use BitPaySDK\Model\Currency;
  */
 class Invoice
 {
-    protected $_currency;
-
-    protected $_guid  = "";
-    protected $_token = "";
-
-    protected $_price;
-    protected $_posData;
-    protected $_notificationURL   = "";
-    protected $_transactionSpeed  = "";
-    protected $_fullNotifications = false;
-    protected $_notificationEmail = "";
-    protected $_redirectURL       = "";
-    protected $_orderId           = "";
-    protected $_itemDesc          = "";
-    protected $_itemCode          = "";
-    protected $_physical          = false;
-    protected $_paymentCurrencies;
-    protected $_paymentSubtotals;
-    protected $_paymentTotals;
-    protected $_paymentDisplayTotals;
-    protected $_paymentDisplaySubTotals;
-    protected $_paymentCodes;
-    protected $_paymentString;
-    protected $_verificationLink;
-    protected $_acceptanceWindow;
-    protected $_buyer;
-    protected $_refundAddresses;
-    protected $_closeURL   = "";
-    protected $_autoRedirect  = false;
-    protected $_jsonPayProRequired;
-    protected $_buyerEmail;
-    protected $_buyerSms;
-
-    protected $_merchantName;
-    protected $_selectedTransactionCurrency;
-    protected $_forcedBuyerSelectedWallet;
-    protected $_forcedBuyerSelectedTransactionCurrency;
-    protected $_itemizedDetails;
-
-    protected $_id;
-    protected $_url;
-    protected $_status;
-    protected $_lowFeeDetected;
-    protected $_invoiceTime;
-    protected $_expirationTime;
-    protected $_currentTime;
-    protected $_transactions;
-    protected $_exceptionStatus;
-    protected $_targetConfirmations;
-    protected $_refundAddressRequestPending;
-    protected $_buyerProvidedEmail;
-    protected $_buyerProvidedInfo;
-    protected $_transactionDetails;
-    protected $_universalCodes;
-    protected $_supportedTransactionCurrencies;
-    protected $_minerFees;
-    protected $_nonPayProPaymentReceived;
-    protected $_shopper;
-    protected $_billId;
-    protected $_refundInfo;
-    protected $_extendedNotifications = false;
-    protected $_isCancelled;
-
-    protected $_transactionCurrency;
-    protected $_underpaidAmount;
-    protected $_overpaidAmount;
-    protected $_amountPaid;
-    protected $_displayAmountPaid;
-    protected $_exchangeRates;
-    protected $_bitpayIdRequired;
-    protected $_paymentDisplaytotals;
-    protected $_paymentDisplaySubtotals;
+    protected ?string $currency = null;
+    protected ?string $guid = null;
+    protected ?string $token = null;
+    protected ?float $price = null;
+    protected ?string $posData = null;
+    protected ?string $notificationURL = null;
+    protected ?string $transactionSpeed = null;
+    protected bool $fullNotifications = false;
+    protected ?string $notificationEmail = null;
+    protected ?string $redirectURL = null;
+    protected ?string $orderId = null;
+    protected ?string $itemDesc = null;
+    protected ?string $itemCode = null;
+    protected bool $physical = false;
+    protected ?array $paymentCurrencies = null;
+    protected ?array $paymentSubTotals = null;
+    protected ?array $paymentTotals = null;
+    protected ?array $paymentCodes = null;
+    protected ?string $paymentString = null;
+    protected ?string $verificationLink = null;
+    protected ?float $acceptanceWindow = null;
+    protected ?Buyer $buyer = null;
+    protected ?array $refundAddresses = null;
+    protected ?string $closeURL = null;
+    protected bool $autoRedirect = false;
+    protected ?bool $jsonPayProRequired = null;
+    protected ?string $buyerEmail = null;
+    protected ?string $buyerSms = null;
+    protected ?string $merchantName = null;
+    protected ?string $selectedTransactionCurrency = null;
+    protected ?string $forcedBuyerSelectedWallet = null;
+    protected ?string $forcedBuyerSelectedTransactionCurrency = null;
+    /**
+     * @var ItemizedDetails[]
+     */
+    protected array $itemizedDetails = [];
+    protected ?string $id = null;
+    protected ?string $url = null;
+    protected ?string $status = null;
+    protected ?bool $lowFeeDetected = null;
+    protected ?int $invoiceTime = null;
+    protected ?string $expirationTime = null;
+    protected ?string $currentTime = null;
+    protected ?array $transactions = null;
+    protected ?bool $exceptionStatus = null;
+    protected ?int $targetConfirmations = null;
+    protected ?bool $refundAddressRequestPending = null;
+    protected ?string $buyerProvidedEmail = null;
+    protected ?BuyerProvidedInfo $buyerProvidedInfo = null;
+    protected ?TransactionDetails $transactionDetails = null;
+    protected ?UniversalCodes $universalCodes = null;
+    protected ?SupportedTransactionCurrencies $supportedTransactionCurrencies = null;
+    protected ?MinerFees $minerFees = null;
+    protected ?bool $nonPayProPaymentReceived = null;
+    protected ?Shopper $shopper = null;
+    protected ?string $billId = null;
+    protected ?RefundInfo $refundInfo = null;
+    protected bool $extendedNotifications = false;
+    protected ?bool $isCancelled = null;
+    protected ?string $transactionCurrency = null;
+    protected ?int $underpaidAmount = null;
+    protected ?int $overpaidAmount = null;
+    protected ?int $amountPaid = null;
+    protected ?string $displayAmountPaid = null;
+    protected ?array $exchangeRates = null;
+    protected ?bool $bitpayIdRequired = null;
+    protected ?array $paymentDisplayTotals = null;
+    protected ?array $paymentDisplaySubTotals = null;
 
     /**
      * Constructor, create a minimal request Invoice object.
      *
-     * @param $price    float The amount for which the invoice will be created.
-     * @param $currency string three digit currency type used to compute the invoice bitcoin amount.
+     * @param float|null $price float The amount for which the invoice will be created.
+     * @param string|null $currency string three digit currency type used to compute the invoice bitcoin amount.
      */
     public function __construct(float $price = null, string $currency = null)
     {
-        $this->_price = $price;
-        $this->_currency = $currency;
-        $this->_buyer = new Buyer();
-        $this->_buyerProvidedInfo = new BuyerProvidedInfo();
-        $this->_universalCodes = new UniversalCodes();
-        $this->_supportedTransactionCurrencies = new SupportedTransactionCurrencies();
-        $this->_minerFees = new MinerFees();
-        $this->_shopper = new Shopper();
-        $this->_refundInfo = new RefundInfo();
-        $this->_itemizedDetails = new ItemizedDetails();
-        $this->_transactionDetails = new TransactionDetails();
+        $this->price = $price;
+        $this->currency = $currency;
+        $this->buyer = new Buyer();
+        $this->buyerProvidedInfo = new BuyerProvidedInfo();
+        $this->universalCodes = new UniversalCodes();
+        $this->supportedTransactionCurrencies = new SupportedTransactionCurrencies();
+        $this->minerFees = new MinerFees();
+        $this->shopper = new Shopper();
+        $this->refundInfo = new RefundInfo();
+        $this->itemizedDetails = [new ItemizedDetails()];
+        $this->transactionDetails = new TransactionDetails();
     }
 
     // API fields
@@ -120,11 +118,11 @@ class Invoice
      * supported currencies are available via the
      * <a href="#rest-api-resources-currencies">Currencies resource</a>
      *
-     * @return string
+     * @return string|null The currency
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     // Required fields
@@ -141,13 +139,13 @@ class Invoice
      *
      * @throws BitPayException
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
         if (!Currency::isValid($currency)) {
             throw new BitPayException("currency code must be a type of Model.Currency");
         }
 
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -157,11 +155,11 @@ class Invoice
      * to correlate the invoice with an order ID in their system,
      * which can be used as a lookup variable in Retrieve Invoice by GUID.
      *
-     * @return string
+     * @return string|null The guid
      */
-    public function getGuid()
+    public function getGuid(): ?string
     {
-        return $this->_guid;
+        return $this->guid;
     }
 
     /**
@@ -173,9 +171,9 @@ class Invoice
      *
      * @param string $guid The guid of the refund request being retrieved
      */
-    public function setGuid(string $guid)
+    public function setGuid(string $guid): void
     {
-        $this->_guid = $guid;
+        $this->guid = $guid;
     }
 
     /**
@@ -184,11 +182,11 @@ class Invoice
      * Invoice resource token. This token is derived from the API token initially used
      * to create the invoice and is tied to the specific resource id created.
      *
-     * @return string - Invoice resource token.
+     * @return string|null - Invoice resource token.
      */
-    public function getToken()
+    public function getToken(): ?string
     {
-        return $this->_token;
+        return $this->token;
     }
 
     // Optional fields
@@ -202,9 +200,9 @@ class Invoice
      *
      * @param string $token Invoice resource token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     /**
@@ -212,11 +210,11 @@ class Invoice
      *
      * Fixed price amount for the checkout, in the "currency" of the invoice object.
      *
-     * @return float
+     * @return float|null The price
      */
-    public function getPrice()
+    public function getPrice(): ?float
     {
-        return $this->_price;
+        return $this->price;
     }
 
     /**
@@ -227,9 +225,9 @@ class Invoice
      * @param float $price Fixed price amount for the checkout, in the "currency" of the invoice object.
      *
      */
-    public function setPrice(float $price)
+    public function setPrice(float $price): void
     {
-        $this->_price = $price;
+        $this->price = $price;
     }
 
     /**
@@ -239,11 +237,11 @@ class Invoice
      * used by the merchant to correlate the invoice with an order or other object in their system.
      * This passthru variable can be a serialized object.
      *
-     * @return string
+     * @return string|null The pos data
      */
-    public function getPosData()
+    public function getPosData(): ?string
     {
-        return $this->_posData;
+        return $this->posData;
     }
 
     /**
@@ -255,19 +253,19 @@ class Invoice
      *
      * @param string $posData the pos data
      */
-    public function setPosData(string $posData)
+    public function setPosData(string $posData): void
     {
-        $this->_posData = $posData;
+        $this->posData = $posData;
     }
 
     /**
      * Gets notificationURL
      *
-     * @return string - URL to which BitPay sends webhook notifications. HTTPS is mandatory.
+     * @return string|null - URL to which BitPay sends webhook notifications. HTTPS is mandatory.
      */
-    public function getNotificationURL()
+    public function getNotificationURL(): ?string
     {
-        return $this->_notificationURL;
+        return $this->notificationURL;
     }
 
     /**
@@ -275,9 +273,9 @@ class Invoice
      *
      * @param string $notificationURL - URL to which BitPay sends webhook notifications. HTTPS is mandatory.
      */
-    public function setNotificationURL(string $notificationURL)
+    public function setNotificationURL(string $notificationURL): void
     {
-        $this->_notificationURL = $notificationURL;
+        $this->notificationURL = $notificationURL;
     }
 
     /**
@@ -290,11 +288,11 @@ class Invoice
      * Note : orders are only credited to your BitPay Account Summary for settlement after
      * the invoice reaches the status "complete" (regardless of this setting).
      *
-     * @return string
+     * @return string|null the transaction speed
      */
-    public function getTransactionSpeed()
+    public function getTransactionSpeed(): ?string
     {
-        return $this->_transactionSpeed;
+        return $this->transactionSpeed;
     }
 
     /**
@@ -309,9 +307,9 @@ class Invoice
      *
      * @param string $transactionSpeed the transaction speed
      */
-    public function setTransactionSpeed(string $transactionSpeed)
+    public function setTransactionSpeed(string $transactionSpeed): void
     {
-        $this->_transactionSpeed = $transactionSpeed;
+        $this->transactionSpeed = $transactionSpeed;
     }
 
     /**
@@ -324,11 +322,11 @@ class Invoice
      * This webhook will be for the "confirmed" or "complete" invoice status,
      * depending on the transactionSpeed selected.
      *
-     * @return bool
+     * @return bool|null the full notification
      */
-    public function getFullNotifications()
+    public function getFullNotifications(): ?bool
     {
-        return $this->_fullNotifications;
+        return $this->fullNotifications;
     }
 
     /**
@@ -343,9 +341,9 @@ class Invoice
      *
      * @param bool $fullNotifications the full notification
      */
-    public function setFullNotifications(bool $fullNotifications)
+    public function setFullNotifications(bool $fullNotifications): void
     {
-        $this->_fullNotifications = $fullNotifications;
+        $this->fullNotifications = $fullNotifications;
     }
 
     /**
@@ -353,11 +351,11 @@ class Invoice
      *
      * Merchant email address for notification of payout status change.
      *
-     * @return string
+     * @return string|null the notification email
      */
-    public function getNotificationEmail()
+    public function getNotificationEmail(): ?string
     {
-        return $this->_notificationEmail;
+        return $this->notificationEmail;
     }
 
     /**
@@ -367,9 +365,9 @@ class Invoice
      *
      * @param string $notificationEmail Merchant email address for notification of payout status change
      */
-    public function setNotificationEmail(string $notificationEmail)
+    public function setNotificationEmail(string $notificationEmail): void
     {
-        $this->_notificationEmail = $notificationEmail;
+        $this->notificationEmail = $notificationEmail;
     }
 
     /**
@@ -378,11 +376,11 @@ class Invoice
      * The shopper will be redirected to this URL when clicking on the Return button
      * after a successful payment or when clicking on the Close button if a separate closeURL is not specified.
      *
-     * @return string
+     * @return string|null the redirect url
      */
-    public function getRedirectURL()
+    public function getRedirectURL(): ?string
     {
-        return $this->_redirectURL;
+        return $this->redirectURL;
     }
 
     /**
@@ -394,9 +392,9 @@ class Invoice
      *
      * @param string $redirectURL The shopper will be redirected to this URL
      */
-    public function setRedirectURL(string $redirectURL)
+    public function setRedirectURL(string $redirectURL): void
     {
-        $this->_redirectURL = $redirectURL;
+        $this->redirectURL = $redirectURL;
     }
 
     /**
@@ -405,11 +403,11 @@ class Invoice
      * Can be used by the merchant to assign their own internal Id to an invoice.
      * If used, there should be a direct match between an orderId and an invoice id.
      *
-     * @return string
+     * @return string|null
      */
-    public function getOrderId()
+    public function getOrderId(): ?string
     {
-        return $this->_orderId;
+        return $this->orderId;
     }
 
     /**
@@ -420,9 +418,9 @@ class Invoice
      *
      * @param string $orderId Invoice order id
      */
-    public function setOrderId(string $orderId)
+    public function setOrderId(string $orderId): void
     {
-        $this->_orderId = $orderId;
+        $this->orderId = $orderId;
     }
 
 
@@ -431,11 +429,11 @@ class Invoice
      *
      * Invoice description - will be added as a line item on the BitPay checkout page, under the merchant name.
      *
-     * @return string
+     * @return string|null the item desc
      */
-    public function getItemDesc()
+    public function getItemDesc(): ?string
     {
-        return $this->_itemDesc;
+        return $this->itemDesc;
     }
 
 
@@ -446,9 +444,9 @@ class Invoice
      *
      * @param string $itemDesc Invoice description
      */
-    public function setItemDesc(string $itemDesc)
+    public function setItemDesc(string $itemDesc): void
     {
-        $this->_itemDesc = $itemDesc;
+        $this->itemDesc = $itemDesc;
     }
 
     /**
@@ -456,11 +454,11 @@ class Invoice
      *
      * "bitcoindonation" for donations, otherwise do not include the field in the request.
      *
-     * @return string
+     * @return string|null the item code
      */
-    public function getItemCode()
+    public function getItemCode(): ?string
     {
-        return $this->_itemCode;
+        return $this->itemCode;
     }
 
     /**
@@ -470,9 +468,9 @@ class Invoice
      *
      * @param string $itemCode "bitcoindonation" for donations, otherwise do not include the field in the request.
      */
-    public function setItemCode(string $itemCode)
+    public function setItemCode(string $itemCode): void
     {
-        $this->_itemCode = $itemCode;
+        $this->itemCode = $itemCode;
     }
 
     /**
@@ -480,11 +478,11 @@ class Invoice
      *
      * Indicates whether items are physical goods. Alternatives include digital goods and services.
      *
-     * @return bool
+     * @return bool|null the physical
      */
-    public function getPhysical()
+    public function getPhysical(): ?bool
     {
-        return $this->_physical;
+        return $this->physical;
     }
 
     /**
@@ -494,9 +492,9 @@ class Invoice
      *
      * @param bool $physical the physical
      */
-    public function setPhysical(bool $physical)
+    public function setPhysical(bool $physical): void
     {
-        $this->_physical = $physical;
+        $this->physical = $physical;
     }
 
     /**
@@ -508,11 +506,11 @@ class Invoice
      * For instance "paymentCurrencies": ["BTC"] will create an invoice with only XRP available as transaction currency,
      * thus bypassing the currency selection step on the invoice.
      *
-     * @return mixed
+     * @return array|null the payment currencies
      */
-    public function getPaymentCurrencies()
+    public function getPaymentCurrencies(): ?array
     {
-        return $this->_paymentCurrencies;
+        return $this->paymentCurrencies;
     }
 
     /**
@@ -526,36 +524,21 @@ class Invoice
      *
      * @param array $paymentCurrencies the payment currencies
      */
-    public function setPaymentCurrencies(array $paymentCurrencies)
+    public function setPaymentCurrencies(array $paymentCurrencies): void
     {
-        $this->_paymentCurrencies = $paymentCurrencies;
+        $this->paymentCurrencies = $paymentCurrencies;
     }
-
-    /**
-     * Gets acceptanceWindow
-     *
-     * Number of milliseconds that a user has to pay an invoice before it expires (0-900000).
-     * If not set, invoice will default to the account acceptanceWindow.
-     * If account acceptanceWindow is not set, invoice will default to 15 minutes (900,000 milliseconds).
-     *
-     * @return float|null
-     */
-    public function getAcceptanceWindow(): ?float
-    {
-        return $this->_acceptanceWindow;
-    }
-
 
     /**
      * Gets closeURL
      *
      * URL to redirect if the shopper does not pay the invoice and click on the Close button instead.
      *
-     * @return string
+     * @return string|null the close url
      */
-    public function getCloseURL()
+    public function getCloseURL(): ?string
     {
-        return $this->_closeURL;
+        return $this->closeURL;
     }
 
     /**
@@ -566,9 +549,9 @@ class Invoice
      *
      * @param string $closeURL URL to redirect if the shopper does not pay the invoice
      */
-    public function setCloseURL(string $closeURL)
+    public function setCloseURL(string $closeURL): void
     {
-        $this->_closeURL = $closeURL;
+        $this->closeURL = $closeURL;
     }
 
     /**
@@ -577,11 +560,11 @@ class Invoice
      * Set to false by default,
      * merchant can setup automatic redirect to their website by setting this parameter to true.
      *
-     * @return bool
+     * @return bool|null the auto redirect
      */
-    public function getAutoRedirect()
+    public function getAutoRedirect(): ?bool
     {
-        return $this->_autoRedirect;
+        return $this->autoRedirect;
     }
 
     /**
@@ -592,9 +575,9 @@ class Invoice
      *
      * @param bool $autoRedirect the auto redirect
      */
-    public function setAutoRedirect(bool $autoRedirect)
+    public function setAutoRedirect(bool $autoRedirect): void
     {
-        $this->_autoRedirect = $autoRedirect;
+        $this->autoRedirect = $autoRedirect;
     }
 
     /**
@@ -605,11 +588,11 @@ class Invoice
      * from wallets which have implemented the
      * <a href="https://bitpay.com/docs/payment-protocol">BitPay JSON Payment Protocol</a>
      *
-     * @return mixed
+     * @return bool|null the json pay pro required
      */
-    public function getJsonPayProRequired()
+    public function getJsonPayProRequired(): ?bool
     {
-        return $this->_jsonPayProRequired;
+        return $this->jsonPayProRequired;
     }
 
     /**
@@ -622,9 +605,9 @@ class Invoice
      *
      * @param bool $jsonPayProRequired the json pay pro required
      */
-    public function setJsonPayProRequired(bool $jsonPayProRequired)
+    public function setJsonPayProRequired(bool $jsonPayProRequired): void
     {
-        $this->_jsonPayProRequired = $jsonPayProRequired;
+        $this->jsonPayProRequired = $jsonPayProRequired;
     }
 
     /**
@@ -634,11 +617,11 @@ class Invoice
      * or receiving a refund over a given threshold, which may vary by region.
      * This Boolean forces the invoice to require BitPay ID regardless of the price.
      *
-     * @return mixed
+     * @return bool|null the Bitpay id required
      */
-    public function getBitpayIdRequired()
+    public function getBitpayIdRequired(): ?bool
     {
-        return $this->_bitpayIdRequired;
+        return $this->bitpayIdRequired;
     }
 
     /**
@@ -650,9 +633,9 @@ class Invoice
      *
      * @param bool $bitpayIdRequired the bitpay id required
      */
-    public function setBitpayIdRequired(bool $bitpayIdRequired)
+    public function setBitpayIdRequired(bool $bitpayIdRequired): void
     {
-        $this->_bitpayIdRequired = $bitpayIdRequired;
+        $this->bitpayIdRequired = $bitpayIdRequired;
     }
 
     /**
@@ -660,11 +643,11 @@ class Invoice
      *
      * A display string for merchant identification (ex. Wal-Mart Store #1452, Bowling Green, KY).
      *
-     * @return mixed
+     * @return string|null the merchant name
      */
-    public function getMerchantName()
+    public function getMerchantName(): ?string
     {
-        return $this->_merchantName;
+        return $this->merchantName;
     }
 
     /**
@@ -674,9 +657,9 @@ class Invoice
      *
      * @param string $merchantName A display string for merchant identification
      */
-    public function setMerchantName(string $merchantName)
+    public function setMerchantName(string $merchantName): void
     {
-        $this->_merchantName = $merchantName;
+        $this->merchantName = $merchantName;
     }
 
     /**
@@ -687,11 +670,11 @@ class Invoice
      * "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      * If not yet selected, this field will not be returned.
      *
-     * @return mixed
+     * @return string|null the selected transaction currency
      */
-    public function getSelectedTransactionCurrency()
+    public function getSelectedTransactionCurrency(): ?string
     {
-        return $this->_selectedTransactionCurrency;
+        return $this->selectedTransactionCurrency;
     }
 
     /**
@@ -705,9 +688,9 @@ class Invoice
      * @param string $selectedTransactionCurrency This field will be populated with the cryptocurrency selected
      * to pay the BitPay invoice
      */
-    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
+    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency): void
     {
-        $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
+        $this->selectedTransactionCurrency = $selectedTransactionCurrency;
     }
 
     /**
@@ -715,11 +698,11 @@ class Invoice
      *
      * Merchant pre-selects transaction currency on behalf of buyer.
      *
-     * @return mixed
+     * @return string|null the forced buyer selected wallet
      */
-    public function getForcedBuyerSelectedWallet()
+    public function getForcedBuyerSelectedWallet(): ?string
     {
-        return $this->_forcedBuyerSelectedWallet;
+        return $this->forcedBuyerSelectedWallet;
     }
 
     /**
@@ -731,7 +714,7 @@ class Invoice
      */
     public function setForcedBuyerSelectedWallet(string $forcedBuyerSelectedWallet)
     {
-        $this->_forcedBuyerSelectedWallet = $forcedBuyerSelectedWallet;
+        $this->forcedBuyerSelectedWallet = $forcedBuyerSelectedWallet;
     }
 
     /**
@@ -739,11 +722,11 @@ class Invoice
      *
      * Merchant pre-selects transaction currency on behalf of buyer.
      *
-     * @return string
+     * @return string|null Merchant pre-selects transaction currency
      */
-    public function getForcedBuyerSelectedTransactionCurrency()
+    public function getForcedBuyerSelectedTransactionCurrency(): ?string
     {
-        return $this->_forcedBuyerSelectedTransactionCurrency;
+        return $this->forcedBuyerSelectedTransactionCurrency;
     }
 
     /**
@@ -755,7 +738,7 @@ class Invoice
      */
     public function setForcedBuyerSelectedTransactionCurrency(string $forcedBuyerSelectedTransactionCurrency)
     {
-        $this->_forcedBuyerSelectedTransactionCurrency = $forcedBuyerSelectedTransactionCurrency;
+        $this->forcedBuyerSelectedTransactionCurrency = $forcedBuyerSelectedTransactionCurrency;
     }
 
     /**
@@ -763,11 +746,11 @@ class Invoice
      *
      * Object containing line item details for display.
      *
-     * @return ItemizedDetails
+     * @return ItemizedDetails[]
      */
-    public function getItemizedDetails()
+    public function getItemizedDetails(): array
     {
-        return $this->_itemizedDetails;
+        return $this->itemizedDetails;
     }
 
     /**
@@ -777,19 +760,41 @@ class Invoice
      *
      * @param array $itemizedDetails Objects array containing line item details for display.
      */
-    public function setItemizedDetails(array $itemizedDetails)
+    public function setItemizedDetails(array $itemizedDetails): void
     {
-        $itemsArray = [];
+        if (empty($itemizedDetails)) {
+            $this->itemizedDetails = [];
+
+            return;
+        }
 
         foreach ($itemizedDetails as $item) {
             if ($item instanceof ItemizedDetails) {
-                array_push($itemsArray, $item->toArray());
+                $itemsArray[] = $item;
             } else {
-                array_push($itemsArray, $item);
+                $newItemizedDetails = new ItemizedDetails();
+                $newItemizedDetails->setAmount($item->amount ?? null);
+                $newItemizedDetails->setIsFee($item->isFee ?? null);
+                $newItemizedDetails->setDescription($item->description ?? null);
+                $itemsArray[] = $newItemizedDetails;
             }
         }
 
-        $this->_itemizedDetails = $itemsArray;
+        $this->itemizedDetails = $itemsArray;
+    }
+
+    /**
+     * Gets acceptanceWindow
+     *
+     * Number of milliseconds that a user has to pay an invoice before it expires (0-900000).
+     * If not set, invoice will default to the account acceptanceWindow.
+     * If account acceptanceWindow is not set, invoice will default to 15 minutes (900,000 milliseconds).
+     *
+     * @return float|null the acceptance window
+     */
+    public function getAcceptanceWindow(): ?float
+    {
+        return $this->acceptanceWindow;
     }
 
     /**
@@ -801,9 +806,9 @@ class Invoice
      *
      * @param float $acceptanceWindow Number of milliseconds that a user has to pay an invoice before it expire
      */
-    public function setAcceptanceWindow(float $acceptanceWindow)
+    public function setAcceptanceWindow(float $acceptanceWindow): void
     {
-        $this->_acceptanceWindow = $acceptanceWindow;
+        $this->acceptanceWindow = $acceptanceWindow;
     }
 
     /**
@@ -811,11 +816,11 @@ class Invoice
      *
      * Allows merchant to pass buyer related information in the invoice object
      *
-     * @return Buyer
+     * @return Buyer|null the buyer
      */
-    public function getBuyer()
+    public function getBuyer(): ?Buyer
     {
-        return $this->_buyer;
+        return $this->buyer;
     }
 
     /**
@@ -825,9 +830,9 @@ class Invoice
      *
      * @param Buyer $buyer the buyer
      */
-    public function setBuyer(Buyer $buyer)
+    public function setBuyer(Buyer $buyer): void
     {
-        $this->_buyer = $buyer;
+        $this->buyer = $buyer;
     }
 
     /**
@@ -836,11 +841,11 @@ class Invoice
      * Buyer's email address.
      * If provided during invoice creation, this will bypass the email prompt for the consumer when opening the invoice.
      *
-     * @return string
+     * @return string|null the buyer email
      */
-    public function getBuyerEmail()
+    public function getBuyerEmail(): ?string
     {
-        return $this->_buyerEmail;
+        return $this->buyerEmail;
     }
 
     /**
@@ -851,9 +856,9 @@ class Invoice
      *
      * @param string $buyerEmail Buyer's email address
      */
-    public function setBuyerEmail(string $buyerEmail)
+    public function setBuyerEmail(string $buyerEmail): void
     {
-        $this->_buyerEmail = $buyerEmail;
+        $this->buyerEmail = $buyerEmail;
     }
 
     /**
@@ -863,11 +868,11 @@ class Invoice
      * This is only used for instances where a buyers email
      * (primary form of buyer communication) is can not be gathered.
      *
-     * @return mixed
+     * @return string|null the buyer sms
      */
-    public function getBuyerSms()
+    public function getBuyerSms(): ?string
     {
-        return $this->_buyerSms;
+        return $this->buyerSms;
     }
 
     /**
@@ -879,9 +884,9 @@ class Invoice
      *
      * @param string $buyerSms SMS provided by user for communication
      */
-    public function setBuyerSms(string $buyerSms)
+    public function setBuyerSms(string $buyerSms): void
     {
-        $this->_buyerSms = $buyerSms;
+        $this->buyerSms = $buyerSms;
     }
 
     // Response fields
@@ -894,11 +899,11 @@ class Invoice
      * This field will be populated with the refund address
      * provided by the customer if you request a refund of the specific invoice.
      *
-     * @return array
+     * @return array|null Refund address provided by the customer
      */
-    public function getRefundAddresses()
+    public function getRefundAddresses(): ?array
     {
-        return $this->_refundAddresses;
+        return $this->refundAddresses;
     }
 
     /**
@@ -910,19 +915,19 @@ class Invoice
      *
      * @param array $refundAddresses Refund address provided by the customer
      */
-    public function setRefundAddresses(array $refundAddresses)
+    public function setRefundAddresses(array $refundAddresses): void
     {
-        $this->_refundAddresses = $refundAddresses;
+        $this->refundAddresses = $refundAddresses;
     }
 
     /**
      * Gets invoice resource id
      *
-     * @return string
+     * @return string|null Invoice resource id
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -930,9 +935,9 @@ class Invoice
      *
      * @param string $id Invoice resource id
      */
-    public function setId($id)
+    public function setId(string $id): void
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -940,11 +945,11 @@ class Invoice
      *
      * Web address of invoice, expires at expirationTime
      *
-     * @return string
+     * @return string|null Web address of invoice
      */
-    public function getUrl()
+    public function getUrl(): ?string
     {
-        return $this->_url;
+        return $this->url;
     }
 
     /**
@@ -954,9 +959,9 @@ class Invoice
      *
      * @param string $url Web address of invoice
      */
-    public function setUrl($url)
+    public function setUrl(string $url): void
     {
-        $this->_url = $url;
+        $this->url = $url;
     }
 
     /**
@@ -967,11 +972,11 @@ class Invoice
      * Instant Payment Notification (IPN) section.
      * </a>
      *
-     * @return string
+     * @return string|null Invoice status
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -984,9 +989,9 @@ class Invoice
      *
      * @param string $status Invoice status
      */
-    public function setStatus($status)
+    public function setStatus(string $status): void
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -995,11 +1000,11 @@ class Invoice
      * Flag to indicate if the miner fee used by the buyer is too low.
      * Initially set to false when the invoice is created.
      *
-     * @return boolean
+     * @return bool|null Flag to indicate if the miner fee used by the buyer is too low
      */
-    public function getLowFeeDetected()
+    public function getLowFeeDetected(): ?bool
     {
-        return $this->_lowFeeDetected;
+        return $this->lowFeeDetected;
     }
 
     /**
@@ -1010,19 +1015,19 @@ class Invoice
      *
      * @param boolean $lowFeeDetected Flag to indicate if the miner fee used by the buyer is too low
      */
-    public function setLowFeeDetected($lowFeeDetected)
+    public function setLowFeeDetected(bool $lowFeeDetected)
     {
-        $this->_lowFeeDetected = $lowFeeDetected;
+        $this->lowFeeDetected = $lowFeeDetected;
     }
 
     /**
      * Gets invoiceTime - UNIX time of invoice creation, in milliseconds
      *
-     * @return int
+     * @return int|null UNIX time of invoice creation, in milliseconds
      */
-    public function getInvoiceTime()
+    public function getInvoiceTime(): ?int
     {
-        return $this->_invoiceTime;
+        return $this->invoiceTime;
     }
 
     /**
@@ -1030,19 +1035,19 @@ class Invoice
      *
      * @param int $invoiceTime UNIX time of invoice creation, in milliseconds
      */
-    public function setInvoiceTime($invoiceTime)
+    public function setInvoiceTime(int $invoiceTime)
     {
-        $this->_invoiceTime = $invoiceTime;
+        $this->invoiceTime = $invoiceTime;
     }
 
     /**
      * Gets expirationTime - UNIX time when invoice is last available to be paid, in milliseconds
      *
-     * @return mixed
+     * @return string|null the UNIX time
      */
-    public function getExpirationTime()
+    public function getExpirationTime(): ?string
     {
-        return $this->_expirationTime;
+        return $this->expirationTime;
     }
 
     /**
@@ -1050,19 +1055,19 @@ class Invoice
      *
      * @param string $expirationTime UNIX time when invoice is last available to be paid, in milliseconds
      */
-    public function setExpirationTime($expirationTime)
+    public function setExpirationTime(string $expirationTime): void
     {
-        $this->_expirationTime = $expirationTime;
+        $this->expirationTime = $expirationTime;
     }
 
     /**
      * Gets currentTime - UNIX time of API call, in milliseconds
      *
-     * @return string
+     * @return string|null UNIX time
      */
-    public function getCurrentTime()
+    public function getCurrentTime(): ?string
     {
-        return $this->_currentTime;
+        return $this->currentTime;
     }
 
     /**
@@ -1070,9 +1075,9 @@ class Invoice
      *
      * @param string $currentTime UNIX time of API call, in milliseconds
      */
-    public function setCurrentTime($currentTime)
+    public function setCurrentTime(string $currentTime): void
     {
-        $this->_currentTime = $currentTime;
+        $this->currentTime = $currentTime;
     }
 
     /**
@@ -1080,11 +1085,11 @@ class Invoice
      *
      * Contains the cryptocurrency transaction details for the executed payout.
      *
-     * @return array
+     * @return array|null the transactions
      */
-    public function getTransactions()
+    public function getTransactions(): ?array
     {
-        return $this->_transactions;
+        return $this->transactions;
     }
 
     /**
@@ -1094,9 +1099,9 @@ class Invoice
      *
      * @param array $transactions array with the crypto currency transaction hashes linked to the invoice
      */
-    public function setTransactions($transactions)
+    public function setTransactions(array $transactions): void
     {
-        $this->_transactions = $transactions;
+        $this->transactions = $transactions;
     }
 
     /**
@@ -1108,11 +1113,11 @@ class Invoice
      * "paidPartial": (string) if the consumer did not send enough funds when paying the invoice.
      * "paidOver": (string) if the consumer sent to much funds when paying the invoice.
      *
-     * @return boolean
+     * @return bool|null the exception status
      */
-    public function getExceptionStatus()
+    public function getExceptionStatus(): ?bool
     {
-        return $this->_exceptionStatus;
+        return $this->exceptionStatus;
     }
 
     /**
@@ -1126,9 +1131,9 @@ class Invoice
      *
      * @param boolean $exceptionStatus this parameter will indicate if the purchaser sent too much or not enough funds
      */
-    public function setExceptionStatus($exceptionStatus)
+    public function setExceptionStatus(bool $exceptionStatus): void
     {
-        $this->_exceptionStatus = $exceptionStatus;
+        $this->exceptionStatus = $exceptionStatus;
     }
 
     /**
@@ -1139,11 +1144,11 @@ class Invoice
      * Currently, the value set is set to 6 by default for BTC/BCH/XRP,
      * 40 for DOGE and 50 for ETH/GUSD/PAX/USDC/BUSD/DAI/WBTC
      *
-     * @return int
+     * @return int|null the target confirmations
      */
-    public function getTargetConfirmations()
+    public function getTargetConfirmations(): ?int
     {
-        return $this->_targetConfirmations;
+        return $this->targetConfirmations;
     }
 
     /**
@@ -1157,9 +1162,9 @@ class Invoice
      * @param int $targetConfirmations Indicates the number of block confirmation of the crypto currency transaction
      * which are required to credit a paid invoice to the merchant account
      */
-    public function setTargetConfirmations($targetConfirmations)
+    public function setTargetConfirmations(int $targetConfirmations): void
     {
-        $this->_targetConfirmations = $targetConfirmations;
+        $this->targetConfirmations = $targetConfirmations;
     }
 
     /**
@@ -1171,11 +1176,11 @@ class Invoice
      * from the buyer to provide an address for the refund,
      * via the secure link which has been automatically emailed to him.
      *
-     * @return boolean
+     * @return bool|null the refund address request pending
      */
-    public function getRefundAddressRequestPending()
+    public function getRefundAddressRequestPending(): ?bool
     {
-        return $this->_refundAddressRequestPending;
+        return $this->refundAddressRequestPending;
     }
 
     /**
@@ -1190,9 +1195,9 @@ class Invoice
      * @param boolean $refundAddressRequestPending This flag is here to indicate that the refund
      * request is pending action
      */
-    public function setRefundAddressRequestPending($refundAddressRequestPending)
+    public function setRefundAddressRequestPending(bool $refundAddressRequestPending): void
     {
-        $this->_refundAddressRequestPending = $refundAddressRequestPending;
+        $this->refundAddressRequestPending = $refundAddressRequestPending;
     }
 
     /**
@@ -1204,11 +1209,11 @@ class Invoice
      * the bitpay invoice UI will prompt the user to enter his
      * email address and this field will be populated with the email submitted.
      *
-     * @return string
+     * @return string|null the buyer provided email
      */
-    public function getBuyerProvidedEmail()
+    public function getBuyerProvidedEmail(): ?string
     {
-        return $this->_buyerProvidedEmail;
+        return $this->buyerProvidedEmail;
     }
 
     /**
@@ -1223,9 +1228,9 @@ class Invoice
      * @param string $buyerProvidedEmail Populated with the buyer's email address if passed in the buyer object
      * by the merchant
      */
-    public function setBuyerProvidedEmail($buyerProvidedEmail)
+    public function setBuyerProvidedEmail(string $buyerProvidedEmail): void
     {
-        $this->_buyerProvidedEmail = $buyerProvidedEmail;
+        $this->buyerProvidedEmail = $buyerProvidedEmail;
     }
 
     /**
@@ -1234,11 +1239,11 @@ class Invoice
      * Information collected from the buyer during the process of paying an invoice.
      * Initially this object is empty.
      *
-     * @return BuyerProvidedInfo|null
+     * @return BuyerProvidedInfo|null Information collected from the buyer
      */
     public function getBuyerProvidedInfo(): ?BuyerProvidedInfo
     {
-        return $this->_buyerProvidedInfo;
+        return $this->buyerProvidedInfo;
     }
 
     /**
@@ -1252,17 +1257,24 @@ class Invoice
      */
     public function setBuyerProvidedInfo(BuyerProvidedInfo $buyerProvidedInfo)
     {
-        $this->_buyerProvidedInfo = $buyerProvidedInfo;
+        $this->buyerProvidedInfo = $buyerProvidedInfo;
     }
 
-    public function getTransactionDetails()
+    /**
+     * @return TransactionDetails|null
+     */
+    public function getTransactionDetails(): ?TransactionDetails
     {
-        return $this->_transactionDetails;
+        return $this->transactionDetails;
     }
 
+    /**
+     * @param TransactionDetails $transactionDetails
+     * @return void
+     */
     public function setTransactionDetails(TransactionDetails $transactionDetails)
     {
-        $this->_transactionDetails = $transactionDetails;
+        $this->transactionDetails = $transactionDetails;
     }
 
     /**
@@ -1274,7 +1286,7 @@ class Invoice
      */
     public function getUniversalCodes(): ?UniversalCodes
     {
-        return $this->_universalCodes;
+        return $this->universalCodes;
     }
 
     /**
@@ -1284,7 +1296,7 @@ class Invoice
      */
     public function setUniversalCodes(UniversalCodes $universalCodes)
     {
-        $this->_universalCodes = $universalCodes;
+        $this->universalCodes = $universalCodes;
     }
 
     /**
@@ -1297,11 +1309,11 @@ class Invoice
      * If you disable a currency via the invoice parameter "paymentCurrencies",
      * this parameter will be set to "merchantDisabledByParam"
      *
-     * @return object
+     * @return SupportedTransactionCurrencies|null The currencies that may be used to pay this invoice
      */
-    public function getSupportedTransactionCurrencies()
+    public function getSupportedTransactionCurrencies(): ?SupportedTransactionCurrencies
     {
-        return $this->_supportedTransactionCurrencies;
+        return $this->supportedTransactionCurrencies;
     }
 
     /**
@@ -1317,9 +1329,10 @@ class Invoice
      * @param SupportedTransactionCurrencies $supportedTransactionCurrencies The currencies that may be used
      * to pay this invoice
      */
-    public function setSupportedTransactionCurrencies(SupportedTransactionCurrencies $supportedTransactionCurrencies)
-    {
-        $this->_supportedTransactionCurrencies = $supportedTransactionCurrencies;
+    public function setSupportedTransactionCurrencies(
+        SupportedTransactionCurrencies $supportedTransactionCurrencies
+    ): void {
+        $this->supportedTransactionCurrencies = $supportedTransactionCurrencies;
     }
 
     /**
@@ -1327,11 +1340,11 @@ class Invoice
      *
      * For internal use - This field can be ignored in merchant implementations.
      *
-     * @return object
+     * @return array|null the payment totals
      */
-    public function getPaymentTotals()
+    public function getPaymentTotals(): ?array
     {
-        return $this->_paymentTotals;
+        return $this->paymentTotals;
     }
 
     /**
@@ -1339,11 +1352,11 @@ class Invoice
      *
      * For internal use - This field can be ignored in merchant implementations.
      *
-     * @param object $paymentTotals the payment totals
+     * @param array|null $paymentTotals the payment totals
      */
-    public function setPaymentTotals($paymentTotals)
+    public function setPaymentTotals(?array $paymentTotals)
     {
-        $this->_paymentTotals = $paymentTotals;
+        $this->paymentTotals = $paymentTotals;
     }
 
     /**
@@ -1351,11 +1364,11 @@ class Invoice
      *
      * For internal use. This field can be ignored in merchant implementations.
      *
-     * @return object
+     * @return array|null the payment subtotals
      */
-    public function getPaymentSubTotals()
+    public function getPaymentSubTotals(): ?array
     {
-        return $this->_paymentSubtotals;
+        return $this->paymentSubTotals;
     }
 
     /**
@@ -1363,11 +1376,11 @@ class Invoice
      *
      * For internal use. This field can be ignored in merchant implementations.
      *
-     * @param object $paymentSubtotals the payment subtotals
+     * @param array|null $paymentSubTotals the payment subtotals
      */
-    public function setPaymentSubTotals($paymentSubtotals)
+    public function setPaymentSubTotals(?array $paymentSubTotals)
     {
-        $this->_paymentSubtotals = $paymentSubtotals;
+        $this->paymentSubTotals = $paymentSubTotals;
     }
 
     /**
@@ -1377,11 +1390,11 @@ class Invoice
      * The key is the currency and the value is an amount indicated in the base unit
      * for each supported transactionCurrency.
      *
-     * @return object
+     * @return array|null Equivalent to price for each supported transactionCurrency
      */
-    public function getPaymentDisplaySubTotals()
+    public function getPaymentDisplaySubTotals(): ?array
     {
-        return $this->_paymentDisplaySubtotals;
+        return $this->paymentDisplaySubTotals;
     }
 
     /**
@@ -1391,11 +1404,11 @@ class Invoice
      * The key is the currency and the value is an amount indicated in the base unit
      * for each supported transactionCurrency.
      *
-     * @param object $paymentDisplaySubtotals Equivalent to price for each supported transactionCurrency
+     * @param array|null $paymentDisplaySubTotals Equivalent to price for each supported transactionCurrency
      */
-    public function setPaymentDisplaySubTotals($paymentDisplaySubtotals)
+    public function setPaymentDisplaySubTotals(?array $paymentDisplaySubTotals)
     {
-        $this->_paymentDisplaySubtotals = $paymentDisplaySubtotals;
+        $this->paymentDisplaySubTotals = $paymentDisplaySubTotals;
     }
 
     /**
@@ -1406,11 +1419,11 @@ class Invoice
      * The key is the currency and the value is an amount
      * indicated in the base unit for each supported transactionCurrency.
      *
-     * @return object
+     * @return array|null The total amount that the purchaser should pay
      */
-    public function getPaymentDisplayTotals()
+    public function getPaymentDisplayTotals(): ?array
     {
-        return $this->_paymentDisplaytotals;
+        return $this->paymentDisplayTotals;
     }
 
     /**
@@ -1421,11 +1434,11 @@ class Invoice
      * The key is the currency and the value is an amount
      * indicated in the base unit for each supported transactionCurrency.
      *
-     * @param object $paymentDisplaytotals The total amount that the purchaser should pay
+     * @param array|null $paymentDisplayTotals The total amount that the purchaser should pay
      */
-    public function setPaymentDisplayTotals($paymentDisplaytotals)
+    public function setPaymentDisplayTotals(?array $paymentDisplayTotals)
     {
-        $this->_paymentDisplaytotals = $paymentDisplaytotals;
+        $this->paymentDisplayTotals = $paymentDisplayTotals;
     }
 
     /**
@@ -1438,11 +1451,11 @@ class Invoice
      * For "ETH", "GUSD", "PAX", "BUSD", "USDC", "DAI" and "WBTC"- EIP681 is supported
      * For "XRP" - RIP681, BIP72b and BIP73 is supported
      *
-     * @return object
+     * @return array|null
      */
-    public function getPaymentCodes()
+    public function getPaymentCodes(): ?array
     {
-        return $this->_paymentCodes;
+        return $this->paymentCodes;
     }
 
     /**
@@ -1455,11 +1468,11 @@ class Invoice
      * For "ETH", "GUSD", "PAX", "BUSD", "USDC", "DAI" and "WBTC"- EIP681 is supported
      * For "XRP" - RIP681, BIP72b and BIP73 is supported
      *
-     * @param object
+     * @param array|null $paymentCodes
      */
-    public function setPaymentCodes($paymentCodes)
+    public function setPaymentCodes(?array $paymentCodes)
     {
-        $this->_paymentCodes = $paymentCodes;
+        $this->paymentCodes = $paymentCodes;
     }
 
     /**
@@ -1474,7 +1487,7 @@ class Invoice
      */
     public function getUnderpaidAmount(): ?int
     {
-        return $this->_underpaidAmount;
+        return $this->underpaidAmount;
     }
 
     /**
@@ -1487,9 +1500,9 @@ class Invoice
      *
      * @param int $underpaidAmount the underpaid amount
      */
-    public function setUnderpaidAmount(int $underpaidAmount)
+    public function setUnderpaidAmount(int $underpaidAmount): void
     {
-        $this->_underpaidAmount = $underpaidAmount;
+        $this->underpaidAmount = $underpaidAmount;
     }
 
     /**
@@ -1504,7 +1517,7 @@ class Invoice
      */
     public function getOverpaidAmount(): ?int
     {
-        return $this->_overpaidAmount;
+        return $this->overpaidAmount;
     }
 
     /**
@@ -1517,9 +1530,9 @@ class Invoice
      *
      * @param int $overpaidAmount the overpaid amount
      */
-    public function setOverpaidAmount(int $overpaidAmount)
+    public function setOverpaidAmount(int $overpaidAmount): void
     {
-        $this->_overpaidAmount = $overpaidAmount;
+        $this->overpaidAmount = $overpaidAmount;
     }
 
     /**
@@ -1533,11 +1546,11 @@ class Invoice
      * this support article
      * </a> for more information
      *
-     * @return MinerFees
+     * @return MinerFees|null
      */
-    public function getMinerFees()
+    public function getMinerFees(): ?MinerFees
     {
-        return $this->_minerFees;
+        return $this->minerFees;
     }
 
     /**
@@ -1554,9 +1567,9 @@ class Invoice
      * @param MinerFees $minerFees The total amount of fees that the purchaser will pay
      * to cover BitPay's UTXO sweep cost for an invoice
      */
-    public function setMinerFees(MinerFees $minerFees)
+    public function setMinerFees(MinerFees $minerFees): void
     {
-        $this->_minerFees = $minerFees;
+        $this->minerFees = $minerFees;
     }
 
     /**
@@ -1565,11 +1578,11 @@ class Invoice
      * This boolean will be available on an invoice object once an invoice is paid
      * and indicate if the transaction was made with a wallet using the payment protocol (true) or peer to peer (false).
      *
-     * @return boolean
+     * @return bool|null
      */
-    public function getNonPayProPaymentReceived()
+    public function getNonPayProPaymentReceived(): ?bool
     {
-        return $this->_nonPayProPaymentReceived;
+        return $this->nonPayProPaymentReceived;
     }
 
     /**
@@ -1580,9 +1593,9 @@ class Invoice
      *
      * @param boolean $nonPayProPaymentReceived transaction was made with a wallet using the payment protocol
      */
-    public function setNonPayProPaymentReceived(bool $nonPayProPaymentReceived)
+    public function setNonPayProPaymentReceived(bool $nonPayProPaymentReceived): void
     {
-        $this->_nonPayProPaymentReceived = $nonPayProPaymentReceived;
+        $this->nonPayProPaymentReceived = $nonPayProPaymentReceived;
     }
 
     /**
@@ -1591,11 +1604,11 @@ class Invoice
      * This object will be available on the invoice if a shopper signs in on an invoice using his BitPay ID.
      * See the following <a href="https://blog.bitpay.com/bitpay-dashboard-id/">blogpost</a> for more information.
      *
-     * @return Shopper
+     * @return Shopper|null the shopper
      */
-    public function getShopper()
+    public function getShopper(): ?Shopper
     {
-        return $this->_shopper;
+        return $this->shopper;
     }
 
     /**
@@ -1608,7 +1621,7 @@ class Invoice
      */
     public function setShopper(Shopper $shopper)
     {
-        $this->_shopper = $shopper;
+        $this->shopper = $shopper;
     }
 
     /**
@@ -1617,11 +1630,11 @@ class Invoice
      * This field will be in the invoice object only if the invoice was generated from a bill, see the
      * <a href="https://bitpay.com/api/#rest-api-resources-bills">Bills</a> resource for more information
      *
-     * @return string
+     * @return string|null
      */
-    public function getBillId()
+    public function getBillId(): ?string
     {
-        return $this->_billId;
+        return $this->billId;
     }
 
     /**
@@ -1632,9 +1645,9 @@ class Invoice
      *
      * @param string $billId the bill id
      */
-    public function setBillId($billId)
+    public function setBillId(string $billId): void
     {
-        $this->_billId = $billId;
+        $this->billId = $billId;
     }
 
     /**
@@ -1642,11 +1655,11 @@ class Invoice
      *
      * For a refunded invoice, this object will contain the details of executed refunds for the corresponding invoice.
      *
-     * @return RefundInfo
+     * @return RefundInfo|null
      */
-    public function getRefundInfo()
+    public function getRefundInfo(): ?RefundInfo
     {
-        return $this->_refundInfo;
+        return $this->refundInfo;
     }
 
     /**
@@ -1656,9 +1669,9 @@ class Invoice
      *
      * @param RefundInfo object which contain the details of executed refunds for the corresponding invoice.
      */
-    public function setRefundInfo(RefundInfo $refundInfo)
+    public function setRefundInfo(RefundInfo $refundInfo): void
     {
-        $this->_refundInfo = $refundInfo;
+        $this->refundInfo = $refundInfo;
     }
 
     /**
@@ -1670,11 +1683,11 @@ class Invoice
      * When using the extendedNotifications parameter,
      * the webhook also have a payload slightly different from the standard webhooks.
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getExtendedNotifications()
+    public function getExtendedNotifications(): ?bool
     {
-        return $this->_extendedNotifications;
+        return $this->extendedNotifications;
     }
 
     /**
@@ -1688,9 +1701,9 @@ class Invoice
      *
      * @param bool $extendedNotifications Allows merchants to get access to additional webhooks
      */
-    public function setExtendedNotifications(bool $extendedNotifications)
+    public function setExtendedNotifications(bool $extendedNotifications): void
     {
-        $this->_extendedNotifications = $extendedNotifications;
+        $this->extendedNotifications = $extendedNotifications;
     }
 
     /**
@@ -1701,11 +1714,11 @@ class Invoice
      * Possible values are currently "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD",
      * "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      *
-     * @return string
+     * @return string|null
      */
-    public function getTransactionCurrency()
+    public function getTransactionCurrency(): ?string
     {
-        return $this->_transactionCurrency;
+        return $this->transactionCurrency;
     }
 
     /**
@@ -1718,9 +1731,9 @@ class Invoice
      *
      * @param string $transactionCurrency The currency used for the invoice transaction.
      */
-    public function setTransactionCurrency($transactionCurrency)
+    public function setTransactionCurrency(string $transactionCurrency): void
     {
-        $this->_transactionCurrency = $transactionCurrency;
+        $this->transactionCurrency = $transactionCurrency;
     }
 
     /**
@@ -1733,7 +1746,7 @@ class Invoice
      */
     public function getAmountPaid(): ?int
     {
-        return $this->_amountPaid;
+        return $this->amountPaid;
     }
 
     /**
@@ -1744,9 +1757,9 @@ class Invoice
      *
      * @param int $amountPaid The total amount paid to the invoice
      */
-    public function setAmountPaid($amountPaid)
+    public function setAmountPaid(int $amountPaid): void
     {
-        $this->_amountPaid = $amountPaid;
+        $this->amountPaid = $amountPaid;
     }
 
     /**
@@ -1756,11 +1769,11 @@ class Invoice
      * It will be updated with the total amount paid to the invoice
      * indicated in the base unit for the corresponding transactionCurrency
      *
-     * @return string
+     * @return string|null
      */
-    public function getDisplayAmountPaid()
+    public function getDisplayAmountPaid(): ?string
     {
-        return $this->_displayAmountPaid;
+        return $this->displayAmountPaid;
     }
 
     /**
@@ -1772,9 +1785,9 @@ class Invoice
      *
      * @param string $displayAmountPaid display amount paid
      */
-    public function setDisplayAmountPaid($displayAmountPaid)
+    public function setDisplayAmountPaid(string $displayAmountPaid): void
     {
-        $this->_displayAmountPaid = $displayAmountPaid;
+        $this->displayAmountPaid = $displayAmountPaid;
     }
 
     /**
@@ -1782,11 +1795,11 @@ class Invoice
      *
      * Exchange rates keyed by source and target currencies.
      *
-     * @return object
+     * @return array|null
      */
-    public function getExchangeRates()
+    public function getExchangeRates(): ?array
     {
-        return $this->_exchangeRates;
+        return $this->exchangeRates;
     }
 
     /**
@@ -1794,11 +1807,11 @@ class Invoice
      *
      * Exchange rates keyed by source and target currencies.
      *
-     * @param object $exchangeRates Exchange rates keyed by source and target currencies.
+     * @param array|null $exchangeRates Exchange rates keyed by source and target currencies.
      */
-    public function setExchangeRates($exchangeRates)
+    public function setExchangeRates(?array $exchangeRates): void
     {
-        $this->_exchangeRates = $exchangeRates;
+        $this->exchangeRates = $exchangeRates;
     }
 
     /**
@@ -1806,11 +1819,11 @@ class Invoice
      *
      * Payment protocol URL for selected wallet, defaults to BitPay URL if no wallet selected.
      *
-     * @return string
+     * @return string|null
      */
-    public function getPaymentString()
+    public function getPaymentString(): ?string
     {
-        return $this->_paymentString;
+        return $this->paymentString;
     }
 
     /**
@@ -1820,9 +1833,9 @@ class Invoice
      *
      * @param string $paymentString Payment protocol URL for selected wallet
      */
-    public function setPaymentString(string $paymentString)
+    public function setPaymentString(string $paymentString): void
     {
-        $this->_paymentString = $paymentString;
+        $this->paymentString = $paymentString;
     }
 
     /**
@@ -1830,11 +1843,11 @@ class Invoice
      *
      * Link to bring user to BitPay ID flow, only present when bitpayIdRequired is true.
      *
-     * @return string
+     * @return string|null
      */
-    public function getVerificationLink()
+    public function getVerificationLink(): ?string
     {
-        return $this->_verificationLink;
+        return $this->verificationLink;
     }
 
     /**
@@ -1844,9 +1857,9 @@ class Invoice
      *
      * @param string $verificationLink Link to bring user to BitPay ID flow
      */
-    public function setVerificationLink(string $verificationLink)
+    public function setVerificationLink(string $verificationLink): void
     {
-        $this->_verificationLink = $verificationLink;
+        $this->verificationLink = $verificationLink;
     }
 
     /**
@@ -1854,11 +1867,11 @@ class Invoice
      *
      * Indicates whether or not the invoice was cancelled.
      *
-     * @return boolean
+     * @return bool|null
      */
-    public function getIsCancelled()
+    public function getIsCancelled(): ?bool
     {
-        return $this->_isCancelled;
+        return $this->isCancelled;
     }
 
     /**
@@ -1868,9 +1881,9 @@ class Invoice
      *
      * @param boolean $isCancelled Indicates whether or not the invoice was cancelled.
      */
-    public function setIsCancelled(bool $isCancelled)
+    public function setIsCancelled(bool $isCancelled): void
     {
-        $this->_isCancelled = $isCancelled;
+        $this->isCancelled = $isCancelled;
     }
 
     /**
@@ -1878,7 +1891,7 @@ class Invoice
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'currency'                       => $this->getCurrency(),

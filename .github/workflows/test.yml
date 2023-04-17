@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        php-version: [8.0, 8.1]
+        php-version: [8.0, 8.1, 8.2]
     
     steps:
       - uses: actions/checkout@v3
@@ -28,6 +28,8 @@ jobs:
           configuration: phpunit.xml
           php_version: ${{ matrix.php-version }}
           php_extensions: bcmath gmp xdebug
+          testsuite: Unit
+          version: 9
   phpcs:
     runs-on: ubuntu-latest
     

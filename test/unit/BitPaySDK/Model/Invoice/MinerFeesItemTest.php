@@ -56,11 +56,11 @@ class MinerFeesItemTest extends TestCase
         $this->assertArrayHasKey('totalFee', $minerFeesItemArray);
         $this->assertArrayNotHasKey('fiatAmount', $minerFeesItemArray);
 
-        $this->assertEquals($minerFeesItemArray['satoshisPerByte'], 1.1);
-        $this->assertEquals($minerFeesItemArray['totalFee'], 1.1);
+        $this->assertEquals(1.1, $minerFeesItemArray['satoshisPerByte']);
+        $this->assertEquals(1.1, $minerFeesItemArray['totalFee']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): MinerFeesItem
     {
         return new MinerFeesItem();
     }

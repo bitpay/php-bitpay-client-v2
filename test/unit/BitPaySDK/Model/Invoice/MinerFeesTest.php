@@ -132,7 +132,7 @@ class MinerFeesTest extends TestCase
         $this->assertArrayNotHasKey('btc', $minesFeesArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): MinerFees
     {
         return new MinerFees();
     }

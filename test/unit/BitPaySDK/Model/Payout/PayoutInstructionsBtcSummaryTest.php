@@ -40,14 +40,15 @@ class PayoutInstructionsBtcSummaryTest extends TestCase
     $this->assertArrayHasKey('paid', $payoutInstructionBtcSummaryArray);
     $this->assertArrayHasKey('unpaid', $payoutInstructionBtcSummaryArray);
 
-    $this->assertEquals($payoutInstructionBtcSummaryArray['paid'], 1.23);
-    $this->assertEquals($payoutInstructionBtcSummaryArray['unpaid'], 4.56);
+    $this->assertEquals(1.23, $payoutInstructionBtcSummaryArray['paid']);
+    $this->assertEquals(4.56, $payoutInstructionBtcSummaryArray['unpaid']);
   }
 
-  private function createClassObject()
+  private function createClassObject(): PayoutInstructionBtcSummary
   {
     $paid = 1.23;
     $unpaid = 4.56;
+
     return new PayoutInstructionBtcSummary($paid, $unpaid);
   }
 }

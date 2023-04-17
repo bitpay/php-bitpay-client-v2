@@ -34,7 +34,7 @@ class PayoutRecipientsTest extends TestCase
     $payoutRecipient->setId('abcd123');
     $payoutRecipient->setShopperId('efgh456');
     $payoutRecipient->setToken('6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL');
-    array_push($expectedPayoutRecipients, $payoutRecipient);
+    $expectedPayoutRecipients[] = $payoutRecipient;
 
     $payoutRecipients = $this->createClassObject();
     $payoutRecipients->setRecipients($expectedPayoutRecipients);
@@ -80,7 +80,7 @@ class PayoutRecipientsTest extends TestCase
     $payoutRecipient->setId('abcd123');
     $payoutRecipient->setShopperId('efgh456');
     $payoutRecipient->setToken('6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL');
-    array_push($expectedPayoutRecipients, $payoutRecipient);
+    $expectedPayoutRecipients[] = $payoutRecipient;
 
     $payoutRecipients = $this->createClassObject();
     $payoutRecipients->setGuid('cd47864e-374b-4a92-8592-4357fcbc6a89');
@@ -95,15 +95,15 @@ class PayoutRecipientsTest extends TestCase
     $this->assertArrayHasKey('recipients', $payoutRecipientsArray);
     $this->assertArrayHasKey('token', $payoutRecipientsArray);
 
-    $this->assertEquals($payoutRecipientsArray['guid'], 'cd47864e-374b-4a92-8592-4357fcbc6a89');
-    $this->assertEquals($payoutRecipientsArray['recipients'][0]['email'], 'john@doe.com');
-    $this->assertEquals($payoutRecipientsArray['recipients'][0]['label'], 'My Label');
-    $this->assertEquals($payoutRecipientsArray['recipients'][0]['notificationURL'], 'https://www.example.com');
-    $this->assertEquals($payoutRecipientsArray['recipients'][0]['status'], 'success');
-    $this->assertEquals($payoutRecipientsArray['recipients'][0]['id'], 'abcd123');
-    $this->assertEquals($payoutRecipientsArray['recipients'][0]['shopperId'], 'efgh456');
-    $this->assertEquals($payoutRecipientsArray['recipients'][0]['token'], '6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL');
-    $this->assertEquals($payoutRecipientsArray['token'], '6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL');
+    $this->assertEquals('cd47864e-374b-4a92-8592-4357fcbc6a89', $payoutRecipientsArray['guid']);
+    $this->assertEquals('john@doe.com', $payoutRecipientsArray['recipients'][0]['email']);
+    $this->assertEquals('My Label', $payoutRecipientsArray['recipients'][0]['label']);
+    $this->assertEquals('https://www.example.com', $payoutRecipientsArray['recipients'][0]['notificationURL']);
+    $this->assertEquals('success', $payoutRecipientsArray['recipients'][0]['status']);
+    $this->assertEquals('abcd123', $payoutRecipientsArray['recipients'][0]['id']);
+    $this->assertEquals('efgh456', $payoutRecipientsArray['recipients'][0]['shopperId']);
+    $this->assertEquals('6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL', $payoutRecipientsArray['recipients'][0]['token']);
+    $this->assertEquals('6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL', $payoutRecipientsArray['token']);
   }
 
   public function testToArrayEmptyKey()
@@ -113,7 +113,7 @@ class PayoutRecipientsTest extends TestCase
     $this->assertArrayNotHasKey('guid', $payoutRecipientsArray);
   }
 
-  private function createClassObject()
+  private function createClassObject(): PayoutRecipients
   {
     return new PayoutRecipients();
   }

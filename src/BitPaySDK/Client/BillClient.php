@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitPaySDK\Client;
 
 use BitPaySDK\Exceptions\BillCreationException;

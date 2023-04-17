@@ -12,7 +12,11 @@ use PHPUnit\Framework\TestCase;
 
 class PayoutInstructionTest extends TestCase
 {
-  public function testConstructEmail()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testConstructEmail()
   {
     $expectedEmail = 'john@doe.com';
 
@@ -20,7 +24,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedEmail, $payoutInstruction->getEmail());
   }
 
-  public function testConstructRecipientId()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testConstructRecipientId()
   {
     $expectedRecipientId = 'abcd123';
 
@@ -28,7 +36,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedRecipientId, $payoutInstruction->getRecipientId());
   }
 
-  public function testConstructShopperId()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testConstructShopperId()
   {
     $expectedShopperId = 'abcd123';
 
@@ -36,29 +48,46 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedShopperId, $payoutInstruction->getShopperId());
   }
 
-  public function testConstructInvalid()
+    /**
+     * @throws BitPayException
+     */
+    public function testConstructInvalid()
   {
     $this->expectException(PayoutBatchCreationException::class);
     new PayoutInstruction(5.0, 999, 'abcd123');
   }
 
-  public function testGetAmount()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testGetAmount()
   {
     $expectedAmount = 10.0;
 
     $payoutInstruction = new PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, 'john@doe.com');
-    $payoutInstruction->setAmount($expectedAmount);
+      try {
+          $payoutInstruction->setAmount($expectedAmount);
+      } catch (BitPayException) {
+      }
 
-    $this->assertEquals($expectedAmount, $payoutInstruction->getAmount());
+      $this->assertEquals($expectedAmount, $payoutInstruction->getAmount());
   }
 
-  public function testGetAmountLessThanFive()
+    /**
+     * @throws PayoutBatchCreationException
+     */
+    public function testGetAmountLessThanFive()
   {
     $this->expectException(BitPayException::class);
     new PayoutInstruction(1.0, RecipientReferenceMethod::EMAIL, 'john@doe.com');
   }
 
-  public function testGetEmail()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testGetEmail()
   {
     $expectedEmail = 'jane@doe.com';
 
@@ -68,7 +97,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedEmail, $payoutInstruction->getEmail());
   }
 
-  public function testGetRecipientId()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testGetRecipientId()
   {
     $expectedRecipientId = 'efgh456';
 
@@ -78,7 +111,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedRecipientId, $payoutInstruction->getRecipientId());
   }
 
-  public function testGetShopperId()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testGetShopperId()
   {
     $expectedShopperId = 'efgh456';
 
@@ -88,7 +125,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedShopperId, $payoutInstruction->getShopperId());
   }
 
-  public function testGetLabel()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testGetLabel()
   {
     $expectedLabel = 'My label';
     
@@ -98,7 +139,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedLabel, $payoutInstruction->getLabel());
   }
 
-  public function testGetId()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testGetId()
   {
     $expectedId = 'id_1234';
     
@@ -108,7 +153,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedId, $payoutInstruction->getId());
   }
 
-  public function testGetBtc()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testGetBtc()
   {
     $expectedPayoutInstructionBtcSummary = new PayoutInstructionBtcSummary(1.23, 4.56);
 
@@ -118,7 +167,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedPayoutInstructionBtcSummary->toArray(), $payoutInstruction->getBtc($expectedPayoutInstructionBtcSummary));
   }
 
-  public function testGetTransactions()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testGetTransactions()
   {
     $expectedTransactions = [];
 
@@ -126,7 +179,7 @@ class PayoutInstructionTest extends TestCase
     $transaction->setTxid('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
     $transaction->setAmount(0.000254);
     $transaction->setDate('2021-05-27T11:04:23.155Z');
-    array_push($expectedTransactions, $transaction);
+    $expectedTransactions[] = $transaction;
 
     $payoutInstruction = new PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, 'john@doe.com');
     $payoutInstruction->setTransactions($expectedTransactions);
@@ -134,7 +187,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedTransactions, $payoutInstruction->getTransactions());
   }
 
-  public function testGetStatus()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testGetStatus()
   {
     $expectedStatus = 'success';
     
@@ -144,7 +201,11 @@ class PayoutInstructionTest extends TestCase
     $this->assertEquals($expectedStatus, $payoutInstruction->getStatus());
   }
 
-  public function testToArray()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testToArray()
   {
     $payoutInstruction = new PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, 'john@doe.com');
     $this->objectSetters($payoutInstruction);
@@ -163,21 +224,25 @@ class PayoutInstructionTest extends TestCase
     $this->assertArrayHasKey('transactions', $payoutInstructionArray);
     $this->assertArrayHasKey('status', $payoutInstructionArray);
 
-    $this->assertEquals($payoutInstructionArray['amount'], 10.0);
-    $this->assertEquals($payoutInstructionArray['email'], 'jane@doe.com');
-    $this->assertEquals($payoutInstructionArray['recipientId'], 'abcd123');
-    $this->assertEquals($payoutInstructionArray['shopperId'], 'efgh456');
-    $this->assertEquals($payoutInstructionArray['label'], 'My label');
-    $this->assertEquals($payoutInstructionArray['id'], 'ijkl789');
-    $this->assertEquals($payoutInstructionArray['btc']['paid'], 1.23);
-    $this->assertEquals($payoutInstructionArray['btc']['unpaid'], 4.56);
-    $this->assertEquals($payoutInstructionArray['transactions'][0]['txid'], 'db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
-    $this->assertEquals($payoutInstructionArray['transactions'][0]['amount'], 0.000254);
-    $this->assertEquals($payoutInstructionArray['transactions'][0]['date'], '2021-05-27T11:04:23.155Z');
-    $this->assertEquals($payoutInstructionArray['status'], 'success');
+    $this->assertEquals(10.0, $payoutInstructionArray['amount']);
+    $this->assertEquals('jane@doe.com', $payoutInstructionArray['email']);
+    $this->assertEquals('abcd123', $payoutInstructionArray['recipientId']);
+    $this->assertEquals('efgh456', $payoutInstructionArray['shopperId']);
+    $this->assertEquals('My label', $payoutInstructionArray['label']);
+    $this->assertEquals('ijkl789', $payoutInstructionArray['id']);
+    $this->assertEquals(1.23, $payoutInstructionArray['btc']['paid']);
+    $this->assertEquals(4.56, $payoutInstructionArray['btc']['unpaid']);
+    $this->assertEquals('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057', $payoutInstructionArray['transactions'][0]['txid']);
+    $this->assertEquals(0.000254, $payoutInstructionArray['transactions'][0]['amount']);
+    $this->assertEquals('2021-05-27T11:04:23.155Z', $payoutInstructionArray['transactions'][0]['date']);
+    $this->assertEquals('success', $payoutInstructionArray['status']);
   }
 
-  public function testToArrayEmptyKey()
+    /**
+     * @throws PayoutBatchCreationException
+     * @throws BitPayException
+     */
+    public function testToArrayEmptyKey()
   {
     $payoutInstruction = new PayoutInstruction(5.0, RecipientReferenceMethod::EMAIL, 'john@doe.com');
     $payoutInstructionArray = $payoutInstruction->toArray();
@@ -188,14 +253,17 @@ class PayoutInstructionTest extends TestCase
     $this->assertArrayNotHasKey('transactions', $payoutInstructionArray);
   }
 
-  private function objectSetters(PayoutInstruction $payoutInstruction)
+    /**
+     * @throws BitPayException
+     */
+    private function objectSetters(PayoutInstruction $payoutInstruction)
   {
     $transactions = [];
     $transaction = new PayoutInstructionTransaction();
     $transaction->setTxid('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
     $transaction->setAmount(0.000254);
     $transaction->setDate('2021-05-27T11:04:23.155Z');
-    array_push($transactions, $transaction->toArray());
+    $transactions[] = $transaction->toArray();
 
     $payoutInstruction->setAmount(10.0);
     $payoutInstruction->setEmail('jane@doe.com');

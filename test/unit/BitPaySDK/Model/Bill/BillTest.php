@@ -2,6 +2,7 @@
 
 namespace BitPaySDK\Test\Model\Bill;
 
+use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Bill\Item;
 use PHPUnit\Framework\TestCase;
@@ -23,6 +24,9 @@ class BillTest extends TestCase
         $this->assertEquals($expectedToken, $bill->getToken());
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testGetCurrency()
     {
         $expectedCurrency = 'BTC';
@@ -205,6 +209,9 @@ class BillTest extends TestCase
         $this->assertEquals($expectedMerchant, $bill->getMerchant());
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testToArray()
     {
         $bill = $this->createClassObject();
@@ -237,34 +244,37 @@ class BillTest extends TestCase
         $this->assertArrayHasKey('id', $billArray);
         $this->assertArrayHasKey('merchant', $billArray);
 
-        $this->assertEquals($billArray['currency'], 'BTC');
-        $this->assertEquals($billArray['token'], 'abcd123');
-        $this->assertEquals($billArray['email'], 'test@test.com');
-        $this->assertEquals($billArray['items'], [[]]);
-        $this->assertEquals($billArray['number'], '12');
-        $this->assertEquals($billArray['name'], 'TestName');
-        $this->assertEquals($billArray['address1'], 'Address1');
-        $this->assertEquals($billArray['address2'], 'Address2');
-        $this->assertEquals($billArray['city'], 'Miami');
-        $this->assertEquals($billArray['state'], 'AB');
-        $this->assertEquals($billArray['zip'], '12345');
-        $this->assertEquals($billArray['country'], 'Canada');
-        $this->assertEquals($billArray['cc'], ['']);
-        $this->assertEquals($billArray['phone'], '123456789');
-        $this->assertEquals($billArray['dueDate'], '2022-01-01');
-        $this->assertEquals($billArray['passProcessingFee'], true);
-        $this->assertEquals($billArray['status'], 'status');
-        $this->assertEquals($billArray['url'], 'http://test.com');
-        $this->assertEquals($billArray['createDate'], '2022-01-01');
-        $this->assertEquals($billArray['id'], '1');
-        $this->assertEquals($billArray['merchant'], 'TestUser');
+        $this->assertEquals('BTC', $billArray['currency']);
+        $this->assertEquals('abcd123', $billArray['token']);
+        $this->assertEquals('test@test.com', $billArray['email']);
+        $this->assertEquals([[]], $billArray['items']);
+        $this->assertEquals('12', $billArray['number']);
+        $this->assertEquals('TestName', $billArray['name']);
+        $this->assertEquals('Address1', $billArray['address1']);
+        $this->assertEquals('Address2', $billArray['address2']);
+        $this->assertEquals('Miami', $billArray['city']);
+        $this->assertEquals('AB', $billArray['state']);
+        $this->assertEquals('12345', $billArray['zip']);
+        $this->assertEquals('Canada', $billArray['country']);
+        $this->assertEquals([''], $billArray['cc']);
+        $this->assertEquals('123456789', $billArray['phone']);
+        $this->assertEquals('2022-01-01', $billArray['dueDate']);
+        $this->assertEquals(true, $billArray['passProcessingFee']);
+        $this->assertEquals('status', $billArray['status']);
+        $this->assertEquals('http://test.com', $billArray['url']);
+        $this->assertEquals('2022-01-01', $billArray['createDate']);
+        $this->assertEquals('1', $billArray['id']);
+        $this->assertEquals('TestUser', $billArray['merchant']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Bill
     {
         return new Bill();
     }
 
+    /**
+     * @throws BitPayException
+     */
     private function objectSetters(Bill $bill): void
     {
         $bill->setCurrency('BTC');

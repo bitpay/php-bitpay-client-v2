@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -14,16 +16,16 @@ namespace BitPaySDK\Model\Invoice;
  */
 class Buyer
 {
-    protected $_name;
-    protected $_address1;
-    protected $_address2;
-    protected $_locality;
-    protected $_region;
-    protected $_postalCode;
-    protected $_country;
-    protected $_email;
-    protected $_phone;
-    protected $_notify;
+    protected ?string $name = null;
+    protected ?string $address1 = null;
+    protected ?string $address2 = null;
+    protected ?string $locality = null;
+    protected ?string $region = null;
+    protected ?string $postalCode = null;
+    protected ?string $country = null;
+    protected ?string $email = null;
+    protected ?string $phone = null;
+    protected ?bool $notify = null;
 
     public function __construct()
     {
@@ -32,11 +34,11 @@ class Buyer
     /**
      * Gets Buyer's name
      *
-     * @return string Buyer's name
+     * @return string|null Buyer's name
      */
-    public function getName()
+    public function getName(): ?string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -44,19 +46,19 @@ class Buyer
      *
      * @param string $name Buyer's name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
      * Gets Buyer's address
      *
-     * @return string Buyer's address
+     * @return string|null Buyer's address
      */
-    public function getAddress1()
+    public function getAddress1(): ?string
     {
-        return $this->_address1;
+        return $this->address1;
     }
 
     /**
@@ -64,19 +66,19 @@ class Buyer
      *
      * @param string $address1 Buyer's address
      */
-    public function setAddress1(string $address1)
+    public function setAddress1(string $address1): void
     {
-        $this->_address1 = $address1;
+        $this->address1 = $address1;
     }
 
     /**
      * Gets Buyer's appartment or suite number
      *
-     * @return string Buyer's appartment or suite number
+     * @return string|null Buyer's appartment or suite number
      */
-    public function getAddress2()
+    public function getAddress2(): ?string
     {
-        return $this->_address2;
+        return $this->address2;
     }
 
     /**
@@ -84,19 +86,19 @@ class Buyer
      *
      * @param string $address2 Buyer's appartment or suite number
      */
-    public function setAddress2(string $address2)
+    public function setAddress2(string $address2): void
     {
-        $this->_address2 = $address2;
+        $this->address2 = $address2;
     }
 
     /**
      * Gets Buyer's city or locality
      *
-     * @return string Buyer's city or locality
+     * @return string|null Buyer's city or locality
      */
-    public function getLocality()
+    public function getLocality(): ?string
     {
-        return $this->_locality;
+        return $this->locality;
     }
 
     /**
@@ -104,19 +106,19 @@ class Buyer
      *
      * @param string $locality Buyer's city or locality
      */
-    public function setLocality(string $locality)
+    public function setLocality(string $locality): void
     {
-        $this->_locality = $locality;
+        $this->locality = $locality;
     }
 
     /**
      * Buyer's state or province
      *
-     * @return string Buyer's state or province
+     * @return string|null Buyer's state or province
      */
-    public function getRegion()
+    public function getRegion(): ?string
     {
-        return $this->_region;
+        return $this->region;
     }
 
     /**
@@ -124,19 +126,19 @@ class Buyer
      *
      * @param string $region Buyer's state or province
      */
-    public function setRegion(string $region)
+    public function setRegion(string $region): void
     {
-        $this->_region = $region;
+        $this->region = $region;
     }
 
     /**
      * Gets Buyer's Zip or Postal Code
      *
-     * @return string Buyer's Zip or Postal Code
+     * @return string|null Buyer's Zip or Postal Code
      */
-    public function getPostalCode()
+    public function getPostalCode(): ?string
     {
-        return $this->_postalCode;
+        return $this->postalCode;
     }
 
     /**
@@ -144,9 +146,9 @@ class Buyer
      *
      * @param string $postalCode Buyer's Zip or Postal Code
      */
-    public function setPostalCode(string $postalCode)
+    public function setPostalCode(string $postalCode): void
     {
-        $this->_postalCode = $postalCode;
+        $this->postalCode = $postalCode;
     }
 
     /**
@@ -154,11 +156,11 @@ class Buyer
      *
      * Format ISO 3166-1 alpha-2
      *
-     * @return string Buyer's Country code
+     * @return string|null Buyer's Country code
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
-        return $this->_country;
+        return $this->country;
     }
 
     /**
@@ -166,9 +168,9 @@ class Buyer
      *
      * @param string $country Buyer's Country code
      */
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
-        $this->_country = $country;
+        $this->country = $country;
     }
 
     /**
@@ -176,11 +178,11 @@ class Buyer
      *
      * If provided during invoice creation, this will bypass the email prompt for the consumer when opening the invoice.
      *
-     * @return string Buyer's email address
+     * @return string|null Buyer's email address
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -190,19 +192,19 @@ class Buyer
      *
      * @param string $email Buyer's email address
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
      * Gets Buyer's phone number
      *
-     * @return string Buyer's phone number
+     * @return string|null Buyer's phone number
      */
-    public function getPhone()
+    public function getPhone(): ?string
     {
-        return $this->_phone;
+        return $this->phone;
     }
 
     /**
@@ -210,9 +212,9 @@ class Buyer
      *
      * @param string $phone Buyer's phone number
      */
-    public function setPhone(string $phone)
+    public function setPhone(string $phone): void
     {
-        $this->_phone = $phone;
+        $this->phone = $phone;
     }
 
     /**
@@ -220,11 +222,11 @@ class Buyer
      *
      * Indicates whether a BitPay email confirmation should be sent to the buyer once he has paid the invoice
      *
-     * @return bool Buyer's notify
+     * @return bool|null Buyer's notify
      */
-    public function getNotify()
+    public function getNotify(): ?bool
     {
-        return $this->_notify;
+        return $this->notify;
     }
 
     /**
@@ -234,9 +236,9 @@ class Buyer
      *
      * @param bool $notify  Buyer's notify
      */
-    public function setNotify(bool $notify)
+    public function setNotify(bool $notify): void
     {
-        $this->_notify = $notify;
+        $this->notify = $notify;
     }
 
     /**
@@ -244,7 +246,7 @@ class Buyer
      *
      * @return array Buyer as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'name'       => $this->getName(),

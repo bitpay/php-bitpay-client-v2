@@ -1,48 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace BitPaySDK\Model\Invoice;
 
 class MinerFeesItem
 {
-    protected $_satoshisPerByte;
-    protected $_totalFee;
-    protected $_fiatAmount = null;
+    protected ?float $satoshisPerByte = null;
+    protected ?float $totalFee = null;
+    protected ?float $fiatAmount = null;
 
     public function __construct()
     {
     }
 
-    public function getSatoshisPerByte()
+    public function getSatoshisPerByte(): ?float
     {
-        return $this->_satoshisPerByte;
+        return $this->satoshisPerByte;
     }
 
-    public function setSatoshisPerByte(float $satoshisPerByte)
+    public function setSatoshisPerByte(float $satoshisPerByte): void
     {
-        $this->_satoshisPerByte = $satoshisPerByte;
+        $this->satoshisPerByte = $satoshisPerByte;
     }
 
-    public function getTotalFee()
+    public function getTotalFee(): ?float
     {
-        return $this->_totalFee;
+        return $this->totalFee;
     }
 
-    public function setTotalFee(float $totalFee)
+    public function setTotalFee(float $totalFee): void
     {
-        $this->_totalFee = $totalFee;
+        $this->totalFee = $totalFee;
     }
 
-    public function getFiatAmount()
+    public function getFiatAmount(): ?float
     {
-        return $this->_fiatAmount;
+        return $this->fiatAmount;
     }
 
-    public function setFiatAmount(?float $fiatAmount)
+    public function setFiatAmount(?float $fiatAmount): void
     {
-        $this->_fiatAmount = $fiatAmount;
+        $this->fiatAmount = $fiatAmount;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'satoshisPerByte' => $this->getSatoshisPerByte(),

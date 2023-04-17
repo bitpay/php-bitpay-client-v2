@@ -1,6 +1,6 @@
 <?php
 
-namespace BitPaySDK\Test;
+namespace BitPaySDK\Test\Model\Invoice;
 
 use BitPaySDK\Model\Invoice\TransactionDetails;
 use PHPUnit\Framework\TestCase;
@@ -33,11 +33,9 @@ class TransactionDetailsTest extends TestCase
 
   public function testGetIsFee()
   {
-    $expectedIsFee = true;
-
     $transactionDetails = $this->createClassObject();
-    $transactionDetails->setIsFee($expectedIsFee);
-    $this->assertEquals($expectedIsFee, $transactionDetails->getIsFee());
+    $transactionDetails->setIsFee(true);
+    $this->assertTrue($transactionDetails->getIsFee());
   }
 
   public function testToArray()
@@ -54,12 +52,12 @@ class TransactionDetailsTest extends TestCase
     $this->assertArrayHasKey('description', $transactionDetailsArray);
     $this->assertArrayHasKey('isFee', $transactionDetailsArray);
 
-    $this->assertEquals($transactionDetailsArray['amount'], 1.23);
-    $this->assertEquals($transactionDetailsArray['description'], 'My description');
-    $this->assertEquals($transactionDetailsArray['isFee'], false);
+    $this->assertEquals(1.23, $transactionDetailsArray['amount']);
+    $this->assertEquals('My description', $transactionDetailsArray['description']);
+    $this->assertEquals(false, $transactionDetailsArray['isFee']);
   }
 
-  private function createClassObject()
+  private function createClassObject(): TransactionDetails
   {
     return new TransactionDetails();
   }
