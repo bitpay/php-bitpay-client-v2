@@ -19,6 +19,18 @@ To get up and running with our PHP library quickly, follow [The GUIDE](https://g
 * https://github.com/bitpay/php-bitpay-client-v2/issues
 * https://support.bitpay.com
 
+## Unit Tests
+```php
+./vendor/bin/phpunit --testsuite "Unit"
+```
+
+## Integration Tests
+To run integration tests you have to generate BitPay.config.xml by BitPaySetup and put this file into Integration tests folder.
+To submit request you should create recipient in https://test.bitpay.com/dashboard/payouts/recipients and put this email to "email.txt" file in Integration tests folder.
+```php
+./vendor/bin/phpunit --testsuite "Integration"
+```
+
 ## Contribute
 
 To contribute to this project, please fork and submit a pull request.
