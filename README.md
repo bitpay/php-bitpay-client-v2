@@ -30,8 +30,9 @@ To get up and running with our PHP library quickly, follow [the guide](https://b
 ```
 
 ## Integration Tests
-To run integration tests you have to generate BitPay.config.xml by BitPaySetup and put this file into Integration tests folder.
-To submit request you should create recipient in https://test.bitpay.com/dashboard/payouts/recipients and put this email to "email.txt" file in Integration tests folder.
+To run integration tests you have to generate BitPay.config.yml by running command
+``` php examples/ConfigGenerator.php ``` and put this file into test/Integration/BitPaySDK folder.
+To submit request you should create recipient in https://test.bitpay.com/dashboard/payouts/recipients and put this email to "email.txt" file in test/Integration/BitPaySDK folder.
 ```php
 ./vendor/bin/phpunit --testsuite "Integration"
 ```

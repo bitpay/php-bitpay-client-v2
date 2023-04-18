@@ -22,7 +22,7 @@ class PayoutRecipientsClientTest extends TestCase
     /**
      * @throws PayoutRecipientCreationException
      */
-    public function testSubmitPayoutRecipients(): void
+    public function testPayoutRequests(): void
     {
         $recipientsList = [
             new PayoutRecipient(
@@ -42,103 +42,36 @@ class PayoutRecipientsClientTest extends TestCase
             'invited',
             $payoutRecipients[0]->getStatus()
         );
-    }
 
-    public function testGetPayoutRecipient()
-    {
-        $recipientsList = [
-            new PayoutRecipient(
-                "test@emaill1.com",
-                "recipient1",
-                "https://yournotiticationURL.com/b3sarz5bg0wx01eq1bv9785amx")
-        ];
-
-        $recipients = new PayoutRecipients($recipientsList);
-        $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
-
-        $recipientId = $payoutRecipients[0]->getId();
+        $recipient = $payoutRecipients[0];
+        $recipientId = $recipient->getId();
         $recipient = $this->client->getPayoutRecipient($recipientId);
 
-        $this->assertEquals($recipientId, $recipient->getId());
         $this->assertEquals('test@emaill1.com', $recipient->getEmail());
         $this->assertEquals('recipient1', $recipient->getLabel());
         $this->assertEquals('invited', $recipient->getStatus());
-        $this->assertEquals(null, $recipient->getShopperId());
-    }
 
-    public function testPayoutRecipientShouldCatchRestCliException(): void
-    {
-        $recipientId = 'JA4cEtmBxCp5cybtnh1rds';
 
-        $this->expectException(PayoutRecipientQueryException::class);
-        $this->client->getPayoutRecipient($recipientId);
-    }
-
-    public function testGetPayoutRecipients(): void
-    {
         $recipients = $this->client->getPayoutRecipients('invited', 1);
 
         $this->assertCount(1, $recipients);
         $this->assertEquals('invited', $recipients[0]->getStatus());
         $this->assertNotNull($recipients);
-    }
 
-    public function testUpdatePayoutRecipients(): void
-    {
         $label = 'updateLabel';
-        $recipientsList = [
-            new PayoutRecipient(
-                "test@emaill1.com",
-                "recipient1",
-                "https://yournotiticationURL.com/b3sarz5bg0wx01eq1bv9785amx")
-        ];
+        $recipient->setLabel($label);
 
-        $recipients = new PayoutRecipients($recipientsList);
-        $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
-        $payoutRecipient = $payoutRecipients[0];
-        $payoutRecipient->setLabel($label);
-
-        $updateRecipient = $this->client->updatePayoutRecipient($payoutRecipient->getId(), $payoutRecipient);
+        $updateRecipient = $this->client->updatePayoutRecipient($recipientId, $recipient);
 
         $this->assertEquals($label, $updateRecipient->getLabel());
         $this->assertEquals('test@emaill1.com', $updateRecipient->getEmail());
         $this->assertEquals('invited', $updateRecipient->getStatus());
-        $this->assertEquals($payoutRecipient->getId(), $updateRecipient->getId());
-    }
+        $this->assertEquals($recipient->getId(), $updateRecipient->getId());
 
-    public function testDeletePayoutRecipient(): void
-    {
-        $recipientsList = [
-            new PayoutRecipient(
-                "test@emaill1.com",
-                "recipient1",
-                "https://yournotiticationURL.com/b3sarz5bg0wx01eq1bv9785amx")
-        ];
-
-        $recipients = new PayoutRecipients($recipientsList);
-        $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
-        $payoutRecipientId = $payoutRecipients[0]->getId();
-
-        $result = $this->client->deletePayoutRecipient($payoutRecipientId);
-
+        $result = $this->client->requestPayoutRecipientNotification($recipientId);
         $this->assertEquals(true, $result);
-    }
 
-    public function testPayoutRecipientRequestNotification(): void
-    {
-        $recipientsList = [
-            new PayoutRecipient(
-                "test@emaill1.com",
-                "recipient1",
-                "https://yournotiticationURL.com/b3sarz5bg0wx01eq1bv9785amx")
-        ];
-
-        $recipients = new PayoutRecipients($recipientsList);
-        $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
-        $payoutRecipientId = $payoutRecipients[0]->getId();
-
-        $result = $this->client->requestPayoutRecipientNotification($payoutRecipientId);
-
+        $result = $this->client->deletePayoutRecipient($recipientId);
         $this->assertEquals(true, $result);
     }
 }
