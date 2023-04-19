@@ -22,7 +22,7 @@ jobs:
       - uses: php-actions/composer@v5
         with:
           php_version: ${{ matrix.php-version }}
-          args: --ignore-platform-reqs
+          args: --ignore-platform-reqs --no-scripts
       - uses: php-actions/phpunit@v3
         with:
           configuration: phpunit.xml
