@@ -61,8 +61,7 @@ class Tokens
             Facade::MERCHANT => $this->merchant,
             Facade::PAYOUT => $this->payout,
             Facade::POS => $this->pos,
-            default => throw new Exception(
-                "given facade does not exist or no token defined for the given facade"),
+            default => throw new Exception("given facade does not exist or no token defined for the given facade"),
         };
     }
 

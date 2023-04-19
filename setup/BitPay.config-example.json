@@ -3,11 +3,11 @@
         "Environment": "Test",
         "EnvConfig": {
             "Test": {
-                "PrivateKeyPath": "examples/PrivateKeyName.key",
-                "PrivateKeySecret": "changedPassword",
+                "PrivateKeyPath": "null",
+                "PrivateKeySecret": "null",
                 "ApiTokens": {
-                    "merchant": "testMerchantApiToken",
-                    "payout": "testPayoutApiToken"
+                    "merchant": "null",
+                    "payout": "null"
                 },
                 "proxy": null
             },

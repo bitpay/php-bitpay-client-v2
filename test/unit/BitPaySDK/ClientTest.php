@@ -111,24 +111,7 @@ class ClientTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-
-        $listOfClientsToClear = [
-            BillClient::class,
-            InvoiceClient::class,
-            LedgerClient::class,
-            PayoutClient::class,
-            PayoutRecipientsClient::class,
-            RateClient::class,
-            RefundClient::class,
-            SettlementClient::class,
-            WalletClient::class
-        ];
-
-        foreach ($listOfClientsToClear as $className) {
-            $refProperty = new \ReflectionProperty($className, 'instance');
-            $refProperty->setAccessible(true);
-            $refProperty->setValue(null);
-        }
+        $this->refreshResourceClients();
     }
 
     /**
@@ -139,7 +122,7 @@ class ClientTest extends TestCase
         $tokens = $this->createMock(Tokens::class);
         $result = $this->getTestedClassInstance()::createWithData(
             Env::TEST,
-            __DIR__ . '/../../../examples/bitpay_private_test.key',
+            __DIR__ . '/bitpay_private_test.key',
             $tokens,
             'YourMasterPassword'
         );
@@ -155,7 +138,7 @@ class ClientTest extends TestCase
 
         $instance::createWithData(
             Env::TEST,
-            __DIR__ . '/../../../examples/bitpay_private_test.key',
+            __DIR__ . '/bitpay_private_test.key',
             $tokens,
             'badPassword'
         );
@@ -167,7 +150,7 @@ class ClientTest extends TestCase
     public function testWithFileJsonConfig(): Client
     {
         $instance = $this->getTestedClassInstance();
-        $result = $instance::createWithFile(__DIR__ . '/../../../examples/BitPay.config-example.json');
+        $result = $instance::createWithFile(__DIR__ . '/BitPay.config-unit.json');
         $this->assertInstanceOf(Client::class, $result);
         return $result;
     }
@@ -178,7 +161,7 @@ class ClientTest extends TestCase
     public function testWithFileYmlConfig()
     {
         $instance = $this->getTestedClassInstance();
-        $result = $instance::createWithFile(__DIR__ . '/../../../examples/BitPay.config-example.yml');
+        $result = $instance::createWithFile(__DIR__ . '/BitPay.config-unit.yml');
         $this->assertInstanceOf(Client::class, $result);
     }
 
@@ -3485,5 +3468,26 @@ class ClientTest extends TestCase
             'buyerPaysRefundFee' => false,
             'guid' => '3df73895-2531-e26a-3caa-098a746389b7'
         ];
+    }
+
+    private function refreshResourceClients(): void
+    {
+        $listOfClientsToClear = [
+            BillClient::class,
+            InvoiceClient::class,
+            LedgerClient::class,
+            PayoutClient::class,
+            PayoutRecipientsClient::class,
+            RateClient::class,
+            RefundClient::class,
+            SettlementClient::class,
+            WalletClient::class
+        ];
+
+        foreach ($listOfClientsToClear as $className) {
+            $refProperty = new \ReflectionProperty($className, 'instance');
+            $refProperty->setAccessible(true);
+            $refProperty->setValue(null);
+        }
     }
 }
