@@ -1,0 +1,25 @@
+{
+    "BitPayConfiguration": {
+        "Environment": "Test",
+        "EnvConfig": {
+            "Test": {
+                "PrivateKeyPath": "test/unit/BitPaySDK/PrivateKeyNameUnit.key",
+                "PrivateKeySecret": "changedPassword",
+                "ApiTokens": {
+                    "merchant": "testMerchantApiToken",
+                    "payout": "testPayoutApiToken"
+                },
+                "proxy": null
+            },
+            "Prod": {
+                "PrivateKeyPath": null,
+                "PrivateKeySecret": null,
+                "ApiTokens": {
+                    "merchant": null,
+                    "payout": null
+                },
+                "proxy": null
+            }
+        }
+    }
+}

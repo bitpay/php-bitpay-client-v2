@@ -11,7 +11,7 @@ use BitPaySDK\Client\PayoutClient;
 use BitPaySDK\Client\PayoutRecipientsClient;
 use BitPaySDK\Client\RateClient;
 use BitPaySDK\Client\RefundClient;
-use BitPaySDK\Client\SettlementsClient;
+use BitPaySDK\Client\SettlementClient;
 use BitPaySDK\Client\SubscriptionClient;
 use BitPaySDK\Client\WalletClient;
 use BitPaySDK\Exceptions\BitPayException;
@@ -138,10 +138,10 @@ class Client
      */
     public function createInvoice(
         Invoice $invoice,
-        string $facade = Facade::Merchant,
+        string $facade = Facade::MERCHANT,
         bool $signRequest = true
     ): Invoice {
-        $invoiceClient = $this->createInvoiceClient();
+        $invoiceClient = $this->getInvoiceClient();
 
         return $invoiceClient->create($invoice, $facade, $signRequest);
     }
@@ -165,7 +165,7 @@ class Client
         ?string $buyerEmail,
         bool $autoVerify = false
     ): Invoice {
-        $invoiceClient = $this->createInvoiceClient();
+        $invoiceClient = $this->getInvoiceClient();
 
         return $invoiceClient->update($invoiceId, $buyerSms, $smsCode, $buyerEmail, $autoVerify);
     }
@@ -182,10 +182,10 @@ class Client
      */
     public function getInvoice(
         string $invoiceId,
-        string $facade = Facade::Merchant,
+        string $facade = Facade::MERCHANT,
         bool $signRequest = true
     ): Invoice {
-        $invoiceClient = $this->createInvoiceClient();
+        $invoiceClient = $this->getInvoiceClient();
 
         return $invoiceClient->get($invoiceId, $facade, $signRequest);
     }
@@ -211,7 +211,7 @@ class Client
         int $limit = null,
         int $offset = null
     ): array {
-        $invoiceClient = $this->createInvoiceClient();
+        $invoiceClient = $this->getInvoiceClient();
 
         return $invoiceClient->getInvoices($dateStart, $dateEnd, $status, $orderId, $limit, $offset);
     }
@@ -226,7 +226,7 @@ class Client
      */
     public function requestInvoiceNotification(string $invoiceId): bool
     {
-        $invoiceClient = $this->createInvoiceClient();
+        $invoiceClient = $this->getInvoiceClient();
 
         return $invoiceClient->requestNotification($invoiceId);
     }
@@ -243,7 +243,7 @@ class Client
         string $invoiceId,
         bool $forceCancel = false
     ): Invoice {
-        $invoiceClient = $this->createInvoiceClient();
+        $invoiceClient = $this->getInvoiceClient();
 
         return $invoiceClient->cancel($invoiceId, $forceCancel);
     }
@@ -260,7 +260,7 @@ class Client
         string $guid,
         bool $forceCancel = false
     ): Invoice {
-        $invoiceClient = $this->createInvoiceClient();
+        $invoiceClient = $this->getInvoiceClient();
 
         return $invoiceClient->cancelByGuid($guid, $forceCancel);
     }
@@ -278,7 +278,7 @@ class Client
         string $invoiceId,
         string $status = 'confirmed'
     ): Invoice {
-        $invoiceClient = $this->createInvoiceClient();
+        $invoiceClient = $this->getInvoiceClient();
 
         return $invoiceClient->pay($invoiceId, $status);
     }
@@ -308,7 +308,7 @@ class Client
         bool $buyerPaysRefundFee = false,
         ?string $guid = null
     ): Refund {
-        $refundClient = $this->createRefundClient();
+        $refundClient = $this->getRefundClient();
 
         return $refundClient->create($invoiceId, $amount, $currency, $preview, $immediate, $buyerPaysRefundFee, $guid);
     }
@@ -326,7 +326,7 @@ class Client
         string $refundId,
         string $status
     ): Refund {
-        $refundClient = $this->createRefundClient();
+        $refundClient = $this->getRefundClient();
 
         return $refundClient->update($refundId, $status);
     }
@@ -344,7 +344,7 @@ class Client
         string $guid,
         string $status
     ): Refund {
-        $refundClient = $this->createRefundClient();
+        $refundClient = $this->getRefundClient();
 
         return $refundClient->updateByGuid($guid, $status);
     }
@@ -360,7 +360,7 @@ class Client
     public function getRefunds(
         string $invoiceId
     ): array {
-        $refundClient = $this->createRefundClient();
+        $refundClient = $this->getRefundClient();
 
         return $refundClient->getRefunds($invoiceId);
     }
@@ -376,7 +376,7 @@ class Client
     public function getRefund(
         string $refundId
     ): Refund {
-        $refundClient = $this->createRefundClient();
+        $refundClient = $this->getRefundClient();
 
         return $refundClient->get($refundId);
     }
@@ -389,7 +389,7 @@ class Client
      */
     public function getRefundByGuid(string $guid): Refund
     {
-        $refundClient = $this->createRefundClient();
+        $refundClient = $this->getRefundClient();
 
         return $refundClient->getByGuid($guid);
     }
@@ -404,7 +404,7 @@ class Client
      */
     public function sendRefundNotification(string $refundId): bool
     {
-        $refundClient = $this->createRefundClient();
+        $refundClient = $this->getRefundClient();
 
         return $refundClient->sendNotification($refundId);
     }
@@ -419,7 +419,7 @@ class Client
      */
     public function cancelRefund(string $refundId): Refund
     {
-        $refundClient = $this->createRefundClient();
+        $refundClient = $this->getRefundClient();
 
         return $refundClient->cancel($refundId);
     }
@@ -434,7 +434,7 @@ class Client
      */
     public function cancelRefundByGuid(string $guid): Refund
     {
-        $refundClient = $this->createRefundClient();
+        $refundClient = $this->getRefundClient();
 
         return $refundClient->cancelByGuid($guid);
     }
@@ -448,7 +448,7 @@ class Client
      */
     public function getSupportedWallets(): array
     {
-        $walletClient = $this->createWalletClient();
+        $walletClient = $this->getWalletClient();
 
         return $walletClient->getSupportedWallets();
     }
@@ -462,9 +462,9 @@ class Client
      * @return Bill
      * @throws BitPayException
      */
-    public function createBill(Bill $bill, string $facade = Facade::Merchant, bool $signRequest = true): Bill
+    public function createBill(Bill $bill, string $facade = Facade::MERCHANT, bool $signRequest = true): Bill
     {
-        $billClient = $this->createBillClient();
+        $billClient = $this->getBillClient();
 
         return $billClient->create($bill, $facade, $signRequest);
     }
@@ -478,9 +478,9 @@ class Client
      * @return Bill
      * @throws BitPayException
      */
-    public function getBill(string $billId, string $facade = Facade::Merchant, bool $signRequest = true): Bill
+    public function getBill(string $billId, string $facade = Facade::MERCHANT, bool $signRequest = true): Bill
     {
-        $billClient = $this->createBillClient();
+        $billClient = $this->getBillClient();
 
         return $billClient->get($billId, $facade, $signRequest);
     }
@@ -494,7 +494,7 @@ class Client
      */
     public function getBills(string $status = null): array
     {
-        $billClient = $this->createBillClient();
+        $billClient = $this->getBillClient();
 
         return $billClient->getBills($status);
     }
@@ -509,7 +509,7 @@ class Client
      */
     public function updateBill(Bill $bill, string $billId): Bill
     {
-        $billClient = $this->createBillClient();
+        $billClient = $this->getBillClient();
 
         return $billClient->update($bill, $billId);
     }
@@ -525,7 +525,7 @@ class Client
      */
     public function deliverBill(string $billId, string $billToken, bool $signRequest = true): string
     {
-        $billClient = $this->createBillClient();
+        $billClient = $this->getBillClient();
 
         return $billClient->deliver($billId, $billToken, $signRequest);
     }
@@ -538,7 +538,7 @@ class Client
      */
     public function getRates(): Rates
     {
-        $rateClient = $this->createRateClient();
+        $rateClient = $this->getRateClient();
 
         return $rateClient->getRates();
     }
@@ -553,7 +553,7 @@ class Client
      */
     public function getCurrencyRates(string $baseCurrency): Rates
     {
-        $rateClient = $this->createRateClient();
+        $rateClient = $this->getRateClient();
 
         return $rateClient->getCurrencyRates($baseCurrency);
     }
@@ -569,7 +569,7 @@ class Client
      */
     public function getCurrencyPairRate(string $baseCurrency, string $currency): Rate
     {
-        $rateClient = $this->createRateClient();
+        $rateClient = $this->getRateClient();
 
         return $rateClient->getCurrencyPairRate($baseCurrency, $currency);
     }
@@ -585,7 +585,7 @@ class Client
      */
     public function getLedger(string $currency, string $startDate, string $endDate): array
     {
-        $ledgerClient = $this->createLedgerClient();
+        $ledgerClient = $this->getLedgerClient();
 
         return $ledgerClient->get($currency, $startDate, $endDate);
     }
@@ -598,7 +598,7 @@ class Client
      */
     public function getLedgers(): array
     {
-        $ledgerClient = $this->createLedgerClient();
+        $ledgerClient = $this->getLedgerClient();
 
         return $ledgerClient->getLedgers();
     }
@@ -612,7 +612,7 @@ class Client
      */
     public function submitPayoutRecipients(PayoutRecipients $recipients): array
     {
-        $payoutRecipientsClient = $this->createPayoutRecipientsClient();
+        $payoutRecipientsClient = $this->getPayoutRecipientsClient();
 
         return $payoutRecipientsClient->submit($recipients);
     }
@@ -627,7 +627,7 @@ class Client
      */
     public function getPayoutRecipient(string $recipientId): PayoutRecipient
     {
-        $payoutRecipientsClient = $this->createPayoutRecipientsClient();
+        $payoutRecipientsClient = $this->getPayoutRecipientsClient();
 
         return $payoutRecipientsClient->get($recipientId);
     }
@@ -644,7 +644,7 @@ class Client
      */
     public function getPayoutRecipients(string $status = null, int $limit = null, int $offset = null): array
     {
-        $payoutRecipientsClient = $this->createPayoutRecipientsClient();
+        $payoutRecipientsClient = $this->getPayoutRecipientsClient();
 
         return $payoutRecipientsClient->getPayoutRecipients($status, $limit, $offset);
     }
@@ -659,7 +659,7 @@ class Client
      */
     public function updatePayoutRecipient(string $recipientId, PayoutRecipient $recipient): PayoutRecipient
     {
-        $payoutRecipientsClient = $this->createPayoutRecipientsClient();
+        $payoutRecipientsClient = $this->getPayoutRecipientsClient();
 
         return $payoutRecipientsClient->update($recipientId, $recipient);
     }
@@ -673,7 +673,7 @@ class Client
      */
     public function deletePayoutRecipient(string $recipientId): bool
     {
-        $payoutRecipientsClient = $this->createPayoutRecipientsClient();
+        $payoutRecipientsClient = $this->getPayoutRecipientsClient();
 
         return $payoutRecipientsClient->delete($recipientId);
     }
@@ -687,7 +687,7 @@ class Client
      */
     public function requestPayoutRecipientNotification(string $recipientId): bool
     {
-        $payoutRecipientsClient = $this->createPayoutRecipientsClient();
+        $payoutRecipientsClient = $this->getPayoutRecipientsClient();
 
         return $payoutRecipientsClient->requestNotification($recipientId);
     }
@@ -701,7 +701,7 @@ class Client
      */
     public function submitPayout(Payout $payout): Payout
     {
-        $payoutClient = $this->createPayoutClient();
+        $payoutClient = $this->getPayoutClient();
 
         return $payoutClient->submit($payout);
     }
@@ -716,7 +716,7 @@ class Client
      */
     public function getPayout(string $payoutId): Payout
     {
-        $payoutClient = $this->createPayoutClient();
+        $payoutClient = $this->getPayoutClient();
 
         return $payoutClient->get($payoutId);
     }
@@ -742,7 +742,7 @@ class Client
         int $limit = null,
         int $offset = null
     ): array {
-        $payoutClient = $this->createPayoutClient();
+        $payoutClient = $this->getPayoutClient();
 
         return $payoutClient->getPayouts($startDate, $endDate, $status, $reference, $limit, $offset);
     }
@@ -756,7 +756,7 @@ class Client
      */
     public function cancelPayout(string $payoutId): bool
     {
-        $payoutClient = $this->createPayoutClient();
+        $payoutClient = $this->getPayoutClient();
 
         return $payoutClient->cancel($payoutId);
     }
@@ -770,7 +770,7 @@ class Client
      */
     public function requestPayoutNotification(string $payoutId): bool
     {
-        $payoutClient = $this->createPayoutClient();
+        $payoutClient = $this->getPayoutClient();
 
         return $payoutClient->requestNotification($payoutId);
     }
@@ -797,7 +797,7 @@ class Client
         int $limit = null,
         int $offset = null
     ): array {
-        $settlementsClient = $this->createSettlementsClient();
+        $settlementsClient = $this->getSettlementClient();
 
         return $settlementsClient->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
     }
@@ -811,7 +811,7 @@ class Client
      */
     public function getSettlement(string $settlementId): Settlement
     {
-        $settlementsClient = $this->createSettlementsClient();
+        $settlementsClient = $this->getSettlementClient();
 
         return $settlementsClient->get($settlementId);
     }
@@ -825,66 +825,9 @@ class Client
      */
     public function getSettlementReconciliationReport(Settlement $settlement): Settlement
     {
-        $settlementsClient = $this->createSettlementsClient();
+        $settlementsClient = $this->getSettlementClient();
 
         return $settlementsClient->getReconciliationReport($settlement);
-    }
-
-    /**
-     * Create a BitPay Subscription.
-     *
-     * @param  Subscription $subscription A Subscription object with request parameters defined.
-     * @return Subscription
-     * @throws BitPayException
-     */
-    public function createSubscription(Subscription $subscription): Subscription
-    {
-        $subscriptionClient = $this->createSubscriptionClient();
-
-        return $subscriptionClient->createSubscription($subscription);
-    }
-
-    /**
-     * Retrieve a BitPay subscription by subscription id using the specified facade.
-     *
-     * @param  string $subscriptionId The id of the subscription to retrieve.
-     * @return Subscription
-     * @throws BitPayException
-     */
-    public function getSubscription(string $subscriptionId): Subscription
-    {
-        $subscriptionClient = $this->createSubscriptionClient();
-
-        return $subscriptionClient->getSubscription($subscriptionId);
-    }
-
-    /**
-     * Retrieve a collection of BitPay subscriptions.
-     *
-     * @param  string|null $status The status to filter the subscriptions.
-     * @return Subscription[]
-     * @throws BitPayException
-     */
-    public function getSubscriptions(string $status = null): array
-    {
-        $subscriptionClient = $this->createSubscriptionClient();
-
-        return $subscriptionClient->getSubscriptions($status);
-    }
-
-    /**
-     * Update a BitPay Subscription.
-     *
-     * @param  Subscription $subscription   A Subscription object with the parameters to update defined.
-     * @param  string       $subscriptionId The Id of the Subscription to update.
-     * @return Subscription
-     * @throws BitPayException
-     */
-    public function updateSubscription(Subscription $subscription, string $subscriptionId): Subscription
-    {
-        $subscriptionClient = $this->createSubscriptionClient();
-
-        return $subscriptionClient->updateSubscription($subscription, $subscriptionId);
     }
 
     /**
@@ -939,9 +882,9 @@ class Client
      *
      * @return InvoiceClient the invoice client
      */
-    protected function createInvoiceClient(): InvoiceClient
+    protected function getInvoiceClient(): InvoiceClient
     {
-        return new InvoiceClient($this->tokenCache, $this->restCli);
+        return InvoiceClient::getInstance($this->tokenCache, $this->restCli);
     }
 
     /**
@@ -949,9 +892,9 @@ class Client
      *
      * @return RefundClient the refund client
      */
-    protected function createRefundClient(): RefundClient
+    protected function getRefundClient(): RefundClient
     {
-        return new RefundClient($this->tokenCache, $this->restCli);
+        return RefundClient::getInstance($this->tokenCache, $this->restCli);
     }
 
     /**
@@ -959,9 +902,9 @@ class Client
      *
      * @return WalletClient the wallet client
      */
-    protected function createWalletClient(): WalletClient
+    protected function getWalletClient(): WalletClient
     {
-        return new WalletClient($this->restCli);
+        return WalletClient::getInstance($this->restCli);
     }
 
     /**
@@ -969,9 +912,9 @@ class Client
      *
      * @return BillClient the bill client
      */
-    protected function createBillClient(): BillClient
+    protected function getBillClient(): BillClient
     {
-        return new BillClient($this->tokenCache, $this->restCli);
+        return BillClient::getInstance($this->tokenCache, $this->restCli);
     }
 
     /**
@@ -979,9 +922,9 @@ class Client
      *
      * @return RateClient the rate client
      */
-    protected function createRateClient(): RateClient
+    protected function getRateClient(): RateClient
     {
-        return new RateClient($this->restCli, $this);
+        return RateClient::getInstance($this->restCli);
     }
 
     /**
@@ -989,9 +932,9 @@ class Client
      *
      * @return LedgerClient the ledger client
      */
-    protected function createLedgerClient(): LedgerClient
+    protected function getLedgerClient(): LedgerClient
     {
-        return new LedgerClient($this->tokenCache, $this->restCli);
+        return LedgerClient::getInstance($this->tokenCache, $this->restCli);
     }
 
     /**
@@ -999,9 +942,9 @@ class Client
      *
      * @return PayoutRecipientsClient the payout recipients client
      */
-    protected function createPayoutRecipientsClient(): PayoutRecipientsClient
+    protected function getPayoutRecipientsClient(): PayoutRecipientsClient
     {
-        return new PayoutRecipientsClient($this->tokenCache, $this->restCli);
+        return PayoutRecipientsClient::getInstance($this->tokenCache, $this->restCli);
     }
 
     /**
@@ -1009,19 +952,19 @@ class Client
      *
      * @return PayoutClient the payout client
      */
-    protected function createPayoutClient(): PayoutClient
+    protected function getPayoutClient(): PayoutClient
     {
-        return new PayoutClient($this->tokenCache, $this->restCli);
+        return PayoutClient::getInstance($this->tokenCache, $this->restCli);
     }
 
     /**
-     * Gets settlements client
+     * Gets settlement client
      *
-     * @return SettlementsClient the settlements client
+     * @return SettlementClient the settlements client
      */
-    protected function createSettlementsClient(): SettlementsClient
+    protected function getSettlementClient(): SettlementClient
     {
-        return new SettlementsClient($this->tokenCache, $this->restCli);
+        return SettlementClient::getInstance($this->tokenCache, $this->restCli);
     }
 
     /**
@@ -1029,8 +972,8 @@ class Client
      *
      * @return SubscriptionClient the subscription clients
      */
-    protected function createSubscriptionClient(): SubscriptionClient
+    protected function getSubscriptionClient(): SubscriptionClient
     {
-        return new SubscriptionClient($this->tokenCache, $this->restCli);
+        return SubscriptionClient::getInstance($this->tokenCache, $this->restCli);
     }
 }

@@ -57,30 +57,18 @@ class Tokens
      */
     public function getTokenByFacade($facade): ?string
     {
-        $token = null;
-        switch ($facade) {
-            case Facade::Merchant:
-                $token = $this->merchant;
-                break;
-            case Facade::Payout:
-                $token = $this->payout;
-                break;
-            case Facade::Pos:
-                $token = $this->pos;
-                break;
-        }
-
-        if ($token) {
-            return $token;
-        }
-
-        throw new Exception("given facade does not exist or no token defined for the given facade");
+        return match ($facade) {
+            Facade::MERCHANT => $this->merchant,
+            Facade::PAYOUT => $this->payout,
+            Facade::POS => $this->pos,
+            default => throw new Exception("given facade does not exist or no token defined for the given facade"),
+        };
     }
 
     /**
      * @param string $merchant
      */
-    public function setMerchantToken(string $merchant)
+    public function setMerchantToken(string $merchant): void
     {
         $this->merchant = $merchant;
     }

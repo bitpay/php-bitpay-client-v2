@@ -12,14 +12,12 @@ namespace BitPaySDK\Model\Invoice;
 class Refund
 {
     protected ?string $guid = null;
-    protected string $refundEmail;
     protected float $amount;
     protected string $currency;
     protected string $token;
     protected ?string $id = null;
     protected ?string $requestDate = null;
     protected ?string $status = null;
-    protected ?RefundParams $params = null;
     protected ?string $invoiceId = null;
     protected ?bool $preview = null;
     protected ?bool $immediate = null;
@@ -28,26 +26,30 @@ class Refund
     protected ?string $reference = null;
     protected ?string $lastRefundNotification = null;
     protected ?string $invoice = null;
+    protected ?string $notificationURL = null;
+    protected ?string $refundAddress = null;
+    protected ?string $supportRequest = null;
+    protected ?float $transactionAmount = null;
+    protected ?string $transactionCurrency = null;
+    protected ?float $transactionRefundFee = null;
+    protected ?string $txid = null;
+    protected ?string $type = null;
 
     /**
      * Constructor, create Refund object
      *
-     * @param string $refundEmail
      * @param float $amount
      * @param string $currency
      * @param string $token
      */
     public function __construct(
-        string $refundEmail = "",
         float $amount = 0.0,
         string $currency = "",
         string $token = ""
     ) {
-        $this->refundEmail = $refundEmail;
         $this->amount = $amount;
         $this->currency = $currency;
         $this->token = $token;
-        $this->params = new RefundParams();
     }
 
     // Request fields
@@ -94,26 +96,6 @@ class Refund
     public function setReference(string $reference): void
     {
         $this->reference = $reference;
-    }
-
-    /**
-     * Gets refund email
-     *
-     * @return string
-     */
-    public function getRefundEmail(): string
-    {
-        return $this->refundEmail;
-    }
-
-    /**
-     * Sets refund email
-     *
-     * @param string $refundEmail
-     */
-    public function setRefundEmail(string $refundEmail): void
-    {
-        $this->refundEmail = $refundEmail;
     }
 
     /**
@@ -280,26 +262,6 @@ class Refund
     }
 
     /**
-     * Gets object containing the refund request parameters
-     *
-     * @return RefundParams|null
-     */
-    public function getParams(): ?RefundParams
-    {
-        return $this->params;
-    }
-
-    /**
-     * Sets refund params object
-     *
-     * @param RefundParams $params
-     */
-    public function setParams(RefundParams $params): void
-    {
-        $this->params = $params;
-    }
-
-    /**
      * Gets whether the funds should be removed from merchant ledger immediately
      * on submission or at the time of processing
      *
@@ -402,6 +364,186 @@ class Refund
     }
 
     /**
+     * Gets URL to which BitPay sends webhook notifications. HTTPS is mandatory.
+     *
+     * @return string|null
+     */
+    public function getNotificationURL(): ?string
+    {
+        return $this->notificationURL;
+    }
+
+    /**
+     * Sets URL to which BitPay sends webhook notifications. HTTPS is mandatory.
+     *
+     * @param string|null $notificationURL
+     */
+    public function setNotificationURL(?string $notificationURL): void
+    {
+        $this->notificationURL = $notificationURL;
+    }
+
+    /**
+     * Gets the wallet address that the refund will return the funds to, added by the customer.
+     *
+     * @return string|null
+     */
+    public function getRefundAddress(): ?string
+    {
+        return $this->refundAddress;
+    }
+
+    /**
+     * Sets the wallet address that the refund will return the funds to, added by the customer.
+     *
+     * @param string|null $refundAddress
+     */
+    public function setRefundAddress(?string $refundAddress): void
+    {
+        $this->refundAddress = $refundAddress;
+    }
+
+    /**
+     * Gets the ID of the associated support request for the refund.
+     *
+     * @return string|null
+     */
+    public function getSupportRequest(): ?string
+    {
+        return $this->supportRequest;
+    }
+
+    /**
+     * Sets the ID of the associated support request for the refund.
+     *
+     * @param string|null $supportRequest
+     */
+    public function setSupportRequest(?string $supportRequest): void
+    {
+        $this->supportRequest = $supportRequest;
+    }
+
+    /**
+     * Gets amount to be refunded in terms of the transaction currency.
+     *
+     * @return float|null
+     */
+    public function getTransactionAmount(): ?float
+    {
+        return $this->transactionAmount;
+    }
+
+    /**
+     * Sets amount to be refunded in terms of the transaction currency.
+     *
+     * @param float|null $transactionAmount
+     */
+    public function setTransactionAmount(?float $transactionAmount): void
+    {
+        $this->transactionAmount = $transactionAmount;
+    }
+
+    /**
+     * Gets the currency used for the invoice transaction.
+     *
+     * @return string|null
+     */
+    public function getTransactionCurrency(): ?string
+    {
+        return $this->transactionCurrency;
+    }
+
+    /**
+     * Sets the currency used for the invoice transaction.
+     *
+     * @param string|null $transactionCurrency
+     */
+    public function setTransactionCurrency(?string $transactionCurrency): void
+    {
+        $this->transactionCurrency = $transactionCurrency;
+    }
+
+    /**
+     * Gets the refund fee expressed in terms of transaction currency.
+     *
+     * @return float|null
+     */
+    public function getTransactionRefundFee(): ?float
+    {
+        return $this->transactionRefundFee;
+    }
+
+    /**
+     * Sets the refund fee expressed in terms of transaction currency.
+     *
+     * @param float|null $transactionRefundFee
+     */
+    public function setTransactionRefundFee(?float $transactionRefundFee): void
+    {
+        $this->transactionRefundFee = $transactionRefundFee;
+    }
+
+    /**
+     * Gets the transaction ID of the refund once executed.
+     *
+     * @return string|null
+     */
+    public function getTxid(): ?string
+    {
+        return $this->txid;
+    }
+
+    /**
+     * Sets the transaction ID of the refund once executed.
+     *
+     * @param string|null $txid
+     */
+    public function setTxid(?string $txid): void
+    {
+        $this->txid = $txid;
+    }
+
+    /**
+     * <p>Gets the type of refund.</p>
+     * <ul>
+     *    <li>full (current rate): A full refund of the amount paid at the current rate.</li>
+     *    <li>full (fixed rate): A full refund of the amount paid at the fixed rate.
+     *    Note: deprecated refund implementation only.</li>
+     *    <li>partial: Part of the invoice is being refunded, rather than the full invoie amount.</li>
+     *    <li>underpayment: The payment was underpaid, a refund in the amount paid will be executed.</li>
+     *    <li>overpayment: The payment was overpaid, a refund in the amount that was overpaid from the invoice price
+     *    will be executed.</li>
+     *    <li>declined: The payment was declined, a refund in the full amount paid will be excuted.</li>
+     * </ul>
+     *
+     * @return string|null
+     */
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    /**
+     * <p>Sets the type of refund.</p>
+     * <ul>
+     *    <li>full (current rate): A full refund of the amount paid at the current rate.</li>
+     *    <li>full (fixed rate): A full refund of the amount paid at the fixed rate.
+     *    Note: deprecated refund implementation only.</li>
+     *    <li>partial: Part of the invoice is being refunded, rather than the full invoie amount.</li>
+     *    <li>underpayment: The payment was underpaid, a refund in the amount paid will be executed.</li>
+     *    <li>overpayment: The payment was overpaid, a refund in the amount that was overpaid from the invoice price
+     *    will be executed.</li>
+     *    <li>declined: The payment was declined, a refund in the full amount paid will be excuted.</li>
+     * </ul>
+     *
+     * @param string|null $type
+     */
+    public function setType(?string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
      * Return Refund values as array
      *
      * @return array
@@ -410,14 +552,12 @@ class Refund
     {
         return [
             'guid' => $this->getGuid(),
-            'refundEmail' => $this->getRefundEmail(),
             'amount' => $this->getAmount(),
             'currency' => $this->getCurrency(),
             'token' => $this->getToken(),
             'id' => $this->getId(),
             'requestDate' => $this->getRequestDate(),
             'status' => $this->getStatus(),
-            'params' => $this->getParams()->toArray(),
             'invoiceId' => $this->getInvoiceId(),
             'preview' => $this->getPreview(),
             'immediate' => $this->getImmediate(),
@@ -425,7 +565,15 @@ class Refund
             'invoice' => $this->getInvoice(),
             'buyerPaysRefundFee' => $this->getBuyerPaysRefundFee(),
             'reference' => $this->getReference(),
-            'lastRefundNotification' => $this->getLastRefundNotification()
+            'lastRefundNotification' => $this->getLastRefundNotification(),
+            'notificationURL' => $this->getNotificationURL(),
+            'refundAddress' => $this->getRefundAddress(),
+            'supportRequest' => $this->getSupportRequest(),
+            'transactionAmount' => $this->getTransactionAmount(),
+            'transactionCurrency' => $this->getTransactionCurrency(),
+            'transactionRefundFee' => $this->getTransactionRefundFee(),
+            'txid' => $this->getTxid(),
+            'type' => $this->getType()
         ];
     }
 }

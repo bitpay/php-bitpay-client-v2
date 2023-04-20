@@ -20,13 +20,30 @@ use Exception;
 
 class RefundClient
 {
+    private static ?self $instance = null;
     private Tokens $tokenCache;
     private RESTcli $restCli;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli)
+    private function __construct(Tokens $tokenCache, RESTcli $restCli)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;
+    }
+
+    /**
+     * Factory method for Bill Client.
+     *
+     * @param Tokens $tokenCache
+     * @param RESTcli $restCli
+     * @return static
+     */
+    public static function getInstance(Tokens $tokenCache, RESTcli $restCli): self
+    {
+        if (!self::$instance) {
+            self::$instance = new RefundClient($tokenCache, $restCli);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -59,7 +76,7 @@ class RefundClient
         string $guid = null
     ): Refund {
         $params = [];
-        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
         $params["invoiceId"] =  $invoiceId;
         $params["amount"] = $amount;
         $params["currency"] = $currency;
@@ -112,7 +129,7 @@ class RefundClient
         string $status
     ): Refund {
         $params = [];
-        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
         $params["status"] = $status;
 
         try {
@@ -160,7 +177,7 @@ class RefundClient
         string $status
     ): Refund {
         $params = [];
-        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
         $params["status"] = $status;
 
         try {
@@ -205,7 +222,7 @@ class RefundClient
         string $invoiceId
     ): array {
         $params = [];
-        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
         $params["invoiceId"] = $invoiceId;
 
         try {
@@ -251,7 +268,7 @@ class RefundClient
         string $refundId
     ): Refund {
         $params = [];
-        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
 
         try {
             $responseJson = $this->restCli->get("refunds/" . $refundId, $params, true);
@@ -295,7 +312,7 @@ class RefundClient
     public function getByGuid(string $guid): Refund
     {
         $params = [];
-        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
 
         try {
             $responseJson = $this->restCli->get("refunds/guid/" . $guid, $params, true);
@@ -337,7 +354,7 @@ class RefundClient
     public function sendNotification(string $refundId): bool
     {
         $params = [];
-        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
 
         try {
             $responseJson = $this->restCli->post("refunds/" . $refundId . "/notifications", $params, true);
@@ -377,7 +394,7 @@ class RefundClient
     public function cancel(string $refundId): Refund
     {
         $params = [];
-        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
 
         try {
             $responseJson = $this->restCli->delete("refunds/" . $refundId, $params);
@@ -421,7 +438,7 @@ class RefundClient
     public function cancelByGuid(string $guid): Refund
     {
         $params = [];
-        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
 
         try {
             $responseJson = $this->restCli->delete("refunds/guid/" . $guid, $params);

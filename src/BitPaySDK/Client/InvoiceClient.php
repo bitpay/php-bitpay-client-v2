@@ -20,13 +20,30 @@ use Exception;
 
 class InvoiceClient
 {
+    private static ?self $instance = null;
     private Tokens $tokenCache;
     private RESTcli $restCli;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli)
+    private function __construct(Tokens $tokenCache, RESTcli $restCli)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;
+    }
+
+    /**
+     * Factory method for Invoice Client.
+     *
+     * @param Tokens $tokenCache
+     * @param RESTcli $restCli
+     * @return static
+     */
+    public static function getInstance(Tokens $tokenCache, RESTcli $restCli): self
+    {
+        if (!self::$instance) {
+            self::$instance = new self($tokenCache, $restCli);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -40,7 +57,7 @@ class InvoiceClient
      */
     public function create(
         Invoice $invoice,
-        string $facade = Facade::Merchant,
+        string $facade = Facade::MERCHANT,
         bool $signRequest = true
     ): Invoice {
         try {
@@ -107,7 +124,7 @@ class InvoiceClient
 
         try {
             $params = [];
-            $params["token"]      = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"]      = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
             $params["buyerEmail"] = $buyerEmail;
             $params["buyerSms"]   = $buyerSms;
             $params["smsCode"]    = $smsCode;
@@ -153,7 +170,7 @@ class InvoiceClient
      */
     public function get(
         string $invoiceId,
-        string $facade = Facade::Merchant,
+        string $facade = Facade::MERCHANT,
         bool $signRequest = true
     ): Invoice {
         try {
@@ -211,7 +228,7 @@ class InvoiceClient
     ): array {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
             $params["dateStart"] = $dateStart;
             $params["dateEnd"] = $dateEnd;
             if ($status) {
@@ -309,7 +326,7 @@ class InvoiceClient
     ): Invoice {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
             if ($forceCancel) {
                 $params["forceCancel"] = $forceCancel;
             }
@@ -356,7 +373,7 @@ class InvoiceClient
     ): Invoice {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
             if ($forceCancel) {
                 $params["forceCancel"] = $forceCancel;
             }
@@ -404,7 +421,7 @@ class InvoiceClient
     ): Invoice {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
             $params["status"] = $status;
             $responseJson = $this->restCli->update("invoices/pay/" . $invoiceId, $params, true);
         } catch (BitPayException $e) {

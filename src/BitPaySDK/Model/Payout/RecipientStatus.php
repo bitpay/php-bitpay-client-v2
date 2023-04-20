@@ -16,31 +16,31 @@ interface RecipientStatus
     /**
      * Invited recipient status.
      */
-    const INVITED    = 'invited';
+    public const INVITED    = 'invited';
 
     /**
      * Unverified  recipient status.
      */
-    const UNVERIFIED = 'unverified';
+    public const UNVERIFIED = 'unverified';
 
     /**
      * Verified recipient status.
      */
 
-    const VERIFIED   = 'verified';
+    public const VERIFIED   = 'verified';
 
     /**
      * Active recipient status.
      */
-    const ACTIVE     = 'active';
+    public const ACTIVE     = 'active';
 
     /**
      * Paused recipient status.
      */
-    const PAUSED     = 'paused';
+    public const PAUSED     = 'paused';
 
     /**
      * Removed recipient status.
      */
-    const REMOVED    = 'removed';
+    public const REMOVED    = 'removed';
 }

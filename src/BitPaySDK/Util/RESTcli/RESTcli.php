@@ -61,7 +61,7 @@ class RESTcli
     public function __construct(string $environment, PrivateKey $ecKey, ?string $proxy = null)
     {
         $this->ecKey = $ecKey;
-        $this->baseUrl = $environment == Env::Test ? Env::TestUrl : Env::ProdUrl;
+        $this->baseUrl = $environment == Env::TEST ? Env::TEST_URL : Env::PROD_URL;
         $this->proxy = $proxy !== null ? trim($proxy) : '';
         $this->init();
     }
@@ -79,10 +79,10 @@ class RESTcli
                 'base_url' => $this->baseUrl,
                 'defaults' => [
                     'headers' => [
-                        'x-accept-version'           => Env::BitpayApiVersion,
-                        'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
-                        'x-bitpay-api-frame'         => Env::BitpayApiFrame,
-                        'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
+                        'x-accept-version'           => Env::BITPAY_API_VERSION,
+                        'x-bitpay-plugin-info'       => Env::BITPAY_PLUGIN_INFO,
+                        'x-bitpay-api-frame'         => Env::BITPAY_API_FRAME,
+                        'x-bitpay-api-frame-version' => Env::BITPAY_API_FRAME_VERSION,
                     ],
                 ],
             ];
@@ -112,10 +112,10 @@ class RESTcli
             $fullURL = $this->baseUrl . $uri;
             $headers = [
                 'Content-Type'               => 'application/json',
-                'x-accept-version'           => Env::BitpayApiVersion,
-                'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
-                'x-bitpay-api-frame'         => Env::BitpayApiFrame,
-                'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
+                'x-accept-version'           => Env::BITPAY_API_VERSION,
+                'x-bitpay-plugin-info'       => Env::BITPAY_PLUGIN_INFO,
+                'x-bitpay-api-frame'         => Env::BITPAY_API_FRAME,
+                'x-bitpay-api-frame-version' => Env::BITPAY_API_FRAME_VERSION,
             ];
 
             if ($signatureRequired) {
@@ -178,10 +178,10 @@ class RESTcli
             $fullURL = $this->baseUrl . $uri;
             $headers = [
                 'Content-Type'               => 'application/json',
-                'x-accept-version'           => Env::BitpayApiVersion,
-                'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
-                'x-bitpay-api-frame'         => Env::BitpayApiFrame,
-                'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
+                'x-accept-version'           => Env::BITPAY_API_VERSION,
+                'x-bitpay-plugin-info'       => Env::BITPAY_PLUGIN_INFO,
+                'x-bitpay-api-frame'         => Env::BITPAY_API_FRAME,
+                'x-bitpay-api-frame-version' => Env::BITPAY_API_FRAME_VERSION,
             ];
 
             if ($parameters) {
@@ -250,10 +250,10 @@ class RESTcli
             }
 
             $headers = [
-                'x-accept-version'           => Env::BitpayApiVersion,
-                'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
-                'x-bitpay-api-frame'         => Env::BitpayApiFrame,
-                'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
+                'x-accept-version'           => Env::BITPAY_API_VERSION,
+                'x-bitpay-plugin-info'       => Env::BITPAY_PLUGIN_INFO,
+                'x-bitpay-api-frame'         => Env::BITPAY_API_FRAME,
+                'x-bitpay-api-frame-version' => Env::BITPAY_API_FRAME_VERSION,
                 'Content-Type'               => 'application/json',
                 'x-signature'                => $this->ecKey->sign($fullURL),
                 'x-identity'                 => $this->identity,
@@ -312,10 +312,10 @@ class RESTcli
         try {
             $fullURL = $this->baseUrl . $uri;
             $headers = [
-                'x-accept-version'           => Env::BitpayApiVersion,
-                'x-bitpay-plugin-info'       => Env::BitpayPluginInfo,
-                'x-bitpay-api-frame'         => Env::BitpayApiFrame,
-                'x-bitpay-api-frame-version' => Env::BitpayApiFrameVersion,
+                'x-accept-version'           => Env::BITPAY_API_VERSION,
+                'x-bitpay-plugin-info'       => Env::BITPAY_PLUGIN_INFO,
+                'x-bitpay-api-frame'         => Env::BITPAY_API_FRAME,
+                'x-bitpay-api-frame-version' => Env::BITPAY_API_FRAME_VERSION,
                 'Content-Type'               => 'application/json',
                 'x-signature'                => $this->ecKey->sign($fullURL . json_encode($formData)),
                 'x-identity'                 => $this->identity,

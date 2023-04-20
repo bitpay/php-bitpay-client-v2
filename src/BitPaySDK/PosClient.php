@@ -36,7 +36,7 @@ class PosClient extends Client
     {
         try {
             $this->token = new Tokens(null, null, $token);
-            $this->env = strtolower($environment) == "test" ? Env::Test : Env::Prod;
+            $this->env = strtolower($environment) === "test" ? Env::TEST : Env::PROD;
             $this->init();
             parent::__construct($this->RESTcli, new Tokens(null, null, $token));
         } catch (Exception $e) {
@@ -84,7 +84,7 @@ class PosClient extends Client
             $mapper = new JsonMapper();
             $mapper->bEnforceMapType = false;
             $currencies = $mapper->mapArray(
-                json_decode($responseJson),
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
                 Currency::class
             );

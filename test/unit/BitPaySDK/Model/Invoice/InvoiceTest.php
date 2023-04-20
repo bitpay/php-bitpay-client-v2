@@ -410,15 +410,6 @@ class InvoiceTest extends TestCase
         $this->assertEquals($expectedBuyerProvidedInfo, $invoice->getBuyerProvidedInfo());
     }
 
-    public function testGetTransactionDetails()
-    {
-        $expectedTransactionDetails = $this->getMockBuilder(TransactionDetails::class)->getMock();
-
-        $invoice = $this->createClassObject();
-        $invoice->setTransactionDetails($expectedTransactionDetails);
-        $this->assertEquals($expectedTransactionDetails, $invoice->getTransactionDetails());
-    }
-
     public function testGetUniversalCodes()
     {
         $expectedUniversalCodes = $this->getMockBuilder(UniversalCodes::class)->getMock();
@@ -475,8 +466,8 @@ class InvoiceTest extends TestCase
         ];
 
         $invoice = $this->createClassObject();
-        $invoice->setPaymentSubTotals($expectedPaymentSubTotals);
-        $this->assertEquals($expectedPaymentSubTotals, $invoice->getPaymentSubTotals());
+        $invoice->setPaymentSubtotals($expectedPaymentSubTotals);
+        $this->assertEquals($expectedPaymentSubTotals, $invoice->getPaymentSubtotals());
     }
 
     public function testGetPaymentDisplaySubTotals()
@@ -672,24 +663,6 @@ class InvoiceTest extends TestCase
         $this->assertEquals($expectedExchangeRates, $invoice->getExchangeRates());
     }
 
-    public function testGetPaymentString()
-    {
-        $expectedPaymentString = 'Test payment string';
-
-        $invoice = $this->createClassObject();
-        $invoice->setPaymentString($expectedPaymentString);
-        $this->assertEquals($expectedPaymentString, $invoice->getPaymentString());
-    }
-
-    public function testGetVerificationLink()
-    {
-        $expectedVerificationLink = 'http://test.com';
-
-        $invoice = $this->createClassObject();
-        $invoice->setVerificationLink($expectedVerificationLink);
-        $this->assertEquals($expectedVerificationLink, $invoice->getVerificationLink());
-    }
-
     public function testGetIsCancelled()
     {
         $invoice = $this->createClassObject();
@@ -748,8 +721,6 @@ class InvoiceTest extends TestCase
         $this->assertArrayHasKey('selectedTransactionCurrency', $invoiceArray);
         $this->assertArrayHasKey('bitpayIdRequired', $invoiceArray);
         $this->assertArrayHasKey('forcedBuyerSelectedWallet', $invoiceArray);
-        $this->assertArrayHasKey('paymentString', $invoiceArray);
-        $this->assertArrayHasKey('verificationLink', $invoiceArray);
         $this->assertArrayHasKey('isCancelled', $invoiceArray);
         $this->assertArrayHasKey('buyerEmail', $invoiceArray);
         $this->assertArrayHasKey('buyerSms', $invoiceArray);
@@ -793,8 +764,6 @@ class InvoiceTest extends TestCase
         $this->assertEquals('BTC', $invoiceArray['selectedTransactionCurrency']);
         $this->assertTrue($invoiceArray['bitpayIdRequired']);
         $this->assertEquals('Forced Buyer Selected Wallet', $invoiceArray['forcedBuyerSelectedWallet']);
-        $this->assertEquals('Payment string', $invoiceArray['paymentString']);
-        $this->assertEquals('http://test.com', $invoiceArray['verificationLink']);
         $this->assertTrue($invoiceArray['isCancelled']);
         $this->assertEquals('test@email.com', $invoiceArray['buyerEmail']);
         $this->assertEquals('Buyer sms', $invoiceArray['buyerSms']);
@@ -863,8 +832,6 @@ class InvoiceTest extends TestCase
         $invoice->setSelectedTransactionCurrency('BTC');
         $invoice->setBitpayIdRequired(true);
         $invoice->setForcedBuyerSelectedWallet('Forced Buyer Selected Wallet');
-        $invoice->setPaymentString('Payment string');
-        $invoice->setVerificationLink('http://test.com');
         $invoice->setIsCancelled(true);
         $invoice->setBuyerEmail('test@email.com');
         $invoice->setBuyerSms('Buyer sms');

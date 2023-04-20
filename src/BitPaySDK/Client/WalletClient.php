@@ -13,11 +13,27 @@ use Exception;
 
 class WalletClient
 {
+    private static ?self $instance = null;
     private RESTcli $restCli;
 
-    public function __construct(RESTcli $restCli)
+    private function __construct(RESTcli $restCli)
     {
         $this->restCli = $restCli;
+    }
+
+    /**
+     * Factory method for Wallet Client.
+     *
+     * @param RESTcli $restCli
+     * @return static
+     */
+    public static function getInstance(RESTcli $restCli): self
+    {
+        if (!self::$instance) {
+            self::$instance = new self($restCli);
+        }
+
+        return self::$instance;
     }
 
     /**

@@ -19,18 +19,15 @@ use BitPaySDK\Model\Currency;
  */
 class Rates
 {
-    protected Client $bp;
     protected array $rates;
 
     /**
      * Rates constructor.
      *
      * @param array $rates
-     * @param Client $bp
      */
-    public function __construct(array $rates, Client $bp)
+    public function __construct(array $rates)
     {
-        $this->bp = $bp;
         $this->rates = $rates;
     }
 
@@ -59,9 +56,9 @@ class Rates
      *
      * @throws BitPayException
      */
-    public function update(): void
+    public function update(Client $bp): void
     {
-        $this->rates = $this->bp->getRates()->getRates();
+        $this->rates = $bp->getRates()->getRates();
     }
 
     /**
@@ -80,7 +77,7 @@ class Rates
         }
 
         foreach ($this->rates as $rateObj) {
-            if ($rateObj->getCode() == $currencyCode) {
+            if ($rateObj->getCode() === $currencyCode) {
                 $val = $rateObj->getRate();
                 break;
             }

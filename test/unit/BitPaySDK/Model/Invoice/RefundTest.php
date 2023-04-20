@@ -32,15 +32,6 @@ class RefundTest extends TestCase
         $this->assertEquals($expectedReference, $refund->getReference());
     }
 
-    public function testGetRefundEmail()
-    {
-        $expectedRefundEmail = 'test@email.com';
-
-        $refund = $this->createClassObject();
-        $refund->setRefundEmail($expectedRefundEmail);
-        $this->assertEquals($expectedRefundEmail, $refund->getRefundEmail());
-    }
-
     public function testGetAmount()
     {
         $expectedAmount = 15.0;
@@ -111,15 +102,6 @@ class RefundTest extends TestCase
         $this->assertEquals($expectedStatus, $refund->getStatus());
     }
 
-    public function testGetParams()
-    {
-        $expectedParams = $this->getMockBuilder(RefundParams::class)->getMock();
-
-        $refund = $this->createClassObject();
-        $refund->setParams($expectedParams);
-        $this->assertEquals($expectedParams, $refund->getParams());
-    }
-
     public function testGetImmediate()
     {
         $refund = $this->createClassObject();
@@ -163,23 +145,20 @@ class RefundTest extends TestCase
 
     public function testToArray()
     {
-        $params = $this->getMockBuilder(RefundParams::class)->getMock();
         $refund = $this->createClassObject();
-        $this->setSetters($refund, $params);
+        $this->prepareRefund($refund);
         $refundArray = $refund->toArray();
 
         $this->assertNotNull($refundArray);
         $this->assertIsArray($refundArray);
 
         $this->assertArrayHasKey('guid', $refundArray);
-        $this->assertArrayHasKey('refundEmail', $refundArray);
         $this->assertArrayHasKey('amount', $refundArray);
         $this->assertArrayHasKey('currency', $refundArray);
         $this->assertArrayHasKey('token', $refundArray);
         $this->assertArrayHasKey('id', $refundArray);
         $this->assertArrayHasKey('requestDate', $refundArray);
         $this->assertArrayHasKey('status', $refundArray);
-        $this->assertArrayHasKey('params', $refundArray);
         $this->assertArrayHasKey('invoiceId', $refundArray);
         $this->assertArrayHasKey('preview', $refundArray);
         $this->assertArrayHasKey('immediate', $refundArray);
@@ -190,7 +169,6 @@ class RefundTest extends TestCase
         $this->assertArrayHasKey('lastRefundNotification', $refundArray);
 
         $this->assertEquals('Guid', $refundArray['guid']);
-        $this->assertEquals('test@email.com', $refundArray['refundEmail']);
         $this->assertEquals(11.1, $refundArray['amount']);
         $this->assertEquals('BTC', $refundArray['currency']);
         $this->assertEquals('Token', $refundArray['token']);
@@ -212,17 +190,15 @@ class RefundTest extends TestCase
         return new Refund();
     }
 
-    private function setSetters(Refund $refund, $params)
+    private function prepareRefund(Refund $refund): void
     {
         $refund->setGuid('Guid');
-        $refund->setRefundEmail('test@email.com');
         $refund->setAmount(11.1);
         $refund->setCurrency('BTC');
         $refund->setToken('Token');
         $refund->setId('1');
         $refund->setRequestDate('2022-01-01');
         $refund->setStatus('pending');
-        $refund->setParams($params);
         $refund->setInvoiceId('11');
         $refund->setPreview(true);
         $refund->setImmediate(true);

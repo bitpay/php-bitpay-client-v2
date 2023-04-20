@@ -18,17 +18,17 @@ interface Facade
      * and view actions for Invoices and Bills; ledger download,
      * as well as the creation of new merchant or pos tokens associated with the account.
      */
-    const Merchant = "merchant";
+    public const MERCHANT = "merchant";
 
     /**
      * This is the facade which allows merchant to access the Payouts related resources and corresponding endpoints.
      * Access to this facade is not enabled by default.
      */
-    const Payout  = "payout";
+    public const PAYOUT  = "payout";
 
     /**
      * Limited to creating new invoice or bills and search specific invoices
      * or bills based on their id for the merchant's organization
      */
-    const Pos  = "pos";
+    public const POS  = "pos";
 }

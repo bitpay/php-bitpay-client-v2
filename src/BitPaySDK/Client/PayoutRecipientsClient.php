@@ -22,13 +22,30 @@ use Exception;
 
 class PayoutRecipientsClient
 {
+    private static ?self $instance = null;
     private Tokens $tokenCache;
     private RESTcli $restCli;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli)
+    private function __construct(Tokens $tokenCache, RESTcli $restCli)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;
+    }
+
+    /**
+     * Factory method for Payout Recipients Client.
+     *
+     * @param Tokens $tokenCache
+     * @param RESTcli $restCli
+     * @return static
+     */
+    public static function getInstance(Tokens $tokenCache, RESTcli $restCli): self
+    {
+        if (!self::$instance) {
+            self::$instance = new self($tokenCache, $restCli);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -41,7 +58,7 @@ class PayoutRecipientsClient
     public function submit(PayoutRecipients $recipients): array
     {
         try {
-            $recipients->setToken($this->tokenCache->getTokenByFacade(Facade::Payout));
+            $recipients->setToken($this->tokenCache->getTokenByFacade(Facade::PAYOUT));
             $recipients->setGuid(Util::guid());
 
             $responseJson = $this->restCli->post("recipients", $recipients->toArray());
@@ -86,7 +103,7 @@ class PayoutRecipientsClient
     {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Payout);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
 
             $responseJson = $this->restCli->get("recipients/" . $recipientId, $params);
         } catch (BitPayException $e) {
@@ -130,7 +147,7 @@ class PayoutRecipientsClient
     {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Payout);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
 
             if ($status) {
                 $params["status"] = $status;
@@ -184,7 +201,7 @@ class PayoutRecipientsClient
     public function update(string $recipientId, PayoutRecipient $recipient): PayoutRecipient
     {
         try {
-            $recipient->setToken($this->tokenCache->getTokenByFacade(Facade::Payout));
+            $recipient->setToken($this->tokenCache->getTokenByFacade(Facade::PAYOUT));
 
             $responseJson = $this->restCli->update("recipients/" . $recipientId, $recipient->toArray());
         } catch (BitPayException $e) {
@@ -227,7 +244,7 @@ class PayoutRecipientsClient
     {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Payout);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
 
             $responseJson = $this->restCli->delete("recipients/" . $recipientId, $params);
         } catch (BitPayException $e) {
@@ -266,7 +283,7 @@ class PayoutRecipientsClient
     {
         try {
             $content = [];
-            $content["token"] = $this->tokenCache->getTokenByFacade(Facade::Payout);
+            $content["token"] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
 
             $responseJson = $this->restCli->post("recipients/" . $recipientId . "/notifications", $content);
         } catch (BitPayException $e) {

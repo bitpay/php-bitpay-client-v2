@@ -13,15 +13,32 @@ use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
-class SettlementsClient
+class SettlementClient
 {
+    private static ?self $instance = null;
     private Tokens $tokenCache;
     private RESTcli $restCli;
 
-    public function __construct(Tokens $tokenCache, RESTcli $restCli)
+    private function __construct(Tokens $tokenCache, RESTcli $restCli)
     {
         $this->tokenCache = $tokenCache;
         $this->restCli = $restCli;
+    }
+
+    /**
+     * Factory method for Settlements Client.
+     *
+     * @param Tokens $tokenCache
+     * @param RESTcli $restCli
+     * @return static
+     */
+    public static function getInstance(Tokens $tokenCache, RESTcli $restCli): self
+    {
+        if (!self::$instance) {
+            self::$instance = new self($tokenCache, $restCli);
+        }
+
+        return self::$instance;
     }
 
     /**
@@ -52,7 +69,7 @@ class SettlementsClient
             $offset = $offset != null ? $offset : 0;
 
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
             $params["dateStart"] = $dateStart;
             $params["dateEnd"] = $dateEnd;
             $params["currency"] = $currency;
@@ -100,7 +117,7 @@ class SettlementsClient
     {
         try {
             $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::Merchant);
+            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
 
             $responseJson = $this->restCli->get("settlements/" . $settlementId, $params);
         } catch (BitPayException $e) {

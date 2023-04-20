@@ -17,7 +17,6 @@ class RefundInfo
     protected ?string $supportRequest = null;
     protected ?string $currency = null;
     protected ?array $amounts = null;
-    protected ?string $reference = null;
 
     public function __construct()
     {
@@ -96,26 +95,6 @@ class RefundInfo
     }
 
     /**
-     * Gets reference.
-     *
-     * @return string|null
-     */
-    public function getReference(): ?string
-    {
-        return $this->reference;
-    }
-
-    /**
-     * Sets reference.
-     *
-     * @param string $reference
-     */
-    public function setReference(string $reference): void
-    {
-        $this->reference = $reference;
-    }
-
-    /**
      * Gets Refund info as array
      *
      * @return array refund info as array
@@ -125,8 +104,7 @@ class RefundInfo
         return [
             'supportRequest' => $this->getSupportRequest(),
             'currency' => $this->getCurrency(),
-            'amounts' => $this->getAmounts(),
-            'reference' => $this->getReference()
+            'amounts' => $this->getAmounts()
         ];
     }
 }
