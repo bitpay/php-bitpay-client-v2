@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Client;
@@ -73,8 +77,9 @@ class PayoutClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $payout = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Payout()
             );
         } catch (Exception $e) {
@@ -82,8 +87,6 @@ class PayoutClient
                 "failed to deserialize BitPay server response (Payout) : " . $e->getMessage()
             );
         }
-
-        return $payout;
     }
 
     /**
@@ -115,8 +118,9 @@ class PayoutClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $payout = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Payout()
             );
         } catch (Exception $e) {
@@ -124,8 +128,6 @@ class PayoutClient
                 "failed to deserialize BitPay server response (Payout) : " . $e->getMessage()
             );
         }
-
-        return $payout;
     }
 
     /**
@@ -186,18 +188,17 @@ class PayoutClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $payouts = $mapper->mapArray(
-                json_decode($responseJson),
+
+            return $mapper->mapArray(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Payout\Payout'
+                Payout::class
             );
         } catch (Exception $e) {
             throw new PayoutQueryException(
                 "failed to deserialize BitPay server response (Payout) : " . $e->getMessage()
             );
         }
-
-        return $payouts;
     }
 
     /**
@@ -227,14 +228,14 @@ class PayoutClient
         }
 
         try {
-            $result = strtolower(json_decode($responseJson)->status) == "success";
+            $result = json_decode($responseJson, false, 512, JSON_THROW_ON_ERROR);
+
+            return strtolower($result->status) === "success";
         } catch (Exception $e) {
             throw new PayoutCancellationException(
                 "failed to deserialize BitPay server response (Payout) : " . $e->getMessage()
             );
         }
-
-        return $result;
     }
 
     /**
@@ -264,13 +265,13 @@ class PayoutClient
         }
 
         try {
-            $result = strtolower(json_decode($responseJson)->status) == "success";
+            $result = json_decode($responseJson, false, 512, JSON_THROW_ON_ERROR);
+
+            return strtolower($result->status) === "success";
         } catch (Exception $e) {
             throw new PayoutNotificationException(
                 "failed to deserialize BitPay server response (Payout) : " . $e->getMessage()
             );
         }
-
-        return $result;
     }
 }

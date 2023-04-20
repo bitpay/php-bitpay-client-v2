@@ -13,7 +13,7 @@ class PayoutTest extends TestCase
     public function testInstanceOf()
     {
         $payout = $this->createClassObject();
-        $this->assertInstanceOf(Payout::class, $payout);
+        self::assertInstanceOf(Payout::class, $payout);
     }
 
     public function testGetToken()
@@ -22,7 +22,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setToken($expectedToken);
-        $this->assertEquals($expectedToken, $payout->getToken());
+        self::assertEquals($expectedToken, $payout->getToken());
     }
 
     public function testGetAmount()
@@ -31,7 +31,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setAmount($expectedAmount);
-        $this->assertEquals($expectedAmount, $payout->getAmount());
+        self::assertEquals($expectedAmount, $payout->getAmount());
     }
 
     /**
@@ -43,7 +43,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setCurrency($expectedCurrency);
-        $this->assertEquals($expectedCurrency, $payout->getCurrency());
+        self::assertEquals($expectedCurrency, $payout->getCurrency());
     }
 
     public function testGetCurrencyException()
@@ -62,7 +62,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setEffectiveDate($expectedEffectiveDate);
-        $this->assertEquals($expectedEffectiveDate, $payout->getEffectiveDate());
+        self::assertEquals($expectedEffectiveDate, $payout->getEffectiveDate());
     }
 
     /**
@@ -74,7 +74,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setLedgerCurrency($expectedLedgerCurrency);
-        $this->assertEquals($expectedLedgerCurrency, $payout->getLedgerCurrency());
+        self::assertEquals($expectedLedgerCurrency, $payout->getLedgerCurrency());
     }
 
     public function testGetLedgerCurrencyException()
@@ -93,7 +93,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setReference($expectedReference);
-        $this->assertEquals($expectedReference, $payout->getReference());
+        self::assertEquals($expectedReference, $payout->getReference());
     }
 
     public function testGetNotificationUrl()
@@ -102,7 +102,7 @@ class PayoutTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setNotificationUrl($expectedNotificationUrl);
-        $this->assertEquals($expectedNotificationUrl, $bill->getNotificationUrl());
+        self::assertEquals($expectedNotificationUrl, $bill->getNotificationUrl());
     }
 
     public function testGetNotificationEmail()
@@ -111,7 +111,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setNotificationEmail($expectedNotificationEmail);
-        $this->assertEquals($expectedNotificationEmail, $payout->getNotificationEmail());
+        self::assertEquals($expectedNotificationEmail, $payout->getNotificationEmail());
     }
 
     public function testGetEmail()
@@ -120,7 +120,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setEmail($expectedEmail);
-        $this->assertEquals($expectedEmail, $payout->getEmail());
+        self::assertEquals($expectedEmail, $payout->getEmail());
     }
 
     public function testGetRecipientId()
@@ -129,7 +129,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setRecipientId($expectedRecipientId);
-        $this->assertEquals($expectedRecipientId, $payout->getRecipientId());
+        self::assertEquals($expectedRecipientId, $payout->getRecipientId());
     }
 
     public function testGetShopperId()
@@ -138,7 +138,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setShopperId($expectedShopperId);
-        $this->assertEquals($expectedShopperId, $payout->getShopperId());
+        self::assertEquals($expectedShopperId, $payout->getShopperId());
     }
 
     public function testGetLabel()
@@ -147,7 +147,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setLabel($expectedLabel);
-        $this->assertEquals($expectedLabel, $payout->getLabel());
+        self::assertEquals($expectedLabel, $payout->getLabel());
     }
 
     public function testGetMessage()
@@ -156,7 +156,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setMessage($expectedMessage);
-        $this->assertEquals($expectedMessage, $payout->getMessage());
+        self::assertEquals($expectedMessage, $payout->getMessage());
     }
 
     public function testGetId()
@@ -165,7 +165,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setId($expectedId);
-        $this->assertEquals($expectedId, $payout->getId());
+        self::assertEquals($expectedId, $payout->getId());
     }
 
     public function testGetStatus()
@@ -174,7 +174,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setStatus($expectedStatus);
-        $this->assertEquals($expectedStatus, $payout->getStatus());
+        self::assertEquals($expectedStatus, $payout->getStatus());
     }
 
     public function testGetRequestDate()
@@ -183,7 +183,7 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setRequestDate($expectedRequestDate);
-        $this->assertEquals($expectedRequestDate, $payout->getRequestDate());
+        self::assertEquals($expectedRequestDate, $payout->getRequestDate());
     }
 
     public function testGetExchangeRates()
@@ -197,27 +197,26 @@ class PayoutTest extends TestCase
 
         $payout = $this->createClassObject();
         $payout->setExchangeRates($expectedExchangeRates);
-        $this->assertEquals($expectedExchangeRates, $payout->getExchangeRates());
+        self::assertEquals($expectedExchangeRates, $payout->getExchangeRates());
     }
 
     public function testGetTransactions()
     {
-        $expectedTransactions = [
-            'txid' => 'db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057',
-            'amount' => 0.000254,
-            'date' => '2021-05-27T11:04:23.155Z'
-        ];
+        $expectedTransaction = new PayoutTransaction();
+        $expectedTransaction->setTxid('db53d7e2bf3385a31257ce09396202d9c2823370a5ca186db315c45e24594057');
+        $expectedTransaction->setAmount(0.000254);
+        $expectedTransaction->setDate('2021-05-27T11:04:23.155Z');
 
         $expectedItemizedDetails = $this->getMockBuilder(PayoutTransaction::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $expectedItemizedDetails->method('toArray')->willReturn($expectedTransactions);
+        $expectedItemizedDetails->method('toArray')->willReturn([$expectedTransaction]);
 
         $payout = $this->createClassObject();
-        $payout->setTransactions([$expectedTransactions]);
-        $this->assertIsArray($payout->getTransactions());
-        $this->assertNotNull($payout->getTransactions());
-        $this->assertInstanceOf(PayoutTransaction::class, $payout->getTransactions()[0]);
+        $payout->setTransactions([$expectedTransaction]);
+        self::assertIsArray($payout->getTransactions());
+        self::assertNotNull($payout->getTransactions());
+        self::assertInstanceOf(PayoutTransaction::class, $payout->getTransactions()[0]);
     }
 
     public function testFormatAmount()
@@ -228,7 +227,7 @@ class PayoutTest extends TestCase
         $payout = $this->createClassObject();
         $payout->setAmount($amount);
         $payout->formatAmount(2);
-        $this->assertEquals($expectedFormattedAmount, $payout->getAmount());
+        self::assertEquals($expectedFormattedAmount, $payout->getAmount());
     }
 
     /**
@@ -245,54 +244,54 @@ class PayoutTest extends TestCase
         $payoutTransaction->setAmount(0.000254);
         $payoutTransaction->setDate('2021-05-27T11:04:23.155Z');
 
-        $this->assertNotNull($payoutArray);
-        $this->assertIsArray($payoutArray);
+        self::assertNotNull($payoutArray);
+        self::assertIsArray($payoutArray);
 
-        $this->assertArrayHasKey('token', $payoutArray);
-        $this->assertArrayHasKey('amount', $payoutArray);
-        $this->assertArrayHasKey('currency', $payoutArray);
-        $this->assertArrayHasKey('effectiveDate', $payoutArray);
-        $this->assertArrayHasKey('ledgerCurrency', $payoutArray);
-        $this->assertArrayHasKey('reference', $payoutArray);
-        $this->assertArrayHasKey('notificationURL', $payoutArray);
-        $this->assertArrayHasKey('notificationEmail', $payoutArray);
-        $this->assertArrayHasKey('email', $payoutArray);
-        $this->assertArrayHasKey('recipientId', $payoutArray);
-        $this->assertArrayHasKey('shopperId', $payoutArray);
-        $this->assertArrayHasKey('label', $payoutArray);
-        $this->assertArrayHasKey('message', $payoutArray);
-        $this->assertArrayHasKey('id', $payoutArray);
-        $this->assertArrayHasKey('status', $payoutArray);
-        $this->assertArrayHasKey('requestDate', $payoutArray);
-        $this->assertArrayHasKey('exchangeRates', $payoutArray);
-        $this->assertArrayHasKey('transactions', $payoutArray);
+        self::assertArrayHasKey('token', $payoutArray);
+        self::assertArrayHasKey('amount', $payoutArray);
+        self::assertArrayHasKey('currency', $payoutArray);
+        self::assertArrayHasKey('effectiveDate', $payoutArray);
+        self::assertArrayHasKey('ledgerCurrency', $payoutArray);
+        self::assertArrayHasKey('reference', $payoutArray);
+        self::assertArrayHasKey('notificationURL', $payoutArray);
+        self::assertArrayHasKey('notificationEmail', $payoutArray);
+        self::assertArrayHasKey('email', $payoutArray);
+        self::assertArrayHasKey('recipientId', $payoutArray);
+        self::assertArrayHasKey('shopperId', $payoutArray);
+        self::assertArrayHasKey('label', $payoutArray);
+        self::assertArrayHasKey('message', $payoutArray);
+        self::assertArrayHasKey('id', $payoutArray);
+        self::assertArrayHasKey('status', $payoutArray);
+        self::assertArrayHasKey('requestDate', $payoutArray);
+        self::assertArrayHasKey('exchangeRates', $payoutArray);
+        self::assertArrayHasKey('transactions', $payoutArray);
 
-        $this->assertEquals(
+        self::assertEquals(
             '6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL',
             $payoutArray['token']
         );
-        $this->assertEquals(10.0, $payoutArray['amount']);
-        $this->assertEquals(Currency::USD, $payoutArray['currency']);
-        $this->assertEquals('2021-05-27T09:00:00.000Z', $payoutArray['effectiveDate']);
-        $this->assertEquals(Currency::GBP, $payoutArray['ledgerCurrency']);
-        $this->assertEquals('payout_20210527', $payoutArray['reference']);
-        $this->assertEquals('https://example.com', $payoutArray['notificationURL']);
-        $this->assertEquals('test@test.com', $payoutArray['notificationEmail']);
-        $this->assertEquals('test@test.com', $payoutArray['email']);
-        $this->assertEquals('LDxRZCGq174SF8AnQpdBPB', $payoutArray['recipientId']);
-        $this->assertEquals('7qohDf2zZnQK5Qanj8oyC2', $payoutArray['shopperId']);
-        $this->assertEquals('My label', $payoutArray['label']);
-        $this->assertEquals('My message', $payoutArray['message']);
-        $this->assertEquals('JMwv8wQCXANoU2ZZQ9a9GH', $payoutArray['id']);
-        $this->assertEquals('success', $payoutArray['status']);
-        $this->assertEquals('2021-05-27T10:47:37.834Z', $payoutArray['requestDate']);
-        $this->assertEquals([
+        self::assertEquals(10.0, $payoutArray['amount']);
+        self::assertEquals(Currency::USD, $payoutArray['currency']);
+        self::assertEquals('2021-05-27T09:00:00.000Z', $payoutArray['effectiveDate']);
+        self::assertEquals(Currency::GBP, $payoutArray['ledgerCurrency']);
+        self::assertEquals('payout_20210527', $payoutArray['reference']);
+        self::assertEquals('https://example.com', $payoutArray['notificationURL']);
+        self::assertEquals('test@test.com', $payoutArray['notificationEmail']);
+        self::assertEquals('test@test.com', $payoutArray['email']);
+        self::assertEquals('LDxRZCGq174SF8AnQpdBPB', $payoutArray['recipientId']);
+        self::assertEquals('7qohDf2zZnQK5Qanj8oyC2', $payoutArray['shopperId']);
+        self::assertEquals('My label', $payoutArray['label']);
+        self::assertEquals('My message', $payoutArray['message']);
+        self::assertEquals('JMwv8wQCXANoU2ZZQ9a9GH', $payoutArray['id']);
+        self::assertEquals('success', $payoutArray['status']);
+        self::assertEquals('2021-05-27T10:47:37.834Z', $payoutArray['requestDate']);
+        self::assertEquals([
             'BTC' => [
                 'USD' => 39390.47,
                 'GBP' => 27883.962246420004
             ]
         ], $payoutArray['exchangeRates']);
-        $this->assertInstanceOf(PayoutTransaction::class, $payoutArray['transactions'][0]);
+        self::assertInstanceOf(PayoutTransaction::class, $payoutArray['transactions'][0]);
     }
 
     /**
@@ -304,10 +303,10 @@ class PayoutTest extends TestCase
         $this->objectSetters($payout);
         $payoutArray = $payout->toArray();
 
-        $this->assertNotNull($payoutArray);
-        $this->assertIsArray($payoutArray);
+        self::assertNotNull($payoutArray);
+        self::assertIsArray($payoutArray);
 
-        $this->assertArrayNotHasKey('supportPhone', $payoutArray);
+        self::assertArrayNotHasKey('supportPhone', $payoutArray);
     }
 
     private function createClassObject(): Payout

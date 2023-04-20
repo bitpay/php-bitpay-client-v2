@@ -11,7 +11,6 @@ use BitPaySDK\Model\Invoice\MinerFees;
 use BitPaySDK\Model\Invoice\RefundInfo;
 use BitPaySDK\Model\Invoice\Shopper;
 use BitPaySDK\Model\Invoice\SupportedTransactionCurrencies;
-use BitPaySDK\Model\Invoice\TransactionDetails;
 use BitPaySDK\Model\Invoice\UniversalCodes;
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +19,7 @@ class InvoiceTest extends TestCase
     public function testInstanceOf()
     {
         $invoice = $this->createClassObject();
-        $this->assertInstanceOf(Invoice::class, $invoice);
+        self::assertInstanceOf(Invoice::class, $invoice);
     }
 
     public function testGetCurrencyException()
@@ -42,7 +41,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setCurrency($expectedCurrency);
-        $this->assertEquals($expectedCurrency, $invoice->getCurrency());
+        self::assertEquals($expectedCurrency, $invoice->getCurrency());
     }
 
     public function testGetGuid()
@@ -51,7 +50,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setGuid($expectedGuid);
-        $this->assertEquals($expectedGuid, $invoice->getGuid());
+        self::assertEquals($expectedGuid, $invoice->getGuid());
     }
 
     public function testGetToken()
@@ -60,7 +59,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setToken($expectedToken);
-        $this->assertEquals($expectedToken, $invoice->getToken());
+        self::assertEquals($expectedToken, $invoice->getToken());
     }
 
     public function testGetPrice()
@@ -69,7 +68,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setPrice($expectedPrice);
-        $this->assertEquals($expectedPrice, $invoice->getPrice());
+        self::assertEquals($expectedPrice, $invoice->getPrice());
     }
 
     public function testGetPosData()
@@ -78,7 +77,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setPosData($expectedPostData);
-        $this->assertEquals($expectedPostData, $invoice->getPosData());
+        self::assertEquals($expectedPostData, $invoice->getPosData());
     }
 
     public function testGetNotificationURL()
@@ -87,7 +86,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setNotificationURL($expectedNotificationURL);
-        $this->assertEquals($expectedNotificationURL, $invoice->getNotificationURL());
+        self::assertEquals($expectedNotificationURL, $invoice->getNotificationURL());
     }
 
     public function testGetTransactionSpeed()
@@ -96,14 +95,14 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setTransactionSpeed($expectedTransactionSpeed);
-        $this->assertEquals($expectedTransactionSpeed, $invoice->getTransactionSpeed());
+        self::assertEquals($expectedTransactionSpeed, $invoice->getTransactionSpeed());
     }
 
     public function testGetFullNotifications()
     {
         $invoice = $this->createClassObject();
         $invoice->setFullNotifications(true);
-        $this->assertTrue($invoice->getFullNotifications());
+        self::assertTrue($invoice->getFullNotifications());
     }
 
     public function testGetNotificationEmail()
@@ -112,7 +111,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setNotificationEmail($expectedNotificationEmail);
-        $this->assertEquals($expectedNotificationEmail, $invoice->getNotificationEmail());
+        self::assertEquals($expectedNotificationEmail, $invoice->getNotificationEmail());
     }
 
     public function testGetRedirectURL()
@@ -121,7 +120,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setRedirectURL($expectedRedirectURL);
-        $this->assertEquals($expectedRedirectURL, $invoice->getRedirectURL());
+        self::assertEquals($expectedRedirectURL, $invoice->getRedirectURL());
     }
 
     public function testGetOrderId()
@@ -130,7 +129,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setOrderId($expectedOrderId);
-        $this->assertEquals($expectedOrderId, $invoice->getOrderId());
+        self::assertEquals($expectedOrderId, $invoice->getOrderId());
     }
 
     public function testGetItemDesc()
@@ -139,7 +138,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setItemDesc($expectedItemDesc);
-        $this->assertEquals($expectedItemDesc, $invoice->getItemDesc());
+        self::assertEquals($expectedItemDesc, $invoice->getItemDesc());
     }
 
     public function testGetItemCode()
@@ -148,14 +147,14 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setItemCode($expectedItemCode);
-        $this->assertEquals($expectedItemCode, $invoice->getItemCode());
+        self::assertEquals($expectedItemCode, $invoice->getItemCode());
     }
 
     public function testGetPhysical()
     {
         $invoice = $this->createClassObject();
         $invoice->setPhysical(false);
-        $this->assertFalse($invoice->getPhysical());
+        self::assertFalse($invoice->getPhysical());
     }
 
     public function testGetPaymentCurrencies()
@@ -164,7 +163,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentCurrencies($expectedPaymentCurrencies);
-        $this->assertEquals($expectedPaymentCurrencies, $invoice->getPaymentCurrencies());
+        self::assertEquals($expectedPaymentCurrencies, $invoice->getPaymentCurrencies());
     }
 
     public function testGetAcceptanceWindow()
@@ -173,7 +172,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setAcceptanceWindow($expectedAcceptanceWindow);
-        $this->assertEquals($expectedAcceptanceWindow, $invoice->getAcceptanceWindow());
+        self::assertEquals($expectedAcceptanceWindow, $invoice->getAcceptanceWindow());
     }
 
     public function testGetCloseURL()
@@ -182,28 +181,28 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setCloseURL($expectedCloseURL);
-        $this->assertEquals($expectedCloseURL, $invoice->getCloseURL());
+        self::assertEquals($expectedCloseURL, $invoice->getCloseURL());
     }
 
     public function testGetAutoRedirect()
     {
         $invoice = $this->createClassObject();
         $invoice->setAutoRedirect(true);
-        $this->assertTrue($invoice->getAutoRedirect());
+        self::assertTrue($invoice->getAutoRedirect());
     }
 
     public function testGetJsonPayProRequired()
     {
         $invoice = $this->createClassObject();
         $invoice->setJsonPayProRequired(false);
-        $this->assertFalse($invoice->getJsonPayProRequired());
+        self::assertFalse($invoice->getJsonPayProRequired());
     }
 
     public function testGetBitpayIdRequired()
     {
         $invoice = $this->createClassObject();
         $invoice->setBitpayIdRequired(true);
-        $this->assertTrue($invoice->getBitpayIdRequired());
+        self::assertTrue($invoice->getBitpayIdRequired());
     }
 
     public function testGetMerchantName()
@@ -212,7 +211,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setMerchantName($expectedMerchantName);
-        $this->assertEquals($expectedMerchantName, $invoice->getMerchantName());
+        self::assertEquals($expectedMerchantName, $invoice->getMerchantName());
     }
 
     public function testGetSelectedTransactionCurrency()
@@ -221,7 +220,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setSelectedTransactionCurrency($expectedSelectedTransactionCurrency);
-        $this->assertEquals($expectedSelectedTransactionCurrency, $invoice->getSelectedTransactionCurrency());
+        self::assertEquals($expectedSelectedTransactionCurrency, $invoice->getSelectedTransactionCurrency());
     }
 
     public function testGetForcedBuyerSelectedWallet()
@@ -230,7 +229,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setForcedBuyerSelectedWallet($expectedForcedBuyerSelectedWallet);
-        $this->assertEquals($expectedForcedBuyerSelectedWallet, $invoice->getForcedBuyerSelectedWallet());
+        self::assertEquals($expectedForcedBuyerSelectedWallet, $invoice->getForcedBuyerSelectedWallet());
     }
 
     public function testGetForcedBuyerSelectedTransactionCurrency()
@@ -239,26 +238,26 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setForcedBuyerSelectedTransactionCurrency($expectedForcedBuyerSelectedTransactionCurrency);
-        $this->assertEquals($expectedForcedBuyerSelectedTransactionCurrency, $invoice->getForcedBuyerSelectedTransactionCurrency());
+        self::assertEquals($expectedForcedBuyerSelectedTransactionCurrency, $invoice->getForcedBuyerSelectedTransactionCurrency());
     }
 
-    public function testGetItemizedDetailsAsArray()
+    /**
+     * @throws BitPayException
+     */
+    public function testGetItemizedDetailsAsArray(): void
     {
-        $expectedArray = [
-            'amount' => 1,
-            'description' => 'testDescription',
-            'isFee' => true
-        ];
-        $expectedItemizedDetails = $this->getMockBuilder(ItemizedDetails::class)->disableOriginalConstructor()->getMock();
-        $expectedItemizedDetails->method('toArray')->willReturn($expectedArray);
+        $expectedDescription = 'testDescription';
+        $itemizedDetails = new ItemizedDetails();
+        $itemizedDetails->setAmount(1);
+        $itemizedDetails->setDescription($expectedDescription);
+        $itemizedDetails->setIsFee(true);
 
         $invoice = $this->createClassObject();
-        $invoice->setItemizedDetails([$expectedArray]);
+        $invoice->setItemizedDetails([$itemizedDetails]);
 
-        $this->assertIsArray($invoice->getItemizedDetails());
-        $this->assertNotNull($invoice->getItemizedDetails());
-
-        $this->assertInstanceOf(ItemizedDetails::class, $invoice->getItemizedDetails()[0]);
+        self::assertSame([$itemizedDetails], $invoice->getItemizedDetails());
+        self::assertSame($expectedDescription, $invoice->getItemizedDetails()[0]->getDescription());
+        self::assertInstanceOf(ItemizedDetails::class, $invoice->getItemizedDetails()[0]);
     }
 
     public function testGetBuyer()
@@ -267,7 +266,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setBuyer($expectedBuyer);
-        $this->assertEquals($expectedBuyer, $invoice->getBuyer());
+        self::assertEquals($expectedBuyer, $invoice->getBuyer());
     }
 
     public function testGetBuyerEmail()
@@ -276,7 +275,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setBuyerEmail($expectedBuyerEmail);
-        $this->assertEquals($expectedBuyerEmail, $invoice->getBuyerEmail());
+        self::assertEquals($expectedBuyerEmail, $invoice->getBuyerEmail());
     }
 
     public function testGetBuyerSms()
@@ -285,7 +284,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setBuyerSms($expectedBuyerSms);
-        $this->assertEquals($expectedBuyerSms, $invoice->getBuyerSms());
+        self::assertEquals($expectedBuyerSms, $invoice->getBuyerSms());
     }
 
     public function testGetRefundAddresses()
@@ -294,7 +293,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setRefundAddresses($expectedRefundAddresses);
-        $this->assertEquals($expectedRefundAddresses, $invoice->getRefundAddresses());
+        self::assertEquals($expectedRefundAddresses, $invoice->getRefundAddresses());
     }
 
     public function testGetId()
@@ -303,7 +302,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setId($expectedId);
-        $this->assertEquals($expectedId, $invoice->getId());
+        self::assertEquals($expectedId, $invoice->getId());
     }
 
     public function testGetUrl()
@@ -312,7 +311,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setUrl($expectedUrl);
-        $this->assertEquals($expectedUrl, $invoice->getUrl());
+        self::assertEquals($expectedUrl, $invoice->getUrl());
     }
 
     public function testGetStatus()
@@ -321,14 +320,14 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setStatus($expectedStatus);
-        $this->assertEquals($expectedStatus, $invoice->getStatus());
+        self::assertEquals($expectedStatus, $invoice->getStatus());
     }
 
     public function testGetFeeDetected()
     {
         $invoice = $this->createClassObject();
         $invoice->setLowFeeDetected(true);
-        $this->assertTrue($invoice->getLowFeeDetected());
+        self::assertTrue($invoice->getLowFeeDetected());
     }
 
     public function testGetInvoiceTime()
@@ -337,7 +336,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setInvoiceTime($expectedInvoiceTime);
-        $this->assertEquals($expectedInvoiceTime, $invoice->getInvoiceTime());
+        self::assertEquals($expectedInvoiceTime, $invoice->getInvoiceTime());
     }
 
     public function testGetExpirationTime()
@@ -346,7 +345,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setExpirationTime($expectedExpirationTime);
-        $this->assertEquals($expectedExpirationTime, $invoice->getExpirationTime());
+        self::assertEquals($expectedExpirationTime, $invoice->getExpirationTime());
     }
 
     public function testGetCurrentTime()
@@ -355,7 +354,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setCurrentTime($expectedCurrencyTime);
-        $this->assertEquals($expectedCurrencyTime, $invoice->getCurrentTime());
+        self::assertEquals($expectedCurrencyTime, $invoice->getCurrentTime());
     }
 
     public function testGetTransactions()
@@ -364,7 +363,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setTransactions($expectedTransaction);
-        $this->assertEquals($expectedTransaction, $invoice->getTransactions());
+        self::assertEquals($expectedTransaction, $invoice->getTransactions());
     }
 
     public function testGetExceptionStatus()
@@ -373,7 +372,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setExceptionStatus($expectedExceptionStatus);
-        $this->assertEquals($expectedExceptionStatus, $invoice->getExceptionStatus());
+        self::assertEquals($expectedExceptionStatus, $invoice->getExceptionStatus());
     }
 
     public function testGetTargetConfirmations()
@@ -382,14 +381,14 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setTargetConfirmations($expectedTargetConfirmation);
-        $this->assertEquals($expectedTargetConfirmation, $invoice->getTargetConfirmations());
+        self::assertEquals($expectedTargetConfirmation, $invoice->getTargetConfirmations());
     }
 
     public function testGetRefundAddressRequestPending()
     {
         $invoice = $this->createClassObject();
         $invoice->setRefundAddressRequestPending(false);
-        $this->assertFalse($invoice->getRefundAddressRequestPending());
+        self::assertFalse($invoice->getRefundAddressRequestPending());
     }
 
     public function testGetBuyerProvidedEmail()
@@ -398,7 +397,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setBuyerProvidedEmail($expectedBuyerProvidedEmail);
-        $this->assertEquals($expectedBuyerProvidedEmail, $invoice->getBuyerProvidedEmail());
+        self::assertEquals($expectedBuyerProvidedEmail, $invoice->getBuyerProvidedEmail());
     }
 
     public function testGetBuyerProvidedInfo()
@@ -407,7 +406,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setBuyerProvidedInfo($expectedBuyerProvidedInfo);
-        $this->assertEquals($expectedBuyerProvidedInfo, $invoice->getBuyerProvidedInfo());
+        self::assertEquals($expectedBuyerProvidedInfo, $invoice->getBuyerProvidedInfo());
     }
 
     public function testGetUniversalCodes()
@@ -416,7 +415,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setUniversalCodes($expectedUniversalCodes);
-        $this->assertEquals($expectedUniversalCodes, $invoice->getUniversalCodes());
+        self::assertEquals($expectedUniversalCodes, $invoice->getUniversalCodes());
     }
 
     public function testGetSupportedTransactionCurrencies()
@@ -425,7 +424,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setSupportedTransactionCurrencies($expectedSupportedTransactionCurrencies);
-        $this->assertEquals($expectedSupportedTransactionCurrencies, $invoice->getSupportedTransactionCurrencies());
+        self::assertEquals($expectedSupportedTransactionCurrencies, $invoice->getSupportedTransactionCurrencies());
     }
 
     public function testGetPaymentTotals()
@@ -446,7 +445,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentTotals($expectedPaymentTotals);
-        $this->assertEquals($expectedPaymentTotals, $invoice->getPaymentTotals());
+        self::assertEquals($expectedPaymentTotals, $invoice->getPaymentTotals());
     }
 
     public function testGetPaymentSubTotals()
@@ -467,7 +466,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentSubtotals($expectedPaymentSubTotals);
-        $this->assertEquals($expectedPaymentSubTotals, $invoice->getPaymentSubtotals());
+        self::assertEquals($expectedPaymentSubTotals, $invoice->getPaymentSubtotals());
     }
 
     public function testGetPaymentDisplaySubTotals()
@@ -488,7 +487,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentDisplaySubTotals($expectedPaymentDisplaySubTotals);
-        $this->assertEquals($expectedPaymentDisplaySubTotals, $invoice->getPaymentDisplaySubTotals());
+        self::assertEquals($expectedPaymentDisplaySubTotals, $invoice->getPaymentDisplaySubTotals());
     }
 
     public function testGetPaymentDisplayTotals()
@@ -509,7 +508,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentDisplayTotals($expectedPaymentDisplayTotals);
-        $this->assertEquals($expectedPaymentDisplayTotals, $invoice->getPaymentDisplayTotals());
+        self::assertEquals($expectedPaymentDisplayTotals, $invoice->getPaymentDisplayTotals());
     }
 
     public function testGetPaymentCodes()
@@ -556,7 +555,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setPaymentCodes($expectedPaymentCodes);
-        $this->assertEquals($expectedPaymentCodes, $invoice->getPaymentCodes());
+        self::assertEquals($expectedPaymentCodes, $invoice->getPaymentCodes());
     }
 
     public function testGetUnderpaidAmount()
@@ -565,7 +564,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setUnderpaidAmount($expectedUnderpaidAmount);
-        $this->assertEquals($expectedUnderpaidAmount, $invoice->getUnderpaidAmount());
+        self::assertEquals($expectedUnderpaidAmount, $invoice->getUnderpaidAmount());
     }
 
     public function testGetOverpaidAmount()
@@ -574,7 +573,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setOverpaidAmount($expectedOverpaidAmount);
-        $this->assertEquals($expectedOverpaidAmount, $invoice->getOverpaidAmount());
+        self::assertEquals($expectedOverpaidAmount, $invoice->getOverpaidAmount());
     }
 
     public function testGetMinerFees()
@@ -583,14 +582,14 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setMinerFees($expectedMinerFees);
-        $this->assertEquals($expectedMinerFees, $invoice->getMinerFees());
+        self::assertEquals($expectedMinerFees, $invoice->getMinerFees());
     }
 
     public function testGetNonPayProPaymentReceived()
     {
         $invoice = $this->createClassObject();
         $invoice->setNonPayProPaymentReceived(true);
-        $this->assertTrue($invoice->getNonPayProPaymentReceived());
+        self::assertTrue($invoice->getNonPayProPaymentReceived());
     }
 
     public function testGetShopper()
@@ -599,7 +598,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setShopper($expectedShopper);
-        $this->assertEquals($expectedShopper, $invoice->getShopper());
+        self::assertEquals($expectedShopper, $invoice->getShopper());
     }
 
     public function testGetBillId()
@@ -608,7 +607,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setBillId($expectedBillId);
-        $this->assertEquals($expectedBillId, $invoice->getBillId());
+        self::assertEquals($expectedBillId, $invoice->getBillId());
     }
 
     public function testGetRefundInfo()
@@ -617,14 +616,14 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setRefundInfo($expectedRefundInfo);
-        $this->assertEquals($expectedRefundInfo, $invoice->getRefundInfo());
+        self::assertEquals($expectedRefundInfo, $invoice->getRefundInfo());
     }
 
     public function testGetExtendedNotifications()
     {
         $invoice = $this->createClassObject();
         $invoice->setExtendedNotifications(false);
-        $this->assertFalse($invoice->getExtendedNotifications());
+        self::assertFalse($invoice->getExtendedNotifications());
     }
 
     public function testgetTransactionCurrency()
@@ -633,7 +632,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setTransactionCurrency($expectedTransactionCurrency);
-        $this->assertEquals($expectedTransactionCurrency, $invoice->getTransactionCurrency());
+        self::assertEquals($expectedTransactionCurrency, $invoice->getTransactionCurrency());
     }
 
     public function testGetAmountPaid()
@@ -642,7 +641,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setAmountPaid($expectedAmountPaid);
-        $this->assertEquals($expectedAmountPaid, $invoice->getAmountPaid());
+        self::assertEquals($expectedAmountPaid, $invoice->getAmountPaid());
     }
 
     public function testGetDisplayAmountPaid()
@@ -651,7 +650,7 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setDisplayAmountPaid($expectedDisplayAmountPaid);
-        $this->assertEquals($expectedDisplayAmountPaid, $invoice->getDisplayAmountPaid());
+        self::assertEquals($expectedDisplayAmountPaid, $invoice->getDisplayAmountPaid());
     }
 
     public function testGetExchangeRates()
@@ -660,14 +659,14 @@ class InvoiceTest extends TestCase
 
         $invoice = $this->createClassObject();
         $invoice->setExchangeRates($expectedExchangeRates);
-        $this->assertEquals($expectedExchangeRates, $invoice->getExchangeRates());
+        self::assertEquals($expectedExchangeRates, $invoice->getExchangeRates());
     }
 
     public function testGetIsCancelled()
     {
         $invoice = $this->createClassObject();
         $invoice->setIsCancelled(false);
-        $this->assertFalse($invoice->getIsCancelled());
+        self::assertFalse($invoice->getIsCancelled());
     }
 
     /**
@@ -679,95 +678,95 @@ class InvoiceTest extends TestCase
         $this->setObjectSetters($invoice);
         $invoiceArray = $invoice->toArray();
 
-        $this->assertNotNull($invoiceArray);
-        $this->assertIsArray($invoiceArray);
+        self::assertNotNull($invoiceArray);
+        self::assertIsArray($invoiceArray);
 
-        $this->assertArrayHasKey('currency', $invoiceArray);
-        $this->assertArrayHasKey('guid', $invoiceArray);
-        $this->assertArrayHasKey('token', $invoiceArray);
-        $this->assertArrayHasKey('price', $invoiceArray);
-        $this->assertArrayHasKey('posData', $invoiceArray);
-        $this->assertArrayHasKey('notificationURL', $invoiceArray);
-        $this->assertArrayHasKey('transactionSpeed', $invoiceArray);
-        $this->assertArrayHasKey('fullNotifications', $invoiceArray);
-        $this->assertArrayHasKey('notificationEmail', $invoiceArray);
-        $this->assertArrayHasKey('redirectURL', $invoiceArray);
-        $this->assertArrayHasKey('orderId', $invoiceArray);
-        $this->assertArrayHasKey('itemDesc', $invoiceArray);
-        $this->assertArrayHasKey('itemCode', $invoiceArray);
-        $this->assertArrayHasKey('physical', $invoiceArray);
-        $this->assertArrayHasKey('paymentCurrencies', $invoiceArray);
-        $this->assertArrayHasKey('acceptanceWindow', $invoiceArray);
-        $this->assertArrayHasKey('closeURL', $invoiceArray);
-        $this->assertArrayHasKey('autoRedirect', $invoiceArray);
-        $this->assertArrayHasKey('refundAddresses', $invoiceArray);
-        $this->assertArrayHasKey('id', $invoiceArray);
-        $this->assertArrayHasKey('url', $invoiceArray);
-        $this->assertArrayHasKey('status', $invoiceArray);
-        $this->assertArrayHasKey('lowFeeDetected', $invoiceArray);
-        $this->assertArrayHasKey('invoiceTime', $invoiceArray);
-        $this->assertArrayHasKey('expirationTime', $invoiceArray);
-        $this->assertArrayHasKey('currentTime', $invoiceArray);
-        $this->assertArrayHasKey('exceptionStatus', $invoiceArray);
-        $this->assertArrayHasKey('targetConfirmations', $invoiceArray);
-//        $this->assertArrayHasKey('refundAddressRequestPending', $invoiceArray);
-        $this->assertArrayHasKey('buyerProvidedEmail', $invoiceArray);
-        $this->assertArrayHasKey('billId', $invoiceArray);
-        $this->assertArrayHasKey('extendedNotifications', $invoiceArray);
-        $this->assertArrayHasKey('transactionCurrency', $invoiceArray);
-        $this->assertArrayHasKey('amountPaid', $invoiceArray);
-        $this->assertArrayHasKey('exchangeRates', $invoiceArray);
-        $this->assertArrayHasKey('merchantName', $invoiceArray);
-        $this->assertArrayHasKey('selectedTransactionCurrency', $invoiceArray);
-        $this->assertArrayHasKey('bitpayIdRequired', $invoiceArray);
-        $this->assertArrayHasKey('forcedBuyerSelectedWallet', $invoiceArray);
-        $this->assertArrayHasKey('isCancelled', $invoiceArray);
-        $this->assertArrayHasKey('buyerEmail', $invoiceArray);
-        $this->assertArrayHasKey('buyerSms', $invoiceArray);
-        $this->assertArrayHasKey('forcedBuyerSelectedTransactionCurrency', $invoiceArray);
+        self::assertArrayHasKey('currency', $invoiceArray);
+        self::assertArrayHasKey('guid', $invoiceArray);
+        self::assertArrayHasKey('token', $invoiceArray);
+        self::assertArrayHasKey('price', $invoiceArray);
+        self::assertArrayHasKey('posData', $invoiceArray);
+        self::assertArrayHasKey('notificationURL', $invoiceArray);
+        self::assertArrayHasKey('transactionSpeed', $invoiceArray);
+        self::assertArrayHasKey('fullNotifications', $invoiceArray);
+        self::assertArrayHasKey('notificationEmail', $invoiceArray);
+        self::assertArrayHasKey('redirectURL', $invoiceArray);
+        self::assertArrayHasKey('orderId', $invoiceArray);
+        self::assertArrayHasKey('itemDesc', $invoiceArray);
+        self::assertArrayHasKey('itemCode', $invoiceArray);
+        self::assertArrayHasKey('physical', $invoiceArray);
+        self::assertArrayHasKey('paymentCurrencies', $invoiceArray);
+        self::assertArrayHasKey('acceptanceWindow', $invoiceArray);
+        self::assertArrayHasKey('closeURL', $invoiceArray);
+        self::assertArrayHasKey('autoRedirect', $invoiceArray);
+        self::assertArrayHasKey('refundAddresses', $invoiceArray);
+        self::assertArrayHasKey('id', $invoiceArray);
+        self::assertArrayHasKey('url', $invoiceArray);
+        self::assertArrayHasKey('status', $invoiceArray);
+        self::assertArrayHasKey('lowFeeDetected', $invoiceArray);
+        self::assertArrayHasKey('invoiceTime', $invoiceArray);
+        self::assertArrayHasKey('expirationTime', $invoiceArray);
+        self::assertArrayHasKey('currentTime', $invoiceArray);
+        self::assertArrayHasKey('exceptionStatus', $invoiceArray);
+        self::assertArrayHasKey('targetConfirmations', $invoiceArray);
+//        self::assertArrayHasKey('refundAddressRequestPending', $invoiceArray);
+        self::assertArrayHasKey('buyerProvidedEmail', $invoiceArray);
+        self::assertArrayHasKey('billId', $invoiceArray);
+        self::assertArrayHasKey('extendedNotifications', $invoiceArray);
+        self::assertArrayHasKey('transactionCurrency', $invoiceArray);
+        self::assertArrayHasKey('amountPaid', $invoiceArray);
+        self::assertArrayHasKey('exchangeRates', $invoiceArray);
+        self::assertArrayHasKey('merchantName', $invoiceArray);
+        self::assertArrayHasKey('selectedTransactionCurrency', $invoiceArray);
+        self::assertArrayHasKey('bitpayIdRequired', $invoiceArray);
+        self::assertArrayHasKey('forcedBuyerSelectedWallet', $invoiceArray);
+        self::assertArrayHasKey('isCancelled', $invoiceArray);
+        self::assertArrayHasKey('buyerEmail', $invoiceArray);
+        self::assertArrayHasKey('buyerSms', $invoiceArray);
+        self::assertArrayHasKey('forcedBuyerSelectedTransactionCurrency', $invoiceArray);
 
-        $this->assertEquals('BTC', $invoiceArray['currency']);
-        $this->assertEquals('Test guid', $invoiceArray['guid']);
-        $this->assertEquals('4h2h7kee5eh2hh4', $invoiceArray['token']);
-        $this->assertEquals(355.3, $invoiceArray['price']);
-        $this->assertEquals('Test pos data', $invoiceArray['posData']);
-        $this->assertEquals('http://test.com', $invoiceArray['notificationURL']);
-        $this->assertEquals('Test transaction speed', $invoiceArray['transactionSpeed']);
-        $this->assertTrue($invoiceArray['fullNotifications']);
-        $this->assertEquals('test@email.com', $invoiceArray['notificationEmail']);
-        $this->assertEquals('http://test.com', $invoiceArray['redirectURL']);
-        $this->assertEquals('34', $invoiceArray['orderId']);
-        $this->assertEquals('Test item desc', $invoiceArray['itemDesc']);
-        $this->assertEquals('Test item code', $invoiceArray['itemCode']);
-        $this->assertTrue($invoiceArray['physical']);
-        $this->assertEquals(['BTC'], $invoiceArray['paymentCurrencies']);
-        $this->assertEquals(1.1, $invoiceArray['acceptanceWindow']);
-        $this->assertEquals('http://test.com', $invoiceArray['closeURL']);
-        $this->assertTrue($invoiceArray['autoRedirect']);
-        $this->assertEquals(['Test refund address'], $invoiceArray['refundAddresses']);
-        $this->assertEquals('12', $invoiceArray['id']);
-        $this->assertEquals('http://test.com', $invoiceArray['url']);
-        $this->assertEquals('pending', $invoiceArray['status']);
-        $this->assertEquals('Low fee detected', $invoiceArray['lowFeeDetected']);
-        $this->assertEquals(1620734545366, $invoiceArray['invoiceTime']);
-        $this->assertEquals('01:01:01', $invoiceArray['expirationTime']);
-        $this->assertEquals('01:01:01', $invoiceArray['currentTime']);
-        $this->assertEquals('Exception status', $invoiceArray['exceptionStatus']);
-        $this->assertEquals(6, $invoiceArray['targetConfirmations']);
-        $this->assertEquals('test@email.com', $invoiceArray['buyerProvidedEmail']);
-        $this->assertEquals('34', $invoiceArray['billId']);
-        $this->assertTrue($invoiceArray['extendedNotifications']);
-        $this->assertEquals('BTC', $invoiceArray['transactionCurrency']);
-        $this->assertEquals(12, $invoiceArray['amountPaid']);
-        $this->assertEquals($this->getExampleExchangeRates(), $invoiceArray['exchangeRates']);
-        $this->assertEquals('Merchant name', $invoiceArray['merchantName']);
-        $this->assertEquals('BTC', $invoiceArray['selectedTransactionCurrency']);
-        $this->assertTrue($invoiceArray['bitpayIdRequired']);
-        $this->assertEquals('Forced Buyer Selected Wallet', $invoiceArray['forcedBuyerSelectedWallet']);
-        $this->assertTrue($invoiceArray['isCancelled']);
-        $this->assertEquals('test@email.com', $invoiceArray['buyerEmail']);
-        $this->assertEquals('Buyer sms', $invoiceArray['buyerSms']);
-        $this->assertEquals('BTC', $invoiceArray['forcedBuyerSelectedTransactionCurrency']);
+        self::assertEquals('BTC', $invoiceArray['currency']);
+        self::assertEquals('Test guid', $invoiceArray['guid']);
+        self::assertEquals('4h2h7kee5eh2hh4', $invoiceArray['token']);
+        self::assertEquals(355.3, $invoiceArray['price']);
+        self::assertEquals('Test pos data', $invoiceArray['posData']);
+        self::assertEquals('http://test.com', $invoiceArray['notificationURL']);
+        self::assertEquals('Test transaction speed', $invoiceArray['transactionSpeed']);
+        self::assertTrue($invoiceArray['fullNotifications']);
+        self::assertEquals('test@email.com', $invoiceArray['notificationEmail']);
+        self::assertEquals('http://test.com', $invoiceArray['redirectURL']);
+        self::assertEquals('34', $invoiceArray['orderId']);
+        self::assertEquals('Test item desc', $invoiceArray['itemDesc']);
+        self::assertEquals('Test item code', $invoiceArray['itemCode']);
+        self::assertTrue($invoiceArray['physical']);
+        self::assertEquals(['BTC'], $invoiceArray['paymentCurrencies']);
+        self::assertEquals(1.1, $invoiceArray['acceptanceWindow']);
+        self::assertEquals('http://test.com', $invoiceArray['closeURL']);
+        self::assertTrue($invoiceArray['autoRedirect']);
+        self::assertEquals(['Test refund address'], $invoiceArray['refundAddresses']);
+        self::assertEquals('12', $invoiceArray['id']);
+        self::assertEquals('http://test.com', $invoiceArray['url']);
+        self::assertEquals('pending', $invoiceArray['status']);
+        self::assertEquals('Low fee detected', $invoiceArray['lowFeeDetected']);
+        self::assertEquals(1620734545366, $invoiceArray['invoiceTime']);
+        self::assertEquals('01:01:01', $invoiceArray['expirationTime']);
+        self::assertEquals('01:01:01', $invoiceArray['currentTime']);
+        self::assertEquals('Exception status', $invoiceArray['exceptionStatus']);
+        self::assertEquals(6, $invoiceArray['targetConfirmations']);
+        self::assertEquals('test@email.com', $invoiceArray['buyerProvidedEmail']);
+        self::assertEquals('34', $invoiceArray['billId']);
+        self::assertTrue($invoiceArray['extendedNotifications']);
+        self::assertEquals('BTC', $invoiceArray['transactionCurrency']);
+        self::assertEquals(12, $invoiceArray['amountPaid']);
+        self::assertEquals($this->getExampleExchangeRates(), $invoiceArray['exchangeRates']);
+        self::assertEquals('Merchant name', $invoiceArray['merchantName']);
+        self::assertEquals('BTC', $invoiceArray['selectedTransactionCurrency']);
+        self::assertTrue($invoiceArray['bitpayIdRequired']);
+        self::assertEquals('Forced Buyer Selected Wallet', $invoiceArray['forcedBuyerSelectedWallet']);
+        self::assertTrue($invoiceArray['isCancelled']);
+        self::assertEquals('test@email.com', $invoiceArray['buyerEmail']);
+        self::assertEquals('Buyer sms', $invoiceArray['buyerSms']);
+        self::assertEquals('BTC', $invoiceArray['forcedBuyerSelectedTransactionCurrency']);
     }
 
     public function testToArrayEmptyKey()
@@ -775,11 +774,11 @@ class InvoiceTest extends TestCase
         $invoice = $this->createClassObject();
         $invoiceArray = $invoice->toArray();
 
-        $this->assertNotNull($invoiceArray);
-        $this->assertIsArray($invoiceArray);
+        self::assertNotNull($invoiceArray);
+        self::assertIsArray($invoiceArray);
 
-        $this->assertArrayNotHasKey('transactions', $invoiceArray);
-        $this->assertArrayNotHasKey('refundAddressRequestPending', $invoiceArray);
+        self::assertArrayNotHasKey('transactions', $invoiceArray);
+        self::assertArrayNotHasKey('refundAddressRequestPending', $invoiceArray);
     }
 
     private function createClassObject(): Invoice

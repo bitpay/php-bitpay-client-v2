@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+/**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */

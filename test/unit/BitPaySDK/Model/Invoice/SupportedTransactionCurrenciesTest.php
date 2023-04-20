@@ -11,7 +11,7 @@ class SupportedTransactionCurrenciesTest extends TestCase
     public function testInstanceOf()
     {
         $supportedTransactionCurrencies = $this->createClassObject();
-        $this->assertInstanceOf(SupportedTransactionCurrencies::class, $supportedTransactionCurrencies);
+        self::assertInstanceOf(SupportedTransactionCurrencies::class, $supportedTransactionCurrencies);
     }
 
     public function testGetBTC()
@@ -19,7 +19,7 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
         $supportedTransactionCurrencies = $this->createClassObject();
         $supportedTransactionCurrencies->setBTC($expectedSupportedTransactionCurrency);
-        $this->assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getBTC());
+        self::assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getBTC());
     }
 
     public function testGetBCH()
@@ -27,7 +27,7 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
         $supportedTransactionCurrencies = $this->createClassObject();
         $supportedTransactionCurrencies->setBCH($expectedSupportedTransactionCurrency);
-        $this->assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getBCH());
+        self::assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getBCH());
     }
 
     public function testGetETH()
@@ -35,7 +35,7 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
         $supportedTransactionCurrencies = $this->createClassObject();
         $supportedTransactionCurrencies->setETH($expectedSupportedTransactionCurrency);
-        $this->assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getETH());
+        self::assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getETH());
     }
 
     public function testGetUSDC()
@@ -43,7 +43,7 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
         $supportedTransactionCurrencies = $this->createClassObject();
         $supportedTransactionCurrencies->setUSDC($expectedSupportedTransactionCurrency);
-        $this->assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getUSDC());
+        self::assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getUSDC());
     }
 
     public function testGetGUSD()
@@ -51,7 +51,7 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
         $supportedTransactionCurrencies = $this->createClassObject();
         $supportedTransactionCurrencies->setGUSD($expectedSupportedTransactionCurrency);
-        $this->assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getGUSD());
+        self::assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getGUSD());
     }
 
     public function testGetPAX()
@@ -59,7 +59,7 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
         $supportedTransactionCurrencies = $this->createClassObject();
         $supportedTransactionCurrencies->setPAX($expectedSupportedTransactionCurrency);
-        $this->assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getPAX());
+        self::assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getPAX());
     }
 
     public function testGetXRP()
@@ -67,23 +67,23 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
         $supportedTransactionCurrencies = $this->createClassObject();
         $supportedTransactionCurrencies->setXRP($expectedSupportedTransactionCurrency);
-        $this->assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getXRP());
+        self::assertEquals($expectedSupportedTransactionCurrency, $supportedTransactionCurrencies->getXRP());
     }
 
     public function testToArray()
     {
         $expectedSupportedTransactionCurrency = $this->getMockBuilder(SupportedTransactionCurrency::class)->getMock();
-        $expectedSupportedTransactionCurrency->expects($this->once())->method('toArray')->willReturn(['enabled' => true, 'reason' => 'test']);
+        $expectedSupportedTransactionCurrency->expects(self::once())->method('toArray')->willReturn(['enabled' => true, 'reason' => 'test']);
         $supportedTransactionCurrencies = $this->createClassObject();
         $supportedTransactionCurrencies->setBTC($expectedSupportedTransactionCurrency);
         $supportedTransactionCurrenciesArray = $supportedTransactionCurrencies->toArray();
 
-        $this->assertNotNull($supportedTransactionCurrenciesArray);
-        $this->assertIsArray($supportedTransactionCurrenciesArray);
+        self::assertNotNull($supportedTransactionCurrenciesArray);
+        self::assertIsArray($supportedTransactionCurrenciesArray);
 
-        $this->assertArrayHasKey('btc', $supportedTransactionCurrenciesArray);
-        $this->assertArrayNotHasKey('bch', $supportedTransactionCurrenciesArray);
-        $this->assertEquals(['btc' => ['enabled' => true,  'reason' => 'test']], $supportedTransactionCurrenciesArray);
+        self::assertArrayHasKey('btc', $supportedTransactionCurrenciesArray);
+        self::assertArrayNotHasKey('bch', $supportedTransactionCurrenciesArray);
+        self::assertEquals(['btc' => ['enabled' => true,  'reason' => 'test']], $supportedTransactionCurrenciesArray);
     }
 
     public function testToArrayEmptyKey()
@@ -91,10 +91,10 @@ class SupportedTransactionCurrenciesTest extends TestCase
         $supportedTransactionCurrencies = $this->createClassObject();
         $supportedTransactionCurrenciesArray = $supportedTransactionCurrencies->toArray();
 
-        $this->assertNotNull($supportedTransactionCurrenciesArray);
-        $this->assertIsArray($supportedTransactionCurrenciesArray);
+        self::assertNotNull($supportedTransactionCurrenciesArray);
+        self::assertIsArray($supportedTransactionCurrenciesArray);
 
-        $this->assertArrayNotHasKey('btc', $supportedTransactionCurrenciesArray);
+        self::assertArrayNotHasKey('btc', $supportedTransactionCurrenciesArray);
     }
 
     private function createClassObject(): SupportedTransactionCurrencies

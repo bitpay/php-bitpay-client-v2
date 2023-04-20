@@ -12,7 +12,7 @@ class WalletTest extends TestCase
   public function testInstanceOf()
   {
     $wallet = $this->createClassObject();
-    $this->assertInstanceOf(Wallet::class, $wallet);
+    self::assertInstanceOf(Wallet::class, $wallet);
   }
 
   public function testGetKey()
@@ -21,7 +21,7 @@ class WalletTest extends TestCase
 
     $wallet = $this->createClassObject();
     $wallet->setKey($expectedKey);
-    $this->assertEquals($expectedKey, $wallet->getKey());
+    self::assertEquals($expectedKey, $wallet->getKey());
   }
 
   public function testGetDisplayName()
@@ -30,7 +30,7 @@ class WalletTest extends TestCase
 
     $wallet = $this->createClassObject();
     $wallet->setDisplayName($expectedDisplayName);
-    $this->assertEquals($expectedDisplayName, $wallet->getDisplayName());
+    self::assertEquals($expectedDisplayName, $wallet->getDisplayName());
   }
 
   public function testGetAvatar()
@@ -39,14 +39,14 @@ class WalletTest extends TestCase
 
     $wallet = $this->createClassObject();
     $wallet->setAvatar($expectedAvatar);
-    $this->assertEquals($expectedAvatar, $wallet->getAvatar());
+    self::assertEquals($expectedAvatar, $wallet->getAvatar());
   }
 
   public function testGetPayPro()
   {
     $wallet = $this->createClassObject();
     $wallet->setPayPro(true);
-    $this->assertTrue($wallet->getPayPro());
+    self::assertTrue($wallet->getPayPro());
   }
 
   public function testGetCurrencies()
@@ -67,7 +67,7 @@ class WalletTest extends TestCase
     
     $wallet = $this->createClassObject();
     $wallet->setCurrencies($expectedCurrencies);
-    $this->assertEquals($expectedCurrencies, $wallet->getCurrencies());
+    self::assertEquals($expectedCurrencies, $wallet->getCurrencies());
   }
 
   public function testGetImage()
@@ -76,7 +76,7 @@ class WalletTest extends TestCase
 
     $wallet = $this->createClassObject();
     $wallet->setImage($expectedImage);
-    $this->assertEquals($expectedImage, $wallet->getImage());
+    self::assertEquals($expectedImage, $wallet->getImage());
   }
 
   public function testToArray()
@@ -85,30 +85,30 @@ class WalletTest extends TestCase
     $this->objectSetters($wallet);
     $walletArray = $wallet->toArray();
 
-    $this->assertNotNull($walletArray);
-    $this->assertIsArray($walletArray);
+    self::assertNotNull($walletArray);
+    self::assertIsArray($walletArray);
 
-    $this->assertArrayHasKey('key', $walletArray);
-    $this->assertArrayHasKey('displayName', $walletArray);
-    $this->assertArrayHasKey('avatar', $walletArray);
-    $this->assertArrayHasKey('paypro', $walletArray);
-    $this->assertArrayHasKey('currencies', $walletArray);
-    $this->assertArrayHasKey('image', $walletArray);
+    self::assertArrayHasKey('key', $walletArray);
+    self::assertArrayHasKey('displayName', $walletArray);
+    self::assertArrayHasKey('avatar', $walletArray);
+    self::assertArrayHasKey('paypro', $walletArray);
+    self::assertArrayHasKey('currencies', $walletArray);
+    self::assertArrayHasKey('image', $walletArray);
 
-    $this->assertEquals('abcd123', $walletArray['key']);
-    $this->assertEquals('My Wallet', $walletArray['displayName']);
-    $this->assertEquals('image.png', $walletArray['avatar']);
-    $this->assertTrue($walletArray['paypro']);
-    $this->assertEquals('BTH', $walletArray['currencies']['code']);
-    $this->assertTrue($walletArray['currencies']['p2p']);
-    $this->assertTrue($walletArray['currencies']['dappBrowser']);
-    $this->assertEquals('https://bitpay.com/api/images/logo-6fa5404d.svg', $walletArray['currencies']['image']);
-    $this->assertTrue($walletArray['currencies']['paypro']);
-    $this->assertEquals('BIP21', $walletArray['currencies']['qr']['type']);
-    $this->assertFalse($walletArray['currencies']['qr']['collapsed']);
-    $this->assertEquals('1.23', $walletArray['currencies']['withdrawalFee']);
-    $this->assertTrue($walletArray['currencies']['walletConnect']);
-    $this->assertEquals('https://bitpay.com/api/images/logo-6fa5404d.svg', $walletArray['image']);
+    self::assertEquals('abcd123', $walletArray['key']);
+    self::assertEquals('My Wallet', $walletArray['displayName']);
+    self::assertEquals('image.png', $walletArray['avatar']);
+    self::assertTrue($walletArray['paypro']);
+    self::assertEquals('BTH', $walletArray['currencies']['code']);
+    self::assertTrue($walletArray['currencies']['p2p']);
+    self::assertTrue($walletArray['currencies']['dappBrowser']);
+    self::assertEquals('https://bitpay.com/api/images/logo-6fa5404d.svg', $walletArray['currencies']['image']);
+    self::assertTrue($walletArray['currencies']['paypro']);
+    self::assertEquals('BIP21', $walletArray['currencies']['qr']['type']);
+    self::assertFalse($walletArray['currencies']['qr']['collapsed']);
+    self::assertEquals('1.23', $walletArray['currencies']['withdrawalFee']);
+    self::assertTrue($walletArray['currencies']['walletConnect']);
+    self::assertEquals('https://bitpay.com/api/images/logo-6fa5404d.svg', $walletArray['image']);
   }
 
   private function createClassObject(): Wallet

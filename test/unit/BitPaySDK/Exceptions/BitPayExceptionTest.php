@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+declare(strict_types=1);
 
 namespace BitPaySDK\Test\Exceptions;
 
@@ -10,28 +14,28 @@ class BitPayExceptionTest extends TestCase
   public function testInstanceOf()
   {
     $exception = $this->createClassObject();
-    $this->assertInstanceOf(BitPayException::class, $exception);
+    self::assertInstanceOf(BitPayException::class, $exception);
   }
 
   public function testDefaultApiCode()
   {
     $exception = $this->createClassObject();
     
-    $this->assertEquals(null, $exception->getApiCode());
+    self::assertEquals(null, $exception->getApiCode());
   }
 
   public function testDefaultCode()
   {
     $exception = $this->createClassObject();
     
-    $this->assertEquals(100, $exception->getCode());
+    self::assertEquals(100, $exception->getCode());
   }
 
   public function testDefaultMessage()
   {
     $exception = $this->createClassObject();
     
-    $this->assertEquals(
+    self::assertEquals(
       'BITPAY-GENERIC: Unexpected Bitpay exeption.-> ',
       $exception->getMessage()
     );
@@ -46,7 +50,7 @@ class BitPayExceptionTest extends TestCase
       'CUSTOM-API-CODE'
     );
 
-    $this->assertEquals('CUSTOM-API-CODE', $exception->getApiCode());
+    self::assertEquals('CUSTOM-API-CODE', $exception->getApiCode());
   }
 
   private function createClassObject()

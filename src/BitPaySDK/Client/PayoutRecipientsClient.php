@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Client;
@@ -77,18 +81,17 @@ class PayoutRecipientsClient
         }
         try {
             $mapper = JsonMapperFactory::create();
-            $recipients = $mapper->mapArray(
-                json_decode($responseJson),
+
+            return $mapper->mapArray(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Payout\PayoutRecipient'
+                PayoutRecipient::class
             );
         } catch (Exception $e) {
             throw new PayoutRecipientCreationException(
                 "failed to deserialize BitPay server response (PayoutRecipients) : " . $e->getMessage()
             );
         }
-
-        return $recipients;
     }
 
     /**
@@ -120,8 +123,9 @@ class PayoutRecipientsClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $recipient = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new PayoutRecipient()
             );
         } catch (Exception $e) {
@@ -129,8 +133,6 @@ class PayoutRecipientsClient
                 "failed to deserialize BitPay server response (PayoutRecipient) : " . $e->getMessage()
             );
         }
-
-        return $recipient;
     }
 
     /**
@@ -176,18 +178,17 @@ class PayoutRecipientsClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $recipients = $mapper->mapArray(
-                json_decode($responseJson),
+
+            return $mapper->mapArray(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Payout\PayoutRecipient'
+                PayoutRecipient::class
             );
         } catch (Exception $e) {
             throw new PayoutRecipientQueryException(
                 "failed to deserialize BitPay server response (PayoutRecipients) : " . $e->getMessage()
             );
         }
-
-        return $recipients;
     }
 
     /**
@@ -220,8 +221,9 @@ class PayoutRecipientsClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $recipient = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new PayoutRecipient()
             );
         } catch (Exception $e) {
@@ -229,8 +231,6 @@ class PayoutRecipientsClient
                 "failed to deserialize BitPay server response (PayoutRecipient) : " . $e->getMessage()
             );
         }
-
-        return $recipient;
     }
 
     /**
@@ -262,14 +262,14 @@ class PayoutRecipientsClient
         }
 
         try {
-            $result = strtolower(json_decode($responseJson)->status) == "success";
+            $result = json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR);
+
+            return strtolower($result['status']) === "success";
         } catch (Exception $e) {
             throw new PayoutRecipientCancellationException(
                 "failed to deserialize BitPay server response (PayoutRecipient) : " . $e->getMessage()
             );
         }
-
-        return $result;
     }
 
     /**
@@ -301,13 +301,13 @@ class PayoutRecipientsClient
         }
 
         try {
-            $result = strtolower(json_decode($responseJson)->status) == "success";
+            $result = json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR);
+
+            return strtolower($result['status']) === "success";
         } catch (Exception $e) {
             throw new PayoutRecipientNotificationException(
                 "failed to deserialize BitPay server response (PayoutRecipient) : " . $e->getMessage()
             );
         }
-
-        return $result;
     }
 }

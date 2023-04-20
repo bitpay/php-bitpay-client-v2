@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -9,6 +13,8 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Payout;
 
+use BitPaySDK\Exceptions\PayoutRecipientException;
+
 /**
  *
  * @package Bitpay
@@ -16,8 +22,8 @@ namespace BitPaySDK\Model\Payout;
 class PayoutRecipients
 {
     protected array $recipients = [];
-    protected string $guid  = '';
-    protected string $token      = '';
+    protected string $guid = '';
+    protected string $token = '';
 
     /**
      * Constructor, create an recipient-full request PayoutBatch object.
@@ -78,30 +84,27 @@ class PayoutRecipients
     /**
      * Gets an array with all recipients.
      *
-     * @return array
+     * @return PayoutRecipient[]
      */
     public function getRecipients(): array
     {
-        $recipients = [];
-
-        foreach ($this->recipients as $recipient) {
-            if ($recipient instanceof PayoutRecipient) {
-                $recipients[] = $recipient->toArray();
-            } else {
-                $recipients[] = $recipient;
-            }
-        }
-
-        return $recipients;
+        return $this->recipients;
     }
 
     /**
      * Sets array with all recipients.
      *
-     * @param array $recipients
+     * @param PayoutRecipient[] $recipients
+     * @throws PayoutRecipientException
      */
     public function setRecipients(array $recipients): void
     {
+        foreach ($recipients as $recipient) {
+            if (!$recipient instanceof PayoutRecipient) {
+                throw new PayoutRecipientException('Array should contains only PayoutRecipient objects');
+            }
+        }
+
         $this->recipients = $recipients;
     }
 
@@ -112,10 +115,15 @@ class PayoutRecipients
      */
     public function toArray(): array
     {
+        $recipients = [];
+        foreach ($this->getRecipients() as $recipient) {
+            $recipients[] = $recipient->toArray();
+        }
+
         $elements = [
-            'guid'       => $this->getGuid(),
-            'recipients' => $this->getRecipients(),
-            'token'      => $this->getToken(),
+            'guid' => $this->getGuid(),
+            'recipients' => $recipients,
+            'token' => $this->getToken(),
         ];
 
         foreach ($elements as $key => $value) {

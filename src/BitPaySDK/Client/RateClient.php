@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Client;
@@ -142,7 +146,8 @@ class RateClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $rate = $mapper->map(
+
+            return $mapper->map(
                 json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Rate()
             );
@@ -151,7 +156,5 @@ class RateClient
                 "failed to deserialize BitPay server response (Rate) : " . $e->getMessage()
             );
         }
-
-        return $rate;
     }
 }

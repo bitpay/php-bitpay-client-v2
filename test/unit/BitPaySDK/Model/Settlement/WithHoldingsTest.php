@@ -10,7 +10,7 @@ class WithHoldingsTest extends TestCase
     public function testInstanceOf()
     {
         $withHoldings = $this->createClassObject();
-        $this->assertInstanceOf(WithHoldings::class, $withHoldings);
+        self::assertInstanceOf(WithHoldings::class, $withHoldings);
     }
 
     public function testGetAmount()
@@ -19,7 +19,7 @@ class WithHoldingsTest extends TestCase
 
         $withHoldings = $this->createClassObject();
         $withHoldings->setAmount($expectedAmount);
-        $this->assertEquals($expectedAmount, $withHoldings->getAmount());
+        self::assertEquals($expectedAmount, $withHoldings->getAmount());
     }
 
     public function testGetCode()
@@ -28,7 +28,7 @@ class WithHoldingsTest extends TestCase
 
         $withHoldings = $this->createClassObject();
         $withHoldings->setCode($expectedCode);
-        $this->assertEquals($expectedCode, $withHoldings->getCode());
+        self::assertEquals($expectedCode, $withHoldings->getCode());
     }
 
     public function testGetDescription()
@@ -37,7 +37,7 @@ class WithHoldingsTest extends TestCase
 
         $withHoldings = $this->createClassObject();
         $withHoldings->setDescription($expectedDescription);
-        $this->assertEquals($expectedDescription, $withHoldings->getDescription());
+        self::assertEquals($expectedDescription, $withHoldings->getDescription());
     }
 
     public function testGetNotes()
@@ -46,7 +46,7 @@ class WithHoldingsTest extends TestCase
 
         $withHoldings = $this->createClassObject();
         $withHoldings->setNotes($expectedNotes);
-        $this->assertEquals($expectedNotes, $withHoldings->getNotes());
+        self::assertEquals($expectedNotes, $withHoldings->getNotes());
     }
 
     public function testGetLabel()
@@ -55,7 +55,7 @@ class WithHoldingsTest extends TestCase
 
         $withHoldings = $this->createClassObject();
         $withHoldings->setLabel($expectedLabel);
-        $this->assertEquals($expectedLabel, $withHoldings->getLabel());
+        self::assertEquals($expectedLabel, $withHoldings->getLabel());
     }
 
     public function testGetBankCountry()
@@ -64,7 +64,7 @@ class WithHoldingsTest extends TestCase
 
         $withHoldings = $this->createClassObject();
         $withHoldings->setBankCountry($expectedBankCountry);
-        $this->assertEquals($expectedBankCountry, $withHoldings->getBankCountry());
+        self::assertEquals($expectedBankCountry, $withHoldings->getBankCountry());
     }
 
     public function testToArray()
@@ -73,22 +73,22 @@ class WithHoldingsTest extends TestCase
         $this->setSetters($withHoldings);
         $withHoldingsArray = $withHoldings->toArray();
 
-        $this->assertNotNull($withHoldingsArray);
-        $this->assertIsArray($withHoldingsArray);
+        self::assertNotNull($withHoldingsArray);
+        self::assertIsArray($withHoldingsArray);
 
-        $this->assertArrayHasKey('amount', $withHoldingsArray);
-        $this->assertArrayHasKey('code', $withHoldingsArray);
-        $this->assertArrayHasKey('description', $withHoldingsArray);
-        $this->assertArrayHasKey('notes', $withHoldingsArray);
-        $this->assertArrayHasKey('label', $withHoldingsArray);
-        $this->assertArrayHasKey('bankCountry', $withHoldingsArray);
+        self::assertArrayHasKey('amount', $withHoldingsArray);
+        self::assertArrayHasKey('code', $withHoldingsArray);
+        self::assertArrayHasKey('description', $withHoldingsArray);
+        self::assertArrayHasKey('notes', $withHoldingsArray);
+        self::assertArrayHasKey('label', $withHoldingsArray);
+        self::assertArrayHasKey('bankCountry', $withHoldingsArray);
 
-        $this->assertEquals(10.5, $withHoldingsArray['amount']);
-        $this->assertEquals('BTC', $withHoldingsArray['code']);
-        $this->assertEquals('Description', $withHoldingsArray['description']);
-        $this->assertEquals('Note', $withHoldingsArray['notes']);
-        $this->assertEquals('Label', $withHoldingsArray['label']);
-        $this->assertEquals('USA', $withHoldingsArray['bankCountry']);
+        self::assertEquals(10.5, $withHoldingsArray['amount']);
+        self::assertEquals('BTC', $withHoldingsArray['code']);
+        self::assertEquals('Description', $withHoldingsArray['description']);
+        self::assertEquals('Note', $withHoldingsArray['notes']);
+        self::assertEquals('Label', $withHoldingsArray['label']);
+        self::assertEquals('USA', $withHoldingsArray['bankCountry']);
     }
 
     private function createClassObject(): WithHoldings

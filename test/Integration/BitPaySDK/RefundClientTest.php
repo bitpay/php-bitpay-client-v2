@@ -1,25 +1,19 @@
 <?php
+/**
+ * Copyright (c) 2019 BitPay
+ **/
 declare(strict_types=1);
 
 namespace BitPaySDK\Integration;
 
-use BitPaySDK\Client;
 use BitPaySDK\Exceptions\RefundCreationException;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Invoice\Buyer;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Invoice\Refund;
-use PHPUnit\Framework\TestCase;
 
-class RefundClientTest extends TestCase
+class RefundClientTest extends AbstractClientTest
 {
-    protected $client;
-
-    public function setUp(): void
-    {
-        $this->client = Client::createWithFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . Config::BITPAY_CONFIG_FILE);
-    }
-
     public function testCreateRefund(): void
     {
         $invoice = $this->getInvoiceExample();
@@ -27,8 +21,8 @@ class RefundClientTest extends TestCase
         $baseInvoice = $this->client->payInvoice($baseInvoice->getId(), 'complete');
         $refund = $this->client->createRefund($baseInvoice->getId(), 50.0, Currency::USD);
 
-        $this->assertEquals(50.0, $refund->getAmount());
-        $this->assertEquals('USD', $refund->getCurrency());
+        self::assertEquals(50.0, $refund->getAmount());
+        self::assertEquals('USD', $refund->getCurrency());
     }
 
     public function testCreateRefundShouldCatchRestCliException(): void
@@ -48,8 +42,8 @@ class RefundClientTest extends TestCase
         $refunds = $this->client->getRefunds($invoices[0]->getId());
         $refund = $this->client->updateRefund($refunds[0]->getId(), 'created');
 
-        $this->assertEquals('created', $refund->getStatus());
-        $this->assertEquals('USD', $refund->getCurrency());
+        self::assertEquals('created', $refund->getStatus());
+        self::assertEquals('USD', $refund->getCurrency());
     }
 
     public function testGetRefunds(): void
@@ -59,11 +53,11 @@ class RefundClientTest extends TestCase
         $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'complete', null, 1);
         $refunds = $this->client->getRefunds($invoices[0]->getId());
 
-        $this->assertCount(1, $refunds);
-        $this->assertNotNull($refunds);
-        $this->assertTrue(is_array($refunds));
-        $this->assertEquals('complete', $invoices[0]->getStatus());
-        $this->assertEquals('created', $refunds[0]->getStatus());
+        self::assertCount(1, $refunds);
+        self::assertNotNull($refunds);
+        self::assertIsArray($refunds);
+        self::assertEquals('complete', $invoices[0]->getStatus());
+        self::assertEquals('created', $refunds[0]->getStatus());
     }
 
     public function testGetRefund(): void
@@ -74,10 +68,10 @@ class RefundClientTest extends TestCase
         $refunds = $this->client->getRefunds($invoices[0]->getId());
         $refund = $this->client->getRefund($refunds[0]->getId());
 
-        $this->assertInstanceOf(Refund::class, $refund);
-        $this->assertEquals('complete', $invoices[0]->getStatus());
-        $this->assertCount(1, $invoices);
-        $this->assertEquals('created', $refund->getStatus());
+        self::assertInstanceOf(Refund::class, $refund);
+        self::assertEquals('complete', $invoices[0]->getStatus());
+        self::assertCount(1, $invoices);
+        self::assertEquals('created', $refund->getStatus());
     }
 
     public function testSendNotification(): void
@@ -87,7 +81,7 @@ class RefundClientTest extends TestCase
         $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'complete', null, 1);
         $refunds = $this->client->getRefunds($invoices[0]->getId());
 
-        $this->assertTrue($this->client->sendRefundNotification($refunds[0]->getId()));
+        self::assertTrue($this->client->sendRefundNotification($refunds[0]->getId()));
     }
 
     public function testCancelRefund(): void
@@ -99,9 +93,9 @@ class RefundClientTest extends TestCase
         $refundId = $refunds[0]->getId();
         $refund = $this->client->cancelRefund($refundId);
 
-        $this->assertInstanceOf(Refund::class, $refund);
-        $this->assertNotNull($refund);
-        $this->assertEquals('canceled', $refund->getStatus());
+        self::assertInstanceOf(Refund::class, $refund);
+        self::assertNotNull($refund);
+        self::assertEquals('canceled', $refund->getStatus());
     }
 
     private function getInvoiceExample(): Invoice

@@ -10,7 +10,7 @@ class BuyerProvidedInfoTest extends TestCase
     public function testInstanceOf()
     {
         $buyerProvidedInfo = $this->createClassObject();
-        $this->assertInstanceOf(BuyerProvidedInfo::class, $buyerProvidedInfo);
+        self::assertInstanceOf(BuyerProvidedInfo::class, $buyerProvidedInfo);
     }
 
     public function testGetName()
@@ -19,7 +19,7 @@ class BuyerProvidedInfoTest extends TestCase
 
         $buyerProvidedInfo = $this->createClassObject();
         $buyerProvidedInfo->setName($expectedName);
-        $this->assertEquals($expectedName, $buyerProvidedInfo->getName());
+        self::assertEquals($expectedName, $buyerProvidedInfo->getName());
     }
 
     /**
@@ -34,7 +34,7 @@ class BuyerProvidedInfoTest extends TestCase
         $buyerProvidedInfo = $this->createClassObject();
         $buyerProvidedInfo->setSelectedWallet($expectedSelectedWallet);
 
-        $this->assertNull($buyerProvidedInfo->getSelectedWallet());
+        self::assertNull($buyerProvidedInfo->getSelectedWallet());
     }
 
     public function testGetPhoneNumber()
@@ -43,7 +43,7 @@ class BuyerProvidedInfoTest extends TestCase
 
         $buyerProvidedInfo = $this->createClassObject();
         $buyerProvidedInfo->setPhoneNumber($expectedPhoneNumber);
-        $this->assertEquals($expectedPhoneNumber, $buyerProvidedInfo->getPhoneNumber());
+        self::assertEquals($expectedPhoneNumber, $buyerProvidedInfo->getPhoneNumber());
     }
 
     public function testGetSelectedWallet()
@@ -52,7 +52,7 @@ class BuyerProvidedInfoTest extends TestCase
 
         $buyerProvidedInfo = $this->createClassObject();
         $buyerProvidedInfo->setSelectedWallet($expectedSelectedWallet);
-        $this->assertEquals($expectedSelectedWallet, $buyerProvidedInfo->getSelectedWallet());
+        self::assertEquals($expectedSelectedWallet, $buyerProvidedInfo->getSelectedWallet());
     }
 
     public function testGetEmailAddress()
@@ -61,7 +61,7 @@ class BuyerProvidedInfoTest extends TestCase
 
         $buyerProvidedInfo = $this->createClassObject();
         $buyerProvidedInfo->setEmailAddress($expectedEmailAddress);
-        $this->assertEquals($expectedEmailAddress, $buyerProvidedInfo->getEmailAddress());
+        self::assertEquals($expectedEmailAddress, $buyerProvidedInfo->getEmailAddress());
     }
 
     public function testGetSelectedTransactionCurrency()
@@ -70,7 +70,7 @@ class BuyerProvidedInfoTest extends TestCase
 
         $buyerProvidedInfo = $this->createClassObject();
         $buyerProvidedInfo->setSelectedTransactionCurrency($expectedSelectedTransactionCurrency);
-        $this->assertEquals($expectedSelectedTransactionCurrency, $buyerProvidedInfo->getSelectedTransactionCurrency());
+        self::assertEquals($expectedSelectedTransactionCurrency, $buyerProvidedInfo->getSelectedTransactionCurrency());
     }
 
     public function testGetSms()
@@ -79,14 +79,14 @@ class BuyerProvidedInfoTest extends TestCase
 
         $buyerProvidedInfo = $this->createClassObject();
         $buyerProvidedInfo->setSms($expectedSms);
-        $this->assertEquals($expectedSms, $buyerProvidedInfo->getSms());
+        self::assertEquals($expectedSms, $buyerProvidedInfo->getSms());
     }
 
     public function testGetSmsVerified()
     {
         $buyerProvidedInfo = $this->createClassObject();
         $buyerProvidedInfo->setSmsVerified(true);
-        $this->assertTrue($buyerProvidedInfo->getSmsVerified());
+        self::assertTrue($buyerProvidedInfo->getSmsVerified());
     }
 
     public function testToArray()
@@ -96,24 +96,24 @@ class BuyerProvidedInfoTest extends TestCase
 
         $buyerProvidedInfoArray = $buyerProvidedInfo->toArray();
 
-        $this->assertNotNull($buyerProvidedInfoArray);
-        $this->assertIsArray($buyerProvidedInfoArray);
+        self::assertNotNull($buyerProvidedInfoArray);
+        self::assertIsArray($buyerProvidedInfoArray);
 
-        $this->assertArrayHasKey('name', $buyerProvidedInfoArray);
-        $this->assertArrayHasKey('phoneNumber', $buyerProvidedInfoArray);
-        $this->assertArrayHasKey('selectedWallet', $buyerProvidedInfoArray);
-        $this->assertArrayHasKey('emailAddress', $buyerProvidedInfoArray);
-        $this->assertArrayHasKey('selectedTransactionCurrency', $buyerProvidedInfoArray);
-        $this->assertArrayHasKey('sms', $buyerProvidedInfoArray);
-        $this->assertArrayHasKey('smsVerified', $buyerProvidedInfoArray);
+        self::assertArrayHasKey('name', $buyerProvidedInfoArray);
+        self::assertArrayHasKey('phoneNumber', $buyerProvidedInfoArray);
+        self::assertArrayHasKey('selectedWallet', $buyerProvidedInfoArray);
+        self::assertArrayHasKey('emailAddress', $buyerProvidedInfoArray);
+        self::assertArrayHasKey('selectedTransactionCurrency', $buyerProvidedInfoArray);
+        self::assertArrayHasKey('sms', $buyerProvidedInfoArray);
+        self::assertArrayHasKey('smsVerified', $buyerProvidedInfoArray);
 
-        $this->assertEquals('Test User', $buyerProvidedInfoArray['name']);
-        $this->assertEquals('1112223333', $buyerProvidedInfoArray['phoneNumber']);
-        $this->assertEquals('bitpay', $buyerProvidedInfoArray['selectedWallet']);
-        $this->assertEquals('example@bitpay.com', $buyerProvidedInfoArray['emailAddress']);
-        $this->assertEquals('BTC', $buyerProvidedInfoArray['selectedTransactionCurrency']);
-        $this->assertEquals('4445556666', $buyerProvidedInfoArray['sms']);
-        $this->assertEquals(true, $buyerProvidedInfoArray['smsVerified']);
+        self::assertEquals('Test User', $buyerProvidedInfoArray['name']);
+        self::assertEquals('1112223333', $buyerProvidedInfoArray['phoneNumber']);
+        self::assertEquals('bitpay', $buyerProvidedInfoArray['selectedWallet']);
+        self::assertEquals('example@bitpay.com', $buyerProvidedInfoArray['emailAddress']);
+        self::assertEquals('BTC', $buyerProvidedInfoArray['selectedTransactionCurrency']);
+        self::assertEquals('4445556666', $buyerProvidedInfoArray['sms']);
+        self::assertEquals(true, $buyerProvidedInfoArray['smsVerified']);
     }
 
     public function testToArrayEmptyKey()
@@ -122,10 +122,10 @@ class BuyerProvidedInfoTest extends TestCase
 
         $buyerProvidedInfoArray = $buyerProvidedInfo->toArray();
 
-        $this->assertNotNull($buyerProvidedInfoArray);
-        $this->assertIsArray($buyerProvidedInfoArray);
+        self::assertNotNull($buyerProvidedInfoArray);
+        self::assertIsArray($buyerProvidedInfoArray);
 
-        $this->assertArrayNotHasKey('name', $buyerProvidedInfoArray);
+        self::assertArrayNotHasKey('name', $buyerProvidedInfoArray);
     }
 
     private function createClassObject(): BuyerProvidedInfo

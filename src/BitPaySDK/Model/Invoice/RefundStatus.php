@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+/**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -15,31 +19,31 @@ interface RefundStatus
     /**
      * No funds deducted, refund will not proceed automatically
      */
-    const Preview   = "preview";
+    public const PREVIEW = "preview";
 
     /**
      * Funds deducted/allocated if immediate, will proceed when transactions are confirmed
      * and the required data is collected
      */
-    const Created   = "created";
+    public const CREATED = "created";
 
     /**
      * Refund was canceled by merchant action. Immediate refunds cannot be canceled outside of preview state
      */
-    const Cancelled = "cancelled";
+    public const CANCELLED = "cancelled";
 
     /**
      * Refund is in process of being fulfilled
      */
-    const Pending   = "pending";
+    public const PENDING = "pending";
 
     /**
      * Refund was successfully processed
      */
-    const Success   = "success";
+    public const SUCCESS = "success";
 
     /**
      * Refund failed during processing (this is really more of an internal state)
      */
-    const Failure   = "failure";
+    public const FAILURE = "failure";
 }

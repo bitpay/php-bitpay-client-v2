@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -196,7 +200,7 @@ class SettlementLedgerEntry
             'timestamp' => $this->getTimestamp(),
             'description' => $this->getDescription(),
             'reference' => $this->getReference(),
-            'invoiceData' => $this->getInvoiceData()->toArray(),
+            'invoiceData' => $this->getInvoiceData() ? $this->getInvoiceData()->toArray() : null,
         ];
     }
 }

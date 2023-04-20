@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Client;
@@ -72,18 +76,12 @@ class BillClient
         }
 
         try {
-            $mapper = JsonMapperFactory::create();
-            $bill = $mapper->map(
-                json_decode($responseJson),
-                new Bill()
-            );
+            return $this->mapJsonToBillClass($responseJson);
         } catch (Exception $e) {
             throw new BillCreationException(
                 "failed to deserialize BitPay server response (Bill) : " . $e->getMessage()
             );
         }
-
-        return $bill;
     }
 
     /**
@@ -97,7 +95,6 @@ class BillClient
      */
     public function get(string $billId, string $facade = Facade::MERCHANT, bool $signRequest = true): Bill
     {
-
         try {
             $params = [];
             $params["token"] = $this->tokenCache->getTokenByFacade($facade);
@@ -116,18 +113,12 @@ class BillClient
         }
 
         try {
-            $mapper = JsonMapperFactory::create();
-            $bill = $mapper->map(
-                json_decode($responseJson),
-                new Bill()
-            );
+            return $this->mapJsonToBillClass($responseJson);
         } catch (Exception $e) {
             throw new BillQueryException(
                 "failed to deserialize BitPay server response (Bill) : " . $e->getMessage()
             );
         }
-
-        return $bill;
     }
 
     /**
@@ -162,9 +153,9 @@ class BillClient
         try {
             $mapper = JsonMapperFactory::create();
             $bills = $mapper->mapArray(
-                json_decode($responseJson),
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Bill\Bill'
+                Bill::class
             );
         } catch (Exception $e) {
             throw new BillQueryException(
@@ -204,15 +195,14 @@ class BillClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $bill = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 $bill
             );
         } catch (Exception $e) {
             throw new BillUpdateException("failed to deserialize BitPay server response (Bill) : " . $e->getMessage());
         }
-
-        return $bill;
     }
 
     /**
@@ -221,10 +211,10 @@ class BillClient
      * @param  string $billId      The id of the requested bill.
      * @param  string $billToken   The token of the requested bill.
      * @param  bool   $signRequest Allow unsigned request
-     * @return string
+     * @return bool
      * @throws BitPayException
      */
-    public function deliver(string $billId, string $billToken, bool $signRequest = true): string
+    public function deliver(string $billId, string $billToken, bool $signRequest = true): bool
     {
         try {
             $responseJson = $this->restCli->post(
@@ -246,12 +236,28 @@ class BillClient
 
         try {
             $result = str_replace("\"", "", $responseJson);
+
+            return strtolower($result) === 'success';
         } catch (Exception $e) {
             throw new BillDeliveryException(
                 "failed to deserialize BitPay server response (Bill) : " . $e->getMessage()
             );
         }
+    }
 
-        return $result;
+    /**
+     * @param string|null $responseJson
+     * @return mixed
+     * @throws \JsonException
+     * @throws \JsonMapper_Exception
+     */
+    private function mapJsonToBillClass(?string $responseJson): mixed
+    {
+        $mapper = JsonMapperFactory::create();
+
+        return $mapper->map(
+            json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
+            new Bill()
+        );
     }
 }

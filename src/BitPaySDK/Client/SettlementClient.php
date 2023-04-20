@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Client;
@@ -64,9 +68,9 @@ class SettlementClient
         int $offset = null
     ): array {
         try {
-            $status = $status != null ? $status : "";
-            $limit = $limit != null ? $limit : 100;
-            $offset = $offset != null ? $offset : 0;
+            $status = $status ?? "";
+            $limit = $limit ?? 100;
+            $offset = $offset ?? 0;
 
             $params = [];
             $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
@@ -92,18 +96,17 @@ class SettlementClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $settlements = $mapper->mapArray(
-                json_decode($responseJson),
+
+            return $mapper->mapArray(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Settlement\Settlement'
+                Settlement::class
             );
         } catch (Exception $e) {
             throw new SettlementQueryException(
                 "failed to deserialize BitPay server response (Settlement) : " . $e->getMessage()
             );
         }
-
-        return $settlements;
     }
 
     /**
@@ -134,8 +137,9 @@ class SettlementClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $settlement = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Settlement()
             );
         } catch (Exception $e) {
@@ -143,8 +147,6 @@ class SettlementClient
                 "failed to deserialize BitPay server response (Settlement) : " . $e->getMessage()
             );
         }
-
-        return $settlement;
     }
 
     /**
@@ -180,8 +182,9 @@ class SettlementClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $reconciliationReport = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Settlement()
             );
         } catch (Exception $e) {
@@ -189,7 +192,5 @@ class SettlementClient
                 "failed to deserialize BitPay server response (Reconciliation Report) : " . $e->getMessage()
             );
         }
-
-        return $reconciliationReport;
     }
 }

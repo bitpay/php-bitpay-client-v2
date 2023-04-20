@@ -10,7 +10,7 @@ class ItemizedDetailsTest extends TestCase
     public function testInstanceOf()
     {
         $itemizedDetails = $this->createClassObject();
-        $this->assertInstanceOf(ItemizedDetails::class, $itemizedDetails);
+        self::assertInstanceOf(ItemizedDetails::class, $itemizedDetails);
     }
 
     public function testGetAmount()
@@ -19,7 +19,7 @@ class ItemizedDetailsTest extends TestCase
 
         $itemizedDetails = $this->createClassObject();
         $itemizedDetails->setAmount($expectedAmount);
-        $this->assertEquals($expectedAmount, $itemizedDetails->getAmount());
+        self::assertEquals($expectedAmount, $itemizedDetails->getAmount());
     }
 
     public function testGetDescription()
@@ -28,14 +28,14 @@ class ItemizedDetailsTest extends TestCase
 
         $itemizedDetails = $this->createClassObject();
         $itemizedDetails->setDescription($expectedDescription);
-        $this->assertEquals($expectedDescription, $itemizedDetails->getDescription());
+        self::assertEquals($expectedDescription, $itemizedDetails->getDescription());
     }
 
     public function testGetIsFee()
     {
         $itemizedDetails = $this->createClassObject();
         $itemizedDetails->setIsFee(true);
-        $this->assertTrue($itemizedDetails->getIsFee());
+        self::assertTrue($itemizedDetails->getIsFee());
     }
 
     public function testToArray()
@@ -44,16 +44,16 @@ class ItemizedDetailsTest extends TestCase
         $this->setSetters($itemizedDetails);
         $itemizedDetailsArray = $itemizedDetails->toArray();
 
-        $this->assertNotNull($itemizedDetailsArray);
-        $this->assertIsArray($itemizedDetailsArray);
+        self::assertNotNull($itemizedDetailsArray);
+        self::assertIsArray($itemizedDetailsArray);
 
-        $this->assertArrayHasKey('amount', $itemizedDetailsArray);
-        $this->assertArrayHasKey('description', $itemizedDetailsArray);
-        $this->assertArrayHasKey('isFee', $itemizedDetailsArray);
+        self::assertArrayHasKey('amount', $itemizedDetailsArray);
+        self::assertArrayHasKey('description', $itemizedDetailsArray);
+        self::assertArrayHasKey('isFee', $itemizedDetailsArray);
 
-        $this->assertEquals(15.5, $itemizedDetailsArray['amount']);
-        $this->assertEquals('Test description', $itemizedDetailsArray['description']);
-        $this->assertEquals(true, $itemizedDetailsArray['isFee']);
+        self::assertEquals(15.5, $itemizedDetailsArray['amount']);
+        self::assertEquals('Test description', $itemizedDetailsArray['description']);
+        self::assertEquals(true, $itemizedDetailsArray['isFee']);
     }
 
     private function createClassObject(): ItemizedDetails

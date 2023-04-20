@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -754,29 +758,18 @@ class Invoice
      *
      * Object containing line item details for display.
      *
-     * @param array $itemizedDetails Objects array containing line item details for display.
+     * @param ItemizedDetails[] $itemizedDetails
+     * @throws BitPayException
      */
     public function setItemizedDetails(array $itemizedDetails): void
     {
-        if (empty($itemizedDetails)) {
-            $this->itemizedDetails = [];
-
-            return;
-        }
-
         foreach ($itemizedDetails as $item) {
-            if ($item instanceof ItemizedDetails) {
-                $itemsArray[] = $item;
-            } else {
-                $newItemizedDetails = new ItemizedDetails();
-                $newItemizedDetails->setAmount($item->amount ?? null);
-                $newItemizedDetails->setIsFee($item->isFee ?? null);
-                $newItemizedDetails->setDescription($item->description ?? null);
-                $itemsArray[] = $newItemizedDetails;
+            if (!$item instanceof ItemizedDetails) {
+                throw new BitPayException('Wrong format for itemized details');
             }
         }
 
-        $this->itemizedDetails = $itemsArray;
+        $this->itemizedDetails = $itemizedDetails;
     }
 
     /**
@@ -1825,57 +1818,58 @@ class Invoice
     public function toArray(): array
     {
         $elements = [
-            'currency'                       => $this->getCurrency(),
-            'guid'                           => $this->getGuid(),
-            'token'                          => $this->getToken(),
-            'price'                          => $this->getPrice(),
-            'posData'                        => $this->getPosData(),
-            'notificationURL'                => $this->getNotificationURL(),
-            'transactionSpeed'               => $this->getTransactionSpeed(),
-            'fullNotifications'              => $this->getFullNotifications(),
-            'notificationEmail'              => $this->getNotificationEmail(),
-            'redirectURL'                    => $this->getRedirectURL(),
-            'orderId'                        => $this->getOrderId(),
-            'itemDesc'                       => $this->getItemDesc(),
-            'itemCode'                       => $this->getItemCode(),
-            'physical'                       => $this->getPhysical(),
-            'paymentCurrencies'              => $this->getPaymentCurrencies(),
-            'acceptanceWindow'               => $this->getAcceptanceWindow(),
-            'closeURL'                       => $this->getCloseURL(),
-            'autoRedirect'                   => $this->getAutoRedirect(),
-            'buyer'                          => $this->getBuyer()->toArray(),
-            'refundAddresses'                => $this->getRefundAddresses(),
-            'id'                             => $this->getId(),
-            'url'                            => $this->getUrl(),
-            'status'                         => $this->getStatus(),
-            'lowFeeDetected'                 => $this->getLowFeeDetected(),
-            'invoiceTime'                    => $this->getInvoiceTime(),
-            'expirationTime'                 => $this->getExpirationTime(),
-            'currentTime'                    => $this->getCurrentTime(),
-            'transactions'                   => $this->getTransactions(),
-            'exceptionStatus'                => $this->getExceptionStatus(),
-            'targetConfirmations'            => $this->getTargetConfirmations(),
-            'refundAddressRequestPending'    => $this->getRefundAddressRequestPending(),
-            'buyerProvidedEmail'             => $this->getBuyerProvidedEmail(),
-            'buyerProvidedInfo'              => $this->getBuyerProvidedInfo()->toArray(),
-            'universalCodes'                 => $this->getUniversalCodes()->toArray(),
-            'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()->toArray(),
-            'minerFees'                      => $this->getMinerFees()->toArray(),
-            'shopper'                        => $this->getShopper()->toArray(),
-            'billId'                         => $this->getBillId(),
-            'refundInfo'                     => $this->getRefundInfo()->toArray(),
-            'extendedNotifications'          => $this->getExtendedNotifications(),
-            'transactionCurrency'            => $this->getTransactionCurrency(),
-            'amountPaid'                     => $this->getAmountPaid(),
-            'exchangeRates'                  => $this->getExchangeRates(),
-            'merchantName'                   => $this->getMerchantName(),
-            'selectedTransactionCurrency'    => $this->getSelectedTransactionCurrency(),
-            'bitpayIdRequired'               => $this->getBitpayIdRequired(),
-            'forcedBuyerSelectedWallet'      => $this->getForcedBuyerSelectedWallet(),
-            'isCancelled'                    => $this->getIsCancelled(),
-            'buyerEmail'                     => $this->getBuyerEmail(),
-            'buyerSms'                       => $this->getBuyerSms(),
-            'itemizedDetails'                => $this->getItemizedDetails(),
+            'currency' => $this->getCurrency(),
+            'guid' => $this->getGuid(),
+            'token' => $this->getToken(),
+            'price' => $this->getPrice(),
+            'posData' => $this->getPosData(),
+            'notificationURL' => $this->getNotificationURL(),
+            'transactionSpeed' => $this->getTransactionSpeed(),
+            'fullNotifications' => $this->getFullNotifications(),
+            'notificationEmail' => $this->getNotificationEmail(),
+            'redirectURL' => $this->getRedirectURL(),
+            'orderId' => $this->getOrderId(),
+            'itemDesc' => $this->getItemDesc(),
+            'itemCode' => $this->getItemCode(),
+            'physical' => $this->getPhysical(),
+            'paymentCurrencies' => $this->getPaymentCurrencies(),
+            'acceptanceWindow' => $this->getAcceptanceWindow(),
+            'closeURL' => $this->getCloseURL(),
+            'autoRedirect' => $this->getAutoRedirect(),
+            'buyer' => $this->getBuyer() ? $this->getBuyer()->toArray() : null,
+            'refundAddresses' => $this->getRefundAddresses(),
+            'id' => $this->getId(),
+            'url' => $this->getUrl(),
+            'status' => $this->getStatus(),
+            'lowFeeDetected' => $this->getLowFeeDetected(),
+            'invoiceTime' => $this->getInvoiceTime(),
+            'expirationTime' => $this->getExpirationTime(),
+            'currentTime' => $this->getCurrentTime(),
+            'transactions' => $this->getTransactions(),
+            'exceptionStatus' => $this->getExceptionStatus(),
+            'targetConfirmations' => $this->getTargetConfirmations(),
+            'refundAddressRequestPending' => $this->getRefundAddressRequestPending(),
+            'buyerProvidedEmail' => $this->getBuyerProvidedEmail(),
+            'buyerProvidedInfo' => $this->getBuyerProvidedInfo() ? $this->getBuyerProvidedInfo()->toArray() : null,
+            'universalCodes' => $this->getUniversalCodes() ? $this->getUniversalCodes()->toArray() : null,
+            'supportedTransactionCurrencies' => $this->getSupportedTransactionCurrencies()
+                ? $this->getSupportedTransactionCurrencies()->toArray() : null,
+            'minerFees' => $this->getMinerFees() ? $this->getMinerFees()->toArray() : null,
+            'shopper' => $this->getShopper() ? $this->getShopper()->toArray() : null,
+            'billId' => $this->getBillId(),
+            'refundInfo' => $this->getRefundInfo() ? $this->getRefundInfo()->toArray() : null,
+            'extendedNotifications' => $this->getExtendedNotifications(),
+            'transactionCurrency' => $this->getTransactionCurrency(),
+            'amountPaid' => $this->getAmountPaid(),
+            'exchangeRates' => $this->getExchangeRates(),
+            'merchantName' => $this->getMerchantName(),
+            'selectedTransactionCurrency' => $this->getSelectedTransactionCurrency(),
+            'bitpayIdRequired' => $this->getBitpayIdRequired(),
+            'forcedBuyerSelectedWallet' => $this->getForcedBuyerSelectedWallet(),
+            'isCancelled' => $this->getIsCancelled(),
+            'buyerEmail' => $this->getBuyerEmail(),
+            'buyerSms' => $this->getBuyerSms(),
+            'itemizedDetails' => $this->getItemizedDetails(),
             'forcedBuyerSelectedTransactionCurrency' => $this->getForcedBuyerSelectedTransactionCurrency()
         ];
 

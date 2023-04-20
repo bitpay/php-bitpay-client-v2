@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -201,7 +205,7 @@ class InvoiceData
             'currency' => $this->getCurrency(),
             'transactionCurrency' => $this->getTransactionCurrency(),
             'payoutPercentage' => $this->getPayoutPercentage(),
-            'refundInfo' => $this->getRefundInfo()->toArray(),
+            'refundInfo' => $this->getRefundInfo() ? $this->getRefundInfo()->toArray() : null,
         ];
     }
 }

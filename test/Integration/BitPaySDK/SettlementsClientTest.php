@@ -1,21 +1,15 @@
 <?php
+/**
+ * Copyright (c) 2019 BitPay
+ **/
 declare(strict_types=1);
 
 namespace BitPaySDK\Integration;
 
-use BitPaySDK\Client;
 use BitPaySDK\Model\Settlement\Settlement;
-use PHPUnit\Framework\TestCase;
 
-class SettlementsClientTest extends TestCase
+class SettlementsClientTest extends AbstractClientTest
 {
-    protected $client;
-
-    public function setUp(): void
-    {
-        $this->client = Client::createWithFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . Config::BITPAY_CONFIG_FILE);
-    }
-
     public function testGetSettlements(): void
     {
         $status = 'processing';
@@ -25,8 +19,8 @@ class SettlementsClientTest extends TestCase
 
         $settlements = $this->client->getSettlements($currency, $dateStart, $dateEnd, $status);
 
-        $this->assertNotNull($settlements);
-        $this->assertTrue(is_array($settlements));
+        self::assertNotNull($settlements);
+        self::assertIsArray($settlements);
     }
 
     public function testGetSettlement(): void
@@ -40,10 +34,10 @@ class SettlementsClientTest extends TestCase
 
         $settlement = $this->client->getSettlement($settlements[0]->getId());
 
-        $this->assertNotNull($settlement);
-        $this->assertInstanceOf(Settlement::class, $settlement);
-        $this->assertEquals($currency, $settlement->getCurrency());
-        $this->assertEquals($status, $settlement->getStatus());
+        self::assertNotNull($settlement);
+        self::assertInstanceOf(Settlement::class, $settlement);
+        self::assertEquals($currency, $settlement->getCurrency());
+        self::assertEquals($status, $settlement->getStatus());
     }
 
     public function testGetReconciliationReport(): void
@@ -57,9 +51,9 @@ class SettlementsClientTest extends TestCase
         $settlement = $this->client->getSettlement($settlements[0]->getId());
         $settlement = $this->client->getSettlementReconciliationReport($settlement);
 
-        $this->assertEquals('processing', $settlement->getStatus());
-        $this->assertNotNull($settlement);
-        $this->assertEquals('USD', $settlement->getCurrency());
-        $this->assertEquals($status, $settlement->getStatus());
+        self::assertEquals('processing', $settlement->getStatus());
+        self::assertNotNull($settlement);
+        self::assertEquals('USD', $settlement->getCurrency());
+        self::assertEquals($status, $settlement->getStatus());
     }
 }

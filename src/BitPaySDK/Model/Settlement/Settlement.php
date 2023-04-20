@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -8,6 +12,8 @@ declare(strict_types=1);
  */
 
 namespace BitPaySDK\Model\Settlement;
+
+use BitPaySDK\Exceptions\SettlementException;
 
 /**
  * Settlement data object
@@ -26,10 +32,10 @@ class Settlement
     protected ?string $closingDate = null;
     protected ?float $openingBalance = null;
     protected ?float $ledgerEntriesSum = null;
-    protected array $withHoldings;
+    protected array $withHoldings = [];
     protected ?float $withHoldingsSum = null;
     protected ?float $totalAmount = null;
-    protected array $ledgerEntries;
+    protected array $ledgerEntries = [];
     protected ?string $token = null;
 
     public function __construct()
@@ -326,21 +332,11 @@ class Settlement
      * Array of withholdings. Withholdings are kept on the ledger to be used later and thus withheld
      * from this settlement. Each withholding is a JSON object containing a code, amount and description field.
      *
-     * @return array
+     * @return WithHoldings[]
      */
     public function getWithHoldings(): array
     {
-        $withHoldings = [];
-
-        foreach ($this->withHoldings as $withHolding) {
-            if ($withHolding instanceof WithHoldings) {
-                array_push($withHoldings, $withHolding->toArray());
-            } else {
-                array_push($withHoldings, $withHolding);
-            }
-        }
-
-        return $withHoldings;
+        return $this->withHoldings;
     }
 
     /**
@@ -349,10 +345,17 @@ class Settlement
      * Array of withholdings. Withholdings are kept on the ledger to be used later and thus withheld
      * from this settlement. Each withholding is a JSON object containing a code, amount and description field.
      *
-     * @param array $withHoldings
+     * @param WithHoldings[] $withHoldings
+     * @throws SettlementException
      */
     public function setWithHoldings(array $withHoldings): void
     {
+        foreach ($withHoldings as $withHolding) {
+            if (!$withHolding instanceof WithHoldings) {
+                throw new SettlementException('Array should contains only WithHoldings objects');
+            }
+        }
+
         $this->withHoldings = $withHoldings;
     }
 
@@ -406,21 +409,11 @@ class Settlement
      * The total sum of all ledger entries is reported in the field ledgerEntriesSum.
      * A description of all ledger codes can be found
      *
-     * @return array
+     * @return SettlementLedgerEntry[]
      */
     public function getLedgerEntries(): array
     {
-        $ledgerEntries = [];
-
-        foreach ($this->ledgerEntries as $ledgerEntrie) {
-            if ($ledgerEntrie instanceof SettlementLedgerEntry) {
-                array_push($ledgerEntries, $ledgerEntrie->toArray());
-            } else {
-                array_push($ledgerEntries, $ledgerEntrie);
-            }
-        }
-
-        return $ledgerEntries;
+        return $this->ledgerEntries;
     }
 
     /**
@@ -429,10 +422,16 @@ class Settlement
      * The total sum of all ledger entries is reported in the field ledgerEntriesSum.
      * A description of all ledger codes can be found
      *
-     * @param array $ledgerEntries
+     * @param SettlementLedgerEntry[] $ledgerEntries
+     * @throws SettlementException
      */
     public function setLedgerEntries(array $ledgerEntries): void
     {
+        foreach ($ledgerEntries as $ledgerEntry) {
+            if (!$ledgerEntry instanceof SettlementLedgerEntry) {
+                throw new SettlementException('Array should contains only SettlementLedgerEntry objects');
+            }
+        }
         $this->ledgerEntries = $ledgerEntries;
     }
 
@@ -469,6 +468,16 @@ class Settlement
      */
     public function toArray(): array
     {
+        $ledgerEntries = [];
+        foreach ($this->getLedgerEntries() as $item) {
+            $ledgerEntries[] = $item->toArray();
+        }
+
+        $withHoldings = [];
+        foreach ($this->getWithHoldings() as $withHolding) {
+            $withHoldings[] = $withHolding->toArray();
+        }
+
         return [
             'id' => $this->getId(),
             'accountId' => $this->getAccountId(),
@@ -482,10 +491,10 @@ class Settlement
             'closingDate' => $this->getClosingDate(),
             'openingBalance' => $this->getOpeningBalance(),
             'ledgerEntriesSum' => $this->getLedgerEntriesSum(),
-            'withHoldings' => $this->getWithHoldings(),
+            'withHoldings' => $withHoldings,
             'withHoldingsSum' => $this->getWithHoldingsSum(),
             'totalAmount' => $this->getTotalAmount(),
-            'ledgerEntries' => $this->getLedgerEntries(),
+            'ledgerEntries' => $ledgerEntries,
             'token' => $this->getToken(),
         ];
     }

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Client;
@@ -63,17 +67,16 @@ class WalletClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $wallets = $mapper->mapArray(
-                json_decode($responseJson),
+
+            return $mapper->mapArray(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Wallet\Wallet'
+                Wallet::class
             );
         } catch (Exception $e) {
             throw new WalletQueryException(
                 "failed to deserialize BitPay server response (Wallet) : " . $e->getMessage()
             );
         }
-
-        return $wallets;
     }
 }

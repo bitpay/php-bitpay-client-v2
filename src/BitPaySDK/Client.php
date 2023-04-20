@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
 namespace BitPaySDK;
 
 use BitPayKeyUtils\KeyHelper\PrivateKey;
@@ -12,31 +18,29 @@ use BitPaySDK\Client\PayoutRecipientsClient;
 use BitPaySDK\Client\RateClient;
 use BitPaySDK\Client\RefundClient;
 use BitPaySDK\Client\SettlementClient;
-use BitPaySDK\Client\SubscriptionClient;
 use BitPaySDK\Client\WalletClient;
 use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\InvoiceUpdateException;
-use BitPaySDK\Exceptions\InvoiceQueryException;
 use BitPaySDK\Exceptions\InvoiceCancellationException;
 use BitPaySDK\Exceptions\InvoicePaymentException;
-use BitPaySDK\Exceptions\PayoutRecipientCreationException;
-use BitPaySDK\Exceptions\PayoutRecipientCancellationException;
-use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
-use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
+use BitPaySDK\Exceptions\InvoiceQueryException;
+use BitPaySDK\Exceptions\InvoiceUpdateException;
 use BitPaySDK\Exceptions\PayoutCancellationException;
 use BitPaySDK\Exceptions\PayoutCreationException;
-use BitPaySDK\Exceptions\PayoutQueryException;
 use BitPaySDK\Exceptions\PayoutNotificationException;
-use BitPaySDK\Exceptions\RefundCreationException;
-use BitPaySDK\Exceptions\RefundUpdateException;
+use BitPaySDK\Exceptions\PayoutQueryException;
+use BitPaySDK\Exceptions\PayoutRecipientCancellationException;
+use BitPaySDK\Exceptions\PayoutRecipientCreationException;
+use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
+use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
 use BitPaySDK\Exceptions\RefundCancellationException;
+use BitPaySDK\Exceptions\RefundCreationException;
 use BitPaySDK\Exceptions\RefundQueryException;
+use BitPaySDK\Exceptions\RefundUpdateException;
 use BitPaySDK\Exceptions\WalletQueryException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Invoice\Refund;
-use BitPaySDK\Model\Wallet\Wallet;
 use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Payout\Payout;
 use BitPaySDK\Model\Payout\PayoutRecipient;
@@ -44,7 +48,7 @@ use BitPaySDK\Model\Payout\PayoutRecipients;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Model\Settlement\Settlement;
-use BitPaySDK\Model\Subscription\Subscription;
+use BitPaySDK\Model\Wallet\Wallet;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 use Symfony\Component\Yaml\Yaml;
@@ -520,10 +524,10 @@ class Client
      * @param  string $billId      The id of the requested bill.
      * @param  string $billToken   The token of the requested bill.
      * @param  bool   $signRequest Allow unsigned request
-     * @return string
+     * @return bool
      * @throws BitPayException
      */
-    public function deliverBill(string $billId, string $billToken, bool $signRequest = true): string
+    public function deliverBill(string $billId, string $billToken, bool $signRequest = true): bool
     {
         $billClient = $this->getBillClient();
 
@@ -965,15 +969,5 @@ class Client
     protected function getSettlementClient(): SettlementClient
     {
         return SettlementClient::getInstance($this->tokenCache, $this->restCli);
-    }
-
-    /**
-     * Gets subscription client
-     *
-     * @return SubscriptionClient the subscription clients
-     */
-    protected function getSubscriptionClient(): SubscriptionClient
-    {
-        return SubscriptionClient::getInstance($this->tokenCache, $this->restCli);
     }
 }

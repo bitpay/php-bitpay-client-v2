@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Client;
@@ -8,6 +12,7 @@ use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\LedgerQueryException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Ledger\Ledger;
+use BitPaySDK\Model\Ledger\LedgerEntry;
 use BitPaySDK\Tokens;
 use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
@@ -81,9 +86,9 @@ class LedgerClient
         try {
             $mapper = JsonMapperFactory::create();
             $ledger = $mapper->mapArray(
-                json_decode($responseJson),
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Ledger\LedgerEntry'
+                LedgerEntry::class
             );
         } catch (Exception $e) {
             throw new LedgerQueryException(
@@ -122,9 +127,9 @@ class LedgerClient
         try {
             $mapper = JsonMapperFactory::create();
             $ledgers = $mapper->mapArray(
-                json_decode($responseJson),
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Ledger\Ledger'
+                Ledger::class
             );
         } catch (Exception $e) {
             throw new LedgerQueryException(

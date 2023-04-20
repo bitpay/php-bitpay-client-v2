@@ -1,24 +1,18 @@
 <?php
+/**
+ * Copyright (c) 2019 BitPay
+ **/
 declare(strict_types=1);
 
 namespace BitPaySDK\Integration;
 
-use BitPaySDK\Client;
 use BitPaySDK\Exceptions\PayoutRecipientCreationException;
 use BitPaySDK\Exceptions\PayoutRecipientQueryException;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
-use PHPUnit\Framework\TestCase;
 
-class PayoutRecipientsClientTest extends TestCase
+class PayoutRecipientsClientTest extends AbstractClientTest
 {
-    protected $client;
-
-    public function setUp(): void
-    {
-        $this->client = Client::createWithFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . Config::BITPAY_CONFIG_FILE);
-    }
-
     /**
      * @throws PayoutRecipientCreationException
      */
@@ -35,10 +29,10 @@ class PayoutRecipientsClientTest extends TestCase
 
         $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
 
-        $this->assertCount(1, $payoutRecipients);
-        $this->assertEquals('test@emaill1.com', $payoutRecipients[0]->getEmail());
-        $this->assertEquals('recipient1', $payoutRecipients[0]->getLabel());
-        $this->assertEquals(
+        self::assertCount(1, $payoutRecipients);
+        self::assertEquals('test@emaill1.com', $payoutRecipients[0]->getEmail());
+        self::assertEquals('recipient1', $payoutRecipients[0]->getLabel());
+        self::assertEquals(
             'invited',
             $payoutRecipients[0]->getStatus()
         );
@@ -59,11 +53,11 @@ class PayoutRecipientsClientTest extends TestCase
         $recipientId = $payoutRecipients[0]->getId();
         $recipient = $this->client->getPayoutRecipient($recipientId);
 
-        $this->assertEquals($recipientId, $recipient->getId());
-        $this->assertEquals('test@emaill1.com', $recipient->getEmail());
-        $this->assertEquals('recipient1', $recipient->getLabel());
-        $this->assertEquals('invited', $recipient->getStatus());
-        $this->assertEquals(null, $recipient->getShopperId());
+        self::assertEquals($recipientId, $recipient->getId());
+        self::assertEquals('test@emaill1.com', $recipient->getEmail());
+        self::assertEquals('recipient1', $recipient->getLabel());
+        self::assertEquals('invited', $recipient->getStatus());
+        self::assertEquals(null, $recipient->getShopperId());
     }
 
     public function testPayoutRecipientShouldCatchRestCliException(): void
@@ -78,9 +72,9 @@ class PayoutRecipientsClientTest extends TestCase
     {
         $recipients = $this->client->getPayoutRecipients('invited', 1);
 
-        $this->assertCount(1, $recipients);
-        $this->assertEquals('invited', $recipients[0]->getStatus());
-        $this->assertNotNull($recipients);
+        self::assertCount(1, $recipients);
+        self::assertEquals('invited', $recipients[0]->getStatus());
+        self::assertNotNull($recipients);
     }
 
     public function testUpdatePayoutRecipients(): void
@@ -100,10 +94,10 @@ class PayoutRecipientsClientTest extends TestCase
 
         $updateRecipient = $this->client->updatePayoutRecipient($payoutRecipient->getId(), $payoutRecipient);
 
-        $this->assertEquals($label, $updateRecipient->getLabel());
-        $this->assertEquals('test@emaill1.com', $updateRecipient->getEmail());
-        $this->assertEquals('invited', $updateRecipient->getStatus());
-        $this->assertEquals($payoutRecipient->getId(), $updateRecipient->getId());
+        self::assertEquals($label, $updateRecipient->getLabel());
+        self::assertEquals('test@emaill1.com', $updateRecipient->getEmail());
+        self::assertEquals('invited', $updateRecipient->getStatus());
+        self::assertEquals($payoutRecipient->getId(), $updateRecipient->getId());
     }
 
     public function testDeletePayoutRecipient(): void
@@ -121,7 +115,7 @@ class PayoutRecipientsClientTest extends TestCase
 
         $result = $this->client->deletePayoutRecipient($payoutRecipientId);
 
-        $this->assertEquals(true, $result);
+        self::assertEquals(true, $result);
     }
 
     public function testPayoutRecipientRequestNotification(): void
@@ -139,6 +133,6 @@ class PayoutRecipientsClientTest extends TestCase
 
         $result = $this->client->requestPayoutRecipientNotification($payoutRecipientId);
 
-        $this->assertEquals(true, $result);
+        self::assertEquals(true, $result);
     }
 }

@@ -10,7 +10,7 @@ class CurrencyQrTest extends TestCase
   public function testInstanceOf()
   {
     $currencyQr = $this->createClassObject();
-    $this->assertInstanceOf(CurrencyQr::class, $currencyQr);
+    self::assertInstanceOf(CurrencyQr::class, $currencyQr);
   }
 
   public function testGetType()
@@ -19,14 +19,14 @@ class CurrencyQrTest extends TestCase
 
     $currencyQr = $this->createClassObject();
     $currencyQr->setType($expectedType);
-    $this->assertEquals($expectedType, $currencyQr->getType());
+    self::assertEquals($expectedType, $currencyQr->getType());
   }
 
   public function testGetCollapsed()
   {
     $currencyQr = $this->createClassObject();
     $currencyQr->setCollapsed(false);
-    $this->assertFalse($currencyQr->getCollapsed());
+    self::assertFalse($currencyQr->getCollapsed());
   }
 
   public function testToArray()
@@ -35,14 +35,14 @@ class CurrencyQrTest extends TestCase
     $this->objectSetters($currencyQr);
     $currencyQrArray = $currencyQr->toArray();
 
-    $this->assertNotNull($currencyQrArray);
-    $this->assertIsArray($currencyQrArray);
+    self::assertNotNull($currencyQrArray);
+    self::assertIsArray($currencyQrArray);
 
-    $this->assertArrayHasKey('type', $currencyQrArray);
-    $this->assertArrayHasKey('collapsed', $currencyQrArray);
+    self::assertArrayHasKey('type', $currencyQrArray);
+    self::assertArrayHasKey('collapsed', $currencyQrArray);
 
-    $this->assertEquals('BIP21', $currencyQrArray['type']);
-    $this->assertEquals(false, $currencyQrArray['collapsed']);
+    self::assertEquals('BIP21', $currencyQrArray['type']);
+    self::assertEquals(false, $currencyQrArray['collapsed']);
   }
 
   private function createClassObject(): CurrencyQr

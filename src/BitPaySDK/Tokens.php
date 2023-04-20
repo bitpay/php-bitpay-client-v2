@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
 namespace BitPaySDK;
 
 use BitPaySDK\Model\Facade;
