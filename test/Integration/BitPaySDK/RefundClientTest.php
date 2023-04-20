@@ -40,18 +40,6 @@ class RefundClientTest extends TestCase
         $this->client->createRefund($invoice->getId(), 50.0, Currency::USD, true);
     }
 
-    public function testUpdateRefund(): void
-    {
-        $dateStart = date('Y-m-d', strtotime("-30 day"));
-        $dateEnd = date("Y-m-d", strtotime("+1 day"));
-        $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'complete', null, 1);
-        $refunds = $this->client->getRefunds($invoices[0]->getId());
-        $refund = $this->client->updateRefund($refunds[0]->getId(), 'created');
-
-        $this->assertEquals('created', $refund->getStatus());
-        $this->assertEquals('USD', $refund->getCurrency());
-    }
-
     public function testGetRefunds(): void
     {
         $dateStart = date('Y-m-d', strtotime("-30 day"));

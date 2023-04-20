@@ -67,6 +67,7 @@ class PayoutClientTest extends TestCase
         $payout->setNotificationURL("https://somenotiticationURL.com");
         $payout->setNotificationEmail($email);
         $payout->setReference("PHP Integration tests " . uniqid());
+        $payout->setTransactions([]);
 
         return $this->client->submitPayout($payout);
     }
