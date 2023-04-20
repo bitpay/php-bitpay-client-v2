@@ -1379,7 +1379,7 @@ class Invoice
      */
     public function getPaymentDisplaySubTotals()
     {
-        return $this->_paymentDisplaySubtotals;
+        return $this->_paymentDisplaySubTotals;
     }
 
     /**
@@ -1393,7 +1393,7 @@ class Invoice
      */
     public function setPaymentDisplaySubTotals($paymentDisplaySubtotals)
     {
-        $this->_paymentDisplaySubtotals = $paymentDisplaySubtotals;
+        $this->_paymentDisplaySubTotals = $paymentDisplaySubtotals;
     }
 
     /**
@@ -1408,7 +1408,7 @@ class Invoice
      */
     public function getPaymentDisplayTotals()
     {
-        return $this->_paymentDisplaytotals;
+        return $this->_paymentDisplayTotals;
     }
 
     /**
@@ -1423,7 +1423,7 @@ class Invoice
      */
     public function setPaymentDisplayTotals($paymentDisplaytotals)
     {
-        $this->_paymentDisplaytotals = $paymentDisplaytotals;
+        $this->_paymentDisplayTotals = $paymentDisplaytotals;
     }
 
     /**

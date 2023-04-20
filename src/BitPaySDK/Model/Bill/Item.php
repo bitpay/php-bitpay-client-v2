@@ -10,6 +10,8 @@ namespace BitPaySDK\Model\Bill;
 /**
  * @package Bitpay
  */
+
+#[\AllowDynamicProperties]
 class Item
 {
     protected $_id;

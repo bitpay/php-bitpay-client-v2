@@ -16,7 +16,7 @@ class Wallet
     protected $_key;
     protected $_displayName;
     protected $_avatar;
-    protected $_paypro;
+    protected $_payPro;
     protected $_currencies;
     protected $_image;
 
