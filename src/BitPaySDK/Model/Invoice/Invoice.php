@@ -105,7 +105,7 @@ class Invoice
         $this->minerFees = new MinerFees();
         $this->shopper = new Shopper();
         $this->refundInfo = new RefundInfo();
-        $this->itemizedDetails = [new ItemizedDetails()];
+        $this->itemizedDetails = [];
     }
 
     // API fields
