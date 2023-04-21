@@ -1,22 +1,28 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
 namespace BitPaySDK\Exceptions;
 
 use Exception;
 
 class InvoiceException extends BitPayException
 {
-    private $bitPayMessage = "An unexpected error occurred while trying to manage the invoice";
-    private $bitPayCode    = "BITPAY-INVOICE-GENERIC";
+    private string $bitPayMessage = "An unexpected error occurred while trying to manage the invoice";
+    private string $bitPayCode = "BITPAY-INVOICE-GENERIC";
 
     /**
      * Construct the InvoiceException.
      *
      * @param string $message [optional] The Exception message to throw.
-     * @param int    $code    [optional] The Exception code to throw.
-     * @param string $apiCode [optional] The API Exception code to throw.
+     * @param int $code [optional] The Exception code to throw.
+     * @param string|null $apiCode [optional] The API Exception code to throw.
      */
-    public function __construct($message = "", $code = 101, Exception $previous = null, $apiCode = "000000")
+    public function __construct($message = "", $code = 101, Exception $previous = null, ?string $apiCode = "000000")
     {
         if (!$message) {
             $message = $this->bitPayCode . ": " . $this->bitPayMessage . "-> " . $message;

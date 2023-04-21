@@ -1,12 +1,18 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
 namespace BitPaySDK;
 
 use BitPayKeyUtils\KeyHelper\PrivateKey;
 use BitpaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\CurrencyQueryException;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Util\RESTcli\RESTcli;
-use BitPaySDK\Exceptions\CurrencyQueryException;
 use Exception;
 use JsonMapper;
 

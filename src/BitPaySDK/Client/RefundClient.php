@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Client;
@@ -101,8 +105,9 @@ class RefundClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $refund = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Refund()
             );
         } catch (Exception $e) {
@@ -110,8 +115,6 @@ class RefundClient
                 "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
             );
         }
-
-        return $refund;
     }
 
     /**
@@ -148,8 +151,9 @@ class RefundClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $refund = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Refund()
             );
         } catch (Exception $e) {
@@ -157,8 +161,6 @@ class RefundClient
                 "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
             );
         }
-
-        return $refund;
     }
 
     /**
@@ -196,8 +198,9 @@ class RefundClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $refund = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Refund()
             );
         } catch (Exception $e) {
@@ -205,8 +208,6 @@ class RefundClient
                 "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
             );
         }
-
-        return $refund;
     }
 
     /**
@@ -241,18 +242,17 @@ class RefundClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $refunds = $mapper->mapArray(
-                json_decode($responseJson),
+
+            return $mapper->mapArray(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
-                'BitPaySDK\Model\Invoice\Refund'
+                Refund::class
             );
         } catch (Exception $e) {
             throw new RefundQueryException(
                 "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
             );
         }
-
-        return $refunds;
     }
 
     /**
@@ -286,8 +286,9 @@ class RefundClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $refund = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Refund()
             );
         } catch (Exception $e) {
@@ -295,8 +296,6 @@ class RefundClient
                 "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
             );
         }
-
-        return $refund;
     }
 
     /**
@@ -330,8 +329,9 @@ class RefundClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $refund = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Refund()
             );
         } catch (Exception $e) {
@@ -339,8 +339,6 @@ class RefundClient
                 "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
             );
         }
-
-        return $refund;
     }
 
     /**
@@ -371,16 +369,15 @@ class RefundClient
         }
 
         try {
-            $result = json_decode($responseJson)->status == "success";
+            $result = json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR);
+
+            return $result['status'] === "success";
         } catch (Exception $e) {
             throw new RefundNotificationException(
                 "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
             );
         }
-
-        return $result;
     }
-
 
     /**
      * Cancel a previously submitted refund request on a BitPay invoice.
@@ -412,8 +409,9 @@ class RefundClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $refund = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Refund()
             );
         } catch (Exception $e) {
@@ -421,8 +419,6 @@ class RefundClient
                 "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
             );
         }
-
-        return $refund;
     }
 
     /**
@@ -456,8 +452,9 @@ class RefundClient
 
         try {
             $mapper = JsonMapperFactory::create();
-            $refund = $mapper->map(
-                json_decode($responseJson),
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 new Refund()
             );
         } catch (Exception $e) {
@@ -465,7 +462,5 @@ class RefundClient
                 "failed to deserialize BitPay server response (Refund) : " . $e->getMessage()
             );
         }
-
-        return $refund;
     }
 }

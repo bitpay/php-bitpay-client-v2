@@ -1,43 +1,37 @@
 <?php
+/**
+ * Copyright (c) 2019 BitPay
+ **/
 declare(strict_types=1);
 
 namespace BitPaySDK\Integration;
 
-use BitPaySDK\Client;
 use BitPaySDK\Exceptions\LedgerQueryException;
-use PHPUnit\Framework\TestCase;
 
-class LedgerClientTest extends TestCase
+class LedgerClientTest extends AbstractClientTest
 {
-    protected $client;
-
-    public function setUp(): void
-    {
-        $this->client = Client::createWithFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . Config::BITPAY_CONFIG_FILE);
-    }
-
     public function testGetLedger(): void
     {
         $currency = 'USD';
         $startDate = '2022-12-20T13:00:45.063Z';
         $endDate = '2023-01-01T13:00:45.063Z';
 
-        $ledgers = $this->client->getLedger($currency, $startDate, $endDate);
+        $ledgers = $this->client->getLedgerEntries($currency, $startDate, $endDate);
         if (!empty($ledgers)) {
-            $this->assertEquals($currency, $ledgers[0]->getInvoiceCurrency());
+            self::assertEquals($currency, $ledgers[0]->getInvoiceCurrency());
         }
 
-        $this->assertCount(count($ledgers), $ledgers);
-        $this->assertNotNull($ledgers);
-        $this->assertTrue(is_array($ledgers));
+        self::assertCount(count($ledgers), $ledgers);
+        self::assertNotNull($ledgers);
+        self::assertIsArray($ledgers);
     }
 
     public function testGetLedgers(): void
     {
         $ledgers = $this->client->getLedgers();
 
-        $this->assertTrue(is_array($ledgers));
-        $this->assertCount(count($ledgers), $ledgers);
+        self::assertIsArray($ledgers);
+        self::assertCount(count($ledgers), $ledgers);
     }
 
     public function testGetLedgerShouldCatchRestCliException(): void
@@ -47,6 +41,6 @@ class LedgerClientTest extends TestCase
         $endDate = '2022-05-13T13:00:45.063Z';
 
         $this->expectException(LedgerQueryException::class);
-        $this->client->getLedger($currency, $startDate, $endDate);
+        $this->client->getLedgerEntries($currency, $startDate, $endDate);
     }
 }

@@ -1,34 +1,28 @@
 <?php
+/**
+ * Copyright (c) 2019 BitPay
+ **/
 declare(strict_types=1);
 
 namespace BitPaySDK\Integration;
 
 use BitPaySDK\Model\Invoice\Buyer;
 use BitPaySDK\Model\Invoice\Invoice;
-use BitPaySDK\Client;
-use PHPUnit\Framework\TestCase;
 
-class InvoiceClientTest extends TestCase
+class InvoiceClientTest extends AbstractClientTest
 {
-    protected $client;
-
-    public function setUp(): void
-    {
-        $this->client = Client::createWithFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . Config::BITPAY_CONFIG_FILE);
-    }
-
     public function testCreateInvoice(): void
     {
         $invoice = $this->getInvoiceExample();
         $baseInvoice = $this->client->createInvoice($invoice);
 
-        $this->assertEquals('new', $baseInvoice->getStatus());
-        $this->assertEquals('USD', $baseInvoice->getCurrency());
-        $this->assertEquals(50.0, $baseInvoice->getPrice());
-        $this->assertEquals('Test', $baseInvoice->getBuyer()->getName());
-        $this->assertEquals('168 General Grove', $baseInvoice->getBuyer()->getAddress1());
-        $this->assertEquals('Port Horizon', $baseInvoice->getBuyer()->getLocality());
-        $this->assertEquals('New Port', $baseInvoice->getBuyer()->getRegion());
+        self::assertEquals('new', $baseInvoice->getStatus());
+        self::assertEquals('USD', $baseInvoice->getCurrency());
+        self::assertEquals(50.0, $baseInvoice->getPrice());
+        self::assertEquals('Test', $baseInvoice->getBuyer()->getName());
+        self::assertEquals('168 General Grove', $baseInvoice->getBuyer()->getAddress1());
+        self::assertEquals('Port Horizon', $baseInvoice->getBuyer()->getLocality());
+        self::assertEquals('New Port', $baseInvoice->getBuyer()->getRegion());
     }
 
     public function testGetInvoice(): void
@@ -37,12 +31,26 @@ class InvoiceClientTest extends TestCase
         $baseInvoice = $this->client->createInvoice($invoice);
         $baseInvoice = $this->client->getInvoice($baseInvoice->getId());
 
-        $this->assertEquals('new', $baseInvoice->getStatus());
-        $this->assertEquals(50.0, $baseInvoice->getPrice());
-        $this->assertEquals('Test', $baseInvoice->getBuyer()->getName());
-        $this->assertEquals('168 General Grove', $baseInvoice->getBuyer()->getAddress1());
-        $this->assertInstanceOf(Invoice::class, $baseInvoice);
-        $this->assertNotNull($baseInvoice);
+        self::assertEquals('new', $baseInvoice->getStatus());
+        self::assertEquals(50.0, $baseInvoice->getPrice());
+        self::assertEquals('Test', $baseInvoice->getBuyer()->getName());
+        self::assertEquals('168 General Grove', $baseInvoice->getBuyer()->getAddress1());
+        self::assertInstanceOf(Invoice::class, $baseInvoice);
+        self::assertNotNull($baseInvoice);
+    }
+
+    public function testGetInvoiceByGuid(): void
+    {
+        $invoice = $this->getInvoiceExample();
+        $baseInvoice = $this->client->createInvoice($invoice);
+        $baseInvoice = $this->client->getInvoiceByGuid($baseInvoice->getGuid());
+
+        self::assertEquals('new', $baseInvoice->getStatus());
+        self::assertEquals(50.0, $baseInvoice->getPrice());
+        self::assertEquals('Test', $baseInvoice->getBuyer()->getName());
+        self::assertEquals('168 General Grove', $baseInvoice->getBuyer()->getAddress1());
+        self::assertInstanceOf(Invoice::class, $baseInvoice);
+        self::assertNotNull($baseInvoice);
     }
 
     public function testUpdateInvoice(): void
@@ -58,7 +66,7 @@ class InvoiceClientTest extends TestCase
             'test1@email.com'
         );
 
-        $this->assertEquals('test1@email.com', $updateInvoice->getBuyer()->getEmail());
+        self::assertEquals('test1@email.com', $updateInvoice->getBuyer()->getEmail());
     }
 
     public function testGetInvoices(): void
@@ -67,9 +75,9 @@ class InvoiceClientTest extends TestCase
         $dateEnd = date("Y-m-d", strtotime("+1 day"));
         $invoices = $this->client->getInvoices($dateStart, $dateEnd, 'new', null, 1);
 
-        $this->assertCount(1, $invoices);
-        $this->assertTrue(count($invoices) > 0);
-        $this->assertNotNull($invoices);
+        self::assertCount(1, $invoices);
+        self::assertTrue(count($invoices) > 0);
+        self::assertNotNull($invoices);
     }
 
     public function testCancel(): void
@@ -79,7 +87,7 @@ class InvoiceClientTest extends TestCase
         $baseInvoice = $this->client->getInvoice($baseInvoice->getId());
         $cancelInvoice = $this->client->cancelInvoice($baseInvoice->getId());
 
-        $this->assertEquals('expired', $cancelInvoice->getStatus());
+        self::assertEquals('expired', $cancelInvoice->getStatus());
     }
 
     public function testCancelInvoiceByGuid()
@@ -88,10 +96,10 @@ class InvoiceClientTest extends TestCase
         $baseInvoice = $this->client->createInvoice($invoice);
         $baseInvoice = $this->client->cancelInvoiceByGuid($baseInvoice->getGuid());
 
-        $this->assertEquals('expired', $baseInvoice->getStatus());
-        $this->assertEquals(50.0, $baseInvoice->getPrice());
-        $this->assertInstanceOf(Invoice::class, $baseInvoice);
-        $this->assertNotNull($baseInvoice);
+        self::assertEquals('expired', $baseInvoice->getStatus());
+        self::assertEquals(50.0, $baseInvoice->getPrice());
+        self::assertInstanceOf(Invoice::class, $baseInvoice);
+        self::assertNotNull($baseInvoice);
     }
 
     public function testPayInvoice(): void
@@ -100,7 +108,7 @@ class InvoiceClientTest extends TestCase
         $invoice = $this->client->createInvoice($invoice);
         $invoice = $this->client->payInvoice($invoice->getId());
 
-        $this->assertEquals('confirmed', $invoice->getStatus());
+        self::assertEquals('confirmed', $invoice->getStatus());
     }
 
     private function getInvoiceExample(): Invoice

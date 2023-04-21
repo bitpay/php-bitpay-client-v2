@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -11,6 +15,7 @@ namespace BitPaySDK\Model\Wallet;
 
 /**
  * Object containing QR code related information to show for this payment method
+ * @see <a href="https://bitpay.readme.io/reference/wallets">Wallets</a>
  */
 class CurrencyQr
 {

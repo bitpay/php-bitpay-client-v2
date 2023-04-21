@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -13,15 +17,15 @@ use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
 /**
- *
  * @package Bitpay
+ * @see <a href="https://developer.bitpay.com/reference/bills">REST API Bills</a>
  */
 class Bill
 {
     protected ?string $currency = null;
     protected ?string $token = null;
     protected ?string $email = null;
-    protected ?array $items = null;
+    protected array $items = [];
     protected ?string $number = null;
     protected ?string $name = null;
     protected ?string $address1 = null;
@@ -57,7 +61,11 @@ class Bill
         $this->number = $number;
         $this->currency = $currency;
         $this->email = $email;
-        $this->items = $items;
+
+        if (!$items) {
+            $items = [];
+        }
+        $this->setItems($items);
     }
 
     /**
@@ -138,9 +146,9 @@ class Bill
     /**
      * Gets items from bill
      *
-     * @return array|null items object from bill
+     * @return array Item[]
      */
-    public function getItems(): ?array
+    public function getItems(): array
     {
         return $this->items;
     }
@@ -155,11 +163,7 @@ class Bill
         $items = [];
 
         foreach ($this->items as $item) {
-            if ($item instanceof Item) {
-                $items[] = $item->toArray();
-            } else {
-                $items[] = $item;
-            }
+            $items[] = $item->toArray();
         }
 
         return $items;
@@ -168,7 +172,7 @@ class Bill
     /**
      * Sets Bill's items
      *
-     * @param array $items items in bill
+     * @param array $items Item[]
      */
     public function setItems(array $items): void
     {

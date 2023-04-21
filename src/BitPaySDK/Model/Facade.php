@@ -1,6 +1,10 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+/**
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -10,6 +14,8 @@ namespace BitPaySDK\Model;
 /**
  * Facades named collections of capabilities that can be granted,
  * such as the ability to create invoices or grant refunds
+ *
+ * @see <a href="https://bitpay.readme.io/reference/concepts#facades">REST API facades</a>
  */
 interface Facade
 {

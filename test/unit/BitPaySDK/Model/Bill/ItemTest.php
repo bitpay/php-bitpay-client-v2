@@ -10,7 +10,7 @@ class ItemTest extends TestCase
     public function testInstanceOf()
     {
         $item = $this->createClassObject();
-        $this->assertInstanceOf(Item::class, $item);
+        self::assertInstanceOf(Item::class, $item);
     }
 
     public function testGetId()
@@ -19,7 +19,7 @@ class ItemTest extends TestCase
 
         $item = $this->createClassObject();
         $item->setId($expectedId);
-        $this->assertEquals($expectedId, $item->getId());
+        self::assertEquals($expectedId, $item->getId());
     }
 
     public function testGetDescription()
@@ -28,7 +28,7 @@ class ItemTest extends TestCase
 
         $item = $this->createClassObject();
         $item->setDescription($expectedDescription);
-        $this->assertEquals($expectedDescription, $item->getDescription());
+        self::assertEquals($expectedDescription, $item->getDescription());
     }
 
     public function testGetPrice()
@@ -37,7 +37,7 @@ class ItemTest extends TestCase
 
         $item = $this->createClassObject();
         $item->setPrice($expectedPrice);
-        $this->assertEquals($expectedPrice, $item->getPrice());
+        self::assertEquals($expectedPrice, $item->getPrice());
     }
 
     public function testGetQuantity()
@@ -46,7 +46,7 @@ class ItemTest extends TestCase
 
         $item = $this->createClassObject();
         $item->setQuantity($expectedQuantity);
-        $this->assertEquals($expectedQuantity, $item->getQuantity());
+        self::assertEquals($expectedQuantity, $item->getQuantity());
     }
 
     public function testCreateFromArray()
@@ -59,8 +59,8 @@ class ItemTest extends TestCase
         $item = $this->createClassObject();
         $item = $item::createFromArray($testArrayItem);
 
-        $this->assertEquals('test', $item->getDescription());
-        $this->assertEquals(12, $item->getPrice());
+        self::assertEquals('test', $item->getDescription());
+        self::assertEquals(12, $item->getPrice());
     }
 
     public function testToArray()
@@ -70,18 +70,18 @@ class ItemTest extends TestCase
 
         $itemArray = $item->toArray();
 
-        $this->assertNotNull($itemArray);
-        $this->assertIsArray($itemArray);
+        self::assertNotNull($itemArray);
+        self::assertIsArray($itemArray);
 
-        $this->assertArrayHasKey('id', $itemArray);
-        $this->assertArrayHasKey('description', $itemArray);
-        $this->assertArrayHasKey('price', $itemArray);
-        $this->assertArrayHasKey('quantity', $itemArray);
+        self::assertArrayHasKey('id', $itemArray);
+        self::assertArrayHasKey('description', $itemArray);
+        self::assertArrayHasKey('price', $itemArray);
+        self::assertArrayHasKey('quantity', $itemArray);
 
-        $this->assertEquals(1, $itemArray['id']);
-        $this->assertEquals('description', $itemArray['description']);
-        $this->assertEquals(1.2, $itemArray['price']);
-        $this->assertEquals(1, $itemArray['quantity']);
+        self::assertEquals(1, $itemArray['id']);
+        self::assertEquals('description', $itemArray['description']);
+        self::assertEquals(1.2, $itemArray['price']);
+        self::assertEquals(1, $itemArray['quantity']);
     }
 
     private function createClassObject(): Item

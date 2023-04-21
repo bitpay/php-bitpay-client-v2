@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -9,6 +13,11 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Settlement;
 
+/**
+ * Class SettlementLedgerEntry
+ * @package BitPaySDK\Model\Settlement
+ * @see <a href="https://bitpay.readme.io/reference/settlements">Settlements</a>
+ */
 class SettlementLedgerEntry
 {
     protected ?int $code = null;
@@ -196,7 +205,7 @@ class SettlementLedgerEntry
             'timestamp' => $this->getTimestamp(),
             'description' => $this->getDescription(),
             'reference' => $this->getReference(),
-            'invoiceData' => $this->getInvoiceData()->toArray(),
+            'invoiceData' => $this->getInvoiceData() ? $this->getInvoiceData()->toArray() : null,
         ];
     }
 }

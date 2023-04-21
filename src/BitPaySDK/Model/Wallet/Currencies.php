@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -11,6 +15,7 @@ namespace BitPaySDK\Model\Wallet;
 
 /**
  * Details of what currencies support payments for this wallet
+ * @see <a href="https://bitpay.readme.io/reference/wallets">Wallets</a>
  */
 class Currencies
 {

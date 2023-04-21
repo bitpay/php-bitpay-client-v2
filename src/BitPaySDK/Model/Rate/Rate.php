@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -9,6 +13,11 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Rate;
 
+/**
+ * Class Rate
+ * @package BitPaySDK\Model\Rate
+ * @see <a href="https://bitpay.readme.io/reference/rates">REST API Rates</a>
+ */
 class Rate
 {
     protected ?string $name = null;

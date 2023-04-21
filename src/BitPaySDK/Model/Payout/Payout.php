@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -10,11 +14,12 @@ declare(strict_types=1);
 namespace BitPaySDK\Model\Payout;
 
 use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\PayoutException;
 use BitPaySDK\Model\Currency;
 
 /**
- *
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 class Payout
 {
@@ -39,7 +44,10 @@ class Payout
     protected ?string $status = null;
     protected ?string $requestDate = null;
     protected ?array $exchangeRates = null;
-    protected ?array $transactions = null;
+    /**
+     * @var PayoutTransaction[]
+     */
+    protected array $transactions = [];
 
     /**
      * Constructor, create a request Payout object.
@@ -634,31 +642,20 @@ class Payout
     /**
      * Sets transactions. Contains the cryptocurrency transaction details for the executed payout request.
      *
-     * @param array $transactions
+     * @param PayoutTransaction[] $transactions
+     * @throws PayoutException
      */
     public function setTransactions(array $transactions): void
     {
-        if (empty($transactions)) {
-            $this->transactions = [];
-
-            return;
-        }
-
-        $transactionsArray = [];
-
         foreach ($transactions as $transaction) {
-            if ($transaction instanceof PayoutTransaction) {
-                $transactionsArray[] = $transaction;
-            } else {
-                $payoutTransaction = new PayoutTransaction();
-                $payoutTransaction->setAmount($transaction->amount ?? null);
-                $payoutTransaction->setDate($transaction->date ?? null);
-                $payoutTransaction->setTxid($transaction->txid ?? null);
-                $transactionsArray[] = $payoutTransaction;
+            if (!$transaction instanceof PayoutTransaction) {
+                throw new PayoutException(
+                    'Wrong type of transactions array. They should contains only PayoutTransaction objects'
+                );
             }
         }
 
-        $this->transactions = $transactionsArray;
+        $this->transactions = $transactions;
     }
 
     /**

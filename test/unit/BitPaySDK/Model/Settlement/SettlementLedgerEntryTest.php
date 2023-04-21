@@ -11,7 +11,7 @@ class SettlementLedgerEntryTest extends TestCase
     public function testInstanceOf()
     {
         $settlementLedgerEntry = $this->createClassObject();
-        $this->assertInstanceOf(SettlementLedgerEntry::class, $settlementLedgerEntry);
+        self::assertInstanceOf(SettlementLedgerEntry::class, $settlementLedgerEntry);
     }
 
     public function testGetCode()
@@ -20,7 +20,7 @@ class SettlementLedgerEntryTest extends TestCase
 
         $settlementLedgerEntry = $this->createClassObject();
         $settlementLedgerEntry->setCode($expectedCode);
-        $this->assertEquals($expectedCode, $settlementLedgerEntry->getCode());
+        self::assertEquals($expectedCode, $settlementLedgerEntry->getCode());
     }
 
     public function testGetInvoiceId()
@@ -29,7 +29,7 @@ class SettlementLedgerEntryTest extends TestCase
 
         $settlementLedgerEntry = $this->createClassObject();
         $settlementLedgerEntry->setInvoiceId($expectedInvoiceId);
-        $this->assertEquals($expectedInvoiceId, $settlementLedgerEntry->getInvoiceId());
+        self::assertEquals($expectedInvoiceId, $settlementLedgerEntry->getInvoiceId());
     }
 
     public function testGetAmount()
@@ -38,7 +38,7 @@ class SettlementLedgerEntryTest extends TestCase
 
         $settlementLedgerEntry = $this->createClassObject();
         $settlementLedgerEntry->setAmount($expectedAmount);
-        $this->assertEquals($expectedAmount, $settlementLedgerEntry->getAmount());
+        self::assertEquals($expectedAmount, $settlementLedgerEntry->getAmount());
     }
 
     public function testGetTimestamp()
@@ -47,7 +47,7 @@ class SettlementLedgerEntryTest extends TestCase
 
         $settlementLedgerEntry = $this->createClassObject();
         $settlementLedgerEntry->setTimestamp($expectedTimestamp);
-        $this->assertEquals($expectedTimestamp, $settlementLedgerEntry->getTimestamp());
+        self::assertEquals($expectedTimestamp, $settlementLedgerEntry->getTimestamp());
     }
 
     public function testGetDescription()
@@ -56,7 +56,7 @@ class SettlementLedgerEntryTest extends TestCase
 
         $settlementLedgerEntry = $this->createClassObject();
         $settlementLedgerEntry->setDescription($expectedDescription);
-        $this->assertEquals($expectedDescription, $settlementLedgerEntry->getDescription());
+        self::assertEquals($expectedDescription, $settlementLedgerEntry->getDescription());
     }
 
     public function testGetReference()
@@ -65,7 +65,7 @@ class SettlementLedgerEntryTest extends TestCase
 
         $settlementLedgerEntry = $this->createClassObject();
         $settlementLedgerEntry->setReference($expectedReference);
-        $this->assertEquals($expectedReference, $settlementLedgerEntry->getReference());
+        self::assertEquals($expectedReference, $settlementLedgerEntry->getReference());
     }
 
     public function testGetInvoiceData()
@@ -74,7 +74,7 @@ class SettlementLedgerEntryTest extends TestCase
 
         $settlementLedgerEntry = $this->createClassObject();
         $settlementLedgerEntry->setInvoiceData($expectedInvoiceData);
-        $this->assertEquals($expectedInvoiceData, $settlementLedgerEntry->getInvoiceData());
+        self::assertEquals($expectedInvoiceData, $settlementLedgerEntry->getInvoiceData());
     }
 
     public function testToArray()
@@ -83,23 +83,23 @@ class SettlementLedgerEntryTest extends TestCase
         $this->setSetters($settlementLedgerEntry);
         $settlementLedgerEntryArray = $settlementLedgerEntry->toArray();
 
-        $this->assertNotNull($settlementLedgerEntryArray);
-        $this->assertIsArray($settlementLedgerEntryArray);
+        self::assertNotNull($settlementLedgerEntryArray);
+        self::assertIsArray($settlementLedgerEntryArray);
 
-        $this->assertArrayHasKey('code', $settlementLedgerEntryArray);
-        $this->assertArrayHasKey('invoiceId', $settlementLedgerEntryArray);
-        $this->assertArrayHasKey('amount', $settlementLedgerEntryArray);
-        $this->assertArrayHasKey('timestamp', $settlementLedgerEntryArray);
-        $this->assertArrayHasKey('description', $settlementLedgerEntryArray);
-        $this->assertArrayHasKey('reference', $settlementLedgerEntryArray);
-        $this->assertArrayHasKey('invoiceData', $settlementLedgerEntryArray);
+        self::assertArrayHasKey('code', $settlementLedgerEntryArray);
+        self::assertArrayHasKey('invoiceId', $settlementLedgerEntryArray);
+        self::assertArrayHasKey('amount', $settlementLedgerEntryArray);
+        self::assertArrayHasKey('timestamp', $settlementLedgerEntryArray);
+        self::assertArrayHasKey('description', $settlementLedgerEntryArray);
+        self::assertArrayHasKey('reference', $settlementLedgerEntryArray);
+        self::assertArrayHasKey('invoiceData', $settlementLedgerEntryArray);
 
-        $this->assertEquals(567, $settlementLedgerEntryArray['code']);
-        $this->assertEquals('14', $settlementLedgerEntryArray['invoiceId']);
-        $this->assertEquals(55.5, $settlementLedgerEntryArray['amount']);
-        $this->assertEquals('2022-01-11 01:01:01', $settlementLedgerEntryArray['timestamp']);
-        $this->assertEquals('Description', $settlementLedgerEntryArray['description']);
-        $this->assertEquals('Reference', $settlementLedgerEntryArray['reference']);
+        self::assertEquals(567, $settlementLedgerEntryArray['code']);
+        self::assertEquals('14', $settlementLedgerEntryArray['invoiceId']);
+        self::assertEquals(55.5, $settlementLedgerEntryArray['amount']);
+        self::assertEquals('2022-01-11 01:01:01', $settlementLedgerEntryArray['timestamp']);
+        self::assertEquals('Description', $settlementLedgerEntryArray['description']);
+        self::assertEquals('Reference', $settlementLedgerEntryArray['reference']);
     }
 
     private function createClassObject(): SettlementLedgerEntry

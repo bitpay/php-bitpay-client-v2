@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -12,6 +16,7 @@ namespace BitPaySDK\Model\Wallet;
 /**
  *
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/wallets">Wallets</a>
  */
 class Wallet
 {

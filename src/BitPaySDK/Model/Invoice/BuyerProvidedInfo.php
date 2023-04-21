@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -11,6 +15,7 @@ namespace BitPaySDK\Model\Invoice;
 
 /**
  * Information collected from the buyer during the process of paying an invoice. Initially this object is empty.
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 class BuyerProvidedInfo
 {

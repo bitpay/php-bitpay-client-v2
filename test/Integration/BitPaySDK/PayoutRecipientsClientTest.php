@@ -1,28 +1,24 @@
 <?php
+
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Integration;
 
-use BitPaySDK\Client;
 use BitPaySDK\Exceptions\PayoutRecipientCreationException;
 use BitPaySDK\Exceptions\PayoutRecipientQueryException;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
-use PHPUnit\Framework\TestCase;
 
-class PayoutRecipientsClientTest extends TestCase
+class PayoutRecipientsClientTest extends AbstractClientTest
 {
-    protected $client;
-
-    public function setUp(): void
-    {
-        $this->client = Client::createWithFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . Config::BITPAY_CONFIG_FILE);
-    }
-
     /**
      * @throws PayoutRecipientCreationException
      */
-    public function testPayoutRequests(): void
+    public function testSubmitPayoutRecipients(): void
     {
         $recipientsList = [
             new PayoutRecipient(
@@ -35,43 +31,110 @@ class PayoutRecipientsClientTest extends TestCase
 
         $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
 
-        $this->assertCount(1, $payoutRecipients);
-        $this->assertEquals('test@emaill1.com', $payoutRecipients[0]->getEmail());
-        $this->assertEquals('recipient1', $payoutRecipients[0]->getLabel());
-        $this->assertEquals(
+        self::assertCount(1, $payoutRecipients);
+        self::assertEquals('test@emaill1.com', $payoutRecipients[0]->getEmail());
+        self::assertEquals('recipient1', $payoutRecipients[0]->getLabel());
+        self::assertEquals(
             'invited',
             $payoutRecipients[0]->getStatus()
         );
+    }
 
-        $recipient = $payoutRecipients[0];
-        $recipientId = $recipient->getId();
+    public function testGetPayoutRecipient()
+    {
+        $recipientsList = [
+            new PayoutRecipient(
+                "test@emaill1.com",
+                "recipient1",
+                "https://yournotiticationURL.com/b3sarz5bg0wx01eq1bv9785amx")
+        ];
+
+        $recipients = new PayoutRecipients($recipientsList);
+        $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
+
+        $recipientId = $payoutRecipients[0]->getId();
         $recipient = $this->client->getPayoutRecipient($recipientId);
 
-        $this->assertEquals('test@emaill1.com', $recipient->getEmail());
-        $this->assertEquals('recipient1', $recipient->getLabel());
-        $this->assertEquals('invited', $recipient->getStatus());
+        self::assertEquals($recipientId, $recipient->getId());
+        self::assertEquals('test@emaill1.com', $recipient->getEmail());
+        self::assertEquals('recipient1', $recipient->getLabel());
+        self::assertEquals('invited', $recipient->getStatus());
+        self::assertEquals(null, $recipient->getShopperId());
+    }
 
+    public function testPayoutRecipientShouldCatchRestCliException(): void
+    {
+        $recipientId = 'JA4cEtmBxCp5cybtnh1rds';
 
+        $this->expectException(PayoutRecipientQueryException::class);
+        $this->client->getPayoutRecipient($recipientId);
+    }
+
+    public function testGetPayoutRecipients(): void
+    {
         $recipients = $this->client->getPayoutRecipients('invited', 1);
 
-        $this->assertCount(1, $recipients);
-        $this->assertEquals('invited', $recipients[0]->getStatus());
-        $this->assertNotNull($recipients);
+        self::assertCount(1, $recipients);
+        self::assertEquals('invited', $recipients[0]->getStatus());
+        self::assertNotNull($recipients);
+    }
 
+    public function testUpdatePayoutRecipients(): void
+    {
         $label = 'updateLabel';
-        $recipient->setLabel($label);
+        $recipientsList = [
+            new PayoutRecipient(
+                "test@emaill1.com",
+                "recipient1",
+                "https://yournotiticationURL.com/b3sarz5bg0wx01eq1bv9785amx")
+        ];
 
-        $updateRecipient = $this->client->updatePayoutRecipient($recipientId, $recipient);
+        $recipients = new PayoutRecipients($recipientsList);
+        $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
+        $payoutRecipient = $payoutRecipients[0];
+        $payoutRecipient->setLabel($label);
 
-        $this->assertEquals($label, $updateRecipient->getLabel());
-        $this->assertEquals('test@emaill1.com', $updateRecipient->getEmail());
-        $this->assertEquals('invited', $updateRecipient->getStatus());
-        $this->assertEquals($recipient->getId(), $updateRecipient->getId());
+        $updateRecipient = $this->client->updatePayoutRecipient($payoutRecipient->getId(), $payoutRecipient);
 
-        $result = $this->client->requestPayoutRecipientNotification($recipientId);
-        $this->assertEquals(true, $result);
+        self::assertEquals($label, $updateRecipient->getLabel());
+        self::assertEquals('test@emaill1.com', $updateRecipient->getEmail());
+        self::assertEquals('invited', $updateRecipient->getStatus());
+        self::assertEquals($payoutRecipient->getId(), $updateRecipient->getId());
+    }
 
-        $result = $this->client->deletePayoutRecipient($recipientId);
-        $this->assertEquals(true, $result);
+    public function testDeletePayoutRecipient(): void
+    {
+        $recipientsList = [
+            new PayoutRecipient(
+                "test@emaill1.com",
+                "recipient1",
+                "https://yournotiticationURL.com/b3sarz5bg0wx01eq1bv9785amx")
+        ];
+
+        $recipients = new PayoutRecipients($recipientsList);
+        $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
+        $payoutRecipientId = $payoutRecipients[0]->getId();
+
+        $result = $this->client->deletePayoutRecipient($payoutRecipientId);
+
+        self::assertEquals(true, $result);
+    }
+
+    public function testPayoutRecipientRequestNotification(): void
+    {
+        $recipientsList = [
+            new PayoutRecipient(
+                "test@emaill1.com",
+                "recipient1",
+                "https://yournotiticationURL.com/b3sarz5bg0wx01eq1bv9785amx")
+        ];
+
+        $recipients = new PayoutRecipients($recipientsList);
+        $payoutRecipients = $this->client->submitPayoutRecipients($recipients);
+        $payoutRecipientId = $payoutRecipients[0]->getId();
+
+        $result = $this->client->requestPayoutRecipientNotification($payoutRecipientId);
+
+        self::assertEquals(true, $result);
     }
 }

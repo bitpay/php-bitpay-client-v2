@@ -11,7 +11,7 @@ class MinerFeesTest extends TestCase
     public function testInstanceOf()
     {
         $minesFees = $this->createClassObject();
-        $this->assertInstanceOf(MinerFees::class, $minesFees);
+        self::assertInstanceOf(MinerFees::class, $minesFees);
     }
 
     public function testGetBTC()
@@ -20,7 +20,7 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setBTC($expectedBTC);
-        $this->assertEquals($expectedBTC, $minesFees->getBTC());
+        self::assertEquals($expectedBTC, $minesFees->getBTC());
     }
 
     public function testGetBCH()
@@ -29,7 +29,7 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setBCH($expectedBCH);
-        $this->assertEquals($expectedBCH, $minesFees->getBCH());
+        self::assertEquals($expectedBCH, $minesFees->getBCH());
     }
 
     public function testGetETH()
@@ -38,7 +38,7 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setETH($expectedETH);
-        $this->assertEquals($expectedETH, $minesFees->getETH());
+        self::assertEquals($expectedETH, $minesFees->getETH());
     }
 
     public function testGetUSDC()
@@ -47,7 +47,7 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setUSDC($expectedUSDC);
-        $this->assertEquals($expectedUSDC, $minesFees->getUSDC());
+        self::assertEquals($expectedUSDC, $minesFees->getUSDC());
     }
 
     public function testGetGUSD()
@@ -56,7 +56,7 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setGUSD($expectedGUSD);
-        $this->assertEquals($expectedGUSD, $minesFees->getGUSD());
+        self::assertEquals($expectedGUSD, $minesFees->getGUSD());
     }
 
     public function testGetPAX()
@@ -65,7 +65,7 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setPAX($expectedPAX);
-        $this->assertEquals($expectedPAX, $minesFees->getPAX());
+        self::assertEquals($expectedPAX, $minesFees->getPAX());
     }
 
     public function testGetBUSD()
@@ -74,7 +74,7 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setBUSD($expectedBUSD);
-        $this->assertEquals($expectedBUSD, $minesFees->getBUSD());
+        self::assertEquals($expectedBUSD, $minesFees->getBUSD());
     }
 
     public function testGetXRP()
@@ -83,7 +83,7 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setXRP($expectedXRP);
-        $this->assertEquals($expectedXRP, $minesFees->getXRP());
+        self::assertEquals($expectedXRP, $minesFees->getXRP());
     }
 
     public function testGetDOGE()
@@ -92,7 +92,7 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setDOGE($expectedDOGE);
-        $this->assertEquals($expectedDOGE, $minesFees->getDOGE());
+        self::assertEquals($expectedDOGE, $minesFees->getDOGE());
     }
 
     public function testGetLTC()
@@ -101,23 +101,23 @@ class MinerFeesTest extends TestCase
 
         $minesFees = $this->createClassObject();
         $minesFees->setLTC($expectedLTC);
-        $this->assertEquals($expectedLTC, $minesFees->getLTC());
+        self::assertEquals($expectedLTC, $minesFees->getLTC());
     }
 
     public function testToArray()
     {
         $expectedMinerFeesItem = $this->getMockBuilder(MinerFeesItem::class)->getMock();
-        $expectedMinerFeesItem->expects($this->once())->method('toArray')->willReturn(['satoshisPerByte' => 1.1, 'totalFee' => 1.1, 'fiatAmount' => 1.1]);
+        $expectedMinerFeesItem->expects(self::once())->method('toArray')->willReturn(['satoshisPerByte' => 1.1, 'totalFee' => 1.1, 'fiatAmount' => 1.1]);
         $minesFees = $this->createClassObject();
         $minesFees->setBTC($expectedMinerFeesItem);
         $minesFeesArray = $minesFees->toArray();
 
-        $this->assertNotNull($minesFeesArray);
-        $this->assertIsArray($minesFeesArray);
+        self::assertNotNull($minesFeesArray);
+        self::assertIsArray($minesFeesArray);
 
-        $this->assertArrayHasKey('btc', $minesFeesArray);
-        $this->assertArrayNotHasKey('bch', $minesFeesArray);
-        $this->assertEquals(['btc' => ['satoshisPerByte' => 1.1,  'totalFee' => 1.1, 'fiatAmount' => 1.1]], $minesFeesArray);
+        self::assertArrayHasKey('btc', $minesFeesArray);
+        self::assertArrayNotHasKey('bch', $minesFeesArray);
+        self::assertEquals(['btc' => ['satoshisPerByte' => 1.1,  'totalFee' => 1.1, 'fiatAmount' => 1.1]], $minesFeesArray);
     }
 
     public function testToArrayEmptyKey()
@@ -126,10 +126,10 @@ class MinerFeesTest extends TestCase
 
         $minesFeesArray = $minesFees->toArray();
 
-        $this->assertNotNull($minesFeesArray);
-        $this->assertIsArray($minesFeesArray);
+        self::assertNotNull($minesFeesArray);
+        self::assertIsArray($minesFeesArray);
 
-        $this->assertArrayNotHasKey('btc', $minesFeesArray);
+        self::assertArrayNotHasKey('btc', $minesFeesArray);
     }
 
     private function createClassObject(): MinerFees

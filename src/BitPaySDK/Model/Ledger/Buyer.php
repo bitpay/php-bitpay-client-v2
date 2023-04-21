@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -9,6 +13,11 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Ledger;
 
+/**
+ * Class Buyer
+ * @package BitPaySDK\Model\Ledger
+ * @see <a href="https://bitpay.readme.io/reference/ledgers">REST API Ledgers</a>
+ */
 class Buyer
 {
     protected ?string $name = null;

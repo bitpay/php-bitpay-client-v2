@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -11,6 +15,7 @@ namespace BitPaySDK\Model\Invoice;
 
 /**
  * For a refunded invoice, this object will contain the details of executed refunds for the corresponding invoice.
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 class RefundInfo
 {

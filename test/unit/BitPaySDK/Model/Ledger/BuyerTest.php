@@ -10,7 +10,7 @@ class BuyerTest extends TestCase
     public function testInstanceOf()
     {
         $buyer = $this->createClassObject();
-        $this->assertInstanceOf(Buyer::class, $buyer);
+        self::assertInstanceOf(Buyer::class, $buyer);
     }
 
     public function testGetName()
@@ -19,7 +19,7 @@ class BuyerTest extends TestCase
 
         $buyer = $this->createClassObject();
         $buyer->setName($expectedName);
-        $this->assertEquals($expectedName, $buyer->getName());
+        self::assertEquals($expectedName, $buyer->getName());
     }
 
     public function testGetAddress1()
@@ -28,7 +28,7 @@ class BuyerTest extends TestCase
 
         $buyer = $this->createClassObject();
         $buyer->setAddress1($expectedAddress1);
-        $this->assertEquals($expectedAddress1, $buyer->getAddress1());
+        self::assertEquals($expectedAddress1, $buyer->getAddress1());
     }
 
     public function testGetAddress2()
@@ -37,7 +37,7 @@ class BuyerTest extends TestCase
 
         $buyer = $this->createClassObject();
         $buyer->setAddress2($expectedAddress2);
-        $this->assertEquals($expectedAddress2, $buyer->getAddress2());
+        self::assertEquals($expectedAddress2, $buyer->getAddress2());
     }
 
     public function testGetCity()
@@ -46,7 +46,7 @@ class BuyerTest extends TestCase
 
         $buyer = $this->createClassObject();
         $buyer->setCity($expectedCity);
-        $this->assertEquals($expectedCity, $buyer->getCity());
+        self::assertEquals($expectedCity, $buyer->getCity());
     }
 
     public function testGetState()
@@ -55,7 +55,7 @@ class BuyerTest extends TestCase
 
         $buyer = $this->createClassObject();
         $buyer->setState($expectedState);
-        $this->assertEquals($expectedState, $buyer->getState());
+        self::assertEquals($expectedState, $buyer->getState());
     }
 
     public function testGetZip()
@@ -64,7 +64,7 @@ class BuyerTest extends TestCase
 
         $buyer = $this->createClassObject();
         $buyer->setZip($expectedZip);
-        $this->assertEquals($expectedZip, $buyer->getZip());
+        self::assertEquals($expectedZip, $buyer->getZip());
     }
 
     public function testGetCountry()
@@ -73,7 +73,7 @@ class BuyerTest extends TestCase
 
         $buyer = $this->createClassObject();
         $buyer->setCountry($expectedCountry);
-        $this->assertEquals($expectedCountry, $buyer->getCountry());
+        self::assertEquals($expectedCountry, $buyer->getCountry());
     }
 
     public function testGetEmail()
@@ -82,7 +82,7 @@ class BuyerTest extends TestCase
 
         $buyer = $this->createClassObject();
         $buyer->setEmail($expectedEmail);
-        $this->assertEquals($expectedEmail, $buyer->getEmail());
+        self::assertEquals($expectedEmail, $buyer->getEmail());
     }
 
     public function testGetPhone()
@@ -91,17 +91,17 @@ class BuyerTest extends TestCase
 
         $buyer = $this->createClassObject();
         $buyer->setPhone($expectedPhone);
-        $this->assertEquals($expectedPhone, $buyer->getPhone());
+        self::assertEquals($expectedPhone, $buyer->getPhone());
     }
 
     public function testGetNotify()
     {
         $buyer = $this->createClassObject();
         $buyer->setNotify(true);
-        $this->assertTrue($buyer->getNotify());
+        self::assertTrue($buyer->getNotify());
 
         $buyer->setNotify(false);
-        $this->assertFalse($buyer->getNotify());
+        self::assertFalse($buyer->getNotify());
     }
 
     public function testToArray()
@@ -111,30 +111,30 @@ class BuyerTest extends TestCase
 
         $buyerArray = $buyer->toArray();
 
-        $this->assertNotNull($buyerArray);
-        $this->assertIsArray($buyerArray);
+        self::assertNotNull($buyerArray);
+        self::assertIsArray($buyerArray);
 
-        $this->assertArrayHasKey('name', $buyerArray);
-        $this->assertArrayHasKey('address1', $buyerArray);
-        $this->assertArrayHasKey('address2', $buyerArray);
-        $this->assertArrayHasKey('city', $buyerArray);
-        $this->assertArrayHasKey('state', $buyerArray);
-        $this->assertArrayHasKey('zip', $buyerArray);
-        $this->assertArrayHasKey('country', $buyerArray);
-        $this->assertArrayHasKey('phone', $buyerArray);
-        $this->assertArrayHasKey('notify', $buyerArray);
-        $this->assertArrayHasKey('email', $buyerArray);
+        self::assertArrayHasKey('name', $buyerArray);
+        self::assertArrayHasKey('address1', $buyerArray);
+        self::assertArrayHasKey('address2', $buyerArray);
+        self::assertArrayHasKey('city', $buyerArray);
+        self::assertArrayHasKey('state', $buyerArray);
+        self::assertArrayHasKey('zip', $buyerArray);
+        self::assertArrayHasKey('country', $buyerArray);
+        self::assertArrayHasKey('phone', $buyerArray);
+        self::assertArrayHasKey('notify', $buyerArray);
+        self::assertArrayHasKey('email', $buyerArray);
 
-        $this->assertEquals('TestName', $buyerArray['name']);
-        $this->assertEquals('Address1', $buyerArray['address1']);
-        $this->assertEquals('Address2', $buyerArray['address2']);
-        $this->assertEquals('Miami', $buyerArray['city']);
-        $this->assertEquals('AB', $buyerArray['state']);
-        $this->assertEquals('12345', $buyerArray['zip']);
-        $this->assertEquals('USA', $buyerArray['country']);
-        $this->assertEquals('123456789', $buyerArray['phone']);
-        $this->assertTrue($buyerArray['notify']);
-        $this->assertEquals('test@email.com', $buyerArray['email']);
+        self::assertEquals('TestName', $buyerArray['name']);
+        self::assertEquals('Address1', $buyerArray['address1']);
+        self::assertEquals('Address2', $buyerArray['address2']);
+        self::assertEquals('Miami', $buyerArray['city']);
+        self::assertEquals('AB', $buyerArray['state']);
+        self::assertEquals('12345', $buyerArray['zip']);
+        self::assertEquals('USA', $buyerArray['country']);
+        self::assertEquals('123456789', $buyerArray['phone']);
+        self::assertTrue($buyerArray['notify']);
+        self::assertEquals('test@email.com', $buyerArray['email']);
     }
 
     private function createClassObject(): Buyer

@@ -10,14 +10,14 @@ class SupportedTransactionCurrencyTest extends TestCase
   public function testInstanceOf()
   {
     $supportedTransactionCurrency = $this->createClassObject();
-    $this->assertInstanceOf(SupportedTransactionCurrency::class, $supportedTransactionCurrency);
+    self::assertInstanceOf(SupportedTransactionCurrency::class, $supportedTransactionCurrency);
   }
 
   public function testGetEnabled()
   {
     $supportedTransactionCurrency = $this->createClassObject();
     $supportedTransactionCurrency->setEnabled(true);
-    $this->assertTrue($supportedTransactionCurrency->getEnabled());
+    self::assertTrue($supportedTransactionCurrency->getEnabled());
   }
 
   public function testGetReason()
@@ -26,7 +26,7 @@ class SupportedTransactionCurrencyTest extends TestCase
 
     $supportedTransactionCurrency = $this->createClassObject();
     $supportedTransactionCurrency->setReason($expectedReason);
-    $this->assertEquals($expectedReason, $supportedTransactionCurrency->getReason());
+    self::assertEquals($expectedReason, $supportedTransactionCurrency->getReason());
   }
 
   public function testToArray()
@@ -36,14 +36,14 @@ class SupportedTransactionCurrencyTest extends TestCase
 
     $supportedTransactionCurrencyArray = $supportedTransactionCurrency->toArray();
 
-    $this->assertNotNull($supportedTransactionCurrencyArray);
-    $this->assertIsArray($supportedTransactionCurrencyArray);
+    self::assertNotNull($supportedTransactionCurrencyArray);
+    self::assertIsArray($supportedTransactionCurrencyArray);
 
-    $this->assertArrayHasKey('enabled', $supportedTransactionCurrencyArray);
-    $this->assertArrayHasKey('reason', $supportedTransactionCurrencyArray);
+    self::assertArrayHasKey('enabled', $supportedTransactionCurrencyArray);
+    self::assertArrayHasKey('reason', $supportedTransactionCurrencyArray);
 
-    $this->assertEquals(true, $supportedTransactionCurrencyArray['enabled']);
-    $this->assertEquals("My reason", $supportedTransactionCurrencyArray['reason']);
+    self::assertEquals(true, $supportedTransactionCurrencyArray['enabled']);
+    self::assertEquals("My reason", $supportedTransactionCurrencyArray['reason']);
   }
 
   public function testToArrayEmptyKey()
@@ -52,10 +52,10 @@ class SupportedTransactionCurrencyTest extends TestCase
 
     $supportedTransactionCurrencyArray = $supportedTransactionCurrency->toArray();
 
-    $this->assertNotNull($supportedTransactionCurrencyArray);
-    $this->assertIsArray($supportedTransactionCurrencyArray);
+    self::assertNotNull($supportedTransactionCurrencyArray);
+    self::assertIsArray($supportedTransactionCurrencyArray);
 
-    $this->assertArrayNotHasKey('enabled', $supportedTransactionCurrencyArray);
+    self::assertArrayNotHasKey('enabled', $supportedTransactionCurrencyArray);
   }
 
   private function createClassObject(): SupportedTransactionCurrency

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -11,6 +15,7 @@ namespace BitPaySDK\Model\Invoice;
 
 /**
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  *
  * Allows merchant to pass buyer related information in the invoice object
  */

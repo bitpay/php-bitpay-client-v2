@@ -11,7 +11,7 @@ class CurrencyTest extends TestCase
     public function testInstanceOf()
     {
         $currency = $this->createClassObject();
-        $this->assertInstanceOf(Currency::class, $currency);
+        self::assertInstanceOf(Currency::class, $currency);
     }
 
     public function testIsValid()
@@ -23,10 +23,10 @@ class CurrencyTest extends TestCase
         foreach ($allCurrencies as $currency) {
             $result = $currencyObject::isValid($currency);
 
-            $this->assertTrue($result);
+            self::assertTrue($result);
         }
 
-        $this->assertFalse($currencyObject::isValid('wrongValue'));
+        self::assertFalse($currencyObject::isValid('wrongValue'));
     }
 
     public function testToArray()
@@ -36,116 +36,116 @@ class CurrencyTest extends TestCase
 
         $currencyArray = $currency->toArray();
 
-        $this->assertNotNull($currencyArray);
-        $this->assertIsArray($currencyArray);
-        $this->assertArrayHasKey('code', $currencyArray);
-        $this->assertArrayHasKey('symbol', $currencyArray);
-        $this->assertArrayHasKey('precision', $currencyArray);
-        $this->assertArrayHasKey('currentlySettled', $currencyArray);
-        $this->assertArrayHasKey('name', $currencyArray);
-        $this->assertArrayHasKey('plural', $currencyArray);
-        $this->assertArrayHasKey('alts', $currencyArray);
-        $this->assertArrayHasKey('minimum', $currencyArray);
-        $this->assertArrayHasKey('sanctioned', $currencyArray);
-        $this->assertArrayHasKey('decimals', $currencyArray);
-        $this->assertArrayHasKey('payoutFields', $currencyArray);
-        $this->assertArrayHasKey('settlementMinimum', $currencyArray);
-        $this->assertEquals('BTC', $currencyArray['code']);
-        $this->assertEquals('Symbol', $currencyArray['symbol']);
-        $this->assertEquals(1, $currencyArray['precision']);
-        $this->assertEquals(true, $currencyArray['currentlySettled']);
-        $this->assertEquals('Bitcoin', $currencyArray['name']);
-        $this->assertEquals('plural', $currencyArray['plural']);
-        $this->assertEquals('alts', $currencyArray['alts']);
-        $this->assertEquals('minimum', $currencyArray['minimum']);
-        $this->assertEquals(true, $currencyArray['sanctioned']);
-        $this->assertEquals('decimals', $currencyArray['decimals']);
-        $this->assertEquals(['test'], $currencyArray['payoutFields']);
-        $this->assertEquals(['test'], $currencyArray['settlementMinimum']);
+        self::assertNotNull($currencyArray);
+        self::assertIsArray($currencyArray);
+        self::assertArrayHasKey('code', $currencyArray);
+        self::assertArrayHasKey('symbol', $currencyArray);
+        self::assertArrayHasKey('precision', $currencyArray);
+        self::assertArrayHasKey('currentlySettled', $currencyArray);
+        self::assertArrayHasKey('name', $currencyArray);
+        self::assertArrayHasKey('plural', $currencyArray);
+        self::assertArrayHasKey('alts', $currencyArray);
+        self::assertArrayHasKey('minimum', $currencyArray);
+        self::assertArrayHasKey('sanctioned', $currencyArray);
+        self::assertArrayHasKey('decimals', $currencyArray);
+        self::assertArrayHasKey('payoutFields', $currencyArray);
+        self::assertArrayHasKey('settlementMinimum', $currencyArray);
+        self::assertEquals('BTC', $currencyArray['code']);
+        self::assertEquals('Symbol', $currencyArray['symbol']);
+        self::assertEquals(1, $currencyArray['precision']);
+        self::assertEquals(true, $currencyArray['currentlySettled']);
+        self::assertEquals('Bitcoin', $currencyArray['name']);
+        self::assertEquals('plural', $currencyArray['plural']);
+        self::assertEquals('alts', $currencyArray['alts']);
+        self::assertEquals('minimum', $currencyArray['minimum']);
+        self::assertEquals(true, $currencyArray['sanctioned']);
+        self::assertEquals('decimals', $currencyArray['decimals']);
+        self::assertEquals(['test'], $currencyArray['payoutFields']);
+        self::assertEquals(['test'], $currencyArray['settlementMinimum']);
     }
 
     public function testGetCode()
     {
         $currency = $this->createClassObject();
         $currency->setCode('testCode');
-        $this->assertEquals('testCode', $currency->getCode());
+        self::assertEquals('testCode', $currency->getCode());
     }
 
     public function testGetSymbol()
     {
         $currency = $this->createClassObject();
         $currency->setSymbol('testSymbol');
-        $this->assertEquals('testSymbol', $currency->getSymbol());
+        self::assertEquals('testSymbol', $currency->getSymbol());
     }
 
     public function testGetPrecision()
     {
         $currency = $this->createClassObject();
         $currency->setPrecision(1);
-        $this->assertEquals(1, $currency->getPrecision());
+        self::assertEquals(1, $currency->getPrecision());
     }
 
     public function testGetCurrentlySettled()
     {
         $currency = $this->createClassObject();
         $currency->setCurrentlySettled(true);
-        $this->assertEquals(true, $currency->getCurrentlySettled());
+        self::assertEquals(true, $currency->getCurrentlySettled());
     }
 
     public function testGetName()
     {
         $currency = $this->createClassObject();
         $currency->setName('testName');
-        $this->assertEquals('testName', $currency->getName());
+        self::assertEquals('testName', $currency->getName());
     }
 
     public function testGetPlural()
     {
         $currency = $this->createClassObject();
         $currency->setPlural('testPlural');
-        $this->assertEquals('testPlural', $currency->getPlural());
+        self::assertEquals('testPlural', $currency->getPlural());
     }
 
     public function testGetAlts()
     {
         $currency = $this->createClassObject();
         $currency->setAlts('testAlts');
-        $this->assertEquals('testAlts', $currency->getAlts());
+        self::assertEquals('testAlts', $currency->getAlts());
     }
 
     public function testGetMinimum()
     {
         $currency = $this->createClassObject();
         $currency->setMinimum('testMinimum');
-        $this->assertEquals('testMinimum', $currency->getMinimum());
+        self::assertEquals('testMinimum', $currency->getMinimum());
     }
 
     public function testGetSanctioned()
     {
         $currency = $this->createClassObject();
         $currency->setSanctioned(true);
-        $this->assertEquals(true, $currency->getSanctioned());
+        self::assertEquals(true, $currency->getSanctioned());
     }
 
     public function testGetDecimals()
     {
         $currency = $this->createClassObject();
         $currency->setDecimals('testDecimals');
-        $this->assertEquals('testDecimals', $currency->getDecimals());
+        self::assertEquals('testDecimals', $currency->getDecimals());
     }
 
     public function testGetPayoutFields()
     {
         $currency = $this->createClassObject();
         $currency->setPayoutFields(['test']);
-        $this->assertEquals(['test'], $currency->getPayoutFields());
+        self::assertEquals(['test'], $currency->getPayoutFields());
     }
 
     public function testGetSettlementMinimum()
     {
         $currency = $this->createClassObject();
         $currency->setSettlementMinimum(['test']);
-        $this->assertEquals(['test'], $currency->getSettlementMinimum());
+        self::assertEquals(['test'], $currency->getSettlementMinimum());
     }
 
     private function createClassObject(): Currency

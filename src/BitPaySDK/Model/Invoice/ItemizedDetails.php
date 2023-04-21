@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 /*
@@ -9,6 +13,11 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Invoice;
 
+/**
+ * Class ItemizedDetails
+ * @package BitPaySDK\Model\Invoice
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ */
 class ItemizedDetails
 {
     protected ?float $amount = null;
