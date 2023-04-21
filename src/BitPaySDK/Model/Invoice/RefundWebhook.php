@@ -8,6 +8,11 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Invoice;
 
+/**
+ * Class RefundWebhook
+ * @package BitPaySDK\Model\Invoice
+ * @see <a href="https://bitpay.readme.io/reference/refunds-1">Webhooks refunds</a>
+ */
 class RefundWebhook
 {
     protected string $id;

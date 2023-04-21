@@ -14,13 +14,14 @@ namespace BitPaySDK\Model\Payout;
 /**
  * Interface RecipientStatus
  * @package BitPaySDK\Model\Payout
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 interface RecipientStatus
 {
     /**
      * Invited recipient status.
      */
-    public const INVITED    = 'invited';
+    public const INVITED = 'invited';
 
     /**
      * Unverified  recipient status.
@@ -31,20 +32,20 @@ interface RecipientStatus
      * Verified recipient status.
      */
 
-    public const VERIFIED   = 'verified';
+    public const VERIFIED = 'verified';
 
     /**
      * Active recipient status.
      */
-    public const ACTIVE     = 'active';
+    public const ACTIVE = 'active';
 
     /**
      * Paused recipient status.
      */
-    public const PAUSED     = 'paused';
+    public const PAUSED = 'paused';
 
     /**
      * Removed recipient status.
      */
-    public const REMOVED    = 'removed';
+    public const REMOVED = 'removed';
 }

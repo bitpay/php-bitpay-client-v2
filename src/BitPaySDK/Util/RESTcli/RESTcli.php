@@ -377,9 +377,8 @@ class RESTcli
      */
     public function responseToJsonString(Response $response): string
     {
-
         try {
-            $body = json_decode($response->getBody()->getContents(), true);
+            $body = json_decode($response->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
             if ($this->proxy !== '' && !is_array($body)) {
                 throw new BitPayException(
                     "Please check your proxy settings, HTTP Code:" .
@@ -389,10 +388,8 @@ class RESTcli
                 );
             }
 
-            if (!empty($body['status'])) {
-                if ($body['status'] == 'error') {
-                    throw new BitpayException($body['message'], null, null, $body['code']);
-                }
+            if ($this->isErrorStatus($body)) {
+                throw new BitpayException($body['message'], null, null, (string)$body['code']);
             }
 
             $error_message = false;
@@ -436,5 +433,14 @@ class RESTcli
         } catch (Exception $e) {
             throw new BitPayException("failed to retrieve HTTP response body : " . $e->getMessage());
         }
+    }
+
+    /**
+     * @param array $body
+     * @return bool
+     */
+    private function isErrorStatus(array $body): bool
+    {
+        return !empty($body['status']) && $body['status'] === 'error';
     }
 }

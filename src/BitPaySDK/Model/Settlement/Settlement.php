@@ -16,7 +16,8 @@ namespace BitPaySDK\Model\Settlement;
 use BitPaySDK\Exceptions\SettlementException;
 
 /**
- * Settlement data object
+ * Settlement data object.
+ * @see <a href="https://bitpay.readme.io/reference/settlements">Settlements</a>
  */
 class Settlement
 {

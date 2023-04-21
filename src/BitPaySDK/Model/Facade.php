@@ -14,6 +14,8 @@ namespace BitPaySDK\Model;
 /**
  * Facades named collections of capabilities that can be granted,
  * such as the ability to create invoices or grant refunds
+ *
+ * @see <a href="https://bitpay.readme.io/reference/concepts#facades">REST API facades</a>
  */
 interface Facade
 {

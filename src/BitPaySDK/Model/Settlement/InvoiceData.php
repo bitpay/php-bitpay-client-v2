@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace BitPaySDK\Model\Settlement;
 
 /**
- * Object containing relevant information from the paid invoice
+ * Object containing relevant information from the paid invoice.
+ * @see <a href="https://bitpay.readme.io/reference/settlements">Settlements</a>
  */
 class InvoiceData
 {

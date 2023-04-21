@@ -15,6 +15,7 @@ namespace BitPaySDK\Model\Invoice;
 
 /**
  * Object containing wallet-specific URLs for payment protocol.
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 class UniversalCodes
 {

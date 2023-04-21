@@ -14,6 +14,7 @@ namespace BitPaySDK\Model\Payout;
 /**
  * Interface PayoutStatus
  * @package BitPaySDK\Model\Payout
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 interface PayoutStatus
 {

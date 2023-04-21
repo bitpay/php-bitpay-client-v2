@@ -14,7 +14,7 @@ namespace BitPaySDK\Model\Invoice;
 /**
  * The type Invoice status.
  *
- * @see <a href="https://bitpay.com/api/#rest-api-resources-invoices-resource">REST API Invoices</a>
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 interface InvoiceStatus
 {

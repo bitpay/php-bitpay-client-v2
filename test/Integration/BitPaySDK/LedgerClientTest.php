@@ -16,7 +16,7 @@ class LedgerClientTest extends AbstractClientTest
         $startDate = '2022-12-20T13:00:45.063Z';
         $endDate = '2023-01-01T13:00:45.063Z';
 
-        $ledgers = $this->client->getLedger($currency, $startDate, $endDate);
+        $ledgers = $this->client->getLedgerEntries($currency, $startDate, $endDate);
         if (!empty($ledgers)) {
             self::assertEquals($currency, $ledgers[0]->getInvoiceCurrency());
         }
@@ -41,6 +41,6 @@ class LedgerClientTest extends AbstractClientTest
         $endDate = '2022-05-13T13:00:45.063Z';
 
         $this->expectException(LedgerQueryException::class);
-        $this->client->getLedger($currency, $startDate, $endDate);
+        $this->client->getLedgerEntries($currency, $startDate, $endDate);
     }
 }

@@ -16,8 +16,8 @@ namespace BitPaySDK\Model\Settlement;
 /**
  * Class WithHoldings
  *
- * @see <a href="https://bitpay.com/api/#rest-api-resources-settlements">Settlements</a>
  * @package BitPaySDK\Model\Settlement
+ * @see <a href="https://bitpay.readme.io/reference/settlements">Settlements</a>
  */
 class WithHoldings
 {

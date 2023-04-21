@@ -52,7 +52,7 @@ class LedgerClient
      * @param string $currency The three digit currency string for the ledger to retrieve.
      * @param string $startDate The first date for the query filter.
      * @param string $endDate The last date for the query filter.
-     * @return array A Ledger object populated with the BitPay ledger entries list.
+     * @return LedgerEntry[] A Ledger object populated with the BitPay ledger entries list.
      * @throws LedgerQueryException
      */
     public function get(string $currency, string $startDate, string $endDate): array

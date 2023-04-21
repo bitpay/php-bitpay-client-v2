@@ -13,6 +13,11 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Ledger;
 
+/**
+ * Class Ledger
+ * @package BitPaySDK\Model\Ledger
+ * @see <a href="https://bitpay.readme.io/reference/ledgers">REST API Ledgers</a>
+ */
 class Ledger
 {
     protected ?string $currency = null;

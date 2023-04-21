@@ -15,6 +15,7 @@ namespace BitPaySDK\Model\Payout;
 
 /**
  * Contains the cryptocurrency transaction details for the executed payout.
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 class PayoutTransaction
 {

@@ -13,13 +13,14 @@ namespace BitPaySDK\Model\Payout;
 
 /**
  * List of recipient reference methods
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 interface RecipientReferenceMethod
 {
     /**
      * Email method will be used to target the recipient
      */
-    public const EMAIL        = 1;
+    public const EMAIL = 1;
 
     /**
      * Recipient id will be used to target the recipient
@@ -29,5 +30,5 @@ interface RecipientReferenceMethod
     /**
      * Shopper id will be used to target the recipient
      */
-    public const SHOPPER_ID   = 3;
+    public const SHOPPER_ID = 3;
 }

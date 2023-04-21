@@ -16,8 +16,8 @@ namespace BitPaySDK\Model\Payout;
 use BitPaySDK\Exceptions\PayoutRecipientException;
 
 /**
- *
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 class PayoutRecipients
 {

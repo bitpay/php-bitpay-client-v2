@@ -16,6 +16,7 @@ namespace BitPaySDK\Model\Invoice;
 /**
  * This object will be available on the invoice if a shopper signs in on an invoice using his BitPay ID.
  * See the following blogpost for more information.
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 class Shopper
 {

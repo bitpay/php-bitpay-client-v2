@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace BitPaySDK\Model\Settlement;
 
 /**
- * Object containing the settlement info provided by the Merchant in his BitPay account settings
+ * Object containing the settlement info provided by the Merchant in his BitPay account settings.
+ * @see <a href="https://bitpay.readme.io/reference/settlements">Settlements</a>
  */
 class PayoutInfo
 {

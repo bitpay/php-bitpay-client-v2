@@ -18,9 +18,8 @@ namespace BitPaySDK\Model\Invoice;
  * The currency that may be used to pay this invoice. The values are objects with an "enabled" boolean and option.
  * An extra "reason" parameter is added in the object if a cryptocurrency is disabled on a specific invoice.
  *
- * @see <a href="https://bitpay.com/api/#rest-api-resources-invoices-resource">REST API Invoices</a>
- *
  * @package BitPaySDK\Model\Invoice
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 class SupportedTransactionCurrency
 {

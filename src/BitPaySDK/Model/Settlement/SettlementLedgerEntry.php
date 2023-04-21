@@ -13,6 +13,11 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Settlement;
 
+/**
+ * Class SettlementLedgerEntry
+ * @package BitPaySDK\Model\Settlement
+ * @see <a href="https://bitpay.readme.io/reference/settlements">Settlements</a>
+ */
 class SettlementLedgerEntry
 {
     protected ?int $code = null;

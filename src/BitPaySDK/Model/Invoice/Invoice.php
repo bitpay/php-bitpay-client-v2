@@ -17,8 +17,8 @@ use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
 /**
- *
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 class Invoice
 {

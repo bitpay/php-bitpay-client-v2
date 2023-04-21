@@ -207,6 +207,49 @@ class InvoiceClient
     }
 
     /**
+     * @param string $guid
+     * @param string $facade
+     * @param bool $signRequest
+     * @return Invoice
+     * @throws InvoiceQueryException
+     */
+    public function getByGuid(
+        string $guid,
+        string $facade = Facade::MERCHANT,
+        bool $signRequest = true
+    ): Invoice {
+        try {
+            $params = [];
+            $params["token"] = $this->tokenCache->getTokenByFacade($facade);
+
+            $responseJson = $this->restCli->get("invoices/guid/" . $guid, $params, $signRequest);
+        } catch (BitPayException $e) {
+            throw new InvoiceQueryException(
+                "failed to serialize Invoice object : " .
+                $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new InvoiceQueryException("failed to serialize Invoice object : " . $e->getMessage());
+        }
+
+        try {
+            $mapper = JsonMapperFactory::create();
+
+            return $mapper->map(
+                json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
+                new Invoice()
+            );
+        } catch (Exception $e) {
+            throw new InvoiceQueryException(
+                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
+            );
+        }
+    }
+
+    /**
      * Retrieve a collection of BitPay invoices.
      *
      * @param string $dateStart The start of the date window to query for invoices. Format YYYY-MM-DD.
@@ -284,8 +327,7 @@ class InvoiceClient
     public function requestNotification(string $invoiceId): bool
     {
         try {
-            $params = [];
-            $invoice = $this->get($invoiceId);
+            $params = ['token' => $this->tokenCache->getTokenByFacade(Facade::MERCHANT)];
         } catch (BitPayException $e) {
             throw new InvoiceQueryException(
                 "failed to serialize invoice object : " .
@@ -297,8 +339,6 @@ class InvoiceClient
         } catch (Exception $e) {
             throw new InvoiceQueryException("failed to serialize invoice object : " . $e->getMessage());
         }
-
-        $params["token"] = $invoice->getToken();
 
         try {
             $responseJson = $this->restCli->post("invoices/" . $invoiceId . "/notifications", $params);

@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace BitPaySDK\Model\Bill;
 
 /**
+ * @see <a href="https://developer.bitpay.com/reference/bills">REST API Bills</a>
+ *
  * @package Bitpay
  */
 class Item

@@ -13,6 +13,11 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Invoice;
 
+/**
+ * Class Refund
+ * @package BitPaySDK\Model\Invoice
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ */
 class Refund
 {
     protected ?string $guid = null;

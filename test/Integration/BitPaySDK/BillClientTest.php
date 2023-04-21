@@ -74,7 +74,7 @@ class BillClientTest extends AbstractClientTest
         $bill = $this->client->getBill($bill->getId());
         $result = $this->client->deliverBill($bill->getId(), $bill->getToken());
 
-        self::assertIsString($result);
+        self::assertTrue($result);
     }
 
     private function getBillExample(): Bill

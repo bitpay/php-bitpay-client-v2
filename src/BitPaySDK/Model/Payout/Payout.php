@@ -18,8 +18,8 @@ use BitPaySDK\Exceptions\PayoutException;
 use BitPaySDK\Model\Currency;
 
 /**
- *
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 class Payout
 {

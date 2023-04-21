@@ -14,7 +14,7 @@ namespace BitPaySDK\Model\Bill;
 /**
  * Contains bill statuses: Can be "draft", "sent", "new", "paid", or "complete"
  *
- * @see <a href="https://bitpay.com/api/#rest-api-resources-bills">REST API Bills</a>
+ * @see <a href="https://developer.bitpay.com/reference/bills">REST API Bills</a>
  */
 interface BillStatus
 {
