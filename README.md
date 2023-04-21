@@ -24,6 +24,19 @@ To get up and running with our PHP library quickly, follow [the guide](https://b
 - PHP version: 8.0 / 8.1 / 8.2
 - PHP extensions: json, reflection
 
+## Unit Tests
+```php
+./vendor/bin/phpunit --testsuite "Unit"
+```
+
+## Integration Tests
+To run integration tests you have to generate BitPay.config.yml by running command
+``` php examples/ConfigGenerator.php ``` and put this file into test/Integration/BitPaySDK folder.
+To submit request you should create recipient in https://test.bitpay.com/dashboard/payouts/recipients and put this email to "email.txt" file in test/Integration/BitPaySDK folder.
+```php
+./vendor/bin/phpunit --testsuite "Integration"
+```
+
 ## Contribute
 
 To contribute to this project, please fork and submit a pull request.
