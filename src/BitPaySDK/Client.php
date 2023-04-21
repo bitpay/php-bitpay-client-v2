@@ -972,7 +972,6 @@ class Client
      * @param string $configFilePath
      * @return array
      * @throws BitPayException
-     * @throws \JsonException
      */
     private static function getConfigData(string $configFilePath): array
     {
@@ -980,9 +979,9 @@ class Client
             throw new BitPayException("Configuration file not found");
         }
 
-        $configData = json_decode(file_get_contents($configFilePath), true, 512, JSON_THROW_ON_ERROR);
-
-        if (!$configData) {
+        try {
+            $configData = json_decode(file_get_contents($configFilePath), true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
             $configData = Yaml::parseFile($configFilePath);
         }
 

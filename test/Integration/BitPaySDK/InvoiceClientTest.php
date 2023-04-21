@@ -39,6 +39,20 @@ class InvoiceClientTest extends AbstractClientTest
         self::assertNotNull($baseInvoice);
     }
 
+    public function testGetInvoiceByGuid(): void
+    {
+        $invoice = $this->getInvoiceExample();
+        $baseInvoice = $this->client->createInvoice($invoice);
+        $baseInvoice = $this->client->getInvoiceByGuid($baseInvoice->getGuid());
+
+        self::assertEquals('new', $baseInvoice->getStatus());
+        self::assertEquals(50.0, $baseInvoice->getPrice());
+        self::assertEquals('Test', $baseInvoice->getBuyer()->getName());
+        self::assertEquals('168 General Grove', $baseInvoice->getBuyer()->getAddress1());
+        self::assertInstanceOf(Invoice::class, $baseInvoice);
+        self::assertNotNull($baseInvoice);
+    }
+
     public function testUpdateInvoice(): void
     {
         $invoice = $this->getInvoiceExample();

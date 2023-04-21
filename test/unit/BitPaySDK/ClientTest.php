@@ -27,6 +27,7 @@ use BitPaySDK\Exceptions\InvoiceCreationException;
 use BitPaySDK\Exceptions\InvoicePaymentException;
 use BitPaySDK\Exceptions\InvoiceQueryException;
 use BitPaySDK\Exceptions\InvoiceUpdateException;
+use BitPaySDK\Exceptions\LedgerQueryException;
 use BitPaySDK\Exceptions\PayoutCancellationException;
 use BitPaySDK\Exceptions\PayoutCreationException;
 use BitPaySDK\Exceptions\PayoutNotificationException;
@@ -49,6 +50,8 @@ use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Invoice\Refund;
+use BitPaySDK\Model\Ledger\Ledger;
+use BitPaySDK\Model\Ledger\LedgerEntry;
 use BitPaySDK\Model\Payout\Payout;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
@@ -628,140 +631,140 @@ class ClientTest extends TestCase
         $client->deliverBill($exampleBillId, $exampleBillToken);
     }
 
-//    public function testGetLedger()
-//    {
-//        $exampleCurrency = Currency::BTC;
-//        $exampleStartDate = '2021-5-10';
-//        $exampleEndDate = '2021-5-31';
-//        $restCliMock = $this->getRestCliMock();
-//        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgerBalances.json');
-//
-//        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-//        $params["currency"] = $exampleCurrency;
-//        $params["startDate"] = $exampleStartDate;
-//        $params["endDate"] = $exampleEndDate;
-//
-//        $restCliMock
-//            ->expects(self::once())
-//            ->method('get')
-//            ->with("ledgers/" . $exampleCurrency, $params)
-//            ->willReturn($exampleResponse);
-//
-//        $client = $this->getClient($restCliMock);
-//        $result = $client->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
-//
-//        self::assertIsArray($result);
-//        self::assertEquals('EUR', $result[0]->getCurrency());
-//        self::assertEquals('USD', $result[1]->getCurrency());
-//        self::assertEquals('BTC', $result[2]->getCurrency());
-//        self::assertInstanceOf(LedgerEntry::class, $result[0]);
-//    }
-//
-//    public function testGetLedgerShouldCatchRestCliException()
-//    {
-//        $restCliMock = $this->getRestCliMock();
-//        $restCliMock
-//            ->expects(self::once())
-//            ->method('get')
-//            ->willThrowException(new \Exception());
-//
-//        $client = $this->getClient($restCliMock);
-//
-//        $this->expectException(LedgerQueryException::class);
-//        $exampleCurrency = Currency::BTC;
-//        $exampleStartDate = '2021-5-10';
-//        $exampleEndDate = '2021-5-31';
-//        $client->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
-//    }
-//
-//    public function testGetLedgerShouldCatchRestCliBitPayException()
-//    {
-//        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->expects(self::once())->method('get')->willThrowException(new BitPayException());
-//
-//        $client = $this->getClient($restCliMock);
-//
-//        $this->expectException(LedgerQueryException::class);
-//        $exampleCurrency = Currency::BTC;
-//        $exampleStartDate = '2021-5-10';
-//        $exampleEndDate = '2021-5-31';
-//        $client->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
-//    }
-//
-//    public function testGetLedgerShouldCatchJsonMapperException()
-//    {
-//        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
-//
-//        $restCliMock = $this->getRestCliMock();
-//        $restCliMock
-//            ->expects(self::once())
-//            ->method('get')
-//            ->willReturn($badResponse);
-//
-//        $client = $this->getClient($restCliMock);
-//
-//        $this->expectException(LedgerQueryException::class);
-//        $exampleCurrency = Currency::BTC;
-//        $exampleStartDate = '2021-5-10';
-//        $exampleEndDate = '2021-5-31';
-//        $client->getLedger($exampleCurrency, $exampleStartDate, $exampleEndDate);
-//    }
-//
-//    public function testGetLedgers()
-//    {
-//        $restCliMock = $this->getRestCliMock();
-//        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-//        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgers.json');
-//
-//        $restCliMock
-//            ->expects(self::once())
-//            ->method('get')
-//            ->with("ledgers", $params)
-//            ->willReturn($exampleResponse);
-//
-//        $client = $this->getClient($restCliMock);
-//
-//        $result = $client->getLedgers();
-//
-//
-//        self::assertIsArray($result);
-//        self::assertInstanceOf(Ledger::class, $result[0]);
-//    }
-//
-//    public function testGetLedgersShouldCatchBitPayException()
-//    {
-//        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->expects(self::once())->method('get')->willThrowException(new BitPayException());
-//
-//        $client = $this->getClient($restCliMock);
-//
-//        $this->expectException(LedgerQueryException::class);
-//        $client->getLedgers();
-//    }
-//
-//    public function testGetLedgersShouldCatchRestCliException()
-//    {
-//        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->expects(self::once())->method('get')->willThrowException(new Exception());
-//
-//        $client = $this->getClient($restCliMock);
-//
-//        $this->expectException(LedgerQueryException::class);
-//        $client->getLedgers();
-//    }
-//
-//    public function testGetLedgersShouldCatchJsonMapperException()
-//    {
-//        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
-//
-//        $restCliMock = $this->getRestCliMock();
-//        $restCliMock->expects(self::once())->method('get')->willReturn($badResponse);
-//
-//        $client = $this->getClient($restCliMock);
-//
-//        $this->expectException(LedgerQueryException::class);
-//        $client->getLedgers();
-//    }
+    public function testGetLedger()
+    {
+        $exampleCurrency = Currency::BTC;
+        $exampleStartDate = '2021-5-10';
+        $exampleEndDate = '2021-5-31';
+        $restCliMock = $this->getRestCliMock();
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgerBalances.json');
+
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $params["currency"] = $exampleCurrency;
+        $params["startDate"] = $exampleStartDate;
+        $params["endDate"] = $exampleEndDate;
+
+        $restCliMock
+            ->expects(self::once())
+            ->method('get')
+            ->with("ledgers/" . $exampleCurrency, $params)
+            ->willReturn($exampleResponse);
+
+        $client = $this->getClient($restCliMock);
+        $result = $client->getLedgerEntries($exampleCurrency, $exampleStartDate, $exampleEndDate);
+
+        self::assertIsArray($result);
+        self::assertEquals('EUR', $result[0]->getCurrency());
+        self::assertEquals('USD', $result[1]->getCurrency());
+        self::assertEquals('BTC', $result[2]->getCurrency());
+        self::assertInstanceOf(LedgerEntry::class, $result[0]);
+    }
+
+    public function testGetLedgerShouldCatchRestCliException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects(self::once())
+            ->method('get')
+            ->willThrowException(new \Exception());
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(LedgerQueryException::class);
+        $exampleCurrency = Currency::BTC;
+        $exampleStartDate = '2021-5-10';
+        $exampleEndDate = '2021-5-31';
+        $client->getLedgerEntries($exampleCurrency, $exampleStartDate, $exampleEndDate);
+    }
+
+    public function testGetLedgerShouldCatchRestCliBitPayException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects(self::once())->method('get')->willThrowException(new BitPayException());
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(LedgerQueryException::class);
+        $exampleCurrency = Currency::BTC;
+        $exampleStartDate = '2021-5-10';
+        $exampleEndDate = '2021-5-31';
+        $client->getLedgerEntries($exampleCurrency, $exampleStartDate, $exampleEndDate);
+    }
+
+    public function testGetLedgerShouldCatchJsonMapperException()
+    {
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects(self::once())
+            ->method('get')
+            ->willReturn($badResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(LedgerQueryException::class);
+        $exampleCurrency = Currency::BTC;
+        $exampleStartDate = '2021-5-10';
+        $exampleEndDate = '2021-5-31';
+        $client->getLedgerEntries($exampleCurrency, $exampleStartDate, $exampleEndDate);
+    }
+
+    public function testGetLedgers()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgers.json');
+
+        $restCliMock
+            ->expects(self::once())
+            ->method('get')
+            ->with("ledgers", $params)
+            ->willReturn($exampleResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $result = $client->getLedgers();
+
+
+        self::assertIsArray($result);
+        self::assertInstanceOf(Ledger::class, $result[0]);
+    }
+
+    public function testGetLedgersShouldCatchBitPayException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects(self::once())->method('get')->willThrowException(new BitPayException());
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(LedgerQueryException::class);
+        $client->getLedgers();
+    }
+
+    public function testGetLedgersShouldCatchRestCliException()
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects(self::once())->method('get')->willThrowException(new Exception());
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(LedgerQueryException::class);
+        $client->getLedgers();
+    }
+
+    public function testGetLedgersShouldCatchJsonMapperException()
+    {
+        $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects(self::once())->method('get')->willReturn($badResponse);
+
+        $client = $this->getClient($restCliMock);
+
+        $this->expectException(LedgerQueryException::class);
+        $client->getLedgers();
+    }
 
     public function testSubmitPayoutRecipients()
     {
@@ -2776,11 +2779,30 @@ class ClientTest extends TestCase
         $restCliMock
             ->expects(self::once())
             ->method("get")
-            ->with('invoices/' . $exampleInvoiceObject->id, ['token' => $exampleInvoiceObject->token], true)
+            ->with('invoices/' . $exampleInvoiceObject->id, ['token' => self::MERCHANT_TOKEN], true)
             ->willReturn(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
 
         $testedObject = $this->getClient($restCliMock);
         $result = $testedObject->getInvoice($exampleInvoiceObject->id, Facade::MERCHANT, true);
+
+        self::assertEquals($exampleInvoiceObject->id, $result->getId());
+        self::assertEquals($exampleInvoiceObject->amountPaid, $result->getAmountPaid());
+        self::assertEquals($exampleInvoiceObject->currency, $result->getCurrency());
+    }
+
+    public function testGetInvoiceByGuid()
+    {
+        $exampleInvoiceObject = json_decode(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects(self::once())
+            ->method("get")
+            ->with('invoices/guid/' . $exampleInvoiceObject->guid, ['token' => self::MERCHANT_TOKEN], true)
+            ->willReturn(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
+
+        $testedObject = $this->getClient($restCliMock);
+        $result = $testedObject->getInvoiceByGuid($exampleInvoiceObject->guid, Facade::MERCHANT, true);
 
         self::assertEquals($exampleInvoiceObject->id, $result->getId());
         self::assertEquals($exampleInvoiceObject->amountPaid, $result->getAmountPaid());
@@ -2949,11 +2971,7 @@ class ClientTest extends TestCase
         $params['token'] = self::MERCHANT_TOKEN;
         $expectedFailResponse = 'fail';
         $restCliMock = $this->getRestCliMock();
-        $restCliMock
-            ->expects(self::once())
-            ->method('get')
-            ->with("invoices/" . self::TEST_INVOICE_ID, $params, true)
-            ->willReturn(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
+
         $restCliMock
             ->expects(self::once())
             ->method('post')
@@ -2965,37 +2983,16 @@ class ClientTest extends TestCase
         self::assertFalse($result);
     }
 
-    public function testRequestInvoiceNotificationShouldCatchExceptionFromGetInvoice()
+    public function testRequestInvoiceNotificationShouldCatchJsonMapperException()
     {
         $params['token'] = self::MERCHANT_TOKEN;
         $restCliMock = $this->getRestCliMock();
-        $restCliMock
-            ->expects(self::once())
-            ->method('get')
-            ->with("invoices/" . self::TEST_INVOICE_ID, $params, true)
-            ->willReturn(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
 
         $restCliMock
             ->expects(self::once())
             ->method('post')
             ->with("invoices/" . self::TEST_INVOICE_ID . '/notifications', $params, true)
             ->willThrowException(new InvoiceQueryException());
-
-        $testedObject = $this->getClient($restCliMock);
-
-        $this->expectException(InvoiceQueryException::class);
-        $testedObject->requestInvoiceNotification(self::TEST_INVOICE_ID);
-    }
-
-    public function testRequestInvoiceNotificationShouldCatchJsonMapperException()
-    {
-        $params['token'] = self::MERCHANT_TOKEN;
-        $restCliMock = $this->getRestCliMock();
-        $restCliMock
-            ->expects(self::once())
-            ->method('get')
-            ->with("invoices/" . self::TEST_INVOICE_ID, $params, true)
-            ->willReturn('corruptJson');
 
         $testedObject = $this->getClient($restCliMock);
 
