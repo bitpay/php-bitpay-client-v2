@@ -227,7 +227,9 @@ class Client
     /**
      * Retrieve a collection of BitPay invoices.
      *
-     * @see <a href="https://developer.bitpay.com/reference/retrieve-invoices-filtered-by-query">Retrieve Invoices Filtered by Query</a>
+     * @see <a href="https://developer.bitpay.com/reference/retrieve-invoices-filtered-by-query">
+     * Retrieve Invoices Filtered by Query
+     * </a>
      *
      * @param string      $dateStart The start of the date window to query for invoices. Format YYYY-MM-DD.
      * @param string      $dateEnd   The end of the date window to query for invoices. Format YYYY-MM-DD.
@@ -380,7 +382,9 @@ class Client
     /**
      * Update the status of a BitPay invoice.
      *
-     * @see <a href="https://developer.bitpay.com/reference/update-a-refund-by-guid-request">Update a Refund by GUID Request</a>
+     * @see <a href="https://developer.bitpay.com/reference/update-a-refund-by-guid-request">
+     * Update a Refund by GUID Request
+     * </a>
      *
      * @param  string $guid        BitPay refund Guid.
      * @param  string $status      The new status for the refund to be updated.
@@ -400,7 +404,9 @@ class Client
     /**
      * Retrieve all refund requests on a BitPay invoice.
      *
-     * @see <a href="https://developer.bitpay.com/reference/retrieve-refunds-of-an-invoice">Retrieve Refunds of an Invoice</a>
+     * @see <a href="https://developer.bitpay.com/reference/retrieve-refunds-of-an-invoice">
+     * Retrieve Refunds of an Invoice
+     * </a>
      *
      * @param  string $invoiceId   The BitPay invoice object having the associated refunds.
      * @return Refund[]
@@ -436,7 +442,9 @@ class Client
     /**
      * Retrieve a previously made refund request on a BitPay invoice.
      *
-     * @see <a href="https://developer.bitpay.com/reference/retrieve-a-refund-by-guid-request">Retrieve a Refund by GUID Request</a>
+     * @see <a href="https://developer.bitpay.com/reference/retrieve-a-refund-by-guid-request">
+     * Retrieve a Refund by GUID Request
+     * </a>
      *
      * @param string $guid The BitPay refund Guid
      * @return Refund BitPay Refund object with the associated Refund object.
@@ -453,7 +461,9 @@ class Client
     /**
      * Send a refund notification.
      *
-     * @see <a href="https://developer.bitpay.com/reference/request-a-refund-notification-to-be-resent">Request a Refund Notification to be Resent</a>
+     * @see <a href="https://developer.bitpay.com/reference/request-a-refund-notification-to-be-resent">
+     * Request a Refund Notification to be Resent
+     * </a>
      *
      * @param  string $refundId    A BitPay refund ID.
      * @return bool   $result      An updated Refund Object
@@ -487,7 +497,9 @@ class Client
     /**
      * Cancel a previously submitted refund request on a BitPay invoice.
      *
-     * @see <a href="https://developer.bitpay.com/reference/cancel-a-refund-by-guid-request">Cancel a Refund by GUID Request</a>
+     * @see <a href="https://developer.bitpay.com/reference/cancel-a-refund-by-guid-request">
+     * Cancel a Refund by GUID Request
+     * </a>
      *
      * @param  string $guid     The refund Guid for the refund to be canceled.
      * @return Refund $refund   Cancelled refund Object.
@@ -504,7 +516,9 @@ class Client
     /**
      * Retrieve all supported wallets.
      *
-     * @see <a href="https://developer.bitpay.com/reference/retrieve-the-supported-wallets">Retrieve the Supported Wallets</a>
+     * @see <a href="https://developer.bitpay.com/reference/retrieve-the-supported-wallets">
+     * Retrieve the Supported Wallets
+     * </a>
      *
      * @return Wallet[]
      * @throws WalletQueryException
@@ -620,7 +634,9 @@ class Client
     /**
      * Retrieve all the rates for a given cryptocurrency
      *
-     * @see <a href="https://developer.bitpay.com/reference/retrieve-all-the-rates-for-a-given-cryptocurrency">Retrieve all the rates for a given cryptocurrency</a>
+     * @see <a href="https://developer.bitpay.com/reference/retrieve-all-the-rates-for-a-given-cryptocurrency">
+     * Retrieve all the rates for a given cryptocurrency
+     * </a>
      *
      * @param string $baseCurrency The cryptocurrency for which you want to fetch the rates.
      *                             Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC
@@ -637,7 +653,9 @@ class Client
     /**
      * Retrieve the rate for a cryptocurrency / fiat pair
      *
-     * @see <a href="https://developer.bitpay.com/reference/retrieve-the-rates-for-a-cryptocurrency-fiat-pair">Retrieve the rates for a cryptocurrency / fiat pair</a>
+     * @see <a href="https://developer.bitpay.com/reference/retrieve-the-rates-for-a-cryptocurrency-fiat-pair">
+     * Retrieve the rates for a cryptocurrency / fiat pair
+     * </a>
      *
      * @param string $baseCurrency The cryptocurrency for which you want to fetch the fiat-equivalent rate.
      *                             Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC
@@ -722,7 +740,9 @@ class Client
     /**
      * Retrieve a collection of BitPay Payout Recipients.
      *
-     * @see <a href="https://developer.bitpay.com/reference/retrieve-recipients-by-status">Retrieve Recipients by Status</a>
+     * @see <a href="https://developer.bitpay.com/reference/retrieve-recipients-by-status">
+     * Retrieve Recipients by Status
+     * </a>
      *
      * @param  string|null $status The recipient status you want to query on.
      * @param  int|null    $limit  Maximum results that the query will return (useful for paging results).
@@ -774,7 +794,9 @@ class Client
     /**
      * Notify BitPay Payout Recipient.
      *
-     * @see <a href="https://developer.bitpay.com/reference/request-a-recipient-webhook-to-be-resent">Request a Recipient Webhook to be Resent</a>
+     * @see <a href="https://developer.bitpay.com/reference/request-a-recipient-webhook-to-be-resent">
+     * Request a Recipient Webhook to be Resent
+     * </a>
      *
      * @param  string $recipientId The id of the recipient to notify.
      * @return bool                True if the notification was successfully sent, false otherwise.
@@ -823,7 +845,9 @@ class Client
     /**
      * Retrieve a collection of BitPay payouts.
      *
-     * @see <a href="https://developer.bitpay.com/reference/retrieve-payouts-filtered-by-query">Retrieve Payouts Filtered by Query</a>
+     * @see <a href="https://developer.bitpay.com/reference/retrieve-payouts-filtered-by-query">
+     * Retrieve Payouts Filtered by Query
+     * </a>
      *
      * @param string|null $startDate The start date to filter the Payout Batches.
      * @param string|null $endDate The end date to filter the Payout Batches.
@@ -867,7 +891,9 @@ class Client
     /**
      * Notify BitPay Payout.
      *
-     * @see <a href="https://developer.bitpay.com/reference/request-a-payout-webhook-to-be-resent">Request a Payout Webhook to be Resent</a>
+     * @see <a href="https://developer.bitpay.com/reference/request-a-payout-webhook-to-be-resent">
+     * Request a Payout Webhook to be Resent
+     * </a>
      *
      * @param string $payoutId The id of the Payout to notify.
      * @return bool
@@ -928,7 +954,9 @@ class Client
     /**
      * Gets a detailed reconciliation report of the activity within the settlement period.
      *
-     * @see <a href="https://developer.bitpay.com/reference/fetch-a-reconciliation-report">Fetch a Reconciliation Report</a>
+     * @see <a href="https://developer.bitpay.com/reference/fetch-a-reconciliation-report">
+     * Fetch a Reconciliation Report
+     * </a>
      *
      * @param  Settlement $settlement Settlement to generate report for.
      * @return Settlement
