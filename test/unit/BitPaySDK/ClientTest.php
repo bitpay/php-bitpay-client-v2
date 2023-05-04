@@ -3057,11 +3057,12 @@ class ClientTest extends TestCase
     {
         $payoutBatchMock = new PayoutBatch();
         $payoutInstruction = new PayoutInstruction(12, RecipientReferenceMethod::EMAIL, 'any@email.com');
+        $payoutInstruction2 = new PayoutInstruction(12, RecipientReferenceMethod::EMAIL, 'any2@email.com');
 
         $payoutBatchMock->setToken($this->getPayoutTokenFromFile());
         $payoutBatchMock->setCurrency(Currency::USD);
         $payoutBatchMock->setLedgerCurrency(Currency::USD);
-        $payoutBatchMock->setInstructions([$payoutInstruction, $payoutInstruction]);
+        $payoutBatchMock->setInstructions([$payoutInstruction, $payoutInstruction2]);
 
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')->with("payoutBatches", $payoutBatchMock->toArray())
