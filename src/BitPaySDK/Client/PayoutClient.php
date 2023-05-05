@@ -15,6 +15,8 @@ use BitPaySDK\Exceptions\PayoutNotificationException;
 use BitPaySDK\Exceptions\PayoutQueryException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Payout\Payout;
+use BitPaySDK\Model\Payout\PayoutGroup;
+use BitPaySDK\Model\Payout\PayoutGroupFailed;
 use BitPaySDK\Tokens;
 use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
@@ -270,6 +272,95 @@ class PayoutClient
             return strtolower($result->status) === "success";
         } catch (Exception $e) {
             throw new PayoutNotificationException(
+                "failed to deserialize BitPay server response (Payout) : " . $e->getMessage()
+            );
+        }
+    }
+
+    /**
+     * @param Payout[] $payouts
+     * @throws PayoutCreationException
+     */
+    public function createGroup(array $payouts): PayoutGroup
+    {
+        try {
+            $request = [];
+            $request['token'] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
+        } catch (Exception $e) {
+            throw new PayoutCreationException("Missing facade token");
+        }
+
+        try {
+            foreach ($payouts as $payout) {
+                $request['instructions'][] = $payout->toArray();
+            }
+
+            $responseJson = $this->restCli->post("payouts/group", $request);
+        } catch (BitPayException $e) {
+            throw new PayoutCreationException(
+                "failed to serialize Payout object : " . $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new PayoutCreationException("failed to serialize Payout object : " . $e->getMessage());
+        }
+
+        return $this->getPayoutGroupResponse($responseJson, 'completed');
+    }
+
+    /**
+     * @throws PayoutCancellationException
+     */
+    public function cancelGroup(string $groupId): PayoutGroup
+    {
+        try {
+            $request = [];
+            $request['token'] = $this->tokenCache->getTokenByFacade(Facade::PAYOUT);
+        } catch (Exception $e) {
+            throw new PayoutCancellationException("Missing facade token");
+        }
+
+        try {
+            $responseJson = $this->restCli->delete("payouts/group/" . $groupId, $request);
+
+            return $this->getPayoutGroupResponse($responseJson, 'cancelled');
+        } catch (BitPayException $e) {
+            throw new PayoutCancellationException(
+                "failed to serialize Payout object : " . $e->getMessage(),
+                null,
+                null,
+                $e->getApiCode()
+            );
+        } catch (Exception $e) {
+            throw new PayoutCancellationException("failed to serialize Payout object : " . $e->getMessage());
+        }
+    }
+
+    /**
+     * @param string $responseJson
+     * @param string $responseType completed/cancelled
+     * @return PayoutGroup
+     * @throws PayoutCreationException
+     */
+    private function getPayoutGroupResponse(string $responseJson, string $responseType): PayoutGroup
+    {
+        try {
+            $mapper = JsonMapperFactory::create();
+            $response = json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR);
+
+            $payouts = $mapper->mapArray($response[$responseType], [], Payout::class);
+            $mapper->bIgnoreVisibility = true;
+            $failed = $mapper->mapArray($response['failed'], [], PayoutGroupFailed::class);
+
+            $payoutGroup = new PayoutGroup();
+            $payoutGroup->setPayouts($payouts);
+            $payoutGroup->setFailed($failed);
+
+            return $payoutGroup;
+        } catch (Exception $e) {
+            throw new PayoutCreationException(
                 "failed to deserialize BitPay server response (Payout) : " . $e->getMessage()
             );
         }

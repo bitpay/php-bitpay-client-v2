@@ -11,6 +11,7 @@ use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Payout\Payout;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
+use BitPaySDK\Model\Payout\PayoutStatus;
 
 class PayoutClientTest extends AbstractClientTest
 {
@@ -39,6 +40,31 @@ class PayoutClientTest extends AbstractClientTest
 
         $cancelledPayout = $this->client->cancelPayout($payoutId);
         self::assertTrue($cancelledPayout);
+    }
+
+    /**
+     * @throws BitPayException
+     * @throws \BitPaySDK\Exceptions\PayoutCancellationException
+     * @throws \BitPaySDK\Exceptions\PayoutCreationException
+     */
+    public function testPayoutGroupRequests(): void
+    {
+        $payout = new Payout();
+        $payout->setAmount(10);
+        $payout->setCurrency(Currency::USD);
+        $payout->setLedgerCurrency(Currency::USD);
+        $payout->setReference('payout_20210527');
+        $payout->setNotificationEmail('merchant@email.com');
+        $payout->setNotificationURL('https://yournotiticationURL.com/wed3sa0wx1rz5bg0bv97851eqx');
+        $payout->setEmail($this->getFromFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt'));
+
+        $createGroupResponse = $this->client->createPayoutGroup([$payout]);
+        self::assertCount(1, $createGroupResponse->getPayouts());
+        self::assertEquals(PayoutStatus::NEW, $createGroupResponse->getPayouts()[0]->getStatus());
+
+        $groupId = $createGroupResponse->getPayouts()[0]->getGroupId();
+        $cancelGroupResponse = $this->client->cancelPayoutGroup($groupId);
+        self::assertEquals(PayoutStatus::CANCELLED, $cancelGroupResponse->getPayouts()[0]->getStatus());
     }
 
     private function submitPayout(string $currency, string $ledgerCurrency, int $amount)

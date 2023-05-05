@@ -44,6 +44,7 @@ use BitPaySDK\Model\Invoice\Refund;
 use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Ledger\LedgerEntry;
 use BitPaySDK\Model\Payout\Payout;
+use BitPaySDK\Model\Payout\PayoutGroup;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
 use BitPaySDK\Model\Rate\Rate;
@@ -904,6 +905,34 @@ class Client
         $payoutClient = $this->getPayoutClient();
 
         return $payoutClient->requestNotification($payoutId);
+    }
+
+    /**
+     * @see <a href="https://developer.bitpay.com/reference/create-payout-group">Create Payout Group</>
+     *
+     * @param Payout[] $payouts
+     * @return PayoutGroup
+     * @throws PayoutCreationException
+     */
+    public function createPayoutGroup(array $payouts): PayoutGroup
+    {
+        $payoutClient = $this->getPayoutClient();
+
+        return $payoutClient->createGroup($payouts);
+    }
+
+    /**
+     * @see <a href="https://developer.bitpay.com/reference/cancel-a-payout-group">Cancel a Payout Group</>
+     *
+     * @param string $groupId
+     * @return PayoutGroup
+     * @throws PayoutCancellationException
+     */
+    public function cancelPayoutGroup(string $groupId): PayoutGroup
+    {
+        $payoutClient = $this->getPayoutClient();
+
+        return $payoutClient->cancelGroup($groupId);
     }
 
     /**
