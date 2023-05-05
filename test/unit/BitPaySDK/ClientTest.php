@@ -3,6 +3,7 @@
 namespace BitPaySDK\Test;
 
 use BitPaySDK\Client;
+use BitPaySDK\Env;
 use BitPaySDK\Exceptions\BillCreationException;
 use BitPaySDK\Exceptions\BillDeliveryException;
 use BitPaySDK\Exceptions\BillQueryException;
@@ -47,18 +48,19 @@ use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Ledger\LedgerEntry;
 use BitPaySDK\Model\Payout\Payout;
 use BitPaySDK\Model\Payout\PayoutBatch;
+use BitPaySDK\Model\Payout\PayoutInstruction;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
+use BitPaySDK\Model\Payout\RecipientReferenceMethod;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Model\Settlement\Settlement;
 use BitPaySDK\Model\Subscription\Subscription;
 use BitPaySDK\Model\Wallet\Wallet;
+use BitPaySDK\Tokens;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 use PHPUnit\Framework\TestCase;
-use BitPaySDK\Env;
-use BitPaySDK\Tokens;
 
 
 class ClientTest extends TestCase
@@ -2334,7 +2336,9 @@ class ClientTest extends TestCase
         $examplePayoutBatchId = 'test';
         $params['token'] = $this->getPayoutTokenFromFile();
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects($this->once())->method('get')->with("payoutBatches/" . $examplePayoutBatchId, $params)->willReturn(self::CORRECT_JSON_STRING);
+        $restCliMock->expects(self::once())->method('get')
+            ->with("payoutBatches/" . $examplePayoutBatchId, $params)
+            ->willReturn(file_get_contents('json/getPayoutBatchResponse.json', true));
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
@@ -2342,7 +2346,12 @@ class ClientTest extends TestCase
         $doSetRestCli();
 
         $result = $testedObject->getPayoutBatch($examplePayoutBatchId);
-        $this->assertInstanceOf(PayoutBatch::class, $result);
+        self::assertEquals('8dJGJ65BhrKJmcgfChfg65dn6fuENkKzhgf3hg4hglkj675hn', $result->getToken());
+        self::assertEquals(24.0, $result->getAmount());
+        self::assertEquals('USD', $result->getLedgerCurrency());
+        self::assertEquals('1-855-4-BITPAY', $result->getSupportPhone());
+        self::assertEquals('LRNmxyjRN1e2JUc6fhgfd', $result->getId());
+        self::assertEquals(12.0, $result->getInstructions()[0]->amount);
     }
 
     /**
@@ -3046,27 +3055,32 @@ class ClientTest extends TestCase
      */
     public function testSubmitPayoutBatch($testedObject)
     {
-        $payoutBatchMock = $this->createMock(PayoutBatch::class);
-        $exampleCurrency = Currency::USD;
-        $payoutBatchToArray = [
-            'token' => $this->getPayoutTokenFromFile(),
-            'currency' => $exampleCurrency
-        ];
+        $payoutBatchMock = new PayoutBatch();
+        $payoutInstruction = new PayoutInstruction(12, RecipientReferenceMethod::EMAIL, 'any@email.com');
+        $payoutInstruction2 = new PayoutInstruction(12, RecipientReferenceMethod::EMAIL, 'any2@email.com');
 
-        $payoutBatchMock->method('getCurrency')->willReturn(Currency::USD);
-        $payoutBatchMock->method('toArray')->willReturn($payoutBatchToArray);
+        $payoutBatchMock->setToken($this->getPayoutTokenFromFile());
+        $payoutBatchMock->setCurrency(Currency::USD);
+        $payoutBatchMock->setLedgerCurrency(Currency::USD);
+        $payoutBatchMock->setInstructions([$payoutInstruction, $payoutInstruction2]);
+
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects($this->once())->method('post')->with("payoutBatches", $payoutBatchMock->toArray())
-            ->willReturn(json_encode($payoutBatchMock->toArray()));
-
+        $restCliMock->expects(self::once())->method('post')->with("payoutBatches", $payoutBatchMock->toArray())
+            ->willReturn(file_get_contents('json/getPayoutBatchResponse.json', true));
         $setRestCli = function () use ($restCliMock) {
             $this->_RESTcli = $restCliMock;
         };
+
         $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
         $doSetRestCli();
 
         $result = $testedObject->submitPayoutBatch($payoutBatchMock);
-        $this->assertInstanceOf(PayoutBatch::class, $result);
+        self::assertEquals('8dJGJ65BhrKJmcgfChfg65dn6fuENkKzhgf3hg4hglkj675hn', $result->getToken());
+        self::assertEquals(24.0, $result->getAmount());
+        self::assertEquals('USD', $result->getLedgerCurrency());
+        self::assertEquals('1-855-4-BITPAY', $result->getSupportPhone());
+        self::assertEquals('LRNmxyjRN1e2JUc6fhgfd', $result->getId());
+        self::assertEquals(12.0, $result->getInstructions()[0]->amount);
     }
 
     /**

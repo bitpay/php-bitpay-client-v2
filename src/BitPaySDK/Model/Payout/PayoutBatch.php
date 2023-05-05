@@ -83,6 +83,8 @@ class PayoutBatch
             foreach ($this->_instructions as $instruction) {
                 if ($instruction instanceof PayoutInstruction) {
                     $amount += $instruction->getAmount();
+                } elseif ($instruction instanceof \stdClass) {
+                    $amount += $instruction->amount;
                 } else {
                     $amount += $instruction['amount'];
                 }
@@ -220,6 +222,9 @@ class PayoutBatch
     public function getInstructions()
     {
         $instructions = [];
+        if (!$this->_instructions || !is_array($this->_instructions)) {
+            return $instructions;
+        }
 
         foreach ($this->_instructions as $instruction) {
             if ($instruction instanceof PayoutInstruction) {

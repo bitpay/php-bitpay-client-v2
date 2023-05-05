@@ -1,0 +1,33 @@
+{
+  "id": "LRNmxyjRN1e2JUc6fhgfd",
+  "account": "6iyfXz1dU54Ntrdtr4ez3ch",
+  "status": "new",
+  "amount": 12,
+  "currency": "USD",
+  "ledgerCurrency": "USD",
+  "requestDate": "2023-05-04T11:10:26.032Z",
+  "effectiveDate": "2023-05-04T09:00:00.000Z",
+  "ignoreEmails": false,
+  "supportPhone": "1-855-4-BITPAY",
+  "instructions": [
+    {
+      "id": "XB85mxDdaYkj24hrgs",
+      "payoutId": "Mfdgu5S589birhug24hj23",
+      "amount": 12,
+      "email": "any@email.com",
+      "recipientId": "VeZgfxdgfc687tg34jk",
+      "shopperId": "2toTAVjhkh2dgf65x",
+      "transactions": []
+    },
+    {
+      "id": "XB85mxDdaghj24hrgs",
+      "payoutId": "Mfdgu5S589bifghg24hj23",
+      "amount": 12,
+      "email": "any2@email.com",
+      "recipientId": "VeZgfxdgddfg4jk",
+      "shopperId": "2toTAVjhksdfdgf65x",
+      "transactions": []
+    }
+  ],
+  "token": "8dJGJ65BhrKJmcgfChfg65dn6fuENkKzhgf3hg4hglkj675hn"
+}
