@@ -1,9 +1,9 @@
 <?php
+
 /**
- *
- * @copyright  Copyright 2022
- * @author     Marcin Warzybok <support@sumoheavy.com>
- */
+ * Copyright (c) 2019 BitPay
+ **/
+
 declare(strict_types=1);
 
 namespace BitPaySDK\Model\Payout;
