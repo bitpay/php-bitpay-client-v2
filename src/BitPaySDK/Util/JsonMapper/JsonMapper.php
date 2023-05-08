@@ -16,6 +16,7 @@ namespace BitPaySDK\Util\JsonMapper;
 
 use ReflectionClass;
 use ReflectionNamedType;
+use ReflectionProperty;
 
 /**
  * Automatically map JSON structures into objects.
