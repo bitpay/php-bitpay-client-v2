@@ -307,7 +307,7 @@ class PayoutClient
             throw new PayoutCreationException("failed to serialize Payout object : " . $e->getMessage());
         }
 
-        return $this->getPayoutGroupResponse($responseJson, 'completed');
+        return $this->getPayoutGroupResponse($responseJson, 'created');
     }
 
     /**
@@ -349,6 +349,10 @@ class PayoutClient
         try {
             $mapper = JsonMapperFactory::create();
             $response = json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR);
+
+            if (!array_key_exists($responseType, $response)) {
+                throw new \RuntimeException(print_r($response, true));
+            }
 
             $payouts = $mapper->mapArray($response[$responseType], [], Payout::class);
             $mapper->bIgnoreVisibility = true;
