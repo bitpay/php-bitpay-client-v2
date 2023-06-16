@@ -15,7 +15,7 @@ class TokenClient
     private static ?self $instance = null;
     private RESTcli $restCli;
 
-    private function __construct( RESTcli $restCli)
+    private function __construct(RESTcli $restCli)
     {
         $this->restCli = $restCli;
     }

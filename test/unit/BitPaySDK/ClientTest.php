@@ -188,7 +188,7 @@ class ClientTest extends TestCase
         $tokenClient = $this->getClient($restCliMock);
         $tokens = $tokenClient->getTokens();
 
-        self::assertEquals('someMerchantToken', $tokens['merchant']);
+        self::assertEquals('someMerchantToken', $tokens[0]['merchant']);
     }
 
     public function testCreateBill()
