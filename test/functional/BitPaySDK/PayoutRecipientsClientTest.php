@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace BitPaySDK\Integration;
+namespace BitPaySDK\Functional;
 
 use BitPaySDK\Exceptions\PayoutRecipientCreationException;
 use BitPaySDK\Exceptions\PayoutRecipientQueryException;

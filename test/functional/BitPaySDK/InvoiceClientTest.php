@@ -4,7 +4,7 @@
  **/
 declare(strict_types=1);
 
-namespace BitPaySDK\Integration;
+namespace BitPaySDK\Functional;
 
 use BitPaySDK\Model\Invoice\Buyer;
 use BitPaySDK\Model\Invoice\Invoice;
@@ -118,7 +118,7 @@ class InvoiceClientTest extends AbstractClientTest
         $invoice->setExtendedNotifications(true);
         $invoice->setNotificationURL("https://test/lJnJg9WW7MtG9GZlPVdj");
         $invoice->setRedirectURL("https://test/lJnJg9WW7MtG9GZlPVdj");
-        $invoice->setItemDesc("Created by PHP Integration test");
+        $invoice->setItemDesc("Created by PHP functional test");
         $invoice->setNotificationEmail("");
         $invoice->setBuyerSms('+12223334445');
 

@@ -4,7 +4,7 @@
  **/
 declare(strict_types=1);
 
-namespace BitPaySDK\Integration;
+namespace BitPaySDK\Functional;
 
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Bill\Item;

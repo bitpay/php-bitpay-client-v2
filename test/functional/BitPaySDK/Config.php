@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace BitPaySDK\Integration;
+namespace BitPaySDK\Functional;
 
 use BitPaySDK\Exceptions\BitPayException;
 
 class Config
 {
-    public const INTEGRATION_TEST_PATH = 'test/Integration/BitPaySDK';
+    public const FUNCTIONAL_TEST_PATH = 'test/funcitonal/BitPaySDK';
     public const BITPAY_CONFIG_FILE = 'BitPay.config.yml';
 }
