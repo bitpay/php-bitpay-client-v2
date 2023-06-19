@@ -145,7 +145,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
@@ -194,6 +194,20 @@
 <dd>Cancel a BitPay Payout.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Client-PayoutClient.html#method_cancelGroup">cancelGroup()</a>
+    <span>
+                                &nbsp;: <a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a>    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Client-PayoutClient.html#method_createGroup">createGroup()</a>
+    <span>
+                                &nbsp;: <a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a>    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Client-PayoutClient.html#method_get">get()</a>
     <span>
                                 &nbsp;: <a href="classes/BitPaySDK-Model-Payout-Payout.html"><abbr title="\BitPaySDK\Model\Payout\Payout">Payout</abbr></a>    </span>
@@ -236,6 +250,13 @@ for the payout facade.</dd>
 </dt>
 <dd></dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/BitPaySDK-Client-PayoutClient.html#method_getPayoutGroupResponse">getPayoutGroupResponse()</a>
+    <span>
+                                &nbsp;: <a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a>    </span>
+</dt>
+<dd></dd>
+
         </dl>
 
 
@@ -264,7 +285,7 @@ for the payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -298,7 +319,7 @@ for the payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -332,7 +353,7 @@ for the payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -370,7 +391,7 @@ for the payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">211</span>
+    <span class="phpdocumentor-element-found-in__line">213</span>
 
     </aside>
 
@@ -422,6 +443,119 @@ for the payout facade.</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_cancelGroup">
+        cancelGroup()
+        <a href="classes/BitPaySDK-Client-PayoutClient.html#method_cancelGroup" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">316</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">cancelGroup</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$groupId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$groupId</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-PayoutCancellationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutCancellationException">PayoutCancellationException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_createGroup">
+        createGroup()
+        <a href="classes/BitPaySDK-Client-PayoutClient.html#method_createGroup" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">284</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">createGroup</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/BitPaySDK-Model-Payout-Payout.html"><abbr title="\BitPaySDK\Model\Payout\Payout">Payout</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$payouts</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$payouts</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/BitPaySDK-Model-Payout-Payout.html"><abbr title="\BitPaySDK\Model\Payout\Payout">Payout</abbr></a>&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-PayoutCreationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutCreationException">PayoutCreationException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_get">
         get()
         <a href="classes/BitPaySDK-Client-PayoutClient.html#method_get" class="headerlink"><i class="fas fa-link"></i></a>
@@ -429,7 +563,7 @@ for the payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -489,7 +623,7 @@ for the payout facade.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -539,7 +673,7 @@ for the payout facade.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">146</span>
+    <span class="phpdocumentor-element-found-in__line">148</span>
 
     </aside>
 
@@ -644,7 +778,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">248</span>
+    <span class="phpdocumentor-element-found-in__line">250</span>
 
     </aside>
 
@@ -705,7 +839,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
@@ -764,7 +898,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -799,6 +933,71 @@ starting with the 11th result).</p>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getPayoutGroupResponse">
+        getPayoutGroupResponse()
+        <a href="classes/BitPaySDK-Client-PayoutClient.html#method_getPayoutGroupResponse" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/PayoutClient.php"><a href="files/src-bitpaysdk-client-payoutclient.html"><abbr title="src/BitPaySDK/Client/PayoutClient.php">PayoutClient.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">347</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">getPayoutGroupResponse</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseJson</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseType</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$responseJson</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$responseType</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>completed/cancelled</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-PayoutCreationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutCreationException">PayoutCreationException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span>
             &mdash;
         
     

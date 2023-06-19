@@ -144,7 +144,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -162,7 +162,16 @@
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p>Antonio Buedo</p>
+                                                 <section class="phpdocumentor-description"><p>BitPay Integrations <a href="mailto:integrations@bitpay.com">integrations@bitpay.com</a></p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">license</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>http://www.opensource.org/licenses/mit-license.php MIT</p>
 </section>
 
                                     </dd>
@@ -170,7 +179,7 @@
                     <span class="phpdocumentor-tag__name">version</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                            <span class="phpdocumentor-tag-link">7.1.0</span>
+                                            <span class="phpdocumentor-tag-link">8.0.0</span>
                                                                                 
                                                  <section class="phpdocumentor-description"><p>See bitpay.com/api for more information.
 date 15.11.2021</p>
@@ -233,6 +242,13 @@ date 15.11.2021</p>
 <dd>Cancel a BitPay Payout.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Client.html#method_cancelPayoutGroup">cancelPayoutGroup()</a>
+    <span>
+                                &nbsp;: <a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a>    </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Client.html#method_cancelRefund">cancelRefund()</a>
     <span>
                                 &nbsp;: <a href="classes/BitPaySDK-Model-Invoice-Refund.html"><abbr title="\BitPaySDK\Model\Invoice\Refund">Refund</abbr></a>    </span>
@@ -259,6 +275,13 @@ date 15.11.2021</p>
                                 &nbsp;: <a href="classes/BitPaySDK-Model-Invoice-Invoice.html"><abbr title="\BitPaySDK\Model\Invoice\Invoice">Invoice</abbr></a>    </span>
 </dt>
 <dd>Create a BitPay invoice.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Client.html#method_createPayoutGroup">createPayoutGroup()</a>
+    <span>
+                                &nbsp;: <a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a>    </span>
+</dt>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Client.html#method_createRefund">createRefund()</a>
@@ -446,6 +469,13 @@ payout facade.</dd>
 <dd>Retrieve all supported wallets.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Client.html#method_getTokens">getTokens()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>Get Tokens.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Client.html#method_payInvoice">payInvoice()</a>
     <span>
                                 &nbsp;: <a href="classes/BitPaySDK-Model-Invoice-Invoice.html"><abbr title="\BitPaySDK\Model\Invoice\Invoice">Invoice</abbr></a>    </span>
@@ -600,6 +630,13 @@ payout facade.</dd>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/BitPaySDK-Client.html#method_getTokenClient">getTokenClient()</a>
+    <span>
+                                &nbsp;: <a href="classes/BitPaySDK-Client-TokenClient.html"><abbr title="\BitPaySDK\Client\TokenClient">TokenClient</abbr></a>    </span>
+</dt>
+<dd>Gets token client</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
     <a href="classes/BitPaySDK-Client.html#method_initKeys">initKeys()</a>
     <span>
                                 &nbsp;: <abbr title="\BitPayKeyUtils\KeyHelper\PrivateKey">PrivateKey</abbr>|null    </span>
@@ -634,7 +671,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -668,7 +705,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -706,7 +743,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 
     </aside>
 
@@ -758,7 +795,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">282</span>
+    <span class="phpdocumentor-element-found-in__line">301</span>
 
     </aside>
 
@@ -844,7 +881,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">301</span>
+    <span class="phpdocumentor-element-found-in__line">320</span>
 
     </aside>
 
@@ -930,7 +967,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">860</span>
+    <span class="phpdocumentor-element-found-in__line">901</span>
 
     </aside>
 
@@ -991,6 +1028,71 @@ payout facade.</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_cancelPayoutGroup">
+        cancelPayoutGroup()
+        <a href="classes/BitPaySDK-Client.html#method_cancelPayoutGroup" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">947</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">cancelPayoutGroup</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$groupId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$groupId</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/cancel-a-payout-group">Cancel a Payout Group&lt;/&gt;</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-PayoutCancellationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutCancellationException">PayoutCancellationException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_cancelRefund">
         cancelRefund()
         <a href="classes/BitPaySDK-Client.html#method_cancelRefund" class="headerlink"><i class="fas fa-link"></i></a>
@@ -998,7 +1100,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">480</span>
+    <span class="phpdocumentor-element-found-in__line">507</span>
 
     </aside>
 
@@ -1076,7 +1178,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">497</span>
+    <span class="phpdocumentor-element-found-in__line">526</span>
 
     </aside>
 
@@ -1111,7 +1213,9 @@ payout facade.</dd>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/cancel-a-refund-by-guid-request">Cancel a Refund by GUID Request</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/cancel-a-refund-by-guid-request">
+Cancel a Refund by GUID Request
+</a>
 </section>
 
                                     </dd>
@@ -1154,7 +1258,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">531</span>
+    <span class="phpdocumentor-element-found-in__line">562</span>
 
     </aside>
 
@@ -1240,7 +1344,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">146</span>
+    <span class="phpdocumentor-element-found-in__line">163</span>
 
     </aside>
 
@@ -1319,6 +1423,71 @@ payout facade.</dd>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_createPayoutGroup">
+        createPayoutGroup()
+        <a href="classes/BitPaySDK-Client.html#method_createPayoutGroup" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">933</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">createPayoutGroup</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/BitPaySDK-Model-Payout-Payout.html"><abbr title="\BitPaySDK\Model\Payout\Payout">Payout</abbr></a>&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$payouts</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$payouts</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, <a href="classes/BitPaySDK-Model-Payout-Payout.html"><abbr title="\BitPaySDK\Model\Payout\Payout">Payout</abbr></a>&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/create-payout-group">Create Payout Group&lt;/&gt;</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-PayoutCreationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutCreationException">PayoutCreationException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_createRefund">
         createRefund()
         <a href="classes/BitPaySDK-Client.html#method_createRefund" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1326,7 +1495,7 @@ payout facade.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">346</span>
+    <span class="phpdocumentor-element-found-in__line">365</span>
 
     </aside>
 
@@ -1464,7 +1633,7 @@ or at time of processing</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">91</span>
+    <span class="phpdocumentor-element-found-in__line">94</span>
 
     </aside>
 
@@ -1560,7 +1729,7 @@ http://********.com:3128</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">117</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 
@@ -1621,7 +1790,7 @@ http://********.com:3128</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">767</span>
+    <span class="phpdocumentor-element-found-in__line">804</span>
 
     </aside>
 
@@ -1691,7 +1860,7 @@ http://********.com:3128</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">600</span>
+    <span class="phpdocumentor-element-found-in__line">631</span>
 
     </aside>
 
@@ -1777,7 +1946,7 @@ http://********.com:3128</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">549</span>
+    <span class="phpdocumentor-element-found-in__line">580</span>
 
     </aside>
 
@@ -1863,7 +2032,7 @@ http://********.com:3128</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">565</span>
+    <span class="phpdocumentor-element-found-in__line">596</span>
 
     </aside>
 
@@ -1930,7 +2099,7 @@ http://********.com:3128</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">648</span>
+    <span class="phpdocumentor-element-found-in__line">683</span>
 
     </aside>
 
@@ -1975,7 +2144,9 @@ Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/retrieve-the-rates-for-a-cryptocurrency-fiat-pair">Retrieve the rates for a cryptocurrency / fiat pair</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/retrieve-the-rates-for-a-cryptocurrency-fiat-pair">
+Retrieve the rates for a cryptocurrency / fiat pair
+</a>
 </section>
 
                                     </dd>
@@ -2010,7 +2181,7 @@ Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">630</span>
+    <span class="phpdocumentor-element-found-in__line">663</span>
 
     </aside>
 
@@ -2046,7 +2217,9 @@ Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/retrieve-all-the-rates-for-a-given-cryptocurrency">Retrieve all the rates for a given cryptocurrency</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/retrieve-all-the-rates-for-a-given-cryptocurrency">
+Retrieve all the rates for a given cryptocurrency
+</a>
 </section>
 
                                     </dd>
@@ -2081,7 +2254,7 @@ Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">194</span>
+    <span class="phpdocumentor-element-found-in__line">211</span>
 
     </aside>
 
@@ -2168,7 +2341,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">217</span>
+    <span class="phpdocumentor-element-found-in__line">234</span>
 
     </aside>
 
@@ -2256,7 +2429,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">242</span>
+    <span class="phpdocumentor-element-found-in__line">261</span>
 
     </aside>
 
@@ -2337,7 +2510,9 @@ with the 11th result).</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/retrieve-invoices-filtered-by-query">Retrieve Invoices Filtered by Query</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/retrieve-invoices-filtered-by-query">
+Retrieve Invoices Filtered by Query
+</a>
 </section>
 
                                     </dd>
@@ -2370,7 +2545,7 @@ with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">666</span>
+    <span class="phpdocumentor-element-found-in__line">701</span>
 
     </aside>
 
@@ -2458,7 +2633,7 @@ with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">681</span>
+    <span class="phpdocumentor-element-found-in__line">716</span>
 
     </aside>
 
@@ -2516,7 +2691,7 @@ with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">816</span>
+    <span class="phpdocumentor-element-found-in__line">855</span>
 
     </aside>
 
@@ -2585,7 +2760,7 @@ for the payout facade.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">715</span>
+    <span class="phpdocumentor-element-found-in__line">750</span>
 
     </aside>
 
@@ -2662,7 +2837,7 @@ payout facade.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">734</span>
+    <span class="phpdocumentor-element-found-in__line">771</span>
 
     </aside>
 
@@ -2716,7 +2891,9 @@ starting with the 11th result).</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/retrieve-recipients-by-status">Retrieve Recipients by Status</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/retrieve-recipients-by-status">
+Retrieve Recipients by Status
+</a>
 </section>
 
                                     </dd>
@@ -2749,7 +2926,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">838</span>
+    <span class="phpdocumentor-element-found-in__line">879</span>
 
     </aside>
 
@@ -2830,7 +3007,9 @@ starting with the 11th result).</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/retrieve-payouts-filtered-by-query">Retrieve Payouts Filtered by Query</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/retrieve-payouts-filtered-by-query">
+Retrieve Payouts Filtered by Query
+</a>
 </section>
 
                                     </dd>
@@ -2863,7 +3042,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">613</span>
+    <span class="phpdocumentor-element-found-in__line">644</span>
 
     </aside>
 
@@ -2910,7 +3089,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">428</span>
+    <span class="phpdocumentor-element-found-in__line">451</span>
 
     </aside>
 
@@ -2988,7 +3167,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">446</span>
+    <span class="phpdocumentor-element-found-in__line">471</span>
 
     </aside>
 
@@ -3023,7 +3202,9 @@ starting with the 11th result).</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/retrieve-a-refund-by-guid-request">Retrieve a Refund by GUID Request</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/retrieve-a-refund-by-guid-request">
+Retrieve a Refund by GUID Request
+</a>
 </section>
 
                                     </dd>
@@ -3066,7 +3247,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">410</span>
+    <span class="phpdocumentor-element-found-in__line">433</span>
 
     </aside>
 
@@ -3101,7 +3282,9 @@ starting with the 11th result).</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/retrieve-refunds-of-an-invoice">Retrieve Refunds of an Invoice</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/retrieve-refunds-of-an-invoice">
+Retrieve Refunds of an Invoice
+</a>
 </section>
 
                                     </dd>
@@ -3142,7 +3325,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">921</span>
+    <span class="phpdocumentor-element-found-in__line">992</span>
 
     </aside>
 
@@ -3210,7 +3393,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">937</span>
+    <span class="phpdocumentor-element-found-in__line">1010</span>
 
     </aside>
 
@@ -3245,7 +3428,9 @@ starting with the 11th result).</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/fetch-a-reconciliation-report">Fetch a Reconciliation Report</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/fetch-a-reconciliation-report">
+Fetch a Reconciliation Report
+</a>
 </section>
 
                                     </dd>
@@ -3278,7 +3463,7 @@ starting with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">899</span>
+    <span class="phpdocumentor-element-found-in__line">970</span>
 
     </aside>
 
@@ -3394,7 +3579,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">513</span>
+    <span class="phpdocumentor-element-found-in__line">544</span>
 
     </aside>
 
@@ -3417,7 +3602,9 @@ specify pages for large query sets.</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/retrieve-the-supported-wallets">Retrieve the Supported Wallets</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/retrieve-the-supported-wallets">
+Retrieve the Supported Wallets
+</a>
 </section>
 
                                     </dd>
@@ -3451,6 +3638,61 @@ specify pages for large query sets.</p>
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getTokens">
+        getTokens()
+        <a href="classes/BitPaySDK-Client.html#method_getTokens" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">145</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get Tokens.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getTokens</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\JsonException">JsonException</abbr></span>
+                                                            
+                                             
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_payInvoice">
         payInvoice()
         <a href="classes/BitPaySDK-Client.html#method_payInvoice" class="headerlink"><i class="fas fa-link"></i></a>
@@ -3458,7 +3700,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">319</span>
+    <span class="phpdocumentor-element-found-in__line">338</span>
 
     </aside>
 
@@ -3536,7 +3778,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">265</span>
+    <span class="phpdocumentor-element-found-in__line">284</span>
 
     </aside>
 
@@ -3614,7 +3856,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">876</span>
+    <span class="phpdocumentor-element-found-in__line">919</span>
 
     </aside>
 
@@ -3649,7 +3891,9 @@ specify pages for large query sets.</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/request-a-payout-webhook-to-be-resent">Request a Payout Webhook to be Resent</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/request-a-payout-webhook-to-be-resent">
+Request a Payout Webhook to be Resent
+</a>
 </section>
 
                                     </dd>
@@ -3684,7 +3928,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">783</span>
+    <span class="phpdocumentor-element-found-in__line">822</span>
 
     </aside>
 
@@ -3719,7 +3963,9 @@ specify pages for large query sets.</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/request-a-recipient-webhook-to-be-resent">Request a Recipient Webhook to be Resent</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/request-a-recipient-webhook-to-be-resent">
+Request a Recipient Webhook to be Resent
+</a>
 </section>
 
                                     </dd>
@@ -3754,7 +4000,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">463</span>
+    <span class="phpdocumentor-element-found-in__line">490</span>
 
     </aside>
 
@@ -3789,7 +4035,9 @@ specify pages for large query sets.</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/request-a-refund-notification-to-be-resent">Request a Refund Notification to be Resent</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/request-a-refund-notification-to-be-resent">
+Request a Refund Notification to be Resent
+</a>
 </section>
 
                                     </dd>
@@ -3832,7 +4080,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">799</span>
+    <span class="phpdocumentor-element-found-in__line">838</span>
 
     </aside>
 
@@ -3900,7 +4148,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">697</span>
+    <span class="phpdocumentor-element-found-in__line">732</span>
 
     </aside>
 
@@ -3970,7 +4218,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">582</span>
+    <span class="phpdocumentor-element-found-in__line">613</span>
 
     </aside>
 
@@ -4047,7 +4295,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">187</span>
 
     </aside>
 
@@ -4159,7 +4407,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">751</span>
+    <span class="phpdocumentor-element-found-in__line">788</span>
 
     </aside>
 
@@ -4236,7 +4484,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">371</span>
+    <span class="phpdocumentor-element-found-in__line">390</span>
 
     </aside>
 
@@ -4323,7 +4571,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">391</span>
+    <span class="phpdocumentor-element-found-in__line">412</span>
 
     </aside>
 
@@ -4367,7 +4615,9 @@ specify pages for large query sets.</p>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
-                                                 <section class="phpdocumentor-description"><p><a href="https://developer.bitpay.com/reference/update-a-refund-by-guid-request">Update a Refund by GUID Request</a></p>
+                                                 <section class="phpdocumentor-description"><a href="https://developer.bitpay.com/reference/update-a-refund-by-guid-request">
+Update a Refund by GUID Request
+</a>
 </section>
 
                                     </dd>
@@ -4410,7 +4660,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1026</span>
+    <span class="phpdocumentor-element-found-in__line">1109</span>
 
     </aside>
 
@@ -4445,7 +4695,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">996</span>
+    <span class="phpdocumentor-element-found-in__line">1079</span>
 
     </aside>
 
@@ -4480,7 +4730,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1046</span>
+    <span class="phpdocumentor-element-found-in__line">1129</span>
 
     </aside>
 
@@ -4515,7 +4765,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1066</span>
+    <span class="phpdocumentor-element-found-in__line">1149</span>
 
     </aside>
 
@@ -4550,7 +4800,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1056</span>
+    <span class="phpdocumentor-element-found-in__line">1139</span>
 
     </aside>
 
@@ -4585,7 +4835,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1036</span>
+    <span class="phpdocumentor-element-found-in__line">1119</span>
 
     </aside>
 
@@ -4620,7 +4870,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1006</span>
+    <span class="phpdocumentor-element-found-in__line">1089</span>
 
     </aside>
 
@@ -4655,7 +4905,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1076</span>
+    <span class="phpdocumentor-element-found-in__line">1159</span>
 
     </aside>
 
@@ -4690,7 +4940,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1016</span>
+    <span class="phpdocumentor-element-found-in__line">1099</span>
 
     </aside>
 
@@ -4725,7 +4975,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">976</span>
+    <span class="phpdocumentor-element-found-in__line">1049</span>
 
     </aside>
 
@@ -4772,6 +5022,39 @@ specify pages for large query sets.</p>
         class="phpdocumentor-element
             -method
             -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getTokenClient">
+        getTokenClient()
+        <a href="classes/BitPaySDK-Client.html#method_getTokenClient" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">1069</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Gets token client</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">getTokenClient</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Client-TokenClient.html"><abbr title="\BitPaySDK\Client\TokenClient">TokenClient</abbr></a></span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Client-TokenClient.html"><abbr title="\BitPaySDK\Client\TokenClient">TokenClient</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
                                     -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_initKeys">
@@ -4781,7 +5064,7 @@ specify pages for large query sets.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client.php"><a href="files/src-bitpaysdk-client.html"><abbr title="src/BitPaySDK/Client.php">Client.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">951</span>
+    <span class="phpdocumentor-element-found-in__line">1024</span>
 
     </aside>
 
