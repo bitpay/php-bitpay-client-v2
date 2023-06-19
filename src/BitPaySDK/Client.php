@@ -1943,7 +1943,7 @@ class Client
             }
             $responseJson = $this->_RESTcli->post("payouts/group", $request);
 
-            return $this->getPayoutGroupResponse($responseJson, 'completed');
+            return $this->getPayoutGroupResponse($responseJson, 'created');
         } catch (Exception $e) {
             throw new PayoutCreationException("failed to serialize Payout object : " . $e->getMessage());
         }
