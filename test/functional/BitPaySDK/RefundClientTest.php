@@ -4,7 +4,7 @@
  **/
 declare(strict_types=1);
 
-namespace BitPaySDK\Integration;
+namespace BitPaySDK\Functional;
 
 use BitPaySDK\Exceptions\RefundCreationException;
 use BitPaySDK\Model\Currency;
@@ -93,7 +93,7 @@ class RefundClientTest extends AbstractClientTest
         $invoice->setExtendedNotifications(true);
         $invoice->setNotificationURL("https://test/lJnJg9WW7MtG9GZlPVdj");
         $invoice->setRedirectURL("https://test/lJnJg9WW7MtG9GZlPVdj");
-        $invoice->setItemDesc("Created by PHP Integration test");
+        $invoice->setItemDesc("Created by PHP functional test");
         $invoice->setNotificationEmail("");
 
         $buyer = new Buyer();

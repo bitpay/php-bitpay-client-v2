@@ -4,7 +4,7 @@
  **/
 declare(strict_types=1);
 
-namespace BitPaySDK\Integration;
+namespace BitPaySDK\Functional;
 
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
@@ -20,7 +20,7 @@ class PayoutClientTest extends AbstractClientTest
         $currency = Currency::USD;
         $ledgerCurrency = Currency::USD;
         $amount = 10;
-        $email = $this->getFromFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt');
+        $email = $this->getFromFile(Config::FUNCTIONAL_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt');
         $submitPayout = $this->submitPayout($currency, $ledgerCurrency, $amount);
         self::assertEquals($currency, $submitPayout->getCurrency());
         $payoutId = $submitPayout->getId();
@@ -56,7 +56,7 @@ class PayoutClientTest extends AbstractClientTest
         $payout->setReference('payout_20210527');
         $payout->setNotificationEmail('merchant@email.com');
         $payout->setNotificationURL('https://yournotiticationURL.com/wed3sa0wx1rz5bg0bv97851eqx');
-        $payout->setEmail($this->getFromFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt'));
+        $payout->setEmail($this->getFromFile(Config::FUNCTIONAL_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt'));
 
         $createGroupResponse = $this->client->createPayoutGroup([$payout]);
         self::assertCount(1, $createGroupResponse->getPayouts());
@@ -69,7 +69,7 @@ class PayoutClientTest extends AbstractClientTest
 
     private function submitPayout(string $currency, string $ledgerCurrency, int $amount)
     {
-        $email = $this->getFromFile(Config::INTEGRATION_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt');
+        $email = $this->getFromFile(Config::FUNCTIONAL_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt');
         $payout = new Payout($amount, $currency, $ledgerCurrency);
 
         $recipientsList = [
@@ -86,7 +86,7 @@ class PayoutClientTest extends AbstractClientTest
         $payout->setRecipientId($payoutRecipientId);
         $payout->setNotificationURL("https://somenotiticationURL.com");
         $payout->setNotificationEmail($email);
-        $payout->setReference("PHP Integration tests " . uniqid('', true));
+        $payout->setReference("PHP functional tests " . uniqid('', true));
         $payout->setTransactions([]);
 
         return $this->client->submitPayout($payout);
