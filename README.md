@@ -30,9 +30,35 @@ To get up and running with our PHP library quickly, follow [the guide](https://b
 ```
 
 ## Functional Tests
-To run functional tests you have to generate BitPay.config.yml by running command
-``` php setup/ConfigGenerator.php ``` and put this file into test/functional/BitPaySDK folder.
-To submit request you should create recipient in https://test.bitpay.com/dashboard/payouts/recipients and put this email to "email.txt" file in test/functional/BitPaySDK folder.
+
+To run functional tests you will need to perform the following steps.
+
+### Generate Configuration
+
+
+Run the following command to generate `BitPay.config.yml`:
+
+```bash
+composer setup
+```
+
+Copy `BitPay.config.yml` to the `test/functional/BitPaySDK` directory.
+
+Copy `PrivateKeyName.key` to the `setup` directory.
+
+### Create Recipient
+
+To submit requests you should:
+
+1. Create a recipient in https://test.bitpay.com/dashboard/payouts/recipients
+2. Accept the invite in the recipient's email inbox
+3. Create a file at `test/functional/BitPaySDK/email.txt` containing the email
+   address of the recipient you created in step 1.
+
+### Run the Functional Tests
+
+Run the following command to execute the functional tests:
+
 ```php
 ./vendor/bin/phpunit --testsuite "Functional"
 ```

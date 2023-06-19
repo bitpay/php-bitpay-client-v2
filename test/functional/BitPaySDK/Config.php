@@ -7,6 +7,6 @@ use BitPaySDK\Exceptions\BitPayException;
 
 class Config
 {
-    public const FUNCTIONAL_TEST_PATH = 'test/funcitonal/BitPaySDK';
+    public const FUNCTIONAL_TEST_PATH = 'test/functional/BitPaySDK';
     public const BITPAY_CONFIG_FILE = 'BitPay.config.yml';
 }
