@@ -18,6 +18,7 @@ use BitPaySDK\Client\PayoutRecipientsClient;
 use BitPaySDK\Client\RateClient;
 use BitPaySDK\Client\RefundClient;
 use BitPaySDK\Client\SettlementClient;
+use BitPaySDK\Client\TokenClient;
 use BitPaySDK\Client\WalletClient;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\InvoiceCancellationException;
@@ -131,6 +132,20 @@ class Client
         } catch (Exception $e) {
             throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
         }
+    }
+
+    /**
+     * Get Tokens.
+     *
+     * @return array
+     * @throws BitPayException
+     * @throws \JsonException
+     */
+    public function getTokens(): array
+    {
+        $tokenClient = $this->getTokenClient();
+
+        return $tokenClient->getTokens();
     }
 
     /**
@@ -1043,6 +1058,16 @@ class Client
         }
 
         return $configData;
+    }
+
+    /**
+     * Gets token client
+     *
+     * @return TokenClient
+     */
+    private function getTokenClient(): TokenClient
+    {
+        return TokenClient::getInstance($this->restCli);
     }
 
     /**

@@ -177,6 +177,21 @@ class ClientTest extends TestCase
         $instance::createWithFile('badpath');
     }
 
+    public function testGetTokens(): void
+    {
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock
+            ->expects(self::once())
+            ->method('get')
+            ->with("tokens")
+            ->willReturn(file_get_contents(__DIR__ . '/jsonResponse/getTokensResponse.json'));
+
+        $tokenClient = $this->getClient($restCliMock);
+        $tokens = $tokenClient->getTokens();
+
+        self::assertEquals('someMerchantToken', $tokens[0]['merchant']);
+    }
+
     public function testCreateBill()
     {
         $expectedId = 'X6KJbe9RxAGWNReCwd1xRw';

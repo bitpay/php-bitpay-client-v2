@@ -1,0 +1,14 @@
+[
+  {
+    "merchant": "someMerchantToken"
+  },
+  {
+    "payout": "somePayoutToken"
+  },
+  {
+    "payout\/recipient": "somePayoutRecipientToken1"
+  },
+  {
+    "payout\/recipient": "somePayoutRecipientToken2"
+  }
+]
