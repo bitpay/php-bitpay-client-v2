@@ -11,32 +11,31 @@ use BitPaySDK\Exceptions\BillQueryException;
 use BitPaySDK\Exceptions\BillUpdateException;
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Exceptions\CurrencyQueryException;
-use BitPaySDK\Exceptions\InvoiceCreationException;
-use BitPaySDK\Exceptions\InvoiceUpdateException;
-use BitPaySDK\Exceptions\InvoiceQueryException;
 use BitPaySDK\Exceptions\InvoiceCancellationException;
+use BitPaySDK\Exceptions\InvoiceCreationException;
 use BitPaySDK\Exceptions\InvoicePaymentException;
+use BitPaySDK\Exceptions\InvoiceQueryException;
+use BitPaySDK\Exceptions\InvoiceUpdateException;
 use BitPaySDK\Exceptions\LedgerQueryException;
-use BitPaySDK\Exceptions\PayoutRecipientCreationException;
-use BitPaySDK\Exceptions\PayoutRecipientCancellationException;
-use BitPaySDK\Exceptions\PayoutRecipientQueryException;
-use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
-use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
+use BitPaySDK\Exceptions\PayoutBatchCancellationException;
+use BitPaySDK\Exceptions\PayoutBatchCreationException;
+use BitPaySDK\Exceptions\PayoutBatchNotificationException;
+use BitPaySDK\Exceptions\PayoutBatchQueryException;
 use BitPaySDK\Exceptions\PayoutCancellationException;
 use BitPaySDK\Exceptions\PayoutCreationException;
-use BitPaySDK\Exceptions\PayoutQueryException;
-use BitPaySDK\Exceptions\PayoutUpdateException;
 use BitPaySDK\Exceptions\PayoutNotificationException;
-use BitPaySDK\Exceptions\PayoutBatchCreationException;
-use BitPaySDK\Exceptions\PayoutBatchQueryException;
-use BitPaySDK\Exceptions\PayoutBatchCancellationException;
-use BitPaySDK\Exceptions\PayoutBatchNotificationException;
+use BitPaySDK\Exceptions\PayoutQueryException;
+use BitPaySDK\Exceptions\PayoutRecipientCancellationException;
+use BitPaySDK\Exceptions\PayoutRecipientCreationException;
+use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
+use BitPaySDK\Exceptions\PayoutRecipientQueryException;
+use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
 use BitPaySDK\Exceptions\RateQueryException;
-use BitPaySDK\Exceptions\RefundCreationException;
-use BitPaySDK\Exceptions\RefundUpdateException;
 use BitPaySDK\Exceptions\RefundCancellationException;
+use BitPaySDK\Exceptions\RefundCreationException;
 use BitPaySDK\Exceptions\RefundNotificationException;
 use BitPaySDK\Exceptions\RefundQueryException;
+use BitPaySDK\Exceptions\RefundUpdateException;
 use BitPaySDK\Exceptions\SettlementQueryException;
 use BitPaySDK\Exceptions\SubscriptionCreationException;
 use BitPaySDK\Exceptions\SubscriptionQueryException;
@@ -46,16 +45,18 @@ use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Invoice\Refund;
-use BitPaySDK\Model\Wallet\Wallet;
 use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Payout\Payout;
 use BitPaySDK\Model\Payout\PayoutBatch;
+use BitPaySDK\Model\Payout\PayoutGroup;
+use BitPaySDK\Model\Payout\PayoutGroupFailed;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Model\Settlement\Settlement;
 use BitPaySDK\Model\Subscription\Subscription;
+use BitPaySDK\Model\Wallet\Wallet;
 use BitPaySDK\Util\JsonMapper\JsonMapper;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
@@ -1919,6 +1920,63 @@ class Client
     }
 
     /**
+     * Create Payout Group.
+     *
+     * @see <a href="https://developer.bitpay.com/reference/create-payout-group">Create Payout Group</>
+     *
+     * @param Payout[] $payouts
+     * @return PayoutGroup
+     * @throws PayoutCreationException
+     */
+    public function createPayoutGroup(array $payouts): PayoutGroup
+    {
+        $request = [];
+        try {
+            $request['token'] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
+        } catch (Exception $e) {
+            throw new PayoutCreationException("Missing facade token");
+        }
+
+        try {
+            foreach ($payouts as $payout) {
+                $request['instructions'][] = $payout->toArray();
+            }
+            $responseJson = $this->_RESTcli->post("payouts/group", $request);
+
+            return $this->getPayoutGroupResponse($responseJson, 'created');
+        } catch (Exception $e) {
+            throw new PayoutCreationException("failed to serialize Payout object : " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Cancel Payout group.
+     *
+     * @see <a href="https://developer.bitpay.com/reference/cancel-a-payout-group">Cancel a Payout Group</>
+     *
+     * @param string $groupId
+     * @return PayoutGroup
+     * @throws PayoutCancellationException
+     */
+    public function cancelPayoutGroup(string $groupId): PayoutGroup
+    {
+        $request = [];
+        try {
+            $request['token'] = $this->_tokenCache->getTokenByFacade(Facade::Payout);
+        } catch (Exception $e) {
+            throw new PayoutCancellationException("Missing facade token");
+        }
+
+        try {
+            $responseJson = $this->_RESTcli->delete("payouts/group/" . $groupId, $request);
+
+            return $this->getPayoutGroupResponse($responseJson, 'cancelled');
+        } catch (Exception $e) {
+            throw new PayoutCancellationException("failed to serialize Payout object : " . $e->getMessage());
+        }
+    }
+
+    /**
      * Notify BitPay Payout.
      *
      * @param  string $payoutId The id of the Payout to notify.
@@ -2717,5 +2775,27 @@ class Client
     {
         return $autoVerify == false &&
             (!empty($buyerSms) && empty($smsCode)) || (!empty($smsCode) && empty($buyerSms));
+    }
+
+    /**
+     * @param string $responseJson
+     * @param string $responseType completed/cancelled
+     * @return PayoutGroup
+     * @throws Exception
+     */
+    private function getPayoutGroupResponse(string $responseJson, string $responseType): PayoutGroup
+    {
+        $mapper = new JsonMapper();
+        $response = json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR);
+
+        $payouts = $mapper->mapArray($response[$responseType], [], Payout::class);
+
+        $mapper->bIgnoreVisibility = true;
+
+        $payoutGroup = new PayoutGroup();
+        $payoutGroup->setPayouts($payouts);
+        $payoutGroup->setFailed($mapper->mapArray($response['failed'], [], PayoutGroupFailed::class));
+
+        return $payoutGroup;
     }
 }

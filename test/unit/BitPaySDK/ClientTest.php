@@ -67,6 +67,7 @@ class ClientTest extends TestCase
 {
     private const CORRUPT_JSON_STRING = '{"code":"USD""name":"US Dollar","rate":21205.85}';
     private const CORRECT_JSON_STRING = '[ { "currency": "EUR", "balance": 0 }, { "currency": "USD", "balance": 2389.82 }, { "currency": "BTC", "balance": 0.000287 } ]';
+    private const PAYOUT_TOKEN = 'testPayoutApiToken';
 
     protected function setUp(): void
     {
@@ -2326,6 +2327,81 @@ class ClientTest extends TestCase
 
         $this->expectException(PayoutCreationException::class);
         $testedObject->submitPayout($payoutMock);
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     */
+    public function testCreatePayoutGroup(Client $testedObject): void
+    {
+
+        $notificationURL = 'https://yournotiticationURL.com/wed3sa0wx1rz5bg0bv97851eqx';
+        $shopperId = '7qohDf2zZnQK5Qanj8oyC2';
+
+        $payout = new Payout();
+        $payout->setAmount(10);
+        $payout->setCurrency(Currency::USD);
+        $payout->setLedgerCurrency(Currency::USD);
+        $payout->setReference('payout_20210527');
+        $payout->setNotificationEmail('merchant@email.com');
+        $payout->setNotificationURL($notificationURL);
+        $payout->setEmail('john@doe.com');
+        $payout->setRecipientId('LDxRZCGq174SF8AnQpdBPB');
+        $payout->setShopperId($shopperId);
+
+        $expectedRequest['instructions'][] = $payout->toArray();
+        $expectedRequest['token'] = self::PAYOUT_TOKEN;
+
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects(self::once())->method('post')
+            ->with("payouts/group", $expectedRequest, true)
+            ->willReturn(file_get_contents(__DIR__ . '/json/createPayoutGroupResponse.json', true));
+        $setRestCli = function () use ($restCliMock) {
+            $this->_RESTcli = $restCliMock;
+        };
+        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+        $doSetRestCli();
+
+        $result = $testedObject->createPayoutGroup([$payout]);
+        $firstPayout = $result->getPayouts()[0];
+        $firstFailed = $result->getFailed()[0];
+
+        self::assertCount(1, $result->getPayouts());
+        self::assertEquals($notificationURL, $firstPayout->getNotificationURL());
+        self::assertEquals($shopperId, $firstPayout->getShopperId());
+        self::assertEquals('Ledger currency is required', $firstFailed->getErrorMessage());
+        self::assertEquals('john@doe.com', $firstFailed->getPayee());
+    }
+
+    /**
+     * @depends testWithFileJsonConfig
+     * @throws PayoutCancellationException
+     */
+    public function testCancelPayoutGroup(Client $testedObject): void
+    {
+        $groupId = '12345';
+        $restCliMock = $this->getRestCliMock();
+        $restCliMock->expects(self::once())->method('delete')
+            ->with("payouts/group/" . $groupId, ['token' => self::PAYOUT_TOKEN])
+            ->willReturn(file_get_contents(__DIR__ . '/json/cancelPayoutGroupResponse.json', true));
+        $setRestCli = function () use ($restCliMock) {
+            $this->_RESTcli = $restCliMock;
+        };
+        $doSetRestCli = $setRestCli->bindTo($testedObject, get_class($testedObject));
+        $doSetRestCli();
+
+        $result = $testedObject->cancelPayoutGroup($groupId);
+        $firstPayout = $result->getPayouts()[0];
+        $firstFailed = $result->getFailed()[0];
+
+        self::assertCount(2, $result->getPayouts());
+        self::assertEquals(
+            'https://yournotiticationURL.com/wed3sa0wx1rz5bg0bv97851eqx',
+            $firstPayout->getNotificationURL()
+        );
+        self::assertEquals('7qohDf2zZnQK5Qanj8oyC2', $firstPayout->getShopperId());
+        self::assertEquals('PayoutId is missing or invalid', $firstFailed->getErrorMessage());
+        self::assertEquals('D8tgWzn1psUua4NYWW1vYo', $firstFailed->getPayoutId());
     }
 
     /**

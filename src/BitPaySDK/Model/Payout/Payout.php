@@ -34,6 +34,7 @@ class Payout
     protected $_label = '';
     protected $_supportPhone = '';
     protected $_message = '';
+    protected bool $ignoreEmails = false;
     protected $_percentFee = 0.0;
     protected $_fee = 0.0;
     protected $_depositTotal = 0.0;
@@ -46,6 +47,7 @@ class Payout
     protected $_requestDate;
     protected $_exchangeRates;
     protected $_transactions;
+    protected ?string $_groupId = null;
 
     /**
      * Constructor, create a request Payout object.
@@ -765,6 +767,48 @@ class Payout
     }
 
     /**
+     * Gets boolean to prevent email updates on a specific payout.
+     * Defaults to false if not provided - you will receive emails unless specified to true.
+     *
+     * @return bool
+     */
+    public function isIgnoreEmails(): bool
+    {
+        return $this->ignoreEmails;
+    }
+
+    /**
+     * Sets boolean to prevent email updates on a specific payout.
+     * Defaults to false if not provided - you will receive emails unless specified to true.
+     *
+     * @param bool $ignoreEmails
+     */
+    public function setIgnoreEmails(bool $ignoreEmails): void
+    {
+        $this->ignoreEmails = $ignoreEmails;
+    }
+
+    /**
+     * Gets group id.
+     *
+     * @return string|null
+     */
+    public function getGroupId(): ?string
+    {
+        return $this->_groupId;
+    }
+
+    /**
+     * Sets group id.
+     *
+     * @param string|null $groupId
+     */
+    public function setGroupId(?string $groupId): void
+    {
+        $this->_groupId = $groupId;
+    }
+
+    /**
      * Return Payout values as array.
      *
      * @return array
@@ -788,6 +832,8 @@ class Payout
             'label'             => $this->getLabel(),
             'supportPhone'      => $this->getSupportPhone(),
             'message'           => $this->getMessage(),
+            'groupId'           => $this->getGroupId(),
+            'ignoreEmails'      => $this->isIgnoreEmails(),
             'percentFee'        => $this->getPercentFee(),
             'fee'               => $this->getFee(),
             'depositTotal'      => $this->getDepositTotal(),
