@@ -37,6 +37,7 @@ class Payout
     protected string $shopperId = '';
     protected string $label = '';
     protected string $message = '';
+    protected bool $ignoreEmails = false;
     protected ?string $groupId = null;
     protected ?int $code = null;
     protected ?string $dateExecuted = null;
@@ -659,43 +660,43 @@ class Payout
     }
 
     /**
+     * Gets boolean to prevent email updates on a specific payout.
+     * Defaults to false if not provided - you will receive emails unless specified to true.
+     *
+     * @return bool
+     */
+    public function isIgnoreEmails(): bool
+    {
+        return $this->ignoreEmails;
+    }
+
+    /**
+     * Sets boolean to prevent email updates on a specific payout.
+     * Defaults to false if not provided - you will receive emails unless specified to true.
+     *
+     * @param bool $ignoreEmails
+     */
+    public function setIgnoreEmails(bool $ignoreEmails): void
+    {
+        $this->ignoreEmails = $ignoreEmails;
+    }
+
+    /**
      * Return Payout values as array.
      *
      * @return array
      */
     public function toArray(): array
     {
-        $elements = [
-            'token' => $this->getToken(),
-            'amount' => $this->getAmount(),
-            'currency' => $this->getCurrency(),
-            'effectiveDate' => $this->getEffectiveDate(),
-            'ledgerCurrency' => $this->getLedgerCurrency(),
-            'reference' => $this->getReference(),
-            'notificationURL' => $this->getNotificationURL(),
-            'notificationEmail' => $this->getNotificationEmail(),
-            'accountId' => $this->getAccountId(),
-            'email' => $this->getEmail(),
-            'recipientId' => $this->getRecipientId(),
-            'shopperId' => $this->getShopperId(),
-            'label' => $this->getLabel(),
-            'message' => $this->getMessage(),
-            'groupId' => $this->getGroupId(),
-            'code' => $this->getCode(),
-            'dateExecuted' => $this->getDateExecuted(),
-            'id' => $this->getId(),
-            'status' => $this->getStatus(),
-            'requestDate' => $this->getRequestDate(),
-            'exchangeRates' => $this->getExchangeRates(),
-            'transactions' => $this->getTransactions()
-        ];
+        $result = [];
+        $fields = get_object_vars($this);
 
-        foreach ($elements as $key => $value) {
-            if (empty($value)) {
-                unset($elements[$key]);
+        foreach ($fields as $name => $value) {
+            if (!empty($value)) {
+                $result[$name] = $value;
             }
         }
 
-        return $elements;
+        return $result;
     }
 }
