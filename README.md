@@ -4,11 +4,8 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/bitpay/php-bitpay-client-v2/master/LICENSE)
 [![Packagist](https://img.shields.io/packagist/v/bitpay/sdk.svg?style=flat-square)](https://packagist.org/packages/bitpay/sdk)
 [![Total Downloads](https://poser.pugx.org/bitpay/sdk/downloads.svg)](https://packagist.org/packages/bitpay/sdk)
-[![Latest Unstable Version](https://poser.pugx.org/bitpay/sdk/v/unstable.svg)](https://packagist.org/packages/bitpay/sdk)
 
-Full implementation of the BitPay Payment Gateway. This library implements BitPay's [Cryptographically Secure RESTful API](https://bitpay.com/api).
-
-Our Lite version will most likely be all you need to integrate to your site, available [here](https://github.com/bitpay/php-bitpay-light-client)
+Full implementation of the BitPay Payment Gateway. This library implements BitPay's [Cryptographically Secure RESTful API](https://developer.bitpay.com/reference/concepts).
 
 ## Getting Started
 
