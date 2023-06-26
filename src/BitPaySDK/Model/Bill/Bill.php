@@ -87,7 +87,7 @@ class Bill
      * API token for bill resource. This token is actually derived from the API token used to
      * create the bill and is tied to the specific resource id created.
      *
-     * @param string $token the token
+     * @param string $token API token for bill resource
      */
     public function setToken(string $token): void
     {
@@ -111,7 +111,7 @@ class Bill
      *
      * ISO 4217 3-character currency code. This is the currency associated with the price field
      *
-     * @param string $currency the currency
+     * @param string $currency 3-character currency code
      * @throws BitPayException
      */
     public function setCurrency(string $currency): void
@@ -136,7 +136,7 @@ class Bill
     /**
      * Sets Bill's email
      *
-     * @param string $email the email
+     * @param string $email Bill's email
      */
     public function setEmail(string $email): void
     {
@@ -206,7 +206,7 @@ class Bill
      *
      * Bill identifier, specified by merchant
      *
-     * @param string $number the number
+     * @param string $number Bill identifier, specified by merchant
      */
     public function setNumber(string $number): void
     {
@@ -226,7 +226,7 @@ class Bill
     /**
      * Sets Bill recipient's name
      *
-     * @param string $name the name
+     * @param string $name Bill recipient's name
      */
     public function setName(string $name): void
     {
@@ -246,7 +246,7 @@ class Bill
     /**
      * Sets Bill recipient's address
      *
-     * @param string $address1
+     * @param string $address1 Bill recipient's address
      */
     public function setAddress1(string $address1): void
     {
@@ -266,7 +266,7 @@ class Bill
     /**
      * Sets Bill recipient's address
      *
-     * @param string $address2
+     * @param string $address2 Bill recipient's address
      */
     public function setAddress2(string $address2): void
     {
@@ -286,7 +286,7 @@ class Bill
     /**
      * Sets Bill recipient's city
      *
-     * @param string $city
+     * @param string $city Bill recipient's city
      */
     public function setCity(string $city): void
     {
@@ -306,7 +306,7 @@ class Bill
     /**
      * Sets Bill recipient's state or province
      *
-     * @param string $state
+     * @param string $state Bill recipient's state or province
      */
     public function setState(string $state): void
     {
@@ -326,7 +326,7 @@ class Bill
     /**
      * Sets Bill recipient's ZIP code
      *
-     * @param string $zip
+     * @param string $zip Bill recipient's ZIP code
      */
     public function setZip(string $zip): void
     {
@@ -346,7 +346,7 @@ class Bill
     /**
      * Sets Bill recipient's country
      *
-     * @param string $country
+     * @param string $country Bill recipient's country
      */
     public function setCountry(string $country): void
     {
@@ -370,7 +370,7 @@ class Bill
      *
      * Email addresses to which a copy of the bill must be sent
      *
-     * @param array $cc
+     * @param array $cc Email addresses to which a copy of the bill must be sent
      */
     public function setCc(array $cc): void
     {
@@ -390,7 +390,7 @@ class Bill
     /**
      * Sets Bill recipient's phone number
      *
-     * @param string $phone
+     * @param string $phone Bill recipient's phone number
      */
     public function setPhone(string $phone): void
     {
@@ -414,7 +414,7 @@ class Bill
      *
      * Date and time at which a bill is due, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
-     * @param string $dueDate
+     * @param string $dueDate Date and time at which a bill is due
      */
     public function setDueDate(string $dueDate): void
     {
@@ -436,7 +436,7 @@ class Bill
      *
      * If set to true, BitPay's processing fee will be included in the amount charged on the invoice
      *
-     * @param bool $passProcessingFee
+     * @param bool $passProcessingFee Bill's pass processing fee
      */
     public function setPassProcessingFee(bool $passProcessingFee): void
     {
@@ -460,7 +460,7 @@ class Bill
      *
      * Can "draft", "sent", "new", "paid", or "complete"
      *
-     * @param string $status
+     * @param string $status Bill's status
      */
     public function setStatus(string $status): void
     {
@@ -484,7 +484,7 @@ class Bill
      *
      * Web address of bill
      *
-     * @param string $url
+     * @param string $url Web address of bill
      */
     public function setUrl(string $url): void
     {
@@ -508,7 +508,7 @@ class Bill
      *
      * Date and time of Bill creation, ISO-8601 format yyyy-mm-ddThh:mm:ssZ. (UTC)
      *
-     * @param string $createDate
+     * @param string $createDate Bill's create date
      */
     public function setCreateDate(string $createDate): void
     {
@@ -532,7 +532,7 @@ class Bill
      *
      * Bill resource id
      *
-     * @param string $id
+     * @param string $id Bill resource id
      */
     public function setId(string $id): void
     {
@@ -556,7 +556,7 @@ class Bill
      *
      * Internal identifier for BitPay, this field can be ignored by the merchants.
      *
-     * @param string $merchant
+     * @param string $merchant Internal identifier for BitPay
      */
     public function setMerchant(string $merchant): void
     {

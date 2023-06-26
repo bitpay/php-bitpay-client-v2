@@ -213,7 +213,7 @@ $config = [
                     "merchant" => $isProd ? null : $merchantToken,
                     "payout"  => $isProd ? null : $payoutToken,
                 ],
-                "proxy" => $proxy,
+                "Proxy" => $proxy,
             ],
             'Prod' => [
                 "PrivateKeyPath"   => $isProd ? __DIR__."/".$privateKeyname : null,
@@ -222,7 +222,7 @@ $config = [
                     "merchant" => $isProd ? $merchantToken : null,
                     "payout"  => $isProd ? $payoutToken : null,
                 ],
-                "proxy" => $proxy,
+                "Proxy" => $proxy,
             ],
         ],
     ],

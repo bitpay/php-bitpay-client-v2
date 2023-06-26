@@ -184,7 +184,7 @@ class SettlementLedgerEntry
      *
      * Object containing relevant information from the paid invoice
      *
-     * @param InvoiceData $invoiceData
+     * @param InvoiceData $invoiceData information from the paid invoice
      */
     public function setInvoiceData(InvoiceData $invoiceData): void
     {

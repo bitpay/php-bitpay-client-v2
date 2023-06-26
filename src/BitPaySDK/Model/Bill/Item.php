@@ -18,6 +18,8 @@ namespace BitPaySDK\Model\Bill;
  *
  * @package Bitpay
  */
+
+#[\AllowDynamicProperties]
 class Item
 {
     protected ?string $id = null;
