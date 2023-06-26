@@ -68,7 +68,7 @@ class MinerFees
     /**
      * Sets BTC.
      *
-     * @param MinerFeesItem $btc
+     * @param MinerFeesItem $btc the BTC
      */
     public function setBTC(MinerFeesItem $btc): void
     {
@@ -88,7 +88,7 @@ class MinerFees
     /**
      * Sets BCH.
      *
-     * @param MinerFeesItem $bch
+     * @param MinerFeesItem $bch the BCH
      */
     public function setBCH(MinerFeesItem $bch): void
     {
@@ -108,7 +108,7 @@ class MinerFees
     /**
      * Sets ETH.
      *
-     * @param MinerFeesItem $eth
+     * @param MinerFeesItem $eth the ETH
      */
     public function setETH(MinerFeesItem $eth): void
     {
@@ -128,7 +128,7 @@ class MinerFees
     /**
      * Sets USDC.
      *
-     * @param MinerFeesItem $usdc
+     * @param MinerFeesItem $usdc the USDC
      */
     public function setUSDC(MinerFeesItem $usdc): void
     {
@@ -148,7 +148,7 @@ class MinerFees
     /**
      * Sets GUSD.
      *
-     * @param MinerFeesItem $gusd
+     * @param MinerFeesItem $gusd the GUSD
      */
     public function setGUSD(MinerFeesItem $gusd): void
     {
@@ -168,7 +168,7 @@ class MinerFees
     /**
      * Sets PAX.
      *
-     * @param MinerFeesItem $pax
+     * @param MinerFeesItem $pax the PAX
      */
     public function setPAX(MinerFeesItem $pax): void
     {
@@ -188,7 +188,7 @@ class MinerFees
     /**
      * Sets BUSD.
      *
-     * @param MinerFeesItem $busd
+     * @param MinerFeesItem $busd the BUSD
      */
     public function setBUSD(MinerFeesItem $busd): void
     {
@@ -208,7 +208,7 @@ class MinerFees
     /**
      * Sets XRP.
      *
-     * @param MinerFeesItem $xrp
+     * @param MinerFeesItem $xrp the XRP
      */
     public function setXRP(MinerFeesItem $xrp): void
     {
@@ -228,7 +228,7 @@ class MinerFees
     /**
      * Sets DOGE.
      *
-     * @param MinerFeesItem $doge
+     * @param MinerFeesItem $doge the DOGE
      */
     public function setDOGE(MinerFeesItem $doge): void
     {
@@ -248,7 +248,7 @@ class MinerFees
     /**
      * Sets LTC.
      *
-     * @param MinerFeesItem $ltc
+     * @param MinerFeesItem $ltc the LTC
      */
     public function setLTC(MinerFeesItem $ltc): void
     {

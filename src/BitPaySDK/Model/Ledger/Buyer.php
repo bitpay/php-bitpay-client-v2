@@ -68,7 +68,7 @@ class Buyer
     /**
      * Sets address1
      *
-     * @param string $address1
+     * @param string $address1 the address1
      */
     public function setAddress1(string $address1): void
     {

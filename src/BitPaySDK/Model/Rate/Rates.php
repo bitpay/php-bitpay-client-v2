@@ -68,7 +68,7 @@ class Rates
     /**
      * Gets rate for the requested currency code.
      *
-     * @param string $currencyCode
+     * @param string $currencyCode 3-character currency code
      * @return float|null
      * @throws BitPayException
      */

@@ -36,7 +36,7 @@ class SupportedTransactionCurrency
     /**
      * Gets enabled.
      *
-     * @param bool $enabled
+     * @param bool $enabled is enabled
      */
     public function setEnabled(bool $enabled): void
     {
@@ -56,7 +56,7 @@ class SupportedTransactionCurrency
     /**
      * Gets reason.
      *
-     * @param string $reason
+     * @param string $reason the reason
      */
     public function setReason(string $reason): void
     {
