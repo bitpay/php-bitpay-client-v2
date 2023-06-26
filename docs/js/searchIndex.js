@@ -7811,6 +7811,16 @@ Search.appendIndex(
             "summary": "Sets\u0020amounts.",
             "url": "classes/BitPaySDK-Model-Settlement-RefundInfo.html#method_setAmounts"
         },                {
+            "fqsen": "\\BitPaySDK\\Model\\Settlement\\RefundInfo\u003A\u003AgetRefundRequestEid\u0028\u0029",
+            "name": "getRefundRequestEid",
+            "summary": "Gets\u0020Refund\u0020Request\u0020Eid.",
+            "url": "classes/BitPaySDK-Model-Settlement-RefundInfo.html#method_getRefundRequestEid"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Settlement\\RefundInfo\u003A\u003AsetRefundRequestEid\u0028\u0029",
+            "name": "setRefundRequestEid",
+            "summary": "Sets\u0020Refund\u0020Request\u0020Eid.",
+            "url": "classes/BitPaySDK-Model-Settlement-RefundInfo.html#method_setRefundRequestEid"
+        },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\RefundInfo\u003A\u003AtoArray\u0028\u0029",
             "name": "toArray",
             "summary": "Gets\u0020Refund\u0020info\u0020as\u0020array",
@@ -7830,6 +7840,11 @@ Search.appendIndex(
             "name": "amounts",
             "summary": "",
             "url": "classes/BitPaySDK-Model-Settlement-RefundInfo.html#property_amounts"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Settlement\\RefundInfo\u003A\u003A\u0024refundRequestEid",
+            "name": "refundRequestEid",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Settlement-RefundInfo.html#property_refundRequestEid"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\Settlement",
             "name": "Settlement",
