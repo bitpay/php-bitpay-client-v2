@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -13,36 +19,40 @@ namespace BitPaySDK\Model\Invoice;
  * the total fee, and the fiat amount. This is referenced as "Network Cost" on an invoice,
  * see this support article for more information.
  *
- * @see <a href="https://bitpay.com/api/#rest-api-resources-invoices-resource">REST API Invoices</a>
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 class MinerFees
 {
-    protected $_btc;
-    protected $_bch;
-    protected $_eth;
-    protected $_usdc;
-    protected $_gusd;
-    protected $_pax;
-    protected $_busd;
-    protected $_xrp;
-    protected $_doge;
-    protected $_ltc;
+    protected MinerFeesItem $btc;
+    protected MinerFeesItem $bch;
+    protected MinerFeesItem $eth;
+    protected MinerFeesItem $usdc;
+    protected MinerFeesItem $gusd;
+    protected MinerFeesItem $pax;
+    protected MinerFeesItem $busd;
+    protected MinerFeesItem $xrp;
+    protected MinerFeesItem $doge;
+    protected MinerFeesItem $ltc;
+    protected MinerFeesItem $dai;
+    protected MinerFeesItem $wbtc;
 
     /**
      * MinerFees constructor.
      */
     public function __construct()
     {
-        $this->_btc = new MinerFeesItem();
-        $this->_bch = new MinerFeesItem();
-        $this->_eth = new MinerFeesItem();
-        $this->_usdc = new MinerFeesItem();
-        $this->_gusd = new MinerFeesItem();
-        $this->_pax = new MinerFeesItem();
-        $this->_busd = new MinerFeesItem();
-        $this->_xrp = new MinerFeesItem();
-        $this->_doge = new MinerFeesItem();
-        $this->_ltc = new MinerFeesItem();
+        $this->btc = new MinerFeesItem();
+        $this->bch = new MinerFeesItem();
+        $this->eth = new MinerFeesItem();
+        $this->usdc = new MinerFeesItem();
+        $this->gusd = new MinerFeesItem();
+        $this->pax = new MinerFeesItem();
+        $this->busd = new MinerFeesItem();
+        $this->xrp = new MinerFeesItem();
+        $this->doge = new MinerFeesItem();
+        $this->ltc = new MinerFeesItem();
+        $this->dai = new MinerFeesItem();
+        $this->wbtc = new MinerFeesItem();
     }
 
     /**
@@ -50,9 +60,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getBTC()
+    public function getBTC(): MinerFeesItem
     {
-        return $this->_btc;
+        return $this->btc;
     }
 
     /**
@@ -60,9 +70,9 @@ class MinerFees
      *
      * @param MinerFeesItem $btc the BTC
      */
-    public function setBTC(MinerFeesItem $btc)
+    public function setBTC(MinerFeesItem $btc): void
     {
-        $this->_btc = $btc;
+        $this->btc = $btc;
     }
 
     /**
@@ -70,9 +80,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getBCH()
+    public function getBCH(): MinerFeesItem
     {
-        return $this->_bch;
+        return $this->bch;
     }
 
     /**
@@ -80,9 +90,9 @@ class MinerFees
      *
      * @param MinerFeesItem $bch the BCH
      */
-    public function setBCH(MinerFeesItem $bch)
+    public function setBCH(MinerFeesItem $bch): void
     {
-        $this->_bch = $bch;
+        $this->bch = $bch;
     }
 
     /**
@@ -90,9 +100,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getETH()
+    public function getETH(): MinerFeesItem
     {
-        return $this->_eth;
+        return $this->eth;
     }
 
     /**
@@ -100,9 +110,9 @@ class MinerFees
      *
      * @param MinerFeesItem $eth the ETH
      */
-    public function setETH(MinerFeesItem $eth)
+    public function setETH(MinerFeesItem $eth): void
     {
-        $this->_eth = $eth;
+        $this->eth = $eth;
     }
 
     /**
@@ -110,9 +120,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getUSDC()
+    public function getUSDC(): MinerFeesItem
     {
-        return $this->_usdc;
+        return $this->usdc;
     }
 
     /**
@@ -120,9 +130,9 @@ class MinerFees
      *
      * @param MinerFeesItem $usdc the USDC
      */
-    public function setUSDC(MinerFeesItem $usdc)
+    public function setUSDC(MinerFeesItem $usdc): void
     {
-        $this->_usdc = $usdc;
+        $this->usdc = $usdc;
     }
 
     /**
@@ -130,9 +140,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getGUSD()
+    public function getGUSD(): MinerFeesItem
     {
-        return $this->_gusd;
+        return $this->gusd;
     }
 
     /**
@@ -140,9 +150,9 @@ class MinerFees
      *
      * @param MinerFeesItem $gusd the GUSD
      */
-    public function setGUSD(MinerFeesItem $gusd)
+    public function setGUSD(MinerFeesItem $gusd): void
     {
-        $this->_gusd = $gusd;
+        $this->gusd = $gusd;
     }
 
     /**
@@ -150,9 +160,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getPAX()
+    public function getPAX(): MinerFeesItem
     {
-        return $this->_pax;
+        return $this->pax;
     }
 
     /**
@@ -160,9 +170,9 @@ class MinerFees
      *
      * @param MinerFeesItem $pax the PAX
      */
-    public function setPAX(MinerFeesItem $pax)
+    public function setPAX(MinerFeesItem $pax): void
     {
-        $this->_pax = $pax;
+        $this->pax = $pax;
     }
 
     /**
@@ -170,9 +180,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getBUSD()
+    public function getBUSD(): MinerFeesItem
     {
-        return $this->_busd;
+        return $this->busd;
     }
 
     /**
@@ -180,9 +190,9 @@ class MinerFees
      *
      * @param MinerFeesItem $busd the BUSD
      */
-    public function setBUSD(MinerFeesItem $busd)
+    public function setBUSD(MinerFeesItem $busd): void
     {
-        $this->_busd = $busd;
+        $this->busd = $busd;
     }
 
     /**
@@ -190,9 +200,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getXRP()
+    public function getXRP(): MinerFeesItem
     {
-        return $this->_xrp;
+        return $this->xrp;
     }
 
     /**
@@ -200,9 +210,9 @@ class MinerFees
      *
      * @param MinerFeesItem $xrp the XRP
      */
-    public function setXRP(MinerFeesItem $xrp)
+    public function setXRP(MinerFeesItem $xrp): void
     {
-        $this->_xrp = $xrp;
+        $this->xrp = $xrp;
     }
 
     /**
@@ -210,9 +220,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getDOGE()
+    public function getDOGE(): MinerFeesItem
     {
-        return $this->_doge;
+        return $this->doge;
     }
 
     /**
@@ -220,9 +230,9 @@ class MinerFees
      *
      * @param MinerFeesItem $doge the DOGE
      */
-    public function setDOGE(MinerFeesItem $doge)
+    public function setDOGE(MinerFeesItem $doge): void
     {
-        $this->_doge = $doge;
+        $this->doge = $doge;
     }
 
     /**
@@ -230,9 +240,9 @@ class MinerFees
      *
      * @return MinerFeesItem
      */
-    public function getLTC()
+    public function getLTC(): MinerFeesItem
     {
-        return $this->_ltc;
+        return $this->ltc;
     }
 
     /**
@@ -240,9 +250,49 @@ class MinerFees
      *
      * @param MinerFeesItem $ltc the LTC
      */
-    public function setLTC(MinerFeesItem $ltc)
+    public function setLTC(MinerFeesItem $ltc): void
     {
-        $this->_ltc = $ltc;
+        $this->ltc = $ltc;
+    }
+
+    /**
+     * Gets DAI.
+     *
+     * @return MinerFeesItem
+     */
+    public function getDAI(): MinerFeesItem
+    {
+        return $this->dai;
+    }
+
+    /**
+     * Sets DAI.
+     *
+     * @param MinerFeesItem $dai
+     */
+    public function setDAI(MinerFeesItem $dai): void
+    {
+        $this->dai = $dai;
+    }
+
+    /**
+     * Gets WBTC.
+     *
+     * @return MinerFeesItem
+     */
+    public function getWBTC(): MinerFeesItem
+    {
+        return $this->wbtc;
+    }
+
+    /**
+     * Sets WBTC.
+     *
+     * @param MinerFeesItem $wbtc
+     */
+    public function setWBTC(MinerFeesItem $wbtc): void
+    {
+        $this->wbtc = $wbtc;
     }
 
     /**
@@ -250,7 +300,7 @@ class MinerFees
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'btc'  => $this->getBTC()->toArray(),
@@ -263,6 +313,8 @@ class MinerFees
             'xrp'  => $this->getXRP()->toArray(),
             'doge' => $this->getDOGE()->toArray(),
             'ltc'  => $this->getLTC()->toArray(),
+            'dai'  => $this->getDAI()->toArray(),
+            'wbtc'  => $this->getWBTC()->toArray(),
         ];
 
         foreach ($elements as $key => $value) {

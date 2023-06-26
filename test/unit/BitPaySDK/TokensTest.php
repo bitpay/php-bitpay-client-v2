@@ -17,9 +17,9 @@ class TokensTest extends TestCase
     public function testLoadFromArray()
     {
         $tokens = Tokens::loadFromArray(['merchant' => 'test1', 'payout' => 'test2']);
-        $this->assertEquals('test1', $tokens->getTokenByFacade(Facade::Merchant));
-        $this->assertEquals('test2', $tokens->getTokenByFacade(Facade::Payout));
-        $this->assertEquals('test2', $tokens->getPayoutToken());
+        self::assertEquals('test1', $tokens->getTokenByFacade(Facade::MERCHANT));
+        self::assertEquals('test2', $tokens->getTokenByFacade(Facade::PAYOUT));
+        self::assertEquals('test2', $tokens->getPayoutToken());
     }
 
     public function testGetTokenByFacadeException()
@@ -36,13 +36,13 @@ class TokensTest extends TestCase
      */
     public function testGetTokenByFacade()
     {
-        $instance = new Tokens(Facade::Merchant, Facade::Payout);
-        $this->assertEquals(
+        $instance = new Tokens(Facade::MERCHANT, Facade::PAYOUT);
+        self::assertEquals(
             $this->accessProtected($instance, 'merchant'),
-            $instance->getTokenByFacade(Facade::Merchant)
+            $instance->getTokenByFacade(Facade::MERCHANT)
         );
 
-        $this->assertEquals($instance->getPayoutToken(), $instance->getTokenByFacade(Facade::Payout));
+        self::assertEquals($instance->getPayoutToken(), $instance->getTokenByFacade(Facade::PAYOUT));
     }
 
     /**

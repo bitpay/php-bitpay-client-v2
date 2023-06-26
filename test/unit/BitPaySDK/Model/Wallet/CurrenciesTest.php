@@ -1,6 +1,6 @@
 <?php
 
-namespace BitPaySDK\Test;
+namespace BitPaySDK\Test\Model\Wallet;
 
 use BitPaySDK\Model\Wallet\Currencies;
 use BitPaySDK\Model\Wallet\CurrencyQr;
@@ -11,7 +11,7 @@ class CurrenciesTest extends TestCase
   public function testInstanceOf()
   {
     $currencies = $this->createClassObject();
-    $this->assertInstanceOf(Currencies::class, $currencies);
+    self::assertInstanceOf(Currencies::class, $currencies);
   }
 
   public function testGetCode()
@@ -20,25 +20,21 @@ class CurrenciesTest extends TestCase
 
     $currencies = $this->createClassObject();
     $currencies->setCode($expectedCode);
-    $this->assertEquals($expectedCode, $currencies->getCode());
+    self::assertEquals($expectedCode, $currencies->getCode());
   }
 
   public function testGetP2p()
   {
-    $expectedP2p = true;
-
     $currencies = $this->createClassObject();
-    $currencies->setP2p($expectedP2p);
-    $this->assertEquals($expectedP2p, $currencies->getP2p());
+    $currencies->setP2p(true);
+    self::assertTrue($currencies->getP2p());
   }
 
   public function testGetDappBrowser()
   {
-    $expectedDappBrowser = true;
-
-    $currencies = $this->createClassObject();
-    $currencies->setDappBrowser($expectedDappBrowser);
-    $this->assertEquals($expectedDappBrowser, $currencies->getDappBrowser());
+     $currencies = $this->createClassObject();
+    $currencies->setDappBrowser(true);
+    self::assertTrue($currencies->getDappBrowser());
   }
 
   public function testGetImage()
@@ -46,17 +42,15 @@ class CurrenciesTest extends TestCase
     $expectedImage = 'https://bitpay.com/api/images/logo-6fa5404d.svg';
 
     $currencies = $this->createClassObject();
-    $currencies->setImage($expectedImage, $currencies->getImage());
-    $this->assertEquals($expectedImage, $currencies->getImage());
+    $currencies->setImage($expectedImage);
+    self::assertEquals($expectedImage, $currencies->getImage());
   }
 
   public function testGetPayPro()
   {
-    $expectedPayPro = true;
-
     $currencies = $this->createClassObject();
-    $currencies->setPayPro($expectedPayPro);
-    $this->assertEquals($expectedPayPro, $currencies->getPayPro());
+    $currencies->setPayPro(true);
+    self::assertTrue($currencies->getPayPro());
   }
 
   public function testGetQr()
@@ -68,7 +62,7 @@ class CurrenciesTest extends TestCase
     $currencies = $this->createClassObject();
     $currencies->setQr($expectedCurrencyQr);
 
-    $this->assertEquals($expectedCurrencyQr, $currencies->getQr());
+    self::assertEquals($expectedCurrencyQr, $currencies->getQr());
   }
 
   public function testGetWithdrawalFee()
@@ -77,16 +71,14 @@ class CurrenciesTest extends TestCase
 
     $currencies = $this->createClassObject();
     $currencies->setWithdrawalFee($expectedWithdrawalFee);
-    $this->assertEquals($expectedWithdrawalFee, $currencies->getWithdrawalFee());
+    self::assertEquals($expectedWithdrawalFee, $currencies->getWithdrawalFee());
   }
 
   public function testGetWalletConnect()
   {
-    $expectedWalletConnect = true;
-
     $currencies = $this->createClassObject();
-    $currencies->setWalletConnect($expectedWalletConnect);
-    $this->assertEquals($expectedWalletConnect, $currencies->getWalletConnect());
+    $currencies->setWalletConnect(true);
+    self::assertTrue($currencies->getWalletConnect());
   }
 
   public function testToArray()
@@ -95,30 +87,30 @@ class CurrenciesTest extends TestCase
     $this->objectSetters($currencies);
     $currenciesArray = $currencies->toArray();
 
-    $this->assertNotNull($currenciesArray);
-    $this->assertIsArray($currenciesArray);
+    self::assertNotNull($currenciesArray);
+    self::assertIsArray($currenciesArray);
 
-    $this->assertArrayHasKey('code', $currenciesArray);
-    $this->assertArrayHasKey('p2p', $currenciesArray);
-    $this->assertArrayHasKey('dappBrowser', $currenciesArray);
-    $this->assertArrayHasKey('image', $currenciesArray);
-    $this->assertArrayHasKey('paypro', $currenciesArray);
-    $this->assertArrayHasKey('qr', $currenciesArray);
-    $this->assertArrayHasKey('withdrawalFee', $currenciesArray);
-    $this->assertArrayHasKey('walletConnect', $currenciesArray);
+    self::assertArrayHasKey('code', $currenciesArray);
+    self::assertArrayHasKey('p2p', $currenciesArray);
+    self::assertArrayHasKey('dappBrowser', $currenciesArray);
+    self::assertArrayHasKey('image', $currenciesArray);
+    self::assertArrayHasKey('paypro', $currenciesArray);
+    self::assertArrayHasKey('qr', $currenciesArray);
+    self::assertArrayHasKey('withdrawalFee', $currenciesArray);
+    self::assertArrayHasKey('walletConnect', $currenciesArray);
 
-    $this->assertEquals($currenciesArray['code'], 'BTH');
-    $this->assertEquals($currenciesArray['p2p'], true);
-    $this->assertEquals($currenciesArray['dappBrowser'], true);
-    $this->assertEquals($currenciesArray['image'], 'https://bitpay.com/api/images/logo-6fa5404d.svg');
-    $this->assertEquals($currenciesArray['paypro'], true);
-    $this->assertEquals($currenciesArray['qr']['type'], 'BIP21');
-    $this->assertEquals($currenciesArray['qr']['collapsed'], false);
-    $this->assertEquals($currenciesArray['withdrawalFee'], '1.23');
-    $this->assertEquals($currenciesArray['walletConnect'], true);
+    self::assertEquals('BTH', $currenciesArray['code']);
+    self::assertEquals(true, $currenciesArray['p2p']);
+    self::assertEquals(true, $currenciesArray['dappBrowser']);
+    self::assertEquals('https://bitpay.com/api/images/logo-6fa5404d.svg', $currenciesArray['image']);
+    self::assertEquals(true, $currenciesArray['paypro']);
+    self::assertEquals('BIP21', $currenciesArray['qr']['type']);
+    self::assertEquals(false, $currenciesArray['qr']['collapsed']);
+    self::assertEquals('1.23', $currenciesArray['withdrawalFee']);
+    self::assertEquals(true, $currenciesArray['walletConnect']);
   }
 
-  private function createClassObject()
+  private function createClassObject(): Currencies
   {
     return new Currencies();
   }

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright (c) 2019 BitPay
+ **/
+declare(strict_types=1);
 
 namespace BitPaySDK\Test\Exceptions;
 
@@ -12,20 +16,20 @@ class BillUpdateExceptionTest extends TestCase
   {
     $exception = $this->createClassObject();
     
-    $this->assertEquals('000000', $exception->getApiCode());
+    self::assertEquals('000000', $exception->getApiCode());
   }
 
   public function testInstanceOf()
   {
     $exception = $this->createClassObject();
-    $this->assertInstanceOf(BillUpdateException::class, $exception);
+    self::assertInstanceOf(BillUpdateException::class, $exception);
   }
 
   public function testDefaultMessage()
   {
     $exception = $this->createClassObject();
     
-    $this->assertEquals(
+    self::assertEquals(
       'BITPAY-BILL-UPDATE: Failed to update bill-> ',
       $exception->getMessage()
     );
@@ -35,7 +39,7 @@ class BillUpdateExceptionTest extends TestCase
   {
     $exception = $this->createClassObject();
     
-    $this->assertEquals(114, $exception->getCode());
+    self::assertEquals(114, $exception->getCode());
   }
 
   public function testGetApiCode()
@@ -47,7 +51,7 @@ class BillUpdateExceptionTest extends TestCase
       'CUSTOM-API-CODE'
     );
 
-    $this->assertEquals('CUSTOM-API-CODE', $exception->getApiCode());
+    self::assertEquals('CUSTOM-API-CODE', $exception->getApiCode());
   }
 
   private function createClassObject()

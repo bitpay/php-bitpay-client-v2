@@ -10,7 +10,7 @@ class ShopperTest extends TestCase
     public function testInstanceOf()
     {
         $shopper = $this->createClassObject();
-        $this->assertInstanceOf(Shopper::class, $shopper);
+        self::assertInstanceOf(Shopper::class, $shopper);
     }
 
     public function testGetUser()
@@ -19,7 +19,7 @@ class ShopperTest extends TestCase
 
         $shopper = $this->createClassObject();
         $shopper->setUser($expectedUser);
-        $this->assertEquals($expectedUser, $shopper->getUser());
+        self::assertEquals($expectedUser, $shopper->getUser());
     }
 
     public function testToArray()
@@ -28,21 +28,21 @@ class ShopperTest extends TestCase
         $shopper->setUser('Test user');
         $shopperArray = $shopper->toArray();
 
-        $this->assertNotNull($shopperArray);
-        $this->assertIsArray($shopperArray);
+        self::assertNotNull($shopperArray);
+        self::assertIsArray($shopperArray);
 
-        $this->assertArrayHasKey('user', $shopperArray);
-        $this->assertEquals($shopperArray['user'], 'Test user');
+        self::assertArrayHasKey('user', $shopperArray);
+        self::assertEquals('Test user', $shopperArray['user']);
     }
 
     public function testToArrayEmptyUser()
     {
         $shopper = $this->createClassObject();
         $shopperArray = $shopper->toArray();
-        $this->assertArrayNotHasKey('user', $shopperArray);
+        self::assertArrayNotHasKey('user', $shopperArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Shopper
     {
         return new Shopper();
     }

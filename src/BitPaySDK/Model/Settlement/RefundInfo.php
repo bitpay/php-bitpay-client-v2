@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -8,15 +14,15 @@
 namespace BitPaySDK\Model\Settlement;
 
 /**
- * Object containing information about the refund
+ * Object containing information about the refund.
+ * @see <a href="https://bitpay.readme.io/reference/settlements">Settlements</a>
  */
 class RefundInfo
 {
-    protected $_supportRequest;
-    protected $_currency;
-    protected $_amounts;
-    protected $_reference;
-    protected $_refundRequestEid;
+    protected ?string $supportRequest = null;
+    protected ?string $currency = null;
+    protected ?array $amounts = null;
+    protected ?string $refundRequestEid = null;
 
     public function __construct()
     {
@@ -27,11 +33,11 @@ class RefundInfo
      *
      * BitPay support request ID associated to the refund
      *
-     * @return string the support request
+     * @return string|null the support request
      */
-    public function getSupportRequest()
+    public function getSupportRequest(): ?string
     {
-        return $this->_supportRequest;
+        return $this->supportRequest;
     }
 
     /**
@@ -41,9 +47,9 @@ class RefundInfo
      *
      * @param string $supportRequest the support request
      */
-    public function setSupportRequest(string $supportRequest)
+    public function setSupportRequest(string $supportRequest): void
     {
-        $this->_supportRequest = $supportRequest;
+        $this->supportRequest = $supportRequest;
     }
 
     /**
@@ -52,11 +58,11 @@ class RefundInfo
      * ISO 4217 3-character currency code. This is the currency associated with the settlement.
      * Supported settlement currencies are listed on <a href="https://bitpay.com/docs/settlement">Settlement Docs</a>
      *
-     * @return string
+     * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -67,9 +73,9 @@ class RefundInfo
      *
      * @param string $currency the currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -77,41 +83,21 @@ class RefundInfo
      *
      * This object will contain the crypto currency amount refunded by BitPay to the consumer
      *
-     * @return array
+     * @return array|null
      */
-    public function getAmounts()
+    public function getAmounts(): ?array
     {
-        return $this->_amounts;
+        return $this->amounts;
     }
 
     /**
      * Sets amounts.
      *
-     * @param array $amounts the amounts
+     * @param array $amounts
      */
-    public function setAmounts(array $amounts)
+    public function setAmounts(array $amounts): void
     {
-        $this->_amounts = $amounts;
-    }
-
-    /**
-     * Gets reference.
-     *
-     * @return string
-     */
-    public function getReference()
-    {
-        return $this->_reference;
-    }
-
-    /**
-     * Sets reference.
-     *
-     * @param string $reference the reference
-     */
-    public function setReference(string $reference)
-    {
-        $this->_reference = $reference;
+        $this->amounts = $amounts;
     }
 
     /**
@@ -121,7 +107,7 @@ class RefundInfo
      */
     public function getRefundRequestEid(): ?string
     {
-        return $this->_refundRequestEid;
+        return $this->refundRequestEid;
     }
 
     /**
@@ -131,7 +117,7 @@ class RefundInfo
      */
     public function setRefundRequestEid(?string $refundRequestEid): void
     {
-        $this->_refundRequestEid = $refundRequestEid;
+        $this->refundRequestEid = $refundRequestEid;
     }
 
     /**
@@ -142,10 +128,9 @@ class RefundInfo
     public function toArray(): array
     {
         return [
-            'supportRequest'   => $this->getSupportRequest(),
-            'currency'         => $this->getCurrency(),
-            'amounts'          => $this->getAmounts(),
-            'reference'        => $this->getReference(),
+            'supportRequest' => $this->getSupportRequest(),
+            'currency' => $this->getCurrency(),
+            'amounts' => $this->getAmounts(),
             'refundRequestEid' => $this->getRefundRequestEid()
         ];
     }

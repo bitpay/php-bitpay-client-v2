@@ -12,12 +12,13 @@
   ],
   "homepage": "https://github.com/bitpay/php-bitpay-client-v2",
   "require": {
-    "bitpay/key-utils": "^1.1",
-    "php": "^7.4 || ^8.0 || ^8.1",
-    "guzzlehttp/guzzle": "^7.0",
+    "php": "^8.0 || ^8.1 || ^8.2",
     "ext-json": "*",
     "ext-reflection": "*",
-    "symfony/yaml": "^3.0 || ^4.3 || ^5.0 || ^6.0"
+    "bitpay/key-utils": "^1.1",
+    "guzzlehttp/guzzle": "^7.0",
+    "symfony/yaml": "^5.4 || ^6.0 || ^6.1 || ^6.2",
+    "netresearch/jsonmapper": "^4.1"
   },
   "authors": [
     {
@@ -28,6 +29,11 @@
   "require-dev": {
     "phpunit/phpunit": "^7.5 || ^9.0"
   },
+  "scripts": {
+    "setup": [
+      "php setup/ConfigGenerator.php"
+    ]
+  },
   "autoload": {
     "psr-4": {
       "BitPaySDK\\": "src/BitPaySDK"
@@ -35,7 +41,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "BitPaySDK\\Test\\": "test/unit/BitPaySDK"
+      "BitPaySDK\\Test\\": "test/unit/BitPaySDK",
+      "BitPaySDK\\Functional\\": "test/functional/BitPaySDK"
     }
   }
 }

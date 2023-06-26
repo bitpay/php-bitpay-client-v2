@@ -1,34 +1,43 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 
 namespace BitPaySDK\Model\Settlement;
 
+use BitPaySDK\Exceptions\SettlementException;
+
 /**
- * Settlement data object
+ * Settlement data object.
+ * @see <a href="https://bitpay.readme.io/reference/settlements">Settlements</a>
  */
 class Settlement
 {
-    protected $_id;
-    protected $_accountId;
-    protected $_currency;
-    protected $_payoutInfo;
-    protected $_status;
-    protected $_dateCreated;
-    protected $_dateExecuted;
-    protected $_dateCompleted;
-    protected $_openingDate;
-    protected $_closingDate;
-    protected $_openingBalance;
-    protected $_ledgerEntriesSum;
-    protected $_withHoldings;
-    protected $_withHoldingsSum;
-    protected $_totalAmount;
-    protected $_ledgerEntries;
-    protected $_token;
+    protected ?string $id = null;
+    protected ?string $accountId = null;
+    protected ?string $currency = null;
+    protected ?PayoutInfo $payoutInfo = null;
+    protected ?string $status = null;
+    protected ?string $dateCreated = null;
+    protected ?string $dateExecuted = null;
+    protected ?string $dateCompleted = null;
+    protected ?string $openingDate = null;
+    protected ?string $closingDate = null;
+    protected ?float $openingBalance = null;
+    protected ?float $ledgerEntriesSum = null;
+    protected array $withHoldings = [];
+    protected ?float $withHoldingsSum = null;
+    protected ?float $totalAmount = null;
+    protected array $ledgerEntries = [];
+    protected ?string $token = null;
 
     public function __construct()
     {
@@ -39,11 +48,11 @@ class Settlement
      *
      * String identifying the settlement; this id will also be in the description of the corresponding bank settlement.
      *
-     * @return string
+     * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -51,11 +60,11 @@ class Settlement
      *
      * String identifying the settlement; this id will also be in the description of the corresponding bank settlement.
      *
-     * @param string $id String identifying the settlement
+     * @param string $id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -63,11 +72,11 @@ class Settlement
      *
      * String identifying the BitPay merchant. For internal use, this field can be ignored in merchant implementations.
      *
-     * @return string
+     * @return string|null
      */
-    public function getAccountId()
+    public function getAccountId(): ?string
     {
-        return $this->_accountId;
+        return $this->accountId;
     }
 
     /**
@@ -75,11 +84,11 @@ class Settlement
      *
      * String identifying the BitPay merchant. For internal use, this field can be ignored in merchant implementations.
      *
-     * @param string $accountId String identifying the BitPay merchant
+     * @param string $accountId
      */
-    public function setAccountId(string $accountId)
+    public function setAccountId(string $accountId): void
     {
-        $this->_accountId = $accountId;
+        $this->accountId = $accountId;
     }
 
     /**
@@ -88,11 +97,11 @@ class Settlement
      * ISO 4217 3-character currency code. This is the currency associated with the settlement.
      * Supported settlement currencies are listed on https://bitpay.com/docs/settlement
      *
-     * @return string
+     * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -101,51 +110,51 @@ class Settlement
      * ISO 4217 3-character currency code. This is the currency associated with the settlement.
      * Supported settlement currencies are listed on https://bitpay.com/docs/settlement
      *
-     * @param string $currency 3-character currency code
+     * @param string $currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
      * Gets Object containing the settlement info provided by the Merchant in his BitPay account settings
      *
-     * @return PayoutInfo
+     * @return PayoutInfo|null
      */
-    public function getPayoutInfo()
+    public function getPayoutInfo(): ?PayoutInfo
     {
-        return $this->_payoutInfo;
+        return $this->payoutInfo;
     }
 
     /**
      * Sets Object containing the settlement info provided by the Merchant in his BitPay account settings
      *
-     * @param PayoutInfo $payoutInfo Object containing the settlement info provided by the Merchant
+     * @param PayoutInfo $payoutInfo
      */
-    public function setPayoutInfo(PayoutInfo $payoutInfo)
+    public function setPayoutInfo(PayoutInfo $payoutInfo): void
     {
-        $this->_payoutInfo = $payoutInfo;
+        $this->payoutInfo = $payoutInfo;
     }
 
     /**
      * Gets Status of the settlement. Possible statuses are "new", "processing", "rejected" and "completed".
      *
-     * @return string
+     * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
      * Sets Status of the settlement. Possible statuses are "new", "processing", "rejected" and "completed".
      *
-     * @param string $status Status of the settlement
+     * @param string $status
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -153,11 +162,11 @@ class Settlement
      *
      * Timestamp when the settlement was created. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @return string
+     * @return string|null
      */
-    public function getDateCreated()
+    public function getDateCreated(): ?string
     {
-        return $this->_dateCreated;
+        return $this->dateCreated;
     }
 
     /**
@@ -165,11 +174,11 @@ class Settlement
      *
      * Timestamp when the settlement was created. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $dateCreated timestamp when the settlement was created
+     * @param string $dateCreated
      */
-    public function setDateCreated(string $dateCreated)
+    public function setDateCreated(string $dateCreated): void
     {
-        $this->_dateCreated = $dateCreated;
+        $this->dateCreated = $dateCreated;
     }
 
     /**
@@ -177,11 +186,11 @@ class Settlement
      *
      * Timestamp when the settlement was executed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @return string
+     * @return string|null
      */
-    public function getDateExecuted()
+    public function getDateExecuted(): ?string
     {
-        return $this->_dateExecuted;
+        return $this->dateExecuted;
     }
 
     /**
@@ -189,11 +198,11 @@ class Settlement
      *
      * Timestamp when the settlement was executed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $dateExecuted timestamp when the settlement was executed
+     * @param string $dateExecuted
      */
-    public function setDateExecuted(string $dateExecuted)
+    public function setDateExecuted(string $dateExecuted): void
     {
-        $this->_dateExecuted = $dateExecuted;
+        $this->dateExecuted = $dateExecuted;
     }
 
     /**
@@ -201,11 +210,11 @@ class Settlement
      *
      * Timestamp when the settlement was completed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @return string
+     * @return string|null
      */
-    public function getDateCompleted()
+    public function getDateCompleted(): ?string
     {
-        return $this->_dateCompleted;
+        return $this->dateCompleted;
     }
 
     /**
@@ -213,11 +222,11 @@ class Settlement
      *
      * Timestamp when the settlement was completed. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $dateCompleted timestamp when the settlement was completed
+     * @param string $dateCompleted
      */
-    public function setDateCompleted(string $dateCompleted)
+    public function setDateCompleted(string $dateCompleted): void
     {
-        $this->_dateCompleted = $dateCompleted;
+        $this->dateCompleted = $dateCompleted;
     }
 
     /**
@@ -227,11 +236,11 @@ class Settlement
      * For the first settlement of an account the value will be the BitPay merchant account creation date.
      * UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @return string
+     * @return string|null
      */
-    public function getOpeningDate()
+    public function getOpeningDate(): ?string
     {
-        return $this->_openingDate;
+        return $this->openingDate;
     }
 
     /**
@@ -241,11 +250,11 @@ class Settlement
      * For the first settlement of an account the value will be the BitPay merchant account creation date.
      * UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $openingDate corresponds to the closingDate of the previous settlement executed
+     * @param string $openingDate
      */
-    public function setOpeningDate(string $openingDate)
+    public function setOpeningDate(string $openingDate): void
     {
-        $this->_openingDate = $openingDate;
+        $this->openingDate = $openingDate;
     }
 
     /**
@@ -253,11 +262,11 @@ class Settlement
      *
      * Date & time for last ledger entry used for the settlement. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @return string
+     * @return string|null
      */
-    public function getClosingDate()
+    public function getClosingDate(): ?string
     {
-        return $this->_closingDate;
+        return $this->closingDate;
     }
 
     /**
@@ -265,31 +274,31 @@ class Settlement
      *
      * Date & time for last ledger entry used for the settlement. UTC date, ISO-8601 format yyyy-mm-ddThh:mm:ssZ
      *
-     * @param string $closingDate Date & time for last ledger entry used for the settlement
+     * @param string $closingDate
      */
-    public function setClosingDate(string $closingDate)
+    public function setClosingDate(string $closingDate): void
     {
-        $this->_closingDate = $closingDate;
+        $this->closingDate = $closingDate;
     }
 
     /**
      * Gets Balance of the ledger at the openingDate
      *
-     * @return float
+     * @return float|null
      */
-    public function getOpeningBalance()
+    public function getOpeningBalance(): ?float
     {
-        return $this->_openingBalance;
+        return $this->openingBalance;
     }
 
     /**
      * Sets Balance of the ledger at the openingDate
      *
-     * @param float $openingBalance Balance of the ledger at the openingDate
+     * @param float $openingBalance
      */
-    public function setOpeningBalance(float $openingBalance)
+    public function setOpeningBalance(float $openingBalance): void
     {
-        $this->_openingBalance = $openingBalance;
+        $this->openingBalance = $openingBalance;
     }
 
     /**
@@ -298,11 +307,11 @@ class Settlement
      * Sum of all ledger entries in the settlement, this means all the debits & credits
      * which happened between openingDate and closingDate
      *
-     * @return mixed
+     * @return float|null
      */
-    public function getLedgerEntriesSum()
+    public function getLedgerEntriesSum(): ?float
     {
-        return $this->_ledgerEntriesSum;
+        return $this->ledgerEntriesSum;
     }
 
     /**
@@ -311,11 +320,11 @@ class Settlement
      * Sum of all ledger entries in the settlement, this means all the debits & credits
      * which happened between openingDate and closingDate
      *
-     * @param float $ledgerEntriesSum Sum of all ledger entries in the settlement
+     * @param float $ledgerEntriesSum
      */
-    public function setLedgerEntriesSum(float $ledgerEntriesSum)
+    public function setLedgerEntriesSum(float $ledgerEntriesSum): void
     {
-        $this->_ledgerEntriesSum = $ledgerEntriesSum;
+        $this->ledgerEntriesSum = $ledgerEntriesSum;
     }
 
     /**
@@ -324,21 +333,11 @@ class Settlement
      * Array of withholdings. Withholdings are kept on the ledger to be used later and thus withheld
      * from this settlement. Each withholding is a JSON object containing a code, amount and description field.
      *
-     * @return array
+     * @return WithHoldings[]
      */
-    public function getWithHoldings()
+    public function getWithHoldings(): array
     {
-        $withHoldings = [];
-
-        foreach ($this->_withHoldings as $withHolding) {
-            if ($withHolding instanceof WithHoldings) {
-                array_push($withHoldings, $withHolding->toArray());
-            } else {
-                array_push($withHoldings, $withHolding);
-            }
-        }
-
-        return $withHoldings;
+        return $this->withHoldings;
     }
 
     /**
@@ -347,31 +346,38 @@ class Settlement
      * Array of withholdings. Withholdings are kept on the ledger to be used later and thus withheld
      * from this settlement. Each withholding is a JSON object containing a code, amount and description field.
      *
-     * @param array $withHoldings array of withholdings
+     * @param WithHoldings[] $withHoldings
+     * @throws SettlementException
      */
-    public function setWithHoldings(array $withHoldings)
+    public function setWithHoldings(array $withHoldings): void
     {
-        $this->_withHoldings = $withHoldings;
+        foreach ($withHoldings as $withHolding) {
+            if (!$withHolding instanceof WithHoldings) {
+                throw new SettlementException('Array should contains only WithHoldings objects');
+            }
+        }
+
+        $this->withHoldings = $withHoldings;
     }
 
     /**
      * Gets Sum of all amounts that are withheld from settlement
      *
-     * @return float
+     * @return float|null
      */
-    public function getWithHoldingsSum()
+    public function getWithHoldingsSum(): ?float
     {
-        return $this->_withHoldingsSum;
+        return $this->withHoldingsSum;
     }
 
     /**
      * Sets Sum of all amounts that are withheld from settlement
      *
-     * @param float $withHoldingsSum Sum of all amounts that are withheld from settlement
+     * @param float $withHoldingsSum
      */
-    public function setWithHoldingsSum(float $withHoldingsSum)
+    public function setWithHoldingsSum(float $withHoldingsSum): void
     {
-        $this->_withHoldingsSum = $withHoldingsSum;
+        $this->withHoldingsSum = $withHoldingsSum;
     }
 
     /**
@@ -379,11 +385,11 @@ class Settlement
      *
      * totalAmount = openingBalance + ledgerEntriesSum - withholdingsSum
      *
-     * @return float
+     * @return float|null
      */
-    public function getTotalAmount()
+    public function getTotalAmount(): ?float
     {
-        return $this->_totalAmount;
+        return $this->totalAmount;
     }
 
     /**
@@ -391,11 +397,11 @@ class Settlement
      *
      * totalAmount = openingBalance + ledgerEntriesSum - withholdingsSum
      *
-     * @param float $totalAmount total amount sent to the merchant
+     * @param float $totalAmount
      */
-    public function setTotalAmount(float $totalAmount)
+    public function setTotalAmount(float $totalAmount): void
     {
-        $this->_totalAmount = $totalAmount;
+        $this->totalAmount = $totalAmount;
     }
 
     /**
@@ -404,21 +410,11 @@ class Settlement
      * The total sum of all ledger entries is reported in the field ledgerEntriesSum.
      * A description of all ledger codes can be found
      *
-     * @return array
+     * @return SettlementLedgerEntry[]
      */
-    public function getLedgerEntries()
+    public function getLedgerEntries(): array
     {
-        $ledgerEntries = [];
-
-        foreach ($this->_ledgerEntries as $ledgerEntrie) {
-            if ($ledgerEntrie instanceof SettlementLedgerEntry) {
-                array_push($ledgerEntries, $ledgerEntrie->toArray());
-            } else {
-                array_push($ledgerEntries, $ledgerEntrie);
-            }
-        }
-
-        return $ledgerEntries;
+        return $this->ledgerEntries;
     }
 
     /**
@@ -427,11 +423,17 @@ class Settlement
      * The total sum of all ledger entries is reported in the field ledgerEntriesSum.
      * A description of all ledger codes can be found
      *
-     * @param array $ledgerEntries Array of ledger entries
+     * @param SettlementLedgerEntry[] $ledgerEntries
+     * @throws SettlementException
      */
-    public function setLedgerEntries(array $ledgerEntries)
+    public function setLedgerEntries(array $ledgerEntries): void
     {
-        $this->_ledgerEntries = $ledgerEntries;
+        foreach ($ledgerEntries as $ledgerEntry) {
+            if (!$ledgerEntry instanceof SettlementLedgerEntry) {
+                throw new SettlementException('Array should contains only SettlementLedgerEntry objects');
+            }
+        }
+        $this->ledgerEntries = $ledgerEntries;
     }
 
     /**
@@ -440,11 +442,11 @@ class Settlement
      * This token is actually derived from the merchant facade token used during the query.
      * This token is required to fetch the reconciliation report
      *
-     * @return string
+     * @return string|null
      */
-    public function getToken()
+    public function getToken(): ?string
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -453,11 +455,11 @@ class Settlement
      * This token is actually derived from the merchant facade token used during the query.
      * This token is required to fetch the reconciliation report
      *
-     * @param string $token API token for the corresponding settlement resource
+     * @param string $token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     /**
@@ -465,29 +467,36 @@ class Settlement
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements =
-            [
-                'id'               => $this->getId(),
-                'accountId'        => $this->getAccountId(),
-                'currency'         => $this->getCurrency(),
-                'payoutInfo'       => $this->getPayoutInfo(),
-                'status'           => $this->getStatus(),
-                'dateCreated'      => $this->getDateCreated(),
-                'dateExecuted'     => $this->getDateExecuted(),
-                'dateCompleted'    => $this->getDateCompleted(),
-                'openingDate'      => $this->getOpeningDate(),
-                'closingDate'      => $this->getClosingDate(),
-                'openingBalance'   => $this->getOpeningBalance(),
-                'ledgerEntriesSum' => $this->getLedgerEntriesSum(),
-                'withHoldings'     => $this->getWithHoldings(),
-                'withHoldingsSum'  => $this->getWithHoldingsSum(),
-                'totalAmount'      => $this->getTotalAmount(),
-                'ledgerEntries'    => $this->getLedgerEntries(),
-                'token'            => $this->getToken(),
-            ];
+        $ledgerEntries = [];
+        foreach ($this->getLedgerEntries() as $item) {
+            $ledgerEntries[] = $item->toArray();
+        }
 
-        return $elements;
+        $withHoldings = [];
+        foreach ($this->getWithHoldings() as $withHolding) {
+            $withHoldings[] = $withHolding->toArray();
+        }
+
+        return [
+            'id' => $this->getId(),
+            'accountId' => $this->getAccountId(),
+            'currency' => $this->getCurrency(),
+            'payoutInfo' => $this->getPayoutInfo(),
+            'status' => $this->getStatus(),
+            'dateCreated' => $this->getDateCreated(),
+            'dateExecuted' => $this->getDateExecuted(),
+            'dateCompleted' => $this->getDateCompleted(),
+            'openingDate' => $this->getOpeningDate(),
+            'closingDate' => $this->getClosingDate(),
+            'openingBalance' => $this->getOpeningBalance(),
+            'ledgerEntriesSum' => $this->getLedgerEntriesSum(),
+            'withHoldings' => $withHoldings,
+            'withHoldingsSum' => $this->getWithHoldingsSum(),
+            'totalAmount' => $this->getTotalAmount(),
+            'ledgerEntries' => $ledgerEntries,
+            'token' => $this->getToken(),
+        ];
     }
 }

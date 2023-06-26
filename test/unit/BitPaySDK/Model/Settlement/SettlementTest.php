@@ -4,14 +4,19 @@ namespace BitPaySDK\Test\Model\Settlement;
 
 use BitPaySDK\Model\Settlement\PayoutInfo;
 use BitPaySDK\Model\Settlement\Settlement;
+use BitPaySDK\Model\Settlement\SettlementLedgerEntry;
+use BitPaySDK\Model\Settlement\WithHoldings;
 use PHPUnit\Framework\TestCase;
 
 class SettlementTest extends TestCase
 {
+    private const WITH_HOLDINGS_AMOUNT = 12.34;
+    private const LEDGER_ENTRY_AMOUNT = 42.24;
+
     public function testInstanceOf()
     {
         $settlement = $this->createClassObject();
-        $this->assertInstanceOf(Settlement::class, $settlement);
+        self::assertInstanceOf(Settlement::class, $settlement);
     }
 
     public function testGetId()
@@ -20,7 +25,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setId($expectedId);
-        $this->assertEquals($expectedId, $settlement->getId());
+        self::assertEquals($expectedId, $settlement->getId());
     }
 
     public function testGetAccountId()
@@ -29,7 +34,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setAccountId($expectedAccountId);
-        $this->assertEquals($expectedAccountId, $settlement->getAccountId());
+        self::assertEquals($expectedAccountId, $settlement->getAccountId());
     }
 
     public function testGetCurrency()
@@ -38,7 +43,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setCurrency($expectedCurrency);
-        $this->assertEquals($expectedCurrency, $settlement->getCurrency());
+        self::assertEquals($expectedCurrency, $settlement->getCurrency());
     }
 
     public function testGetPayoutInfo()
@@ -47,7 +52,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setPayoutInfo($expectedPayoutInfo);
-        $this->assertEquals($expectedPayoutInfo, $settlement->getPayoutInfo());
+        self::assertEquals($expectedPayoutInfo, $settlement->getPayoutInfo());
     }
 
     public function testGetStatus()
@@ -56,7 +61,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setStatus($expectedStatus);
-        $this->assertEquals($expectedStatus, $settlement->getStatus());
+        self::assertEquals($expectedStatus, $settlement->getStatus());
     }
 
     public function testGetDateCreated()
@@ -65,7 +70,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setDateCreated($expectedDateCreated);
-        $this->assertEquals($expectedDateCreated, $settlement->getDateCreated());
+        self::assertEquals($expectedDateCreated, $settlement->getDateCreated());
     }
 
     public function testGetDateExecuted()
@@ -74,7 +79,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setDateExecuted($expectedDateExecuted);
-        $this->assertEquals($expectedDateExecuted, $settlement->getDateExecuted());
+        self::assertEquals($expectedDateExecuted, $settlement->getDateExecuted());
     }
 
     public function testGetDateCompleted()
@@ -83,7 +88,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setDateCompleted($expectedDateCompleted);
-        $this->assertEquals($expectedDateCompleted, $settlement->getDateCompleted());
+        self::assertEquals($expectedDateCompleted, $settlement->getDateCompleted());
     }
 
     public function testGetOpeningDate()
@@ -92,7 +97,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setOpeningDate($expectedDateCompleted);
-        $this->assertEquals($expectedDateCompleted, $settlement->getOpeningDate());
+        self::assertEquals($expectedDateCompleted, $settlement->getOpeningDate());
     }
 
     public function testGetClosingDate()
@@ -101,7 +106,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setClosingDate($expectedClosingDate);
-        $this->assertEquals($expectedClosingDate, $settlement->getClosingDate());
+        self::assertEquals($expectedClosingDate, $settlement->getClosingDate());
     }
 
     public function testGetOpeningBalance()
@@ -110,7 +115,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setOpeningBalance($expectedOpeningBalance);
-        $this->assertEquals($expectedOpeningBalance, $settlement->getOpeningBalance());
+        self::assertEquals($expectedOpeningBalance, $settlement->getOpeningBalance());
     }
 
     public function testGetLedgerEntriesSum()
@@ -119,17 +124,17 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setLedgerEntriesSum($expectedLedgerEntriesSum);
-        $this->assertEquals($expectedLedgerEntriesSum, $settlement->getLedgerEntriesSum());
+        self::assertEquals($expectedLedgerEntriesSum, $settlement->getLedgerEntriesSum());
     }
 
     public function testGetWithHoldings()
     {
         $settlement = $this->createClassObject();
-        $arrayWithoutObject = ['test'];
+        $withHolding = new WithHoldings();
 
-        $settlement->setWithHoldings($arrayWithoutObject);
+        $settlement->setWithHoldings([$withHolding]);
 
-        $this->assertEquals($arrayWithoutObject, $settlement->getWithHoldings());
+        self::assertSame([$withHolding], $settlement->getWithHoldings());
     }
 
     public function testGetWithHoldingsSum()
@@ -138,7 +143,7 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setWithHoldingsSum($expectedWithHoldingsSum);
-        $this->assertEquals($expectedWithHoldingsSum, $settlement->getWithHoldingsSum());
+        self::assertEquals($expectedWithHoldingsSum, $settlement->getWithHoldingsSum());
     }
 
     public function testGetTotalAmount()
@@ -147,17 +152,20 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setTotalAmount($expectedTotalAmount);
-        $this->assertEquals($expectedTotalAmount, $settlement->getTotalAmount());
+        self::assertEquals($expectedTotalAmount, $settlement->getTotalAmount());
     }
 
+    /**
+     * @throws \BitPaySDK\Exceptions\SettlementException
+     */
     public function testGetLedgerEntries()
     {
         $settlement = $this->createClassObject();
-        $arrayWithoutObject = ['test'];
+        $ledgerEntry = new SettlementLedgerEntry();
 
-        $settlement->setLedgerEntries($arrayWithoutObject);
+        $settlement->setLedgerEntries([$ledgerEntry]);
 
-        $this->assertEquals($arrayWithoutObject, $settlement->getLedgerEntries());
+        self::assertEquals([$ledgerEntry], $settlement->getLedgerEntries());
     }
 
     public function testGetToken()
@@ -166,62 +174,73 @@ class SettlementTest extends TestCase
 
         $settlement = $this->createClassObject();
         $settlement->setToken($expectedToken);
-        $this->assertEquals($expectedToken, $settlement->getToken());
+        self::assertEquals($expectedToken, $settlement->getToken());
     }
 
+    /**
+     * @throws \BitPaySDK\Exceptions\SettlementException
+     */
     public function testToArray()
     {
         $settlement = $this->createClassObject();
-        $this->setSetters($settlement);
+        $this->prepareSettlementForTests($settlement);
         $settlementArray = $settlement->toArray();
 
-        $this->assertNotNull($settlementArray);
-        $this->assertIsArray($settlementArray);
+        self::assertNotNull($settlementArray);
+        self::assertIsArray($settlementArray);
 
-        $this->assertArrayHasKey('id', $settlementArray);
-        $this->assertArrayHasKey('accountId', $settlementArray);
-        $this->assertArrayHasKey('currency', $settlementArray);
-        $this->assertArrayHasKey('payoutInfo', $settlementArray);
-        $this->assertArrayHasKey('status', $settlementArray);
-        $this->assertArrayHasKey('dateCreated', $settlementArray);
-        $this->assertArrayHasKey('dateExecuted', $settlementArray);
-        $this->assertArrayHasKey('dateCompleted', $settlementArray);
-        $this->assertArrayHasKey('openingDate', $settlementArray);
-        $this->assertArrayHasKey('closingDate', $settlementArray);
-        $this->assertArrayHasKey('openingBalance', $settlementArray);
-        $this->assertArrayHasKey('ledgerEntriesSum', $settlementArray);
-        $this->assertArrayHasKey('withHoldings', $settlementArray);
-        $this->assertArrayHasKey('withHoldingsSum', $settlementArray);
-        $this->assertArrayHasKey('totalAmount', $settlementArray);
-        $this->assertArrayHasKey('ledgerEntries', $settlementArray);
-        $this->assertArrayHasKey('token', $settlementArray);
+        self::assertArrayHasKey('id', $settlementArray);
+        self::assertArrayHasKey('accountId', $settlementArray);
+        self::assertArrayHasKey('currency', $settlementArray);
+        self::assertArrayHasKey('payoutInfo', $settlementArray);
+        self::assertArrayHasKey('status', $settlementArray);
+        self::assertArrayHasKey('dateCreated', $settlementArray);
+        self::assertArrayHasKey('dateExecuted', $settlementArray);
+        self::assertArrayHasKey('dateCompleted', $settlementArray);
+        self::assertArrayHasKey('openingDate', $settlementArray);
+        self::assertArrayHasKey('closingDate', $settlementArray);
+        self::assertArrayHasKey('openingBalance', $settlementArray);
+        self::assertArrayHasKey('ledgerEntriesSum', $settlementArray);
+        self::assertArrayHasKey('withHoldings', $settlementArray);
+        self::assertArrayHasKey('withHoldingsSum', $settlementArray);
+        self::assertArrayHasKey('totalAmount', $settlementArray);
+        self::assertArrayHasKey('ledgerEntries', $settlementArray);
+        self::assertArrayHasKey('token', $settlementArray);
 
-        $this->assertEquals($settlementArray['id'], '11');
-        $this->assertEquals($settlementArray['accountId'], '12');
-        $this->assertEquals($settlementArray['currency'], 'BTC');
-        $this->assertEquals($settlementArray['payoutInfo'], new PayoutInfo());
-        $this->assertEquals($settlementArray['status'], 'pending');
-        $this->assertEquals($settlementArray['dateCreated'], '2022-01-01');
-        $this->assertEquals($settlementArray['dateExecuted'], '2022-01-01');
-        $this->assertEquals($settlementArray['dateCompleted'], '2022-01-01');
-        $this->assertEquals($settlementArray['openingDate'], '2022-01-01');
-        $this->assertEquals($settlementArray['closingDate'], '2022-01-01');
-        $this->assertEquals($settlementArray['openingBalance'], 15.0);
-        $this->assertEquals($settlementArray['ledgerEntriesSum'], 12.2);
-        $this->assertEquals($settlementArray['withHoldings'], ['test']);
-        $this->assertEquals($settlementArray['withHoldingsSum'], 15);
-        $this->assertEquals($settlementArray['totalAmount'], 30);
-        $this->assertEquals($settlementArray['ledgerEntries'], ['test']);
-        $this->assertEquals($settlementArray['token'], '5u3cc2c7b');
+        self::assertEquals('11', $settlementArray['id']);
+        self::assertEquals('12', $settlementArray['accountId']);
+        self::assertEquals('BTC', $settlementArray['currency']);
+        self::assertEquals($settlementArray['payoutInfo'], new PayoutInfo());
+        self::assertEquals('pending', $settlementArray['status']);
+        self::assertEquals('2022-01-01', $settlementArray['dateCreated']);
+        self::assertEquals('2022-01-01', $settlementArray['dateExecuted']);
+        self::assertEquals('2022-01-01', $settlementArray['dateCompleted']);
+        self::assertEquals('2022-01-01', $settlementArray['openingDate']);
+        self::assertEquals('2022-01-01', $settlementArray['closingDate']);
+        self::assertEquals(15.0, $settlementArray['openingBalance']);
+        self::assertEquals(12.2, $settlementArray['ledgerEntriesSum']);
+        self::assertEquals(self::WITH_HOLDINGS_AMOUNT, $settlementArray['withHoldings'][0]['amount']);
+        self::assertEquals(15, $settlementArray['withHoldingsSum']);
+        self::assertEquals(30, $settlementArray['totalAmount']);
+        self::assertEquals(self::LEDGER_ENTRY_AMOUNT, $settlementArray['ledgerEntries'][0]['amount']);
+        self::assertEquals('5u3cc2c7b', $settlementArray['token']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Settlement
     {
         return new Settlement();
     }
 
-    private function setSetters(Settlement $settlement)
+    /**
+     * @throws \BitPaySDK\Exceptions\SettlementException
+     */
+    private function prepareSettlementForTests(Settlement $settlement)
     {
+        $withHoldings = new WithHoldings();
+        $withHoldings->setAmount(self::WITH_HOLDINGS_AMOUNT);
+        $settlementLedgerEntry = new SettlementLedgerEntry();
+        $settlementLedgerEntry->setAmount(self::LEDGER_ENTRY_AMOUNT);
+
         $settlement->setId('11');
         $settlement->setAccountId('12');
         $settlement->setCurrency('BTC');
@@ -234,10 +253,10 @@ class SettlementTest extends TestCase
         $settlement->setClosingDate('2022-01-01');
         $settlement->setOpeningBalance(15);
         $settlement->setLedgerEntriesSum(12.2);
-        $settlement->setWithHoldings(['test']);
+        $settlement->setWithHoldings([$withHoldings]);
         $settlement->setWithHoldingsSum(15);
         $settlement->setTotalAmount(30.0);
-        $settlement->setLedgerEntries(['test']);
+        $settlement->setLedgerEntries([$settlementLedgerEntry]);
         $settlement->setToken('5u3cc2c7b');
     }
 }

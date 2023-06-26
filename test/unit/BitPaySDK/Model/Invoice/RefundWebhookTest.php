@@ -1,6 +1,6 @@
 <?php
 
-namespace BitPaySDK\Test;
+namespace BitPaySDK\Test\Model\Invoice;
 
 use BitPaySDK\Model\Invoice\RefundWebhook;
 use PHPUnit\Framework\TestCase;
@@ -10,7 +10,7 @@ class RefundWebhookTest extends TestCase
   public function testInstanceOf()
   {
     $refundWebhook = $this->createClassObject();
-    $this->assertInstanceOf(RefundWebhook::class, $refundWebhook);
+    self::assertInstanceOf(RefundWebhook::class, $refundWebhook);
   }
 
   public function testGetId()
@@ -19,7 +19,7 @@ class RefundWebhookTest extends TestCase
 
     $refundWebhook = $this->createClassObject();
     $refundWebhook->setId($expectedId);
-    $this->assertEquals($expectedId, $refundWebhook->getId());
+    self::assertEquals($expectedId, $refundWebhook->getId());
   }
 
   public function testGetInvoice()
@@ -28,7 +28,7 @@ class RefundWebhookTest extends TestCase
 
     $refundWebhook = $this->createClassObject();
     $refundWebhook->setInvoice($expectedInvoice);
-    $this->assertEquals($expectedInvoice, $refundWebhook->getInvoice());
+    self::assertEquals($expectedInvoice, $refundWebhook->getInvoice());
   }
 
   public function testGetSupportRequest()
@@ -37,7 +37,7 @@ class RefundWebhookTest extends TestCase
     
     $refundWebhook = $this->createClassObject();
     $refundWebhook->setSupportRequest($expectedSupportRequest);
-    $this->assertEquals($expectedSupportRequest, $refundWebhook->getSupportRequest());
+    self::assertEquals($expectedSupportRequest, $refundWebhook->getSupportRequest());
   }
 
   public function testGetStatus()
@@ -46,7 +46,7 @@ class RefundWebhookTest extends TestCase
 
     $refundWebhook = $this->createClassObject();
     $refundWebhook->setStatus($expectedStatus);
-    $this->assertEquals($expectedStatus, $refundWebhook->getStatus());
+    self::assertEquals($expectedStatus, $refundWebhook->getStatus());
   }
 
   public function testGetAmount()
@@ -55,7 +55,7 @@ class RefundWebhookTest extends TestCase
 
     $refundWebhook = $this->createClassObject();
     $refundWebhook->setAmount($expectedAmount);
-    $this->assertEquals($expectedAmount, $refundWebhook->getAmount());
+    self::assertEquals($expectedAmount, $refundWebhook->getAmount());
   }
 
   public function testGetCurrency()
@@ -64,7 +64,7 @@ class RefundWebhookTest extends TestCase
 
     $refundWebhook = $this->createClassObject();
     $refundWebhook->setCurrency($expectedCurrency);
-    $this->assertEquals($expectedCurrency, $refundWebhook->getCurrency());
+    self::assertEquals($expectedCurrency, $refundWebhook->getCurrency());
   }
 
   public function testGetLastRefundNotification()
@@ -73,7 +73,7 @@ class RefundWebhookTest extends TestCase
 
     $refundWebhook = $this->createClassObject();
     $refundWebhook->setLastRefundNotification($expectedLastRefundNotification);
-    $this->assertEquals($expectedLastRefundNotification, $refundWebhook->getLastRefundNotification());
+    self::assertEquals($expectedLastRefundNotification, $refundWebhook->getLastRefundNotification());
   }
 
   public function testGetRefundFee()
@@ -82,25 +82,21 @@ class RefundWebhookTest extends TestCase
 
     $refundWebhook = $this->createClassObject();
     $refundWebhook->setRefundFee($expectedRefundFee);
-    $this->assertEquals($expectedRefundFee, $refundWebhook->getRefundFee());
+    self::assertEquals($expectedRefundFee, $refundWebhook->getRefundFee());
   }
 
   public function testImmediate()
   {
-    $expectedImmediate = false;
-
     $refundWebhook = $this->createClassObject();
-    $refundWebhook->setImmediate($expectedImmediate);
-    $this->assertEquals($expectedImmediate, $refundWebhook->getImmediate());
+    $refundWebhook->setImmediate(false);
+    self::assertFalse($refundWebhook->getImmediate());
   }
 
   public function testGetBuyerPaysRefundFee()
   {
-    $expectedBuyerPaysRefundFee = true;
-
     $refundWebhook = $this->createClassObject();
-    $refundWebhook->setBuyerPaysRefundFee($expectedBuyerPaysRefundFee);
-    $this->assertEquals($expectedBuyerPaysRefundFee, $refundWebhook->getBuyerPaysRefundFee());
+    $refundWebhook->setBuyerPaysRefundFee(true);
+    self::assertTrue($refundWebhook->getBuyerPaysRefundFee());
   }
 
   public function testGetRequestDate()
@@ -109,7 +105,7 @@ class RefundWebhookTest extends TestCase
 
     $refundWebhook = $this->createClassObject();
     $refundWebhook->setRequestDate($expectedRequestDate);
-    $this->assertEquals($expectedRequestDate, $refundWebhook->getRequestDate());
+    self::assertEquals($expectedRequestDate, $refundWebhook->getRequestDate());
   }
 
   public function testToArray()
@@ -119,35 +115,35 @@ class RefundWebhookTest extends TestCase
 
     $refundWebhookArray = $refundWebhook->toArray();
 
-    $this->assertNotNull($refundWebhookArray);
-    $this->assertIsArray($refundWebhookArray);
+    self::assertNotNull($refundWebhookArray);
+    self::assertIsArray($refundWebhookArray);
 
-    $this->assertArrayHasKey('id', $refundWebhookArray);
-    $this->assertArrayHasKey('invoice', $refundWebhookArray);
-    $this->assertArrayHasKey('supportRequest', $refundWebhookArray);
-    $this->assertArrayHasKey('status', $refundWebhookArray);
-    $this->assertArrayHasKey('amount', $refundWebhookArray);
-    $this->assertArrayHasKey('currency', $refundWebhookArray);
-    $this->assertArrayHasKey('lastRefundNotification', $refundWebhookArray);
-    $this->assertArrayHasKey('refundFee', $refundWebhookArray);
-    $this->assertArrayHasKey('immediate', $refundWebhookArray);
-    $this->assertArrayHasKey('buyerPaysRefundFee', $refundWebhookArray);
-    $this->assertArrayHasKey('requestDate', $refundWebhookArray);
+    self::assertArrayHasKey('id', $refundWebhookArray);
+    self::assertArrayHasKey('invoice', $refundWebhookArray);
+    self::assertArrayHasKey('supportRequest', $refundWebhookArray);
+    self::assertArrayHasKey('status', $refundWebhookArray);
+    self::assertArrayHasKey('amount', $refundWebhookArray);
+    self::assertArrayHasKey('currency', $refundWebhookArray);
+    self::assertArrayHasKey('lastRefundNotification', $refundWebhookArray);
+    self::assertArrayHasKey('refundFee', $refundWebhookArray);
+    self::assertArrayHasKey('immediate', $refundWebhookArray);
+    self::assertArrayHasKey('buyerPaysRefundFee', $refundWebhookArray);
+    self::assertArrayHasKey('requestDate', $refundWebhookArray);
 
-    $this->assertEquals($refundWebhookArray['id'], 'GZBBLcsgQamua3PN8GX92s');
-    $this->assertEquals($refundWebhookArray['invoice'], 'Wp9cpGphCz7cSeFh6MSYpb');
-    $this->assertEquals($refundWebhookArray['supportRequest'], 'XuuYtZfTw7G99Ws3z38kWZ');
-    $this->assertEquals($refundWebhookArray['status'], 'pending');
-    $this->assertEquals($refundWebhookArray['amount'], 6);
-    $this->assertEquals($refundWebhookArray['currency'], 'USD');
-    $this->assertEquals($refundWebhookArray['lastRefundNotification'], '2022-01-11T16:58:23.967Z');
-    $this->assertEquals($refundWebhookArray['refundFee'], 2.31);
-    $this->assertEquals($refundWebhookArray['immediate'], false);
-    $this->assertEquals($refundWebhookArray['buyerPaysRefundFee'], true);
-    $this->assertEquals($refundWebhookArray['requestDate'], '2022-01-11T16:58:23.000Z');
+    self::assertEquals('GZBBLcsgQamua3PN8GX92s', $refundWebhookArray['id']);
+    self::assertEquals('Wp9cpGphCz7cSeFh6MSYpb', $refundWebhookArray['invoice']);
+    self::assertEquals('XuuYtZfTw7G99Ws3z38kWZ', $refundWebhookArray['supportRequest']);
+    self::assertEquals('pending', $refundWebhookArray['status']);
+    self::assertEquals(6, $refundWebhookArray['amount']);
+    self::assertEquals('USD', $refundWebhookArray['currency']);
+    self::assertEquals('2022-01-11T16:58:23.967Z', $refundWebhookArray['lastRefundNotification']);
+    self::assertEquals(2.31, $refundWebhookArray['refundFee']);
+    self::assertEquals(false, $refundWebhookArray['immediate']);
+    self::assertEquals(true, $refundWebhookArray['buyerPaysRefundFee']);
+    self::assertEquals('2022-01-11T16:58:23.000Z', $refundWebhookArray['requestDate']);
   }
 
-  private function createClassObject()
+  private function createClassObject(): RefundWebhook
   {
     return new RefundWebhook();
   }

@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -9,16 +15,17 @@ namespace BitPaySDK\Model\Invoice;
 
 /**
  * Information collected from the buyer during the process of paying an invoice. Initially this object is empty.
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 class BuyerProvidedInfo
 {
-    protected $_name;
-    protected $_phoneNumber;
-    protected $_selectedWallet;
-    protected $_emailAddress;
-    protected $_selectedTransactionCurrency;
-    protected $_sms;
-    protected $_smsVerified;
+    protected ?string $name = null;
+    protected ?string $phoneNumber = null;
+    protected ?string $selectedWallet = null;
+    protected ?string $emailAddress = null;
+    protected ?string $selectedTransactionCurrency = null;
+    protected ?string $sms = null;
+    protected ?bool $smsVerified = null;
 
     public function __construct()
     {
@@ -29,11 +36,11 @@ class BuyerProvidedInfo
      *
      * Populated with the buyer's name address if passed in the buyer object by the merchant
      *
-     * @return string the name
+     * @return string|null the name
      */
-    public function getName()
+    public function getName(): ?string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -43,9 +50,9 @@ class BuyerProvidedInfo
      *
      * @param string $name the name
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -53,11 +60,11 @@ class BuyerProvidedInfo
      *
      * Populated with the buyer's phone number if passed in the buyer object by the merchant
      *
-     * @return string the phone number
+     * @return string|null the phone number
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): ?string
     {
-        return $this->_phoneNumber;
+        return $this->phoneNumber;
     }
 
     /**
@@ -67,9 +74,9 @@ class BuyerProvidedInfo
      *
      * @param string $phoneNumber the phone number
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber): void
     {
-        $this->_phoneNumber = $phoneNumber;
+        $this->phoneNumber = $phoneNumber;
     }
 
     /**
@@ -79,9 +86,9 @@ class BuyerProvidedInfo
      *
      * @return string|null the selected wallet
      */
-    public function getSelectedWallet()
+    public function getSelectedWallet(): ?string
     {
-        return $this->_selectedWallet;
+        return $this->selectedWallet;
     }
 
     /**
@@ -91,9 +98,9 @@ class BuyerProvidedInfo
      *
      * @param string|null $selectedWallet the selected wallet
      */
-    public function setSelectedWallet(?string $selectedWallet)
+    public function setSelectedWallet(?string $selectedWallet): void
     {
-        $this->_selectedWallet = $selectedWallet;
+        $this->selectedWallet = $selectedWallet;
     }
 
     /**
@@ -102,11 +109,11 @@ class BuyerProvidedInfo
      * Populated with the buyer's email address if passed in the buyer object,
      * otherwise this field is not returned in the response.
      *
-     * @return string the email address
+     * @return string|null the email address
      */
-    public function getEmailAddress()
+    public function getEmailAddress(): ?string
     {
-        return $this->_emailAddress;
+        return $this->emailAddress;
     }
 
     /**
@@ -117,9 +124,9 @@ class BuyerProvidedInfo
      *
      * @param string $emailAddress the email address
      */
-    public function setEmailAddress($emailAddress)
+    public function setEmailAddress(string $emailAddress): void
     {
-        $this->_emailAddress = $emailAddress;
+        $this->emailAddress = $emailAddress;
     }
 
     /**
@@ -129,11 +136,11 @@ class BuyerProvidedInfo
      * current supported values are "BTC", "BCH", "ETH", "GUSD", "PAX", "BUSD", "USDC", "XRP", "DOGE", "DAI" and "WBTC".
      * If not yet selected, this field will not be returned.
      *
-     * @return string the selected transaction currency
+     * @return string|null the selected transaction currency
      */
-    public function getSelectedTransactionCurrency()
+    public function getSelectedTransactionCurrency(): ?string
     {
-        return $this->_selectedTransactionCurrency;
+        return $this->selectedTransactionCurrency;
     }
 
     /**
@@ -145,9 +152,9 @@ class BuyerProvidedInfo
      *
      * @param string $selectedTransactionCurrency the selected transaction currency
      */
-    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency)
+    public function setSelectedTransactionCurrency(string $selectedTransactionCurrency): void
     {
-        $this->_selectedTransactionCurrency = $selectedTransactionCurrency;
+        $this->selectedTransactionCurrency = $selectedTransactionCurrency;
     }
 
     /**
@@ -156,11 +163,11 @@ class BuyerProvidedInfo
      * SMS provided by user for communications. This is only used for instances where a buyers email
      * (primary form of buyer communication) is can not be gathered.
      *
-     * @return string the sms
+     * @return string|null the sms
      */
-    public function getSms()
+    public function getSms(): ?string
     {
-        return $this->_sms;
+        return $this->sms;
     }
 
     /**
@@ -171,29 +178,29 @@ class BuyerProvidedInfo
      *
      * @param string $sms the sms
      */
-    public function setSms(string $sms)
+    public function setSms(string $sms): void
     {
-        $this->_sms = $sms;
+        $this->sms = $sms;
     }
 
     /**
      * Gets verification status of SMS (ie. have they passed the challenge).
      *
-     * @return bool the sms verified
+     * @return bool|null the sms verified
      */
-    public function getSmsVerified()
+    public function getSmsVerified(): ?bool
     {
-        return $this->_smsVerified;
+        return $this->smsVerified;
     }
 
     /**
      * Sets verification status of SMS (ie. have they passed the challenge).
      *
-     * @param bool $smsVerfied the sms verified
+     * @param bool $smsVerified the sms verified
      */
-    public function setSmsVerified(bool $smsVerfied)
+    public function setSmsVerified(bool $smsVerified): void
     {
-        $this->_smsVerified = $smsVerfied;
+        $this->smsVerified = $smsVerified;
     }
 
     /**
@@ -201,7 +208,7 @@ class BuyerProvidedInfo
      *
      * @return array BuyerProvidedInfo as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'name'                        => $this->getName(),

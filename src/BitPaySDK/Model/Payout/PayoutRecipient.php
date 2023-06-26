@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -8,37 +14,33 @@
 namespace BitPaySDK\Model\Payout;
 
 /**
- *
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 class PayoutRecipient
 {
-    protected $_email;
-    protected $_guid;
-    protected $_label;
-    protected $_reference;
-    protected $_notificationURL;
-
-    protected $_account;
-    protected $_status;
-    protected $_id;
-    protected $_shopperId;
-    protected $_token;
-    protected $_supportPhone;
+    protected ?string $email = null;
+    protected ?string $guid = null;
+    protected ?string $label = null;
+    protected ?string $notificationURL = null;
+    protected ?string $status = null;
+    protected ?string $id = null;
+    protected ?string $shopperId = null;
+    protected ?string $token = null;
 
     /**
      * Constructor, create a minimal Recipient object.
      *
-     * @param $email           string Recipient email address to which the invite shall be sent.
-     * @param $label           string Recipient nickname assigned by the merchant (Optional).
-     * @param $notificationURL string URL to which BitPay sends webhook notifications to inform the merchant about the
-     *                         status of a given recipient. HTTPS is mandatory (Optional).
+     * @param string|null $email string Recipient email address to which the invite shall be sent.
+     * @param string|null $label string Recipient nickname assigned by the merchant (Optional).
+     * @param string|null $notificationURL string URL to which BitPay sends webhook notifications to inform
+     *                         the merchant about the status of a given recipient. HTTPS is mandatory (Optional).
      */
     public function __construct(string $email = null, string $label = null, string $notificationURL = null)
     {
-        $this->_email = $email;
-        $this->_label = $label;
-        $this->_notificationURL = $notificationURL;
+        $this->email = $email;
+        $this->label = $label;
+        $this->notificationURL = $notificationURL;
     }
 
     // Required fields
@@ -49,19 +51,19 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
      * Sets email.
      *
-     * @param string|null $email Recipient email address
+     * @param string|null $email
      */
-    public function setEmail(?string $email)
+    public function setEmail(?string $email): void
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     // Optional fields
@@ -72,19 +74,19 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getGuid()
+    public function getGuid(): ?string
     {
-        return $this->_guid;
+        return $this->guid;
     }
 
     /**
      * Sets guid.
      *
-     * @param string $guid the guid
+     * @param string $guid
      */
-    public function setGuid(string $guid)
+    public function setGuid(string $guid): void
     {
-        $this->_guid = $guid;
+        $this->guid = $guid;
     }
 
     /**
@@ -92,39 +94,19 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
      * Sets label.
      *
-     * @param string|null $label could be customer name or unique reference
+     * @param string|null $label
      */
-    public function setLabel(?string $label)
+    public function setLabel(?string $label): void
     {
-        $this->_label = $label;
-    }
-
-    /**
-     * Gets reference.
-     *
-     * @return string|null
-     */
-    public function getReference()
-    {
-        return $this->_reference;
-    }
-
-    /**
-     * Sets reference.
-     *
-     * @param string $reference the reference
-     */
-    public function setReference(string $reference)
-    {
-        $this->_reference = $reference;
+        $this->label = $label;
     }
 
     /**
@@ -132,62 +114,42 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getNotificationURL()
+    public function getNotificationURL(): ?string
     {
-        return $this->_notificationURL;
+        return $this->notificationURL;
     }
 
     /**
      * Sets notification url.
      *
-     * @param string|null $notificationURL URL to which BitPay sends webhook notifications
+     * @param string|null $notificationURL
      */
-    public function setNotificationURL(?string $notificationURL)
+    public function setNotificationURL(?string $notificationURL): void
     {
-        $this->_notificationURL = $notificationURL;
+        $this->notificationURL = $notificationURL;
     }
 
     // Response fields
     //
 
     /**
-     * Gets account.
-     *
-     * @return string|null
-     */
-    public function getAccount()
-    {
-        return $this->_account;
-    }
-
-    /**
-     * Sets account.
-     *
-     * @param string $account the account
-     */
-    public function setAccount(string $account)
-    {
-        $this->_account = $account;
-    }
-
-    /**
      * Gets status.
      *
      * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
      * Sets status.
      *
-     * @param string $status Recipient status
+     * @param string $status
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -195,19 +157,19 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
      * Sets id.
      *
-     * @param string|null $id Unique recipient id
+     * @param string|null $id
      */
-    public function setId(?string $id)
+    public function setId(?string $id): void
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -215,19 +177,19 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getShopperId()
+    public function getShopperId(): ?string
     {
-        return $this->_shopperId;
+        return $this->shopperId;
     }
 
     /**
      * Sets Shopper ID.
      *
-     * @param string|null $shopperId shopper unique id
+     * @param string|null $shopperId
      */
-    public function setShopperId(?string $shopperId)
+    public function setShopperId(?string $shopperId): void
     {
-        $this->_shopperId = $shopperId;
+        $this->shopperId = $shopperId;
     }
 
     /**
@@ -235,39 +197,19 @@ class PayoutRecipient
      *
      * @return string|null
      */
-    public function getToken()
+    public function getToken(): ?string
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
      * Sets token.
      *
-     * @param string $token Approved payout facade token.
+     * @param string $token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
-        $this->_token = $token;
-    }
-
-    /**
-     * Gets support phone.
-     *
-     * @return string|null
-     */
-    public function getSupportPhone()
-    {
-        return $this->_supportPhone;
-    }
-
-    /**
-     * Sets support phone.
-     *
-     * @param string $supportPhone the support phone
-     */
-    public function setSupportPhone(string $supportPhone)
-    {
-        $this->_supportPhone = $supportPhone;
+        $this->token = $token;
     }
 
     /**
@@ -275,20 +217,17 @@ class PayoutRecipient
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
-            'email'           => $this->getEmail(),
-            'guid'            => $this->getGuid(),
-            'label'           => $this->getLabel(),
-            'reference'       => $this->getReference(),
+            'email' => $this->getEmail(),
+            'guid' => $this->getGuid(),
+            'label' => $this->getLabel(),
             'notificationURL' => $this->getNotificationURL(),
-            'account'         => $this->getAccount(),
-            'status'          => $this->getStatus(),
-            'id'              => $this->getId(),
-            'shopperId'       => $this->getShopperId(),
-            'token'           => $this->getToken(),
-            'supportPhone'    => $this->getSupportPhone()
+            'status' => $this->getStatus(),
+            'id' => $this->getId(),
+            'shopperId' => $this->getShopperId(),
+            'token' => $this->getToken(),
         ];
 
         foreach ($elements as $key => $value) {

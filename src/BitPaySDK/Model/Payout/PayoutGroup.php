@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @author BitPay Integrations <integrations@bitpay.com>
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
-
 declare(strict_types=1);
 
 namespace BitPaySDK\Model\Payout;
@@ -16,6 +11,9 @@ class PayoutGroup
      */
     private array $payouts = [];
 
+    /**
+     * @var PayoutGroupFailed[]
+     */
     private array $failed = [];
 
     /**

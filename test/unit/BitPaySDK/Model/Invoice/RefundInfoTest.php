@@ -10,7 +10,7 @@ class RefundInfoTest extends TestCase
     public function testInstanceOf()
     {
         $refundInfo = $this->createClassObject();
-        $this->assertInstanceOf(RefundInfo::class, $refundInfo);
+        self::assertInstanceOf(RefundInfo::class, $refundInfo);
     }
 
     public function testGetSupportRequest()
@@ -19,7 +19,7 @@ class RefundInfoTest extends TestCase
 
         $refundInfo = $this->createClassObject();
         $refundInfo->setSupportRequest($expectedSupportRequest);
-        $this->assertEquals($expectedSupportRequest, $refundInfo->getSupportRequest());
+        self::assertEquals($expectedSupportRequest, $refundInfo->getSupportRequest());
     }
 
     public function testGetCurrency()
@@ -28,7 +28,7 @@ class RefundInfoTest extends TestCase
 
         $refundInfo = $this->createClassObject();
         $refundInfo->setCurrency($expectedCurrency);
-        $this->assertEquals($expectedCurrency, $refundInfo->getCurrency());
+        self::assertEquals($expectedCurrency, $refundInfo->getCurrency());
     }
 
     public function testGetAmounts()
@@ -37,7 +37,7 @@ class RefundInfoTest extends TestCase
 
         $refundInfo = $this->createClassObject();
         $refundInfo->setAmounts($expectedAmount);
-        $this->assertEquals($expectedAmount, $refundInfo->getAmounts());
+        self::assertEquals($expectedAmount, $refundInfo->getAmounts());
     }
 
     public function testToArray()
@@ -46,18 +46,18 @@ class RefundInfoTest extends TestCase
         $this->setSetters($refundInfo);
         $refundInfoArray = $refundInfo->toArray();
 
-        $this->assertNotNull($refundInfoArray);
-        $this->assertIsArray($refundInfoArray);
+        self::assertNotNull($refundInfoArray);
+        self::assertIsArray($refundInfoArray);
 
-        $this->assertArrayHasKey('supportRequest', $refundInfoArray);
-        $this->assertArrayHasKey('currency', $refundInfoArray);
-        $this->assertArrayNotHasKey('amounts', $refundInfoArray);
+        self::assertArrayHasKey('supportRequest', $refundInfoArray);
+        self::assertArrayHasKey('currency', $refundInfoArray);
+        self::assertArrayNotHasKey('amounts', $refundInfoArray);
 
-        $this->assertEquals($refundInfoArray['supportRequest'], 'Test support request');
-        $this->assertEquals($refundInfoArray['currency'], 'BTC');
+        self::assertEquals('Test support request', $refundInfoArray['supportRequest']);
+        self::assertEquals('BTC', $refundInfoArray['currency']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): RefundInfo
     {
         return new RefundInfo();
     }

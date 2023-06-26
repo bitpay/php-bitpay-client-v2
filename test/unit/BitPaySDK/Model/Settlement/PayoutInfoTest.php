@@ -10,7 +10,7 @@ class PayoutInfoTest extends TestCase
     public function testInstanceOf()
     {
         $payoutInfo = $this->createClassObject();
-        $this->assertInstanceOf(PayoutInfo::class, $payoutInfo);
+        self::assertInstanceOf(PayoutInfo::class, $payoutInfo);
     }
 
     public function testGetAccount()
@@ -19,7 +19,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setAccount($expectedAccount);
-        $this->assertEquals($expectedAccount, $payoutInfo->getAccount());
+        self::assertEquals($expectedAccount, $payoutInfo->getAccount());
     }
 
     public function testGetRouting()
@@ -28,7 +28,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setRouting($expectedRouting);
-        $this->assertEquals($expectedRouting, $payoutInfo->getRouting());
+        self::assertEquals($expectedRouting, $payoutInfo->getRouting());
     }
 
     public function testGetMerchantEin()
@@ -37,7 +37,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setMerchantEin($expectedMerchantEin);
-        $this->assertEquals($expectedMerchantEin, $payoutInfo->getMerchantEin());
+        self::assertEquals($expectedMerchantEin, $payoutInfo->getMerchantEin());
     }
 
     public function testGetLabel()
@@ -46,7 +46,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setLabel($expectedLabel);
-        $this->assertEquals($expectedLabel, $payoutInfo->getLabel());
+        self::assertEquals($expectedLabel, $payoutInfo->getLabel());
     }
 
     public function testGetBankCountry()
@@ -55,7 +55,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setBankCountry($expectedBankCountry);
-        $this->assertEquals($expectedBankCountry, $payoutInfo->getBankCountry());
+        self::assertEquals($expectedBankCountry, $payoutInfo->getBankCountry());
     }
 
     public function testGetName()
@@ -64,7 +64,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setName($expectedName);
-        $this->assertEquals($expectedName, $payoutInfo->getName());
+        self::assertEquals($expectedName, $payoutInfo->getName());
     }
 
     public function testGetBank()
@@ -73,7 +73,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setBank($expectedBank);
-        $this->assertEquals($expectedBank, $payoutInfo->getBank());
+        self::assertEquals($expectedBank, $payoutInfo->getBank());
     }
 
     public function testGetSwift()
@@ -82,7 +82,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setSwift($expectedSwift);
-        $this->assertEquals($expectedSwift, $payoutInfo->getSwift());
+        self::assertEquals($expectedSwift, $payoutInfo->getSwift());
     }
 
     public function testGetAddress()
@@ -91,7 +91,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setAddress($expectedAddress);
-        $this->assertEquals($expectedAddress, $payoutInfo->getAddress());
+        self::assertEquals($expectedAddress, $payoutInfo->getAddress());
     }
 
     public function testGetCity()
@@ -100,7 +100,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setCity($expectedCity);
-        $this->assertEquals($expectedCity, $payoutInfo->getCity());
+        self::assertEquals($expectedCity, $payoutInfo->getCity());
     }
 
     public function testGetPostal()
@@ -109,7 +109,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setPostal($expectedPostal);
-        $this->assertEquals($expectedPostal, $payoutInfo->getPostal());
+        self::assertEquals($expectedPostal, $payoutInfo->getPostal());
     }
 
     public function testGetSort()
@@ -118,7 +118,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setSort($expectedSort);
-        $this->assertEquals($expectedSort, $payoutInfo->getSort());
+        self::assertEquals($expectedSort, $payoutInfo->getSort());
     }
 
     public function testGetWire()
@@ -127,7 +127,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setWire($expectedWire);
-        $this->assertEquals($expectedWire, $payoutInfo->getWire());
+        self::assertEquals($expectedWire, $payoutInfo->getWire());
     }
 
     public function testGetBankName()
@@ -136,7 +136,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setBankName($expectedBankName);
-        $this->assertEquals($expectedBankName, $payoutInfo->getBankName());
+        self::assertEquals($expectedBankName, $payoutInfo->getBankName());
     }
 
     public function testGetBankAddress()
@@ -145,7 +145,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setBankAddress($expectedBankAddress);
-        $this->assertEquals($expectedBankAddress, $payoutInfo->getBankAddress());
+        self::assertEquals($expectedBankAddress, $payoutInfo->getBankAddress());
     }
 
     public function testGetBankAddress2()
@@ -154,7 +154,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setBankAddress2($expectedBankAddress2);
-        $this->assertEquals($expectedBankAddress2, $payoutInfo->getBankAddress2());
+        self::assertEquals($expectedBankAddress2, $payoutInfo->getBankAddress2());
     }
 
     public function testGetIban()
@@ -163,7 +163,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setIban($expectedIban);
-        $this->assertEquals($expectedIban, $payoutInfo->getIban());
+        self::assertEquals($expectedIban, $payoutInfo->getIban());
     }
 
     public function testGetAdditionalInformation()
@@ -172,7 +172,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setAdditionalInformation($expectedAdditionalInformation);
-        $this->assertEquals($expectedAdditionalInformation, $payoutInfo->getAdditionalInformation());
+        self::assertEquals($expectedAdditionalInformation, $payoutInfo->getAdditionalInformation());
     }
 
     public function testGetAccountHolderName()
@@ -181,7 +181,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setAccountHolderName($expectedAccountHolderName);
-        $this->assertEquals($expectedAccountHolderName, $payoutInfo->getAccountHolderName());
+        self::assertEquals($expectedAccountHolderName, $payoutInfo->getAccountHolderName());
     }
 
     public function testGetAccountHolderAddress()
@@ -190,7 +190,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setAccountHolderAddress($expectedAccountHolderAddress);
-        $this->assertEquals($expectedAccountHolderAddress, $payoutInfo->getAccountHolderAddress());
+        self::assertEquals($expectedAccountHolderAddress, $payoutInfo->getAccountHolderAddress());
     }
 
     public function testGetAccountHolderAddress2()
@@ -199,7 +199,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setAccountHolderAddress2($expectedAccountHolderAddress2);
-        $this->assertEquals($expectedAccountHolderAddress2, $payoutInfo->getAccountHolderAddress2());
+        self::assertEquals($expectedAccountHolderAddress2, $payoutInfo->getAccountHolderAddress2());
     }
 
     public function testGetAccountHolderPostalCode()
@@ -208,7 +208,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setAccountHolderPostalCode($expectedAccountHolderPostalCode);
-        $this->assertEquals($expectedAccountHolderPostalCode, $payoutInfo->getAccountHolderPostalCode());
+        self::assertEquals($expectedAccountHolderPostalCode, $payoutInfo->getAccountHolderPostalCode());
     }
 
     public function testGetAccountHolderCity()
@@ -217,7 +217,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setAccountHolderCity($expectedAccountHolderCity);
-        $this->assertEquals($expectedAccountHolderCity, $payoutInfo->getAccountHolderCity());
+        self::assertEquals($expectedAccountHolderCity, $payoutInfo->getAccountHolderCity());
     }
 
     public function testGetAccountHolderCountry()
@@ -226,7 +226,7 @@ class PayoutInfoTest extends TestCase
 
         $payoutInfo = $this->createClassObject();
         $payoutInfo->setAccountHolderCountry($expectedAccountHolderCountry);
-        $this->assertEquals($expectedAccountHolderCountry, $payoutInfo->getAccountHolderCountry());
+        self::assertEquals($expectedAccountHolderCountry, $payoutInfo->getAccountHolderCountry());
     }
 
     public function testToArray()
@@ -235,53 +235,53 @@ class PayoutInfoTest extends TestCase
         $this->setSetters($payoutInfo);
         $payoutInfoArray = $payoutInfo->toArray();
 
-        $this->assertNotNull($payoutInfoArray);
-        $this->assertIsArray($payoutInfoArray);
+        self::assertNotNull($payoutInfoArray);
+        self::assertIsArray($payoutInfoArray);
 
-        $this->assertArrayHasKey('label', $payoutInfoArray);
-        $this->assertArrayHasKey('bankCountry', $payoutInfoArray);
-        $this->assertArrayHasKey('name', $payoutInfoArray);
-        $this->assertArrayHasKey('bank', $payoutInfoArray);
-        $this->assertArrayHasKey('swift', $payoutInfoArray);
-        $this->assertArrayHasKey('address', $payoutInfoArray);
-        $this->assertArrayHasKey('city', $payoutInfoArray);
-        $this->assertArrayHasKey('postal', $payoutInfoArray);
-        $this->assertArrayHasKey('sort', $payoutInfoArray);
-        $this->assertArrayHasKey('wire', $payoutInfoArray);
-        $this->assertArrayHasKey('bankName', $payoutInfoArray);
-        $this->assertArrayHasKey('bankAddress', $payoutInfoArray);
-        $this->assertArrayHasKey('iban', $payoutInfoArray);
-        $this->assertArrayHasKey('additionalInformation', $payoutInfoArray);
-        $this->assertArrayHasKey('accountHolderName', $payoutInfoArray);
-        $this->assertArrayHasKey('accountHolderAddress', $payoutInfoArray);
-        $this->assertArrayHasKey('accountHolderAddress2', $payoutInfoArray);
-        $this->assertArrayHasKey('accountHolderPostalCode', $payoutInfoArray);
-        $this->assertArrayHasKey('accountHolderCity', $payoutInfoArray);
-        $this->assertArrayHasKey('accountHolderCountry', $payoutInfoArray);
+        self::assertArrayHasKey('label', $payoutInfoArray);
+        self::assertArrayHasKey('bankCountry', $payoutInfoArray);
+        self::assertArrayHasKey('name', $payoutInfoArray);
+        self::assertArrayHasKey('bank', $payoutInfoArray);
+        self::assertArrayHasKey('swift', $payoutInfoArray);
+        self::assertArrayHasKey('address', $payoutInfoArray);
+        self::assertArrayHasKey('city', $payoutInfoArray);
+        self::assertArrayHasKey('postal', $payoutInfoArray);
+        self::assertArrayHasKey('sort', $payoutInfoArray);
+        self::assertArrayHasKey('wire', $payoutInfoArray);
+        self::assertArrayHasKey('bankName', $payoutInfoArray);
+        self::assertArrayHasKey('bankAddress', $payoutInfoArray);
+        self::assertArrayHasKey('iban', $payoutInfoArray);
+        self::assertArrayHasKey('additionalInformation', $payoutInfoArray);
+        self::assertArrayHasKey('accountHolderName', $payoutInfoArray);
+        self::assertArrayHasKey('accountHolderAddress', $payoutInfoArray);
+        self::assertArrayHasKey('accountHolderAddress2', $payoutInfoArray);
+        self::assertArrayHasKey('accountHolderPostalCode', $payoutInfoArray);
+        self::assertArrayHasKey('accountHolderCity', $payoutInfoArray);
+        self::assertArrayHasKey('accountHolderCountry', $payoutInfoArray);
 
-        $this->assertEquals($payoutInfoArray['label'], 'Label');
-        $this->assertEquals($payoutInfoArray['bankCountry'], 'USA');
-        $this->assertEquals($payoutInfoArray['name'], 'Name');
-        $this->assertEquals($payoutInfoArray['bank'], 'Bank');
-        $this->assertEquals($payoutInfoArray['swift'], 'Swift');
-        $this->assertEquals($payoutInfoArray['address'], 'Address');
-        $this->assertEquals($payoutInfoArray['city'], 'Miami');
-        $this->assertEquals($payoutInfoArray['postal'], '12345');
-        $this->assertEquals($payoutInfoArray['sort'], 'Sort');
-        $this->assertEquals($payoutInfoArray['wire'], 'Wire');
-        $this->assertEquals($payoutInfoArray['bankName'], 'Bank name');
-        $this->assertEquals($payoutInfoArray['bankAddress'], 'Bank address');
-        $this->assertEquals($payoutInfoArray['iban'], 'KW81CBKU00000000000012345601013');
-        $this->assertEquals($payoutInfoArray['additionalInformation'], 'Additional information');
-        $this->assertEquals($payoutInfoArray['accountHolderName'], 'Account holder name');
-        $this->assertEquals($payoutInfoArray['accountHolderAddress'], 'Account holder address');
-        $this->assertEquals($payoutInfoArray['accountHolderAddress2'], 'Account holder address2');
-        $this->assertEquals($payoutInfoArray['accountHolderPostalCode'], 'Account holder postal code');
-        $this->assertEquals($payoutInfoArray['accountHolderCity'], 'Account holder city');
-        $this->assertEquals($payoutInfoArray['accountHolderCountry'], 'Account holder country');
+        self::assertEquals('Label', $payoutInfoArray['label']);
+        self::assertEquals('USA', $payoutInfoArray['bankCountry']);
+        self::assertEquals('Name', $payoutInfoArray['name']);
+        self::assertEquals('Bank', $payoutInfoArray['bank']);
+        self::assertEquals('Swift', $payoutInfoArray['swift']);
+        self::assertEquals('Address', $payoutInfoArray['address']);
+        self::assertEquals('Miami', $payoutInfoArray['city']);
+        self::assertEquals('12345', $payoutInfoArray['postal']);
+        self::assertEquals('Sort', $payoutInfoArray['sort']);
+        self::assertEquals('Wire', $payoutInfoArray['wire']);
+        self::assertEquals('Bank name', $payoutInfoArray['bankName']);
+        self::assertEquals('Bank address', $payoutInfoArray['bankAddress']);
+        self::assertEquals('KW81CBKU00000000000012345601013', $payoutInfoArray['iban']);
+        self::assertEquals('Additional information', $payoutInfoArray['additionalInformation']);
+        self::assertEquals('Account holder name', $payoutInfoArray['accountHolderName']);
+        self::assertEquals('Account holder address', $payoutInfoArray['accountHolderAddress']);
+        self::assertEquals('Account holder address2', $payoutInfoArray['accountHolderAddress2']);
+        self::assertEquals('Account holder postal code', $payoutInfoArray['accountHolderPostalCode']);
+        self::assertEquals('Account holder city', $payoutInfoArray['accountHolderCity']);
+        self::assertEquals('Account holder country', $payoutInfoArray['accountHolderCountry']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): PayoutInfo
     {
         return new PayoutInfo();
     }

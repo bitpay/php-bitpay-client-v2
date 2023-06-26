@@ -7,14 +7,13 @@ use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
 
 class RatesTest extends TestCase
 {
     public function testInstanceOf()
     {
         $rates = $this->createClassObject();
-        $this->assertInstanceOf(Rates::class, $rates);
+        self::assertInstanceOf(Rates::class, $rates);
     }
 
     public function testGetRates()
@@ -22,23 +21,49 @@ class RatesTest extends TestCase
         $rates = $this->createClassObject();
 
         $ratesArray = $rates->getRates();
-        $this->assertIsArray($ratesArray);
+        self::assertIsArray($ratesArray);
     }
 
-    public function testUpdate()
+    /**
+     * @throws BitPayException
+     */
+    public function testUpdate(): void
     {
-        $rates = [new Rate(), 'test' => 'test'];
-        $bp = $this->getMockBuilder(Client::class)->getMock();
-        $bp->method('getRates')->willReturn(new Rates($rates, $bp));
+        $bch = new Rate();
+        $bch->setName('Bitcoin Cash');
+        $bch->setCode('BCH');
+        $bch->setRate(229.19);
 
-        $rates = new Rates($rates, $bp);
+        $expectedRatesArray = [$bch];
+        $expectedRates = new Rates($expectedRatesArray);
+        $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();
+        $bp->method('getRates')->willReturn($expectedRates);
 
-        $reflection = new ReflectionClass(Rates::class);
-        $rates->update();
+        $rates = new Rates([]);
+        self::assertEquals([], $rates->getRates());
 
-        $reflectionTest = $reflection->getProperty('_rates')->setAccessible(true);
+        $rates->update($bp);
 
-        $this->assertEquals(null, $reflectionTest);
+        self::assertEquals($expectedRatesArray, $rates->getRates());
+    }
+
+    public function testUpdateShouldThrowsExceptionsForInvalidRateFormat(): void
+    {
+        $rates = $this->createClassObject();
+        $this->expectException(BitPayException::class);
+
+        $clientApiResponse = [
+            [
+                'name' => 'Bitcoin Cash',
+                'code' => 'BCH',
+                'rate' => 229.19
+            ]
+        ];
+        $expectedRates = new Rates($clientApiResponse);
+        $bp = $this->getMockBuilder(Client::class)->disableOriginalConstructor()->getMock();
+        $bp->method('getRates')->willReturn($expectedRates);
+
+        $rates->update($bp);
     }
 
     public function testGetRateException()
@@ -49,38 +74,39 @@ class RatesTest extends TestCase
         $rates->getRate('ELO');
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testGetRate()
     {
         $expectedValue = 12;
 
         $rateMock = $this->getMockBuilder(Rate::class)->disableOriginalConstructor()->getMock();
         $rateMock->method('getCode')->willReturn('BTC');
-        $rateMock->method('getRate')->willReturn(12);
+        $rateMock->method('getRate')->willReturn(12.0);
 
         $rates = [$rateMock];
-        $bp = $this->getMockBuilder(Client::class)->getMock();
-        $rates = new Rates($rates, $bp);
+        $rates = new Rates($rates);
 
-        $this->assertEquals($expectedValue, $rates->getRate('BTC'));
+        self::assertEquals($expectedValue, $rates->getRate('BTC'));
     }
 
     public function testToArray()
     {
         $rates = $this->createClassObject();
-        $ratesEmpty = new Rates([], $this->getMockBuilder(Client::class)->getMock());
+        $ratesEmpty = new Rates([]);
         $ratesArray = $rates->toArray();
 
         $ratesEmptyArray = $ratesEmpty->toArray();
 
-        $this->assertIsArray($ratesArray);
-        $this->assertArrayNotHasKey('rates', $ratesEmptyArray);
+        self::assertIsArray($ratesArray);
+        self::assertArrayNotHasKey('rates', $ratesEmptyArray);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Rates
     {
-        $rates = [new Rate(), 'test' => 'test'];
-        $bp = $this->getMockBuilder(Client::class)->getMock();
+        $rates = [new Rate()];
 
-        return new Rates($rates, $bp);
+        return new Rates($rates);
     }
 }

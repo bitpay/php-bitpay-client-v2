@@ -11,7 +11,7 @@ class LedgerEntryTest extends TestCase
     public function testInstanceOf()
     {
         $ledgerEntry = $this->createClassObject();
-        $this->assertInstanceOf(LedgerEntry::class, $ledgerEntry);
+        self::assertInstanceOf(LedgerEntry::class, $ledgerEntry);
     }
 
     public function testGetType()
@@ -20,7 +20,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setType($expectedType);
-        $this->assertEquals($expectedType, $ledgerEntry->getType());
+        self::assertEquals($expectedType, $ledgerEntry->getType());
     }
 
     public function testGetAmount()
@@ -29,7 +29,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setAmount($expectedAmount);
-        $this->assertEquals($expectedAmount, $ledgerEntry->getAmount());
+        self::assertEquals($expectedAmount, $ledgerEntry->getAmount());
     }
 
     public function testGetCode()
@@ -38,7 +38,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setCode($expectedCode);
-        $this->assertEquals($expectedCode, $ledgerEntry->getCode());
+        self::assertEquals($expectedCode, $ledgerEntry->getCode());
     }
 
     public function testGetTimestamp()
@@ -47,7 +47,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setTimestamp($expectedTimestamp);
-        $this->assertEquals($expectedTimestamp, $ledgerEntry->getTimestamp());
+        self::assertEquals($expectedTimestamp, $ledgerEntry->getTimestamp());
     }
 
     public function testGetCurrency()
@@ -56,7 +56,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setCurrency($expectedCurrency);
-        $this->assertEquals($expectedCurrency, $ledgerEntry->getCurrency());
+        self::assertEquals($expectedCurrency, $ledgerEntry->getCurrency());
     }
 
     public function testGetTxType()
@@ -65,7 +65,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setTxType($expectedTxType);
-        $this->assertEquals($expectedTxType, $ledgerEntry->getTxType());
+        self::assertEquals($expectedTxType, $ledgerEntry->getTxType());
     }
 
     public function testGetScale()
@@ -74,7 +74,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setScale($expectedScale);
-        $this->assertEquals($expectedScale, $ledgerEntry->getScale());
+        self::assertEquals($expectedScale, $ledgerEntry->getScale());
     }
 
     public function testGetId()
@@ -83,7 +83,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setId($expectedId);
-        $this->assertEquals($expectedId, $ledgerEntry->getId());
+        self::assertEquals($expectedId, $ledgerEntry->getId());
     }
 
     public function testGetSupportRequest()
@@ -92,7 +92,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setSupportRequest($expectedSupportRequest);
-        $this->assertEquals($expectedSupportRequest, $ledgerEntry->getSupportRequest());
+        self::assertEquals($expectedSupportRequest, $ledgerEntry->getSupportRequest());
     }
 
     public function testGetDescription()
@@ -101,7 +101,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setDescription($expectedDescription);
-        $this->assertEquals($expectedDescription, $ledgerEntry->getDescription());
+        self::assertEquals($expectedDescription, $ledgerEntry->getDescription());
     }
 
     public function testGetInvoiceId()
@@ -110,7 +110,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setInvoiceId($expectedInvoiceId);
-        $this->assertEquals($expectedInvoiceId, $ledgerEntry->getInvoiceId());
+        self::assertEquals($expectedInvoiceId, $ledgerEntry->getInvoiceId());
     }
 
     public function testGetBuyerFields()
@@ -119,7 +119,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setBuyerFields($expectedBuyerField);
-        $this->assertEquals($expectedBuyerField, $ledgerEntry->getBuyerFields());
+        self::assertEquals($expectedBuyerField, $ledgerEntry->getBuyerFields());
     }
 
     public function testGetInvoiceAmount()
@@ -128,7 +128,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setInvoiceAmount($expectedInvoiceAmount);
-        $this->assertEquals($expectedInvoiceAmount, $ledgerEntry->getInvoiceAmount());
+        self::assertEquals($expectedInvoiceAmount, $ledgerEntry->getInvoiceAmount());
     }
 
     public function testGetInvoiceCurrency()
@@ -137,7 +137,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setInvoiceCurrency($expectedInvoiceCurrency);
-        $this->assertEquals($expectedInvoiceCurrency, $ledgerEntry->getInvoiceCurrency());
+        self::assertEquals($expectedInvoiceCurrency, $ledgerEntry->getInvoiceCurrency());
     }
 
     public function testGetTransactionCurrency()
@@ -146,7 +146,7 @@ class LedgerEntryTest extends TestCase
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setTransactionCurrency($expectedTransactionCurrency);
-        $this->assertEquals($expectedTransactionCurrency, $ledgerEntry->getTransactionCurrency());
+        self::assertEquals($expectedTransactionCurrency, $ledgerEntry->getTransactionCurrency());
     }
 
     public function testToArray()
@@ -155,41 +155,41 @@ class LedgerEntryTest extends TestCase
         $this->setSetters($ledgerEntry);
         $ledgerEntryArray = $ledgerEntry->toArray();
 
-        $this->assertNotNull($ledgerEntryArray);
-        $this->assertIsArray($ledgerEntryArray);
+        self::assertNotNull($ledgerEntryArray);
+        self::assertIsArray($ledgerEntryArray);
 
-        $this->assertArrayHasKey('type', $ledgerEntryArray);
-        $this->assertArrayHasKey('amount', $ledgerEntryArray);
-        $this->assertArrayHasKey('code', $ledgerEntryArray);
-        $this->assertArrayHasKey('timestamp', $ledgerEntryArray);
-        $this->assertArrayHasKey('currency', $ledgerEntryArray);
-        $this->assertArrayHasKey('txType', $ledgerEntryArray);
-        $this->assertArrayHasKey('scale', $ledgerEntryArray);
-        $this->assertArrayHasKey('id', $ledgerEntryArray);
-        $this->assertArrayHasKey('supportRequest', $ledgerEntryArray);
-        $this->assertArrayHasKey('description', $ledgerEntryArray);
-        $this->assertArrayHasKey('invoiceId', $ledgerEntryArray);
-        $this->assertArrayHasKey('invoiceAmount', $ledgerEntryArray);
-        $this->assertArrayHasKey('invoiceCurrency', $ledgerEntryArray);
-        $this->assertArrayHasKey('transactionCurrency', $ledgerEntryArray);
+        self::assertArrayHasKey('type', $ledgerEntryArray);
+        self::assertArrayHasKey('amount', $ledgerEntryArray);
+        self::assertArrayHasKey('code', $ledgerEntryArray);
+        self::assertArrayHasKey('timestamp', $ledgerEntryArray);
+        self::assertArrayHasKey('currency', $ledgerEntryArray);
+        self::assertArrayHasKey('txType', $ledgerEntryArray);
+        self::assertArrayHasKey('scale', $ledgerEntryArray);
+        self::assertArrayHasKey('id', $ledgerEntryArray);
+        self::assertArrayHasKey('supportRequest', $ledgerEntryArray);
+        self::assertArrayHasKey('description', $ledgerEntryArray);
+        self::assertArrayHasKey('invoiceId', $ledgerEntryArray);
+        self::assertArrayHasKey('invoiceAmount', $ledgerEntryArray);
+        self::assertArrayHasKey('invoiceCurrency', $ledgerEntryArray);
+        self::assertArrayHasKey('transactionCurrency', $ledgerEntryArray);
 
-        $this->assertEquals($ledgerEntryArray['type'], 'TestType');
-        $this->assertEquals($ledgerEntryArray['amount'], '1');
-        $this->assertEquals($ledgerEntryArray['code'], 'abc123');
-        $this->assertEquals($ledgerEntryArray['timestamp'], '2020-01-01 18:10:10');
-        $this->assertEquals($ledgerEntryArray['currency'], 'BTC');
-        $this->assertEquals($ledgerEntryArray['txType'], 'TxType');
-        $this->assertEquals($ledgerEntryArray['scale'], 'Test scale');
-        $this->assertEquals($ledgerEntryArray['id'], '1');
-        $this->assertEquals($ledgerEntryArray['supportRequest'], 'Test support request');
-        $this->assertEquals($ledgerEntryArray['description'], 'Test description');
-        $this->assertEquals($ledgerEntryArray['invoiceId'], '1');
-        $this->assertEquals($ledgerEntryArray['invoiceAmount'], 20.7);
-        $this->assertEquals($ledgerEntryArray['invoiceCurrency'], 'BTC');
-        $this->assertEquals($ledgerEntryArray['transactionCurrency'], 'BTC');
+        self::assertEquals('TestType', $ledgerEntryArray['type']);
+        self::assertEquals('1', $ledgerEntryArray['amount']);
+        self::assertEquals('abc123', $ledgerEntryArray['code']);
+        self::assertEquals('2020-01-01 18:10:10', $ledgerEntryArray['timestamp']);
+        self::assertEquals('BTC', $ledgerEntryArray['currency']);
+        self::assertEquals('TxType', $ledgerEntryArray['txType']);
+        self::assertEquals('Test scale', $ledgerEntryArray['scale']);
+        self::assertEquals('1', $ledgerEntryArray['id']);
+        self::assertEquals('Test support request', $ledgerEntryArray['supportRequest']);
+        self::assertEquals('Test description', $ledgerEntryArray['description']);
+        self::assertEquals('1', $ledgerEntryArray['invoiceId']);
+        self::assertEquals(20.7, $ledgerEntryArray['invoiceAmount']);
+        self::assertEquals('BTC', $ledgerEntryArray['invoiceCurrency']);
+        self::assertEquals('BTC', $ledgerEntryArray['transactionCurrency']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): LedgerEntry
     {
         return new LedgerEntry();
     }

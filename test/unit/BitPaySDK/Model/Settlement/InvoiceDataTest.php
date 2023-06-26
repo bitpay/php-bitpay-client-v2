@@ -11,7 +11,7 @@ class InvoiceDataTest extends TestCase
     public function testInstanceOf()
     {
         $invoiceData = $this->createClassObject();
-        $this->assertInstanceOf(InvoiceData::class, $invoiceData);
+        self::assertInstanceOf(InvoiceData::class, $invoiceData);
     }
 
     public function testGetOrderId()
@@ -20,7 +20,7 @@ class InvoiceDataTest extends TestCase
 
         $invoiceData = $this->createClassObject();
         $invoiceData->setOrderId($expectedOrderId);
-        $this->assertEquals($expectedOrderId, $invoiceData->getOrderId());
+        self::assertEquals($expectedOrderId, $invoiceData->getOrderId());
     }
 
     public function testGetDate()
@@ -29,7 +29,7 @@ class InvoiceDataTest extends TestCase
 
         $invoiceData = $this->createClassObject();
         $invoiceData->setDate($expectedDate);
-        $this->assertEquals($expectedDate, $invoiceData->getDate());
+        self::assertEquals($expectedDate, $invoiceData->getDate());
     }
 
     public function testGetPrice()
@@ -38,7 +38,7 @@ class InvoiceDataTest extends TestCase
 
         $invoiceData = $this->createClassObject();
         $invoiceData->setPrice($expectedPrice);
-        $this->assertEquals($expectedPrice, $invoiceData->getPrice());
+        self::assertEquals($expectedPrice, $invoiceData->getPrice());
     }
 
     public function testGetCurrency()
@@ -47,7 +47,7 @@ class InvoiceDataTest extends TestCase
 
         $invoiceData = $this->createClassObject();
         $invoiceData->setCurrency($expectedCurrency);
-        $this->assertEquals($expectedCurrency, $invoiceData->getCurrency());
+        self::assertEquals($expectedCurrency, $invoiceData->getCurrency());
     }
 
     public function testGetTransactionCurrency()
@@ -56,7 +56,7 @@ class InvoiceDataTest extends TestCase
 
         $invoiceData = $this->createClassObject();
         $invoiceData->setTransactionCurrency($expectedTransactionCurrency);
-        $this->assertEquals($expectedTransactionCurrency, $invoiceData->getTransactionCurrency());
+        self::assertEquals($expectedTransactionCurrency, $invoiceData->getTransactionCurrency());
     }
 
     public function testGetOverPaidAmount()
@@ -65,7 +65,7 @@ class InvoiceDataTest extends TestCase
 
         $invoiceData = $this->createClassObject();
         $invoiceData->setOverPaidAmount($expectedOverPaidAmount);
-        $this->assertEquals($expectedOverPaidAmount, $invoiceData->getOverPaidAmount());
+        self::assertEquals($expectedOverPaidAmount, $invoiceData->getOverPaidAmount());
     }
 
     public function testGetPayoutPercentage()
@@ -74,16 +74,7 @@ class InvoiceDataTest extends TestCase
 
         $invoiceData = $this->createClassObject();
         $invoiceData->setPayoutPercentage($expectedPayoutPercentage);
-        $this->assertEquals($expectedPayoutPercentage, $invoiceData->getPayoutPercentage());
-    }
-
-    public function testGetBtcPrice()
-    {
-        $expectedBtcPrice = 50000;
-
-        $invoiceData = $this->createClassObject();
-        $invoiceData->setBtcPrice($expectedBtcPrice);
-        $this->assertEquals($expectedBtcPrice, $invoiceData->getBtcPrice());
+        self::assertEquals($expectedPayoutPercentage, $invoiceData->getPayoutPercentage());
     }
 
     public function testGetRefundInfo()
@@ -92,7 +83,7 @@ class InvoiceDataTest extends TestCase
 
         $invoiceData = $this->createClassObject();
         $invoiceData->setRefundInfo($expectedRefundInfo);
-        $this->assertEquals($expectedRefundInfo, $invoiceData->getRefundInfo());
+        self::assertEquals($expectedRefundInfo, $invoiceData->getRefundInfo());
     }
 
     public function testToArray()
@@ -101,27 +92,27 @@ class InvoiceDataTest extends TestCase
         $this->setSetters($invoiceData);
         $invoiceDataArray = $invoiceData->toArray();
 
-        $this->assertNotNull($invoiceDataArray);
-        $this->assertIsArray($invoiceDataArray);
+        self::assertNotNull($invoiceDataArray);
+        self::assertIsArray($invoiceDataArray);
 
-        $this->assertArrayHasKey('orderId', $invoiceDataArray);
-        $this->assertArrayHasKey('date', $invoiceDataArray);
-        $this->assertArrayHasKey('price', $invoiceDataArray);
-        $this->assertArrayHasKey('currency', $invoiceDataArray);
-        $this->assertArrayHasKey('transactionCurrency', $invoiceDataArray);
-        $this->assertArrayHasKey('payoutPercentage', $invoiceDataArray);
-        $this->assertArrayHasKey('refundInfo', $invoiceDataArray);
+        self::assertArrayHasKey('orderId', $invoiceDataArray);
+        self::assertArrayHasKey('date', $invoiceDataArray);
+        self::assertArrayHasKey('price', $invoiceDataArray);
+        self::assertArrayHasKey('currency', $invoiceDataArray);
+        self::assertArrayHasKey('transactionCurrency', $invoiceDataArray);
+        self::assertArrayHasKey('payoutPercentage', $invoiceDataArray);
+        self::assertArrayHasKey('refundInfo', $invoiceDataArray);
 
-        $this->assertEquals($invoiceDataArray['orderId'], '1');
-        $this->assertEquals($invoiceDataArray['date'], '2022-01-01');
-        $this->assertEquals($invoiceDataArray['price'], 12.9);
-        $this->assertEquals($invoiceDataArray['currency'], 'BTC');
-        $this->assertEquals($invoiceDataArray['transactionCurrency'], 'BTC');
-        $this->assertEquals($invoiceDataArray['payoutPercentage'], 15);
-        $this->assertIsArray($invoiceDataArray['refundInfo']);
+        self::assertEquals('1', $invoiceDataArray['orderId']);
+        self::assertEquals('2022-01-01', $invoiceDataArray['date']);
+        self::assertEquals(12.9, $invoiceDataArray['price']);
+        self::assertEquals('BTC', $invoiceDataArray['currency']);
+        self::assertEquals('BTC', $invoiceDataArray['transactionCurrency']);
+        self::assertEquals(15, $invoiceDataArray['payoutPercentage']);
+        self::assertEquals([], $invoiceDataArray['refundInfo']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): InvoiceData
     {
         return new InvoiceData();
     }

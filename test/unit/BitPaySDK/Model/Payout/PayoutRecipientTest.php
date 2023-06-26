@@ -10,7 +10,7 @@ class PayoutRecipientTest extends TestCase
   public function testInstanceOf()
   {
     $payoutRecipient = $this->createClassObject();
-    $this->assertInstanceOf(PayoutRecipient::class, $payoutRecipient);
+    self::assertInstanceOf(PayoutRecipient::class, $payoutRecipient);
   }
 
   public function testGetEmail()
@@ -20,7 +20,7 @@ class PayoutRecipientTest extends TestCase
     $payoutRecipient = $this->createClassObject();
     $payoutRecipient->setEmail($expectedEmail);
 
-    $this->assertEquals($expectedEmail, $payoutRecipient->getEmail());
+    self::assertEquals($expectedEmail, $payoutRecipient->getEmail());
   }
 
   public function testGetLabel()
@@ -30,7 +30,7 @@ class PayoutRecipientTest extends TestCase
     $payoutRecipient = $this->createClassObject();
     $payoutRecipient->setLabel($expectedLabel);
 
-    $this->assertEquals($expectedLabel, $payoutRecipient->getLabel());
+    self::assertEquals($expectedLabel, $payoutRecipient->getLabel());
   }
 
   public function testGetNotificationURL()
@@ -40,7 +40,7 @@ class PayoutRecipientTest extends TestCase
     $payoutRecipient = $this->createClassObject();
     $payoutRecipient->setNotificationURL($expectedNotificationURL);
 
-    $this->assertEquals($expectedNotificationURL, $payoutRecipient->getNotificationURL());
+    self::assertEquals($expectedNotificationURL, $payoutRecipient->getNotificationURL());
   }
 
   public function testGetStatus()
@@ -50,7 +50,7 @@ class PayoutRecipientTest extends TestCase
     $payoutRecipient = $this->createClassObject();
     $payoutRecipient->setStatus($expectedStatus);
 
-    $this->assertEquals($expectedStatus, $payoutRecipient->getStatus());
+    self::assertEquals($expectedStatus, $payoutRecipient->getStatus());
   }
 
   public function testGetId()
@@ -60,7 +60,7 @@ class PayoutRecipientTest extends TestCase
     $payoutRecipient = $this->createClassObject();
     $payoutRecipient->setId($expectedId);
 
-    $this->assertEquals($expectedId, $payoutRecipient->getId());
+    self::assertEquals($expectedId, $payoutRecipient->getId());
   }
 
   public function testGetShopperId()
@@ -70,7 +70,7 @@ class PayoutRecipientTest extends TestCase
     $payoutRecipient = $this->createClassObject();
     $payoutRecipient->setShopperId($expectedShopperId);
 
-    $this->assertEquals($expectedShopperId, $payoutRecipient->getShopperId());
+    self::assertEquals($expectedShopperId, $payoutRecipient->getShopperId());
   }
 
   public function testGetToken()
@@ -80,7 +80,7 @@ class PayoutRecipientTest extends TestCase
     $payoutRecipient = $this->createClassObject();
     $payoutRecipient->setToken($expectedToken);
 
-    $this->assertEquals($expectedToken, $payoutRecipient->getToken());
+    self::assertEquals($expectedToken, $payoutRecipient->getToken());
   }
 
   public function testToArray()
@@ -95,24 +95,24 @@ class PayoutRecipientTest extends TestCase
     $payoutRecipient->setToken('6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL');
     $payoutRecipientArray = $payoutRecipient->toArray();
 
-    $this->assertNotNull($payoutRecipientArray);
-    $this->assertIsArray($payoutRecipientArray);
+    self::assertNotNull($payoutRecipientArray);
+    self::assertIsArray($payoutRecipientArray);
 
-    $this->assertArrayHasKey('email', $payoutRecipientArray);
-    $this->assertArrayHasKey('label', $payoutRecipientArray);
-    $this->assertArrayHasKey('notificationURL', $payoutRecipientArray);
-    $this->assertArrayHasKey('status', $payoutRecipientArray);
-    $this->assertArrayHasKey('id', $payoutRecipientArray);
-    $this->assertArrayHasKey('shopperId', $payoutRecipientArray);
-    $this->assertArrayHasKey('token', $payoutRecipientArray);
+    self::assertArrayHasKey('email', $payoutRecipientArray);
+    self::assertArrayHasKey('label', $payoutRecipientArray);
+    self::assertArrayHasKey('notificationURL', $payoutRecipientArray);
+    self::assertArrayHasKey('status', $payoutRecipientArray);
+    self::assertArrayHasKey('id', $payoutRecipientArray);
+    self::assertArrayHasKey('shopperId', $payoutRecipientArray);
+    self::assertArrayHasKey('token', $payoutRecipientArray);
 
-    $this->assertEquals($payoutRecipientArray['email'], 'john@doe.com');
-    $this->assertEquals($payoutRecipientArray['label'], 'My Label');
-    $this->assertEquals($payoutRecipientArray['notificationURL'], 'https://www.example.com');
-    $this->assertEquals($payoutRecipientArray['status'], 'success');
-    $this->assertEquals($payoutRecipientArray['id'], 'abcd123');
-    $this->assertEquals($payoutRecipientArray['shopperId'], 'efgh456');
-    $this->assertEquals($payoutRecipientArray['token'], '6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL');
+    self::assertEquals('john@doe.com', $payoutRecipientArray['email']);
+    self::assertEquals('My Label', $payoutRecipientArray['label']);
+    self::assertEquals('https://www.example.com', $payoutRecipientArray['notificationURL']);
+    self::assertEquals('success', $payoutRecipientArray['status']);
+    self::assertEquals('abcd123', $payoutRecipientArray['id']);
+    self::assertEquals('efgh456', $payoutRecipientArray['shopperId']);
+    self::assertEquals('6RZSTPtnzEaroAe2X4YijenRiqteRDNvzbT8NjtcHjUVd9FUFwa7dsX8RFgRDDC5SL', $payoutRecipientArray['token']);
   }
 
   public function testToArrayEmptyKey()
@@ -120,10 +120,10 @@ class PayoutRecipientTest extends TestCase
     $payoutRecipient = $this->createClassObject();
     $payoutRecipientArray = $payoutRecipient->toArray();
 
-    $this->assertArrayNotHasKey('email', $payoutRecipientArray);
+    self::assertArrayNotHasKey('email', $payoutRecipientArray);
   }
 
-  private function createClassObject()
+  private function createClassObject(): PayoutRecipient
   {
     return new PayoutRecipient();
   }

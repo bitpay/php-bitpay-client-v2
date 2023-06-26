@@ -1,21 +1,29 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 
 namespace BitPaySDK\Model\Payout;
 
+use BitPaySDK\Exceptions\PayoutRecipientException;
+
 /**
- *
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 class PayoutRecipients
 {
-    protected $_guid  = '';
-    protected $_recipients = [];
-    protected $_token      = '';
+    protected array $recipients = [];
+    protected string $guid = '';
+    protected string $token = '';
 
     /**
      * Constructor, create an recipient-full request PayoutBatch object.
@@ -24,7 +32,7 @@ class PayoutRecipients
      */
     public function __construct(array $recipients = [])
     {
-        $this->_recipients = $recipients;
+        $this->recipients = $recipients;
     }
 
     // API fields
@@ -35,19 +43,19 @@ class PayoutRecipients
      *
      * @return string
      */
-    public function getGuid()
+    public function getGuid(): string
     {
-        return $this->_guid;
+        return $this->guid;
     }
 
     /**
      * Sets guid.
      *
-     * @param string $guid the guid
+     * @param string $guid
      */
-    public function setGuid(string $guid)
+    public function setGuid(string $guid): void
     {
-        $this->_guid = $guid;
+        $this->guid = $guid;
     }
 
     /**
@@ -55,19 +63,19 @@ class PayoutRecipients
      *
      * @return string
      */
-    public function getToken()
+    public function getToken(): string
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
      * Sets token.
      *
-     * @param string $token the token
+     * @param string $token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     // Required fields
@@ -76,31 +84,28 @@ class PayoutRecipients
     /**
      * Gets an array with all recipients.
      *
-     * @return array
+     * @return PayoutRecipient[]
      */
-    public function getRecipients()
+    public function getRecipients(): array
     {
-        $recipients = [];
-
-        foreach ($this->_recipients as $recipient) {
-            if ($recipient instanceof PayoutRecipient) {
-                array_push($recipients, $recipient->toArray());
-            } else {
-                array_push($recipients, $recipient);
-            }
-        }
-
-        return $recipients;
+        return $this->recipients;
     }
 
     /**
      * Sets array with all recipients.
      *
-     * @param array $recipients array with all recipients
+     * @param PayoutRecipient[] $recipients
+     * @throws PayoutRecipientException
      */
-    public function setRecipients(array $recipients)
+    public function setRecipients(array $recipients): void
     {
-        $this->_recipients = $recipients;
+        foreach ($recipients as $recipient) {
+            if (!$recipient instanceof PayoutRecipient) {
+                throw new PayoutRecipientException('Array should contains only PayoutRecipient objects');
+            }
+        }
+
+        $this->recipients = $recipients;
     }
 
     /**
@@ -108,12 +113,17 @@ class PayoutRecipients
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
+        $recipients = [];
+        foreach ($this->getRecipients() as $recipient) {
+            $recipients[] = $recipient->toArray();
+        }
+
         $elements = [
-            'guid'       => $this->getGuid(),
-            'recipients' => $this->getRecipients(),
-            'token'      => $this->getToken(),
+            'guid' => $this->getGuid(),
+            'recipients' => $recipients,
+            'token' => $this->getToken(),
         ];
 
         foreach ($elements as $key => $value) {

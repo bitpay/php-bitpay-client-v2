@@ -1,62 +1,40 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 
 namespace BitPaySDK\Model\Ledger;
 
-use BitPaySDK\Model\Ledger\LedgerEntry;
-
+/**
+ * Class Ledger
+ * @package BitPaySDK\Model\Ledger
+ * @see <a href="https://bitpay.readme.io/reference/ledgers">REST API Ledgers</a>
+ */
 class Ledger
 {
-    protected $_entries;
-    protected $_currency;
-    protected $_balance;
+    protected ?string $currency = null;
+    protected ?float $balance = null;
 
     public function __construct()
     {
     }
 
     /**
-     * Gets Array of ledger entries listing the various debits and credits which are settled in the report
-     *
-     * @return array the ledger entries
-     */
-    public function getEntries()
-    {
-        $entries = [];
-
-        foreach ($this->_entries as $entry) {
-            if ($entry instanceof LedgerEntry) {
-                array_push($entries, $entry->toArray());
-            } else {
-                array_push($entries, $entry);
-            }
-        }
-
-        return $entries;
-    }
-
-    /**
-     * Sets Array of ledger entries listing the various debits and credits which are settled in the report
-     *
-     * @param array $entries the ledgers entries
-     */
-    public function setEntries(array $entries)
-    {
-        $this->_entries = $entries;
-    }
-
-    /**
      * Gets Ledger currency
      *
-     * @return string the Ledger currency
+     * @return string|null the Ledger currency
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
@@ -64,19 +42,19 @@ class Ledger
      *
      * @param string $currency the Ledger currency
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
      * Gets Ledger balance in the corresponding currency
      *
-     * @return float the Ledger balance
+     * @return float|null the Ledger balance
      */
-    public function getBalance()
+    public function getBalance(): ?float
     {
-        return $this->_balance;
+        return $this->balance;
     }
 
     /**
@@ -84,9 +62,9 @@ class Ledger
      *
      * @param float $balance the Ledger balance
      */
-    public function setBalance(float $balance)
+    public function setBalance(float $balance): void
     {
-        $this->_balance = $balance;
+        $this->balance = $balance;
     }
 
     /**
@@ -94,14 +72,11 @@ class Ledger
      *
      * @return array Ledger as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'entries'  => $this->getEntries(),
+        return [
             'currency' => $this->getCurrency(),
             'balance'  => $this->getBalance(),
         ];
-
-        return $elements;
     }
 }

@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -8,16 +14,18 @@
 namespace BitPaySDK\Model\Bill;
 
 /**
+ * @see <a href="https://developer.bitpay.com/reference/bills">REST API Bills</a>
+ *
  * @package Bitpay
  */
 
 #[\AllowDynamicProperties]
 class Item
 {
-    protected $_id;
-    protected $_description;
-    protected $_price;
-    protected $_quantity;
+    protected ?string $id = null;
+    protected ?string $description = null;
+    protected ?float $price = null;
+    protected ?int $quantity = null;
 
     public function __construct()
     {
@@ -26,11 +34,11 @@ class Item
     /**
      * Gets id.
      *
-     * @return string the id
+     * @return string|null the id
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -38,19 +46,19 @@ class Item
      *
      * @param string $id the id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
      * Gets Line item description
      *
-     * @return string the description
+     * @return string|null the description
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
-        return $this->_description;
+        return $this->description;
     }
 
     /**
@@ -58,19 +66,19 @@ class Item
      *
      * @param string $description the description
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
-        $this->_description = $description;
+        $this->description = $description;
     }
 
     /**
      * Gets Line item unit price for the corresponding currency
      *
-     * @return float the price
+     * @return float|null the price
      */
-    public function getPrice()
+    public function getPrice(): ?float
     {
-        return $this->_price;
+        return $this->price;
     }
 
     /**
@@ -78,19 +86,19 @@ class Item
      *
      * @param float $price the price
      */
-    public function setPrice(float $price)
+    public function setPrice(float $price): void
     {
-        $this->_price = $price;
+        $this->price = $price;
     }
 
     /**
      * Gets Line item number of units
      *
-     * @return int the quantity
+     * @return int|null the quantity
      */
-    public function getQuantity()
+    public function getQuantity(): ?int
     {
-        return $this->_quantity;
+        return $this->quantity;
     }
 
     /**
@@ -98,21 +106,21 @@ class Item
      *
      * @param int $quantity the quantity
      */
-    public function setQuantity(int $quantity)
+    public function setQuantity(int $quantity): void
     {
-        $this->_quantity = $quantity;
+        $this->quantity = $quantity;
     }
 
     /**
      * @param array $item List of line items
      * @return Item
      */
-    public static function createFromArray(array $item)
+    public static function createFromArray(array $item): Item
     {
         $instance = new self();
 
         foreach ($item as $key => $value) {
-            $instance->{'_' . $key} = $value;
+            $instance->{$key} = $value;
         }
 
         return $instance;
@@ -123,7 +131,7 @@ class Item
      *
      * @return array item data as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'id'          => $this->getId(),

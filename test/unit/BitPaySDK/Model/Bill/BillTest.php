@@ -2,6 +2,7 @@
 
 namespace BitPaySDK\Test\Model\Bill;
 
+use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Bill\Item;
 use PHPUnit\Framework\TestCase;
@@ -11,7 +12,7 @@ class BillTest extends TestCase
     public function testInstanceOf()
     {
         $bill = $this->createClassObject();
-        $this->assertInstanceOf(Bill::class, $bill);
+        self::assertInstanceOf(Bill::class, $bill);
     }
 
     public function testGetToken()
@@ -20,16 +21,19 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setToken($expectedToken);
-        $this->assertEquals($expectedToken, $bill->getToken());
+        self::assertEquals($expectedToken, $bill->getToken());
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testGetCurrency()
     {
         $expectedCurrency = 'BTC';
 
         $bill = $this->createClassObject();
         $bill->setCurrency($expectedCurrency);
-        $this->assertEquals($expectedCurrency, $bill->getCurrency());
+        self::assertEquals($expectedCurrency, $bill->getCurrency());
     }
 
     public function testGetEmail()
@@ -38,20 +42,20 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setEmail($expectedEmail);
-        $this->assertEquals($expectedEmail, $bill->getEmail());
+        self::assertEquals($expectedEmail, $bill->getEmail());
     }
 
     public function testSetItems()
     {
         $bill = $this->createClassObject();
-        $arrayWithoutObject = ['test' => 'gd'];
+        $arrayWithoutObject = ['description' => 'gd'];
 
         $createdObject = Item::createFromArray($arrayWithoutObject);
         $testArray = [new Item(), $createdObject];
 
         $bill->setItems($testArray);
 
-        $this->assertEquals($testArray, $bill->getItems());
+        self::assertEquals($testArray, $bill->getItems());
     }
 
     public function testGetNumber()
@@ -60,7 +64,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setNumber($expectedNumber);
-        $this->assertEquals($expectedNumber, $bill->getNumber());
+        self::assertEquals($expectedNumber, $bill->getNumber());
     }
 
     public function testGetName()
@@ -69,7 +73,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setName($expectedName);
-        $this->assertEquals($expectedName,  $bill->getName());
+        self::assertEquals($expectedName,  $bill->getName());
     }
 
     public function testGetAddress1()
@@ -78,7 +82,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setAddress1($expectedAddress);
-        $this->assertEquals($expectedAddress, $bill->getAddress1());
+        self::assertEquals($expectedAddress, $bill->getAddress1());
     }
 
     public function testGetAddress2()
@@ -87,7 +91,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setAddress2($expectedAddress2);
-        $this->assertEquals($expectedAddress2, $bill->getAddress2());
+        self::assertEquals($expectedAddress2, $bill->getAddress2());
     }
 
     public function testGetCity()
@@ -96,7 +100,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setCity($expectedCity);
-        $this->assertEquals($expectedCity, $bill->getCity());
+        self::assertEquals($expectedCity, $bill->getCity());
     }
 
     public function testGetState()
@@ -105,7 +109,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setState($expectedState);
-        $this->assertEquals($expectedState, $bill->getState());
+        self::assertEquals($expectedState, $bill->getState());
     }
 
     public function testGetZip()
@@ -114,7 +118,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setZip($expectedZip);
-        $this->assertEquals($expectedZip, $bill->getZip());
+        self::assertEquals($expectedZip, $bill->getZip());
     }
 
     public function testGetCountry()
@@ -123,7 +127,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setCountry($expectedCountry);
-        $this->assertEquals($expectedCountry, $bill->getCountry());
+        self::assertEquals($expectedCountry, $bill->getCountry());
     }
 
     public function testGetCc()
@@ -132,7 +136,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setCc($expectedCc);
-        $this->assertEquals($expectedCc, $bill->getCc());
+        self::assertEquals($expectedCc, $bill->getCc());
     }
 
     public function testGetPhone()
@@ -141,7 +145,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setPhone($expectedPhone);
-        $this->assertEquals($expectedPhone, $bill->getPhone());
+        self::assertEquals($expectedPhone, $bill->getPhone());
     }
 
     public function testGetDueDate()
@@ -150,14 +154,14 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setDueDate($expectedDueDate);
-        $this->assertEquals($expectedDueDate, $bill->getDueDate());
+        self::assertEquals($expectedDueDate, $bill->getDueDate());
     }
 
     public function testGetPassProcessingFee()
     {
         $bill = $this->createClassObject();
         $bill->setPassProcessingFee(true);
-        $this->assertTrue($bill->getPassProcessingFee());
+        self::assertTrue($bill->getPassProcessingFee());
     }
 
     public function testGetStatus()
@@ -166,7 +170,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setStatus($expectedStatus);
-        $this->assertEquals($expectedStatus, $bill->getStatus());
+        self::assertEquals($expectedStatus, $bill->getStatus());
     }
 
     public function testGetUrl()
@@ -175,7 +179,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setUrl($expectedUrl);
-        $this->assertEquals($expectedUrl, $bill->getUrl());
+        self::assertEquals($expectedUrl, $bill->getUrl());
     }
 
     public function testGetCreateDate()
@@ -184,7 +188,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setCreateDate($expectedCreateDate);
-        $this->assertEquals($expectedCreateDate, $bill->getCreateDate());
+        self::assertEquals($expectedCreateDate, $bill->getCreateDate());
     }
 
     public function testGetId()
@@ -193,7 +197,7 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setId($expectedId);
-        $this->assertEquals($expectedId, $bill->getId());
+        self::assertEquals($expectedId, $bill->getId());
     }
 
     public function testGetMerchant()
@@ -202,9 +206,12 @@ class BillTest extends TestCase
 
         $bill = $this->createClassObject();
         $bill->setMerchant($expectedMerchant);
-        $this->assertEquals($expectedMerchant, $bill->getMerchant());
+        self::assertEquals($expectedMerchant, $bill->getMerchant());
     }
 
+    /**
+     * @throws BitPayException
+     */
     public function testToArray()
     {
         $bill = $this->createClassObject();
@@ -212,59 +219,62 @@ class BillTest extends TestCase
 
         $billArray = $bill->toArray();
 
-        $this->assertNotNull($billArray);
-        $this->assertIsArray($billArray);
+        self::assertNotNull($billArray);
+        self::assertIsArray($billArray);
 
-        $this->assertArrayHasKey('currency', $billArray);
-        $this->assertArrayHasKey('token', $billArray);
-        $this->assertArrayHasKey('email', $billArray);
-        $this->assertArrayHasKey('items', $billArray);
-        $this->assertArrayHasKey('number', $billArray);
-        $this->assertArrayHasKey('name', $billArray);
-        $this->assertArrayHasKey('address1', $billArray);
-        $this->assertArrayHasKey('address2', $billArray);
-        $this->assertArrayHasKey('city', $billArray);
-        $this->assertArrayHasKey('state', $billArray);
-        $this->assertArrayHasKey('zip', $billArray);
-        $this->assertArrayHasKey('country', $billArray);
-        $this->assertArrayHasKey('cc', $billArray);
-        $this->assertArrayHasKey('phone', $billArray);
-        $this->assertArrayHasKey('dueDate', $billArray);
-        $this->assertArrayHasKey('passProcessingFee', $billArray);
-        $this->assertArrayHasKey('status', $billArray);
-        $this->assertArrayHasKey('url', $billArray);
-        $this->assertArrayHasKey('createDate', $billArray);
-        $this->assertArrayHasKey('id', $billArray);
-        $this->assertArrayHasKey('merchant', $billArray);
+        self::assertArrayHasKey('currency', $billArray);
+        self::assertArrayHasKey('token', $billArray);
+        self::assertArrayHasKey('email', $billArray);
+        self::assertArrayHasKey('items', $billArray);
+        self::assertArrayHasKey('number', $billArray);
+        self::assertArrayHasKey('name', $billArray);
+        self::assertArrayHasKey('address1', $billArray);
+        self::assertArrayHasKey('address2', $billArray);
+        self::assertArrayHasKey('city', $billArray);
+        self::assertArrayHasKey('state', $billArray);
+        self::assertArrayHasKey('zip', $billArray);
+        self::assertArrayHasKey('country', $billArray);
+        self::assertArrayHasKey('cc', $billArray);
+        self::assertArrayHasKey('phone', $billArray);
+        self::assertArrayHasKey('dueDate', $billArray);
+        self::assertArrayHasKey('passProcessingFee', $billArray);
+        self::assertArrayHasKey('status', $billArray);
+        self::assertArrayHasKey('url', $billArray);
+        self::assertArrayHasKey('createDate', $billArray);
+        self::assertArrayHasKey('id', $billArray);
+        self::assertArrayHasKey('merchant', $billArray);
 
-        $this->assertEquals($billArray['currency'], 'BTC');
-        $this->assertEquals($billArray['token'], 'abcd123');
-        $this->assertEquals($billArray['email'], 'test@test.com');
-        $this->assertEquals($billArray['items'], [[]]);
-        $this->assertEquals($billArray['number'], '12');
-        $this->assertEquals($billArray['name'], 'TestName');
-        $this->assertEquals($billArray['address1'], 'Address1');
-        $this->assertEquals($billArray['address2'], 'Address2');
-        $this->assertEquals($billArray['city'], 'Miami');
-        $this->assertEquals($billArray['state'], 'AB');
-        $this->assertEquals($billArray['zip'], '12345');
-        $this->assertEquals($billArray['country'], 'Canada');
-        $this->assertEquals($billArray['cc'], ['']);
-        $this->assertEquals($billArray['phone'], '123456789');
-        $this->assertEquals($billArray['dueDate'], '2022-01-01');
-        $this->assertEquals($billArray['passProcessingFee'], true);
-        $this->assertEquals($billArray['status'], 'status');
-        $this->assertEquals($billArray['url'], 'http://test.com');
-        $this->assertEquals($billArray['createDate'], '2022-01-01');
-        $this->assertEquals($billArray['id'], '1');
-        $this->assertEquals($billArray['merchant'], 'TestUser');
+        self::assertEquals('BTC', $billArray['currency']);
+        self::assertEquals('abcd123', $billArray['token']);
+        self::assertEquals('test@test.com', $billArray['email']);
+        self::assertEquals([[]], $billArray['items']);
+        self::assertEquals('12', $billArray['number']);
+        self::assertEquals('TestName', $billArray['name']);
+        self::assertEquals('Address1', $billArray['address1']);
+        self::assertEquals('Address2', $billArray['address2']);
+        self::assertEquals('Miami', $billArray['city']);
+        self::assertEquals('AB', $billArray['state']);
+        self::assertEquals('12345', $billArray['zip']);
+        self::assertEquals('Canada', $billArray['country']);
+        self::assertEquals([''], $billArray['cc']);
+        self::assertEquals('123456789', $billArray['phone']);
+        self::assertEquals('2022-01-01', $billArray['dueDate']);
+        self::assertEquals(true, $billArray['passProcessingFee']);
+        self::assertEquals('status', $billArray['status']);
+        self::assertEquals('http://test.com', $billArray['url']);
+        self::assertEquals('2022-01-01', $billArray['createDate']);
+        self::assertEquals('1', $billArray['id']);
+        self::assertEquals('TestUser', $billArray['merchant']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Bill
     {
         return new Bill();
     }
 
+    /**
+     * @throws BitPayException
+     */
     private function objectSetters(Bill $bill): void
     {
         $bill->setCurrency('BTC');

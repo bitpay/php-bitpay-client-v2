@@ -12,12 +12,56 @@ Our Lite version will most likely be all you need to integrate to your site, ava
 
 ## Getting Started
 
-To get up and running with our PHP library quickly, follow [The GUIDE](https://github.com/bitpay/php-bitpay-client-v2/blob/master/GUIDE.md)
+To get up and running with our PHP library quickly, follow [the guide](https://bitpay.readme.io/reference/php-full-sdk-getting-started)
 
 ## Support
 
 * https://github.com/bitpay/php-bitpay-client-v2/issues
 * https://support.bitpay.com
+
+### Requirements
+
+- PHP version: 8.0 / 8.1 / 8.2
+- PHP extensions: json, reflection
+
+## Unit Tests
+```php
+./vendor/bin/phpunit --testsuite "Unit"
+```
+
+## Functional Tests
+
+To run functional tests you will need to perform the following steps.
+
+### Generate Configuration
+
+
+Run the following command to generate `BitPay.config.yml`:
+
+```bash
+composer setup
+```
+
+Copy `BitPay.config.yml` to the `test/functional/BitPaySDK` directory.
+
+Copy `PrivateKeyName.key` to the `setup` directory.
+
+### Create Recipient
+
+To submit requests you should:
+
+1. Create a recipient in https://test.bitpay.com/dashboard/payouts/recipients
+2. Accept the invite in the recipient's email inbox
+3. Create a file at `test/functional/BitPaySDK/email.txt` containing the email
+   address of the recipient you created in step 1.
+
+### Run the Functional Tests
+
+Run the following command to execute the functional tests:
+
+```php
+./vendor/bin/phpunit --testsuite "Functional"
+```
 
 ## Contribute
 

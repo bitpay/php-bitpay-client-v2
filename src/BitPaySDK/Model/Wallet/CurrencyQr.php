@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -9,11 +15,12 @@ namespace BitPaySDK\Model\Wallet;
 
 /**
  * Object containing QR code related information to show for this payment method
+ * @see <a href="https://bitpay.readme.io/reference/wallets">Wallets</a>
  */
 class CurrencyQr
 {
-    protected $_type;
-    protected $_collapsed;
+    protected ?string $type = null;
+    protected ?bool $collapsed = null;
 
     public function __construct()
     {
@@ -24,11 +31,11 @@ class CurrencyQr
      *
      * The type of QR code to use (ex. BIP21, ADDRESS, BIP72b, BIP681, BIP681b, etc)
      *
-     * @return string The type of QR code to use
+     * @return string|null The type of QR code to use
      */
-    public function getType()
+    public function getType(): ?string
     {
-        return $this->_type;
+        return $this->type;
     }
 
     /**
@@ -38,9 +45,9 @@ class CurrencyQr
      *
      * @param string $type The type of QR code to use
      */
-    public function setType(string $type)
+    public function setType(string $type): void
     {
-        $this->_type = $type;
+        $this->type = $type;
     }
 
     /**
@@ -48,11 +55,11 @@ class CurrencyQr
      *
      * UI hint for BitPay invoice, generally not relevant to customer integrations
      *
-     * @return bool the collapsed
+     * @return bool|null the collapsed
      */
-    public function getCollapsed()
+    public function getCollapsed(): ?bool
     {
-        return $this->_collapsed;
+        return $this->collapsed;
     }
 
     /**
@@ -62,9 +69,9 @@ class CurrencyQr
      *
      * @param bool $collapsed the collapsed
      */
-    public function setCollapsed(bool $collapsed)
+    public function setCollapsed(bool $collapsed): void
     {
-        $this->_collapsed = $collapsed;
+        $this->collapsed = $collapsed;
     }
 
     /**
@@ -72,13 +79,11 @@ class CurrencyQr
      *
      * @return array CurrencyQr as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'type'          => $this->getType(),
-            'collapsed'     => $this->getCollapsed(),
+        return [
+            'type' => $this->getType(),
+            'collapsed' => $this->getCollapsed(),
         ];
-
-        return $elements;
     }
 }

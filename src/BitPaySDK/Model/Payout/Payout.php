@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -8,53 +14,48 @@
 namespace BitPaySDK\Model\Payout;
 
 use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\PayoutException;
 use BitPaySDK\Model\Currency;
 
 /**
- *
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 class Payout
 {
-    protected $_token = '';
-
-    protected $_amount       = 0.0;
-    protected $_currency     = '';
-    protected $_effectiveDate;
-    protected $_ledgerCurrency = '';
-
-    protected $_reference         = '';
-    protected $_notificationUrl   = '';
-    protected $_notificationEmail = '';
-    protected $_redirectUrl = '';
-    protected $_account = '';
-    protected $_email = '';
-    protected $_recipientId = '';
-    protected $_shopperId = '';
-    protected $_label = '';
-    protected $_supportPhone = '';
-    protected $_message = '';
+    protected string $token = '';
+    protected ?float $amount = null;
+    protected ?string $currency = null;
+    protected ?string $effectiveDate = null;
+    protected ?string $ledgerCurrency = null;
+    protected string $reference = '';
+    protected string $notificationURL = '';
+    protected string $notificationEmail = '';
+    protected string $accountId = '';
+    protected string $email = '';
+    protected string $recipientId = '';
+    protected string $shopperId = '';
+    protected string $label = '';
+    protected string $message = '';
     protected bool $ignoreEmails = false;
-    protected $_percentFee = 0.0;
-    protected $_fee = 0.0;
-    protected $_depositTotal = 0.0;
-    protected $_rate = 0.0;
-    protected $_btc = 0.0;
-    protected $_dateExecuted;
-
-    protected $_id;
-    protected $_status;
-    protected $_requestDate;
-    protected $_exchangeRates;
-    protected $_transactions;
-    protected ?string $_groupId = null;
+    protected ?string $groupId = null;
+    protected ?int $code = null;
+    protected ?string $dateExecuted = null;
+    protected ?string $id = null;
+    protected ?string $status = null;
+    protected ?string $requestDate = null;
+    protected ?array $exchangeRates = null;
+    /**
+     * @var PayoutTransaction[]
+     */
+    protected array $transactions = [];
 
     /**
      * Constructor, create a request Payout object.
      *
-     * @param $amount            float The amount for which the payout will be created.
-     * @param $currency          string The three digit currency string for the PayoutBatch to use.
-     * @param $ledgerCurrency    string Ledger currency code set for the payout request (ISO 4217 3-character
+     * @param float|null $amount float The amount for which the payout will be created.
+     * @param string|null $currency string The three digit currency string for the PayoutBatch to use.
+     * @param string|null $ledgerCurrency string Ledger currency code set for the payout request (ISO 4217 3-character
      *                           currency code), it indicates on which ledger the payout request will be
      *                           recorded. If not provided in the request, this parameter will be set by
      *                           default to the active ledger currency on your account, e.g. your settlement
@@ -62,10 +63,9 @@ class Payout
      */
     public function __construct(float $amount = null, string $currency = null, string $ledgerCurrency = null)
     {
-        $this->_amount = $amount;
-        $this->_currency = $currency;
-        $this->_ledgerCurrency = $ledgerCurrency;
-        $this->_transactions = new PayoutTransaction();
+        $this->amount = $amount;
+        $this->currency = $currency;
+        $this->ledgerCurrency = $ledgerCurrency;
     }
 
     // API fields
@@ -81,9 +81,9 @@ class Payout
      *
      * @return string
      */
-    public function getToken()
+    public function getToken(): string
     {
-        return $this->_token;
+        return $this->token;
     }
 
     /**
@@ -92,11 +92,11 @@ class Payout
      * This token is actually derived from the API token -
      * used to submit the payout and is tied to the specific payout resource id created.
      *
-     * @param string $token Resource token
+     * @param string $token
      */
-    public function setToken(string $token)
+    public function setToken(string $token): void
     {
-        $this->_token = $token;
+        $this->token = $token;
     }
 
     // Required fields
@@ -107,29 +107,29 @@ class Payout
      *
      * @return float|null
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
      * Sets amount of cryptocurrency sent to the requested address.
      *
-     * @param float $amount The amount of the payout in the indicated currency
+     * @param float $amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(float $amount): void
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
      * Change amount value based on precision rounding.
      *
-     * @param int $precision Number of decimal places
+     * @param int $precision
      */
-    public function formatAmount(int $precision)
+    public function formatAmount(int $precision): void
     {
-        $this->_amount = round($this->_amount, $precision);
+        $this->amount = round($this->amount, $precision);
     }
 
     /**
@@ -137,15 +137,15 @@ class Payout
      *
      * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
-        return $this->_currency;
+        return $this->currency;
     }
 
     /**
      * Sets currency code set for the batch amount (ISO 4217 3-character currency code).
      *
-     * @param string $currency currency code
+     * @param string $currency
      * @throws BitPayException
      */
     public function setCurrency(string $currency)
@@ -154,7 +154,7 @@ class Payout
             throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
-        $this->_currency = $currency;
+        $this->currency = $currency;
     }
 
     /**
@@ -164,13 +164,13 @@ class Payout
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
      *
-     * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">Supported ledger currency codes</a>
      * @return string|null
      *
+     * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">Supported ledger currency codes</a>
      */
-    public function getEffectiveDate()
+    public function getEffectiveDate(): ?string
     {
-        return $this->_effectiveDate;
+        return $this->effectiveDate;
     }
 
     /**
@@ -178,11 +178,11 @@ class Payout
      *
      * ISO-8601 format yyyy-mm-ddThh:mm:ssZ. If not provided, defaults to date and time of creation.
      *
-     * @param string $effectiveDate Effective date and time (UTC) for the payout
+     * @param string $effectiveDate
      */
-    public function setEffectiveDate(string $effectiveDate)
+    public function setEffectiveDate(string $effectiveDate): void
     {
-        $this->_effectiveDate = $effectiveDate;
+        $this->effectiveDate = $effectiveDate;
     }
 
     /**
@@ -192,13 +192,13 @@ class Payout
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
      *
+     * @return string|null
      * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">Supported ledger currency codes</a>
      *
-     * @return string|null
      */
-    public function getLedgerCurrency()
+    public function getLedgerCurrency(): ?string
     {
-        return $this->_ledgerCurrency;
+        return $this->ledgerCurrency;
     }
 
     /**
@@ -208,16 +208,16 @@ class Payout
      * this parameter will be set by default to the active ledger currency on your account,
      * e.g. your settlement currency.
      *
-     * @param string $ledgerCurrency Ledger currency code
+     * @param string $ledgerCurrency
      * @throws BitPayException
      */
-    public function setLedgerCurrency(string $ledgerCurrency)
+    public function setLedgerCurrency(string $ledgerCurrency): void
     {
         if (!Currency::isValid($ledgerCurrency)) {
             throw new BitPayException('currency code must be a type of Model.Currency');
         }
 
-        $this->_ledgerCurrency = $ledgerCurrency;
+        $this->ledgerCurrency = $ledgerCurrency;
     }
 
     // Optional fields
@@ -232,9 +232,9 @@ class Payout
      *
      * @return string
      */
-    public function getReference()
+    public function getReference(): string
     {
-        return $this->_reference;
+        return $this->reference;
     }
 
     /**
@@ -244,11 +244,11 @@ class Payout
      * Merchants can pass their own unique identifier in this field for reconciliation purpose.
      * Maximum string length is 100 characters.
      *
-     * @param string $reference the reference
+     * @param string $reference
      */
-    public function setReference(string $reference)
+    public function setReference(string $reference): void
     {
-        $this->_reference = $reference;
+        $this->reference = $reference;
     }
 
     /**
@@ -258,9 +258,9 @@ class Payout
      *
      * @return string
      */
-    public function getNotificationURL()
+    public function getNotificationURL(): string
     {
-        return $this->_notificationUrl;
+        return $this->notificationURL;
     }
 
     /**
@@ -268,11 +268,11 @@ class Payout
      *
      * URL to which BitPay sends webhook notifications. HTTPS is mandatory.
      *
-     * @param string $notificationUrl URL to which BitPay sends webhook notifications
+     * @param string $notificationURL
      */
-    public function setNotificationURL(string $notificationUrl)
+    public function setNotificationURL(string $notificationURL): void
     {
-        $this->_notificationUrl = $notificationUrl;
+        $this->notificationURL = $notificationURL;
     }
 
     /**
@@ -282,9 +282,9 @@ class Payout
      *
      * @return string
      */
-    public function getNotificationEmail()
+    public function getNotificationEmail(): string
     {
-        return $this->_notificationEmail;
+        return $this->notificationEmail;
     }
 
     /**
@@ -292,59 +292,33 @@ class Payout
      *
      * Merchant email address for notification of payout status change.
      *
-     * @param string $notificationEmail Merchant email address for notification of payout status change
+     * @param string $notificationEmail
      */
-    public function setNotificationEmail(string $notificationEmail)
+    public function setNotificationEmail(string $notificationEmail): void
     {
-        $this->_notificationEmail = $notificationEmail;
+        $this->notificationEmail = $notificationEmail;
     }
 
     /**
-     * Gets redirect url.
-     *
-     * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or
-     * when clicking on the Close button if a separate closeURL is not specified.
-     * Be sure to include "http://" or "https://" in the url.
+     * Gets BitPay account id that is associated to the payout,
+     * assigned by BitPay for a given account during the onboarding process.
      *
      * @return string
      */
-    public function getRedirectUrl()
+    public function getAccountId(): string
     {
-        return $this->_redirectUrl;
+        return $this->accountId;
     }
 
     /**
-     * Sets redirect url.
+     * Sets BitPay account id that is associated to the payout,
+     * assigned by BitPay for a given account during the onboarding process.
      *
-     * The shopper will be redirected to this URL when clicking on the Return button after a successful payment or
-     * when clicking on the Close button if a separate closeURL is not specified.
-     * Be sure to include "http://" or "https://" in the url.
-     *
-     * @param string $redirectUrl the redirect URL
+     * @param string $accountId
      */
-    public function setRedirectUrl(string $redirectUrl)
+    public function setAccountId(string $accountId): void
     {
-        $this->_redirectUrl = $redirectUrl;
-    }
-
-    /**
-     * Gets account.
-     *
-     * @return string
-     */
-    public function getAccount()
-    {
-        return $this->_account;
-    }
-
-    /**
-     * Sets account.
-     *
-     * @param string $account Bank account number of the merchant
-     */
-    public function setAccount(string $account)
-    {
-        $this->_account = $account;
+        $this->accountId = $accountId;
     }
 
     /**
@@ -356,9 +330,9 @@ class Payout
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
-        return $this->_email;
+        return $this->email;
     }
 
     /**
@@ -368,11 +342,11 @@ class Payout
      * Note: In the future, BitPay may allow recipients to update the email address tied to their personal account.
      * BitPay encourages the use of `recipientId` or `shopperId` when programatically creating payouts requests.
      *
-     * @param string $email Email address of an active recipient
+     * @param string $email
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
-        $this->_email = $email;
+        $this->email = $email;
     }
 
     /**
@@ -380,19 +354,19 @@ class Payout
      *
      * @return string
      */
-    public function getRecipientId()
+    public function getRecipientId(): string
     {
-        return $this->_recipientId;
+        return $this->recipientId;
     }
 
     /**
      * Sets BitPay recipient id. Assigned by BitPay for a given recipient email during the onboarding process.
      *
-     * @param string $recipientId BitPay recipient id
+     * @param string $recipientId
      */
-    public function setRecipientId(string $recipientId)
+    public function setRecipientId(string $recipientId): void
     {
-        $this->_recipientId = $recipientId;
+        $this->recipientId = $recipientId;
     }
 
     /**
@@ -407,9 +381,9 @@ class Payout
      *
      * @return string
      */
-    public function getShopperId()
+    public function getShopperId(): string
     {
-        return $this->_shopperId;
+        return $this->shopperId;
     }
 
     /**
@@ -422,11 +396,11 @@ class Payout
      * BitPay personal accounts before completing the payment.
      * This can allow merchants to monitor the activity of a customer (deposits and payouts).
      *
-     * @param string $shopperId the unique id assigned by BitPay
+     * @param string $shopperId
      */
-    public function setShopperId(string $shopperId)
+    public function setShopperId(string $shopperId): void
     {
-        $this->_shopperId = $shopperId;
+        $this->shopperId = $shopperId;
     }
 
     /**
@@ -437,9 +411,9 @@ class Payout
      *
      * @return string
      */
-    public function getLabel()
+    public function getLabel(): string
     {
-        return $this->_label;
+        return $this->label;
     }
 
     /**
@@ -448,31 +422,11 @@ class Payout
      * For merchant use, pass through - can be the customer name or unique merchant reference assigned by
      * the merchant to the recipient.
      *
-     * @param string $label customer name or unique merchant reference
+     * @param string $label
      */
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
-        $this->_label = $label;
-    }
-
-    /**
-     * Gets support phone.
-     *
-     * @return string
-     */
-    public function getSupportPhone()
-    {
-        return $this->_supportPhone;
-    }
-
-    /**
-     * Sets support phone.
-     *
-     * @param string $supportPhone the support phone
-     */
-    public function setSupportPhone(string $supportPhone)
-    {
-        $this->_supportPhone = $supportPhone;
+        $this->label = $label;
     }
 
     /**
@@ -482,9 +436,9 @@ class Payout
      *
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): string
     {
-        return $this->_message;
+        return $this->message;
     }
 
     /**
@@ -492,111 +446,51 @@ class Payout
      *
      * In case of error, this field will contain a description message. Set to `null` if the request is successful.
      *
-     * @param string $message the description message
+     * @param string $message
      */
-    public function setMessage(string $message)
+    public function setMessage(string $message): void
     {
-        $this->_message = $message;
+        $this->message = $message;
     }
 
     /**
-     * Gets percent fee.
+     * Gets group id.
      *
-     * @return float
+     * @return string|null
      */
-    public function getPercentFee()
+    public function getGroupId(): ?string
     {
-        return $this->_percentFee;
+        return $this->groupId;
     }
 
     /**
-     * Sets percent fee.
+     * Sets group id.
      *
-     * @param float $percentFee the percent fee
+     * @param string|null $groupId
      */
-    public function setPercentFee(float $percentFee)
+    public function setGroupId(?string $groupId): void
     {
-        $this->_percentFee = $percentFee;
+        $this->groupId = $groupId;
     }
 
     /**
-     * Gets fee.
+     * This field will be returned in case of error and contain an error code.
      *
-     * @return float
+     * @return int|null
      */
-    public function getFee()
+    public function getCode(): ?int
     {
-        return $this->_fee;
+        return $this->code;
     }
 
     /**
-     * Sets fee.
+     * Sets error code.
      *
-     * @param float $fee the fee
+     * @param int|null $code
      */
-    public function setFee(float $fee)
+    public function setCode(?int $code): void
     {
-        $this->_fee = $fee;
-    }
-
-    /**
-     * Gets deposit total.
-     *
-     * @return float
-     */
-    public function getDepositTotal()
-    {
-        return $this->_depositTotal;
-    }
-
-    /**
-     * Sets deposit total.
-     *
-     * @param float $depositTotal the deposit total
-     */
-    public function setDepositTotal(float $depositTotal)
-    {
-        $this->_depositTotal = $depositTotal;
-    }
-
-    /**
-     * Gets rate.
-     *
-     * @return float
-     */
-    public function getRate()
-    {
-        return $this->_rate;
-    }
-
-    /**
-     * Sets rate.
-     *
-     * @param float $rate the rate
-     */
-    public function setRate(float $rate)
-    {
-        $this->_rate = $rate;
-    }
-
-    /**
-     * Gets btc.
-     *
-     * @return float
-     */
-    public function getBtc()
-    {
-        return $this->_btc;
-    }
-
-    /**
-     * Sets btc.
-     *
-     * @param float $btc the BTC
-     */
-    public function setBtc(float $btc)
-    {
-        $this->_btc = $btc;
+        $this->code = $code;
     }
 
     /**
@@ -604,19 +498,19 @@ class Payout
      *
      * @return string|null
      */
-    public function getDateExecuted()
+    public function getDateExecuted(): ?string
     {
-        return $this->_dateExecuted;
+        return $this->dateExecuted;
     }
 
     /**
      * Sets date and time (UTC) when BitPay executed the payout. ISO-8601 format yyyy-mm-ddThh:mm:ssZ.
      *
-     * @param string $dateExecuted Date and time (UTC) when BitPay executed the payout
+     * @param string $dateExecuted
      */
-    public function setDateExecuted(string $dateExecuted)
+    public function setDateExecuted(string $dateExecuted): void
     {
-        $this->_dateExecuted = $dateExecuted;
+        $this->dateExecuted = $dateExecuted;
     }
 
     // Response fields
@@ -627,19 +521,19 @@ class Payout
      *
      * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
      * Sets Payout request id.
      *
-     * @param string $id Payout id
+     * @param string $id
      */
-    public function setId(string $id)
+    public function setId(string $id): void
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -664,9 +558,9 @@ class Payout
      *
      * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
-        return $this->_status;
+        return $this->status;
     }
 
     /**
@@ -689,11 +583,11 @@ class Payout
      *     <li>cancelled - when the merchant cancels a payout batch (only possible for requests in the status new</li>
      * </ul>
      *
-     * @param string $status Payout status
+     * @param string $status
      */
-    public function setStatus(string $status)
+    public function setStatus(string $status): void
     {
-        $this->_status = $status;
+        $this->status = $status;
     }
 
     /**
@@ -701,19 +595,19 @@ class Payout
      *
      * @return string|null
      */
-    public function getRequestDate()
+    public function getRequestDate(): ?string
     {
-        return $this->_requestDate;
+        return $this->requestDate;
     }
 
     /**
      * Sets date and time (UTC) when BitPay received the batch. ISO-8601 format `yyyy-mm-ddThh:mm:ssZ`.
      *
-     * @param string $requestDate Date and time (UTC) when BitPay received the payout
+     * @param string $requestDate
      */
-    public function setRequestDate(string $requestDate)
+    public function setRequestDate(string $requestDate): void
     {
-        $this->_requestDate = $requestDate;
+        $this->requestDate = $requestDate;
     }
 
     /**
@@ -721,49 +615,48 @@ class Payout
      *
      * @return array|null
      */
-    public function getExchangeRates()
+    public function getExchangeRates(): ?array
     {
-        return $this->_exchangeRates;
+        return $this->exchangeRates;
     }
 
     /**
      * Sets exchange rates keyed by source and target currencies.
      *
-     * @param array $exchangeRates Exchange rates keyed by source and target currencies
+     * @param array $exchangeRates
      */
-    public function setExchangeRates(array $exchangeRates)
+    public function setExchangeRates(array $exchangeRates): void
     {
-        $this->_exchangeRates = $exchangeRates;
+        $this->exchangeRates = $exchangeRates;
     }
 
     /**
      * Gets transactions. Contains the cryptocurrency transaction details for the executed payout request.
      *
-     * @return array
+     * @return PayoutTransaction[]
      */
-    public function getTransactions()
+    public function getTransactions(): array
     {
-        $transactions = [];
-
-        foreach ($this->_transactions as $transaction) {
-            if ($transaction instanceof PayoutTransaction) {
-                array_push($transactions, $transaction->toArray());
-            } else {
-                array_push($transactions, $transaction);
-            }
-        }
-
-        return $transactions;
+        return $this->transactions;
     }
 
     /**
      * Sets transactions. Contains the cryptocurrency transaction details for the executed payout request.
      *
-     * @param array $transactions Contains the cryptocurrency transaction details for the executed payout
+     * @param PayoutTransaction[] $transactions
+     * @throws PayoutException
      */
-    public function setTransactions(array $transactions)
+    public function setTransactions(array $transactions): void
     {
-        $this->_transactions = $transactions;
+        foreach ($transactions as $transaction) {
+            if (!$transaction instanceof PayoutTransaction) {
+                throw new PayoutException(
+                    'Wrong type of transactions array. They should contains only PayoutTransaction objects'
+                );
+            }
+        }
+
+        $this->transactions = $transactions;
     }
 
     /**
@@ -789,70 +682,21 @@ class Payout
     }
 
     /**
-     * Gets group id.
-     *
-     * @return string|null
-     */
-    public function getGroupId(): ?string
-    {
-        return $this->_groupId;
-    }
-
-    /**
-     * Sets group id.
-     *
-     * @param string|null $groupId
-     */
-    public function setGroupId(?string $groupId): void
-    {
-        $this->_groupId = $groupId;
-    }
-
-    /**
      * Return Payout values as array.
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'token'             => $this->getToken(),
-            'amount'            => $this->getAmount(),
-            'currency'          => $this->getCurrency(),
-            'effectiveDate'     => $this->getEffectiveDate(),
-            'ledgerCurrency'    => $this->getLedgerCurrency(),
-            'reference'         => $this->getReference(),
-            'notificationURL'   => $this->getNotificationURL(),
-            'notificationEmail' => $this->getNotificationEmail(),
-            'redirectUrl'       => $this->getRedirectUrl(),
-            'account'           => $this->getAccount(),
-            'email'             => $this->getEmail(),
-            'recipientId'       => $this->getRecipientId(),
-            'shopperId'         => $this->getShopperId(),
-            'label'             => $this->getLabel(),
-            'supportPhone'      => $this->getSupportPhone(),
-            'message'           => $this->getMessage(),
-            'groupId'           => $this->getGroupId(),
-            'ignoreEmails'      => $this->isIgnoreEmails(),
-            'percentFee'        => $this->getPercentFee(),
-            'fee'               => $this->getFee(),
-            'depositTotal'      => $this->getDepositTotal(),
-            'rate'              => $this->getRate(),
-            'btc'               => $this->getBtc(),
-            'dateExecuted'      => $this->getDateExecuted(),
-            'id'                => $this->getId(),
-            'status'            => $this->getStatus(),
-            'requestDate'       => $this->getRequestDate(),
-            'exchangeRates'     => $this->getExchangeRates(),
-            'transactions'      => $this->getTransactions()
-        ];
+        $result = [];
+        $fields = get_object_vars($this);
 
-        foreach ($elements as $key => $value) {
-            if (empty($value)) {
-                unset($elements[$key]);
+        foreach ($fields as $name => $value) {
+            if (!empty($value)) {
+                $result[$name] = $value;
             }
         }
 
-        return $elements;
+        return $result;
     }
 }

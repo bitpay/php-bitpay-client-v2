@@ -10,7 +10,7 @@ class RateTest extends TestCase
     public function testInstanceOf()
     {
         $rate = $this->createClassObject();
-        $this->assertInstanceOf(Rate::class, $rate);
+        self::assertInstanceOf(Rate::class, $rate);
     }
 
     public function testGetName()
@@ -19,7 +19,7 @@ class RateTest extends TestCase
 
         $rate = $this->createClassObject();
         $rate->setName($expectedName);
-        $this->assertEquals($expectedName, $rate->getName());
+        self::assertEquals($expectedName, $rate->getName());
     }
 
     public function testGetCode()
@@ -28,7 +28,7 @@ class RateTest extends TestCase
 
         $rate = $this->createClassObject();
         $rate->setCode($expectedCode);
-        $this->assertEquals($expectedCode, $rate->getCode());
+        self::assertEquals($expectedCode, $rate->getCode());
     }
 
     public function testGetRate()
@@ -37,7 +37,7 @@ class RateTest extends TestCase
 
         $rate = $this->createClassObject();
         $rate->setRate($expectedRate);
-        $this->assertEquals($expectedRate, $rate->getRate());
+        self::assertEquals($expectedRate, $rate->getRate());
     }
 
     public function testToArray()
@@ -46,19 +46,19 @@ class RateTest extends TestCase
         $this->setSetters($rate);
         $rateArray = $rate->toArray();
 
-        $this->assertNotNull($rateArray);
-        $this->assertIsArray($rateArray);
+        self::assertNotNull($rateArray);
+        self::assertIsArray($rateArray);
 
-        $this->assertArrayHasKey('name', $rateArray);
-        $this->assertArrayHasKey('code', $rateArray);
-        $this->assertArrayHasKey('rate', $rateArray);
+        self::assertArrayHasKey('name', $rateArray);
+        self::assertArrayHasKey('code', $rateArray);
+        self::assertArrayHasKey('rate', $rateArray);
 
-        $this->assertEquals($rateArray['name'], 'Bitcoin');
-        $this->assertEquals($rateArray['code'], 'BTC');
-        $this->assertEquals($rateArray['rate'], 1.0);
+        self::assertEquals('Bitcoin', $rateArray['name']);
+        self::assertEquals('BTC', $rateArray['code']);
+        self::assertEquals(1.0, $rateArray['rate']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): Rate
     {
         return new Rate();
     }

@@ -10,7 +10,7 @@ class UniversalCodesTest extends TestCase
     public function testInstanceOf()
     {
         $universalCodes = $this->createClassObject();
-        $this->assertInstanceOf(UniversalCodes::class, $universalCodes);
+        self::assertInstanceOf(UniversalCodes::class, $universalCodes);
     }
 
     public function testGetPaymentString()
@@ -19,7 +19,7 @@ class UniversalCodesTest extends TestCase
 
         $universalCodes = $this->createClassObject();
         $universalCodes->setPaymentString($expectedPaymentString);
-        $this->assertEquals($expectedPaymentString, $universalCodes->getPaymentString());
+        self::assertEquals($expectedPaymentString, $universalCodes->getPaymentString());
     }
 
     public function testGetVerificationLink()
@@ -28,7 +28,7 @@ class UniversalCodesTest extends TestCase
 
         $universalCodes = $this->createClassObject();
         $universalCodes->setVerificationLink($expectedVerificationLink);
-        $this->assertEquals($expectedVerificationLink, $universalCodes->getVerificationLink());
+        self::assertEquals($expectedVerificationLink, $universalCodes->getVerificationLink());
     }
 
     public function testToArray()
@@ -37,17 +37,17 @@ class UniversalCodesTest extends TestCase
         $this->setSetters($universalCodes);
         $universalCodesArray = $universalCodes->toArray();
 
-        $this->assertNotNull($universalCodesArray);
-        $this->assertIsArray($universalCodesArray);
+        self::assertNotNull($universalCodesArray);
+        self::assertIsArray($universalCodesArray);
 
-        $this->assertArrayHasKey('paymentString', $universalCodesArray);
-        $this->assertArrayHasKey('verificationLink', $universalCodesArray);
+        self::assertArrayHasKey('paymentString', $universalCodesArray);
+        self::assertArrayHasKey('verificationLink', $universalCodesArray);
 
-        $this->assertEquals($universalCodesArray['paymentString'], 'Test payment string');
-        $this->assertEquals($universalCodesArray['verificationLink'], 'http://test.com');
+        self::assertEquals('Test payment string', $universalCodesArray['paymentString']);
+        self::assertEquals('http://test.com', $universalCodesArray['verificationLink']);
     }
 
-    private function createClassObject()
+    private function createClassObject(): UniversalCodes
     {
         return new UniversalCodes();
     }

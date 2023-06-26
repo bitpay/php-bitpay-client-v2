@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -12,14 +18,13 @@ namespace BitPaySDK\Model\Invoice;
  * The currency that may be used to pay this invoice. The values are objects with an "enabled" boolean and option.
  * An extra "reason" parameter is added in the object if a cryptocurrency is disabled on a specific invoice.
  *
- * @see <a href="https://bitpay.com/api/#rest-api-resources-invoices-resource">REST API Invoices</a>
- *
  * @package BitPaySDK\Model\Invoice
+ * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
  */
 class SupportedTransactionCurrency
 {
-    protected $_enabled;
-    protected $_reason;
+    protected ?bool $enabled = null;
+    protected ?string $reason = null;
 
     /**
      * SupportedTransactionCurrency constructor.
@@ -33,9 +38,9 @@ class SupportedTransactionCurrency
      *
      * @param bool $enabled is enabled
      */
-    public function setEnabled(bool $enabled)
+    public function setEnabled(bool $enabled): void
     {
-        $this->_enabled = $enabled;
+        $this->enabled = $enabled;
     }
 
     /**
@@ -43,9 +48,9 @@ class SupportedTransactionCurrency
      *
      * @return bool|null
      */
-    public function getEnabled()
+    public function getEnabled(): ?bool
     {
-        return $this->_enabled;
+        return $this->enabled;
     }
 
     /**
@@ -53,9 +58,9 @@ class SupportedTransactionCurrency
      *
      * @param string $reason the reason
      */
-    public function setReason(string $reason)
+    public function setReason(string $reason): void
     {
-        $this->_reason = $reason;
+        $this->reason = $reason;
     }
 
     /**
@@ -63,9 +68,9 @@ class SupportedTransactionCurrency
      *
      * @return string|null
      */
-    public function getReason()
+    public function getReason(): ?string
     {
-        return $this->_reason;
+        return $this->reason;
     }
 
     /**
@@ -73,11 +78,11 @@ class SupportedTransactionCurrency
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'enabled' => $this->getEnabled(),
-            'reason'  => $this->getReason()
+            'reason' => $this->getReason()
         ];
 
         foreach ($elements as $key => $value) {

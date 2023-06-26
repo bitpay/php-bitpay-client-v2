@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -10,34 +16,33 @@ namespace BitPaySDK\Model\Wallet;
 /**
  *
  * @package Bitpay
+ * @see <a href="https://bitpay.readme.io/reference/wallets">Wallets</a>
  */
 class Wallet
 {
-    protected $_key;
-    protected $_displayName;
-    protected $_avatar;
-    protected $_payPro;
-    protected $_currencies;
-    protected $_image;
+    protected ?string $key = null;
+    protected ?string $displayName = null;
+    protected ?string $avatar = null;
+    protected Currencies $currencies;
+    protected ?string $image = null;
+    protected ?bool $payPro = null;
 
     /**
      * Constructor, create a minimal request Wallet object.
-     *
-     * @param $currencies details of what currencies support payments for this wallet
-    */
+     */
     public function __construct()
     {
-        $this->_currencies = new Currencies();
+        $this->currencies = new Currencies();
     }
 
     /**
      * Gets A unique identifier for the wallet
      *
-     * @return string the key
+     * @return string|null the key
      */
-    public function getKey()
+    public function getKey(): ?string
     {
-        return $this->_key;
+        return $this->key;
     }
 
     /**
@@ -45,9 +50,9 @@ class Wallet
      *
      * @param string $key the key
      */
-    public function setKey(string $key)
+    public function setKey(string $key): void
     {
-        $this->_key = $key;
+        $this->key = $key;
     }
 
     /**
@@ -55,11 +60,11 @@ class Wallet
      *
      * Human readable display name for the wallet
      *
-     * @return string the display name
+     * @return string|null the display name
      */
-    public function getDisplayName()
+    public function getDisplayName(): ?string
     {
-        return $this->_displayName;
+        return $this->displayName;
     }
 
     /**
@@ -69,9 +74,9 @@ class Wallet
      *
      * @param string $displayName the display name
      */
-    public function setDisplayName(string $displayName)
+    public function setDisplayName(string $displayName): void
     {
-        $this->_displayName = $displayName;
+        $this->displayName = $displayName;
     }
 
     /**
@@ -79,11 +84,11 @@ class Wallet
      *
      * Filename of a wallet graphic (not fully qualified)
      *
-     * @return string the avatar
+     * @return string|null the avatar
      */
-    public function getAvatar()
+    public function getAvatar(): ?string
     {
-        return $this->_avatar;
+        return $this->avatar;
     }
 
     /**
@@ -93,9 +98,9 @@ class Wallet
      *
      * @param string $avatar the avatar
      */
-    public function setAvatar(string $avatar)
+    public function setAvatar(string $avatar): void
     {
-        $this->_avatar = $avatar;
+        $this->avatar = $avatar;
     }
 
     /**
@@ -103,11 +108,11 @@ class Wallet
      *
      * Whether or not the wallet supports ANY BitPay Payment Protocol options
      *
-     * @return bool the pay pro
+     * @return bool|null the pay pro
      */
-    public function getPayPro()
+    public function getPayPro(): ?bool
     {
-        return $this->_payPro;
+        return $this->payPro;
     }
 
     /**
@@ -117,9 +122,9 @@ class Wallet
      *
      * @param bool $payPro the pay pro
      */
-    public function setPayPro(bool $payPro)
+    public function setPayPro(bool $payPro): void
     {
-        $this->_payPro = $payPro;
+        $this->payPro = $payPro;
     }
 
     /**
@@ -129,9 +134,9 @@ class Wallet
      *
      * @return Currencies the currencies
      */
-    public function getCurrencies()
+    public function getCurrencies(): Currencies
     {
-        return $this->_currencies;
+        return $this->currencies;
     }
 
     /**
@@ -141,9 +146,9 @@ class Wallet
      *
      * @param Currencies $currencies the currencies
      */
-    public function setCurrencies(Currencies $currencies)
+    public function setCurrencies(Currencies $currencies): void
     {
-        $this->_currencies = $currencies;
+        $this->currencies = $currencies;
     }
 
     /**
@@ -151,11 +156,11 @@ class Wallet
      *
      * URL that displays wallet avatar image
      *
-     * @return string the image url
+     * @return string|null the image url
      */
-    public function getImage()
+    public function getImage(): ?string
     {
-        return $this->_image;
+        return $this->image;
     }
 
     /**
@@ -165,9 +170,9 @@ class Wallet
      *
      * @param string $image the image url
      */
-    public function setImage(string $image)
+    public function setImage(string $image): void
     {
-        $this->_image = $image;
+        $this->image = $image;
     }
 
     /**
@@ -175,17 +180,15 @@ class Wallet
      *
      * @return array Wallet as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'key'         => $this->getKey(),
+        return [
+            'key' => $this->getKey(),
             'displayName' => $this->getDisplayName(),
-            'avatar'      => $this->getAvatar(),
-            'paypro'      => $this->getPayPro(),
-            'currencies'  => $this->getCurrencies()->toArray(),
-            'image'       => $this->getImage()
+            'avatar' => $this->getAvatar(),
+            'paypro' => $this->getPayPro(),
+            'currencies' => $this->getCurrencies()->toArray(),
+            'image' => $this->getImage()
         ];
-
-        return $elements;
     }
 }

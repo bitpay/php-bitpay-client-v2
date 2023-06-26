@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -9,12 +15,14 @@ namespace BitPaySDK\Model\Payout;
 
 /**
  * Contains the cryptocurrency transaction details for the executed payout.
+ * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
  */
 class PayoutTransaction
 {
-    protected $_txid;
-    protected $_amount;
-    protected $_date;
+    protected ?string $txid = null;
+    protected ?float $amount = null;
+    protected ?string $date = null;
+    protected ?string $confirmations = null;
 
     public function __construct()
     {
@@ -23,63 +31,83 @@ class PayoutTransaction
     /**
      * Gets Cryptocurrency transaction hash for the executed payout.
      *
-     * @return string the tax id
+     * @return string|null the tax id
      */
-    public function getTxid()
+    public function getTxid(): ?string
     {
-        return $this->_txid;
+        return $this->txid;
     }
 
     /**
      * Sets Cryptocurrency transaction hash for the executed payout.
      *
-     * @param string $txid the tax id
+     * @param string|null $txid the tax id
      */
-    public function setTxid(string $txid)
+    public function setTxid(?string $txid): void
     {
-        $this->_txid = $txid;
+        $this->txid = $txid;
     }
 
     /**
      * Gets Amount of cryptocurrency sent to the requested address.
      *
-     * @return float the amount
+     * @return float|null the amount
      */
-    public function getAmount()
+    public function getAmount(): ?float
     {
-        return $this->_amount;
+        return $this->amount;
     }
 
     /**
      * Sets Amount of cryptocurrency sent to the requested address.
      *
-     * @param float $amount the amount
+     * @param float|null $amount the amount
      */
-    public function setAmount(float $amount)
+    public function setAmount(?float $amount): void
     {
-        $this->_amount = $amount;
+        $this->amount = $amount;
     }
 
     /**
      * Gets Date and time (UTC) when the cryptocurrency transaction is broadcasted.
      * ISO-8601 format yyyy-mm-ddThh:mm:ssZ.
      *
-     * @return string the date
+     * @return string|null the date
      */
-    public function getDate()
+    public function getDate(): ?string
     {
-        return $this->_date;
+        return $this->date;
     }
 
     /**
      * Sets Date and time (UTC) when the cryptocurrency transaction is broadcasted.
      * ISO-8601 format yyyy-mm-ddThh:mm:ssZ.
      *
-     * @param string $date the date
+     * @param string|null $date the date
      */
-    public function setDate(string $date)
+    public function setDate(?string $date): void
     {
-        $this->_date = $date;
+        $this->date = $date;
+    }
+
+    /**
+     * Gets the number of confirmations the transaction has received.
+     *
+     * @return string|null
+     */
+    public function getConfirmations(): ?string
+    {
+        return $this->confirmations;
+    }
+
+    /**
+     * Sets the number of confirmations the transaction has received.
+     *
+     * @param string|null $confirmations
+     */
+    public function setConfirmations(?string $confirmations): void
+    {
+        $this->confirmations = $confirmations;
     }
 
     /**
@@ -87,14 +115,13 @@ class PayoutTransaction
      *
      * @return array PayoutTransaction as array
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $elements = [
-            'txid'   => $this->getTxid(),
+        return [
+            'txid' => $this->getTxid(),
             'amount' => $this->getAmount(),
-            'date'   => $this->getDate(),
+            'date' => $this->getDate(),
+            'confirmations' => $this->getConfirmations()
         ];
-
-        return $elements;
     }
 }

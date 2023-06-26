@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * Copyright (c) 2019 BitPay
+ **/
+
+declare(strict_types=1);
+
+/*
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
@@ -16,200 +22,200 @@ use ReflectionClass;
 class Currency
 {
     // Crypto
-    const BCH  = "BCH";
-    const BTC  = "BTC";
-    const ETH  = "ETH";
-    const USDC = "USDC";
-    const GUSD = "GUSD";
-    const PAX  = "PAX";
-    const XRP  = "XRP";
-    const BUSD = "BUSD";
-    const DOGE = "DOGE";
-    const LTC  = "LTC";
-    const SHIB  = "SHIB";
+    public const BCH  = "BCH";
+    public const BTC  = "BTC";
+    public const ETH  = "ETH";
+    public const USDC = "USDC";
+    public const GUSD = "GUSD";
+    public const PAX  = "PAX";
+    public const XRP  = "XRP";
+    public const BUSD = "BUSD";
+    public const DOGE = "DOGE";
+    public const LTC  = "LTC";
+    public const SHIB  = "SHIB";
 
     // FIAT
-    const AED = "AED";
-    const AFN = "AFN";
-    const ALL = "ALL";
-    const AMD = "AMD";
-    const ANG = "ANG";
-    const AOA = "AOA";
-    const ARS = "ARS";
-    const AUD = "AUD";
-    const AWG = "AWG";
-    const AZN = "AZN";
-    const BAM = "BAM";
-    const BBD = "BBD";
-    const BDT = "BDT";
-    const BGN = "BGN";
-    const BHD = "BHD";
-    const BIF = "BIF";
-    const BMD = "BMD";
-    const BND = "BND";
-    const BOB = "BOB";
-    const BOV = "BOV";
-    const BRL = "BRL";
-    const BSD = "BSD";
-    const BTN = "BTN";
-    const BWP = "BWP";
-    const BYR = "BYR";
-    const BZD = "BZD";
-    const CAD = "CAD";
-    const CDF = "CDF";
-    const CHE = "CHE";
-    const CHF = "CHF";
-    const CHW = "CHW";
-    const CLF = "CLF";
-    const CLP = "CLP";
-    const CNY = "CNY";
-    const COP = "COP";
-    const COU = "COU";
-    const CRC = "CRC";
-    const CUC = "CUC";
-    const CUP = "CUP";
-    const CVE = "CVE";
-    const CZK = "CZK";
-    const DJF = "DJF";
-    const DKK = "DKK";
-    const DOP = "DOP";
-    const DZD = "DZD";
-    const EGP = "EGP";
-    const ERN = "ERN";
-    const ETB = "ETB";
-    const EUR = "EUR";
-    const FJD = "FJD";
-    const FKP = "FKP";
-    const GBP = "GBP";
-    const GEL = "GEL";
-    const GHS = "GHS";
-    const GIP = "GIP";
-    const GMD = "GMD";
-    const GNF = "GNF";
-    const GTQ = "GTQ";
-    const GYD = "GYD";
-    const HKD = "HKD";
-    const HNL = "HNL";
-    const HRK = "HRK";
-    const HTG = "HTG";
-    const HUF = "HUF";
-    const IDR = "IDR";
-    const ILS = "ILS";
-    const INR = "INR";
-    const IQD = "IQD";
-    const IRR = "IRR";
-    const ISK = "ISK";
-    const JMD = "JMD";
-    const JOD = "JOD";
-    const JPY = "JPY";
-    const KES = "KES";
-    const KGS = "KGS";
-    const KHR = "KHR";
-    const KMF = "KMF";
-    const KPW = "KPW";
-    const KRW = "KRW";
-    const KWD = "KWD";
-    const KYD = "KYD";
-    const KZT = "KZT";
-    const LAK = "LAK";
-    const LBP = "LBP";
-    const LKR = "LKR";
-    const LRD = "LRD";
-    const LSL = "LSL";
-    const LYD = "LYD";
-    const MAD = "MAD";
-    const MDL = "MDL";
-    const MGA = "MGA";
-    const MKD = "MKD";
-    const MMK = "MMK";
-    const MNT = "MNT";
-    const MOP = "MOP";
-    const MRU = "MRU";
-    const MUR = "MUR";
-    const MVR = "MVR";
-    const MWK = "MWK";
-    const MXN = "MXN";
-    const MXV = "MXV";
-    const MYR = "MYR";
-    const MZN = "MZN";
-    const NAD = "NAD";
-    const NGN = "NGN";
-    const NIO = "NIO";
-    const NOK = "NOK";
-    const NPR = "NPR";
-    const NZD = "NZD";
-    const OMR = "OMR";
-    const PAB = "PAB";
-    const PEN = "PEN";
-    const PGK = "PGK";
-    const PHP = "PHP";
-    const PKR = "PKR";
-    const PLN = "PLN";
-    const PYG = "PYG";
-    const QAR = "QAR";
-    const RON = "RON";
-    const RSD = "RSD";
-    const RUB = "RUB";
-    const RWF = "RWF";
-    const SAR = "SAR";
-    const SBD = "SBD";
-    const SCR = "SCR";
-    const SDG = "SDG";
-    const SEK = "SEK";
-    const SGD = "SGD";
-    const SHP = "SHP";
-    const SLL = "SLL";
-    const SOS = "SOS";
-    const SRD = "SRD";
-    const SSP = "SSP";
-    const STN = "STN";
-    const SVC = "SVC";
-    const SYP = "SYP";
-    const SZL = "SZL";
-    const THB = "THB";
-    const TJS = "TJS";
-    const TMT = "TMT";
-    const TND = "TND";
-    const TOP = "TOP";
-    const TRY = "TRY";
-    const TTD = "TTD";
-    const TWD = "TWD";
-    const TZS = "TZS";
-    const UAH = "UAH";
-    const UGX = "UGX";
-    const USD = "USD";
-    const USN = "USN";
-    const UYI = "UYI";
-    const UYU = "UYU";
-    const UZS = "UZS";
-    const VEF = "VEF";
-    const VND = "VND";
-    const VUV = "VUV";
-    const WST = "WST";
-    const XAF = "XAF";
-    const XCD = "XCD";
-    const XDR = "XDR";
-    const XOF = "XOF";
-    const XPF = "XPF";
-    const XSU = "XSU";
-    const XUA = "XUA";
-    const YER = "YER";
-    const ZAR = "ZAR";
-    const ZMW = "ZMW";
-    const ZWL = "ZWL";
+    public const AED = "AED";
+    public const AFN = "AFN";
+    public const ALL = "ALL";
+    public const AMD = "AMD";
+    public const ANG = "ANG";
+    public const AOA = "AOA";
+    public const ARS = "ARS";
+    public const AUD = "AUD";
+    public const AWG = "AWG";
+    public const AZN = "AZN";
+    public const BAM = "BAM";
+    public const BBD = "BBD";
+    public const BDT = "BDT";
+    public const BGN = "BGN";
+    public const BHD = "BHD";
+    public const BIF = "BIF";
+    public const BMD = "BMD";
+    public const BND = "BND";
+    public const BOB = "BOB";
+    public const BOV = "BOV";
+    public const BRL = "BRL";
+    public const BSD = "BSD";
+    public const BTN = "BTN";
+    public const BWP = "BWP";
+    public const BYR = "BYR";
+    public const BZD = "BZD";
+    public const CAD = "CAD";
+    public const CDF = "CDF";
+    public const CHE = "CHE";
+    public const CHF = "CHF";
+    public const CHW = "CHW";
+    public const CLF = "CLF";
+    public const CLP = "CLP";
+    public const CNY = "CNY";
+    public const COP = "COP";
+    public const COU = "COU";
+    public const CRC = "CRC";
+    public const CUC = "CUC";
+    public const CUP = "CUP";
+    public const CVE = "CVE";
+    public const CZK = "CZK";
+    public const DJF = "DJF";
+    public const DKK = "DKK";
+    public const DOP = "DOP";
+    public const DZD = "DZD";
+    public const EGP = "EGP";
+    public const ERN = "ERN";
+    public const ETB = "ETB";
+    public const EUR = "EUR";
+    public const FJD = "FJD";
+    public const FKP = "FKP";
+    public const GBP = "GBP";
+    public const GEL = "GEL";
+    public const GHS = "GHS";
+    public const GIP = "GIP";
+    public const GMD = "GMD";
+    public const GNF = "GNF";
+    public const GTQ = "GTQ";
+    public const GYD = "GYD";
+    public const HKD = "HKD";
+    public const HNL = "HNL";
+    public const HRK = "HRK";
+    public const HTG = "HTG";
+    public const HUF = "HUF";
+    public const IDR = "IDR";
+    public const ILS = "ILS";
+    public const INR = "INR";
+    public const IQD = "IQD";
+    public const IRR = "IRR";
+    public const ISK = "ISK";
+    public const JMD = "JMD";
+    public const JOD = "JOD";
+    public const JPY = "JPY";
+    public const KES = "KES";
+    public const KGS = "KGS";
+    public const KHR = "KHR";
+    public const KMF = "KMF";
+    public const KPW = "KPW";
+    public const KRW = "KRW";
+    public const KWD = "KWD";
+    public const KYD = "KYD";
+    public const KZT = "KZT";
+    public const LAK = "LAK";
+    public const LBP = "LBP";
+    public const LKR = "LKR";
+    public const LRD = "LRD";
+    public const LSL = "LSL";
+    public const LYD = "LYD";
+    public const MAD = "MAD";
+    public const MDL = "MDL";
+    public const MGA = "MGA";
+    public const MKD = "MKD";
+    public const MMK = "MMK";
+    public const MNT = "MNT";
+    public const MOP = "MOP";
+    public const MRU = "MRU";
+    public const MUR = "MUR";
+    public const MVR = "MVR";
+    public const MWK = "MWK";
+    public const MXN = "MXN";
+    public const MXV = "MXV";
+    public const MYR = "MYR";
+    public const MZN = "MZN";
+    public const NAD = "NAD";
+    public const NGN = "NGN";
+    public const NIO = "NIO";
+    public const NOK = "NOK";
+    public const NPR = "NPR";
+    public const NZD = "NZD";
+    public const OMR = "OMR";
+    public const PAB = "PAB";
+    public const PEN = "PEN";
+    public const PGK = "PGK";
+    public const PHP = "PHP";
+    public const PKR = "PKR";
+    public const PLN = "PLN";
+    public const PYG = "PYG";
+    public const QAR = "QAR";
+    public const RON = "RON";
+    public const RSD = "RSD";
+    public const RUB = "RUB";
+    public const RWF = "RWF";
+    public const SAR = "SAR";
+    public const SBD = "SBD";
+    public const SCR = "SCR";
+    public const SDG = "SDG";
+    public const SEK = "SEK";
+    public const SGD = "SGD";
+    public const SHP = "SHP";
+    public const SLL = "SLL";
+    public const SOS = "SOS";
+    public const SRD = "SRD";
+    public const SSP = "SSP";
+    public const STN = "STN";
+    public const SVC = "SVC";
+    public const SYP = "SYP";
+    public const SZL = "SZL";
+    public const THB = "THB";
+    public const TJS = "TJS";
+    public const TMT = "TMT";
+    public const TND = "TND";
+    public const TOP = "TOP";
+    public const TRY = "TRY";
+    public const TTD = "TTD";
+    public const TWD = "TWD";
+    public const TZS = "TZS";
+    public const UAH = "UAH";
+    public const UGX = "UGX";
+    public const USD = "USD";
+    public const USN = "USN";
+    public const UYI = "UYI";
+    public const UYU = "UYU";
+    public const UZS = "UZS";
+    public const VEF = "VEF";
+    public const VND = "VND";
+    public const VUV = "VUV";
+    public const WST = "WST";
+    public const XAF = "XAF";
+    public const XCD = "XCD";
+    public const XDR = "XDR";
+    public const XOF = "XOF";
+    public const XPF = "XPF";
+    public const XSU = "XSU";
+    public const XUA = "XUA";
+    public const YER = "YER";
+    public const ZAR = "ZAR";
+    public const ZMW = "ZMW";
+    public const ZWL = "ZWL";
 
-    protected $_code;
-    protected $_symbol;
-    protected $_precision;
-    protected $_currentlySettled;
-    protected $_name;
-    protected $_plural;
-    protected $_alts;
-    protected $_minimum;
-    protected $_sanctioned;
-    protected $_decimals;
-    protected $_payoutFields;
-    protected $_settlementMinimum;
+    protected ?string $code = null;
+    protected ?string $symbol = null;
+    protected ?int $precision = null;
+    protected ?bool $currentlySettled = null;
+    protected ?string $name = null;
+    protected ?string $plural = null;
+    protected ?string $alts = null;
+    protected ?string $minimum = null;
+    protected ?bool $sanctioned = null;
+    protected ?string $decimals = null;
+    protected array $payoutFields = [];
+    protected array $settlementMinimum = [];
 
     /**
      * Currency validation
@@ -217,13 +223,13 @@ class Currency
      * @param string $value the currency value
      * @return bool
      */
-    public static function isValid($value)
+    public static function isValid(string $value): bool
     {
         try {
             $reflect = new ReflectionClass(Currency::class);
 
             return array_key_exists($value, $reflect->getConstants());
-        } catch (Exception $e) {
+        } catch (Exception) {
             return false;
         }
     }
@@ -235,11 +241,11 @@ class Currency
     /**
      * Get ISO 4217 3-character currency code
      *
-     * @return string the code
+     * @return string|null the code
      */
-    public function getCode()
+    public function getCode(): ?string
     {
-        return $this->_code;
+        return $this->code;
     }
 
     /**
@@ -247,19 +253,19 @@ class Currency
      *
      * @param string $code the code
      */
-    public function setCode(string $code)
+    public function setCode(string $code): void
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
      * Display symbol
      *
-     * @return string the symbol
+     * @return string|null the symbol
      */
-    public function getSymbol()
+    public function getSymbol(): ?string
     {
-        return $this->_symbol;
+        return $this->symbol;
     }
 
     /**
@@ -267,19 +273,19 @@ class Currency
      *
      * @param string|null $symbol
      */
-    public function setSymbol(string $symbol = null)
+    public function setSymbol(?string $symbol = null): void
     {
-        $this->_symbol = $symbol;
+        $this->symbol = $symbol;
     }
 
     /**
      * Number of decimal places
      *
-     * @return int the precision
+     * @return int|null the precision
      */
-    public function getPrecision()
+    public function getPrecision(): ?int
     {
-        return $this->_precision;
+        return $this->precision;
     }
 
     /**
@@ -287,19 +293,19 @@ class Currency
      *
      * @param int $precision the precision
      */
-    public function setPrecision(int $precision)
+    public function setPrecision(int $precision): void
     {
-        $this->_precision = $precision;
+        $this->precision = $precision;
     }
 
     /**
      * Gets currently settled value
      *
-     * @return bool
+     * @return bool|null
      */
-    public function getCurrentlySettled()
+    public function getCurrentlySettled(): ?bool
     {
-        return $this->_currentlySettled;
+        return $this->currentlySettled;
     }
 
     /**
@@ -307,19 +313,19 @@ class Currency
      *
      * @param bool $currentlySettled
      */
-    public function setCurrentlySettled(bool $currentlySettled)
+    public function setCurrentlySettled(bool $currentlySettled): void
     {
-        $this->_currentlySettled = $currentlySettled;
+        $this->currentlySettled = $currentlySettled;
     }
 
     /**
      * Gets currency name
      *
-     * @return string the name
+     * @return string|null the name
      */
-    public function getName()
+    public function getName(): ?string
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -327,19 +333,19 @@ class Currency
      *
      * @param string $name the name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
      * Gets English plural form
      *
-     * @return string the plural form
+     * @return string|null the plural form
      */
-    public function getPlural()
+    public function getPlural(): ?string
     {
-        return $this->_plural;
+        return $this->plural;
     }
 
     /**
@@ -347,19 +353,19 @@ class Currency
      *
      * @param string $plural the plural form
      */
-    public function setPlural(string $plural)
+    public function setPlural(string $plural): void
     {
-        $this->_plural = $plural;
+        $this->plural = $plural;
     }
 
     /**
      * Gets alternative currency name(s)
      *
-     * @return string the alts
+     * @return string|null the alts
      */
-    public function getAlts()
+    public function getAlts(): ?string
     {
-        return $this->_alts;
+        return $this->alts;
     }
 
     /**
@@ -367,19 +373,19 @@ class Currency
      *
      * @param string $alts the alts
      */
-    public function setAlts(string $alts)
+    public function setAlts(string $alts): void
     {
-        $this->_alts = $alts;
+        $this->alts = $alts;
     }
 
     /**
      * Gets minimum supported value when creating an invoice, bill or payout for instance
      *
-     * @return string the minimum
+     * @return string|null the minimum
      */
-    public function getMinimum()
+    public function getMinimum(): ?string
     {
-        return $this->_minimum;
+        return $this->minimum;
     }
 
     /**
@@ -387,19 +393,19 @@ class Currency
      *
      * @param string $minimum the minimum
      */
-    public function setMinimum(string $minimum)
+    public function setMinimum(string $minimum): void
     {
-        $this->_minimum = $minimum;
+        $this->minimum = $minimum;
     }
 
     /**
      * Gets if the currency is linked to a sanctionned country
      *
-     * @return bool the sanctioned
+     * @return bool|null the sanctioned
      */
-    public function getSanctioned()
+    public function getSanctioned(): ?bool
     {
-        return $this->_sanctioned;
+        return $this->sanctioned;
     }
 
     /**
@@ -407,19 +413,19 @@ class Currency
      *
      * @param bool $sanctioned the sanctioned
      */
-    public function setSanctioned(bool $sanctioned)
+    public function setSanctioned(bool $sanctioned): void
     {
-        $this->_sanctioned = $sanctioned;
+        $this->sanctioned = $sanctioned;
     }
 
     /**
      * Gets decimal precision
      *
-     * @return string decimals
+     * @return string|null decimals
      */
-    public function getDecimals()
+    public function getDecimals(): ?string
     {
-        return $this->_decimals;
+        return $this->decimals;
     }
 
     /**
@@ -427,9 +433,9 @@ class Currency
      *
      * @param string $decimals decimals
      */
-    public function setDecimals(string $decimals)
+    public function setDecimals(string $decimals): void
     {
-        $this->_decimals = $decimals;
+        $this->decimals = $decimals;
     }
 
     /**
@@ -437,9 +443,9 @@ class Currency
      *
      * @return array the payout fields
      */
-    public function getPayoutFields()
+    public function getPayoutFields(): array
     {
-        return $this->_payoutFields;
+        return $this->payoutFields;
     }
 
     /**
@@ -447,9 +453,9 @@ class Currency
      *
      * @param array $payoutFields the payout fields
      */
-    public function setPayoutFields(array $payoutFields)
+    public function setPayoutFields(array $payoutFields): void
     {
-        $this->_payoutFields = $payoutFields;
+        $this->payoutFields = $payoutFields;
     }
 
     /**
@@ -457,9 +463,9 @@ class Currency
      *
      * @return array the settlement minimum
      */
-    public function getSettlementMinimum()
+    public function getSettlementMinimum(): array
     {
-        return $this->_settlementMinimum;
+        return $this->settlementMinimum;
     }
 
     /**
@@ -467,9 +473,9 @@ class Currency
      *
      * @param array $settlementMinimum the settlement minimum
      */
-    public function setSettlementMinimum(array $settlementMinimum)
+    public function setSettlementMinimum(array $settlementMinimum): void
     {
-        $this->_settlementMinimum = $settlementMinimum;
+        $this->settlementMinimum = $settlementMinimum;
     }
 
     /**
@@ -477,7 +483,7 @@ class Currency
      *
      * @return array currency data as array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $elements = [
             'code'              => $this->getCode(),
