@@ -62,8 +62,6 @@ use Symfony\Component\Yaml\Yaml;
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @version 8.0.0
- * See bitpay.com/api for more information.
- * date 15.11.2021
  */
 class Client
 {

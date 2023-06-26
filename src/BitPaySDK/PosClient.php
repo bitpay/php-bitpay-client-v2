@@ -20,9 +20,7 @@ use JsonMapper;
  * Class Client
  * @package Bitpay light
  * @author  Antonio Buedo
- * @version 2.1.2112
- * See bitpay.com/api for more information.
- * date 10.12.2021
+ * @version 8.0.0
  */
 class PosClient extends Client
 {
