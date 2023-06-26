@@ -22,6 +22,7 @@ class RefundInfo
     protected ?string $supportRequest = null;
     protected ?string $currency = null;
     protected ?array $amounts = null;
+    protected ?string $refundRequestEid = null;
 
     public function __construct()
     {
@@ -100,6 +101,26 @@ class RefundInfo
     }
 
     /**
+     * Gets Refund Request Eid.
+     *
+     * @return string Request Eid
+     */
+    public function getRefundRequestEid(): ?string
+    {
+        return $this->refundRequestEid;
+    }
+
+    /**
+     * Sets Refund Request Eid.
+     *
+     * @param string|null Refund Request Eid
+     */
+    public function setRefundRequestEid(?string $refundRequestEid): void
+    {
+        $this->refundRequestEid = $refundRequestEid;
+    }
+
+    /**
      * Gets Refund info as array
      *
      * @return array refund info as array
@@ -109,7 +130,8 @@ class RefundInfo
         return [
             'supportRequest' => $this->getSupportRequest(),
             'currency' => $this->getCurrency(),
-            'amounts' => $this->getAmounts()
+            'amounts' => $this->getAmounts(),
+            'refundRequestEid' => $this->getRefundRequestEid()
         ];
     }
 }
