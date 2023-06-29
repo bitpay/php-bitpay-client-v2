@@ -7,7 +7,7 @@ namespace BitPaySDK\Functional;
 use BitPaySDK\Client;
 use PHPUnit\Framework\TestCase;
 
-abstract class AbstractClientTest extends TestCase
+abstract class AbstractClientTestCase extends TestCase
 {
     protected Client $client;
 

@@ -12,7 +12,7 @@ use BitPaySDK\Model\Invoice\Buyer;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Model\Invoice\Refund;
 
-class RefundClientTest extends AbstractClientTest
+class RefundClientTest extends AbstractClientTestCase
 {
     public function testCreateRefund(): void
     {

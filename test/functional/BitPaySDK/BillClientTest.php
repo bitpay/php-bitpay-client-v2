@@ -10,7 +10,7 @@ use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Bill\Item;
 use BitPaySDK\Model\Currency;
 
-class BillClientTest extends AbstractClientTest
+class BillClientTest extends AbstractClientTestCase
 {
     public function testCreate(): void
     {
