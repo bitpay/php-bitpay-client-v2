@@ -13,7 +13,7 @@ use BitPaySDK\Exceptions\PayoutRecipientQueryException;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
 
-class PayoutRecipientsClientTest extends AbstractClientTest
+class PayoutRecipientsClientTest extends AbstractClientTestCase
 {
     /**
      * @throws PayoutRecipientCreationException

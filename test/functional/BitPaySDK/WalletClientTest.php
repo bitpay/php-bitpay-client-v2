@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Functional;
 
-class WalletClientTest extends AbstractClientTest
+class WalletClientTest extends AbstractClientTestCase
 {
     public function testGetSupportedWallets(): void
     {

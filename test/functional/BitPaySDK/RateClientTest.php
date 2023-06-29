@@ -8,7 +8,7 @@ namespace BitPaySDK\Functional;
 
 use BitPaySDK\Model\Rate\Rate;
 
-class RateClientTest extends AbstractClientTest
+class RateClientTest extends AbstractClientTestCase
 {
     public function testGetRates(): void
     {

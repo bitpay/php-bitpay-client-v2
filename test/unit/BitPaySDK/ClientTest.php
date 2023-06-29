@@ -15,6 +15,7 @@ use BitPaySDK\Client\PayoutRecipientsClient;
 use BitPaySDK\Client\RateClient;
 use BitPaySDK\Client\RefundClient;
 use BitPaySDK\Client\SettlementClient;
+use BitPaySDK\Client\TokenClient;
 use BitPaySDK\Client\WalletClient;
 use BitPaySDK\Env;
 use BitPaySDK\Exceptions\BillCreationException;
@@ -2892,7 +2893,7 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testGetInvoiceShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testGetInvoiceShouldCatchRestCliExceptions(string $exceptionClass): void
     {
         $exampleInvoiceObject = json_decode(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
 
@@ -3490,7 +3491,7 @@ class ClientTest extends TestCase
         $testedObject->getSupportedWallets();
     }
 
-    public function exceptionClassProvider(): array
+    public static function exceptionClassProvider(): array
     {
         return [
             [BitPayException::class],
@@ -3562,7 +3563,8 @@ class ClientTest extends TestCase
             RateClient::class,
             RefundClient::class,
             SettlementClient::class,
-            WalletClient::class
+            WalletClient::class,
+            TokenClient::class
         ];
 
         foreach ($listOfClientsToClear as $className) {

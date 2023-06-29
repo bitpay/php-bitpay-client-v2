@@ -13,14 +13,14 @@ use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
 use BitPaySDK\Model\Payout\PayoutStatus;
 
-class PayoutClientTest extends AbstractClientTest
+class PayoutClientTest extends AbstractClientTestCase
 {
     public function testPayoutRequests()
     {
         $currency = Currency::USD;
         $ledgerCurrency = Currency::USD;
         $amount = 10;
-        $email = $this->getFromFile(Config::FUNCTIONAL_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt');
+        $email = $this->getEmailFromFile(Config::FUNCTIONAL_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt');
         $submitPayout = $this->submitPayout($currency, $ledgerCurrency, $amount);
         self::assertEquals($currency, $submitPayout->getCurrency());
         $payoutId = $submitPayout->getId();
@@ -56,7 +56,7 @@ class PayoutClientTest extends AbstractClientTest
         $payout->setReference('payout_20210527');
         $payout->setNotificationEmail('merchant@email.com');
         $payout->setNotificationURL('https://yournotiticationURL.com/wed3sa0wx1rz5bg0bv97851eqx');
-        $payout->setEmail($this->getFromFile(Config::FUNCTIONAL_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt'));
+        $payout->setEmail($this->getEmailFromFile(Config::FUNCTIONAL_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt'));
 
         $createGroupResponse = $this->client->createPayoutGroup([$payout]);
         self::assertCount(1, $createGroupResponse->getPayouts());
@@ -69,7 +69,7 @@ class PayoutClientTest extends AbstractClientTest
 
     private function submitPayout(string $currency, string $ledgerCurrency, int $amount)
     {
-        $email = $this->getFromFile(Config::FUNCTIONAL_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt');
+        $email = $this->getEmailFromFile(Config::FUNCTIONAL_TEST_PATH . DIRECTORY_SEPARATOR . 'email.txt');
         $payout = new Payout($amount, $currency, $ledgerCurrency);
 
         $recipientsList = [
@@ -92,10 +92,13 @@ class PayoutClientTest extends AbstractClientTest
         return $this->client->submitPayout($payout);
     }
 
-    private function getFromFile(string $path): string
+    /**
+     * @throws BitPayException
+     */
+    private function getEmailFromFile(string $path): string
     {
         if (!file_exists($path)) {
-            throw new BitPayException("File not found");
+            throw new BitPayException("Please create email.txt with your email: " . $path);
         }
 
         return file_get_contents($path);

@@ -9,7 +9,7 @@ namespace BitPaySDK\Functional;
 use BitPaySDK\Model\Invoice\Buyer;
 use BitPaySDK\Model\Invoice\Invoice;
 
-class InvoiceClientTest extends AbstractClientTest
+class InvoiceClientTest extends AbstractClientTestCase
 {
     public function testCreateInvoice(): void
     {
