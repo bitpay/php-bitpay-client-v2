@@ -26,11 +26,13 @@ jobs:
       - uses: php-actions/phpunit@v3
         with:
           configuration: phpunit.xml
+          coverage_html: "test/unit/_html"
           php_version: ${{ matrix.php-version }}
           php_extensions: bcmath gmp xdebug
-          coverage_html: "test/unit/_html"
           testsuite: Unit
           version: 10
+        env:
+          XDEBUG_MODE: coverage
   phpcs:
     runs-on: ubuntu-latest
     
