@@ -28,6 +28,7 @@ jobs:
           configuration: phpunit.xml
           php_version: ${{ matrix.php-version }}
           php_extensions: bcmath gmp xdebug
+          coverage_html: "test/unit/_html"
           testsuite: Unit
           version: 10
   phpcs:
