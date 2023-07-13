@@ -1,0 +1,27 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: documentation
+  cancel-in-progress: true
+
+jobs:
+  phpdoc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run phpdoc
+        run: |
+          docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 -d ./src -t ./docs
+      - name: git commit
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email ""
+          git add docs/
+          git commit -m "Update phpdoc" || echo "No changes to commit"
+          git push
