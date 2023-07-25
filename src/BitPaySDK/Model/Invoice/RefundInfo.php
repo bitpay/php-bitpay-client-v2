@@ -15,7 +15,7 @@ namespace BitPaySDK\Model\Invoice;
 
 /**
  * For a refunded invoice, this object will contain the details of executed refunds for the corresponding invoice.
- * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class RefundInfo
 {

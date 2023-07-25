@@ -16,7 +16,7 @@ namespace BitPaySDK\Model\Invoice;
 /**
  * Class ItemizedDetails
  * @package BitPaySDK\Model\Invoice
- * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class ItemizedDetails
 {

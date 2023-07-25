@@ -18,7 +18,7 @@ use BitPaySDK\Model\Currency;
 
 /**
  * @package Bitpay
- * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class Invoice
 {
@@ -1574,7 +1574,7 @@ class Invoice
      * Gets shopper
      *
      * This object will be available on the invoice if a shopper signs in on an invoice using his BitPay ID.
-     * See the following <a href="https://blog.bitpay.com/bitpay-dashboard-id/">blogpost</a> for more information.
+     * @see https://blog.bitpay.com/bitpay-dashboard-id for more information.
      *
      * @return Shopper|null the shopper
      */
@@ -1587,7 +1587,7 @@ class Invoice
      * Sets shopper
      *
      * This object will be available on the invoice if a shopper signs in on an invoice using his BitPay ID.
-     * See the following <a href="https://blog.bitpay.com/bitpay-dashboard-id/">blogpost</a> for more information.
+     * @see https://blog.bitpay.com/bitpay-dashboard-id for more information.
      *
      * @param Shopper $shopper the shopper
      */
@@ -1599,8 +1599,8 @@ class Invoice
     /**
      * Gets billId
      *
-     * This field will be in the invoice object only if the invoice was generated from a bill, see the
-     * <a href="https://bitpay.com/api/#rest-api-resources-bills">Bills</a> resource for more information
+     * This field will be in the invoice object only if the invoice was generated from a bill,
+     * @see https://bitpay.com/api/#rest-api-resources-bills resource for more information
      *
      * @return string|null
      */
@@ -1612,8 +1612,8 @@ class Invoice
     /**
      * Sets billId
      *
-     * This field will be in the invoice object only if the invoice was generated from a bill, see the
-     * <a href="https://bitpay.com/api/#rest-api-resources-bills">Bills</a> resource for more information
+     * This field will be in the invoice object only if the invoice was generated from a bill,
+     * @see https://bitpay.com/api/#rest-api-resources-bills resource for more information
      *
      * @param string $billId the bill id
      */
