@@ -683,7 +683,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\u003A\u003AgetRates\u0028\u0029",
             "name": "getRates",
-            "summary": "Retrieve\u0020the\u0020exchange\u0020rate\u0020table\u0020maintained\u0020by\u0020BitPay.\u0020\u0020See\u0020https\u003A\/\/bitpay.com\/bitcoin\u002Dexchange\u002Drates.",
+            "summary": "Retrieve\u0020the\u0020exchange\u0020rate\u0020table\u0020maintained\u0020by\u0020BitPay.",
             "url": "classes/BitPaySDK-Client.html#method_getRates"
         },                {
             "fqsen": "\\BitPaySDK\\Client\u003A\u003AgetCurrencyRates\u0028\u0029",
