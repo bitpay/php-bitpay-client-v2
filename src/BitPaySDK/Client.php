@@ -150,7 +150,7 @@ class Client
     /**
      * Create a BitPay invoice.
      *
-     * @see https://developer.bitpay.com/reference/create-an-invoice Create an Invoice</a>
+     * @see https://developer.bitpay.com/reference/create-an-invoice Create an Invoice
      *
      * @param Invoice $invoice     An Invoice object with request parameters defined.
      * @param string  $facade      The facade used to create it.
@@ -171,7 +171,7 @@ class Client
     /**
      * Update a BitPay invoice.
      *
-     * @see https://developer.bitpay.com/reference/update-an-invoice Update an Invoice</a>
+     * @see https://developer.bitpay.com/reference/update-an-invoice Update an Invoice
      *
      * @param string $invoiceId The id of the invoice to updated.
      * @param string|null $buyerSms The buyer's cell number.
@@ -198,7 +198,7 @@ class Client
      * Retrieve a BitPay invoice by invoice id using the specified facade.  The client must have been previously
      * authorized for the specified facade (the public facade requires no authorization).
      *
-     * @see https://developer.bitpay.com/reference/retrieve-an-invoice-by-guid Retrieve an Invoice by GUID</a>
+     * @see https://developer.bitpay.com/reference/retrieve-an-invoice-by-guid Retrieve an Invoice by GUID
      *
      * @param string $invoiceId The id of the invoice to retrieve.
      * @param string $facade The facade used to create it.
@@ -220,7 +220,7 @@ class Client
      * Retrieve a BitPay invoice by guid using the specified facade.
      * The client must have been previously authorized for the specified facade.
      *
-     * @see https://developer.bitpay.com/reference/retrieve-an-invoice-by-guid Retrieve an Invoice by GUID</a>
+     * @see https://developer.bitpay.com/reference/retrieve-an-invoice-by-guid Retrieve an Invoice by GUID
      *
      * @param string $guid The guid of the invoice to retrieve.
      * @param string $facade The facade used to create it.
@@ -244,7 +244,7 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/retrieve-invoices-filtered-by-query
      * Retrieve Invoices Filtered by Query
-     * </a>
+     *
      *
      * @param string      $dateStart The start of the date window to query for invoices. Format YYYY-MM-DD.
      * @param string      $dateEnd   The end of the date window to query for invoices. Format YYYY-MM-DD.
@@ -272,7 +272,7 @@ class Client
     /**
      * Request a BitPay Invoice Webhook.
      *
-     * @see https://developer.bitpay.com/reference/retrieve-an-event-token Retrieve an Event Token</a>
+     * @see https://developer.bitpay.com/reference/retrieve-an-event-token Retrieve an Event Token
      *
      * @param  string $invoiceId A BitPay invoice ID.
      * @return bool              True if the webhook was successfully requested, false otherwise.
@@ -289,7 +289,7 @@ class Client
     /**
      * Cancel a BitPay invoice.
      *
-     * @see https://developer.bitpay.com/reference/cancel-an-invoice Cancel an Invoice</a>
+     * @see https://developer.bitpay.com/reference/cancel-an-invoice Cancel an Invoice
      *
      * @param  string   $invoiceId The id of the invoice to updated.
      * @return Invoice  $invoice   Cancelled invoice object.
@@ -308,7 +308,7 @@ class Client
     /**
      * Cancel a BitPay invoice.
      *
-     * @see https://developer.bitpay.com/reference/cancel-an-invoice-by-guid Cancel an Invoice by GUID</a>
+     * @see https://developer.bitpay.com/reference/cancel-an-invoice-by-guid Cancel an Invoice by GUID
      *
      * @param  string $guid The guid of the invoice to cancel.
      * @return Invoice $invoice Cancelled invoice object.
@@ -345,7 +345,7 @@ class Client
     /**
      * Create a refund for a BitPay invoice.
      *
-     * @see https://developer.bitpay.com/reference/create-a-refund-request Create a Refund Request</a>
+     * @see https://developer.bitpay.com/reference/create-a-refund-request Create a Refund Request
      *
      * @param  string $invoiceId          The BitPay invoice Id having the associated refund to be created.
      * @param  float  $amount             Amount to be refunded in the currency indicated.
@@ -377,7 +377,7 @@ class Client
     /**
      * Update the status of a BitPay invoice.
      *
-     * @see https://developer.bitpay.com/reference/update-a-refund-request Update a Refund Request</a>
+     * @see https://developer.bitpay.com/reference/update-a-refund-request Update a Refund Request
      *
      * @param  string $refundId    BitPay refund ID.
      * @param  string $status      The new status for the refund to be updated.
@@ -397,9 +397,7 @@ class Client
     /**
      * Update the status of a BitPay invoice.
      *
-     * @see https://developer.bitpay.com/reference/update-a-refund-by-guid-request
-     * Update a Refund by GUID Request
-     * </a>
+     * @see https://developer.bitpay.com/reference/update-a-refund-by-guid-request Update a Refund by GUID Request
      *
      * @param  string $guid        BitPay refund Guid.
      * @param  string $status      The new status for the refund to be updated.
@@ -419,9 +417,7 @@ class Client
     /**
      * Retrieve all refund requests on a BitPay invoice.
      *
-     * @see https://developer.bitpay.com/reference/retrieve-refunds-of-an-invoice
-     * Retrieve Refunds of an Invoice
-     * </a>
+     * @see https://developer.bitpay.com/reference/retrieve-refunds-of-an-invoice Retrieve Refunds of an Invoice
      *
      * @param  string $invoiceId   The BitPay invoice object having the associated refunds.
      * @return Refund[]
@@ -457,9 +453,7 @@ class Client
     /**
      * Retrieve a previously made refund request on a BitPay invoice.
      *
-     * @see https://developer.bitpay.com/reference/retrieve-a-refund-by-guid-request
-     * Retrieve a Refund by GUID Request
-     * </a>
+     * @see https://developer.bitpay.com/reference/retrieve-a-refund-by-guid-request Retrieve a Refund by GUID Request
      *
      * @param string $guid The BitPay refund Guid
      * @return Refund BitPay Refund object with the associated Refund object.
@@ -478,7 +472,6 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/request-a-refund-notification-to-be-resent
      * Request a Refund Notification to be Resent
-     * </a>
      *
      * @param  string $refundId    A BitPay refund ID.
      * @return bool   $result      An updated Refund Object
@@ -514,7 +507,6 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/cancel-a-refund-by-guid-request
      * Cancel a Refund by GUID Request
-     * </a>
      *
      * @param  string $guid     The refund Guid for the refund to be canceled.
      * @return Refund $refund   Cancelled refund Object.
@@ -533,7 +525,6 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/retrieve-the-supported-wallets
      * Retrieve the Supported Wallets
-     * </a>
      *
      * @return Wallet[]
      * @throws WalletQueryException
