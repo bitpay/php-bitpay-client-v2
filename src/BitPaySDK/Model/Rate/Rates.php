@@ -21,7 +21,7 @@ use BitPaySDK\Model\Currency;
 /**
  * Class Rates
  * @package BitPaySDK\Model\Rate
- * @see <a href="https://bitpay.readme.io/reference/rates">REST API Rates</a>
+ * @see https://bitpay.readme.io/reference/rates REST API Rates
  */
 class Rates
 {

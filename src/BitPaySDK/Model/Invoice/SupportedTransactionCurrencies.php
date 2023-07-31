@@ -17,7 +17,7 @@ namespace BitPaySDK\Model\Invoice;
  * Class SupportedTransactionCurrencies. The currencies that may be used to pay this invoice.
  *
  * @package BitPaySDK\Model\Invoice
- * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class SupportedTransactionCurrencies
 {

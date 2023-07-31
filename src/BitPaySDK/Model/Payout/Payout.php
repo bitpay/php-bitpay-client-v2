@@ -19,7 +19,7 @@ use BitPaySDK\Model\Currency;
 
 /**
  * @package Bitpay
- * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
+ * @see https://bitpay.readme.io/reference/payouts REST API Payouts
  */
 class Payout
 {
@@ -166,7 +166,7 @@ class Payout
      *
      * @return string|null
      *
-     * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">Supported ledger currency codes</a>
+     * @see https://bitpay.com/api/#rest-api-resources-payouts Supported ledger currency codes
      */
     public function getEffectiveDate(): ?string
     {
@@ -193,7 +193,7 @@ class Payout
      * e.g. your settlement currency.
      *
      * @return string|null
-     * @see <a href="https://bitpay.com/api/#rest-api-resources-payouts">Supported ledger currency codes</a>
+     * @see https://bitpay.com/api/#rest-api-resources-payouts Supported ledger currency codes
      *
      */
     public function getLedgerCurrency(): ?string

@@ -18,7 +18,7 @@ use BitPaySDK\Model\Currency;
 
 /**
  * @package Bitpay
- * @see <a href="https://developer.bitpay.com/reference/bills">REST API Bills</a>
+ * @see https://developer.bitpay.com/reference/bills REST API Bills
  */
 class Bill
 {

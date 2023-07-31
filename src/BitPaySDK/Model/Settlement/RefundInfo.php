@@ -15,7 +15,7 @@ namespace BitPaySDK\Model\Settlement;
 
 /**
  * Object containing information about the refund.
- * @see <a href="https://bitpay.readme.io/reference/settlements">Settlements</a>
+ * @see https://bitpay.readme.io/reference/settlements Settlements
  */
 class RefundInfo
 {

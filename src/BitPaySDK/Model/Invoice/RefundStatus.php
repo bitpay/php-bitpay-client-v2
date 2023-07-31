@@ -13,7 +13,7 @@ namespace BitPaySDK\Model\Invoice;
 
 /**
  * Refund status list
- * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 interface RefundStatus
 {

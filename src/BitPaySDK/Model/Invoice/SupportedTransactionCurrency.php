@@ -19,7 +19,7 @@ namespace BitPaySDK\Model\Invoice;
  * An extra "reason" parameter is added in the object if a cryptocurrency is disabled on a specific invoice.
  *
  * @package BitPaySDK\Model\Invoice
- * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class SupportedTransactionCurrency
 {

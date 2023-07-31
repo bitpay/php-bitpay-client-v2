@@ -15,7 +15,7 @@ namespace BitPaySDK\Model\Payout;
 
 /**
  * @package Bitpay
- * @see <a href="https://bitpay.readme.io/reference/payouts">REST API Payouts</a>
+ * @see https://bitpay.readme.io/reference/payouts REST API Payouts
  */
 class PayoutRecipient
 {

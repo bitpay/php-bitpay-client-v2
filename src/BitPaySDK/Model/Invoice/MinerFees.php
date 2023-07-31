@@ -19,7 +19,7 @@ namespace BitPaySDK\Model\Invoice;
  * the total fee, and the fiat amount. This is referenced as "Network Cost" on an invoice,
  * see this support article for more information.
  *
- * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class MinerFees
 {

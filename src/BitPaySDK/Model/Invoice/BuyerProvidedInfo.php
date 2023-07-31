@@ -15,7 +15,7 @@ namespace BitPaySDK\Model\Invoice;
 
 /**
  * Information collected from the buyer during the process of paying an invoice. Initially this object is empty.
- * @see <a href="https://bitpay.readme.io/reference/invoices">REST API Invoices</a>
+ * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class BuyerProvidedInfo
 {

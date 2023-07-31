@@ -16,7 +16,7 @@ namespace BitPaySDK\Model\Wallet;
 /**
  *
  * @package Bitpay
- * @see <a href="https://bitpay.readme.io/reference/wallets">Wallets</a>
+ * @see https://bitpay.readme.io/reference/wallets Wallets
  */
 class Wallet
 {

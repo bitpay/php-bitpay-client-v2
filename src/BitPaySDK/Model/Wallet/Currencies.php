@@ -15,7 +15,7 @@ namespace BitPaySDK\Model\Wallet;
 
 /**
  * Details of what currencies support payments for this wallet
- * @see <a href="https://bitpay.readme.io/reference/wallets">Wallets</a>
+ * @see https://bitpay.readme.io/reference/wallets Wallets
  */
 class Currencies
 {
