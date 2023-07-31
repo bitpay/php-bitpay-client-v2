@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -121,188 +122,165 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
     </ul>
 
     <article class="phpdocumentor-element -package">
         <h2 class="phpdocumentor-content__title">Application</h2>
 
         
+<h3 id="toc">
+    Table of Contents
+    <a href="packages/Application.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
-<h3 id="interfaces_class_traits">
-    Interfaces, Classes, Traits and Enums
-    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
 </h3>
 
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Env.html"><abbr title="\BitPaySDK\Env">Env</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Bill-BillStatus.html"><abbr title="\BitPaySDK\Model\Bill\BillStatus">BillStatus</abbr></a></dt>
-        <dd>Contains bill statuses: Can be &quot;draft&quot;, &quot;sent&quot;, &quot;new&quot;, &quot;paid&quot;, or &quot;complete&quot;</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Facade.html"><abbr title="\BitPaySDK\Model\Facade">Facade</abbr></a></dt>
-        <dd>Facades named collections of capabilities that can be granted,
-such as the ability to create invoices or grant refunds</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html"><abbr title="\BitPaySDK\Model\Invoice\InvoiceStatus">InvoiceStatus</abbr></a></dt>
-        <dd>The type Invoice status.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Invoice-RefundStatus.html"><abbr title="\BitPaySDK\Model\Invoice\RefundStatus">RefundStatus</abbr></a></dt>
-        <dd>Refund status list</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Payout-RecipientReferenceMethod.html"><abbr title="\BitPaySDK\Model\Payout\RecipientReferenceMethod">RecipientReferenceMethod</abbr></a></dt>
-        <dd>List of recipient reference methods</dd>
-    
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-BillClient.html"><abbr title="\BitPaySDK\Client\BillClient">BillClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-InvoiceClient.html"><abbr title="\BitPaySDK\Client\InvoiceClient">InvoiceClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-LedgerClient.html"><abbr title="\BitPaySDK\Client\LedgerClient">LedgerClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-PayoutClient.html"><abbr title="\BitPaySDK\Client\PayoutClient">PayoutClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-PayoutRecipientsClient.html"><abbr title="\BitPaySDK\Client\PayoutRecipientsClient">PayoutRecipientsClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-RateClient.html"><abbr title="\BitPaySDK\Client\RateClient">RateClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-RefundClient.html"><abbr title="\BitPaySDK\Client\RefundClient">RefundClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-SettlementClient.html"><abbr title="\BitPaySDK\Client\SettlementClient">SettlementClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-TokenClient.html"><abbr title="\BitPaySDK\Client\TokenClient">TokenClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-WalletClient.html"><abbr title="\BitPaySDK\Client\WalletClient">WalletClient</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillCreationException.html"><abbr title="\BitPaySDK\Exceptions\BillCreationException">BillCreationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillDeliveryException.html"><abbr title="\BitPaySDK\Exceptions\BillDeliveryException">BillDeliveryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillException.html"><abbr title="\BitPaySDK\Exceptions\BillException">BillException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillQueryException.html"><abbr title="\BitPaySDK\Exceptions\BillQueryException">BillQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillUpdateException.html"><abbr title="\BitPaySDK\Exceptions\BillUpdateException">BillUpdateException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-CurrencyException.html"><abbr title="\BitPaySDK\Exceptions\CurrencyException">CurrencyException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-CurrencyQueryException.html"><abbr title="\BitPaySDK\Exceptions\CurrencyQueryException">CurrencyQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceCancellationException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceCancellationException">InvoiceCancellationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceCreationException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceCreationException">InvoiceCreationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceException">InvoiceException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoicePaymentException.html"><abbr title="\BitPaySDK\Exceptions\InvoicePaymentException">InvoicePaymentException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceQueryException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceQueryException">InvoiceQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceUpdateException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceUpdateException">InvoiceUpdateException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-LedgerException.html"><abbr title="\BitPaySDK\Exceptions\LedgerException">LedgerException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-LedgerQueryException.html"><abbr title="\BitPaySDK\Exceptions\LedgerQueryException">LedgerQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchCancellationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchCancellationException">PayoutBatchCancellationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchCreationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchCreationException">PayoutBatchCreationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchException">PayoutBatchException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchNotificationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchNotificationException">PayoutBatchNotificationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchQueryException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchQueryException">PayoutBatchQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutCancellationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutCancellationException">PayoutCancellationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutCreationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutCreationException">PayoutCreationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutException.html"><abbr title="\BitPaySDK\Exceptions\PayoutException">PayoutException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutNotificationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutNotificationException">PayoutNotificationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutQueryException.html"><abbr title="\BitPaySDK\Exceptions\PayoutQueryException">PayoutQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientCancellationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientCancellationException">PayoutRecipientCancellationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientCreationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientCreationException">PayoutRecipientCreationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientException">PayoutRecipientException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientNotificationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientNotificationException">PayoutRecipientNotificationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientQueryException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientQueryException">PayoutRecipientQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientUpdateException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientUpdateException">PayoutRecipientUpdateException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutUpdateException.html"><abbr title="\BitPaySDK\Exceptions\PayoutUpdateException">PayoutUpdateException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RateException.html"><abbr title="\BitPaySDK\Exceptions\RateException">RateException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RateQueryException.html"><abbr title="\BitPaySDK\Exceptions\RateQueryException">RateQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundCancellationException.html"><abbr title="\BitPaySDK\Exceptions\RefundCancellationException">RefundCancellationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundCreationException.html"><abbr title="\BitPaySDK\Exceptions\RefundCreationException">RefundCreationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundException.html"><abbr title="\BitPaySDK\Exceptions\RefundException">RefundException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundNotificationException.html"><abbr title="\BitPaySDK\Exceptions\RefundNotificationException">RefundNotificationException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundQueryException.html"><abbr title="\BitPaySDK\Exceptions\RefundQueryException">RefundQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundUpdateException.html"><abbr title="\BitPaySDK\Exceptions\RefundUpdateException">RefundUpdateException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-SettlementException.html"><abbr title="\BitPaySDK\Exceptions\SettlementException">SettlementException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-SettlementQueryException.html"><abbr title="\BitPaySDK\Exceptions\SettlementQueryException">SettlementQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-WalletException.html"><abbr title="\BitPaySDK\Exceptions\WalletException">WalletException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-WalletQueryException.html"><abbr title="\BitPaySDK\Exceptions\WalletQueryException">WalletQueryException</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Currency.html"><abbr title="\BitPaySDK\Model\Currency">Currency</abbr></a></dt>
-        <dd>Object containing currency information</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-BuyerProvidedInfo.html"><abbr title="\BitPaySDK\Model\Invoice\BuyerProvidedInfo">BuyerProvidedInfo</abbr></a></dt>
-        <dd>Information collected from the buyer during the process of paying an invoice. Initially this object is empty.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-MinerFees.html"><abbr title="\BitPaySDK\Model\Invoice\MinerFees">MinerFees</abbr></a></dt>
-        <dd>The total amount of fees that the purchaser will pay to cover BitPay&#039;s UTXO sweep cost for an invoice.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-RefundInfo.html"><abbr title="\BitPaySDK\Model\Invoice\RefundInfo">RefundInfo</abbr></a></dt>
-        <dd>For a refunded invoice, this object will contain the details of executed refunds for the corresponding invoice.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-Shopper.html"><abbr title="\BitPaySDK\Model\Invoice\Shopper">Shopper</abbr></a></dt>
-        <dd>This object will be available on the invoice if a shopper signs in on an invoice using his BitPay ID.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-UniversalCodes.html"><abbr title="\BitPaySDK\Model\Invoice\UniversalCodes">UniversalCodes</abbr></a></dt>
-        <dd>Object containing wallet-specific URLs for payment protocol.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Payout-PayoutGroupFailed.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroupFailed">PayoutGroupFailed</abbr></a></dt>
-        <dd></dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Payout-PayoutTransaction.html"><abbr title="\BitPaySDK\Model\Payout\PayoutTransaction">PayoutTransaction</abbr></a></dt>
-        <dd>Contains the cryptocurrency transaction details for the executed payout.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Settlement-InvoiceData.html"><abbr title="\BitPaySDK\Model\Settlement\InvoiceData">InvoiceData</abbr></a></dt>
-        <dd>Object containing relevant information from the paid invoice.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Settlement-PayoutInfo.html"><abbr title="\BitPaySDK\Model\Settlement\PayoutInfo">PayoutInfo</abbr></a></dt>
-        <dd>Object containing the settlement info provided by the Merchant in his BitPay account settings.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Settlement-RefundInfo.html"><abbr title="\BitPaySDK\Model\Settlement\RefundInfo">RefundInfo</abbr></a></dt>
-        <dd>Object containing information about the refund.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Settlement-Settlement.html"><abbr title="\BitPaySDK\Model\Settlement\Settlement">Settlement</abbr></a></dt>
-        <dd>Settlement data object.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Wallet-Currencies.html"><abbr title="\BitPaySDK\Model\Wallet\Currencies">Currencies</abbr></a></dt>
-        <dd>Details of what currencies support payments for this wallet</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Wallet-CurrencyQr.html"><abbr title="\BitPaySDK\Model\Wallet\CurrencyQr">CurrencyQr</abbr></a></dt>
-        <dd>Object containing QR code related information to show for this payment method</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Util-JsonMapperFactory.html"><abbr title="\BitPaySDK\Util\JsonMapperFactory">JsonMapperFactory</abbr></a></dt>
-        <dd></dd>
-    
-    
-    </dl>
+
+
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="packages/Application.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Env.html"><abbr title="\BitPaySDK\Env">Env</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Bill-BillStatus.html"><abbr title="\BitPaySDK\Model\Bill\BillStatus">BillStatus</abbr></a></dt><dd>Contains bill statuses: Can be &quot;draft&quot;, &quot;sent&quot;, &quot;new&quot;, &quot;paid&quot;, or &quot;complete&quot;</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Facade.html"><abbr title="\BitPaySDK\Model\Facade">Facade</abbr></a></dt><dd>Facades named collections of capabilities that can be granted,
+such as the ability to create invoices or grant refunds</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html"><abbr title="\BitPaySDK\Model\Invoice\InvoiceStatus">InvoiceStatus</abbr></a></dt><dd>The type Invoice status.</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Invoice-RefundStatus.html"><abbr title="\BitPaySDK\Model\Invoice\RefundStatus">RefundStatus</abbr></a></dt><dd>Refund status list</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/BitPaySDK-Model-Payout-RecipientReferenceMethod.html"><abbr title="\BitPaySDK\Model\Payout\RecipientReferenceMethod">RecipientReferenceMethod</abbr></a></dt><dd>List of recipient reference methods</dd>    </dl>
+
+    <h4 id="toc-classes">
+        Classes
+        <a href="packages/Application.html#toc-classes" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-BillClient.html"><abbr title="\BitPaySDK\Client\BillClient">BillClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-InvoiceClient.html"><abbr title="\BitPaySDK\Client\InvoiceClient">InvoiceClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-LedgerClient.html"><abbr title="\BitPaySDK\Client\LedgerClient">LedgerClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-PayoutClient.html"><abbr title="\BitPaySDK\Client\PayoutClient">PayoutClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-PayoutRecipientsClient.html"><abbr title="\BitPaySDK\Client\PayoutRecipientsClient">PayoutRecipientsClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-RateClient.html"><abbr title="\BitPaySDK\Client\RateClient">RateClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-RefundClient.html"><abbr title="\BitPaySDK\Client\RefundClient">RefundClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-SettlementClient.html"><abbr title="\BitPaySDK\Client\SettlementClient">SettlementClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-TokenClient.html"><abbr title="\BitPaySDK\Client\TokenClient">TokenClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Client-WalletClient.html"><abbr title="\BitPaySDK\Client\WalletClient">WalletClient</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillCreationException.html"><abbr title="\BitPaySDK\Exceptions\BillCreationException">BillCreationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillDeliveryException.html"><abbr title="\BitPaySDK\Exceptions\BillDeliveryException">BillDeliveryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillException.html"><abbr title="\BitPaySDK\Exceptions\BillException">BillException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillQueryException.html"><abbr title="\BitPaySDK\Exceptions\BillQueryException">BillQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BillUpdateException.html"><abbr title="\BitPaySDK\Exceptions\BillUpdateException">BillUpdateException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-CurrencyException.html"><abbr title="\BitPaySDK\Exceptions\CurrencyException">CurrencyException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-CurrencyQueryException.html"><abbr title="\BitPaySDK\Exceptions\CurrencyQueryException">CurrencyQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceCancellationException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceCancellationException">InvoiceCancellationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceCreationException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceCreationException">InvoiceCreationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceException">InvoiceException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoicePaymentException.html"><abbr title="\BitPaySDK\Exceptions\InvoicePaymentException">InvoicePaymentException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceQueryException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceQueryException">InvoiceQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-InvoiceUpdateException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceUpdateException">InvoiceUpdateException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-LedgerException.html"><abbr title="\BitPaySDK\Exceptions\LedgerException">LedgerException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-LedgerQueryException.html"><abbr title="\BitPaySDK\Exceptions\LedgerQueryException">LedgerQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchCancellationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchCancellationException">PayoutBatchCancellationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchCreationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchCreationException">PayoutBatchCreationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchException">PayoutBatchException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchNotificationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchNotificationException">PayoutBatchNotificationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutBatchQueryException.html"><abbr title="\BitPaySDK\Exceptions\PayoutBatchQueryException">PayoutBatchQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutCancellationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutCancellationException">PayoutCancellationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutCreationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutCreationException">PayoutCreationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutException.html"><abbr title="\BitPaySDK\Exceptions\PayoutException">PayoutException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutNotificationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutNotificationException">PayoutNotificationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutQueryException.html"><abbr title="\BitPaySDK\Exceptions\PayoutQueryException">PayoutQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientCancellationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientCancellationException">PayoutRecipientCancellationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientCreationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientCreationException">PayoutRecipientCreationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientException">PayoutRecipientException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientNotificationException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientNotificationException">PayoutRecipientNotificationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientQueryException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientQueryException">PayoutRecipientQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientUpdateException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientUpdateException">PayoutRecipientUpdateException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-PayoutUpdateException.html"><abbr title="\BitPaySDK\Exceptions\PayoutUpdateException">PayoutUpdateException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RateException.html"><abbr title="\BitPaySDK\Exceptions\RateException">RateException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RateQueryException.html"><abbr title="\BitPaySDK\Exceptions\RateQueryException">RateQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundCancellationException.html"><abbr title="\BitPaySDK\Exceptions\RefundCancellationException">RefundCancellationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundCreationException.html"><abbr title="\BitPaySDK\Exceptions\RefundCreationException">RefundCreationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundException.html"><abbr title="\BitPaySDK\Exceptions\RefundException">RefundException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundNotificationException.html"><abbr title="\BitPaySDK\Exceptions\RefundNotificationException">RefundNotificationException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundQueryException.html"><abbr title="\BitPaySDK\Exceptions\RefundQueryException">RefundQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-RefundUpdateException.html"><abbr title="\BitPaySDK\Exceptions\RefundUpdateException">RefundUpdateException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-SettlementException.html"><abbr title="\BitPaySDK\Exceptions\SettlementException">SettlementException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-SettlementQueryException.html"><abbr title="\BitPaySDK\Exceptions\SettlementQueryException">SettlementQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-WalletException.html"><abbr title="\BitPaySDK\Exceptions\WalletException">WalletException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Exceptions-WalletQueryException.html"><abbr title="\BitPaySDK\Exceptions\WalletQueryException">WalletQueryException</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Currency.html"><abbr title="\BitPaySDK\Model\Currency">Currency</abbr></a></dt><dd>Object containing currency information</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-BuyerProvidedInfo.html"><abbr title="\BitPaySDK\Model\Invoice\BuyerProvidedInfo">BuyerProvidedInfo</abbr></a></dt><dd>Information collected from the buyer during the process of paying an invoice. Initially this object is empty.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-MinerFees.html"><abbr title="\BitPaySDK\Model\Invoice\MinerFees">MinerFees</abbr></a></dt><dd>The total amount of fees that the purchaser will pay to cover BitPay&#039;s UTXO sweep cost for an invoice.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-RefundInfo.html"><abbr title="\BitPaySDK\Model\Invoice\RefundInfo">RefundInfo</abbr></a></dt><dd>For a refunded invoice, this object will contain the details of executed refunds for the corresponding invoice.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-Shopper.html"><abbr title="\BitPaySDK\Model\Invoice\Shopper">Shopper</abbr></a></dt><dd>This object will be available on the invoice if a shopper signs in on an invoice using his BitPay ID.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Invoice-UniversalCodes.html"><abbr title="\BitPaySDK\Model\Invoice\UniversalCodes">UniversalCodes</abbr></a></dt><dd>Object containing wallet-specific URLs for payment protocol.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Payout-PayoutGroup.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroup">PayoutGroup</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Payout-PayoutGroupFailed.html"><abbr title="\BitPaySDK\Model\Payout\PayoutGroupFailed">PayoutGroupFailed</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Payout-PayoutTransaction.html"><abbr title="\BitPaySDK\Model\Payout\PayoutTransaction">PayoutTransaction</abbr></a></dt><dd>Contains the cryptocurrency transaction details for the executed payout.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Settlement-InvoiceData.html"><abbr title="\BitPaySDK\Model\Settlement\InvoiceData">InvoiceData</abbr></a></dt><dd>Object containing relevant information from the paid invoice.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Settlement-PayoutInfo.html"><abbr title="\BitPaySDK\Model\Settlement\PayoutInfo">PayoutInfo</abbr></a></dt><dd>Object containing the settlement info provided by the Merchant in his BitPay account settings.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Settlement-RefundInfo.html"><abbr title="\BitPaySDK\Model\Settlement\RefundInfo">RefundInfo</abbr></a></dt><dd>Object containing information about the refund.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Settlement-Settlement.html"><abbr title="\BitPaySDK\Model\Settlement\Settlement">Settlement</abbr></a></dt><dd>Settlement data object.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Wallet-Currencies.html"><abbr title="\BitPaySDK\Model\Wallet\Currencies">Currencies</abbr></a></dt><dd>Details of what currencies support payments for this wallet</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Model-Wallet-CurrencyQr.html"><abbr title="\BitPaySDK\Model\Wallet\CurrencyQr">CurrencyQr</abbr></a></dt><dd>Object containing QR code related information to show for this payment method</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/BitPaySDK-Util-JsonMapperFactory.html"><abbr title="\BitPaySDK\Util\JsonMapperFactory">JsonMapperFactory</abbr></a></dt>    </dl>
+
+
+
+
+
 
 
 
         
 
         
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                            
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                                                    <li><a href="packages/Application.html#toc-interfaces">Interfaces</a></li>
+                                                                <li><a href="packages/Application.html#toc-classes">Classes</a></li>
+                                                                                                                    </ul>
+            </li>
+
+            
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -313,7 +291,6 @@ such as the ability to create invoices or grant refunds</dd>
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="packages/Application.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 

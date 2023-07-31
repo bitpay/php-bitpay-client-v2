@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -121,8 +122,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk.html">BitPaySDK</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk-model.html">Model</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk-model-invoice.html">Invoice</a></li>
@@ -145,6 +147,11 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
     :
@@ -158,278 +165,264 @@
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">see</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="https://bitpay.readme.io/reference/refunds-1"><abbr title="https://bitpay.readme.io/reference/refunds-1">https://bitpay.readme.io/reference/refunds-1</abbr></a></span>
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://bitpay.readme.io/reference/refunds-1">https://bitpay.readme.io/reference/refunds-1</a></span>
                                         
                                                  <section class="phpdocumentor-description"><p>Webhooks refunds</p>
 </section>
 
                                     </dd>
-                        </dl>
-
-
-
+                                            </dl>
 
 
 
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_amount">$amount</a>
     <span>
                         &nbsp;: float            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_buyerPaysRefundFee">$buyerPaysRefundFee</a>
     <span>
                         &nbsp;: bool            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_currency">$currency</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_id">$id</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_immediate">$immediate</a>
     <span>
                         &nbsp;: bool            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_invoice">$invoice</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_lastRefundNotification">$lastRefundNotification</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_refundFee">$refundFee</a>
     <span>
                         &nbsp;: float            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_requestDate">$requestDate</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_status">$status</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_supportRequest">$supportRequest</a>
     <span>
                         &nbsp;: string            </span>
 </dt>
-<dd></dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getAmount">getAmount()</a>
     <span>
                                 &nbsp;: float    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getBuyerPaysRefundFee">getBuyerPaysRefundFee()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getCurrency">getCurrency()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getId">getId()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getImmediate">getImmediate()</a>
     <span>
                                 &nbsp;: bool    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getInvoice">getInvoice()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getLastRefundNotification">getLastRefundNotification()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getRefundFee">getRefundFee()</a>
     <span>
                                 &nbsp;: float    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getRequestDate">getRequestDate()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getStatus">getStatus()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getSupportRequest">getSupportRequest()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setAmount">setAmount()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setBuyerPaysRefundFee">setBuyerPaysRefundFee()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setCurrency">setCurrency()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setId">setId()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setImmediate">setImmediate()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setInvoice">setInvoice()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setLastRefundNotification">setLastRefundNotification()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setRefundFee">setRefundFee()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setRequestDate">setRequestDate()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setStatus">setStatus()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setSupportRequest">setSupportRequest()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_toArray">toArray()</a>
     <span>
                                 &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
-<dd></dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -440,6 +433,7 @@
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -451,6 +445,7 @@
     <h4 class="phpdocumentor-element__name" id="property_amount">
         $amount
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_amount" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -468,10 +463,8 @@
     <span class="phpdocumentor-signature__name">$amount</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -485,6 +478,7 @@
     <h4 class="phpdocumentor-element__name" id="property_buyerPaysRefundFee">
         $buyerPaysRefundFee
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_buyerPaysRefundFee" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -502,10 +496,8 @@
     <span class="phpdocumentor-signature__name">$buyerPaysRefundFee</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -519,6 +511,7 @@
     <h4 class="phpdocumentor-element__name" id="property_currency">
         $currency
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_currency" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -536,10 +529,8 @@
     <span class="phpdocumentor-signature__name">$currency</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -553,6 +544,7 @@
     <h4 class="phpdocumentor-element__name" id="property_id">
         $id
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -570,10 +562,8 @@
     <span class="phpdocumentor-signature__name">$id</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -587,6 +577,7 @@
     <h4 class="phpdocumentor-element__name" id="property_immediate">
         $immediate
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_immediate" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -604,10 +595,8 @@
     <span class="phpdocumentor-signature__name">$immediate</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -621,6 +610,7 @@
     <h4 class="phpdocumentor-element__name" id="property_invoice">
         $invoice
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_invoice" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -638,10 +628,8 @@
     <span class="phpdocumentor-signature__name">$invoice</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -655,6 +643,7 @@
     <h4 class="phpdocumentor-element__name" id="property_lastRefundNotification">
         $lastRefundNotification
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_lastRefundNotification" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -672,10 +661,8 @@
     <span class="phpdocumentor-signature__name">$lastRefundNotification</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -689,6 +676,7 @@
     <h4 class="phpdocumentor-element__name" id="property_refundFee">
         $refundFee
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_refundFee" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -706,10 +694,8 @@
     <span class="phpdocumentor-signature__name">$refundFee</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -723,6 +709,7 @@
     <h4 class="phpdocumentor-element__name" id="property_requestDate">
         $requestDate
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_requestDate" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -740,10 +727,8 @@
     <span class="phpdocumentor-signature__name">$requestDate</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -757,6 +742,7 @@
     <h4 class="phpdocumentor-element__name" id="property_status">
         $status
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_status" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -774,10 +760,8 @@
     <span class="phpdocumentor-signature__name">$status</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -791,6 +775,7 @@
     <h4 class="phpdocumentor-element__name" id="property_supportRequest">
         $supportRequest
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_supportRequest" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -808,10 +793,8 @@
     <span class="phpdocumentor-signature__name">$supportRequest</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -821,6 +804,7 @@
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -831,6 +815,7 @@
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -844,15 +829,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -864,6 +846,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getAmount">
         getAmount()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getAmount" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -877,16 +860,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">float</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">float</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -897,6 +881,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getBuyerPaysRefundFee">
         getBuyerPaysRefundFee()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getBuyerPaysRefundFee" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -910,16 +895,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getBuyerPaysRefundFee</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -930,6 +916,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getCurrency">
         getCurrency()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -943,16 +930,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getCurrency</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -963,6 +951,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getId">
         getId()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getId" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -976,16 +965,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -996,6 +986,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getImmediate">
         getImmediate()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getImmediate" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1009,16 +1000,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getImmediate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1029,6 +1021,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getInvoice">
         getInvoice()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getInvoice" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1042,16 +1035,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getInvoice</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1062,6 +1056,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getLastRefundNotification">
         getLastRefundNotification()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getLastRefundNotification" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1075,16 +1070,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getLastRefundNotification</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1095,6 +1091,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getRefundFee">
         getRefundFee()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getRefundFee" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1108,16 +1105,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getRefundFee</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">float</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">float</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1128,6 +1126,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getRequestDate">
         getRequestDate()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getRequestDate" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1141,16 +1140,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getRequestDate</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1161,6 +1161,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getStatus">
         getStatus()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getStatus" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1174,16 +1175,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getStatus</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1194,6 +1196,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getSupportRequest">
         getSupportRequest()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getSupportRequest" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1207,16 +1210,17 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getSupportRequest</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1227,6 +1231,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setAmount">
         setAmount()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setAmount" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1240,8 +1245,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1249,17 +1255,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1271,6 +1272,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setBuyerPaysRefundFee">
         setBuyerPaysRefundFee()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setBuyerPaysRefundFee" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1284,8 +1286,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setBuyerPaysRefundFee</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$buyerPaysRefundFee</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1293,17 +1296,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1315,6 +1313,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setCurrency">
         setCurrency()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1328,8 +1327,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setCurrency</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$currency</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1337,17 +1337,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1359,6 +1354,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setId">
         setId()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setId" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1372,8 +1368,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1381,17 +1378,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1403,6 +1395,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setImmediate">
         setImmediate()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setImmediate" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1416,8 +1409,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setImmediate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$immediate</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1425,17 +1419,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">bool</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1447,6 +1436,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setInvoice">
         setInvoice()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setInvoice" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1460,8 +1450,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setInvoice</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$invoice</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1469,17 +1460,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1491,6 +1477,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setLastRefundNotification">
         setLastRefundNotification()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setLastRefundNotification" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1504,8 +1491,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setLastRefundNotification</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$lastRefundNotification</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1513,17 +1501,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1535,6 +1518,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setRefundFee">
         setRefundFee()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setRefundFee" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1548,8 +1532,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setRefundFee</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$refundFee</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1557,17 +1542,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1579,6 +1559,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setRequestDate">
         setRequestDate()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setRequestDate" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1592,8 +1573,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setRequestDate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$requestDate</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1601,17 +1583,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1623,6 +1600,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setStatus">
         setStatus()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setStatus" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1636,8 +1614,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setStatus</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1645,17 +1624,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1667,6 +1641,7 @@
     <h4 class="phpdocumentor-element__name" id="method_setSupportRequest">
         setSupportRequest()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setSupportRequest" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1680,8 +1655,9 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setSupportRequest</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$supportRequest</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1689,17 +1665,12 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1711,6 +1682,7 @@
     <h4 class="phpdocumentor-element__name" id="method_toArray">
         toArray()
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_toArray" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/RefundWebhook.php"><a href="files/src-bitpaysdk-model-invoice-refundwebhook.html"><abbr title="src/BitPaySDK/Model/Invoice/RefundWebhook.php">RefundWebhook.php</abbr></a></abbr>
@@ -1724,83 +1696,180 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
 </article>
             </section>
 
-        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/BitPaySDK/Model/Invoice/RefundWebhook.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
     <script type="text/javascript">
-        function loadExternalCodeSnippets(line) {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
 
-                pre.textContent = '';
+                    var xhr = new XMLHttpRequest();
 
-                pre.setAttribute('data-line', line)
-                code.textContent = 'Loading…';
+                    xhr.open('GET', src, true);
 
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
 
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
-
                             Prism.highlightElement(code);
+                            return;
                         }
-                        else if (xhr.status >= 400) {
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
                             code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
                         }
-                        else {
-                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
-                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
                     }
-                };
+                    modal.classList.add("phpdocumentor-modal__open");
 
-                xhr.send(null);
-            });
-        }
-
-        var modals = document.querySelectorAll("[data-modal]");
-
-        modals.forEach(function (trigger) {
-            trigger.addEventListener("click", function (event) {
-                //event.preventDefault();
-                const modal = document.getElementById(trigger.dataset.modal);
-                modal.classList.add("phpdocumentor-modal__open");
-                loadExternalCodeSnippets(trigger.dataset.line)
-                const exits = modal.querySelectorAll("[data-exit-button]");
-                exits.forEach(function (exit) {
-                    exit.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        modal.classList.remove("phpdocumentor-modal__open");
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
                     });
                 });
             });
-        });
+        })();
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_amount">$amount<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_buyerPaysRefundFee">$buyerPaysRefundFee<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_currency">$currency<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_id">$id<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_immediate">$immediate<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_invoice">$invoice<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_lastRefundNotification">$lastRefundNotification<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_refundFee">$refundFee<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_requestDate">$requestDate<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_status">$status<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#property_supportRequest">$supportRequest<a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getAmount">getAmount()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getBuyerPaysRefundFee">getBuyerPaysRefundFee()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getCurrency">getCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getId">getId()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getImmediate">getImmediate()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getInvoice">getInvoice()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getLastRefundNotification">getLastRefundNotification()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getRefundFee">getRefundFee()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getRequestDate">getRequestDate()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getStatus">getStatus()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_getSupportRequest">getSupportRequest()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setAmount">setAmount()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setBuyerPaysRefundFee">setBuyerPaysRefundFee()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setCurrency">setCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setId">setId()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setImmediate">setImmediate()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setInvoice">setInvoice()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setLastRefundNotification">setLastRefundNotification()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setRefundFee">setRefundFee()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setRequestDate">setRequestDate()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setStatus">setStatus()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_setSupportRequest">setSupportRequest()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#method_toArray">toArray()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -1811,7 +1880,6 @@
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/BitPaySDK-Model-Invoice-RefundWebhook.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 

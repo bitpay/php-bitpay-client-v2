@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/base.css">
             <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
                 <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
         <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
         <script src="js/search.js"></script>
         <script defer src="js/searchIndex.js"></script>
     </head>
@@ -52,7 +53,7 @@
 <label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
     Menu
 </label>
-<aside class="phpdocumentor-column -four phpdocumentor-sidebar">
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
@@ -121,8 +122,9 @@
     </section>
 </aside>
 
-            <div class="phpdocumentor-column -eight phpdocumentor-content">
-                    <ul class="phpdocumentor-breadcrumbs">
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk.html">BitPaySDK</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk-model.html">Model</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk-model-ledger.html">Ledger</a></li>
@@ -145,6 +147,11 @@
     
     </h2>
 
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
     :
@@ -158,143 +165,147 @@
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
                     <span class="phpdocumentor-tag__name">see</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="https://bitpay.readme.io/reference/ledgers"><abbr title="https://bitpay.readme.io/reference/ledgers">https://bitpay.readme.io/reference/ledgers</abbr></a></span>
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://bitpay.readme.io/reference/ledgers">https://bitpay.readme.io/reference/ledgers</a></span>
                                         
                                                  <section class="phpdocumentor-description"><p>REST API Ledgers</p>
 </section>
 
                                     </dd>
-                        </dl>
-
-
-
+                                            </dl>
 
 
 
 <h3 id="toc">
     Table of Contents
-    <a href="#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
 </h3>
 
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_amount">$amount</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_buyerFields">$buyerFields</a>
     <span>
                         &nbsp;: <a href="classes/BitPaySDK-Model-Ledger-Buyer.html"><abbr title="\BitPaySDK\Model\Ledger\Buyer">Buyer</abbr></a>            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_code">$code</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_currency">$currency</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_description">$description</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_id">$id</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_invoiceAmount">$invoiceAmount</a>
     <span>
                         &nbsp;: float|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_invoiceCurrency">$invoiceCurrency</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_invoiceId">$invoiceId</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_scale">$scale</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_supportRequest">$supportRequest</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_timestamp">$timestamp</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_transactionCurrency">$transactionCurrency</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_txType">$txType</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_type">$type</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
-<dd></dd>
 
-                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
-<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getAmount">getAmount()</a>
@@ -513,7 +524,8 @@
 </dt>
 <dd>Gets LedgerEntry as array</dd>
 
-        </dl>
+    </dl>
+
 
 
 
@@ -524,6 +536,7 @@
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
             <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="
@@ -535,6 +548,7 @@
     <h4 class="phpdocumentor-element__name" id="property_amount">
         $amount
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_amount" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -552,10 +566,8 @@
     <span class="phpdocumentor-signature__name">$amount</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -569,6 +581,7 @@
     <h4 class="phpdocumentor-element__name" id="property_buyerFields">
         $buyerFields
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_buyerFields" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -586,10 +599,8 @@
     <span class="phpdocumentor-signature__name">$buyerFields</span>
     </code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -603,6 +614,7 @@
     <h4 class="phpdocumentor-element__name" id="property_code">
         $code
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_code" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -620,10 +632,8 @@
     <span class="phpdocumentor-signature__name">$code</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -637,6 +647,7 @@
     <h4 class="phpdocumentor-element__name" id="property_currency">
         $currency
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_currency" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -654,10 +665,8 @@
     <span class="phpdocumentor-signature__name">$currency</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -671,6 +680,7 @@
     <h4 class="phpdocumentor-element__name" id="property_description">
         $description
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_description" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -688,10 +698,8 @@
     <span class="phpdocumentor-signature__name">$description</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -705,6 +713,7 @@
     <h4 class="phpdocumentor-element__name" id="property_id">
         $id
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_id" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -722,10 +731,8 @@
     <span class="phpdocumentor-signature__name">$id</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -739,6 +746,7 @@
     <h4 class="phpdocumentor-element__name" id="property_invoiceAmount">
         $invoiceAmount
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_invoiceAmount" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -756,10 +764,8 @@
     <span class="phpdocumentor-signature__name">$invoiceAmount</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -773,6 +779,7 @@
     <h4 class="phpdocumentor-element__name" id="property_invoiceCurrency">
         $invoiceCurrency
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_invoiceCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -790,10 +797,8 @@
     <span class="phpdocumentor-signature__name">$invoiceCurrency</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -807,6 +812,7 @@
     <h4 class="phpdocumentor-element__name" id="property_invoiceId">
         $invoiceId
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_invoiceId" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -824,10 +830,8 @@
     <span class="phpdocumentor-signature__name">$invoiceId</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -841,6 +845,7 @@
     <h4 class="phpdocumentor-element__name" id="property_scale">
         $scale
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_scale" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -858,10 +863,8 @@
     <span class="phpdocumentor-signature__name">$scale</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -875,6 +878,7 @@
     <h4 class="phpdocumentor-element__name" id="property_supportRequest">
         $supportRequest
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_supportRequest" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -892,10 +896,8 @@
     <span class="phpdocumentor-signature__name">$supportRequest</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -909,6 +911,7 @@
     <h4 class="phpdocumentor-element__name" id="property_timestamp">
         $timestamp
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_timestamp" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -926,10 +929,8 @@
     <span class="phpdocumentor-signature__name">$timestamp</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -943,6 +944,7 @@
     <h4 class="phpdocumentor-element__name" id="property_transactionCurrency">
         $transactionCurrency
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_transactionCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -960,10 +962,8 @@
     <span class="phpdocumentor-signature__name">$transactionCurrency</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -977,6 +977,7 @@
     <h4 class="phpdocumentor-element__name" id="property_txType">
         $txType
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_txType" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -994,10 +995,8 @@
     <span class="phpdocumentor-signature__name">$txType</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -1011,6 +1010,7 @@
     <h4 class="phpdocumentor-element__name" id="property_type">
         $type
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_type" class="headerlink"><i class="fas fa-link"></i></a>
+
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
@@ -1028,10 +1028,8 @@
     <span class="phpdocumentor-signature__name">$type</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -1041,6 +1039,7 @@
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
             <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
         </h3>
                     <article
         class="phpdocumentor-element
@@ -1051,6 +1050,7 @@
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1064,15 +1064,12 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
+    
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1084,6 +1081,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getAmount">
         getAmount()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getAmount" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1098,17 +1096,19 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>The decimal amount can be obtained by dividing the amount field by the scale parameter.</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1119,6 +1119,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getBuyerFields">
         getBuyerFields()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getBuyerFields" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1133,17 +1134,19 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getBuyerFields</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Ledger-Buyer.html"><abbr title="\BitPaySDK\Model\Ledger\Buyer">Buyer</abbr></a></span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>If provided by the merchant in the buyer object during invoice creation</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Ledger-Buyer.html"><abbr title="\BitPaySDK\Model\Ledger\Buyer">Buyer</abbr></a></span>
-            &mdash;
-        
-    
+        <span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Ledger-Buyer.html"><abbr title="\BitPaySDK\Model\Ledger\Buyer">Buyer</abbr></a></span>
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1154,6 +1157,7 @@
     <h4 class="phpdocumentor-element__name" id="method_getCode">
         getCode()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getCode" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1168,6 +1172,8 @@
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Contains the Ledger entry code.
 See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes</p>
 </section>
@@ -1175,13 +1181,15 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the code</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the code</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1192,6 +1200,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getCurrency">
         getCurrency()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1206,17 +1215,21 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getCurrency</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the currency</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the currency</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1227,6 +1240,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getDescription">
         getDescription()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getDescription" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1241,6 +1255,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getDescription</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Ledger entry description. Also contains an id depending on the type of entry
 (for instance payout id, settlement id, invoice orderId etc...)</p>
 </section>
@@ -1248,13 +1264,15 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the description</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the description</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1265,6 +1283,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getId">
         getId()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getId" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1279,17 +1298,21 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the id</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the id</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1300,6 +1323,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getInvoiceAmount">
         getInvoiceAmount()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getInvoiceAmount" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1314,17 +1338,21 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getInvoiceAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">float|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the invoice amount</p>
+        <span class="phpdocumentor-signature__response_type">float|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the invoice amount</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1335,6 +1363,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getInvoiceCurrency">
         getInvoiceCurrency()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getInvoiceCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1349,17 +1378,21 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getInvoiceCurrency</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the invoice currency</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the invoice currency</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1370,6 +1403,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getInvoiceId">
         getInvoiceId()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getInvoiceId" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1384,17 +1418,21 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getInvoiceId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the invoice id</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the invoice id</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1405,6 +1443,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getScale">
         getScale()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getScale" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1419,19 +1458,23 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getScale</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Power of 10 used for conversion</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the scale</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the scale</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1442,6 +1485,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getSupportRequest">
         getSupportRequest()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getSupportRequest" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1456,17 +1500,21 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getSupportRequest</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the support request</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the support request</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1477,6 +1525,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getTimestamp">
         getTimestamp()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getTimestamp" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1491,17 +1540,21 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getTimestamp</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the timestamp</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the timestamp</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1512,6 +1565,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getTransactionCurrency">
         getTransactionCurrency()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getTransactionCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1526,17 +1580,21 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getTransactionCurrency</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the transaction currency</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the transaction currency</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1547,6 +1605,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getTxType">
         getTxType()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getTxType" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1561,19 +1620,23 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getTxType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>[DEPRECRATED] see type</p>
 </section>
 
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the txType</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the txType</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1584,6 +1647,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_getType">
         getType()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getType" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1598,6 +1662,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">getType</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Contains the Ledger entry name.
 See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes</p>
 </section>
@@ -1605,13 +1671,15 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string|null</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>the type</p>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>the type</p>
 </section>
 
-    
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1622,6 +1690,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setAmount">
         setAmount()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setAmount" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1636,6 +1705,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>The decimal amount can be obtained by dividing the amount field by the scale parameter.</p>
 </section>
 
@@ -1654,10 +1725,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1669,6 +1736,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setBuyerFields">
         setBuyerFields()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setBuyerFields" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1683,6 +1751,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setBuyerFields</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Model-Ledger-Buyer.html"><abbr title="\BitPaySDK\Model\Ledger\Buyer">Buyer</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$buyerFields</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1699,10 +1769,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1714,6 +1780,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setCode">
         setCode()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setCode" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1728,6 +1795,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setCode</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Contains the Ledger entry code.
 See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes</p>
 </section>
@@ -1747,10 +1816,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1762,6 +1827,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setCurrency">
         setCurrency()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1776,6 +1842,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setCurrency</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$currency</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1792,10 +1860,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1807,6 +1871,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setDescription">
         setDescription()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setDescription" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1821,6 +1886,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setDescription</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$description</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Ledger entry description. Also contains an id depending on the type of entry
 (for instance payout id, settlement id, invoice orderId etc...)</p>
 </section>
@@ -1840,10 +1907,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1855,6 +1918,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setId">
         setId()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setId" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1869,6 +1933,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1885,10 +1951,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1900,6 +1962,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setInvoiceAmount">
         setInvoiceAmount()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setInvoiceAmount" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1914,6 +1977,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setInvoiceAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$invoiceAmount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1930,10 +1995,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1945,6 +2006,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setInvoiceCurrency">
         setInvoiceCurrency()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setInvoiceCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -1959,6 +2021,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setInvoiceCurrency</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$invoiceCurrency</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -1975,10 +2039,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -1990,6 +2050,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setInvoiceId">
         setInvoiceId()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setInvoiceId" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -2004,6 +2065,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setInvoiceId</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$invoiceId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2020,10 +2083,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2035,6 +2094,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setScale">
         setScale()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setScale" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -2049,6 +2109,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setScale</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$scale</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Power of 10 used for conversion</p>
 </section>
 
@@ -2067,10 +2129,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2082,6 +2140,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setSupportRequest">
         setSupportRequest()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setSupportRequest" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -2096,6 +2155,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setSupportRequest</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$supportRequest</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2112,10 +2173,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2127,6 +2184,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setTimestamp">
         setTimestamp()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setTimestamp" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -2141,6 +2199,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setTimestamp</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$timestamp</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2157,10 +2217,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2172,6 +2228,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setTransactionCurrency">
         setTransactionCurrency()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setTransactionCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -2186,6 +2243,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setTransactionCurrency</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$transactionCurrency</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
@@ -2202,10 +2261,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2217,6 +2272,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setTxType">
         setTxType()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setTxType" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -2231,6 +2287,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setTxType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$txType</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>[DEPRECRATED] see type</p>
 </section>
 
@@ -2249,10 +2307,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2264,6 +2318,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_setType">
         setType()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setType" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -2278,6 +2333,8 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">setType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$type</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
         <section class="phpdocumentor-description"><p>Contains the Ledger entry name.
 See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes</p>
 </section>
@@ -2297,10 +2354,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     
 
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
     
 </article>
                     <article
@@ -2312,6 +2365,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <h4 class="phpdocumentor-element__name" id="method_toArray">
         toArray()
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_toArray" class="headerlink"><i class="fas fa-link"></i></a>
+
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Ledger/LedgerEntry.php"><a href="files/src-bitpaysdk-model-ledger-ledgerentry.html"><abbr title="src/BitPaySDK/Model/Ledger/LedgerEntry.php">LedgerEntry.php</abbr></a></abbr>
@@ -2326,84 +2380,196 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">toArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
+    <div class="phpdocumentor-label-line">
+        </div>
     
     
     
 
+            <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-            &mdash;
-            <section class="phpdocumentor-description"><p>LedgerEntry as array</p>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>LedgerEntry as array</p>
 </section>
 
-    
+            </section>
+
 </article>
             </section>
 
-        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/BitPaySDK/Model/Ledger/LedgerEntry.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
     <script type="text/javascript">
-        function loadExternalCodeSnippets(line) {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach((pre) => {
-                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
 
-                pre.textContent = '';
+                    var xhr = new XMLHttpRequest();
 
-                pre.setAttribute('data-line', line)
-                code.textContent = 'Loading…';
+                    xhr.open('GET', src, true);
 
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
 
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
-
                             Prism.highlightElement(code);
+                            return;
                         }
-                        else if (xhr.status >= 400) {
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
                             code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
                         }
-                        else {
-                            code.textContent = '✖ Error: File does not exist, is empty or trying to view from localhost';
-                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
                     }
-                };
+                    modal.classList.add("phpdocumentor-modal__open");
 
-                xhr.send(null);
-            });
-        }
-
-        var modals = document.querySelectorAll("[data-modal]");
-
-        modals.forEach(function (trigger) {
-            trigger.addEventListener("click", function (event) {
-                //event.preventDefault();
-                const modal = document.getElementById(trigger.dataset.modal);
-                modal.classList.add("phpdocumentor-modal__open");
-                loadExternalCodeSnippets(trigger.dataset.line)
-                const exits = modal.querySelectorAll("[data-exit-button]");
-                exits.forEach(function (exit) {
-                    exit.addEventListener("click", function (event) {
-                        event.preventDefault();
-                        modal.classList.remove("phpdocumentor-modal__open");
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
                     });
                 });
             });
-        });
+        })();
     </script>
 
     </article>
-                <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_amount">$amount<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_buyerFields">$buyerFields<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_code">$code<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_currency">$currency<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_description">$description<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_id">$id<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_invoiceAmount">$invoiceAmount<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_invoiceCurrency">$invoiceCurrency<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_invoiceId">$invoiceId<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_scale">$scale<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_supportRequest">$supportRequest<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_timestamp">$timestamp<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_transactionCurrency">$transactionCurrency<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_txType">$txType<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_type">$type<a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html"></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method___construct">__construct()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getAmount">getAmount()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getBuyerFields">getBuyerFields()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getCode">getCode()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getCurrency">getCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getDescription">getDescription()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getId">getId()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getInvoiceAmount">getInvoiceAmount()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getInvoiceCurrency">getInvoiceCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getInvoiceId">getInvoiceId()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getScale">getScale()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getSupportRequest">getSupportRequest()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getTimestamp">getTimestamp()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getTransactionCurrency">getTransactionCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getTxType">getTxType()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getType">getType()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setAmount">setAmount()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setBuyerFields">setBuyerFields()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setCode">setCode()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setCurrency">setCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setDescription">setDescription()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setId">setId()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setInvoiceAmount">setInvoiceAmount()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setInvoiceCurrency">setInvoiceCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setInvoiceId">setInvoiceId()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setScale">setScale()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setSupportRequest">setSupportRequest()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setTimestamp">setTimestamp()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setTransactionCurrency">setTransactionCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setTxType">setTxType()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_setType">setType()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_toArray">toArray()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
     <section class="phpdocumentor-search-results__dialog">
         <header class="phpdocumentor-search-results__header">
             <h2 class="phpdocumentor-search-results__title">Search results</h2>
@@ -2414,7 +2580,6 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
         </section>
     </section>
 </section>
-            </div>
         </div>
         <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
