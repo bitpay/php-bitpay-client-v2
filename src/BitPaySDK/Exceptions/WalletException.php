@@ -8,6 +8,13 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Exceptions;
 
+/**
+ * Generic wallet exception.
+ *
+ * @package BitPaySDK\Exceptions
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 class WalletException extends BitPayException
 {
     private string $bitPayMessage = "An unexpected error occurred while trying to manage the wallet";

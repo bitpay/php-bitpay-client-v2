@@ -10,6 +10,13 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
+/**
+ * Payout batch cancellation exception.
+ *
+ * @package BitPaySDK\Exceptions
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 class PayoutBatchCancellationException extends PayoutBatchException
 {
     private string $bitPayMessage = "Failed to cancel payout batch";

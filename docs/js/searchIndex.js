@@ -3,7 +3,7 @@ Search.appendIndex(
                 {
             "fqsen": "\\BitPaySDK\\Client\\BillClient",
             "name": "BillClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020bill\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-BillClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\BillClient\u003A\u003A__construct\u0028\u0029",
@@ -63,7 +63,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\InvoiceClient",
             "name": "InvoiceClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020invoice\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-InvoiceClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\InvoiceClient\u003A\u003A__construct\u0028\u0029",
@@ -148,7 +148,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\LedgerClient",
             "name": "LedgerClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020ledger\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-LedgerClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\LedgerClient\u003A\u003A__construct\u0028\u0029",
@@ -188,7 +188,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\PayoutClient",
             "name": "PayoutClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020payout\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-PayoutClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\PayoutClient\u003A\u003A__construct\u0028\u0029",
@@ -258,7 +258,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\PayoutRecipientsClient",
             "name": "PayoutRecipientsClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020recipients\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-PayoutRecipientsClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\PayoutRecipientsClient\u003A\u003A__construct\u0028\u0029",
@@ -318,7 +318,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\RateClient",
             "name": "RateClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020rate\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-RateClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\RateClient\u003A\u003A__construct\u0028\u0029",
@@ -358,7 +358,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\RefundClient",
             "name": "RefundClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020refund\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-RefundClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\RefundClient\u003A\u003A__construct\u0028\u0029",
@@ -433,7 +433,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\SettlementClient",
             "name": "SettlementClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020settlement\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-SettlementClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\SettlementClient\u003A\u003A__construct\u0028\u0029",
@@ -478,7 +478,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\TokenClient",
             "name": "TokenClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020token\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-TokenClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\TokenClient\u003A\u003A__construct\u0028\u0029",
@@ -508,7 +508,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\WalletClient",
             "name": "WalletClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020wallet\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-WalletClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\WalletClient\u003A\u003A__construct\u0028\u0029",
@@ -538,7 +538,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client",
             "name": "Client",
-            "summary": "Class\u0020Client",
+            "summary": "Client\u0020class\u0020to\u0020interact\u0020with\u0020the\u0020BitPay\u0020API.",
             "url": "classes/BitPaySDK-Client.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\u003A\u003A__construct\u0028\u0029",
@@ -858,7 +858,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Env",
             "name": "Env",
-            "summary": "",
+            "summary": "Constants\u0020used\u0020throughout\u0020the\u0020SDK.",
             "url": "classes/BitPaySDK-Env.html"
         },                {
             "fqsen": "\\BitPaySDK\\Env\u003A\u003ATEST",
@@ -903,7 +903,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillCreationException",
             "name": "BillCreationException",
-            "summary": "",
+            "summary": "Bill\u0020creation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-BillCreationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillCreationException\u003A\u003A__construct\u0028\u0029",
@@ -923,7 +923,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillDeliveryException",
             "name": "BillDeliveryException",
-            "summary": "",
+            "summary": "Bill\u0020delivery\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-BillDeliveryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillDeliveryException\u003A\u003A__construct\u0028\u0029",
@@ -943,7 +943,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillException",
             "name": "BillException",
-            "summary": "",
+            "summary": "Bill\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-BillException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillException\u003A\u003A__construct\u0028\u0029",
@@ -963,7 +963,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillQueryException",
             "name": "BillQueryException",
-            "summary": "",
+            "summary": "Bill\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-BillQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillQueryException\u003A\u003A__construct\u0028\u0029",
@@ -983,7 +983,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillUpdateException",
             "name": "BillUpdateException",
-            "summary": "",
+            "summary": "Bill\u0020update\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-BillUpdateException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BillUpdateException\u003A\u003A__construct\u0028\u0029",
@@ -1003,7 +1003,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BitPayException",
             "name": "BitPayException",
-            "summary": "",
+            "summary": "Generic\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-BitPayException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BitPayException\u003A\u003A__construct\u0028\u0029",
@@ -1033,7 +1033,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\CurrencyException",
             "name": "CurrencyException",
-            "summary": "",
+            "summary": "Generic\u0020currency\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-CurrencyException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\CurrencyException\u003A\u003A__construct\u0028\u0029",
@@ -1053,7 +1053,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\CurrencyQueryException",
             "name": "CurrencyQueryException",
-            "summary": "",
+            "summary": "Currency\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-CurrencyQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\CurrencyQueryException\u003A\u003A__construct\u0028\u0029",
@@ -1073,7 +1073,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceCancellationException",
             "name": "InvoiceCancellationException",
-            "summary": "",
+            "summary": "Invoice\u0020cancellation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-InvoiceCancellationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceCancellationException\u003A\u003A__construct\u0028\u0029",
@@ -1093,7 +1093,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceCreationException",
             "name": "InvoiceCreationException",
-            "summary": "",
+            "summary": "Invoice\u0020creation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-InvoiceCreationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceCreationException\u003A\u003A__construct\u0028\u0029",
@@ -1113,7 +1113,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceException",
             "name": "InvoiceException",
-            "summary": "",
+            "summary": "Generic\u0020invoice\u0020\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-InvoiceException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceException\u003A\u003A__construct\u0028\u0029",
@@ -1133,7 +1133,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoicePaymentException",
             "name": "InvoicePaymentException",
-            "summary": "",
+            "summary": "Invoice\u0020payment\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-InvoicePaymentException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoicePaymentException\u003A\u003A__construct\u0028\u0029",
@@ -1153,7 +1153,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceQueryException",
             "name": "InvoiceQueryException",
-            "summary": "",
+            "summary": "Invoice\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-InvoiceQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceQueryException\u003A\u003A__construct\u0028\u0029",
@@ -1178,7 +1178,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceUpdateException",
             "name": "InvoiceUpdateException",
-            "summary": "",
+            "summary": "Invoice\u0020update\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-InvoiceUpdateException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\InvoiceUpdateException\u003A\u003A__construct\u0028\u0029",
@@ -1198,7 +1198,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\LedgerException",
             "name": "LedgerException",
-            "summary": "",
+            "summary": "Generic\u0020ledger\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-LedgerException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\LedgerException\u003A\u003A__construct\u0028\u0029",
@@ -1218,7 +1218,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\LedgerQueryException",
             "name": "LedgerQueryException",
-            "summary": "",
+            "summary": "Ledger\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-LedgerQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\LedgerQueryException\u003A\u003A__construct\u0028\u0029",
@@ -1238,7 +1238,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchCancellationException",
             "name": "PayoutBatchCancellationException",
-            "summary": "",
+            "summary": "Payout\u0020batch\u0020cancellation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutBatchCancellationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchCancellationException\u003A\u003A__construct\u0028\u0029",
@@ -1258,7 +1258,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchCreationException",
             "name": "PayoutBatchCreationException",
-            "summary": "",
+            "summary": "Payout\u0020batch\u0020creation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutBatchCreationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchCreationException\u003A\u003A__construct\u0028\u0029",
@@ -1278,7 +1278,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchException",
             "name": "PayoutBatchException",
-            "summary": "",
+            "summary": "Generic\u0020payout\u0020batch\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutBatchException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchException\u003A\u003A__construct\u0028\u0029",
@@ -1298,7 +1298,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchNotificationException",
             "name": "PayoutBatchNotificationException",
-            "summary": "",
+            "summary": "Payout\u0020batch\u0020notification\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutBatchNotificationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchNotificationException\u003A\u003A__construct\u0028\u0029",
@@ -1318,7 +1318,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchQueryException",
             "name": "PayoutBatchQueryException",
-            "summary": "",
+            "summary": "Payout\u0020batch\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutBatchQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutBatchQueryException\u003A\u003A__construct\u0028\u0029",
@@ -1338,7 +1338,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutCancellationException",
             "name": "PayoutCancellationException",
-            "summary": "",
+            "summary": "Payout\u0020cancellation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutCancellationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutCancellationException\u003A\u003A__construct\u0028\u0029",
@@ -1358,7 +1358,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutCreationException",
             "name": "PayoutCreationException",
-            "summary": "",
+            "summary": "Generic\u0020payout\u0020creation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutCreationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutCreationException\u003A\u003A__construct\u0028\u0029",
@@ -1378,7 +1378,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutException",
             "name": "PayoutException",
-            "summary": "",
+            "summary": "Generic\u0020payout\u0020batch\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutException\u003A\u003A__construct\u0028\u0029",
@@ -1398,7 +1398,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutNotificationException",
             "name": "PayoutNotificationException",
-            "summary": "",
+            "summary": "Payout\u0020notification\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutNotificationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutNotificationException\u003A\u003A__construct\u0028\u0029",
@@ -1418,7 +1418,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutQueryException",
             "name": "PayoutQueryException",
-            "summary": "",
+            "summary": "Payout\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutQueryException\u003A\u003A__construct\u0028\u0029",
@@ -1438,7 +1438,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientCancellationException",
             "name": "PayoutRecipientCancellationException",
-            "summary": "",
+            "summary": "Payout\u0020recipient\u0020cancellation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutRecipientCancellationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientCancellationException\u003A\u003A__construct\u0028\u0029",
@@ -1458,7 +1458,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientCreationException",
             "name": "PayoutRecipientCreationException",
-            "summary": "",
+            "summary": "Payout\u0020recipient\u0020creation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutRecipientCreationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientCreationException\u003A\u003A__construct\u0028\u0029",
@@ -1478,7 +1478,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientException",
             "name": "PayoutRecipientException",
-            "summary": "",
+            "summary": "Generic\u0020recipient\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutRecipientException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientException\u003A\u003A__construct\u0028\u0029",
@@ -1498,7 +1498,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientNotificationException",
             "name": "PayoutRecipientNotificationException",
-            "summary": "",
+            "summary": "Payout\u0020recipient\u0020notification\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutRecipientNotificationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientNotificationException\u003A\u003A__construct\u0028\u0029",
@@ -1518,7 +1518,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientQueryException",
             "name": "PayoutRecipientQueryException",
-            "summary": "",
+            "summary": "Payout\u0020recipient\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutRecipientQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientQueryException\u003A\u003A__construct\u0028\u0029",
@@ -1538,7 +1538,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientUpdateException",
             "name": "PayoutRecipientUpdateException",
-            "summary": "",
+            "summary": "Payout\u0020recipient\u0020update\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutRecipientUpdateException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutRecipientUpdateException\u003A\u003A__construct\u0028\u0029",
@@ -1558,7 +1558,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutUpdateException",
             "name": "PayoutUpdateException",
-            "summary": "",
+            "summary": "Payout\u0020update\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-PayoutUpdateException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\PayoutUpdateException\u003A\u003A__construct\u0028\u0029",
@@ -1578,7 +1578,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RateException",
             "name": "RateException",
-            "summary": "",
+            "summary": "Generic\u0020rate\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-RateException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RateException\u003A\u003A__construct\u0028\u0029",
@@ -1598,7 +1598,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RateQueryException",
             "name": "RateQueryException",
-            "summary": "",
+            "summary": "Rate\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-RateQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RateQueryException\u003A\u003A__construct\u0028\u0029",
@@ -1618,7 +1618,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundCancellationException",
             "name": "RefundCancellationException",
-            "summary": "",
+            "summary": "Refund\u0020cancellation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-RefundCancellationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundCancellationException\u003A\u003A__construct\u0028\u0029",
@@ -1638,7 +1638,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundCreationException",
             "name": "RefundCreationException",
-            "summary": "",
+            "summary": "Refund\u0020creation\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-RefundCreationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundCreationException\u003A\u003A__construct\u0028\u0029",
@@ -1658,7 +1658,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundException",
             "name": "RefundException",
-            "summary": "",
+            "summary": "Generic\u0020refund\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-RefundException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundException\u003A\u003A__construct\u0028\u0029",
@@ -1678,7 +1678,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundNotificationException",
             "name": "RefundNotificationException",
-            "summary": "",
+            "summary": "Refund\u0020notification\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-RefundNotificationException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundNotificationException\u003A\u003A__construct\u0028\u0029",
@@ -1698,7 +1698,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundQueryException",
             "name": "RefundQueryException",
-            "summary": "",
+            "summary": "Refund\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-RefundQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundQueryException\u003A\u003A__construct\u0028\u0029",
@@ -1718,7 +1718,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundUpdateException",
             "name": "RefundUpdateException",
-            "summary": "",
+            "summary": "Refund\u0020update\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-RefundUpdateException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\RefundUpdateException\u003A\u003A__construct\u0028\u0029",
@@ -1738,7 +1738,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\SettlementException",
             "name": "SettlementException",
-            "summary": "",
+            "summary": "Generic\u0020settlement\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-SettlementException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\SettlementException\u003A\u003A__construct\u0028\u0029",
@@ -1758,7 +1758,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\SettlementQueryException",
             "name": "SettlementQueryException",
-            "summary": "",
+            "summary": "Settlement\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-SettlementQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\SettlementQueryException\u003A\u003A__construct\u0028\u0029",
@@ -1778,7 +1778,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\WalletException",
             "name": "WalletException",
-            "summary": "",
+            "summary": "Generic\u0020wallet\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-WalletException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\WalletException\u003A\u003A__construct\u0028\u0029",
@@ -1798,7 +1798,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\WalletQueryException",
             "name": "WalletQueryException",
-            "summary": "",
+            "summary": "Wallet\u0020query\u0020exception.",
             "url": "classes/BitPaySDK-Exceptions-WalletQueryException.html"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\WalletQueryException\u003A\u003A__construct\u0028\u0029",
@@ -2263,7 +2263,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Currency",
             "name": "Currency",
-            "summary": "Object\u0020containing\u0020currency\u0020information",
+            "summary": "Object\u0020containing\u0020currency\u0020information.",
             "url": "classes/BitPaySDK-Model-Currency.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Currency\u003A\u003AisValid\u0028\u0029",
@@ -3358,7 +3358,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Facade",
             "name": "Facade",
-            "summary": "Facades\u0020named\u0020collections\u0020of\u0020capabilities\u0020that\u0020can\u0020be\u0020granted,\nsuch\u0020as\u0020the\u0020ability\u0020to\u0020create\u0020invoices\u0020or\u0020grant\u0020refunds",
+            "summary": "Facades\u0020are\u0020named\u0020collections\u0020of\u0020capabilities\u0020that\u0020can\u0020be\u0020granted,\nsuch\u0020as\u0020the\u0020ability\u0020to\u0020create\u0020invoices\u0020or\u0020grant\u0020refunds.",
             "url": "classes/BitPaySDK-Model-Facade.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Facade\u003A\u003AMERCHANT",
@@ -3378,7 +3378,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Invoice\\Buyer",
             "name": "Buyer",
-            "summary": "",
+            "summary": "Allows\u0020merchant\u0020to\u0020pass\u0020buyer\u0020related\u0020information\u0020in\u0020the\u0020invoice\u0020object",
             "url": "classes/BitPaySDK-Model-Invoice-Buyer.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Invoice\\Buyer\u003A\u003A__construct\u0028\u0029",
@@ -5893,7 +5893,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\Buyer",
             "name": "Buyer",
-            "summary": "Class\u0020Buyer",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Ledger-Buyer.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\Buyer\u003A\u003A__construct\u0028\u0029",
@@ -6058,7 +6058,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\Ledger",
             "name": "Ledger",
-            "summary": "Class\u0020Ledger",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Ledger-Ledger.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\Ledger\u003A\u003A__construct\u0028\u0029",
@@ -6103,7 +6103,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\LedgerEntry",
             "name": "LedgerEntry",
-            "summary": "Class\u0020LedgerEntry",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Ledger-LedgerEntry.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\LedgerEntry\u003A\u003A__construct\u0028\u0029",
@@ -7163,7 +7163,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Rate\\Rate",
             "name": "Rate",
-            "summary": "Class\u0020Rate",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Rate-Rate.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Rate\\Rate\u003A\u003A__construct\u0028\u0029",
@@ -7223,7 +7223,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Rate\\Rates",
             "name": "Rates",
-            "summary": "Class\u0020Rates",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Rate-Rates.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Rate\\Rates\u003A\u003A__construct\u0028\u0029",
@@ -8118,7 +8118,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\SettlementLedgerEntry",
             "name": "SettlementLedgerEntry",
-            "summary": "Class\u0020SettlementLedgerEntry",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Settlement-SettlementLedgerEntry.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\SettlementLedgerEntry\u003A\u003A__construct\u0028\u0029",
@@ -8238,7 +8238,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\WithHoldings",
             "name": "WithHoldings",
-            "summary": "Class\u0020WithHoldings",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Settlement-WithHoldings.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\WithHoldings\u003A\u003A__construct\u0028\u0029",
@@ -8628,7 +8628,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\PosClient",
             "name": "PosClient",
-            "summary": "Class\u0020Client",
+            "summary": "Client\u0020for\u0020handling\u0020POS\u0020facade\u0020specific\u0020calls.",
             "url": "classes/BitPaySDK-PosClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\PosClient\u003A\u003A__construct\u0028\u0029",
@@ -8663,7 +8663,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Tokens",
             "name": "Tokens",
-            "summary": "Class\u0020Tokens",
+            "summary": "Token\u0020object\u0020used\u0020to\u0020store\u0020the\u0020tokens\u0020for\u0020the\u0020different\u0020facades.",
             "url": "classes/BitPaySDK-Tokens.html"
         },                {
             "fqsen": "\\BitPaySDK\\Tokens\u003A\u003A__construct\u0028\u0029",
@@ -8723,7 +8723,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Util\\RESTcli\\RESTcli",
             "name": "RESTcli",
-            "summary": "Class\u0020RESTcli",
+            "summary": "",
             "url": "classes/BitPaySDK-Util-RESTcli-RESTcli.html"
         },                {
             "fqsen": "\\BitPaySDK\\Util\\RESTcli\\RESTcli\u003A\u003A__construct\u0028\u0029",

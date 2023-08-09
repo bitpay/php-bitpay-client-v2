@@ -10,6 +10,13 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
+/**
+ * Refund notification exception.
+ *
+ * @package BitPaySDK\Exceptions
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 class RefundNotificationException extends RefundException
 {
     private string $bitPayMessage = "Failed to send refund notification";

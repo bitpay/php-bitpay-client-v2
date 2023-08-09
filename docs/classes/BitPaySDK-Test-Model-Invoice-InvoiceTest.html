@@ -1,0 +1,3062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>BitPay PHP SDK</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">BitPay PHP SDK</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/bitpaysdk.html" class="">BitPaySDK</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/bitpaysdk-client.html" class="">Client</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/bitpaysdk-exceptions.html" class="">Exceptions</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/bitpaysdk-model.html" class="">Model</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/bitpaysdk-util.html" class="">Util</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/bitpaysdk-functional.html" class="">Functional</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/bitpaysdk-test.html" class="">Test</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/BitPaySDK.html" class="">BitPaySDK</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="packages/BitPaySDK-Client.html" class="">Client</a>
+                
+            </li>
+                    <li>
+                <a href="packages/BitPaySDK-Exceptions.html" class="">Exceptions</a>
+                
+            </li>
+                    <li>
+                <a href="packages/BitPaySDK-Model.html" class="">Model</a>
+                
+            </li>
+                    <li>
+                <a href="packages/BitPaySDK-Util.html" class="">Util</a>
+                
+            </li>
+            </ul>
+
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Bitpay.html" class="">Bitpay</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk.html">BitPaySDK</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk-test.html">Test</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk-test-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk-test-model-invoice.html">Invoice</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    InvoiceTest
+
+        <span class="phpdocumentor-element__extends">
+        extends <abbr title="\PHPUnit\Framework\TestCase">TestCase</abbr>
+    </span>
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">17</span>
+
+    </aside>
+
+        
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetAcceptanceWindow">testGetAcceptanceWindow()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetAmountPaid">testGetAmountPaid()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetAutoRedirect">testGetAutoRedirect()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBillId">testGetBillId()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBitpayIdRequired">testGetBitpayIdRequired()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyer">testGetBuyer()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerEmail">testGetBuyerEmail()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerProvidedEmail">testGetBuyerProvidedEmail()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerProvidedInfo">testGetBuyerProvidedInfo()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerSms">testGetBuyerSms()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCloseURL">testGetCloseURL()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrency">testGetCurrency()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrencyException">testGetCurrencyException()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrentTime">testGetCurrentTime()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetDisplayAmountPaid">testGetDisplayAmountPaid()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExceptionStatus">testGetExceptionStatus()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExchangeRates">testGetExchangeRates()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExpirationTime">testGetExpirationTime()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExtendedNotifications">testGetExtendedNotifications()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetFeeDetected">testGetFeeDetected()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetForcedBuyerSelectedTransactionCurrency">testGetForcedBuyerSelectedTransactionCurrency()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetForcedBuyerSelectedWallet">testGetForcedBuyerSelectedWallet()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetFullNotifications">testGetFullNotifications()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetGuid">testGetGuid()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetId">testGetId()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetInvoiceTime">testGetInvoiceTime()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetIsCancelled">testGetIsCancelled()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemCode">testGetItemCode()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemDesc">testGetItemDesc()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemizedDetailsAsArray">testGetItemizedDetailsAsArray()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetJsonPayProRequired">testGetJsonPayProRequired()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetMerchantName">testGetMerchantName()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetMinerFees">testGetMinerFees()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetNonPayProPaymentReceived">testGetNonPayProPaymentReceived()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetNotificationEmail">testGetNotificationEmail()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetNotificationURL">testGetNotificationURL()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetOrderId">testGetOrderId()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetOverpaidAmount">testGetOverpaidAmount()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentCodes">testGetPaymentCodes()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentCurrencies">testGetPaymentCurrencies()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentDisplaySubTotals">testGetPaymentDisplaySubTotals()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentDisplayTotals">testGetPaymentDisplayTotals()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentSubTotals">testGetPaymentSubTotals()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentTotals">testGetPaymentTotals()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPhysical">testGetPhysical()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPosData">testGetPosData()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPrice">testGetPrice()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRedirectURL">testGetRedirectURL()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRefundAddresses">testGetRefundAddresses()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRefundAddressRequestPending">testGetRefundAddressRequestPending()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRefundInfo">testGetRefundInfo()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetSelectedTransactionCurrency">testGetSelectedTransactionCurrency()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetShopper">testGetShopper()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetStatus">testGetStatus()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetSupportedTransactionCurrencies">testGetSupportedTransactionCurrencies()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetTargetConfirmations">testGetTargetConfirmations()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetToken">testGetToken()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testgetTransactionCurrency">testgetTransactionCurrency()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetTransactions">testGetTransactions()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetTransactionSpeed">testGetTransactionSpeed()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetUnderpaidAmount">testGetUnderpaidAmount()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetUniversalCodes">testGetUniversalCodes()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetUrl">testGetUrl()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testInstanceOf">testInstanceOf()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testToArray">testToArray()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testToArrayEmptyKey">testToArrayEmptyKey()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_createClassObject">createClassObject()</a>
+    <span>
+                                &nbsp;: <a href="classes/BitPaySDK-Model-Invoice-Invoice.html"><abbr title="\BitPaySDK\Model\Invoice\Invoice">Invoice</abbr></a>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_getExampleExchangeRates">getExampleExchangeRates()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_setObjectSetters">setObjectSetters()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+    </dl>
+
+
+
+
+        
+
+        
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetAcceptanceWindow">
+        testGetAcceptanceWindow()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetAcceptanceWindow" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">169</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetAcceptanceWindow</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetAmountPaid">
+        testGetAmountPaid()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetAmountPaid" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">638</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetAmountPaid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetAutoRedirect">
+        testGetAutoRedirect()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetAutoRedirect" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">187</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetAutoRedirect</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetBillId">
+        testGetBillId()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBillId" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">604</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetBillId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetBitpayIdRequired">
+        testGetBitpayIdRequired()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBitpayIdRequired" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">201</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetBitpayIdRequired</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetBuyer">
+        testGetBuyer()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyer" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">263</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetBuyer</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetBuyerEmail">
+        testGetBuyerEmail()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">272</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetBuyerEmail</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetBuyerProvidedEmail">
+        testGetBuyerProvidedEmail()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerProvidedEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">394</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetBuyerProvidedEmail</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetBuyerProvidedInfo">
+        testGetBuyerProvidedInfo()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerProvidedInfo" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">403</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetBuyerProvidedInfo</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetBuyerSms">
+        testGetBuyerSms()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerSms" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">281</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetBuyerSms</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetCloseURL">
+        testGetCloseURL()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCloseURL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">178</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetCloseURL</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetCurrency">
+        testGetCurrency()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">38</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetCurrency</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrency#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetCurrencyException">
+        testGetCurrencyException()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrencyException" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetCurrencyException</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetCurrentTime">
+        testGetCurrentTime()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrentTime" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">351</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetCurrentTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetDisplayAmountPaid">
+        testGetDisplayAmountPaid()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetDisplayAmountPaid" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">647</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetDisplayAmountPaid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetExceptionStatus">
+        testGetExceptionStatus()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExceptionStatus" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">369</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetExceptionStatus</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetExchangeRates">
+        testGetExchangeRates()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExchangeRates" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">656</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetExchangeRates</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetExpirationTime">
+        testGetExpirationTime()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExpirationTime" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">342</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetExpirationTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetExtendedNotifications">
+        testGetExtendedNotifications()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExtendedNotifications" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">622</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetExtendedNotifications</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetFeeDetected">
+        testGetFeeDetected()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetFeeDetected" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">326</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetFeeDetected</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetForcedBuyerSelectedTransactionCurrency">
+        testGetForcedBuyerSelectedTransactionCurrency()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetForcedBuyerSelectedTransactionCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">235</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetForcedBuyerSelectedTransactionCurrency</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetForcedBuyerSelectedWallet">
+        testGetForcedBuyerSelectedWallet()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetForcedBuyerSelectedWallet" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">226</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetForcedBuyerSelectedWallet</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetFullNotifications">
+        testGetFullNotifications()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetFullNotifications" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">101</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetFullNotifications</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetGuid">
+        testGetGuid()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetGuid" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">47</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetGuid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetId">
+        testGetId()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetId" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">299</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetInvoiceTime">
+        testGetInvoiceTime()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetInvoiceTime" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">333</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetInvoiceTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetIsCancelled">
+        testGetIsCancelled()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetIsCancelled" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">665</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetIsCancelled</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetItemCode">
+        testGetItemCode()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">144</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetItemCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetItemDesc">
+        testGetItemDesc()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemDesc" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">135</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetItemDesc</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetItemizedDetailsAsArray">
+        testGetItemizedDetailsAsArray()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemizedDetailsAsArray" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">247</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetItemizedDetailsAsArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemizedDetailsAsArray#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetJsonPayProRequired">
+        testGetJsonPayProRequired()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetJsonPayProRequired" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">194</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetJsonPayProRequired</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetMerchantName">
+        testGetMerchantName()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetMerchantName" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">208</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetMerchantName</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetMinerFees">
+        testGetMinerFees()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetMinerFees" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">579</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetMinerFees</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetNonPayProPaymentReceived">
+        testGetNonPayProPaymentReceived()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetNonPayProPaymentReceived" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">588</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetNonPayProPaymentReceived</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetNotificationEmail">
+        testGetNotificationEmail()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetNotificationEmail" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">108</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetNotificationEmail</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetNotificationURL">
+        testGetNotificationURL()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetNotificationURL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">83</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetNotificationURL</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetOrderId">
+        testGetOrderId()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetOrderId" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">126</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetOrderId</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetOverpaidAmount">
+        testGetOverpaidAmount()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetOverpaidAmount" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">570</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetOverpaidAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetPaymentCodes">
+        testGetPaymentCodes()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentCodes" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">514</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetPaymentCodes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetPaymentCurrencies">
+        testGetPaymentCurrencies()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentCurrencies" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">160</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetPaymentCurrencies</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetPaymentDisplaySubTotals">
+        testGetPaymentDisplaySubTotals()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentDisplaySubTotals" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">472</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetPaymentDisplaySubTotals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetPaymentDisplayTotals">
+        testGetPaymentDisplayTotals()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentDisplayTotals" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">493</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetPaymentDisplayTotals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetPaymentSubTotals">
+        testGetPaymentSubTotals()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentSubTotals" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">451</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetPaymentSubTotals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetPaymentTotals">
+        testGetPaymentTotals()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentTotals" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">430</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetPaymentTotals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetPhysical">
+        testGetPhysical()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPhysical" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">153</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetPhysical</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetPosData">
+        testGetPosData()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPosData" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">74</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetPosData</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetPrice">
+        testGetPrice()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPrice" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">65</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetPrice</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetRedirectURL">
+        testGetRedirectURL()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRedirectURL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">117</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetRedirectURL</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetRefundAddresses">
+        testGetRefundAddresses()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRefundAddresses" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">290</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetRefundAddresses</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetRefundAddressRequestPending">
+        testGetRefundAddressRequestPending()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRefundAddressRequestPending" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">387</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetRefundAddressRequestPending</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetRefundInfo">
+        testGetRefundInfo()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRefundInfo" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">613</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetRefundInfo</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetSelectedTransactionCurrency">
+        testGetSelectedTransactionCurrency()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetSelectedTransactionCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">217</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetSelectedTransactionCurrency</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetShopper">
+        testGetShopper()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetShopper" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">595</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetShopper</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetStatus">
+        testGetStatus()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetStatus" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">317</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetStatus</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetSupportedTransactionCurrencies">
+        testGetSupportedTransactionCurrencies()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetSupportedTransactionCurrencies" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">421</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetSupportedTransactionCurrencies</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetTargetConfirmations">
+        testGetTargetConfirmations()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetTargetConfirmations" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">378</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetTargetConfirmations</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetToken">
+        testGetToken()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetToken" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testgetTransactionCurrency">
+        testgetTransactionCurrency()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testgetTransactionCurrency" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">629</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testgetTransactionCurrency</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetTransactions">
+        testGetTransactions()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetTransactions" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">360</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetTransactions</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetTransactionSpeed">
+        testGetTransactionSpeed()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetTransactionSpeed" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">92</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetTransactionSpeed</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetUnderpaidAmount">
+        testGetUnderpaidAmount()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetUnderpaidAmount" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">561</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetUnderpaidAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetUniversalCodes">
+        testGetUniversalCodes()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetUniversalCodes" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">412</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetUniversalCodes</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testGetUrl">
+        testGetUrl()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetUrl" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">308</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testGetUrl</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testInstanceOf">
+        testInstanceOf()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testInstanceOf" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testInstanceOf</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testToArray">
+        testToArray()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testToArray" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">675</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testToArray</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testToArray#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_testToArrayEmptyKey">
+        testToArrayEmptyKey()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testToArrayEmptyKey" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">772</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">testToArrayEmptyKey</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_createClassObject">
+        createClassObject()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_createClassObject" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">784</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">createClassObject</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Invoice-Invoice.html"><abbr title="\BitPaySDK\Model\Invoice\Invoice">Invoice</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Invoice-Invoice.html"><abbr title="\BitPaySDK\Model\Invoice\Invoice">Invoice</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getExampleExchangeRates">
+        getExampleExchangeRates()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_getExampleExchangeRates" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">843</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">getExampleExchangeRates</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setObjectSetters">
+        setObjectSetters()
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_setObjectSetters" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php"><a href="files/test-unit-bitpaysdk-model-invoice-invoicetest.html"><abbr title="test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php">InvoiceTest.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">792</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">setObjectSetters</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Model-Invoice-Invoice.html"><abbr title="\BitPaySDK\Model\Invoice\Invoice">Invoice</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$invoice</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$invoice</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Model-Invoice-Invoice.html"><abbr title="\BitPaySDK\Model\Invoice\Invoice">Invoice</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_setObjectSetters#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
+
+    
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/test/unit/BitPaySDK/Model/Invoice/InvoiceTest.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                                                <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetAcceptanceWindow">testGetAcceptanceWindow()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetAmountPaid">testGetAmountPaid()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetAutoRedirect">testGetAutoRedirect()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBillId">testGetBillId()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBitpayIdRequired">testGetBitpayIdRequired()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyer">testGetBuyer()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerEmail">testGetBuyerEmail()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerProvidedEmail">testGetBuyerProvidedEmail()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerProvidedInfo">testGetBuyerProvidedInfo()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetBuyerSms">testGetBuyerSms()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCloseURL">testGetCloseURL()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrency">testGetCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrencyException">testGetCurrencyException()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetCurrentTime">testGetCurrentTime()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetDisplayAmountPaid">testGetDisplayAmountPaid()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExceptionStatus">testGetExceptionStatus()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExchangeRates">testGetExchangeRates()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExpirationTime">testGetExpirationTime()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetExtendedNotifications">testGetExtendedNotifications()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetFeeDetected">testGetFeeDetected()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetForcedBuyerSelectedTransactionCurrency">testGetForcedBuyerSelectedTransactionCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetForcedBuyerSelectedWallet">testGetForcedBuyerSelectedWallet()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetFullNotifications">testGetFullNotifications()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetGuid">testGetGuid()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetId">testGetId()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetInvoiceTime">testGetInvoiceTime()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetIsCancelled">testGetIsCancelled()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemCode">testGetItemCode()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemDesc">testGetItemDesc()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetItemizedDetailsAsArray">testGetItemizedDetailsAsArray()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetJsonPayProRequired">testGetJsonPayProRequired()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetMerchantName">testGetMerchantName()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetMinerFees">testGetMinerFees()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetNonPayProPaymentReceived">testGetNonPayProPaymentReceived()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetNotificationEmail">testGetNotificationEmail()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetNotificationURL">testGetNotificationURL()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetOrderId">testGetOrderId()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetOverpaidAmount">testGetOverpaidAmount()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentCodes">testGetPaymentCodes()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentCurrencies">testGetPaymentCurrencies()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentDisplaySubTotals">testGetPaymentDisplaySubTotals()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentDisplayTotals">testGetPaymentDisplayTotals()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentSubTotals">testGetPaymentSubTotals()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPaymentTotals">testGetPaymentTotals()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPhysical">testGetPhysical()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPosData">testGetPosData()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetPrice">testGetPrice()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRedirectURL">testGetRedirectURL()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRefundAddresses">testGetRefundAddresses()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRefundAddressRequestPending">testGetRefundAddressRequestPending()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetRefundInfo">testGetRefundInfo()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetSelectedTransactionCurrency">testGetSelectedTransactionCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetShopper">testGetShopper()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetStatus">testGetStatus()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetSupportedTransactionCurrencies">testGetSupportedTransactionCurrencies()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetTargetConfirmations">testGetTargetConfirmations()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetToken">testGetToken()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testgetTransactionCurrency">testgetTransactionCurrency()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetTransactions">testGetTransactions()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetTransactionSpeed">testGetTransactionSpeed()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetUnderpaidAmount">testGetUnderpaidAmount()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetUniversalCodes">testGetUniversalCodes()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testGetUrl">testGetUrl()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testInstanceOf">testInstanceOf()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testToArray">testToArray()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_testToArrayEmptyKey">testToArrayEmptyKey()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_createClassObject">createClassObject()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_getExampleExchangeRates">getExampleExchangeRates()</a></li>
+                                            <li><a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#method_setObjectSetters">setObjectSetters()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/BitPaySDK-Test-Model-Invoice-InvoiceTest.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

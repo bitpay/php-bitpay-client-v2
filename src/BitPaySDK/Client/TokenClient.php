@@ -10,6 +10,13 @@ namespace BitPaySDK\Client;
 
 use BitPaySDK\Util\RESTcli\RESTcli;
 
+/**
+ * Handles interactions with the token endpoints.
+ *
+ * @package BitPaySDK\Client
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 class TokenClient
 {
     private static ?self $instance = null;

@@ -6,16 +6,15 @@
 
 declare(strict_types=1);
 
-/*
- * @author BitPay Integrations <integrations@bitpay.com>
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
-
 namespace BitPaySDK\Model\Invoice;
 
 /**
  * This object will be available on the invoice if a shopper signs in on an invoice using his BitPay ID.
  * See the following blogpost for more information.
+ *
+ * @package BitPaySDK\Model\Invoice
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class Shopper

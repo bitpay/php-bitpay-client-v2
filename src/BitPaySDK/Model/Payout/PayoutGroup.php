@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Payout;
 
+/**
+ * @package BitPaySDK\Model\Payout
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 class PayoutGroup
 {
     /**

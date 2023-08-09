@@ -13,6 +13,10 @@ namespace BitPaySDK\Model\Payout;
 
 /**
  * List of recipient reference methods
+ *
+ * @package BitPaySDK\Model\Payout
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @see https://bitpay.readme.io/reference/payouts REST API Payouts
  */
 interface RecipientReferenceMethod

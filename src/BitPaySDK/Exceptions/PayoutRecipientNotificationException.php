@@ -10,6 +10,13 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
+/**
+ * Payout recipient notification exception.
+ *
+ * @package BitPaySDK\Exceptions
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 class PayoutRecipientNotificationException extends PayoutRecipientException
 {
     private string $bitPayMessage = "Failed to send payout recipient notification";

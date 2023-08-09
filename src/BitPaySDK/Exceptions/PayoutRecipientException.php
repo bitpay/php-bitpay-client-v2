@@ -10,6 +10,13 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
+/**
+ * Generic recipient exception.
+ *
+ * @package BitPaySDK\Exceptions
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 class PayoutRecipientException extends BitPayException
 {
     private string $bitPayMessage = "An unexpected error occurred while trying to manage the payout recipient";

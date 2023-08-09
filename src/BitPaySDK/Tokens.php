@@ -12,8 +12,11 @@ use BitPaySDK\Model\Facade;
 use Exception;
 
 /**
- * Class Tokens
- * @package Bitpay
+ * Token object used to store the tokens for the different facades.
+ *
+ * @package BitPaySDK
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 class Tokens
 {

@@ -10,6 +10,13 @@ namespace BitPaySDK\Exceptions;
 
 use Exception;
 
+/**
+ * Generic refund exception.
+ *
+ * @package BitPaySDK\Exceptions
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 class RefundException extends BitPayException
 {
     private string $bitPayMessage = "An unexpected error occurred while trying to manage the refund";

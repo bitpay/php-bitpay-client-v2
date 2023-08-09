@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpdocumentor
+  configVersion="3"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="https://www.phpdoc.org"
+>
+  <title>BitPay PHP SDK</title>
+
+  <paths>
+    <output>docs</output>
+  </paths>
+
+  <version number="8.0.2">
+    <api format="php">
+      <source dsn=".">
+        <path>src</path>
+      </source>
+      <extensions>
+        <extension>php</extension>
+      </extensions>
+      <default-package-name>BitPaySDK</default-package-name>
+    </api>
+  </version>
+
+  <setting name="template.color" value="blue"/>
+
+</phpdocumentor>

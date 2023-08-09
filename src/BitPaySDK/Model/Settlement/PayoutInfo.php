@@ -6,15 +6,14 @@
 
 declare(strict_types=1);
 
-/*
- * @author BitPay Integrations <integrations@bitpay.com>
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
-
 namespace BitPaySDK\Model\Settlement;
 
 /**
  * Object containing the settlement info provided by the Merchant in his BitPay account settings.
+ *
+ * @package BitPaySDK\Model\Settlement
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @see https://bitpay.readme.io/reference/settlements Settlements
  */
 class PayoutInfo

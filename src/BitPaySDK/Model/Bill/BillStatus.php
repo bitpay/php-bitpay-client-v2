@@ -14,6 +14,9 @@ namespace BitPaySDK\Model\Bill;
 /**
  * Contains bill statuses: Can be "draft", "sent", "new", "paid", or "complete"
  *
+ * @package BitPaySDK\Model\Bill
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @see https://developer.bitpay.com/reference/bills REST API Bills
  */
 interface BillStatus

@@ -6,11 +6,6 @@
 
 declare(strict_types=1);
 
-/*
- * @author BitPay Integrations <integrations@bitpay.com>
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
-
 namespace BitPaySDK\Model\Invoice;
 
 /**
@@ -19,6 +14,8 @@ namespace BitPaySDK\Model\Invoice;
  * An extra "reason" parameter is added in the object if a cryptocurrency is disabled on a specific invoice.
  *
  * @package BitPaySDK\Model\Invoice
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class SupportedTransactionCurrency

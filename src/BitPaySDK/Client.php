@@ -57,11 +57,11 @@ use Exception;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Class Client
- * @package Bitpay
+ * Client class to interact with the BitPay API.
+ *
+ * @package BitPaySDK
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
- * @version 8.0.2
  */
 class Client
 {
