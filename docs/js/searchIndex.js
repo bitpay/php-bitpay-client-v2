@@ -3378,7 +3378,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Invoice\\Buyer",
             "name": "Buyer",
-            "summary": "",
+            "summary": "Allows\u0020merchant\u0020to\u0020pass\u0020buyer\u0020related\u0020information\u0020in\u0020the\u0020invoice\u0020object",
             "url": "classes/BitPaySDK-Model-Invoice-Buyer.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Invoice\\Buyer\u003A\u003A__construct\u0028\u0029",
@@ -5893,7 +5893,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\Buyer",
             "name": "Buyer",
-            "summary": "Class\u0020Buyer",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Ledger-Buyer.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\Buyer\u003A\u003A__construct\u0028\u0029",
@@ -6058,7 +6058,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\Ledger",
             "name": "Ledger",
-            "summary": "Class\u0020Ledger",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Ledger-Ledger.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\Ledger\u003A\u003A__construct\u0028\u0029",
@@ -6103,7 +6103,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\LedgerEntry",
             "name": "LedgerEntry",
-            "summary": "Class\u0020LedgerEntry",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Ledger-LedgerEntry.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Ledger\\LedgerEntry\u003A\u003A__construct\u0028\u0029",
@@ -7163,7 +7163,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Rate\\Rate",
             "name": "Rate",
-            "summary": "Class\u0020Rate",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Rate-Rate.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Rate\\Rate\u003A\u003A__construct\u0028\u0029",
@@ -7223,7 +7223,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Rate\\Rates",
             "name": "Rates",
-            "summary": "Class\u0020Rates",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Rate-Rates.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Rate\\Rates\u003A\u003A__construct\u0028\u0029",
@@ -8118,7 +8118,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\SettlementLedgerEntry",
             "name": "SettlementLedgerEntry",
-            "summary": "Class\u0020SettlementLedgerEntry",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Settlement-SettlementLedgerEntry.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\SettlementLedgerEntry\u003A\u003A__construct\u0028\u0029",
@@ -8238,7 +8238,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\WithHoldings",
             "name": "WithHoldings",
-            "summary": "Class\u0020WithHoldings",
+            "summary": "",
             "url": "classes/BitPaySDK-Model-Settlement-WithHoldings.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\WithHoldings\u003A\u003A__construct\u0028\u0029",
