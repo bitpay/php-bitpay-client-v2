@@ -3,7 +3,7 @@ Search.appendIndex(
                 {
             "fqsen": "\\BitPaySDK\\Client\\BillClient",
             "name": "BillClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020bill\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-BillClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\BillClient\u003A\u003A__construct\u0028\u0029",
@@ -63,7 +63,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\InvoiceClient",
             "name": "InvoiceClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020invoice\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-InvoiceClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\InvoiceClient\u003A\u003A__construct\u0028\u0029",
@@ -148,7 +148,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\LedgerClient",
             "name": "LedgerClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020ledger\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-LedgerClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\LedgerClient\u003A\u003A__construct\u0028\u0029",
@@ -188,7 +188,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\PayoutClient",
             "name": "PayoutClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020payout\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-PayoutClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\PayoutClient\u003A\u003A__construct\u0028\u0029",
@@ -258,7 +258,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\PayoutRecipientsClient",
             "name": "PayoutRecipientsClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020recipients\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-PayoutRecipientsClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\PayoutRecipientsClient\u003A\u003A__construct\u0028\u0029",
@@ -318,7 +318,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\RateClient",
             "name": "RateClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020rate\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-RateClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\RateClient\u003A\u003A__construct\u0028\u0029",
@@ -358,7 +358,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\RefundClient",
             "name": "RefundClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020refund\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-RefundClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\RefundClient\u003A\u003A__construct\u0028\u0029",
@@ -433,7 +433,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\SettlementClient",
             "name": "SettlementClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020settlement\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-SettlementClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\SettlementClient\u003A\u003A__construct\u0028\u0029",
@@ -478,7 +478,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\TokenClient",
             "name": "TokenClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020token\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-TokenClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\TokenClient\u003A\u003A__construct\u0028\u0029",
@@ -508,7 +508,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client\\WalletClient",
             "name": "WalletClient",
-            "summary": "",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020wallet\u0020endpoints.",
             "url": "classes/BitPaySDK-Client-WalletClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\\WalletClient\u003A\u003A__construct\u0028\u0029",
@@ -538,7 +538,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Client",
             "name": "Client",
-            "summary": "Class\u0020Client",
+            "summary": "Client\u0020class\u0020to\u0020interact\u0020with\u0020the\u0020BitPay\u0020API.",
             "url": "classes/BitPaySDK-Client.html"
         },                {
             "fqsen": "\\BitPaySDK\\Client\u003A\u003A__construct\u0028\u0029",
@@ -858,7 +858,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Env",
             "name": "Env",
-            "summary": "",
+            "summary": "Constants\u0020used\u0020throughout\u0020the\u0020SDK.",
             "url": "classes/BitPaySDK-Env.html"
         },                {
             "fqsen": "\\BitPaySDK\\Env\u003A\u003ATEST",
@@ -8628,7 +8628,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\PosClient",
             "name": "PosClient",
-            "summary": "Class\u0020Client",
+            "summary": "Client\u0020for\u0020handling\u0020POS\u0020facade\u0020specific\u0020calls.",
             "url": "classes/BitPaySDK-PosClient.html"
         },                {
             "fqsen": "\\BitPaySDK\\PosClient\u003A\u003A__construct\u0028\u0029",
@@ -8663,7 +8663,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Tokens",
             "name": "Tokens",
-            "summary": "Class\u0020Tokens",
+            "summary": "Token\u0020object\u0020used\u0020to\u0020store\u0020the\u0020tokens\u0020for\u0020the\u0020different\u0020facades.",
             "url": "classes/BitPaySDK-Tokens.html"
         },                {
             "fqsen": "\\BitPaySDK\\Tokens\u003A\u003A__construct\u0028\u0029",
