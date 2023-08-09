@@ -6,15 +6,14 @@
 
 declare(strict_types=1);
 
-/*
- * @author BitPay Integrations <integrations@bitpay.com>
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
-
 namespace BitPaySDK\Model\Invoice;
 
 /**
  * Information collected from the buyer during the process of paying an invoice. Initially this object is empty.
+ *
+ * @package BitPaySDK\Model\Invoice
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class BuyerProvidedInfo

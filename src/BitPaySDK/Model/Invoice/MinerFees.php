@@ -6,11 +6,6 @@
 
 declare(strict_types=1);
 
-/*
- * @author BitPay Integrations <integrations@bitpay.com>
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
-
 namespace BitPaySDK\Model\Invoice;
 
 /**
@@ -19,6 +14,9 @@ namespace BitPaySDK\Model\Invoice;
  * the total fee, and the fiat amount. This is referenced as "Network Cost" on an invoice,
  * see this support article for more information.
  *
+ * @package BitPaySDK\Model\Invoice
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @see https://bitpay.readme.io/reference/invoices REST API Invoices
  */
 class MinerFees

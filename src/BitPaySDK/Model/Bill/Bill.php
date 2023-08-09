@@ -6,19 +6,15 @@
 
 declare(strict_types=1);
 
-/*
- * @author BitPay Integrations <integrations@bitpay.com>
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
-
 namespace BitPaySDK\Model\Bill;
 
 use BitPaySDK\Exceptions\BitPayException;
 use BitPaySDK\Model\Currency;
 
 /**
- * @package Bitpay
- * @see https://developer.bitpay.com/reference/bills REST API Bills
+ * @package BitPaySDK\Model\Bill
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 class Bill
 {

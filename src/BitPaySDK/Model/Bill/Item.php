@@ -16,7 +16,9 @@ namespace BitPaySDK\Model\Bill;
 /**
  * @see https://developer.bitpay.com/reference/bills REST API Bills
  *
- * @package Bitpay
+ * @package BitPaySDK\Model\Bill
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 
 #[\AllowDynamicProperties]

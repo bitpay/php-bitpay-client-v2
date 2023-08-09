@@ -6,16 +6,12 @@
 
 declare(strict_types=1);
 
-/*
- * @author BitPay Integrations <integrations@bitpay.com>
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
-
 namespace BitPaySDK\Model\Ledger;
 
 /**
- * Class Buyer
  * @package BitPaySDK\Model\Ledger
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  * @see https://bitpay.readme.io/reference/ledgers REST API Ledgers
  */
 class Buyer
