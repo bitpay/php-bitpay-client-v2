@@ -17,10 +17,11 @@ use Exception;
 use JsonMapper;
 
 /**
- * Class Client
- * @package Bitpay light
- * @author  Antonio Buedo
- * @version 8.0.2
+ * Client for handling POS facade specific calls.
+ * 
+ * @package BitPaySDK
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 class PosClient extends Client
 {

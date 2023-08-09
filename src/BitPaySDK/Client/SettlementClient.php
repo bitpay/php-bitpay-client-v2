@@ -17,6 +17,13 @@ use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
 
+/**
+ * Handles interactions with the settlement endpoints.
+ *
+ * @package BitPaySDK\Client
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
+ */
 class SettlementClient
 {
     private static ?self $instance = null;
