@@ -6,11 +6,6 @@
 
 declare(strict_types=1);
 
-/**
- * @author BitPay Integrations <integrations@bitpay.com>
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- */
-
 namespace BitPaySDK\Util\RESTcli;
 
 use BitPayKeyUtils\KeyHelper\PrivateKey;
@@ -30,8 +25,9 @@ use GuzzleHttp\Psr7\Response as Response;
 use GuzzleHttp\RequestOptions as RequestOptions;
 
 /**
- * Class RESTcli
- * @package BitPaySDK\Util\RESTcli
+ * @package BitPaySDK\Util
+ * @author BitPay Integrations <integrations@bitpay.com>
+ * @license http://www.opensource.org/licenses/mit-license.php MIT
  */
 class RESTcli
 {

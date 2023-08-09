@@ -17,7 +17,7 @@ use Exception;
 use ReflectionClass;
 
 /**
- * Object containing currency information
+ * Object containing currency information.
  *
  * @package BitPaySDK\Model
  * @author BitPay Integrations <integrations@bitpay.com>

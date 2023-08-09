@@ -7,8 +7,8 @@
 namespace BitPaySDK\Model;
 
 /**
- * Facades named collections of capabilities that can be granted,
- * such as the ability to create invoices or grant refunds
+ * Facades are named collections of capabilities that can be granted,
+ * such as the ability to create invoices or grant refunds.
  *
  * @package BitPaySDK\Model
  * @author BitPay Integrations <integrations@bitpay.com>
