@@ -8,5 +8,6 @@
   <paths>
     <output>docs</output>
   </paths>
+  <setting name="template.color" value="blue"/>
 
 </phpdocumentor>
