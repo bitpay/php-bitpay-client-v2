@@ -10,7 +10,7 @@ namespace BitPaySDK\Model\Invoice;
 
 /**
  * Allows merchant to pass buyer related information in the invoice object
- * 
+ *
  * @package BitPaySDK\Model\Invoice
  * @author BitPay Integrations <integrations@bitpay.com>
  * @license http://www.opensource.org/licenses/mit-license.php MIT
