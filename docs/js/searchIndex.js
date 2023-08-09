@@ -2263,7 +2263,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Currency",
             "name": "Currency",
-            "summary": "Object\u0020containing\u0020currency\u0020information",
+            "summary": "Object\u0020containing\u0020currency\u0020information.",
             "url": "classes/BitPaySDK-Model-Currency.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Currency\u003A\u003AisValid\u0028\u0029",
@@ -3358,7 +3358,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Facade",
             "name": "Facade",
-            "summary": "Facades\u0020named\u0020collections\u0020of\u0020capabilities\u0020that\u0020can\u0020be\u0020granted,\nsuch\u0020as\u0020the\u0020ability\u0020to\u0020create\u0020invoices\u0020or\u0020grant\u0020refunds",
+            "summary": "Facades\u0020are\u0020named\u0020collections\u0020of\u0020capabilities\u0020that\u0020can\u0020be\u0020granted,\nsuch\u0020as\u0020the\u0020ability\u0020to\u0020create\u0020invoices\u0020or\u0020grant\u0020refunds.",
             "url": "classes/BitPaySDK-Model-Facade.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Facade\u003A\u003AMERCHANT",
@@ -8723,7 +8723,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\BitPaySDK\\Util\\RESTcli\\RESTcli",
             "name": "RESTcli",
-            "summary": "Class\u0020RESTcli",
+            "summary": "",
             "url": "classes/BitPaySDK-Util-RESTcli-RESTcli.html"
         },                {
             "fqsen": "\\BitPaySDK\\Util\\RESTcli\\RESTcli\u003A\u003A__construct\u0028\u0029",
