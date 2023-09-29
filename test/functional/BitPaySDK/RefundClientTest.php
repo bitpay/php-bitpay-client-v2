@@ -6,11 +6,10 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Functional;
 
-use BitPaySDK\Exceptions\RefundCreationException;
+use BitPaySDK\Exceptions\BitPayApiException;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Invoice\Buyer;
 use BitPaySDK\Model\Invoice\Invoice;
-use BitPaySDK\Model\Invoice\Refund;
 
 class RefundClientTest extends AbstractClientTestCase
 {
@@ -29,7 +28,7 @@ class RefundClientTest extends AbstractClientTestCase
     {
         $invoice = $this->getInvoiceExample();
         $invoice->setId('WoE46gSLkJQS48RJEiNw3L');
-        $this->expectException(RefundCreationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $this->client->createRefund($invoice->getId(), 50.0, Currency::USD, true);
     }
@@ -56,7 +55,6 @@ class RefundClientTest extends AbstractClientTestCase
         $refunds = $this->client->getRefunds($invoices[0]->getId());
         $refund = $this->client->getRefund($refunds[0]->getId());
 
-        self::assertInstanceOf(Refund::class, $refund);
         self::assertEquals('complete', $invoices[0]->getStatus());
         self::assertCount(1, $invoices);
         self::assertEquals('created', $refund->getStatus());
@@ -81,7 +79,6 @@ class RefundClientTest extends AbstractClientTestCase
         $refundId = $refunds[0]->getId();
         $refund = $this->client->cancelRefund($refundId);
 
-        self::assertInstanceOf(Refund::class, $refund);
         self::assertNotNull($refund);
         self::assertEquals('canceled', $refund->getStatus());
     }

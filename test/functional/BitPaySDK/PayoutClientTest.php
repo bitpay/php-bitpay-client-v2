@@ -6,7 +6,9 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Functional;
 
-use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Payout\Payout;
 use BitPaySDK\Model\Payout\PayoutRecipient;
@@ -43,9 +45,7 @@ class PayoutClientTest extends AbstractClientTestCase
     }
 
     /**
-     * @throws BitPayException
-     * @throws \BitPaySDK\Exceptions\PayoutCancellationException
-     * @throws \BitPaySDK\Exceptions\PayoutCreationException
+     * @throws BitPayApiException
      */
     public function testPayoutGroupRequests(): void
     {
@@ -93,12 +93,14 @@ class PayoutClientTest extends AbstractClientTestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayGenericException
      */
     private function getEmailFromFile(string $path): string
     {
         if (!file_exists($path)) {
-            throw new BitPayException("Please create email.txt with your email: " . $path);
+            BitPayExceptionProvider::throwGenericExceptionWithMessage(
+                "Please create email.txt with your email: " . $path
+            );
         }
 
         return file_get_contents($path);

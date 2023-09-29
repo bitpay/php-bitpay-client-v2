@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Client;
 
-use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\SettlementQueryException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Settlement\Settlement;
 use BitPaySDK\Tokens;
@@ -58,13 +59,14 @@ class SettlementClient
      * specify pages for large query sets.
      *
      * @param string $currency The three digit currency string for the ledger to retrieve.
-     * @param string $dateStart  The start date for the query.
+     * @param string $dateStart The start date for the query.
      * @param string $dateEnd The end date for the query.
      * @param string|null $status string Can be `processing`, `completed`, or `failed`.
      * @param int|null $limit int Maximum number of settlements to retrieve.
      * @param int|null $offset int Offset for paging.
      * @return Settlement[]
-     * @throws SettlementQueryException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getSettlements(
         string $currency,
@@ -74,32 +76,20 @@ class SettlementClient
         int $limit = null,
         int $offset = null
     ): array {
-        try {
-            $status = $status ?? "";
-            $limit = $limit ?? 100;
-            $offset = $offset ?? 0;
+        $status = $status ?? "";
+        $limit = $limit ?? 100;
+        $offset = $offset ?? 0;
 
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
-            $params["dateStart"] = $dateStart;
-            $params["dateEnd"] = $dateEnd;
-            $params["currency"] = $currency;
-            $params["status"] = $status;
-            $params["limit"] = (string)$limit;
-            $params["offset"] = (string)$offset;
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
+        $params["dateStart"] = $dateStart;
+        $params["dateEnd"] = $dateEnd;
+        $params["currency"] = $currency;
+        $params["status"] = $status;
+        $params["limit"] = (string)$limit;
+        $params["offset"] = (string)$offset;
 
-            $responseJson = $this->restCli->get("settlements", $params);
-        } catch (BitPayException $e) {
-            throw new SettlementQueryException(
-                "failed to serialize Settlement object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new SettlementQueryException("failed to serialize Settlement object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->get("settlements", $params);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -110,37 +100,24 @@ class SettlementClient
                 Settlement::class
             );
         } catch (Exception $e) {
-            throw new SettlementQueryException(
-                "failed to deserialize BitPay server response (Settlement) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Settlement', $e->getMessage());
         }
     }
 
     /**
      * Retrieves a summary of the specified settlement.
      *
-     * @param  string $settlementId Settlement Id.
+     * @param string $settlementId Settlement Id.
      * @return Settlement
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function get(string $settlementId): Settlement
     {
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
 
-            $responseJson = $this->restCli->get("settlements/" . $settlementId, $params);
-        } catch (BitPayException $e) {
-            throw new SettlementQueryException(
-                "failed to serialize Settlement object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new SettlementQueryException("failed to serialize Settlement object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->get("settlements/" . $settlementId, $params);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -150,42 +127,27 @@ class SettlementClient
                 new Settlement()
             );
         } catch (Exception $e) {
-            throw new SettlementQueryException(
-                "failed to deserialize BitPay server response (Settlement) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Settlement', $e->getMessage());
         }
     }
 
     /**
      * Gets a detailed reconciliation report of the activity within the settlement period.
      *
-     * @param  Settlement $settlement Settlement to generate report for.
+     * @param Settlement $settlement Settlement to generate report for.
      * @return Settlement
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getReconciliationReport(Settlement $settlement): Settlement
     {
-        try {
-            $params = [];
-            $params["token"] = $settlement->getToken();
+        $params = [];
+        $params["token"] = $settlement->getToken();
 
-            $responseJson = $this->restCli->get(
-                "settlements/" . $settlement->getId() . "/reconciliationReport",
-                $params
-            );
-        } catch (BitPayException $e) {
-            throw new SettlementQueryException(
-                "failed to serialize Reconciliation Report object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new SettlementQueryException(
-                "failed to serialize Reconciliation Report object : " . $e->getMessage()
-            );
-        }
+        $responseJson = $this->restCli->get(
+            "settlements/" . $settlement->getId() . "/reconciliationReport",
+            $params
+        );
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -195,9 +157,7 @@ class SettlementClient
                 new Settlement()
             );
         } catch (Exception $e) {
-            throw new SettlementQueryException(
-                "failed to deserialize BitPay server response (Reconciliation Report) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Settlement', $e->getMessage());
         }
     }
 }

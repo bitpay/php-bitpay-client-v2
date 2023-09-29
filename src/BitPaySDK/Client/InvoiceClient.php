@@ -9,12 +9,10 @@ declare(strict_types=1);
 namespace BitPaySDK\Client;
 
 use BitPayKeyUtils\Util\Util;
-use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\InvoiceCancellationException;
-use BitPaySDK\Exceptions\InvoiceCreationException;
-use BitPaySDK\Exceptions\InvoicePaymentException;
-use BitPaySDK\Exceptions\InvoiceQueryException;
-use BitPaySDK\Exceptions\InvoiceUpdateException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
+use BitPaySDK\Exceptions\BitPayValidationException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
 use BitPaySDK\Tokens;
@@ -64,29 +62,18 @@ class InvoiceClient
      * @param string $facade The facade used to create it.
      * @param bool $signRequest Signed request.
      * @return Invoice
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function create(
         Invoice $invoice,
         string $facade = Facade::MERCHANT,
         bool $signRequest = true
     ): Invoice {
-        try {
-            $invoice->setToken($this->tokenCache->getTokenByFacade($facade));
-            $invoice->setGuid(Util::guid());
+        $invoice->setToken($this->tokenCache->getTokenByFacade($facade));
+        $invoice->setGuid(Util::guid());
 
-            $responseJson = $this->restCli->post("invoices", $invoice->toArray(), $signRequest);
-        } catch (BitPayException $e) {
-            throw new InvoiceCreationException(
-                "failed to serialize Invoice object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new InvoiceCreationException("failed to serialize Invoice object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->post("invoices", $invoice->toArray(), $signRequest);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -96,22 +83,21 @@ class InvoiceClient
                 new Invoice()
             );
         } catch (Exception $e) {
-            throw new InvoiceCreationException(
-                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Invoice', $e->getMessage());
         }
     }
 
     /**
      * Update a BitPay invoice.
      *
-     * @param string $invoiceId The id of the invoice to updated.
+     * @param string $invoiceId The id of the invoice to update.
      * @param string|null $buyerSms The buyer's cell number.
      * @param string|null $smsCode The buyer's received verification code.
      * @param string|null $buyerEmail The buyer's email address.
      * @param false $autoVerify Skip the user verification on sandbox ONLY.
      * @return Invoice
-     * @throws InvoiceUpdateException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function update(
         string $invoiceId,
@@ -120,38 +106,17 @@ class InvoiceClient
         ?string $buyerEmail,
         bool $autoVerify = false
     ): Invoice {
-        // Updating the invoice will require EITHER SMS or E-mail, but not both.
-        if ($this->buyerEmailOrSms($buyerEmail, $buyerSms)) {
-            throw new InvoiceUpdateException("Updating the invoice requires buyerSms or buyerEmail, but not both.");
-        }
+        $this->validateBuyerEmailAndSms($buyerEmail, $buyerSms);
+        $this->validateSmsCode($autoVerify, $buyerSms, $smsCode);
 
-        // smsCode required only when verifying SMS, except when autoVerify is true.
-        if ($this->isSmsCodeRequired($autoVerify, $buyerSms, $smsCode)) {
-            throw new InvoiceUpdateException(
-                "Updating the invoice requires both buyerSms and smsCode when verifying SMS."
-            );
-        }
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
+        $params["buyerEmail"] = $buyerEmail;
+        $params["buyerSms"] = $buyerSms;
+        $params["smsCode"] = $smsCode;
+        $params["autoVerify"] = $autoVerify;
 
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
-            $params["buyerEmail"] = $buyerEmail;
-            $params["buyerSms"] = $buyerSms;
-            $params["smsCode"] = $smsCode;
-            $params["autoVerify"] = $autoVerify;
-
-            $responseJson = $this->restCli->update("invoices/" . $invoiceId, $params);
-        } catch (BitPayException $e) {
-            throw new InvoiceUpdateException(
-                "failed to serialize Invoice object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new InvoiceUpdateException("failed to serialize Invoice object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->update("invoices/" . $invoiceId, $params);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -161,9 +126,7 @@ class InvoiceClient
                 new Invoice()
             );
         } catch (Exception $e) {
-            throw new InvoiceUpdateException(
-                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Invoice', $e->getMessage());
         }
     }
 
@@ -175,29 +138,18 @@ class InvoiceClient
      * @param string $facade The facade used to create it.
      * @param bool $signRequest Signed request.
      * @return Invoice
-     * @throws InvoiceQueryException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function get(
         string $invoiceId,
         string $facade = Facade::MERCHANT,
         bool $signRequest = true
     ): Invoice {
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade($facade);
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade($facade);
 
-            $responseJson = $this->restCli->get("invoices/" . $invoiceId, $params, $signRequest);
-        } catch (BitPayException $e) {
-            throw new InvoiceQueryException(
-                "failed to serialize Invoice object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new InvoiceQueryException("failed to serialize Invoice object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->get("invoices/" . $invoiceId, $params, $signRequest);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -207,9 +159,7 @@ class InvoiceClient
                 new Invoice()
             );
         } catch (Exception $e) {
-            throw new InvoiceQueryException(
-                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Invoice', $e->getMessage());
         }
     }
 
@@ -218,29 +168,18 @@ class InvoiceClient
      * @param string $facade
      * @param bool $signRequest
      * @return Invoice
-     * @throws InvoiceQueryException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function getByGuid(
         string $guid,
         string $facade = Facade::MERCHANT,
         bool $signRequest = true
     ): Invoice {
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade($facade);
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade($facade);
 
-            $responseJson = $this->restCli->get("invoices/guid/" . $guid, $params, $signRequest);
-        } catch (BitPayException $e) {
-            throw new InvoiceQueryException(
-                "failed to serialize Invoice object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new InvoiceQueryException("failed to serialize Invoice object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->get("invoices/guid/" . $guid, $params, $signRequest);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -250,9 +189,7 @@ class InvoiceClient
                 new Invoice()
             );
         } catch (Exception $e) {
-            throw new InvoiceQueryException(
-                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Invoice', $e->getMessage());
         }
     }
 
@@ -267,7 +204,8 @@ class InvoiceClient
      * @param int|null $offset Number of results to offset (ex. skip 10 will give you results starting
      *                               with the 11th result).
      * @return Invoice[]
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getInvoices(
         string $dateStart,
@@ -277,36 +215,24 @@ class InvoiceClient
         int $limit = null,
         int $offset = null
     ): array {
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
-            $params["dateStart"] = $dateStart;
-            $params["dateEnd"] = $dateEnd;
-            if ($status) {
-                $params["status"] = $status;
-            }
-            if ($orderId) {
-                $params["orderId"] = $orderId;
-            }
-            if ($limit) {
-                $params["limit"] = $limit;
-            }
-            if ($offset) {
-                $params["offset"] = $offset;
-            }
-
-            $responseJson = $this->restCli->get("invoices", $params);
-        } catch (BitPayException $e) {
-            throw new InvoiceQueryException(
-                "failed to serialize Invoice object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new InvoiceQueryException("failed to serialize Invoice object : " . $e->getMessage());
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
+        $params["dateStart"] = $dateStart;
+        $params["dateEnd"] = $dateEnd;
+        if ($status) {
+            $params["status"] = $status;
         }
+        if ($orderId) {
+            $params["orderId"] = $orderId;
+        }
+        if ($limit) {
+            $params["limit"] = $limit;
+        }
+        if ($offset) {
+            $params["offset"] = $offset;
+        }
+
+        $responseJson = $this->restCli->get("invoices", $params);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -317,9 +243,7 @@ class InvoiceClient
                 Invoice::class
             );
         } catch (Exception $e) {
-            throw new InvoiceQueryException(
-                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Invoice', $e->getMessage());
         }
     }
 
@@ -328,34 +252,15 @@ class InvoiceClient
      *
      * @param string $invoiceId A BitPay invoice ID.
      * @return bool              True if the webhook was successfully requested, false otherwise.
-     * @throws InvoiceQueryException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function requestNotification(string $invoiceId): bool
     {
-        try {
-            $params = ['token' => $this->tokenCache->getTokenByFacade(Facade::MERCHANT)];
-        } catch (BitPayException $e) {
-            throw new InvoiceQueryException(
-                "failed to serialize invoice object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new InvoiceQueryException("failed to serialize invoice object : " . $e->getMessage());
-        }
+        $params = ['token' => $this->tokenCache->getTokenByFacade(Facade::MERCHANT)];
+        $responseJson = $this->restCli->post("invoices/" . $invoiceId . "/notifications", $params);
 
-        try {
-            $responseJson = $this->restCli->post("invoices/" . $invoiceId . "/notifications", $params);
-
-            return strtolower($responseJson) === "success";
-        } catch (Exception $e) {
-            throw new InvoiceQueryException(
-                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
-            );
-        }
+        return strtolower($responseJson) === "success";
     }
 
     /**
@@ -363,32 +268,20 @@ class InvoiceClient
      *
      * @param string $invoiceId The id of the invoice to updated.
      * @return Invoice  $invoice   Cancelled invoice object.
-     * @throws InvoiceCancellationException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function cancel(
         string $invoiceId,
         bool $forceCancel = false
     ): Invoice {
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
-            if ($forceCancel) {
-                $params["forceCancel"] = $forceCancel;
-            }
-
-            $responseJson = $this->restCli->delete("invoices/" . $invoiceId, $params);
-        } catch (BitPayException $e) {
-            throw new InvoiceCancellationException(
-                "failed to serialize Invoice object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new InvoiceCancellationException("failed to serialize Invoice object : " . $e->getMessage());
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
+        if ($forceCancel) {
+            $params["forceCancel"] = $forceCancel;
         }
+
+        $responseJson = $this->restCli->delete("invoices/" . $invoiceId, $params);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -398,9 +291,7 @@ class InvoiceClient
                 new Invoice()
             );
         } catch (Exception $e) {
-            throw new InvoiceCancellationException(
-                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Invoice', $e->getMessage());
         }
     }
 
@@ -409,32 +300,20 @@ class InvoiceClient
      *
      * @param string $guid The guid of the invoice to cancel.
      * @return Invoice $invoice Cancelled invoice object.
-     * @throws InvoiceCancellationException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function cancelByGuid(
         string $guid,
         bool $forceCancel = false
     ): Invoice {
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
-            if ($forceCancel) {
-                $params["forceCancel"] = $forceCancel;
-            }
-
-            $responseJson = $this->restCli->delete("invoices/guid/" . $guid, $params);
-        } catch (BitPayException $e) {
-            throw new InvoiceCancellationException(
-                "failed to serialize Invoice object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new InvoiceCancellationException("failed to serialize Invoice object : " . $e->getMessage());
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
+        if ($forceCancel) {
+            $params["forceCancel"] = $forceCancel;
         }
+
+        $responseJson = $this->restCli->delete("invoices/guid/" . $guid, $params);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -444,9 +323,7 @@ class InvoiceClient
                 new Invoice()
             );
         } catch (Exception $e) {
-            throw new InvoiceCancellationException(
-                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Invoice', $e->getMessage());
         }
     }
 
@@ -456,29 +333,17 @@ class InvoiceClient
      * @param string $invoiceId The id of the invoice.
      * @param string $status Status the invoice will become. Acceptable values are confirmed (default) and complete.
      * @return Invoice $invoice  Invoice object.
-     * @throws InvoicePaymentException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function pay(
         string $invoiceId,
         string $status = 'confirmed'
     ): Invoice {
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
-            $params["status"] = $status;
-            $responseJson = $this->restCli->update("invoices/pay/" . $invoiceId, $params);
-        } catch (BitPayException $e) {
-            throw new InvoicePaymentException(
-                "failed to serialize Invoice object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new InvoicePaymentException("failed to serialize Invoice object : " . $e->getMessage());
-        }
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
+        $params["status"] = $status;
+        $responseJson = $this->restCli->update("invoices/pay/" . $invoiceId, $params);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -488,36 +353,44 @@ class InvoiceClient
                 new Invoice()
             );
         } catch (Exception $e) {
-            throw new InvoicePaymentException(
-                "failed to deserialize BitPay server response (Invoice) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Invoice', $e->getMessage());
         }
     }
 
     /**
      * Check if buyerEmail or buyerSms is present, and not both.
+     * Updating the invoice will require EITHER SMS or E-mail, but not both.
      *
      * @param string|null $buyerEmail The buyer's email address.
      * @param string|null $buyerSms The buyer's cell number.
      *
-     * @return bool
+     * @throws BitPayValidationException
      */
-    private function buyerEmailOrSms(?string $buyerEmail, ?string $buyerSms): bool
+    private function validateBuyerEmailAndSms(?string $buyerEmail, ?string $buyerSms): void
     {
-        return (empty($buyerSms) && empty($buyerEmail)) || (!empty($buyerSms) && empty(!$buyerEmail));
+        if ((empty($buyerSms) && empty($buyerEmail)) || (!empty($buyerSms) && empty(!$buyerEmail))) {
+            BitPayExceptionProvider::throwValidationException(
+                'Updating the invoice requires buyerSms or buyerEmail, but not both.'
+            );
+        }
     }
 
     /**
      * Check if smsCode is required.
+     * smsCode required only when verifying SMS, except when autoVerify is true.
      *
      * @param bool $autoVerify Skip the user verification on sandbox ONLY.
      * @param string $buyerSms The buyer's cell number.
      * @param string $smsCode The buyer's received verification code.
-     * @return bool
+     * @throws BitPayValidationException
      */
-    private function isSmsCodeRequired(bool $autoVerify, string $buyerSms, string $smsCode): bool
+    private function validateSmsCode(bool $autoVerify, string $buyerSms, string $smsCode): void
     {
-        return ($autoVerify === false &&
-                (!empty($buyerSms) && empty($smsCode))) || (!empty($smsCode) && empty($buyerSms));
+        if (($autoVerify === false &&
+                (!empty($buyerSms) && empty($smsCode))) || (!empty($smsCode) && empty($buyerSms))) {
+            BitPayExceptionProvider::throwValidationException(
+                'Updating the invoice requires both buyerSms and smsCode when verifying SMS.'
+            );
+        }
     }
 }

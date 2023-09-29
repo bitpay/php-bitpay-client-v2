@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BitPaySDK\Functional;
 
 use BitPaySDK\Client;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use PHPUnit\Framework\TestCase;
 
 abstract class AbstractClientTestCase extends TestCase
@@ -12,7 +13,7 @@ abstract class AbstractClientTestCase extends TestCase
     protected Client $client;
 
     /**
-     * @throws \BitPaySDK\Exceptions\BitPayException
+     * @throws BitPayGenericException
      */
     public function setUp(): void
     {

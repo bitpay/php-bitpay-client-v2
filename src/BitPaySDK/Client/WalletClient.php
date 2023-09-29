@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Client;
 
-use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\WalletQueryException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Wallet\Wallet;
 use BitPaySDK\Util\JsonMapperFactory;
 use BitPaySDK\Util\RESTcli\RESTcli;
@@ -51,26 +52,12 @@ class WalletClient
      * Retrieve all supported wallets.
      *
      * @return Wallet[]
-     * @throws WalletQueryException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getSupportedWallets(): array
     {
-        try {
-            $responseJson = $this->restCli->get("supportedWallets/", null, false);
-        } catch (BitPayException $e) {
-            throw new WalletQueryException(
-                "failed to serialize Wallet object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new WalletQueryException(
-                "failed to deserialize BitPay server response (Wallet) : " . $e->getMessage()
-            );
-        }
+        $responseJson = $this->restCli->get("supportedWallets/", null, false);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -81,9 +68,7 @@ class WalletClient
                 Wallet::class
             );
         } catch (Exception $e) {
-            throw new WalletQueryException(
-                "failed to deserialize BitPay server response (Wallet) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Wallet', $e->getMessage());
         }
     }
 }

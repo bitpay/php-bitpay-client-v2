@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Client;
 
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Util\RESTcli\RESTcli;
 
 /**
@@ -45,13 +48,17 @@ class TokenClient
     /**
      * Get Tokens.
      *
-     * @throws \BitPaySDK\Exceptions\BitPayException
-     * @throws \JsonException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function getTokens(): array
     {
         $response = $this->restCli->get('tokens');
 
-        return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+        try {
+            return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            BitPayExceptionProvider::throwGenericExceptionWithMessage($e->getMessage());
+        }
     }
 }

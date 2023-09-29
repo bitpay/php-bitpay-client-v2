@@ -8,7 +8,8 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Bill;
 
-use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayValidationException;
 use BitPaySDK\Model\Currency;
 
 /**
@@ -108,12 +109,12 @@ class Bill
      * ISO 4217 3-character currency code. This is the currency associated with the price field
      *
      * @param string $currency 3-character currency code
-     * @throws BitPayException
+     * @throws BitPayValidationException
      */
     public function setCurrency(string $currency): void
     {
         if (!Currency::isValid($currency)) {
-            throw new BitPayException("currency code must be a type of Model.Currency");
+            BitPayExceptionProvider::throwInvalidCurrencyException($currency);
         }
 
         $this->currency = $currency;

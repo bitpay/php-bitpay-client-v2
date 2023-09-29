@@ -8,8 +8,7 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Functional;
 
-use BitPaySDK\Exceptions\PayoutRecipientCreationException;
-use BitPaySDK\Exceptions\PayoutRecipientQueryException;
+use BitPaySDK\Exceptions\BitPayApiException;
 use BitPaySDK\Model\Payout\PayoutRecipient;
 use BitPaySDK\Model\Payout\PayoutRecipients;
 
@@ -66,7 +65,7 @@ class PayoutRecipientsClientTest extends AbstractClientTestCase
     {
         $recipientId = 'JA4cEtmBxCp5cybtnh1rds';
 
-        $this->expectException(PayoutRecipientQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $this->client->getPayoutRecipient($recipientId);
     }
 

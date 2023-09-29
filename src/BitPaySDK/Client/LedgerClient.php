@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Client;
 
-use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\LedgerQueryException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Ledger\Ledger;
 use BitPaySDK\Model\Ledger\LedgerEntry;
@@ -60,76 +61,54 @@ class LedgerClient
      * @param string $startDate The first date for the query filter.
      * @param string $endDate The last date for the query filter.
      * @return LedgerEntry[] A Ledger object populated with the BitPay ledger entries list.
-     * @throws LedgerQueryException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function get(string $currency, string $startDate, string $endDate): array
     {
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
-            if ($currency) {
-                $params["currency"] = $currency;
-            }
-            if ($currency) {
-                $params["startDate"] = $startDate;
-            }
-            if ($currency) {
-                $params["endDate"] = $endDate;
-            }
-
-            $responseJson = $this->restCli->get("ledgers/" . $currency, $params);
-        } catch (BitPayException $e) {
-            throw new LedgerQueryException(
-                "failed to serialize Ledger object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new LedgerQueryException("failed to serialize Ledger object : " . $e->getMessage());
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
+        if ($currency) {
+            $params["currency"] = $currency;
         }
+        if ($currency) {
+            $params["startDate"] = $startDate;
+        }
+        if ($currency) {
+            $params["endDate"] = $endDate;
+        }
+
+        $responseJson = $this->restCli->get("ledgers/" . $currency, $params);
+        $ledgerEntries = [];
 
         try {
             $mapper = JsonMapperFactory::create();
-            $ledger = $mapper->mapArray(
+            $ledgerEntries = $mapper->mapArray(
                 json_decode($responseJson, true, 512, JSON_THROW_ON_ERROR),
                 [],
                 LedgerEntry::class
             );
         } catch (Exception $e) {
-            throw new LedgerQueryException(
-                "failed to deserialize BitPay server response (Ledger) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Ledger', $e->getMessage());
         }
 
-        return $ledger;
+        return $ledgerEntries;
     }
 
     /**
      * Retrieve a list of ledgers using the merchant facade.
      *
      * @return Ledger[] A list of Ledger objects populated with the currency and current balance of each one.
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getLedgers(): array
     {
-        try {
-            $params = [];
-            $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
+        $params = [];
+        $params["token"] = $this->tokenCache->getTokenByFacade(Facade::MERCHANT);
 
-            $responseJson = $this->restCli->get("ledgers", $params);
-        } catch (BitPayException $e) {
-            throw new LedgerQueryException(
-                "failed to serialize Ledger object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new LedgerQueryException("failed to serialize Ledger object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->get("ledgers", $params);
+        $ledgers = [];
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -139,9 +118,7 @@ class LedgerClient
                 Ledger::class
             );
         } catch (Exception $e) {
-            throw new LedgerQueryException(
-                "failed to deserialize BitPay server response (Ledger) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Ledger', $e->getMessage());
         }
 
         return $ledgers;
