@@ -391,7 +391,8 @@ class RESTcli
      * @throws BitPayApiException
      * @throws BitPayGenericException
      */
-    private function parseException(RequestException $exception): void {
+    private function parseException(RequestException $exception): void
+    {
         $json = $exception->getResponse()->getBody()->__toString();
 
         if (!$json) {

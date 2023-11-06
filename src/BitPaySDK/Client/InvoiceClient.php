@@ -386,8 +386,10 @@ class InvoiceClient
      */
     private function validateSmsCode(bool $autoVerify, string $buyerSms, string $smsCode): void
     {
-        if (($autoVerify === false &&
-                (!empty($buyerSms) && empty($smsCode))) || (!empty($smsCode) && empty($buyerSms))) {
+        if (
+            ($autoVerify === false && (!empty($buyerSms) && empty($smsCode)))
+            || (!empty($smsCode) && empty($buyerSms))
+        ) {
             BitPayExceptionProvider::throwValidationException(
                 'Updating the invoice requires both buyerSms and smsCode when verifying SMS.'
             );

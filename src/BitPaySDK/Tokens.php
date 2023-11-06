@@ -72,7 +72,8 @@ class Tokens
             Facade::PAYOUT => $this->payout,
             Facade::POS => $this->pos,
             default => BitPayExceptionProvider::throwGenericExceptionWithMessage(
-                "given facade does not exist or no token defined for the given facade")
+                'given facade does not exist or no token defined for the given facade'
+            )
         };
     }
 
