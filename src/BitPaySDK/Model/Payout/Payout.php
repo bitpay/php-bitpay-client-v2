@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Payout;
 
-use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\PayoutException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayValidationException;
 use BitPaySDK\Model\Currency;
 
 /**
@@ -143,12 +143,12 @@ class Payout
      * Sets currency code set for the batch amount (ISO 4217 3-character currency code).
      *
      * @param string $currency
-     * @throws BitPayException
+     * @throws BitPayValidationException
      */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
         if (!Currency::isValid($currency)) {
-            throw new BitPayException('currency code must be a type of Model.Currency');
+            BitPayExceptionProvider::throwInvalidCurrencyException($currency);
         }
 
         $this->currency = $currency;
@@ -206,12 +206,12 @@ class Payout
      * e.g. your settlement currency.
      *
      * @param string $ledgerCurrency
-     * @throws BitPayException
+     * @throws BitPayValidationException
      */
     public function setLedgerCurrency(string $ledgerCurrency): void
     {
         if (!Currency::isValid($ledgerCurrency)) {
-            throw new BitPayException('currency code must be a type of Model.Currency');
+            BitPayExceptionProvider::throwInvalidCurrencyException($ledgerCurrency);
         }
 
         $this->ledgerCurrency = $ledgerCurrency;

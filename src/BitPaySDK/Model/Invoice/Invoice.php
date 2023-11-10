@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Invoice;
 
-use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
+use BitPaySDK\Exceptions\BitPayValidationException;
 use BitPaySDK\Model\Currency;
 
 /**
@@ -134,12 +136,12 @@ class Invoice
      *
      * @param string $currency 3-character currency code
      *
-     * @throws BitPayException
+     * @throws BitPayValidationException
      */
     public function setCurrency(string $currency): void
     {
         if (!Currency::isValid($currency)) {
-            throw new BitPayException("currency code must be a type of Model.Currency");
+            BitPayExceptionProvider::throwInvalidCurrencyException($currency);
         }
 
         $this->currency = $currency;
@@ -756,13 +758,13 @@ class Invoice
      * Object containing line item details for display.
      *
      * @param ItemizedDetails[] $itemizedDetails
-     * @throws BitPayException
+     * @throws BitPayGenericException
      */
     public function setItemizedDetails(array $itemizedDetails): void
     {
         foreach ($itemizedDetails as $item) {
             if (!$item instanceof ItemizedDetails) {
-                throw new BitPayException('Wrong format for itemized details');
+                BitPayExceptionProvider::throwGenericExceptionWithMessage('Wrong format for itemized details');
             }
         }
 

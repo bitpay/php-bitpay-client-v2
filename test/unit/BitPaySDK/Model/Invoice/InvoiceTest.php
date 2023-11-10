@@ -2,7 +2,8 @@
 
 namespace BitPaySDK\Test\Model\Invoice;
 
-use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayValidationException;
 use BitPaySDK\Model\Invoice\Buyer;
 use BitPaySDK\Model\Invoice\BuyerProvidedInfo;
 use BitPaySDK\Model\Invoice\Invoice;
@@ -24,16 +25,14 @@ class InvoiceTest extends TestCase
 
     public function testGetCurrencyException()
     {
-        $expectedCurrency = 'ELO';
-
         $invoice = $this->createClassObject();
-        $this->expectException(BitPayException::class);
-        $this->expectExceptionMessage('currency code must be a type of Model.Currency');
-        $invoice->setCurrency($expectedCurrency);
+        $this->expectException(BitPayValidationException::class);
+        $this->expectExceptionMessage('Currency code WRG must be a type of Model.Currency');
+        $invoice->setCurrency('WRG');
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testGetCurrency()
     {
@@ -242,7 +241,7 @@ class InvoiceTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testGetItemizedDetailsAsArray(): void
     {
@@ -670,7 +669,7 @@ class InvoiceTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testToArray()
     {
@@ -787,7 +786,7 @@ class InvoiceTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     private function setObjectSetters(Invoice $invoice)
     {

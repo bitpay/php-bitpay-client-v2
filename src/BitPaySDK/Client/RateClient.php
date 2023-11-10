@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Client;
 
-use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\RateQueryException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Util\JsonMapperFactory;
@@ -52,23 +53,12 @@ class RateClient
      * Retrieve the exchange rate table maintained by BitPay.  See https://bitpay.com/bitcoin-exchange-rates.
      *
      * @return Rates
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getRates(): Rates
     {
-        try {
-            $responseJson = $this->restCli->get("rates", null, false);
-        } catch (BitPayException $e) {
-            throw new RateQueryException(
-                "failed to serialize Rates object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new RateQueryException("failed to serialize Rates object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->get("rates", null, false);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -77,13 +67,10 @@ class RateClient
                 [],
                 Rate::class
             );
+            return new Rates($rates);
         } catch (Exception $e) {
-            throw new RateQueryException(
-                "failed to deserialize BitPay server response (Rates) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Rate', $e->getMessage());
         }
-
-        return new Rates($rates);
     }
 
     /**
@@ -92,23 +79,12 @@ class RateClient
      * @param string $baseCurrency The cryptocurrency for which you want to fetch the rates.
      *                             Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC
      * @return Rates               A Rates object populated with the currency rates for the requested baseCurrency.
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getCurrencyRates(string $baseCurrency): Rates
     {
-        try {
-            $responseJson = $this->restCli->get("rates/" . $baseCurrency, null, false);
-        } catch (BitPayException $e) {
-            throw new RateQueryException(
-                "failed to serialize Rates object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new RateQueryException("failed to serialize Rates object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->get("rates/" . $baseCurrency, null, false);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -117,13 +93,10 @@ class RateClient
                 [],
                 Rate::class
             );
+            return new Rates($rates);
         } catch (Exception $e) {
-            throw new RateQueryException(
-                "failed to deserialize BitPay server response (Rates) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Rate', $e->getMessage());
         }
-
-        return new Rates($rates);
     }
 
     /**
@@ -131,25 +104,14 @@ class RateClient
      *
      * @param string $baseCurrency The cryptocurrency for which you want to fetch the fiat-equivalent rate.
      *                             Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC
-     * @param string $currency     The fiat currency for which you want to fetch the baseCurrency rate
+     * @param string $currency The fiat currency for which you want to fetch the baseCurrency rate
      * @return Rate                A Rate object populated with the currency rate for the requested baseCurrency.
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getCurrencyPairRate(string $baseCurrency, string $currency): Rate
     {
-        try {
-            $responseJson = $this->restCli->get("rates/" . $baseCurrency . "/" . $currency, null, false);
-        } catch (BitPayException $e) {
-            throw new RateQueryException(
-                "failed to serialize Rates object : " .
-                $e->getMessage(),
-                null,
-                null,
-                $e->getApiCode()
-            );
-        } catch (Exception $e) {
-            throw new RateQueryException("failed to serialize Rate object : " . $e->getMessage());
-        }
+        $responseJson = $this->restCli->get("rates/" . $baseCurrency . "/" . $currency, null, false);
 
         try {
             $mapper = JsonMapperFactory::create();
@@ -159,9 +121,7 @@ class RateClient
                 new Rate()
             );
         } catch (Exception $e) {
-            throw new RateQueryException(
-                "failed to deserialize BitPay server response (Rate) : " . $e->getMessage()
-            );
+            BitPayExceptionProvider::throwDeserializeResourceException('Rate', $e->getMessage());
         }
     }
 }

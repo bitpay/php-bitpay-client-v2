@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace BitPaySDK;
 
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Facade;
-use Exception;
 
 /**
  * Token object used to store the tokens for the different facades.
@@ -62,7 +63,7 @@ class Tokens
     /**
      * @param $facade
      * @return string|null
-     * @throws Exception
+     * @throws BitPayGenericException
      */
     public function getTokenByFacade($facade): ?string
     {
@@ -70,7 +71,9 @@ class Tokens
             Facade::MERCHANT => $this->merchant,
             Facade::PAYOUT => $this->payout,
             Facade::POS => $this->pos,
-            default => throw new Exception("given facade does not exist or no token defined for the given facade"),
+            default => BitPayExceptionProvider::throwGenericExceptionWithMessage(
+                'given facade does not exist or no token defined for the given facade'
+            )
         };
     }
 

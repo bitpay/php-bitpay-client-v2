@@ -20,24 +20,9 @@ use BitPaySDK\Client\RefundClient;
 use BitPaySDK\Client\SettlementClient;
 use BitPaySDK\Client\TokenClient;
 use BitPaySDK\Client\WalletClient;
-use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\InvoiceCancellationException;
-use BitPaySDK\Exceptions\InvoicePaymentException;
-use BitPaySDK\Exceptions\InvoiceQueryException;
-use BitPaySDK\Exceptions\InvoiceUpdateException;
-use BitPaySDK\Exceptions\PayoutCancellationException;
-use BitPaySDK\Exceptions\PayoutCreationException;
-use BitPaySDK\Exceptions\PayoutNotificationException;
-use BitPaySDK\Exceptions\PayoutQueryException;
-use BitPaySDK\Exceptions\PayoutRecipientCancellationException;
-use BitPaySDK\Exceptions\PayoutRecipientCreationException;
-use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
-use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
-use BitPaySDK\Exceptions\RefundCancellationException;
-use BitPaySDK\Exceptions\RefundCreationException;
-use BitPaySDK\Exceptions\RefundQueryException;
-use BitPaySDK\Exceptions\RefundUpdateException;
-use BitPaySDK\Exceptions\WalletQueryException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Facade;
 use BitPaySDK\Model\Invoice\Invoice;
@@ -87,7 +72,8 @@ class Client
      * @param string|null      $proxy            The url of your proxy to forward requests through. Example:
      *                                           http://********.com:3128
      * @return Client
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public static function createWithData(
         string $environment,
@@ -104,7 +90,9 @@ class Client
 
             return new Client($restCli, $tokenCache);
         } catch (Exception $e) {
-            throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
+            BitPayExceptionProvider::throwGenericExceptionWithMessage(
+                'failed to initialize BitPay Client (Config) : ' . $e->getMessage()
+            );
         }
     }
 
@@ -113,7 +101,7 @@ class Client
      *
      * @param string $configFilePath  The path to the configuration file.
      * @return Client
-     * @throws BitPayException        BitPayException class
+     * @throws BitPayGenericException
      */
     public static function createWithFile(string $configFilePath): Client
     {
@@ -129,7 +117,9 @@ class Client
 
             return new Client($restCli, $tokenCache);
         } catch (Exception $e) {
-            throw new BitPayException("failed to initialize BitPay Client (Config) : " . $e->getMessage());
+            BitPayExceptionProvider::throwGenericExceptionWithMessage(
+                'failed to initialize BitPay Client (Config) : ' . $e->getMessage()
+            );
         }
     }
 
@@ -137,8 +127,8 @@ class Client
      * Get Tokens.
      *
      * @return array
-     * @throws BitPayException
-     * @throws \JsonException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getTokens(): array
     {
@@ -156,7 +146,8 @@ class Client
      * @param string  $facade      The facade used to create it.
      * @param bool    $signRequest Signed request.
      * @return Invoice
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function createInvoice(
         Invoice $invoice,
@@ -179,8 +170,8 @@ class Client
      * @param string|null $buyerEmail The buyer's email address.
      * @param bool $autoVerify Skip the user verification on sandbox ONLY.
      * @return Invoice
-     * @throws BitPayException
-     * @throws InvoiceUpdateException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function updateInvoice(
         string $invoiceId,
@@ -204,7 +195,8 @@ class Client
      * @param string $facade The facade used to create it.
      * @param bool $signRequest Signed request.
      * @return Invoice
-     * @throws InvoiceQueryException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getInvoice(
         string $invoiceId,
@@ -226,7 +218,8 @@ class Client
      * @param string $facade The facade used to create it.
      * @param bool $signRequest Signed request.
      * @return Invoice
-     * @throws InvoiceQueryException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      *
      */
     public function getInvoiceByGuid(
@@ -254,7 +247,8 @@ class Client
      * @param int|null    $offset    Number of results to offset (ex. skip 10 will give you results starting
      *                               with the 11th result).
      * @return Invoice[]
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getInvoices(
         string $dateStart,
@@ -276,8 +270,8 @@ class Client
      *
      * @param  string $invoiceId A BitPay invoice ID.
      * @return bool              True if the webhook was successfully requested, false otherwise.
-     * @throws InvoiceQueryException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function requestInvoiceNotification(string $invoiceId): bool
     {
@@ -291,10 +285,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/cancel-an-invoice Cancel an Invoice
      *
-     * @param  string   $invoiceId The id of the invoice to updated.
+     * @param string $invoiceId The id of the invoice to updated.
      * @return Invoice  $invoice   Cancelled invoice object.
-     * @throws InvoiceCancellationException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function cancelInvoice(
         string $invoiceId,
@@ -310,10 +304,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/cancel-an-invoice-by-guid Cancel an Invoice by GUID
      *
-     * @param  string $guid The guid of the invoice to cancel.
+     * @param string $guid The guid of the invoice to cancel.
      * @return Invoice $invoice Cancelled invoice object.
-     * @throws InvoiceCancellationException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function cancelInvoiceByGuid(
         string $guid,
@@ -327,11 +321,11 @@ class Client
     /**
      * Pay an invoice with a mock transaction
      *
-     * @param  string $invoiceId The id of the invoice.
-     * @param  string $status    Status the invoice will become. Acceptable values are confirmed (default) and complete.
+     * @param string $invoiceId The id of the invoice.
+     * @param string $status Status the invoice will become. Acceptable values are confirmed (default) and complete.
      * @return Invoice $invoice  Invoice object.
-     * @throws InvoicePaymentException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function payInvoice(
         string $invoiceId,
@@ -357,8 +351,8 @@ class Client
      *                                    or at time of processing
      * @param  bool   $buyerPaysRefundFee Whether the buyer should pay the refund fee (default is merchant)
      * @return Refund $refund             An updated Refund Object
-     * @throws RefundCreationException    RefundCreationException class
-     * @throws BitPayException            BitPayException class
+     * @throws BitPayApiException            BitPayException class
+     * @throws BitPayGenericException   BitPayGenericException
      */
     public function createRefund(
         string $invoiceId,
@@ -382,8 +376,7 @@ class Client
      * @param  string $refundId    BitPay refund ID.
      * @param  string $status      The new status for the refund to be updated.
      * @return Refund $refund      Refund A BitPay generated Refund object.
-     * @throws RefundUpdateException
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function updateRefund(
         string $refundId,
@@ -402,8 +395,7 @@ class Client
      * @param  string $guid        BitPay refund Guid.
      * @param  string $status      The new status for the refund to be updated.
      * @return Refund $refund      Refund A BitPay generated Refund object.
-     * @throws RefundUpdateException
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function updateRefundByGuid(
         string $guid,
@@ -421,8 +413,7 @@ class Client
      *
      * @param  string $invoiceId   The BitPay invoice object having the associated refunds.
      * @return Refund[]
-     * @throws RefundQueryException
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function getRefunds(
         string $invoiceId
@@ -437,10 +428,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/retrieve-a-refund-request Retrieve a Refund Request
      *
-     * @param  string $refundId The BitPay refund ID.
+     * @param string $refundId The BitPay refund ID.
      * @return Refund $refund   BitPay Refund object with the associated Refund object.
-     * @throws RefundQueryException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getRefund(
         string $refundId
@@ -457,8 +448,8 @@ class Client
      *
      * @param string $guid The BitPay refund Guid
      * @return Refund BitPay Refund object with the associated Refund object.
-     * @throws BitPayException
-     * @throws RefundQueryException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getRefundByGuid(string $guid): Refund
     {
@@ -475,8 +466,7 @@ class Client
      *
      * @param  string $refundId    A BitPay refund ID.
      * @return bool   $result      An updated Refund Object
-     * @throws RefundCreationException
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function sendRefundNotification(string $refundId): bool
     {
@@ -492,8 +482,7 @@ class Client
      *
      * @param  string $refundId The refund Id for the refund to be canceled.
      * @return Refund $refund   Cancelled refund Object.
-     * @throws RefundCancellationException
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function cancelRefund(string $refundId): Refund
     {
@@ -510,8 +499,7 @@ class Client
      *
      * @param  string $guid     The refund Guid for the refund to be canceled.
      * @return Refund $refund   Cancelled refund Object.
-     * @throws RefundCancellationException
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function cancelRefundByGuid(string $guid): Refund
     {
@@ -527,8 +515,8 @@ class Client
      * Retrieve the Supported Wallets
      *
      * @return Wallet[]
-     * @throws WalletQueryException
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getSupportedWallets(): array
     {
@@ -542,11 +530,12 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/create-a-bill Create a Bill
      *
-     * @param  Bill   $bill        A Bill object with request parameters defined.
-     * @param  string $facade      The facade used to create it.
-     * @param  bool   $signRequest Signed request.
+     * @param Bill $bill A Bill object with request parameters defined.
+     * @param string $facade The facade used to create it.
+     * @param bool $signRequest Signed request.
      * @return Bill
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function createBill(Bill $bill, string $facade = Facade::MERCHANT, bool $signRequest = true): Bill
     {
@@ -564,7 +553,8 @@ class Client
      * @param $facade      string The facade used to retrieve it.
      * @param $signRequest bool Signed request.
      * @return Bill
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getBill(string $billId, string $facade = Facade::MERCHANT, bool $signRequest = true): Bill
     {
@@ -578,9 +568,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/retrieve-bills-by-status Retrieve Bills by Status
      *
-     * @param  string|null The status to filter the bills.
+     * @param string|null The status to filter the bills.
      * @return Bill[]
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getBills(string $status = null): array
     {
@@ -594,10 +585,11 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/update-a-bill Update a Bill
      *
-     * @param  Bill   $bill   A Bill object with the parameters to update defined.
-     * @param  string $billId The Id of the Bill to update.
+     * @param Bill $bill A Bill object with the parameters to update defined.
+     * @param string $billId The Id of the Bill to update.
      * @return Bill
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function updateBill(Bill $bill, string $billId): Bill
     {
@@ -611,11 +603,12 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/deliver-a-bill-via-email Deliver a Bill Via Email
      *
-     * @param  string $billId      The id of the requested bill.
-     * @param  string $billToken   The token of the requested bill.
-     * @param  bool   $signRequest Allow unsigned request
+     * @param string $billId The id of the requested bill.
+     * @param string $billToken The token of the requested bill.
+     * @param bool $signRequest Allow unsigned request
      * @return bool
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function deliverBill(string $billId, string $billToken, bool $signRequest = true): bool
     {
@@ -629,7 +622,8 @@ class Client
      * @see https://bitpay.com/bitcoin-exchange-rates
      *
      * @return Rates
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getRates(): Rates
     {
@@ -647,7 +641,8 @@ class Client
      * @param string $baseCurrency The cryptocurrency for which you want to fetch the rates.
      *                             Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC
      * @return Rates               A Rates object populated with the currency rates for the requested baseCurrency.
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getCurrencyRates(string $baseCurrency): Rates
     {
@@ -664,9 +659,10 @@ class Client
      *
      * @param string $baseCurrency The cryptocurrency for which you want to fetch the fiat-equivalent rate.
      *                             Current supported values are BTC, BCH, ETH, XRP, DOGE and LTC
-     * @param string $currency     The fiat currency for which you want to fetch the baseCurrency rate
+     * @param string $currency The fiat currency for which you want to fetch the baseCurrency rate
      * @return Rate                A Rate object populated with the currency rate for the requested baseCurrency.
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getCurrencyPairRate(string $baseCurrency, string $currency): Rate
     {
@@ -684,7 +680,8 @@ class Client
      * @param string $startDate The first date for the query filter.
      * @param string $endDate The last date for the query filter.
      * @return LedgerEntry[] A Ledger object populated with the BitPay ledger entries list.
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getLedgerEntries(string $currency, string $startDate, string $endDate): array
     {
@@ -699,7 +696,8 @@ class Client
      * @see https://developer.bitpay.com/reference/retrieve-account-balances Retrieve Account Balances
      *
      * @return Ledger[] A list of Ledger objects populated with the currency and current balance of each one.
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getLedgers(): array
     {
@@ -713,9 +711,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/invite-recipients Invite Recipients
      *
-     * @param  PayoutRecipients $recipients A PayoutRecipients object with request parameters defined.
+     * @param PayoutRecipients $recipients A PayoutRecipients object with request parameters defined.
      * @return PayoutRecipient[]       A list of BitPay PayoutRecipients objects.
-     * @throws PayoutRecipientCreationException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function submitPayoutRecipients(PayoutRecipients $recipients): array
     {
@@ -732,8 +731,8 @@ class Client
      *
      * @param string $recipientId The id of the recipient to retrieve.
      * @return PayoutRecipient
-     * @throws PayoutQueryException
-     * @throws Exceptions\PayoutRecipientQueryException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function getPayoutRecipient(string $recipientId): PayoutRecipient
     {
@@ -747,12 +746,13 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/retrieve-recipients-by-status Retrieve Recipients by Status
      *
-     * @param  string|null $status The recipient status you want to query on.
-     * @param  int|null    $limit  Maximum results that the query will return (useful for paging results).
-     * @param  int|null    $offset Number of results to offset (ex. skip 10 will give you results
+     * @param string|null $status The recipient status you want to query on.
+     * @param int|null $limit Maximum results that the query will return (useful for paging results).
+     * @param int|null $offset Number of results to offset (ex. skip 10 will give you results
      *                             starting with the 11th result).
      * @return PayoutRecipient[]
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getPayoutRecipients(string $status = null, int $limit = null, int $offset = null): array
     {
@@ -766,10 +766,11 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/update-a-recipient Update a Recipient
      *
-     * @param  string          $recipientId The recipient id for the recipient to be updated.
-     * @param  PayoutRecipient $recipient   A PayoutRecipient object with updated parameters defined.
+     * @param string $recipientId The recipient id for the recipient to be updated.
+     * @param PayoutRecipient $recipient A PayoutRecipient object with updated parameters defined.
      * @return PayoutRecipient
-     * @throws PayoutRecipientUpdateException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function updatePayoutRecipient(string $recipientId, PayoutRecipient $recipient): PayoutRecipient
     {
@@ -783,9 +784,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/remove-a-recipient Remove a Recipient
      *
-     * @param  string $recipientId The recipient id for the recipient to be deleted.
+     * @param string $recipientId The recipient id for the recipient to be deleted.
      * @return bool                True if the recipient was successfully deleted, false otherwise.
-     * @throws PayoutRecipientCancellationException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function deletePayoutRecipient(string $recipientId): bool
     {
@@ -800,9 +802,10 @@ class Client
      * @see https://developer.bitpay.com/reference/request-a-recipient-webhook-to-be-resent
      * Request a Recipient Webhook to be Resent
      *
-     * @param  string $recipientId The id of the recipient to notify.
+     * @param string $recipientId The id of the recipient to notify.
      * @return bool                True if the notification was successfully sent, false otherwise.
-     * @throws PayoutRecipientNotificationException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function requestPayoutRecipientNotification(string $recipientId): bool
     {
@@ -816,9 +819,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/create-a-payout Create a Payout
      *
-     * @param  Payout $payout A Payout object with request parameters defined.
+     * @param Payout $payout A Payout object with request parameters defined.
      * @return Payout
-     * @throws PayoutCreationException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function submitPayout(Payout $payout): Payout
     {
@@ -833,9 +837,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/retrieve-a-payout Retrieve a Payout
      *
-     * @param  string $payoutId The id of the payout to retrieve.
+     * @param string $payoutId The id of the payout to retrieve.
      * @return Payout
-     * @throws PayoutQueryException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function getPayout(string $payoutId): Payout
     {
@@ -857,7 +862,8 @@ class Client
      * @param int|null $offset Number of results to offset (ex. skip 10 will give you results
      *                           starting with the 11th result).
      * @return Payout[]
-     * @throws PayoutQueryException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function getPayouts(
         string $startDate = null,
@@ -879,7 +885,8 @@ class Client
      *
      * @param string $payoutId The id of the payout to cancel.
      * @return bool
-     * @throws PayoutCancellationException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function cancelPayout(string $payoutId): bool
     {
@@ -896,7 +903,8 @@ class Client
      *
      * @param string $payoutId The id of the Payout to notify.
      * @return bool
-     * @throws PayoutNotificationException BitPayException class
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function requestPayoutNotification(string $payoutId): bool
     {
@@ -910,7 +918,8 @@ class Client
      *
      * @param Payout[] $payouts
      * @return PayoutGroup
-     * @throws PayoutCreationException
+     * @throws BitPayGenericException
+     * @throws BitPayApiException
      */
     public function createPayoutGroup(array $payouts): PayoutGroup
     {
@@ -924,7 +933,8 @@ class Client
      *
      * @param string $groupId
      * @return PayoutGroup
-     * @throws PayoutCancellationException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function cancelPayoutGroup(string $groupId): PayoutGroup
     {
@@ -947,7 +957,8 @@ class Client
      * @param int|null $limit int Maximum number of settlements to retrieve.
      * @param int|null $offset int Offset for paging.
      * @return Settlement[]
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getSettlements(
         string $currency,
@@ -967,9 +978,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/retrieve-a-settlement Retrieve a Settlement
      *
-     * @param  string $settlementId Settlement Id.
+     * @param string $settlementId Settlement Id.
      * @return Settlement
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getSettlement(string $settlementId): Settlement
     {
@@ -983,9 +995,10 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/fetch-a-reconciliation-report Fetch a Reconciliation Report
      *
-     * @param  Settlement $settlement Settlement to generate report for.
+     * @param Settlement $settlement Settlement to generate report for.
      * @return Settlement
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function getSettlementReconciliationReport(Settlement $settlement): Settlement
     {
@@ -998,7 +1011,7 @@ class Client
      * @param string|null $privateKey
      * @param string|null $privateKeySecret
      * @return PrivateKey|null
-     * @throws BitPayException
+     * @throws BitPayApiException
      * @throws Exception
      */
     private static function initKeys(?string $privateKey, ?string $privateKeySecret): ?PrivateKey
@@ -1009,7 +1022,7 @@ class Client
             $key = new PrivateKey("plainHex");
             $key->setHex($privateKey);
             if (!$key->isValid()) {
-                throw new BitPayException("Private Key not found/valid");
+                BitPayExceptionProvider::throwGenericExceptionWithMessage('Private Key not found/valid');
             }
         }
 
@@ -1024,12 +1037,12 @@ class Client
     /**
      * @param string $configFilePath
      * @return array
-     * @throws BitPayException
+     * @throws BitPayGenericException
      */
     private static function getConfigData(string $configFilePath): array
     {
         if (!file_exists($configFilePath)) {
-            throw new BitPayException("Configuration file not found");
+            BitPayExceptionProvider::throwGenericExceptionWithMessage('Configuration file not found');
         }
 
         try {

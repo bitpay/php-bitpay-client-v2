@@ -9,8 +9,10 @@ declare(strict_types=1);
 namespace BitPaySDK\Model\Rate;
 
 use BitPaySDK\Client;
-use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\RateException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayGenericException;
+use BitPaySDK\Exceptions\BitPayValidationException;
 use BitPaySDK\Model\Currency;
 
 /**
@@ -30,7 +32,7 @@ class Rates
      * Rates constructor.
      *
      * @param array $rates Rate[]
-     * @throws BitPayException
+     * @throws BitPayGenericException
      */
     public function __construct(array $rates)
     {
@@ -51,7 +53,8 @@ class Rates
     /**
      * Update rates.
      *
-     * @throws BitPayException
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
      */
     public function update(Client $bp): void
     {
@@ -66,14 +69,14 @@ class Rates
      *
      * @param string $currencyCode 3-character currency code
      * @return float|null
-     * @throws BitPayException
+     * @throws BitPayValidationException
      */
     public function getRate(string $currencyCode): ?float
     {
         $val = null;
 
         if (!Currency::isValid($currencyCode)) {
-            throw new BitPayException("currency code must be a type of Model.Currency");
+            BitPayExceptionProvider::throwInvalidCurrencyException($currencyCode);
         }
 
         foreach ($this->rates as $rateObj) {
@@ -108,13 +111,13 @@ class Rates
 
     /**
      * @param array $rates
-     * @throws BitPayException
+     * @throws BitPayGenericException
      */
     private function validateRates(array $rates): void
     {
         foreach ($rates as $rate) {
             if (!$rate instanceof Rate) {
-                throw new RateException('Array should contains only Rate objects');
+                BitPayExceptionProvider::throwGenericExceptionWithMessage('Array should contains only Rate objects');
             }
         }
     }

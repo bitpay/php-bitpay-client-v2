@@ -3,7 +3,8 @@
 namespace BitPaySDK\Test\Model\Rate;
 
 use BitPaySDK\Client;
-use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use PHPUnit\Framework\TestCase;
@@ -25,7 +26,7 @@ class RatesTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testUpdate(): void
     {
@@ -50,7 +51,7 @@ class RatesTest extends TestCase
     public function testUpdateShouldThrowsExceptionsForInvalidRateFormat(): void
     {
         $rates = $this->createClassObject();
-        $this->expectException(BitPayException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $clientApiResponse = [
             [
@@ -69,13 +70,13 @@ class RatesTest extends TestCase
     public function testGetRateException()
     {
         $rates = $this->createClassObject();
-        $this->expectException(BitPayException::class);
-        $this->expectExceptionMessage('currency code must be a type of Model.Currency');
-        $rates->getRate('ELO');
+        $this->expectException(BitPayGenericException::class);
+        $this->expectExceptionMessage('Currency code WRG must be a type of Model.Currency');
+        $rates->getRate('WRG');
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testGetRate()
     {

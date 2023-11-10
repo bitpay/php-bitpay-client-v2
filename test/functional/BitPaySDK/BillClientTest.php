@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Functional;
 
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Bill\Item;
 use BitPaySDK\Model\Currency;
@@ -27,6 +28,13 @@ class BillClientTest extends AbstractClientTestCase
         self::assertEquals("Test Item 2", $bill->getItems()[1]->getDescription());
         self::assertEquals("Test Item 2", $bill->getItems()[1]->getDescription());
         self::assertEquals("USD", $bill->getCurrency());
+    }
+
+    public function testExceptionForInvalidBill(): void
+    {
+        $bill = new Bill();
+        $this->expectException(BitPayGenericException::class);
+        $this->client->createBill($bill, "Validation errors occurred: Valid email required if emailBill is not set to false.");
     }
 
     public function testGetBill(): void

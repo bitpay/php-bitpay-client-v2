@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Functional;
 
-use BitPaySDK\Exceptions\LedgerQueryException;
+use BitPaySDK\Exceptions\BitPayApiException;
 
 class LedgerClientTest extends AbstractClientTestCase
 {
@@ -40,7 +40,7 @@ class LedgerClientTest extends AbstractClientTestCase
         $startDate = '2020-05-12T13:00:45.063Z';
         $endDate = '2022-05-13T13:00:45.063Z';
 
-        $this->expectException(LedgerQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $this->client->getLedgerEntries($currency, $startDate, $endDate);
     }
 }

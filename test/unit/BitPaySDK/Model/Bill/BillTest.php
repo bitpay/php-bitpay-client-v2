@@ -2,7 +2,7 @@
 
 namespace BitPaySDK\Test\Model\Bill;
 
-use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\BitPayApiException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Bill\Item;
 use PHPUnit\Framework\TestCase;
@@ -25,7 +25,7 @@ class BillTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testGetCurrency()
     {
@@ -210,7 +210,7 @@ class BillTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testToArray()
     {
@@ -273,7 +273,7 @@ class BillTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     private function objectSetters(Bill $bill): void
     {

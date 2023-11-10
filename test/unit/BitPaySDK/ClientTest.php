@@ -18,34 +18,8 @@ use BitPaySDK\Client\SettlementClient;
 use BitPaySDK\Client\TokenClient;
 use BitPaySDK\Client\WalletClient;
 use BitPaySDK\Env;
-use BitPaySDK\Exceptions\BillCreationException;
-use BitPaySDK\Exceptions\BillDeliveryException;
-use BitPaySDK\Exceptions\BillQueryException;
-use BitPaySDK\Exceptions\BillUpdateException;
-use BitPaySDK\Exceptions\BitPayException;
-use BitPaySDK\Exceptions\InvoiceCancellationException;
-use BitPaySDK\Exceptions\InvoiceCreationException;
-use BitPaySDK\Exceptions\InvoicePaymentException;
-use BitPaySDK\Exceptions\InvoiceQueryException;
-use BitPaySDK\Exceptions\InvoiceUpdateException;
-use BitPaySDK\Exceptions\LedgerQueryException;
-use BitPaySDK\Exceptions\PayoutCancellationException;
-use BitPaySDK\Exceptions\PayoutCreationException;
-use BitPaySDK\Exceptions\PayoutNotificationException;
-use BitPaySDK\Exceptions\PayoutQueryException;
-use BitPaySDK\Exceptions\PayoutRecipientCancellationException;
-use BitPaySDK\Exceptions\PayoutRecipientCreationException;
-use BitPaySDK\Exceptions\PayoutRecipientNotificationException;
-use BitPaySDK\Exceptions\PayoutRecipientQueryException;
-use BitPaySDK\Exceptions\PayoutRecipientUpdateException;
-use BitPaySDK\Exceptions\RateQueryException;
-use BitPaySDK\Exceptions\RefundCancellationException;
-use BitPaySDK\Exceptions\RefundCreationException;
-use BitPaySDK\Exceptions\RefundNotificationException;
-use BitPaySDK\Exceptions\RefundQueryException;
-use BitPaySDK\Exceptions\RefundUpdateException;
-use BitPaySDK\Exceptions\SettlementQueryException;
-use BitPaySDK\Exceptions\WalletQueryException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Facade;
@@ -121,7 +95,7 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testWithData()
     {
@@ -140,7 +114,7 @@ class ClientTest extends TestCase
     {
         $instance = $this->getTestedClassInstance();
         $tokens = $this->createMock(Tokens::class);
-        $this->expectException(BitPayException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $instance::createWithData(
             Env::TEST,
@@ -151,7 +125,7 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testWithFileJsonConfig(): Client
     {
@@ -162,7 +136,7 @@ class ClientTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayGenericException
      */
     public function testWithFileYmlConfig()
     {
@@ -174,7 +148,7 @@ class ClientTest extends TestCase
     public function testWithFileException()
     {
         $instance = $this->getTestedClassInstance();
-        $this->expectException(BitPayException::class);
+        $this->expectException(BitPayGenericException::class);
         $instance::createWithFile('badpath');
     }
 
@@ -237,10 +211,10 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('post')
             ->with("bills", $billMock->toArray(), true)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $billClient = $this->getClient($restCliMock);
 
-        $this->expectException(BillCreationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $billClient->createBill($billMock, Facade::MERCHANT);
     }
@@ -260,11 +234,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('post')
             ->with("bills", $billMock->toArray(), true)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillCreationException::class);
+        $this->expectException(BitPayApiException::class);
         $client->createBill($billMock, Facade::MERCHANT, true);
     }
 
@@ -289,7 +263,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillCreationException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->createBill($billMock, Facade::MERCHANT, true);
     }
 
@@ -324,11 +298,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("bills/" . $exampleBillId, $params, true)
-            ->willThrowException(new BillQueryException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getBill($exampleBillId);
     }
 
@@ -341,11 +315,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("bills/" . $exampleBillId, $params, true)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(Exception::class);
+        $this->expectException(BitPayApiException::class);
         $client->getBill($exampleBillId);
     }
 
@@ -363,7 +337,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getBill($exampleBillId);
     }
 
@@ -411,7 +385,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getBills($status);
     }
 
@@ -425,16 +399,16 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("bills", $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getBills($status);
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      * @depends testWithFileJsonConfig
      */
     public function testGetBillsShouldCatchRestCliException()
@@ -447,11 +421,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("bills", $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getBills($status);
     }
 
@@ -508,7 +482,7 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('update')
             ->with("bills/" . $exampleBillId, $billMock->toArray())
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $restCliMock
             ->expects(self::once())
@@ -518,7 +492,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillUpdateException::class);
+        $this->expectException(BitPayApiException::class);
         $client->updateBill($billMock, $exampleBillId);
     }
 
@@ -541,7 +515,7 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('update')
             ->with("bills/" . $exampleBillId, $billMock->toArray())
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $restCliMock
             ->expects(self::once())
@@ -551,7 +525,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillUpdateException::class);
+        $this->expectException(BitPayApiException::class);
         $client->updateBill($billMock, $exampleBillId);
     }
 
@@ -586,12 +560,12 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillUpdateException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->updateBill($billMock, $exampleBillId);
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testDeliverBill()
     {
@@ -622,11 +596,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('post')
             ->with("bills/" . $exampleBillId . '/deliveries', ['token' => $exampleBillToken])
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillDeliveryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->deliverBill($exampleBillId, $exampleBillToken);
     }
 
@@ -640,11 +614,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('post')
             ->with("bills/" . $exampleBillId . '/deliveries', ['token' => $exampleBillToken])
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(BillDeliveryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->deliverBill($exampleBillId, $exampleBillToken);
     }
 
@@ -683,11 +657,11 @@ class ClientTest extends TestCase
         $restCliMock
             ->expects(self::once())
             ->method('get')
-            ->willThrowException(new \Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(LedgerQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $exampleCurrency = Currency::BTC;
         $exampleStartDate = '2021-5-10';
         $exampleEndDate = '2021-5-31';
@@ -697,11 +671,12 @@ class ClientTest extends TestCase
     public function testGetLedgerShouldCatchRestCliBitPayException()
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects(self::once())->method('get')->willThrowException(new BitPayException());
+        $restCliMock->expects(self::once())->method('get')
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(LedgerQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $exampleCurrency = Currency::BTC;
         $exampleStartDate = '2021-5-10';
         $exampleEndDate = '2021-5-31';
@@ -720,7 +695,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(LedgerQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $exampleCurrency = Currency::BTC;
         $exampleStartDate = '2021-5-10';
         $exampleEndDate = '2021-5-31';
@@ -751,22 +726,24 @@ class ClientTest extends TestCase
     public function testGetLedgersShouldCatchBitPayException()
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects(self::once())->method('get')->willThrowException(new BitPayException());
+        $restCliMock->expects(self::once())->method('get')
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(LedgerQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getLedgers();
     }
 
     public function testGetLedgersShouldCatchRestCliException()
     {
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects(self::once())->method('get')->willThrowException(new Exception());
+        $restCliMock->expects(self::once())->method('get')
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(LedgerQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getLedgers();
     }
 
@@ -779,7 +756,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(LedgerQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getLedgers();
     }
 
@@ -822,11 +799,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('post')
             ->with("recipients", $payoutRecipientsMock->toArray())
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientCreationException::class);
+        $this->expectException(BitPayApiException::class);
         $client->submitPayoutRecipients($payoutRecipientsMock);
     }
 
@@ -845,11 +822,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('post')
             ->with("recipients", $payoutRecipientsMock->toArray())
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(Exception::class);
+        $this->expectException(BitPayApiException::class);
         $client->submitPayoutRecipients($payoutRecipientsMock);
     }
 
@@ -877,7 +854,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientCreationException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->submitPayoutRecipients($payoutRecipientsMock);
     }
 
@@ -909,11 +886,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("recipients/" . $recipientId, $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getPayoutRecipient($recipientId);
     }
 
@@ -926,11 +903,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("recipients/" . $recipientId, $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getPayoutRecipient($recipientId);
     }
 
@@ -948,7 +925,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getPayoutRecipient($recipientId);
     }
 
@@ -996,11 +973,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("recipients", $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getPayoutRecipients($status, $limit, $offset);
     }
 
@@ -1021,11 +998,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("recipients", $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getPayoutRecipients($status, $limit, $offset);
     }
 
@@ -1051,13 +1028,10 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getPayoutRecipients($status, $limit, $offset);
     }
 
-    /**
-     * @throws PayoutRecipientUpdateException
-     */
     public function testUpdatePayoutRecipient()
     {
         $exampleRecipientId = 'X3icwc4tE8KJ5hEPNPpDXW';
@@ -1095,11 +1069,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('update')
             ->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientUpdateException::class);
+        $this->expectException(BitPayApiException::class);
         $client->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
     }
 
@@ -1117,11 +1091,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('update')
             ->with("recipients/" . $exampleRecipientId, $payoutRecipientMock->toArray())
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientUpdateException::class);
+        $this->expectException(BitPayApiException::class);
         $client->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
     }
 
@@ -1145,7 +1119,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientUpdateException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->updatePayoutRecipient($exampleRecipientId, $payoutRecipientMock);
     }
 
@@ -1179,11 +1153,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('delete')
             ->with("recipients/" . $exampleRecipientId, $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientCancellationException::class);
+        $this->expectException(BitPayApiException::class);
         $client->deletePayoutRecipient($exampleRecipientId);
     }
 
@@ -1197,11 +1171,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('delete')
             ->with("recipients/" . $exampleRecipientId, $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientCancellationException::class);
+        $this->expectException(BitPayApiException::class);
         $client->deletePayoutRecipient($exampleRecipientId);
     }
 
@@ -1253,11 +1227,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('post')
             ->with("recipients/" . $exampleRecipientId . '/notifications', $content)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientNotificationException::class);
+        $this->expectException(BitPayApiException::class);
         $client->requestPayoutRecipientNotification($exampleRecipientId);
     }
 
@@ -1271,11 +1245,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('post')
             ->with("recipients/" . $exampleRecipientId . '/notifications', $content)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(PayoutRecipientNotificationException::class);
+        $this->expectException(BitPayApiException::class);
         $client->requestPayoutRecipientNotification($exampleRecipientId);
     }
 
@@ -1323,11 +1297,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with('rates', null, false)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RateQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getRates();
     }
 
@@ -1338,11 +1312,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with('rates', null, false)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RateQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getRates();
     }
 
@@ -1358,7 +1332,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RateQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getRates();
     }
 
@@ -1391,11 +1365,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with('rates/' . $exampleCurrency, null, false)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RateQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getCurrencyRates(Currency::USD);
     }
 
@@ -1408,11 +1382,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with('rates/' . $exampleCurrency, null, false)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RateQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getCurrencyRates(Currency::USD);
     }
 
@@ -1430,7 +1404,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RateQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getCurrencyRates(Currency::USD);
     }
 
@@ -1461,11 +1435,11 @@ class ClientTest extends TestCase
         $restCliMock
             ->expects(self::once())
             ->method('get')
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RateQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getCurrencyPairRate(Currency::BTC, Currency::USD);
     }
 
@@ -1475,11 +1449,11 @@ class ClientTest extends TestCase
         $restCliMock
             ->expects(self::once())
             ->method('get')
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RateQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getCurrencyPairRate(Currency::BTC, Currency::USD);
     }
 
@@ -1495,7 +1469,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RateQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getCurrencyPairRate(Currency::BTC, Currency::USD);
     }
 
@@ -1555,11 +1529,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("settlements", $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(SettlementQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
     }
 
@@ -1584,11 +1558,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("settlements", $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(SettlementQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
     }
 
@@ -1618,7 +1592,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(SettlementQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getSettlements($currency, $dateStart, $dateEnd, $status, $limit, $offset);
     }
 
@@ -1657,11 +1631,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("settlements/" . $settlementId, $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(SettlementQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getSettlement($settlementId);
     }
 
@@ -1674,11 +1648,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("settlements/" . $settlementId, $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(SettlementQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getSettlement($settlementId);
     }
 
@@ -1697,7 +1671,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(SettlementQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getSettlement($settlementId);
     }
 
@@ -1744,11 +1718,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(SettlementQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getSettlementReconciliationReport($settlement);
     }
 
@@ -1766,11 +1740,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("settlements/" . $exampleId . '/reconciliationReport', $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(SettlementQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getSettlementReconciliationReport($settlement);
     }
 
@@ -1793,7 +1767,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(SettlementQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getSettlementReconciliationReport($settlement);
     }
 
@@ -1827,9 +1801,9 @@ class ClientTest extends TestCase
         $payoutId = $exampleResponseArray['id'];
         $restCliMock->expects(self::once())->method('get')
             ->with("payouts/" . $payoutId, $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutQueryException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->getPayout($payoutId);
     }
@@ -1845,7 +1819,7 @@ class ClientTest extends TestCase
             ->with("payouts/" . $payoutId, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutQueryException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $client->getPayout($payoutId);
     }
@@ -1862,9 +1836,9 @@ class ClientTest extends TestCase
         $payoutId = $exampleResponseArray['id'];
         $restCliMock->expects(self::once())->method('get')
             ->with("payouts/" . $payoutId, $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutQueryException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->getPayout($payoutId);
     }
@@ -1904,9 +1878,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('get')
             ->with("payouts", $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutQueryException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->getPayouts(
             $params['startDate'],
@@ -1925,9 +1899,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('get')
             ->with("payouts", $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutQueryException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->getPayouts(
             $params['startDate'],
@@ -1948,7 +1922,7 @@ class ClientTest extends TestCase
             ->with("payouts", $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutQueryException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $client->getPayouts(
             $params['startDate'],
@@ -1981,9 +1955,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('delete')
             ->with("payouts/" . $examplePayoutId, $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutCancellationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->cancelPayout($examplePayoutId);
     }
@@ -1995,9 +1969,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('delete')
             ->with("payouts/" . $examplePayoutId, $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutCancellationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->cancelPayout($examplePayoutId);
     }
@@ -2049,9 +2023,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')
             ->with("payouts", $payoutMock->toArray())
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutCreationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->submitPayout($payoutMock);
     }
@@ -2069,9 +2043,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')
             ->with("payouts", $payoutMock->toArray())
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutCreationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->submitPayout($payoutMock);
     }
@@ -2091,7 +2065,7 @@ class ClientTest extends TestCase
             ->with("payouts", $payoutMock->toArray())
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutCreationException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $client->submitPayout($payoutMock);
     }
@@ -2117,9 +2091,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')
             ->with("payouts/{$payoutId}/notifications", $content)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutNotificationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->requestPayoutNotification($payoutId);
     }
@@ -2131,9 +2105,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')
             ->with("payouts/{$payoutId}/notifications", $content)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(PayoutNotificationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->requestPayoutNotification($payoutId);
     }
@@ -2246,9 +2220,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')
             ->with("refunds/", $params, true)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundCreationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->createRefund(
             $params['invoiceId'],
@@ -2267,9 +2241,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')
             ->with("refunds/", $params, true)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundCreationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->createRefund(
             $params['invoiceId'],
@@ -2288,7 +2262,7 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')->with("refunds/", $params, true)->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundCreationException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $client->createRefund(
             $params['invoiceId'],
@@ -2327,10 +2301,10 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('delete')
             ->with("refunds/" . $exampleRefundId, $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundCancellationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->cancelRefund($exampleRefundId);
     }
@@ -2343,11 +2317,11 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('delete')
             ->with("refunds/" . $exampleRefundId, $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RefundCancellationException::class);
+        $this->expectException(BitPayApiException::class);
         $client->cancelRefund($exampleRefundId);
     }
 
@@ -2360,7 +2334,7 @@ class ClientTest extends TestCase
             ->with("refunds/" . $exampleRefundId, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundCancellationException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $client->cancelRefund($exampleRefundId);
     }
@@ -2391,10 +2365,10 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('delete')
             ->with("refunds/guid/" . $guid, $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundCancellationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->cancelRefundByGuid($guid);
     }
@@ -2407,11 +2381,11 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('delete')
             ->with("refunds/guid/" . $guid, $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RefundCancellationException::class);
+        $this->expectException(BitPayApiException::class);
         $client->cancelRefundByGuid($guid);
     }
 
@@ -2424,7 +2398,7 @@ class ClientTest extends TestCase
             ->with("refunds/guid/" . $guid, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundCancellationException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $client->cancelRefundByGuid($guid);
     }
@@ -2454,9 +2428,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('update')
             ->with("refunds/" . $refundId, $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundUpdateException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->updateRefund($refundId, $params['status']);
     }
@@ -2469,10 +2443,10 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('update')
             ->with("refunds/" . $refundId, $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundUpdateException::class);
+        $this->expectException(BitPayApiException::class);
         $client->updateRefund($refundId, $params['status']);
     }
 
@@ -2487,7 +2461,7 @@ class ClientTest extends TestCase
             ->with("refunds/" . $refundId, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundUpdateException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $client->updateRefund($refundId, $params['status']);
     }
@@ -2519,9 +2493,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('update')
             ->with("refunds/guid/" . $guid, $params)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundUpdateException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->updateRefundByGuid($guid, $params['status']);
     }
@@ -2534,10 +2508,10 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('update')
             ->with("refunds/guid/" . $guid, $params)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundUpdateException::class);
+        $this->expectException(BitPayApiException::class);
         $client->updateRefundByGuid($guid, $params['status']);
     }
 
@@ -2552,7 +2526,7 @@ class ClientTest extends TestCase
             ->with("refunds/guid/" . $guid, $params)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundUpdateException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $client->updateRefundByGuid($guid, $params['status']);
     }
@@ -2585,9 +2559,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('get')
             ->with("refunds/", $params, true)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundQueryException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->getRefunds($exampleInvoiceId);
     }
@@ -2604,9 +2578,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('get')
             ->with("refunds/", $params, true)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundQueryException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->getRefunds($exampleInvoiceId);
     }
@@ -2625,7 +2599,7 @@ class ClientTest extends TestCase
             ->with("refunds/", $params, true)
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundQueryException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $client->getRefunds($exampleInvoiceId);
     }
@@ -2664,10 +2638,10 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('get')
             ->with("refunds/" . $exampleRefundId, $params, true)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RefundQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getRefund($exampleRefundId);
     }
 
@@ -2682,10 +2656,10 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('get')
             ->with("refunds/" . $exampleRefundId, $params, true)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RefundQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getRefund($exampleRefundId);
     }
 
@@ -2703,7 +2677,7 @@ class ClientTest extends TestCase
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RefundQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getRefund($exampleRefundId);
     }
 
@@ -2738,10 +2712,10 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('get')
             ->with("refunds/guid/" . $guid, $params, true)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RefundQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getRefundByGuid($guid);
     }
 
@@ -2756,10 +2730,10 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('get')
             ->with("refunds/guid/" . $guid, $params, true)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RefundQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $client->getRefundByGuid($guid);
     }
 
@@ -2777,7 +2751,7 @@ class ClientTest extends TestCase
             ->willReturn(self::CORRUPT_JSON_STRING);
         $client = $this->getClient($restCliMock);
 
-        $this->expectException(RefundQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $client->getRefundByGuid($guid);
     }
 
@@ -2810,9 +2784,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')
             ->with("refunds/" . $exampleRefundId . "/notifications", $params, true)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundNotificationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->sendRefundNotification($exampleRefundId);
     }
@@ -2828,9 +2802,9 @@ class ClientTest extends TestCase
         $restCliMock = $this->getRestCliMock();
         $restCliMock->expects(self::once())->method('post')
             ->with("refunds/" . $exampleRefundId . "/notifications", $params, true)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
         $client = $this->getClient($restCliMock);
-        $this->expectException(RefundNotificationException::class);
+        $this->expectException(BitPayApiException::class);
 
         $client->sendRefundNotification($exampleRefundId);
     }
@@ -2890,10 +2864,7 @@ class ClientTest extends TestCase
         self::assertEquals($exampleInvoiceObject->currency, $result->getCurrency());
     }
 
-    /**
-     * @dataProvider exceptionClassProvider
-     */
-    public function testGetInvoiceShouldCatchRestCliExceptions(string $exceptionClass): void
+    public function testGetInvoiceShouldCatchRestCliExceptions(): void
     {
         $exampleInvoiceObject = json_decode(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'));
 
@@ -2902,10 +2873,10 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method("get")
             ->with('invoices/' . $exampleInvoiceObject->id, ['token' => $exampleInvoiceObject->token], true)
-            ->willThrowException(new $exceptionClass);
+            ->willThrowException($this->getBitPayApiException());
 
         $testedObject = $this->getClient($restCliMock);
-        $this->expectException(InvoiceQueryException::class);
+        $this->expectException(BitPayApiException::class);
 
         $testedObject->getInvoice($exampleInvoiceObject->id, Facade::MERCHANT, true);
     }
@@ -2922,7 +2893,7 @@ class ClientTest extends TestCase
             ->willReturn('badString');
 
         $testedObject = $this->getClient($restCliMock);
-        $this->expectException(InvoiceQueryException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $testedObject->getInvoice($exampleInvoiceObject->id, Facade::MERCHANT, true);
     }
@@ -2966,7 +2937,7 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testGetInvoicesShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testGetInvoicesShouldCatchRestCliExceptions(Exception $exceptionClass)
     {
         $params = [
             'status' => 'status',
@@ -2983,10 +2954,10 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method("get")
             ->with('invoices', $params)
-            ->willThrowException(new $exceptionClass);
+            ->willThrowException($exceptionClass);
 
         $testedObject = $this->getClient($restCliMock);
-        $this->expectException(InvoiceQueryException::class);
+        $this->expectException($exceptionClass::class);
 
         $testedObject->getInvoices(
             $params['dateStart'],
@@ -3017,7 +2988,7 @@ class ClientTest extends TestCase
             ->willReturn('badString');
 
         $testedObject = $this->getClient($restCliMock);
-        $this->expectException(InvoiceQueryException::class);
+        $this->expectException(BitPayGenericException::class);
 
         $testedObject->getInvoices(
             $params['dateStart'],
@@ -3073,11 +3044,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('post')
             ->with("invoices/" . self::TEST_INVOICE_ID . '/notifications', $params, true)
-            ->willThrowException(new InvoiceQueryException());
+            ->willThrowException(new BitPayGenericException());
 
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(InvoiceQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $testedObject->requestInvoiceNotification(self::TEST_INVOICE_ID);
     }
 
@@ -3101,17 +3072,19 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testCancelInvoiceShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testCancelInvoiceShouldCatchRestCliExceptions(Exception $exceptionClass)
     {
         $restCliMock = $this->getRestCliMock();
         $params = [
             'token' => self::MERCHANT_TOKEN,
             'forceCancel' => true
         ];
-        $restCliMock->expects(self::once())->method('delete')->with("invoices/" . self::TEST_INVOICE_ID, $params)->willThrowException(new $exceptionClass());
+        $restCliMock->expects(self::once())->method('delete')
+            ->with("invoices/" . self::TEST_INVOICE_ID, $params)
+            ->willThrowException($exceptionClass);
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(InvoiceCancellationException::class);
+        $this->expectException($exceptionClass::class);
         $testedObject->cancelInvoice(self::TEST_INVOICE_ID, $params['forceCancel']);
     }
 
@@ -3122,10 +3095,12 @@ class ClientTest extends TestCase
             'token' => self::MERCHANT_TOKEN,
             'forceCancel' => true
         ];
-        $restCliMock->expects(self::once())->method('delete')->with("invoices/" . self::TEST_INVOICE_ID, $params)->willReturn('corruptJson');
+        $restCliMock->expects(self::once())->method('delete')
+            ->with("invoices/" . self::TEST_INVOICE_ID, $params)
+            ->willReturn('corruptJson');
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(InvoiceCancellationException::class);
+        $this->expectException(BitPayGenericException::class);
         $testedObject->cancelInvoice(self::TEST_INVOICE_ID, $params['forceCancel']);
     }
 
@@ -3155,7 +3130,7 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testCancelInvoiceByGuidShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testCancelInvoiceByGuidShouldCatchRestCliExceptions(Exception $exceptionClass)
     {
         $restCliMock = $this->getRestCliMock();
         $params = [
@@ -3166,11 +3141,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('delete')
             ->with("invoices/guid/" . self::TEST_INVOICE_GUID, $params)
-            ->willThrowException(new $exceptionClass());
+            ->willThrowException($exceptionClass);
 
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(InvoiceCancellationException::class);
+        $this->expectException($exceptionClass::class);
         $testedObject->cancelInvoiceByGuid(self::TEST_INVOICE_GUID, $params['forceCancel']);
     }
 
@@ -3189,7 +3164,7 @@ class ClientTest extends TestCase
 
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(InvoiceCancellationException::class);
+        $this->expectException(BitPayGenericException::class);
         $testedObject->cancelInvoiceByGuid(self::TEST_INVOICE_GUID, $params['forceCancel']);
     }
 
@@ -3214,16 +3189,18 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testPayInvoiceShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testPayInvoiceShouldCatchRestCliExceptions(Exception $exceptionClass)
     {
         $params['status'] = 'confirmed';
         $params['token'] = self::MERCHANT_TOKEN;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects(self::once())->method('update')->with("invoices/pay/" . self::TEST_INVOICE_ID, $params)->willThrowException(new $exceptionClass());
+        $restCliMock->expects(self::once())->method('update')
+            ->with("invoices/pay/" . self::TEST_INVOICE_ID, $params)
+            ->willThrowException($exceptionClass);
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(InvoicePaymentException::class);
+        $this->expectException($exceptionClass::class);
         $testedObject->payInvoice(self::TEST_INVOICE_ID, $params['status']);
     }
 
@@ -3233,15 +3210,17 @@ class ClientTest extends TestCase
         $params['token'] = self::MERCHANT_TOKEN;
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects(self::once())->method('update')->with("invoices/pay/" . self::TEST_INVOICE_ID, $params)->willReturn('corruptJson');
+        $restCliMock->expects(self::once())->method('update')
+            ->with("invoices/pay/" . self::TEST_INVOICE_ID, $params)
+            ->willReturn('corruptJson');
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(InvoicePaymentException::class);
+        $this->expectException(BitPayGenericException::class);
         $testedObject->payInvoice(self::TEST_INVOICE_ID, $params['status']);
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testCreateInvoice()
     {
@@ -3266,17 +3245,19 @@ class ClientTest extends TestCase
     /**
      * @dataProvider exceptionClassProvider
      */
-    public function testCreateInvoiceShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testCreateInvoiceShouldCatchRestCliExceptions(Exception $exceptionClass)
     {
         $invoiceArray = json_decode(file_get_contents(__DIR__.'/jsonResponse/getInvoice.json'), true);
         $invoiceMock = $this->createMock(Invoice::class);
         $invoiceMock->expects(self::once())->method('toArray')->willReturn($invoiceArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects(self::once())->method('post')->with('invoices', $invoiceArray, true)->willThrowException(new $exceptionClass());
+        $restCliMock->expects(self::once())->method('post')
+            ->with('invoices', $invoiceArray, true)
+            ->willThrowException($exceptionClass);
 
         $testedObject = $this->getClient($restCliMock);
-        $this->expectException(InvoiceCreationException::class);
+        $this->expectException($exceptionClass::class);
         $testedObject->createInvoice($invoiceMock);
     }
 
@@ -3287,17 +3268,16 @@ class ClientTest extends TestCase
         $invoiceMock->expects(self::once())->method('toArray')->willReturn($invoiceArray);
 
         $restCliMock = $this->getRestCliMock();
-        $restCliMock->expects(self::once())->method('post')->with('invoices', $invoiceArray, true)->willReturn('corruptJson');
+        $restCliMock->expects(self::once())->method('post')
+            ->with('invoices', $invoiceArray, true)
+            ->willReturn('corruptJson');
 
         $testedObject = $this->getClient($restCliMock);
-        $this->expectException(InvoiceCreationException::class);
+        $this->expectException(BitPayGenericException::class);
         $testedObject->createInvoice($invoiceMock);
     }
 
-    /**
-     * @dataProvider exceptionClassProvider
-     */
-    public function testUpdateInvoiceShouldCatchRestCliExceptions(string $exceptionClass)
+    public function testUpdateInvoiceShouldCatchRestCliExceptions()
     {
         $params = [
             'token' => self::MERCHANT_TOKEN,
@@ -3312,9 +3292,9 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('update')
             ->with('invoices/'. self::TEST_INVOICE_ID, $params)
-            ->willThrowException(new $exceptionClass());
+            ->willThrowException($this->getBitPayApiException());
 
-        $this->expectException(InvoiceUpdateException::class);
+        $this->expectException(BitPayApiException::class);
         $testedObject = $this->getClient($restCliMock);
         $testedObject->updateInvoice(
             self::TEST_INVOICE_ID,
@@ -3342,7 +3322,7 @@ class ClientTest extends TestCase
             ->with('invoices/'. self::TEST_INVOICE_ID, $params)
             ->willReturn('corruptJson');
 
-        $this->expectException(InvoiceUpdateException::class);
+        $this->expectException(BitPayGenericException::class);
         $testedObject = $this->getClient($restCliMock);
         $testedObject->updateInvoice(
             self::TEST_INVOICE_ID,
@@ -3453,11 +3433,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("supportedWallets/", null, false)
-            ->willThrowException(new BitPayException());
+            ->willThrowException($this->getBitPayApiException());
 
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(WalletQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $testedObject->getSupportedWallets();
     }
 
@@ -3468,11 +3448,11 @@ class ClientTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with("supportedWallets/", null, false)
-            ->willThrowException(new Exception());
+            ->willThrowException($this->getBitPayApiException());
 
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(WalletQueryException::class);
+        $this->expectException(BitPayApiException::class);
         $testedObject->getSupportedWallets();
     }
 
@@ -3487,15 +3467,15 @@ class ClientTest extends TestCase
 
         $testedObject = $this->getClient($restCliMock);
 
-        $this->expectException(WalletQueryException::class);
+        $this->expectException(BitPayGenericException::class);
         $testedObject->getSupportedWallets();
     }
 
     public static function exceptionClassProvider(): array
     {
         return [
-            [BitPayException::class],
-            [Exception::class],
+            [new BitPayApiException("any", null)],
+            [new BitPayGenericException()],
         ];
     }
 
@@ -3572,5 +3552,13 @@ class ClientTest extends TestCase
             $refProperty->setAccessible(true);
             $refProperty->setValue(null);
         }
+    }
+
+    /**
+     * @return BitPayApiException
+     */
+    private function getBitPayApiException(): BitPayApiException
+    {
+        return $this->getMockBuilder(BitPayApiException::class)->disableOriginalConstructor()->getMock();
     }
 }

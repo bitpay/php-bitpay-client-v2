@@ -2,7 +2,8 @@
 
 namespace BitPaySDK\Test\Model\Payout;
 
-use BitPaySDK\Exceptions\BitPayException;
+use BitPaySDK\Exceptions\BitPayApiException;
+use BitPaySDK\Exceptions\BitPayGenericException;
 use BitPaySDK\Model\Currency;
 use BitPaySDK\Model\Payout\Payout;
 use BitPaySDK\Model\Payout\PayoutTransaction;
@@ -35,7 +36,7 @@ class PayoutTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testGetCurrency()
     {
@@ -48,12 +49,10 @@ class PayoutTest extends TestCase
 
     public function testGetCurrencyException()
     {
-        $expectedCurrency = 'ZZZ';
-
         $payout = $this->createClassObject();
-        $this->expectException(BitPayException::class);
-        $this->expectExceptionMessage('currency code must be a type of Model.Currency');
-        $payout->setCurrency($expectedCurrency);
+        $this->expectException(BitPayGenericException::class);
+        $this->expectExceptionMessage('Currency code ZZZ must be a type of Model.Currency');
+        $payout->setCurrency('ZZZ');
     }
 
     public function testGetEffectiveDate()
@@ -66,7 +65,7 @@ class PayoutTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testGetLedgerCurrency()
     {
@@ -79,12 +78,10 @@ class PayoutTest extends TestCase
 
     public function testGetLedgerCurrencyException()
     {
-        $expectedLedgerCurrency = 'ZZZ';
-
         $payout = $this->createClassObject();
-        $this->expectException(BitPayException::class);
-        $this->expectExceptionMessage('currency code must be a type of Model.Currency');
-        $payout->setLedgerCurrency($expectedLedgerCurrency);
+        $this->expectException(BitPayGenericException::class);
+        $this->expectExceptionMessage('Currency code ZZZ must be a type of Model.Currency');
+        $payout->setLedgerCurrency('ZZZ');
     }
 
     public function testGetReference()
@@ -231,7 +228,7 @@ class PayoutTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testToArray()
     {
@@ -295,7 +292,7 @@ class PayoutTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     public function testToArrayEmptyKey()
     {
@@ -315,7 +312,7 @@ class PayoutTest extends TestCase
     }
 
     /**
-     * @throws BitPayException
+     * @throws BitPayApiException
      */
     private function objectSetters(Payout $payout)
     {
@@ -333,7 +330,7 @@ class PayoutTest extends TestCase
         $payout->setEffectiveDate('2021-05-27T09:00:00.000Z');
         try {
             $payout->setLedgerCurrency(Currency::GBP);
-        } catch (BitPayException) {
+        } catch (BitPayApiException) {
         }
         $payout->setReference('payout_20210527');
         $payout->setNotificationURL('https://example.com');
