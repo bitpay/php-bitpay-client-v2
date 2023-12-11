@@ -63,7 +63,7 @@ class Invoice
     protected ?int $expirationTime = null;
     protected ?int $currentTime = null;
     protected ?array $transactions = null;
-    protected bool|string|null $exceptionStatus = null;
+    protected string|null $exceptionStatus = null;
     protected ?int $targetConfirmations = null;
     protected ?bool $refundAddressRequestPending = null;
     protected ?string $buyerProvidedEmail = null;
@@ -1098,13 +1098,13 @@ class Invoice
      *
      * Initially a boolean false, this parameter will indicate if the purchaser sent too much ("paidOver")
      * or not enough funds ("paidPartial") in the transaction to pay the BitPay invoice. Possible values are:
-     * false: default value (boolean) unless an exception is triggered.
+     * "false": default value unless an exception is triggered.
      * "paidPartial": (string) if the consumer did not send enough funds when paying the invoice.
      * "paidOver": (string) if the consumer sent to much funds when paying the invoice.
      *
-     * @return bool|string|null the exception status
+     * @return string|null the exception status
      */
-    public function getExceptionStatus(): bool|string|null
+    public function getExceptionStatus(): string|null
     {
         return $this->exceptionStatus;
     }
@@ -1114,13 +1114,13 @@ class Invoice
      *
      * Initially a boolean false, this parameter will indicate if the purchaser sent too much ("paidOver")
      * or not enough funds ("paidPartial") in the transaction to pay the BitPay invoice. Possible values are:
-     * false: default value (boolean) unless an exception is triggered.
+     * "false": default value (boolean) unless an exception is triggered.
      * "paidPartial": (string) if the consumer did not send enough funds when paying the invoice.
      * "paidOver": (string) if the consumer sent to much funds when paying the invoice.
      *
-     * @param boolean $exceptionStatus this parameter will indicate if the purchaser sent too much or not enough funds
+     * @param string|null $exceptionStatus this parameter will indicate if the purchaser sent too much or not enough funds
      */
-    public function setExceptionStatus(bool|string|null $exceptionStatus): void
+    public function setExceptionStatus(string|null $exceptionStatus): void
     {
         $this->exceptionStatus = $exceptionStatus;
     }
