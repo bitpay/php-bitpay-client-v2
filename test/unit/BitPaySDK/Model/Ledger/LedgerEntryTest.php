@@ -34,7 +34,7 @@ class LedgerEntryTest extends TestCase
 
     public function testGetCode()
     {
-        $expectedCode = 'abc123';
+        $expectedCode = 1324;
 
         $ledgerEntry = $this->createClassObject();
         $ledgerEntry->setCode($expectedCode);
@@ -175,7 +175,7 @@ class LedgerEntryTest extends TestCase
 
         self::assertEquals('TestType', $ledgerEntryArray['type']);
         self::assertEquals('1', $ledgerEntryArray['amount']);
-        self::assertEquals('abc123', $ledgerEntryArray['code']);
+        self::assertEquals(111, $ledgerEntryArray['code']);
         self::assertEquals('2020-01-01 18:10:10', $ledgerEntryArray['timestamp']);
         self::assertEquals('BTC', $ledgerEntryArray['currency']);
         self::assertEquals('TxType', $ledgerEntryArray['txType']);
@@ -198,7 +198,7 @@ class LedgerEntryTest extends TestCase
     {
         $ledgerEntry->setType('TestType');
         $ledgerEntry->setAmount('1');
-        $ledgerEntry->setCode('abc123');
+        $ledgerEntry->setCode(111);
         $ledgerEntry->setTimestamp('2020-01-01 18:10:10');
         $ledgerEntry->setCurrency('BTC');
         $ledgerEntry->setTxType('TxType');

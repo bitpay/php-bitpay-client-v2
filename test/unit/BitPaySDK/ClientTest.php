@@ -622,13 +622,13 @@ class ClientTest extends TestCase
         $client->deliverBill($exampleBillId, $exampleBillToken);
     }
 
-    public function testGetLedger()
+    public function testGetLedgerEntries()
     {
         $exampleCurrency = Currency::BTC;
         $exampleStartDate = '2021-5-10';
         $exampleEndDate = '2021-5-31';
         $restCliMock = $this->getRestCliMock();
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgerBalances.json');
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgerEntriesResponse.json');
 
         $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
         $params["currency"] = $exampleCurrency;
@@ -645,9 +645,9 @@ class ClientTest extends TestCase
         $result = $client->getLedgerEntries($exampleCurrency, $exampleStartDate, $exampleEndDate);
 
         self::assertIsArray($result);
-        self::assertEquals('EUR', $result[0]->getCurrency());
-        self::assertEquals('USD', $result[1]->getCurrency());
-        self::assertEquals('BTC', $result[2]->getCurrency());
+        self::assertCount(3, $result);
+        self::assertEquals(-8000000, $result[1]->getAmount());
+        self::assertEquals("John Doe", $result[1]->getBuyerFields()->getBuyerName());
         self::assertInstanceOf(LedgerEntry::class, $result[0]);
     }
 
@@ -706,7 +706,7 @@ class ClientTest extends TestCase
     {
         $restCliMock = $this->getRestCliMock();
         $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgers.json');
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgersResponse.json');
 
         $restCliMock
             ->expects(self::once())
@@ -720,7 +720,9 @@ class ClientTest extends TestCase
 
 
         self::assertIsArray($result);
-        self::assertInstanceOf(Ledger::class, $result[0]);
+        $ledger = $result[1];
+        self::assertInstanceOf(Ledger::class, $ledger);
+        self::assertEquals(2389.82, $ledger->getBalance());
     }
 
     public function testGetLedgersShouldCatchBitPayException()

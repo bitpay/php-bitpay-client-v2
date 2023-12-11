@@ -217,9 +217,8 @@ class Currency
     protected ?string $alts = null;
     protected ?string $minimum = null;
     protected ?bool $sanctioned = null;
-    protected ?string $decimals = null;
-    protected array $payoutFields = [];
-    protected array $settlementMinimum = [];
+    protected ?int $decimals = null;
+    protected ?string $chain;
 
     /**
      * Currency validation
@@ -425,9 +424,9 @@ class Currency
     /**
      * Gets decimal precision
      *
-     * @return string|null decimals
+     * @return int|null decimals
      */
-    public function getDecimals(): ?string
+    public function getDecimals(): ?int
     {
         return $this->decimals;
     }
@@ -435,51 +434,21 @@ class Currency
     /**
      * Sets decimal precision
      *
-     * @param string $decimals decimals
+     * @param int|null $decimals decimals
      */
-    public function setDecimals(string $decimals): void
+    public function setDecimals(?int $decimals): void
     {
         $this->decimals = $decimals;
     }
 
-    /**
-     * Gets payout fields
-     *
-     * @return array the payout fields
-     */
-    public function getPayoutFields(): array
+    public function getChain(): ?string
     {
-        return $this->payoutFields;
+        return $this->chain;
     }
 
-    /**
-     * Sets payout fields
-     *
-     * @param array $payoutFields the payout fields
-     */
-    public function setPayoutFields(array $payoutFields): void
+    public function setChain(?string $chain): void
     {
-        $this->payoutFields = $payoutFields;
-    }
-
-    /**
-     * Gets settlement minimum
-     *
-     * @return array the settlement minimum
-     */
-    public function getSettlementMinimum(): array
-    {
-        return $this->settlementMinimum;
-    }
-
-    /**
-     * Sets settlement minimum
-     *
-     * @param array $settlementMinimum the settlement minimum
-     */
-    public function setSettlementMinimum(array $settlementMinimum): void
-    {
-        $this->settlementMinimum = $settlementMinimum;
+        $this->chain = $chain;
     }
 
     /**
@@ -500,8 +469,7 @@ class Currency
             'minimum'           => $this->getMinimum(),
             'sanctioned'        => $this->getSanctioned(),
             'decimals'          => $this->getDecimals(),
-            'payoutFields'      => $this->getPayoutFields(),
-            'settlementMinimum' => $this->getSettlementMinimum(),
+            'chain'             => $this->getChain()
         ];
 
         foreach ($elements as $key => $value) {

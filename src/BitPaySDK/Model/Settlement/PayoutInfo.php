@@ -19,9 +19,7 @@ namespace BitPaySDK\Model\Settlement;
 class PayoutInfo
 {
     protected ?string $name = null;
-    protected ?string $account = null;
     protected ?string $routing = null;
-    protected ?string $merchantEin = null;
     protected ?string $label = null;
     protected ?string $bankCountry = null;
     protected ?string $bank = null;
@@ -29,8 +27,10 @@ class PayoutInfo
     protected ?string $address = null;
     protected ?string $city = null;
     protected ?string $postal = null;
+    protected ?string $account = null;
+    protected ?string $merchantEin = null;
     protected ?string $sort = null;
-    protected ?string $wire = null;
+    protected ?bool $wire = null;
     protected ?string $bankName = null;
     protected ?string $bankAddress = null;
     protected ?string $bankAddress2 = null;
@@ -45,26 +45,6 @@ class PayoutInfo
 
     public function __construct()
     {
-    }
-
-    /**
-     * Gets Bank account number of the merchant
-     *
-     * @return string|null the bank account number
-     */
-    public function getAccount(): ?string
-    {
-        return $this->account;
-    }
-
-    /**
-     * Sets Bank account number of the merchant
-     *
-     * @param string $account the bank account number
-     */
-    public function setAccount(string $account): void
-    {
-        $this->account = $account;
     }
 
     /**
@@ -281,6 +261,26 @@ class PayoutInfo
     }
 
     /**
+     * Gets Bank account number of the merchant
+     *
+     * @return string|null the bank account number
+     */
+    public function getAccount(): ?string
+    {
+        return $this->account;
+    }
+
+    /**
+     * Sets Bank account number of the merchant
+     *
+     * @param string $account the bank account number
+     */
+    public function setAccount(string $account): void
+    {
+        $this->account = $account;
+    }
+
+    /**
      * Gets sort
      *
      * used to pass country specific bank fields: BSB for AUD
@@ -308,9 +308,9 @@ class PayoutInfo
      * If set to true, this means BitPay will be settling the account using an international transfer via the SWIFT
      * network instead of local settlement methods like ACH(United States) or SEPA (European Economic Area)
      *
-     * @return string|null the wire
+     * @return bool|null the wire
      */
-    public function getWire(): ?string
+    public function getWire(): ?bool
     {
         return $this->wire;
     }
@@ -318,9 +318,9 @@ class PayoutInfo
     /**
      * Sets wire
      *
-     * @param string $wire the wire
+     * @param bool $wire the wire
      */
-    public function setWire(string $wire): void
+    public function setWire(bool $wire): void
     {
         $this->wire = $wire;
     }

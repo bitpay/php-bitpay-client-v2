@@ -340,7 +340,7 @@ class InvoiceTest extends TestCase
 
     public function testGetExpirationTime()
     {
-        $expectedExpirationTime = '01:01:01';
+        $expectedExpirationTime = 123456;
 
         $invoice = $this->createClassObject();
         $invoice->setExpirationTime($expectedExpirationTime);
@@ -349,7 +349,7 @@ class InvoiceTest extends TestCase
 
     public function testGetCurrentTime()
     {
-        $expectedCurrencyTime = '01:01:01';
+        $expectedCurrencyTime = 123456;
 
         $invoice = $this->createClassObject();
         $invoice->setCurrentTime($expectedCurrencyTime);
@@ -739,7 +739,7 @@ class InvoiceTest extends TestCase
         self::assertEquals('Test item code', $invoiceArray['itemCode']);
         self::assertTrue($invoiceArray['physical']);
         self::assertEquals(['BTC'], $invoiceArray['paymentCurrencies']);
-        self::assertEquals(1.1, $invoiceArray['acceptanceWindow']);
+        self::assertEquals(1, $invoiceArray['acceptanceWindow']);
         self::assertEquals('http://test.com', $invoiceArray['closeURL']);
         self::assertTrue($invoiceArray['autoRedirect']);
         self::assertEquals(['Test refund address'], $invoiceArray['refundAddresses']);
@@ -748,8 +748,8 @@ class InvoiceTest extends TestCase
         self::assertEquals('pending', $invoiceArray['status']);
         self::assertEquals('Low fee detected', $invoiceArray['lowFeeDetected']);
         self::assertEquals(1620734545366, $invoiceArray['invoiceTime']);
-        self::assertEquals('01:01:01', $invoiceArray['expirationTime']);
-        self::assertEquals('01:01:01', $invoiceArray['currentTime']);
+        self::assertEquals(123456, $invoiceArray['expirationTime']);
+        self::assertEquals(456789, $invoiceArray['currentTime']);
         self::assertEquals('Exception status', $invoiceArray['exceptionStatus']);
         self::assertEquals(6, $invoiceArray['targetConfirmations']);
         self::assertEquals('test@email.com', $invoiceArray['buyerProvidedEmail']);
@@ -805,7 +805,7 @@ class InvoiceTest extends TestCase
         $invoice->setItemCode('Test item code');
         $invoice->setPhysical(true);
         $invoice->setPaymentCurrencies(['BTC']);
-        $invoice->setAcceptanceWindow(1.1);
+        $invoice->setAcceptanceWindow(1);
         $invoice->setCloseURL('http://test.com');
         $invoice->setAutoRedirect(true);
         $invoice->setRefundAddresses(['Test refund address']);
@@ -814,8 +814,8 @@ class InvoiceTest extends TestCase
         $invoice->setStatus('pending');
         $invoice->setLowFeeDetected('Low fee detected');
         $invoice->setInvoiceTime(1620734545366);
-        $invoice->setExpirationTime('01:01:01');
-        $invoice->setCurrentTime('01:01:01');
+        $invoice->setExpirationTime(123456);
+        $invoice->setCurrentTime(456789);
         $invoice->setTransactions([]);
         $invoice->setExceptionStatus('Exception status');
         $invoice->setTargetConfirmations(6);
