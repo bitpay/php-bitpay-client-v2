@@ -29,7 +29,7 @@ class InvoiceWebhook
     protected ?array $paymentSubtotals;
     protected ?array $paymentTotals;
     protected ?array $exchangeRates;
-    protected ?int $amountPaid;
+    protected ?float $amountPaid;
     protected ?string $orderId;
     protected ?string $transactionCurrency;
 
@@ -163,12 +163,12 @@ class InvoiceWebhook
         $this->exchangeRates = $exchangeRates;
     }
 
-    public function getAmountPaid(): ?int
+    public function getAmountPaid(): ?float
     {
         return $this->amountPaid;
     }
 
-    public function setAmountPaid(?int $amountPaid): void
+    public function setAmountPaid(?float $amountPaid): void
     {
         $this->amountPaid = $amountPaid;
     }

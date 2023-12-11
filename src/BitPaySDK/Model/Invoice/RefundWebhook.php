@@ -22,7 +22,7 @@ class RefundWebhook
     protected ?string $invoice = null;
     protected ?string $supportRequest = null;
     protected ?string $status = null;
-    protected ?int $amount = null;
+    protected ?float $amount = null;
     protected ?string $currency = null;
     protected ?string $lastRefundNotification = null;
     protected ?float $refundFee = null;
@@ -70,12 +70,12 @@ class RefundWebhook
         $this->status = $status;
     }
 
-    public function getAmount(): ?int
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
 
-    public function setAmount(?int $amount): void
+    public function setAmount(?float $amount): void
     {
         $this->amount = $amount;
     }

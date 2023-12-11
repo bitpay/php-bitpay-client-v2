@@ -132,6 +132,14 @@ class CurrencyTest extends TestCase
         self::assertEquals($expected, $currency->getDecimals());
     }
 
+    public function testModifyChain(): void
+    {
+        $testedClass = $this->createClassObject();
+        $expected = 'someValue';
+        $testedClass->setChain($expected);
+
+        self::assertEquals($expected, $testedClass->getChain());
+    }
 
     private function createClassObject(): Currency
     {

@@ -78,9 +78,9 @@ class Invoice
     protected bool $extendedNotifications = false;
     protected ?bool $isCancelled = null;
     protected ?string $transactionCurrency = null;
-    protected ?int $underpaidAmount = null;
-    protected ?int $overpaidAmount = null;
-    protected ?int $amountPaid = null;
+    protected ?float $underpaidAmount = null;
+    protected ?float $overpaidAmount = null;
+    protected ?float $amountPaid = null;
     protected ?string $displayAmountPaid = null;
     protected ?array $exchangeRates = null;
     protected ?bool $bitpayIdRequired = null;
@@ -1455,9 +1455,9 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @return int|null
+     * @return float|null
      */
-    public function getUnderpaidAmount(): ?int
+    public function getUnderpaidAmount(): ?float
     {
         return $this->underpaidAmount;
     }
@@ -1470,9 +1470,9 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @param int $underpaidAmount the underpaid amount
+     * @param float|null $underpaidAmount the underpaid amount
      */
-    public function setUnderpaidAmount(int $underpaidAmount): void
+    public function setUnderpaidAmount(?float $underpaidAmount): void
     {
         $this->underpaidAmount = $underpaidAmount;
     }
@@ -1485,9 +1485,9 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @return int|null
+     * @return float|null
      */
-    public function getOverpaidAmount(): ?int
+    public function getOverpaidAmount(): ?float
     {
         return $this->overpaidAmount;
     }
@@ -1500,9 +1500,9 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @param int $overpaidAmount the overpaid amount
+     * @param float|null $overpaidAmount the overpaid amount
      */
-    public function setOverpaidAmount(int $overpaidAmount): void
+    public function setOverpaidAmount(?float $overpaidAmount): void
     {
         $this->overpaidAmount = $overpaidAmount;
     }
@@ -1714,9 +1714,9 @@ class Invoice
      * The total amount paid to the invoice in terms of the invoice transactionCurrency indicated
      * in the smallest possible unit for the corresponding transactionCurrency (e.g satoshis for BTC and BCH)
      *
-     * @return int|null
+     * @return float|null
      */
-    public function getAmountPaid(): ?int
+    public function getAmountPaid(): ?float
     {
         return $this->amountPaid;
     }
@@ -1727,9 +1727,9 @@ class Invoice
      * The total amount paid to the invoice in terms of the invoice transactionCurrency indicated
      * in the smallest possible unit for the corresponding transactionCurrency (e.g satoshis for BTC and BCH)
      *
-     * @param int $amountPaid The total amount paid to the invoice
+     * @param float|null $amountPaid The total amount paid to the invoice
      */
-    public function setAmountPaid(int $amountPaid): void
+    public function setAmountPaid(?float $amountPaid): void
     {
         $this->amountPaid = $amountPaid;
     }

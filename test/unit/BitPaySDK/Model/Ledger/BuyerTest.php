@@ -7,13 +7,13 @@ use PHPUnit\Framework\TestCase;
 
 class BuyerTest extends TestCase
 {
-    public function testInstanceOf()
+    public function testInstanceOf(): void
     {
         $buyer = $this->createClassObject();
         self::assertInstanceOf(Buyer::class, $buyer);
     }
 
-    public function testGetName()
+    public function testModifyBuyerName(): void
     {
         $expectedName = 'Test Name';
 
@@ -22,7 +22,7 @@ class BuyerTest extends TestCase
         self::assertEquals($expectedName, $buyer->getBuyerName());
     }
 
-    public function testGetAddress1()
+    public function testModifyBuyerAddress1(): void
     {
         $expectedAddress1 = 'Address 1';
 
@@ -31,7 +31,7 @@ class BuyerTest extends TestCase
         self::assertEquals($expectedAddress1, $buyer->getBuyerAddress1());
     }
 
-    public function testGetAddress2()
+    public function testModifyBuyerAddress2(): void
     {
         $expectedAddress2 = 'Address 2';
 
@@ -40,7 +40,7 @@ class BuyerTest extends TestCase
         self::assertEquals($expectedAddress2, $buyer->getBuyerAddress2());
     }
 
-    public function testGetCity()
+    public function testModifyBuyerCity(): void
     {
         $expectedCity = 'Miami';
 
@@ -49,7 +49,7 @@ class BuyerTest extends TestCase
         self::assertEquals($expectedCity, $buyer->getBuyerCity());
     }
 
-    public function testGetState()
+    public function testModifyBuyerState(): void
     {
         $expectedState = 'AB';
 
@@ -58,7 +58,7 @@ class BuyerTest extends TestCase
         self::assertEquals($expectedState, $buyer->getBuyerState());
     }
 
-    public function testGetZip()
+    public function testModifyBuyerZip(): void
     {
         $expectedZip = '12345';
 
@@ -67,7 +67,7 @@ class BuyerTest extends TestCase
         self::assertEquals($expectedZip, $buyer->getBuyerZip());
     }
 
-    public function testGetCountry()
+    public function testModifyBuyerCountry(): void
     {
         $expectedCountry = 'Canada';
 
@@ -76,7 +76,7 @@ class BuyerTest extends TestCase
         self::assertEquals($expectedCountry, $buyer->getBuyerCountry());
     }
 
-    public function testGetEmail()
+    public function testModifyBuyerEmail(): void
     {
         $expectedEmail = 'test@email.com';
 
@@ -85,7 +85,7 @@ class BuyerTest extends TestCase
         self::assertEquals($expectedEmail, $buyer->getBuyerEmail());
     }
 
-    public function testGetPhone()
+    public function testModifyBuyerPhone(): void
     {
         $expectedPhone = '123456789';
 
@@ -94,7 +94,7 @@ class BuyerTest extends TestCase
         self::assertEquals($expectedPhone, $buyer->getBuyerPhone());
     }
 
-    public function testGetNotify()
+    public function testModifyBuyerNotify(): void
     {
         $buyer = $this->createClassObject();
         $buyer->setBuyerNotify(true);
@@ -104,7 +104,7 @@ class BuyerTest extends TestCase
         self::assertFalse($buyer->getBuyerNotify());
     }
 
-    public function testToArray()
+    public function testToArray(): void
     {
         $buyer = $this->createClassObject();
         $this->setSetters($buyer);

@@ -99,7 +99,6 @@ class BuyerFieldsTest extends TestCase
         self::assertEquals($expected, $testedClass->getBuyerZip());
     }
 
-
     private function getTestedClass(): BuyerFields
     {
         return new BuyerFields();
