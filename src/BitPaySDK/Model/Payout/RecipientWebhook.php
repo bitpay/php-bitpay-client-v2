@@ -72,9 +72,4 @@ class RecipientWebhook
     {
         $this->shopperId = $shopperId;
     }
-
-
-
-
-
 }

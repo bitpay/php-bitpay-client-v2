@@ -1118,7 +1118,7 @@ class Invoice
      * "paidPartial": (string) if the consumer did not send enough funds when paying the invoice.
      * "paidOver": (string) if the consumer sent to much funds when paying the invoice.
      *
-     * @param string|null $exceptionStatus this parameter will indicate if the purchaser sent too much or not enough funds
+     * @param string|null $exceptionStatus parameter will indicate if the purchaser sent too much or not enough funds
      */
     public function setExceptionStatus(string|null $exceptionStatus): void
     {
