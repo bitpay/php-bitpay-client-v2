@@ -1005,7 +1005,7 @@ class Client
     {
         $settlementsClient = $this->getSettlementClient();
 
-        return $settlementsClient->getReconciliationReport( $settlementId, $settlementToken);
+        return $settlementsClient->getReconciliationReport($settlementId, $settlementToken);
     }
 
     /**
