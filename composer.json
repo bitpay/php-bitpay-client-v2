@@ -36,7 +36,8 @@
   },
   "autoload": {
     "psr-4": {
-      "BitPaySDK\\": "src/BitPaySDK"
+      "BitPaySDK\\": "src/BitPaySDK",
+      "BitPaySDKexamples\\": "examples"
     }
   },
   "autoload-dev": {

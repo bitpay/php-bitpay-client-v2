@@ -134,18 +134,19 @@ class SettlementClient
     /**
      * Gets a detailed reconciliation report of the activity within the settlement period.
      *
-     * @param Settlement $settlement Settlement to generate report for.
+     * @param string $settlementId Settlement ID
+     * @param string $settlementToken Settlement Token
      * @return Settlement
      * @throws BitPayApiException
      * @throws BitPayGenericException
      */
-    public function getReconciliationReport(Settlement $settlement): Settlement
+    public function getReconciliationReport(string $settlementId, string $settlementToken): Settlement
     {
         $params = [];
-        $params["token"] = $settlement->getToken();
+        $params["token"] = $settlementToken;
 
         $responseJson = $this->restCli->get(
-            "settlements/" . $settlement->getId() . "/reconciliationReport",
+            "settlements/" . $settlementId . "/reconciliationReport",
             $params
         );
 

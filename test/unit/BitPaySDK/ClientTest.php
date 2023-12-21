@@ -1679,11 +1679,8 @@ class ClientTest extends TestCase
 
     public function testGetSettlementReconciliationReport()
     {
-        $settlement = $this->createMock(Settlement::class);
         $exampleToken = self::MERCHANT_TOKEN;
         $exampleId = 'RPWTabW8urd3xWv2To989v';
-        $settlement->method('getToken')->willReturn($exampleToken);
-        $settlement->method('getId')->willReturn($exampleId);
         $params['token'] = $exampleToken;
         $exampleResponse = file_get_contents(
             __DIR__ . '/jsonResponse/getSettlementReconciliationReportResponse.json'
@@ -1698,7 +1695,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $result = $client->getSettlementReconciliationReport($settlement);
+        $result = $client->getSettlementReconciliationReport($exampleId, $exampleToken);
 
         self::assertEquals('RvNuCTMAkURKimwgvSVEMP', $result->getId());
         self::assertEquals('processing', $result->getStatus());
@@ -1708,11 +1705,8 @@ class ClientTest extends TestCase
 
     public function testGetSettlementReconciliationReportShouldCatchRestCliBitPayException()
     {
-        $settlement = $this->createMock(Settlement::class);
         $exampleToken = self::MERCHANT_TOKEN;
         $exampleId = 'RPWTabW8urd3xWv2To989v';
-        $settlement->method('getToken')->willReturn($exampleToken);
-        $settlement->method('getId')->willReturn($exampleId);
         $params['token'] = $exampleToken;
 
         $restCliMock = $this->getRestCliMock();
@@ -1725,16 +1719,13 @@ class ClientTest extends TestCase
         $client = $this->getClient($restCliMock);
 
         $this->expectException(BitPayApiException::class);
-        $client->getSettlementReconciliationReport($settlement);
+        $client->getSettlementReconciliationReport($exampleId, $exampleToken);
     }
 
     public function testGetSettlementReconciliationReportShouldCatchRestCliException()
     {
-        $settlement = $this->createMock(Settlement::class);
         $exampleToken = self::MERCHANT_TOKEN;
         $exampleId = 'RPWTabW8urd3xWv2To989v';
-        $settlement->method('getToken')->willReturn($exampleToken);
-        $settlement->method('getId')->willReturn($exampleId);
         $params['token'] = $exampleToken;
 
         $restCliMock = $this->getRestCliMock();
@@ -1747,16 +1738,13 @@ class ClientTest extends TestCase
         $client = $this->getClient($restCliMock);
 
         $this->expectException(BitPayApiException::class);
-        $client->getSettlementReconciliationReport($settlement);
+        $client->getSettlementReconciliationReport($exampleId, $exampleToken);
     }
 
     public function testGetSettlementReconciliationReportShouldCatchJsonMapperException()
     {
-        $settlement = $this->createMock(Settlement::class);
         $exampleToken = self::MERCHANT_TOKEN;
         $exampleId = 'RPWTabW8urd3xWv2To989v';
-        $settlement->method('getToken')->willReturn($exampleToken);
-        $settlement->method('getId')->willReturn($exampleId);
         $params['token'] = $exampleToken;
         $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
 
@@ -1770,7 +1758,7 @@ class ClientTest extends TestCase
         $client = $this->getClient($restCliMock);
 
         $this->expectException(BitPayGenericException::class);
-        $client->getSettlementReconciliationReport($settlement);
+        $client->getSettlementReconciliationReport($exampleId, $exampleToken);
     }
 
     /**

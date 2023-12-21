@@ -218,7 +218,11 @@ class Currency
     protected ?string $minimum = null;
     protected ?bool $sanctioned = null;
     protected ?int $decimals = null;
-    protected ?string $chain;
+    protected ?string $chain = null;
+    protected ?string $displayCode = null;
+    protected ?float $maxSupply = null;
+    protected ?int $trancheDecimals = null;
+    protected ?string $contractAddress = null;
 
     /**
      * Currency validation
@@ -452,6 +456,70 @@ class Currency
     }
 
     /**
+     * @return string|null
+     */
+    public function getDisplayCode(): ?string
+    {
+        return $this->displayCode;
+    }
+
+    /**
+     * @param string|null $displayCode
+     */
+    public function setDisplayCode(?string $displayCode): void
+    {
+        $this->displayCode = $displayCode;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getMaxSupply(): ?float
+    {
+        return $this->maxSupply;
+    }
+
+    /**
+     * @param float|null $maxSupply
+     */
+    public function setMaxSupply(?float $maxSupply): void
+    {
+        $this->maxSupply = $maxSupply;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getTrancheDecimals(): ?int
+    {
+        return $this->trancheDecimals;
+    }
+
+    /**
+     * @param int|null $trancheDecimals
+     */
+    public function setTrancheDecimals(?int $trancheDecimals): void
+    {
+        $this->trancheDecimals = $trancheDecimals;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getContractAddress(): ?string
+    {
+        return $this->contractAddress;
+    }
+
+    /**
+     * @param string|null $contractAddress
+     */
+    public function setContractAddress(?string $contractAddress): void
+    {
+        $this->contractAddress = $contractAddress;
+    }
+
+    /**
      * Gets currency data as array
      *
      * @return array currency data as array
@@ -469,7 +537,11 @@ class Currency
             'minimum'           => $this->getMinimum(),
             'sanctioned'        => $this->getSanctioned(),
             'decimals'          => $this->getDecimals(),
-            'chain'             => $this->getChain()
+            'chain'             => $this->getChain(),
+            'displayCode'       => $this->getDisplayCode(),
+            'maxSupply'         => $this->getMaxSupply(),
+            'trancheDecimals'   => $this->getTrancheDecimals(),
+            'contractAddress'   => $this->getContractAddress(),
         ];
 
         foreach ($elements as $key => $value) {
