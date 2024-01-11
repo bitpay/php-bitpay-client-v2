@@ -6,6 +6,7 @@ namespace BitPaySDKexamples\Merchant;
 
 use BitPaySDK\Model\Bill\Bill;
 use BitPaySDK\Model\Bill\Item;
+use BitPaySDK\Model\Facade;
 use BitPaySDKexamples\ClientProvider;
 
 final class BillRequests
@@ -25,7 +26,7 @@ final class BillRequests
         $bill->setCity('MyCity');
         // ...
 
-        $client->createBill($bill);
+        $client->createBill($bill, Facade::MERCHANT, false);
     }
 
     /**
@@ -36,9 +37,7 @@ final class BillRequests
     {
         $client = ClientProvider::create();
 
-        $bill = $client->getBill('someBillId');
-
-        $bills = $client->getBills('draft');
+        $bill = $client->getBill('someBillId', Facade::MERCHANT, false);
     }
 
     /**

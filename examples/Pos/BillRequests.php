@@ -46,6 +46,6 @@ final class BillRequests
     {
         $client = ClientProvider::createPos();
 
-        $client->deliverBill('someBillId', 'myBillToken');
+        $result = $client->deliverBill('someBillId', 'myBillToken');
     }
 }

@@ -220,7 +220,7 @@ class Currency
     protected ?int $decimals = null;
     protected ?string $chain = null;
     protected ?string $displayCode = null;
-    protected ?float $maxSupply = null;
+    protected ?string $maxSupply = null;
     protected ?int $trancheDecimals = null;
     protected ?string $contractAddress = null;
 
@@ -472,17 +472,17 @@ class Currency
     }
 
     /**
-     * @return float|null
+     * @return string|null
      */
-    public function getMaxSupply(): ?float
+    public function getMaxSupply(): ?string
     {
         return $this->maxSupply;
     }
 
     /**
-     * @param float|null $maxSupply
+     * @param string|null $maxSupply
      */
-    public function setMaxSupply(?float $maxSupply): void
+    public function setMaxSupply(?string $maxSupply): void
     {
         $this->maxSupply = $maxSupply;
     }

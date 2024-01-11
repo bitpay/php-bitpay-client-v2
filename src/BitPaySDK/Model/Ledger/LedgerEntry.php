@@ -27,7 +27,7 @@ class LedgerEntry
     protected ?string $timestamp = null;
     protected ?string $currency = null;
     protected ?string $txType = null;
-    protected ?string $scale = null;
+    protected ?int $scale = null;
     protected ?string $id = null;
     protected ?string $supportRequest = null;
     protected ?string $description = null;
@@ -185,9 +185,9 @@ class LedgerEntry
      *
      * Power of 10 used for conversion
      *
-     * @return string|null the scale
+     * @return int|null the scale
      */
-    public function getScale(): ?string
+    public function getScale(): ?int
     {
         return $this->scale;
     }
@@ -197,9 +197,9 @@ class LedgerEntry
      *
      * Power of 10 used for conversion
      *
-     * @param string $scale the scale
+     * @param int $scale the scale
      */
-    public function setScale(string $scale): void
+    public function setScale(int $scale): void
     {
         $this->scale = $scale;
     }

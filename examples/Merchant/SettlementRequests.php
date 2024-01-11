@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BitPaySDKexamples\Merchant;
 
-use BitPaySDK\Model\Settlement\Settlement;
 use BitPaySDKexamples\ClientProvider;
 
 final class SettlementRequests
@@ -28,8 +27,6 @@ final class SettlementRequests
     public function fetchReconciliationReport(): void
     {
         $client = ClientProvider::create();
-
-        $settlement = new Settlement();
 
         $client->getSettlementReconciliationReport('settlementId', 'settlementToken');
     }

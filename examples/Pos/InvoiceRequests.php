@@ -52,15 +52,4 @@ final class InvoiceRequests
 
         $invoiceById = $client->getInvoice('myInvoiceId');
     }
-
-    /**
-     * @throws \BitPaySDK\Exceptions\BitPayApiException
-     * @throws \BitPaySDK\Exceptions\BitPayGenericException
-     */
-    public function requestInvoiceWebhookToBeResent(): void
-    {
-        $client = ClientProvider::createPos();
-
-        $client->requestInvoiceNotification('someInvoiceId');
-    }
 }
