@@ -38,6 +38,8 @@ final class BillRequests
         $client = ClientProvider::create();
 
         $bill = $client->getBill('someBillId', Facade::MERCHANT, false);
+
+        $bills = $client->getBills('draft');
     }
 
     /**
@@ -51,7 +53,7 @@ final class BillRequests
         $item = new Item();
         $item->setPrice(12.34);
         $item->setQuantity(5);
-        $item->setDescription('someDecription');
+        $item->setDescription('someDescription');
 
         $bill = new Bill();
         $bill->setEmail('myNew@email.com');
