@@ -217,9 +217,12 @@ class Currency
     protected ?string $alts = null;
     protected ?string $minimum = null;
     protected ?bool $sanctioned = null;
-    protected ?string $decimals = null;
-    protected array $payoutFields = [];
-    protected array $settlementMinimum = [];
+    protected ?int $decimals = null;
+    protected ?string $chain = null;
+    protected ?string $displayCode = null;
+    protected ?string $maxSupply = null;
+    protected ?int $trancheDecimals = null;
+    protected ?string $contractAddress = null;
 
     /**
      * Currency validation
@@ -425,9 +428,9 @@ class Currency
     /**
      * Gets decimal precision
      *
-     * @return string|null decimals
+     * @return int|null decimals
      */
-    public function getDecimals(): ?string
+    public function getDecimals(): ?int
     {
         return $this->decimals;
     }
@@ -435,51 +438,85 @@ class Currency
     /**
      * Sets decimal precision
      *
-     * @param string $decimals decimals
+     * @param int|null $decimals decimals
      */
-    public function setDecimals(string $decimals): void
+    public function setDecimals(?int $decimals): void
     {
         $this->decimals = $decimals;
     }
 
-    /**
-     * Gets payout fields
-     *
-     * @return array the payout fields
-     */
-    public function getPayoutFields(): array
+    public function getChain(): ?string
     {
-        return $this->payoutFields;
+        return $this->chain;
+    }
+
+    public function setChain(?string $chain): void
+    {
+        $this->chain = $chain;
     }
 
     /**
-     * Sets payout fields
-     *
-     * @param array $payoutFields the payout fields
+     * @return string|null
      */
-    public function setPayoutFields(array $payoutFields): void
+    public function getDisplayCode(): ?string
     {
-        $this->payoutFields = $payoutFields;
+        return $this->displayCode;
     }
 
     /**
-     * Gets settlement minimum
-     *
-     * @return array the settlement minimum
+     * @param string|null $displayCode
      */
-    public function getSettlementMinimum(): array
+    public function setDisplayCode(?string $displayCode): void
     {
-        return $this->settlementMinimum;
+        $this->displayCode = $displayCode;
     }
 
     /**
-     * Sets settlement minimum
-     *
-     * @param array $settlementMinimum the settlement minimum
+     * @return string|null
      */
-    public function setSettlementMinimum(array $settlementMinimum): void
+    public function getMaxSupply(): ?string
     {
-        $this->settlementMinimum = $settlementMinimum;
+        return $this->maxSupply;
+    }
+
+    /**
+     * @param string|null $maxSupply
+     */
+    public function setMaxSupply(?string $maxSupply): void
+    {
+        $this->maxSupply = $maxSupply;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getTrancheDecimals(): ?int
+    {
+        return $this->trancheDecimals;
+    }
+
+    /**
+     * @param int|null $trancheDecimals
+     */
+    public function setTrancheDecimals(?int $trancheDecimals): void
+    {
+        $this->trancheDecimals = $trancheDecimals;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getContractAddress(): ?string
+    {
+        return $this->contractAddress;
+    }
+
+    /**
+     * @param string|null $contractAddress
+     */
+    public function setContractAddress(?string $contractAddress): void
+    {
+        $this->contractAddress = $contractAddress;
     }
 
     /**
@@ -500,8 +537,11 @@ class Currency
             'minimum'           => $this->getMinimum(),
             'sanctioned'        => $this->getSanctioned(),
             'decimals'          => $this->getDecimals(),
-            'payoutFields'      => $this->getPayoutFields(),
-            'settlementMinimum' => $this->getSettlementMinimum(),
+            'chain'             => $this->getChain(),
+            'displayCode'       => $this->getDisplayCode(),
+            'maxSupply'         => $this->getMaxSupply(),
+            'trancheDecimals'   => $this->getTrancheDecimals(),
+            'contractAddress'   => $this->getContractAddress(),
         ];
 
         foreach ($elements as $key => $value) {

@@ -995,16 +995,17 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/fetch-a-reconciliation-report Fetch a Reconciliation Report
      *
-     * @param Settlement $settlement Settlement to generate report for.
+     * @param string $settlementId Settlement ID
+     * @param string $settlementToken Settlement Token
      * @return Settlement
      * @throws BitPayApiException
      * @throws BitPayGenericException
      */
-    public function getSettlementReconciliationReport(Settlement $settlement): Settlement
+    public function getSettlementReconciliationReport(string $settlementId, string $settlementToken): Settlement
     {
         $settlementsClient = $this->getSettlementClient();
 
-        return $settlementsClient->getReconciliationReport($settlement);
+        return $settlementsClient->getReconciliationReport($settlementId, $settlementToken);
     }
 
     /**

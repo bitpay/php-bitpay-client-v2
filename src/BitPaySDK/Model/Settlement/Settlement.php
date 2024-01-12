@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Settlement;
 
-use BitPaySDK\Exceptions\SettlementException;
-
 /**
  * Settlement data object.
  *

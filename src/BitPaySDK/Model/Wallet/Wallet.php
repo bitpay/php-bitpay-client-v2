@@ -22,6 +22,9 @@ class Wallet
     protected Currencies $currencies;
     protected ?string $image = null;
     protected ?bool $payPro = null;
+    protected ?string $uniCode = null;
+    protected ?bool $offChainMode = null;
+    protected ?string $invoiceDefault = null;
 
     /**
      * Constructor, create a minimal request Wallet object.
@@ -172,6 +175,54 @@ class Wallet
     }
 
     /**
+     * @return string|null
+     */
+    public function getUniCode(): ?string
+    {
+        return $this->uniCode;
+    }
+
+    /**
+     * @param string|null $uniCode
+     */
+    public function setUniCode(?string $uniCode): void
+    {
+        $this->uniCode = $uniCode;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getOffChainMode(): ?bool
+    {
+        return $this->offChainMode;
+    }
+
+    /**
+     * @param bool|null $offChainMode
+     */
+    public function setOffChainMode(?bool $offChainMode): void
+    {
+        $this->offChainMode = $offChainMode;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInvoiceDefault(): ?string
+    {
+        return $this->invoiceDefault;
+    }
+
+    /**
+     * @param string|null $invoiceDefault
+     */
+    public function setInvoiceDefault(?string $invoiceDefault): void
+    {
+        $this->invoiceDefault = $invoiceDefault;
+    }
+
+    /**
      * Gets Wallet as array
      *
      * @return array Wallet as array
@@ -184,7 +235,10 @@ class Wallet
             'avatar' => $this->getAvatar(),
             'paypro' => $this->getPayPro(),
             'currencies' => $this->getCurrencies()->toArray(),
-            'image' => $this->getImage()
+            'image' => $this->getImage(),
+            'uniCode' => $this->getUniCode(),
+            'offChainMode' => $this->getOffChainMode(),
+            'invoiceDefault' => $this->getInvoiceDefault()
         ];
     }
 }

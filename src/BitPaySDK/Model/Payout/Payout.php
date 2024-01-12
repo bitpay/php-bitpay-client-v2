@@ -20,20 +20,20 @@ use BitPaySDK\Model\Currency;
  */
 class Payout
 {
-    protected string $token = '';
+    protected ?string $token = null;
     protected ?float $amount = null;
     protected ?string $currency = null;
     protected ?string $effectiveDate = null;
     protected ?string $ledgerCurrency = null;
-    protected string $reference = '';
-    protected string $notificationURL = '';
-    protected string $notificationEmail = '';
-    protected string $accountId = '';
-    protected string $email = '';
-    protected string $recipientId = '';
-    protected string $shopperId = '';
-    protected string $label = '';
-    protected string $message = '';
+    protected ?string $reference = null;
+    protected ?string $notificationURL = null;
+    protected ?string $notificationEmail = null;
+    protected ?string $accountId = null;
+    protected ?string $email = null;
+    protected ?string $recipientId = null;
+    protected ?string $shopperId = null;
+    protected ?string $label = null;
+    protected ?string $message = null;
     protected bool $ignoreEmails = false;
     protected ?string $groupId = null;
     protected ?int $code = null;
@@ -229,7 +229,7 @@ class Payout
      *
      * @return string
      */
-    public function getReference(): string
+    public function getReference(): ?string
     {
         return $this->reference;
     }
@@ -255,7 +255,7 @@ class Payout
      *
      * @return string
      */
-    public function getNotificationURL(): string
+    public function getNotificationURL(): ?string
     {
         return $this->notificationURL;
     }
@@ -279,7 +279,7 @@ class Payout
      *
      * @return string
      */
-    public function getNotificationEmail(): string
+    public function getNotificationEmail(): ?string
     {
         return $this->notificationEmail;
     }
@@ -302,7 +302,7 @@ class Payout
      *
      * @return string
      */
-    public function getAccountId(): string
+    public function getAccountId(): ?string
     {
         return $this->accountId;
     }
@@ -327,7 +327,7 @@ class Payout
      *
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -351,7 +351,7 @@ class Payout
      *
      * @return string
      */
-    public function getRecipientId(): string
+    public function getRecipientId(): ?string
     {
         return $this->recipientId;
     }
@@ -378,7 +378,7 @@ class Payout
      *
      * @return string
      */
-    public function getShopperId(): string
+    public function getShopperId(): ?string
     {
         return $this->shopperId;
     }
@@ -408,7 +408,7 @@ class Payout
      *
      * @return string
      */
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -433,7 +433,7 @@ class Payout
      *
      * @return string
      */
-    public function getMessage(): string
+    public function getMessage(): ?string
     {
         return $this->message;
     }

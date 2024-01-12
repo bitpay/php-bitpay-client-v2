@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace BitPaySDK\Model\Payout;
 
-use BitPaySDK\Exceptions\PayoutRecipientException;
+use BitPaySDK\Exceptions\BitPayExceptionProvider;
+use BitPaySDK\Exceptions\BitPayValidationException;
 
 /**
  * @package BitPaySDK\Model\Payout
@@ -24,8 +25,8 @@ use BitPaySDK\Exceptions\PayoutRecipientException;
 class PayoutRecipients
 {
     protected array $recipients = [];
-    protected string $guid = '';
-    protected string $token = '';
+    protected ?string $guid = null;
+    protected ?string $token = null;
 
     /**
      * Constructor, create an recipient-full request PayoutBatch object.
@@ -43,9 +44,9 @@ class PayoutRecipients
     /**
      * Gets guid.
      *
-     * @return string
+     * @return string|null
      */
-    public function getGuid(): string
+    public function getGuid(): ?string
     {
         return $this->guid;
     }
@@ -63,9 +64,9 @@ class PayoutRecipients
     /**
      * Gets token.
      *
-     * @return string
+     * @return string|null
      */
-    public function getToken(): string
+    public function getToken(): ?string
     {
         return $this->token;
     }
@@ -97,13 +98,13 @@ class PayoutRecipients
      * Sets array with all recipients.
      *
      * @param PayoutRecipient[] $recipients
-     * @throws PayoutRecipientException
+     * @throws BitPayValidationException
      */
     public function setRecipients(array $recipients): void
     {
         foreach ($recipients as $recipient) {
             if (!$recipient instanceof PayoutRecipient) {
-                throw new PayoutRecipientException('Array should contains only PayoutRecipient objects');
+                BitPayExceptionProvider::throwValidationException('Array should contains only PayoutRecipient objects');
             }
         }
 

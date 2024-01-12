@@ -33,6 +33,8 @@ class MinerFees
     protected MinerFeesItem $ltc;
     protected MinerFeesItem $dai;
     protected MinerFeesItem $wbtc;
+    protected MinerFeesItem $matic;
+    protected MinerFeesItem $usdcM;
 
     /**
      * MinerFees constructor.
@@ -51,6 +53,8 @@ class MinerFees
         $this->ltc = new MinerFeesItem();
         $this->dai = new MinerFeesItem();
         $this->wbtc = new MinerFeesItem();
+        $this->matic = new MinerFeesItem();
+        $this->usdcM = new MinerFeesItem();
     }
 
     /**
@@ -294,6 +298,48 @@ class MinerFees
     }
 
     /**
+     * Gets MATIC.
+     *
+     * @return MinerFeesItem
+     */
+    public function getMATIC(): MinerFeesItem
+    {
+        return $this->matic;
+    }
+
+    /**
+     * Sets MATIC.
+     *
+     * @param MinerFeesItem $matic
+     * @return void
+     */
+    public function setMATIC(MinerFeesItem $matic): void
+    {
+        $this->matic = $matic;
+    }
+
+    /**
+     * Gets USDC_m.
+     *
+     * @return MinerFeesItem
+     */
+    public function getUsdcM(): MinerFeesItem
+    {
+        return $this->usdcM;
+    }
+
+    /**
+     * Sets USDC_m.
+     *
+     * @param MinerFeesItem $usdcM
+     * @return void
+     */
+    public function setUsdcM(MinerFeesItem $usdcM): void
+    {
+        $this->usdcM = $usdcM;
+    }
+
+    /**
      * Return array with details for currencies.
      *
      * @return array
@@ -313,6 +359,8 @@ class MinerFees
             'ltc'  => $this->getLTC()->toArray(),
             'dai'  => $this->getDAI()->toArray(),
             'wbtc'  => $this->getWBTC()->toArray(),
+            'matic' => $this->getMATIC()->toArray(),
+            'usdc_m' => $this->getUsdcM()->toArray()
         ];
 
         foreach ($elements as $key => $value) {

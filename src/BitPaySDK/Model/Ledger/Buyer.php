@@ -16,16 +16,16 @@ namespace BitPaySDK\Model\Ledger;
  */
 class Buyer
 {
-    protected ?string $name = null;
-    protected ?string $address1 = null;
-    protected ?string $address2 = null;
-    protected ?string $city = null;
-    protected ?string $state = null;
-    protected ?string $zip = null;
-    protected ?string $country = null;
-    protected ?string $phone = null;
-    protected ?bool $notify = null;
-    protected ?string $email = null;
+    protected ?string $buyerName = null;
+    protected ?string $buyerAddress1 = null;
+    protected ?string $buyerAddress2 = null;
+    protected ?string $buyerCity = null;
+    protected ?string $buyerState = null;
+    protected ?string $buyerZip = null;
+    protected ?string $buyerCountry = null;
+    protected ?string $buyerPhone = null;
+    protected ?bool $buyerNotify = null;
+    protected ?string $buyerEmail = null;
 
     public function __construct()
     {
@@ -36,9 +36,9 @@ class Buyer
      *
      * @return string|null the name
      */
-    public function getName(): ?string
+    public function getBuyerName(): ?string
     {
-        return $this->name;
+        return $this->buyerName;
     }
 
     /**
@@ -46,9 +46,9 @@ class Buyer
      *
      * @param string $name the name
      */
-    public function setName(string $name): void
+    public function setBuyerName(string $name): void
     {
-        $this->name = $name;
+        $this->buyerName = $name;
     }
 
     /**
@@ -56,9 +56,9 @@ class Buyer
      *
      * @return string|null the address1
      */
-    public function getAddress1(): ?string
+    public function getBuyerAddress1(): ?string
     {
-        return $this->address1;
+        return $this->buyerAddress1;
     }
 
     /**
@@ -66,9 +66,9 @@ class Buyer
      *
      * @param string $address1 the address1
      */
-    public function setAddress1(string $address1): void
+    public function setBuyerAddress1(string $address1): void
     {
-        $this->address1 = $address1;
+        $this->buyerAddress1 = $address1;
     }
 
     /**
@@ -76,9 +76,9 @@ class Buyer
      *
      * @return string|null the address2
      */
-    public function getAddress2(): ?string
+    public function getBuyerAddress2(): ?string
     {
-        return $this->address2;
+        return $this->buyerAddress2;
     }
 
     /**
@@ -86,9 +86,9 @@ class Buyer
      *
      * @param string $address2 the address2
      */
-    public function setAddress2(string $address2): void
+    public function setBuyerAddress2(string $address2): void
     {
-        $this->address2 = $address2;
+        $this->buyerAddress2 = $address2;
     }
 
     /**
@@ -96,9 +96,9 @@ class Buyer
      *
      * @return string|null the city
      */
-    public function getCity(): ?string
+    public function getBuyerCity(): ?string
     {
-        return $this->city;
+        return $this->buyerCity;
     }
 
     /**
@@ -106,9 +106,9 @@ class Buyer
      *
      * @param string $city the city
      */
-    public function setCity(string $city): void
+    public function setBuyerCity(string $city): void
     {
-        $this->city = $city;
+        $this->buyerCity = $city;
     }
 
     /**
@@ -116,9 +116,9 @@ class Buyer
      *
      * @return string|null the state
      */
-    public function getState(): ?string
+    public function getBuyerState(): ?string
     {
-        return $this->state;
+        return $this->buyerState;
     }
 
     /**
@@ -126,9 +126,9 @@ class Buyer
      *
      * @param string $state the state
      */
-    public function setState(string $state): void
+    public function setBuyerState(string $state): void
     {
-        $this->state = $state;
+        $this->buyerState = $state;
     }
 
     /**
@@ -136,9 +136,9 @@ class Buyer
      *
      * @return string|null the zip
      */
-    public function getZip(): ?string
+    public function getBuyerZip(): ?string
     {
-        return $this->zip;
+        return $this->buyerZip;
     }
 
     /**
@@ -146,9 +146,9 @@ class Buyer
      *
      * @param string $zip the zip
      */
-    public function setZip(string $zip): void
+    public function setBuyerZip(string $zip): void
     {
-        $this->zip = $zip;
+        $this->buyerZip = $zip;
     }
 
     /**
@@ -156,9 +156,9 @@ class Buyer
      *
      * @return string|null the country
      */
-    public function getCountry(): ?string
+    public function getBuyerCountry(): ?string
     {
-        return $this->country;
+        return $this->buyerCountry;
     }
 
     /**
@@ -166,9 +166,9 @@ class Buyer
      *
      * @param string $country the country
      */
-    public function setCountry(string $country): void
+    public function setBuyerCountry(string $country): void
     {
-        $this->country = $country;
+        $this->buyerCountry = $country;
     }
 
     /**
@@ -176,9 +176,9 @@ class Buyer
      *
      * @return string|null the email
      */
-    public function getEmail(): ?string
+    public function getBuyerEmail(): ?string
     {
-        return $this->email;
+        return $this->buyerEmail;
     }
 
     /**
@@ -186,9 +186,9 @@ class Buyer
      *
      * @param string $email the email
      */
-    public function setEmail(string $email): void
+    public function setBuyerEmail(string $email): void
     {
-        $this->email = $email;
+        $this->buyerEmail = $email;
     }
 
     /**
@@ -196,9 +196,9 @@ class Buyer
      *
      * @return string|null the phone
      */
-    public function getPhone(): ?string
+    public function getBuyerPhone(): ?string
     {
-        return $this->phone;
+        return $this->buyerPhone;
     }
 
     /**
@@ -206,9 +206,9 @@ class Buyer
      *
      * @param string $phone the phone
      */
-    public function setPhone(string $phone): void
+    public function setBuyerPhone(string $phone): void
     {
-        $this->phone = $phone;
+        $this->buyerPhone = $phone;
     }
 
     /**
@@ -216,9 +216,9 @@ class Buyer
      *
      * @return bool|null notify
      */
-    public function getNotify(): ?bool
+    public function getBuyerNotify(): ?bool
     {
-        return $this->notify;
+        return $this->buyerNotify;
     }
 
     /**
@@ -226,9 +226,9 @@ class Buyer
      *
      * @param bool $notify notify
      */
-    public function setNotify(bool $notify): void
+    public function setBuyerNotify(bool $notify): void
     {
-        $this->notify = $notify;
+        $this->buyerNotify = $notify;
     }
 
     /**
@@ -239,16 +239,16 @@ class Buyer
     public function toArray(): array
     {
         $elements = [
-            'name'     => $this->getName(),
-            'address1' => $this->getAddress1(),
-            'address2' => $this->getAddress2(),
-            'city'     => $this->getCity(),
-            'state'    => $this->getState(),
-            'zip'      => $this->getZip(),
-            'country'  => $this->getCountry(),
-            'phone'    => $this->getPhone(),
-            'notify'   => $this->getNotify(),
-            'email'    => $this->getEmail(),
+            'buyerName'     => $this->getBuyerName(),
+            'buyerAddress1' => $this->getBuyerAddress1(),
+            'buyerAddress2' => $this->getBuyerAddress2(),
+            'buyerCity'     => $this->getBuyerCity(),
+            'buyerState'    => $this->getBuyerState(),
+            'buyerZip'      => $this->getBuyerZip(),
+            'buyerCountry'  => $this->getBuyerCountry(),
+            'buyerPhone'    => $this->getBuyerPhone(),
+            'buyerNotify'   => $this->getBuyerNotify(),
+            'buyerEmail'    => $this->getBuyerEmail(),
         ];
 
         foreach ($elements as $key => $value) {

@@ -48,8 +48,6 @@ class CurrencyTest extends TestCase
         self::assertArrayHasKey('minimum', $currencyArray);
         self::assertArrayHasKey('sanctioned', $currencyArray);
         self::assertArrayHasKey('decimals', $currencyArray);
-        self::assertArrayHasKey('payoutFields', $currencyArray);
-        self::assertArrayHasKey('settlementMinimum', $currencyArray);
         self::assertEquals('BTC', $currencyArray['code']);
         self::assertEquals('Symbol', $currencyArray['symbol']);
         self::assertEquals(1, $currencyArray['precision']);
@@ -59,9 +57,8 @@ class CurrencyTest extends TestCase
         self::assertEquals('alts', $currencyArray['alts']);
         self::assertEquals('minimum', $currencyArray['minimum']);
         self::assertEquals(true, $currencyArray['sanctioned']);
-        self::assertEquals('decimals', $currencyArray['decimals']);
-        self::assertEquals(['test'], $currencyArray['payoutFields']);
-        self::assertEquals(['test'], $currencyArray['settlementMinimum']);
+        self::assertEquals(2, $currencyArray['decimals']);
+        self::assertEquals('chain', $currencyArray['chain']);
     }
 
     public function testGetCode()
@@ -130,22 +127,18 @@ class CurrencyTest extends TestCase
     public function testGetDecimals()
     {
         $currency = $this->createClassObject();
-        $currency->setDecimals('testDecimals');
-        self::assertEquals('testDecimals', $currency->getDecimals());
+        $expected = 2;
+        $currency->setDecimals($expected);
+        self::assertEquals($expected, $currency->getDecimals());
     }
 
-    public function testGetPayoutFields()
+    public function testModifyChain(): void
     {
-        $currency = $this->createClassObject();
-        $currency->setPayoutFields(['test']);
-        self::assertEquals(['test'], $currency->getPayoutFields());
-    }
+        $testedClass = $this->createClassObject();
+        $expected = 'someValue';
+        $testedClass->setChain($expected);
 
-    public function testGetSettlementMinimum()
-    {
-        $currency = $this->createClassObject();
-        $currency->setSettlementMinimum(['test']);
-        self::assertEquals(['test'], $currency->getSettlementMinimum());
+        self::assertEquals($expected, $testedClass->getChain());
     }
 
     private function createClassObject(): Currency
@@ -164,8 +157,7 @@ class CurrencyTest extends TestCase
         $currency->setAlts('alts');
         $currency->setMinimum('minimum');
         $currency->setSanctioned(true);
-        $currency->setDecimals('decimals');
-        $currency->setPayoutFields(['test']);
-        $currency->setSettlementMinimum(['test']);
+        $currency->setDecimals(2);
+        $currency->setChain('chain');
     }
 }

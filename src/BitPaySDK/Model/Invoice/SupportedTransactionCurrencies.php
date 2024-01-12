@@ -29,6 +29,16 @@ class SupportedTransactionCurrencies
     protected SupportedTransactionCurrency $doge;
     protected SupportedTransactionCurrency $ltc;
     protected SupportedTransactionCurrency $wbtc;
+    protected SupportedTransactionCurrency $dai;
+    protected SupportedTransactionCurrency $euroc;
+    protected SupportedTransactionCurrency $matic;
+    protected SupportedTransactionCurrency $maticE;
+    protected SupportedTransactionCurrency $ethM;
+    protected SupportedTransactionCurrency $usdcM;
+    protected SupportedTransactionCurrency $busdM;
+    protected SupportedTransactionCurrency $daiM;
+    protected SupportedTransactionCurrency $wbtcM;
+    protected SupportedTransactionCurrency $shibM;
 
     /**
      * SupportedTransactionCurrencies constructor.
@@ -46,6 +56,16 @@ class SupportedTransactionCurrencies
         $this->doge = new SupportedTransactionCurrency();
         $this->ltc = new SupportedTransactionCurrency();
         $this->wbtc = new SupportedTransactionCurrency();
+        $this->dai = new SupportedTransactionCurrency();
+        $this->euroc = new SupportedTransactionCurrency();
+        $this->matic = new SupportedTransactionCurrency();
+        $this->maticE = new SupportedTransactionCurrency();
+        $this->ethM = new SupportedTransactionCurrency();
+        $this->usdcM = new SupportedTransactionCurrency();
+        $this->busdM = new SupportedTransactionCurrency();
+        $this->daiM = new SupportedTransactionCurrency();
+        $this->wbtcM = new SupportedTransactionCurrency();
+        $this->shibM = new SupportedTransactionCurrency();
     }
 
     /**
@@ -269,6 +289,216 @@ class SupportedTransactionCurrencies
     }
 
     /**
+     * Gets DAI.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getDAI(): SupportedTransactionCurrency
+    {
+        return $this->dai;
+    }
+
+    /**
+     * Sets DAI.
+     *
+     * @param SupportedTransactionCurrency $dai
+     * @return void
+     */
+    public function setDAI(SupportedTransactionCurrency $dai): void
+    {
+        $this->dai = $dai;
+    }
+
+    /**
+     * Gets EUROC.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getEUROC(): SupportedTransactionCurrency
+    {
+        return $this->euroc;
+    }
+
+    /**
+     * Sets EUROC.
+     *
+     * @param SupportedTransactionCurrency $euroc
+     * @return void
+     */
+    public function setEUROC(SupportedTransactionCurrency $euroc): void
+    {
+        $this->euroc = $euroc;
+    }
+
+    /**
+     * Gets MATIC.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getMATIC(): SupportedTransactionCurrency
+    {
+        return $this->matic;
+    }
+
+    /**
+     * Sets MATIC.
+     *
+     * @param SupportedTransactionCurrency $matic
+     * @return void
+     */
+    public function setMATIC(SupportedTransactionCurrency $matic): void
+    {
+        $this->matic = $matic;
+    }
+
+    /**
+     * Gets MATIC_e
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getMaticE(): SupportedTransactionCurrency
+    {
+        return $this->maticE;
+    }
+
+    /**
+     * Sets MATIC_e.
+     *
+     * @param SupportedTransactionCurrency $maticE
+     * @return void
+     */
+    public function setMaticE(SupportedTransactionCurrency $maticE): void
+    {
+        $this->maticE = $maticE;
+    }
+
+    /**
+     * Gets ETC_m.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getEthM(): SupportedTransactionCurrency
+    {
+        return $this->ethM;
+    }
+
+    /**
+     * Sets ETC_m.
+     *
+     * @param SupportedTransactionCurrency $ethM
+     * @return void
+     */
+    public function setEthM(SupportedTransactionCurrency $ethM): void
+    {
+        $this->ethM = $ethM;
+    }
+
+    /**
+     * Gets USDC_m.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getUsdcM(): SupportedTransactionCurrency
+    {
+        return $this->usdcM;
+    }
+
+    /**
+     * Sets USDC_m.
+     *
+     * @param SupportedTransactionCurrency $usdcM
+     * @return void
+     */
+    public function setUsdcM(SupportedTransactionCurrency $usdcM): void
+    {
+        $this->usdcM = $usdcM;
+    }
+
+    /**
+     * Gets BUSD_m.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getBusdM(): SupportedTransactionCurrency
+    {
+        return $this->busdM;
+    }
+
+    /**
+     * Sets BUSD_m.
+     *
+     * @param SupportedTransactionCurrency $busdM
+     * @return void
+     */
+    public function setBusdM(SupportedTransactionCurrency $busdM): void
+    {
+        $this->busdM = $busdM;
+    }
+
+    /**
+     * Gets DAI_m.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getDaiM(): SupportedTransactionCurrency
+    {
+        return $this->daiM;
+    }
+
+    /**
+     * Sets DAI_m.
+     *
+     * @param SupportedTransactionCurrency $daiM
+     * @return void
+     */
+    public function setDaiM(SupportedTransactionCurrency $daiM): void
+    {
+        $this->daiM = $daiM;
+    }
+
+    /**
+     * Gets WBTC_m.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getWbtcM(): SupportedTransactionCurrency
+    {
+        return $this->wbtcM;
+    }
+
+    /**
+     * Sets WBTC_m.
+     *
+     * @param SupportedTransactionCurrency $wbtcM
+     * @return void
+     */
+    public function setWbtcM(SupportedTransactionCurrency $wbtcM): void
+    {
+        $this->wbtcM = $wbtcM;
+    }
+
+    /**
+     * Gets SHIB_m.
+     *
+     * @return SupportedTransactionCurrency
+     */
+    public function getShibM(): SupportedTransactionCurrency
+    {
+        return $this->shibM;
+    }
+
+    /**
+     * Sets SHIB_m.
+     *
+     * @param SupportedTransactionCurrency $shibM
+     * @return void
+     */
+    public function setShibM(SupportedTransactionCurrency $shibM): void
+    {
+        $this->shibM = $shibM;
+    }
+
+    /**
      * Return array with details for currencies.
      *
      * @return array
@@ -287,6 +517,16 @@ class SupportedTransactionCurrencies
             'doge' => $this->getDOGE()->toArray(),
             'ltc' => $this->getLTC()->toArray(),
             'wbtc' => $this->getWBTC()->toArray(),
+            'dai' => $this->getDAI()->toArray(),
+            'euroc' => $this->getEUROC()->toArray(),
+            'matic' => $this->getMATIC()->toArray(),
+            'maticE' => $this->getMaticE()->toArray(),
+            'ethM' => $this->getEthM()->toArray(),
+            'usdcM' => $this->getUsdcM()->toArray(),
+            'busdM' => $this->getBusdM()->toArray(),
+            'daiM' => $this->getDaiM()->toArray(),
+            'wbtcM' => $this->getWbtcM()->toArray(),
+            'shibM' => $this->getShibM()->toArray(),
         ];
 
         foreach ($elements as $key => $value) {

@@ -23,7 +23,7 @@ interface InvoiceStatus
      * it will still reflect a status of new to the merchant. From a merchant system perspective,
      * an invoice is either paid or not paid, partial payments are automatically refunded by BitPay to the consumer.
      */
-    public const NEW = "new";
+    public const NEW = 'new';
 
     /**
      * As soon as payment is received it is evaluated against the invoice requested amount.
@@ -31,7 +31,7 @@ interface InvoiceStatus
      * To detect whether the invoice has been overpaid consult the invoice exception status (exceptionStatus parameter).
      * The overpaid amount on an invoice is automatically refunded by BitPay to the consumer.
      */
-    public const PAID = "paid";
+    public const PAID = 'paid';
 
     /**
      * This status can be used by merchants in order to fulfill orders placed by the consumer.
@@ -40,7 +40,7 @@ interface InvoiceStatus
      * This can be configured during invoice creation using the "transactionSpeed" parameter
      * (section Create an invoice), or at account level via a dashboard setting.
      */
-    public const CONFIRMED = "confirmed";
+    public const CONFIRMED = 'confirmed';
 
     /**
      * When an invoice has the status complete, it means that BitPay has credited the merchant account,
@@ -48,12 +48,12 @@ interface InvoiceStatus
      * 6 confirmation blocks on the bitcoin network are required for an invoice to be complete,
      * this takes on average 1 hour.
      */
-    public const COMPLETE = "complete";
+    public const COMPLETE = 'complete';
 
     /**
      * An invoice reaches the expired status if no payment was received and the 15 minute payment window has elapsed.
      */
-    public const EXPIRED = "expired";
+    public const EXPIRED = 'expired';
 
     /**
      * An invoice is considered invalid when it was paid,
@@ -62,5 +62,13 @@ interface InvoiceStatus
      * If the transaction confirms after 1 hour, BitPay will update the invoice state from "invalid" to "complete"
      * (6 confirmations for transactions on the bitcoin network for instance).
      */
-    public const INVALID = "invalid";
+    public const INVALID = 'invalid';
+
+    /**
+     * An invoice in the declined status is no longer eligible to be successfully completed,
+     * and the customer will be automatically contacted regarding a refund if needed.
+     * Reason for this status include cancelling an invoice before completion
+     * and the invoice remaining unconfirmed after a set time period - typically 24 hours.
+     */
+    public const DECLINED = 'declined';
 }

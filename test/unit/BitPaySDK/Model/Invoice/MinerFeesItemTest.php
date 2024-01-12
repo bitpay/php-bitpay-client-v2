@@ -15,7 +15,7 @@ class MinerFeesItemTest extends TestCase
 
     public function testGetSatoshisPerByte()
     {
-        $expectedSatoshiPerByte = 1.1;
+        $expectedSatoshiPerByte = 1;
 
         $minerFeesItem = $this->createClassObject();
         $minerFeesItem->setSatoshisPerByte($expectedSatoshiPerByte);
@@ -24,7 +24,7 @@ class MinerFeesItemTest extends TestCase
 
     public function testGetTotalFee()
     {
-        $expectedTotalFee = 1.1;
+        $expectedTotalFee = 1;
 
         $minerFeesItem = $this->createClassObject();
         $minerFeesItem->setTotalFee($expectedTotalFee);
@@ -43,8 +43,8 @@ class MinerFeesItemTest extends TestCase
     public function testToArray()
     {
         $minerFeesItem = $this->createClassObject();
-        $minerFeesItem->setSatoshisPerByte(1.1);
-        $minerFeesItem->setTotalFee(1.1);
+        $minerFeesItem->setSatoshisPerByte(1);
+        $minerFeesItem->setTotalFee(1);
         $minerFeesItem->setFiatAmount(null);
 
         $minerFeesItemArray = $minerFeesItem->toArray();
@@ -56,8 +56,8 @@ class MinerFeesItemTest extends TestCase
         self::assertArrayHasKey('totalFee', $minerFeesItemArray);
         self::assertArrayNotHasKey('fiatAmount', $minerFeesItemArray);
 
-        self::assertEquals(1.1, $minerFeesItemArray['satoshisPerByte']);
-        self::assertEquals(1.1, $minerFeesItemArray['totalFee']);
+        self::assertEquals(1, $minerFeesItemArray['satoshisPerByte']);
+        self::assertEquals(1, $minerFeesItemArray['totalFee']);
     }
 
     private function createClassObject(): MinerFeesItem

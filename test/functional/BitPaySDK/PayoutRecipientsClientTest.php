@@ -14,9 +14,6 @@ use BitPaySDK\Model\Payout\PayoutRecipients;
 
 class PayoutRecipientsClientTest extends AbstractClientTestCase
 {
-    /**
-     * @throws PayoutRecipientCreationException
-     */
     public function testSubmitPayoutRecipients(): void
     {
         $recipientsList = [

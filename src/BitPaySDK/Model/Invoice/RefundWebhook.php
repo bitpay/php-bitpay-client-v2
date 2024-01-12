@@ -18,128 +18,124 @@ namespace BitPaySDK\Model\Invoice;
  */
 class RefundWebhook
 {
-    protected string $id;
-    protected string $invoice;
-    protected string $supportRequest;
-    protected string $status;
-    protected float $amount;
-    protected string $currency;
-    protected string $lastRefundNotification;
-    protected float $refundFee;
-    protected bool $immediate;
-    protected bool $buyerPaysRefundFee;
-    protected string $requestDate;
+    protected ?string $id = null;
+    protected ?string $invoice = null;
+    protected ?string $supportRequest = null;
+    protected ?string $status = null;
+    protected ?float $amount = null;
+    protected ?string $currency = null;
+    protected ?string $lastRefundNotification = null;
+    protected ?float $refundFee = null;
+    protected ?bool $immediate = null;
+    protected ?bool $buyerPaysRefundFee = null;
+    protected ?string $requestDate = null;
 
-    public function __construct()
-    {
-    }
-
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(string $id): void
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }
 
-    public function getInvoice(): string
+    public function getInvoice(): ?string
     {
         return $this->invoice;
     }
 
-    public function setInvoice(string $invoice): void
+    public function setInvoice(?string $invoice): void
     {
         $this->invoice = $invoice;
     }
 
-    public function getSupportRequest(): string
+    public function getSupportRequest(): ?string
     {
         return $this->supportRequest;
     }
 
-    public function setSupportRequest(string $supportRequest): void
+    public function setSupportRequest(?string $supportRequest): void
     {
         $this->supportRequest = $supportRequest;
     }
 
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(?string $status): void
     {
         $this->status = $status;
     }
 
-    public function getAmount(): float
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
 
-    public function setAmount(float $amount): void
+    public function setAmount(?float $amount): void
     {
         $this->amount = $amount;
     }
 
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
-    public function setCurrency(string $currency): void
+    public function setCurrency(?string $currency): void
     {
         $this->currency = $currency;
     }
 
-    public function getLastRefundNotification(): string
+    public function getLastRefundNotification(): ?string
     {
         return $this->lastRefundNotification;
     }
 
-    public function setLastRefundNotification(string $lastRefundNotification): void
+    public function setLastRefundNotification(?string $lastRefundNotification): void
     {
         $this->lastRefundNotification = $lastRefundNotification;
     }
 
-    public function getRefundFee(): float
+    public function getRefundFee(): ?float
     {
         return $this->refundFee;
     }
 
-    public function setRefundFee(float $refundFee): void
+    public function setRefundFee(?float $refundFee): void
     {
         $this->refundFee = $refundFee;
     }
 
-    public function getImmediate(): bool
+    public function getImmediate(): ?bool
     {
         return $this->immediate;
     }
 
-    public function setImmediate(bool $immediate): void
+    public function setImmediate(?bool $immediate): void
     {
         $this->immediate = $immediate;
     }
 
-    public function getBuyerPaysRefundFee(): bool
+    public function getBuyerPaysRefundFee(): ?bool
     {
         return $this->buyerPaysRefundFee;
     }
 
-    public function setBuyerPaysRefundFee(bool $buyerPaysRefundFee): void
+    public function setBuyerPaysRefundFee(?bool $buyerPaysRefundFee): void
     {
         $this->buyerPaysRefundFee = $buyerPaysRefundFee;
     }
 
-    public function getRequestDate(): string
+    public function getRequestDate(): ?string
     {
         return $this->requestDate;
     }
 
-    public function setRequestDate(string $requestDate): void
+    public function setRequestDate(?string $requestDate): void
     {
         $this->requestDate = $requestDate;
     }

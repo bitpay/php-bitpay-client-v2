@@ -22,12 +22,12 @@ namespace BitPaySDK\Model\Ledger;
 class LedgerEntry
 {
     protected ?string $type = null;
-    protected ?string $amount = null;
-    protected ?string $code = null;
+    protected ?float $amount = null;
+    protected ?int $code = null;
     protected ?string $timestamp = null;
     protected ?string $currency = null;
     protected ?string $txType = null;
-    protected ?string $scale = null;
+    protected ?int $scale = null;
     protected ?string $id = null;
     protected ?string $supportRequest = null;
     protected ?string $description = null;
@@ -72,9 +72,9 @@ class LedgerEntry
      * Gets Ledger entry amount, relative to the scale.
      * The decimal amount can be obtained by dividing the amount field by the scale parameter.
      *
-     * @return string|null
+     * @return float|null
      */
-    public function getAmount(): ?string
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -83,9 +83,9 @@ class LedgerEntry
      * Sets Ledger entry amount, relative to the scale.
      * The decimal amount can be obtained by dividing the amount field by the scale parameter.
      *
-     * @param string $amount the amount
+     * @param float $amount the amount
      */
-    public function setAmount(string $amount): void
+    public function setAmount(float $amount): void
     {
         $this->amount = $amount;
     }
@@ -96,9 +96,9 @@ class LedgerEntry
      * Contains the Ledger entry code.
      * See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes
      *
-     * @return string|null the code
+     * @return int|null the code
      */
-    public function getCode(): ?string
+    public function getCode(): ?int
     {
         return $this->code;
     }
@@ -109,9 +109,9 @@ class LedgerEntry
      * Contains the Ledger entry code.
      * See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-codes
      *
-     * @param string $code the code
+     * @param int $code the code
      */
-    public function setCode(string $code): void
+    public function setCode(int $code): void
     {
         $this->code = $code;
     }
@@ -185,9 +185,9 @@ class LedgerEntry
      *
      * Power of 10 used for conversion
      *
-     * @return string|null the scale
+     * @return int|null the scale
      */
-    public function getScale(): ?string
+    public function getScale(): ?int
     {
         return $this->scale;
     }
@@ -197,9 +197,9 @@ class LedgerEntry
      *
      * Power of 10 used for conversion
      *
-     * @param string $scale the scale
+     * @param int $scale the scale
      */
-    public function setScale(string $scale): void
+    public function setScale(int $scale): void
     {
         $this->scale = $scale;
     }

@@ -39,7 +39,7 @@ class Invoice
     protected ?array $paymentSubtotals = null;
     protected ?array $paymentTotals = null;
     protected ?array $paymentCodes = null;
-    protected ?float $acceptanceWindow = null;
+    protected ?int $acceptanceWindow = null;
     protected ?Buyer $buyer = null;
     protected ?array $refundAddresses = null;
     protected ?string $closeURL = null;
@@ -60,10 +60,10 @@ class Invoice
     protected ?string $status = null;
     protected ?bool $lowFeeDetected = null;
     protected ?int $invoiceTime = null;
-    protected ?string $expirationTime = null;
-    protected ?string $currentTime = null;
+    protected ?int $expirationTime = null;
+    protected ?int $currentTime = null;
     protected ?array $transactions = null;
-    protected ?bool $exceptionStatus = null;
+    protected string|null $exceptionStatus = null;
     protected ?int $targetConfirmations = null;
     protected ?bool $refundAddressRequestPending = null;
     protected ?string $buyerProvidedEmail = null;
@@ -78,9 +78,9 @@ class Invoice
     protected bool $extendedNotifications = false;
     protected ?bool $isCancelled = null;
     protected ?string $transactionCurrency = null;
-    protected ?int $underpaidAmount = null;
-    protected ?int $overpaidAmount = null;
-    protected ?int $amountPaid = null;
+    protected ?float $underpaidAmount = null;
+    protected ?float $overpaidAmount = null;
+    protected ?float $amountPaid = null;
     protected ?string $displayAmountPaid = null;
     protected ?array $exchangeRates = null;
     protected ?bool $bitpayIdRequired = null;
@@ -778,9 +778,9 @@ class Invoice
      * If not set, invoice will default to the account acceptanceWindow.
      * If account acceptanceWindow is not set, invoice will default to 15 minutes (900,000 milliseconds).
      *
-     * @return float|null the acceptance window
+     * @return int|null the acceptance window
      */
-    public function getAcceptanceWindow(): ?float
+    public function getAcceptanceWindow(): ?int
     {
         return $this->acceptanceWindow;
     }
@@ -792,9 +792,9 @@ class Invoice
      * If not set, invoice will default to the account acceptanceWindow.
      * If account acceptanceWindow is not set, invoice will default to 15 minutes (900,000 milliseconds).
      *
-     * @param float $acceptanceWindow Number of milliseconds that a user has to pay an invoice before it expire
+     * @param int $acceptanceWindow Number of milliseconds that a user has to pay an invoice before it expire
      */
-    public function setAcceptanceWindow(float $acceptanceWindow): void
+    public function setAcceptanceWindow(int $acceptanceWindow): void
     {
         $this->acceptanceWindow = $acceptanceWindow;
     }
@@ -960,7 +960,7 @@ class Invoice
      * Instant Payment Notification (IPN) section.
      * </a>
      *
-     * @return string|null Invoice status
+     * @return string|null InvoiceStatus const value
      */
     public function getStatus(): ?string
     {
@@ -973,9 +973,10 @@ class Invoice
      * Detailed information about invoice status notifications can be found under the
      * <a href="https://bitpay.com/api/#notifications-webhooks-instant-payment-notifications-handling">
      * Instant Payment Notification (IPN) section.
+     * Use values from InvoiceStatus const.
      * </a>
      *
-     * @param string $status Invoice status
+     * @param string $status InvoiceStatus const value
      */
     public function setStatus(string $status): void
     {
@@ -1031,9 +1032,9 @@ class Invoice
     /**
      * Gets expirationTime - UNIX time when invoice is last available to be paid, in milliseconds
      *
-     * @return string|null the UNIX time
+     * @return int|null the UNIX time
      */
-    public function getExpirationTime(): ?string
+    public function getExpirationTime(): ?int
     {
         return $this->expirationTime;
     }
@@ -1041,9 +1042,9 @@ class Invoice
     /**
      * Sets expirationTime - UNIX time when invoice is last available to be paid, in milliseconds
      *
-     * @param string $expirationTime UNIX time when invoice is last available to be paid, in milliseconds
+     * @param int|null $expirationTime UNIX time when invoice is last available to be paid, in milliseconds
      */
-    public function setExpirationTime(string $expirationTime): void
+    public function setExpirationTime(?int $expirationTime): void
     {
         $this->expirationTime = $expirationTime;
     }
@@ -1051,9 +1052,9 @@ class Invoice
     /**
      * Gets currentTime - UNIX time of API call, in milliseconds
      *
-     * @return string|null UNIX time
+     * @return int|null UNIX time
      */
-    public function getCurrentTime(): ?string
+    public function getCurrentTime(): ?int
     {
         return $this->currentTime;
     }
@@ -1061,9 +1062,9 @@ class Invoice
     /**
      * Sets currentTime - UNIX time of API call, in milliseconds
      *
-     * @param string $currentTime UNIX time of API call, in milliseconds
+     * @param int|null $currentTime UNIX time of API call, in milliseconds
      */
-    public function setCurrentTime(string $currentTime): void
+    public function setCurrentTime(?int $currentTime): void
     {
         $this->currentTime = $currentTime;
     }
@@ -1097,13 +1098,13 @@ class Invoice
      *
      * Initially a boolean false, this parameter will indicate if the purchaser sent too much ("paidOver")
      * or not enough funds ("paidPartial") in the transaction to pay the BitPay invoice. Possible values are:
-     * false: default value (boolean) unless an exception is triggered.
+     * "false": default value unless an exception is triggered.
      * "paidPartial": (string) if the consumer did not send enough funds when paying the invoice.
      * "paidOver": (string) if the consumer sent to much funds when paying the invoice.
      *
-     * @return bool|null the exception status
+     * @return string|null the exception status
      */
-    public function getExceptionStatus(): ?bool
+    public function getExceptionStatus(): string|null
     {
         return $this->exceptionStatus;
     }
@@ -1113,13 +1114,13 @@ class Invoice
      *
      * Initially a boolean false, this parameter will indicate if the purchaser sent too much ("paidOver")
      * or not enough funds ("paidPartial") in the transaction to pay the BitPay invoice. Possible values are:
-     * false: default value (boolean) unless an exception is triggered.
+     * "false": default value (boolean) unless an exception is triggered.
      * "paidPartial": (string) if the consumer did not send enough funds when paying the invoice.
      * "paidOver": (string) if the consumer sent to much funds when paying the invoice.
      *
-     * @param boolean $exceptionStatus this parameter will indicate if the purchaser sent too much or not enough funds
+     * @param string|null $exceptionStatus parameter will indicate if the purchaser sent too much or not enough funds
      */
-    public function setExceptionStatus(bool $exceptionStatus): void
+    public function setExceptionStatus(string|null $exceptionStatus): void
     {
         $this->exceptionStatus = $exceptionStatus;
     }
@@ -1454,9 +1455,9 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @return int|null
+     * @return float|null
      */
-    public function getUnderpaidAmount(): ?int
+    public function getUnderpaidAmount(): ?float
     {
         return $this->underpaidAmount;
     }
@@ -1469,9 +1470,9 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @param int $underpaidAmount the underpaid amount
+     * @param float|null $underpaidAmount the underpaid amount
      */
-    public function setUnderpaidAmount(int $underpaidAmount): void
+    public function setUnderpaidAmount(?float $underpaidAmount): void
     {
         $this->underpaidAmount = $underpaidAmount;
     }
@@ -1484,9 +1485,9 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @return int|null
+     * @return float|null
      */
-    public function getOverpaidAmount(): ?int
+    public function getOverpaidAmount(): ?float
     {
         return $this->overpaidAmount;
     }
@@ -1499,9 +1500,9 @@ class Invoice
      * It equals to the absolute difference between amountPaid
      * and paymentTotals for the corresponding transactionCurrency used.
      *
-     * @param int $overpaidAmount the overpaid amount
+     * @param float|null $overpaidAmount the overpaid amount
      */
-    public function setOverpaidAmount(int $overpaidAmount): void
+    public function setOverpaidAmount(?float $overpaidAmount): void
     {
         $this->overpaidAmount = $overpaidAmount;
     }
@@ -1713,9 +1714,9 @@ class Invoice
      * The total amount paid to the invoice in terms of the invoice transactionCurrency indicated
      * in the smallest possible unit for the corresponding transactionCurrency (e.g satoshis for BTC and BCH)
      *
-     * @return int|null
+     * @return float|null
      */
-    public function getAmountPaid(): ?int
+    public function getAmountPaid(): ?float
     {
         return $this->amountPaid;
     }
@@ -1726,9 +1727,9 @@ class Invoice
      * The total amount paid to the invoice in terms of the invoice transactionCurrency indicated
      * in the smallest possible unit for the corresponding transactionCurrency (e.g satoshis for BTC and BCH)
      *
-     * @param int $amountPaid The total amount paid to the invoice
+     * @param float|null $amountPaid The total amount paid to the invoice
      */
-    public function setAmountPaid(int $amountPaid): void
+    public function setAmountPaid(?float $amountPaid): void
     {
         $this->amountPaid = $amountPaid;
     }

@@ -622,13 +622,13 @@ class ClientTest extends TestCase
         $client->deliverBill($exampleBillId, $exampleBillToken);
     }
 
-    public function testGetLedger()
+    public function testGetLedgerEntries()
     {
         $exampleCurrency = Currency::BTC;
         $exampleStartDate = '2021-5-10';
         $exampleEndDate = '2021-5-31';
         $restCliMock = $this->getRestCliMock();
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgerBalances.json');
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgerEntriesResponse.json');
 
         $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
         $params["currency"] = $exampleCurrency;
@@ -645,9 +645,9 @@ class ClientTest extends TestCase
         $result = $client->getLedgerEntries($exampleCurrency, $exampleStartDate, $exampleEndDate);
 
         self::assertIsArray($result);
-        self::assertEquals('EUR', $result[0]->getCurrency());
-        self::assertEquals('USD', $result[1]->getCurrency());
-        self::assertEquals('BTC', $result[2]->getCurrency());
+        self::assertCount(3, $result);
+        self::assertEquals(-8000000, $result[1]->getAmount());
+        self::assertEquals("John Doe", $result[1]->getBuyerFields()->getBuyerName());
         self::assertInstanceOf(LedgerEntry::class, $result[0]);
     }
 
@@ -706,7 +706,7 @@ class ClientTest extends TestCase
     {
         $restCliMock = $this->getRestCliMock();
         $params['token'] = 'kQLZ7C9YKPSnMCC4EJwrqRHXuQkLzL1W8DfZCh37DHb';
-        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgers.json');
+        $exampleResponse = file_get_contents(__DIR__ . '/jsonResponse/getLedgersResponse.json');
 
         $restCliMock
             ->expects(self::once())
@@ -720,7 +720,9 @@ class ClientTest extends TestCase
 
 
         self::assertIsArray($result);
-        self::assertInstanceOf(Ledger::class, $result[0]);
+        $ledger = $result[1];
+        self::assertInstanceOf(Ledger::class, $ledger);
+        self::assertEquals(2389.82, $ledger->getBalance());
     }
 
     public function testGetLedgersShouldCatchBitPayException()
@@ -1677,11 +1679,8 @@ class ClientTest extends TestCase
 
     public function testGetSettlementReconciliationReport()
     {
-        $settlement = $this->createMock(Settlement::class);
         $exampleToken = self::MERCHANT_TOKEN;
         $exampleId = 'RPWTabW8urd3xWv2To989v';
-        $settlement->method('getToken')->willReturn($exampleToken);
-        $settlement->method('getId')->willReturn($exampleId);
         $params['token'] = $exampleToken;
         $exampleResponse = file_get_contents(
             __DIR__ . '/jsonResponse/getSettlementReconciliationReportResponse.json'
@@ -1696,7 +1695,7 @@ class ClientTest extends TestCase
 
         $client = $this->getClient($restCliMock);
 
-        $result = $client->getSettlementReconciliationReport($settlement);
+        $result = $client->getSettlementReconciliationReport($exampleId, $exampleToken);
 
         self::assertEquals('RvNuCTMAkURKimwgvSVEMP', $result->getId());
         self::assertEquals('processing', $result->getStatus());
@@ -1706,11 +1705,8 @@ class ClientTest extends TestCase
 
     public function testGetSettlementReconciliationReportShouldCatchRestCliBitPayException()
     {
-        $settlement = $this->createMock(Settlement::class);
         $exampleToken = self::MERCHANT_TOKEN;
         $exampleId = 'RPWTabW8urd3xWv2To989v';
-        $settlement->method('getToken')->willReturn($exampleToken);
-        $settlement->method('getId')->willReturn($exampleId);
         $params['token'] = $exampleToken;
 
         $restCliMock = $this->getRestCliMock();
@@ -1723,16 +1719,13 @@ class ClientTest extends TestCase
         $client = $this->getClient($restCliMock);
 
         $this->expectException(BitPayApiException::class);
-        $client->getSettlementReconciliationReport($settlement);
+        $client->getSettlementReconciliationReport($exampleId, $exampleToken);
     }
 
     public function testGetSettlementReconciliationReportShouldCatchRestCliException()
     {
-        $settlement = $this->createMock(Settlement::class);
         $exampleToken = self::MERCHANT_TOKEN;
         $exampleId = 'RPWTabW8urd3xWv2To989v';
-        $settlement->method('getToken')->willReturn($exampleToken);
-        $settlement->method('getId')->willReturn($exampleId);
         $params['token'] = $exampleToken;
 
         $restCliMock = $this->getRestCliMock();
@@ -1745,16 +1738,13 @@ class ClientTest extends TestCase
         $client = $this->getClient($restCliMock);
 
         $this->expectException(BitPayApiException::class);
-        $client->getSettlementReconciliationReport($settlement);
+        $client->getSettlementReconciliationReport($exampleId, $exampleToken);
     }
 
     public function testGetSettlementReconciliationReportShouldCatchJsonMapperException()
     {
-        $settlement = $this->createMock(Settlement::class);
         $exampleToken = self::MERCHANT_TOKEN;
         $exampleId = 'RPWTabW8urd3xWv2To989v';
-        $settlement->method('getToken')->willReturn($exampleToken);
-        $settlement->method('getId')->willReturn($exampleId);
         $params['token'] = $exampleToken;
         $badResponse = file_get_contents(__DIR__ . '/jsonResponse/badResponse.json');
 
@@ -1768,7 +1758,7 @@ class ClientTest extends TestCase
         $client = $this->getClient($restCliMock);
 
         $this->expectException(BitPayGenericException::class);
-        $client->getSettlementReconciliationReport($settlement);
+        $client->getSettlementReconciliationReport($exampleId, $exampleToken);
     }
 
     /**
