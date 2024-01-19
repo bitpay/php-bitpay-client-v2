@@ -100,14 +100,14 @@ class CurrenciesTest extends TestCase
     self::assertArrayHasKey('walletConnect', $currenciesArray);
 
     self::assertEquals('BTH', $currenciesArray['code']);
-    self::assertEquals(true, $currenciesArray['p2p']);
-    self::assertEquals(true, $currenciesArray['dappBrowser']);
+    self::assertTrue($currenciesArray['p2p']);
+    self::assertTrue($currenciesArray['dappBrowser']);
     self::assertEquals('https://bitpay.com/api/images/logo-6fa5404d.svg', $currenciesArray['image']);
-    self::assertEquals(true, $currenciesArray['paypro']);
+    self::assertTrue($currenciesArray['paypro']);
     self::assertEquals('BIP21', $currenciesArray['qr']['type']);
-    self::assertEquals(false, $currenciesArray['qr']['collapsed']);
+    self::assertFalse($currenciesArray['qr']['collapsed']);
     self::assertEquals('1.23', $currenciesArray['withdrawalFee']);
-    self::assertEquals(true, $currenciesArray['walletConnect']);
+    self::assertTrue($currenciesArray['walletConnect']);
   }
 
   private function createClassObject(): Currencies

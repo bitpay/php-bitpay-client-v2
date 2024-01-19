@@ -53,12 +53,12 @@ class CurrencyTest extends TestCase
         self::assertEquals('BTC', $currencyArray['code']);
         self::assertEquals('Symbol', $currencyArray['symbol']);
         self::assertEquals(1, $currencyArray['precision']);
-        self::assertEquals(true, $currencyArray['currentlySettled']);
+        self::assertTrue($currencyArray['currentlySettled']);
         self::assertEquals('Bitcoin', $currencyArray['name']);
         self::assertEquals('plural', $currencyArray['plural']);
         self::assertEquals('alts', $currencyArray['alts']);
         self::assertEquals('minimum', $currencyArray['minimum']);
-        self::assertEquals(true, $currencyArray['sanctioned']);
+        self::assertTrue($currencyArray['sanctioned']);
         self::assertEquals('decimals', $currencyArray['decimals']);
         self::assertEquals(['test'], $currencyArray['payoutFields']);
         self::assertEquals(['test'], $currencyArray['settlementMinimum']);
@@ -89,7 +89,7 @@ class CurrencyTest extends TestCase
     {
         $currency = $this->createClassObject();
         $currency->setCurrentlySettled(true);
-        self::assertEquals(true, $currency->getCurrentlySettled());
+        self::assertTrue($currency->getCurrentlySettled());
     }
 
     public function testGetName()
@@ -124,7 +124,7 @@ class CurrencyTest extends TestCase
     {
         $currency = $this->createClassObject();
         $currency->setSanctioned(true);
-        self::assertEquals(true, $currency->getSanctioned());
+        self::assertTrue($currency->getSanctioned());
     }
 
     public function testGetDecimals()

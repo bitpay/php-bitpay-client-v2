@@ -175,11 +175,11 @@ class RefundTest extends TestCase
         self::assertEquals('2022-01-01', $refundArray['requestDate']);
         self::assertEquals('pending', $refundArray['status']);
         self::assertEquals('11', $refundArray['invoiceId']);
-        self::assertEquals(true, $refundArray['preview']);
-        self::assertEquals(true, $refundArray['immediate']);
+        self::assertTrue($refundArray['preview']);
+        self::assertTrue($refundArray['immediate']);
         self::assertEquals(1.0, $refundArray['refundFee']);
         self::assertEquals('Invoice', $refundArray['invoice']);
-        self::assertEquals(true, $refundArray['buyerPaysRefundFee']);
+        self::assertTrue($refundArray['buyerPaysRefundFee']);
         self::assertEquals('Reference', $refundArray['reference']);
         self::assertEquals('Last refunded notification', $refundArray['lastRefundNotification']);
     }
