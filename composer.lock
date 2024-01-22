@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bitpay/key-utils",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bitpay/bitpay-php-keyutils.git",
-                "reference": "44283014751d1886b41c7de29f1972737d6dfe4d"
+                "reference": "2c9dc573e6fd13aa15578860097fbd06a3f3a5d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/44283014751d1886b41c7de29f1972737d6dfe4d",
-                "reference": "44283014751d1886b41c7de29f1972737d6dfe4d",
+                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/2c9dc573e6fd13aa15578860097fbd06a3f3a5d2",
+                "reference": "2c9dc573e6fd13aa15578860097fbd06a3f3a5d2",
                 "shasum": ""
             },
             "require": {
@@ -52,9 +52,9 @@
             "description": "BitPay Utils pack for cryptography",
             "support": {
                 "issues": "https://github.com/bitpay/bitpay-php-keyutils/issues",
-                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/1.1.2"
+                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/1.1.3"
             },
-            "time": "2023-06-15T19:11:27+00:00"
+            "time": "2024-01-18T20:44:01+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2605,5 +2605,5 @@
         "ext-reflection": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
