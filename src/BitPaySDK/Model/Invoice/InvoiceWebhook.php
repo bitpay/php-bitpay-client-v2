@@ -32,6 +32,8 @@ class InvoiceWebhook
     protected ?float $amountPaid;
     protected ?string $orderId;
     protected ?string $transactionCurrency;
+    protected ?string $inInvoiceId;
+    protected ?string $inPaymentRequest;
 
     public function getId(): ?string
     {
@@ -191,5 +193,28 @@ class InvoiceWebhook
     public function setTransactionCurrency(?string $transactionCurrency): void
     {
         $this->transactionCurrency = $transactionCurrency;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInInvoiceId(): ?string
+    {
+        return $this->inInvoiceId;
+    }
+
+    public function setInInvoiceId(?string $inInvoiceId): void
+    {
+        $this->inInvoiceId = $inInvoiceId;
+    }
+
+    public function getInPaymentRequest(): ?string
+    {
+        return $this->inPaymentRequest;
+    }
+
+    public function setInPaymentRequest(?string $inPaymentRequest): void
+    {
+        $this->inPaymentRequest = $inPaymentRequest;
     }
 }

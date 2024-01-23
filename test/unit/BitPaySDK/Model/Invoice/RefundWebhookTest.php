@@ -129,6 +129,14 @@ class RefundWebhookTest extends TestCase
     self::assertArrayHasKey('immediate', $refundWebhookArray);
     self::assertArrayHasKey('buyerPaysRefundFee', $refundWebhookArray);
     self::assertArrayHasKey('requestDate', $refundWebhookArray);
+    self::assertArrayHasKey('reference', $refundWebhookArray);
+    self::assertArrayHasKey('guid', $refundWebhookArray);
+    self::assertArrayHasKey('refundAddress', $refundWebhookArray);
+    self::assertArrayHasKey('type', $refundWebhookArray);
+    self::assertArrayHasKey('txid', $refundWebhookArray);
+    self::assertArrayHasKey('transactionCurrency', $refundWebhookArray);
+    self::assertArrayHasKey('transactionAmount', $refundWebhookArray);
+    self::assertArrayHasKey('transactionRefundFee', $refundWebhookArray);
 
     self::assertEquals('GZBBLcsgQamua3PN8GX92s', $refundWebhookArray['id']);
     self::assertEquals('Wp9cpGphCz7cSeFh6MSYpb', $refundWebhookArray['invoice']);
@@ -141,6 +149,14 @@ class RefundWebhookTest extends TestCase
     self::assertEquals(false, $refundWebhookArray['immediate']);
     self::assertEquals(true, $refundWebhookArray['buyerPaysRefundFee']);
     self::assertEquals('2022-01-11T16:58:23.000Z', $refundWebhookArray['requestDate']);
+    self::assertEquals('someReference', $refundWebhookArray['reference']);
+    self::assertEquals('someGuid', $refundWebhookArray['guid']);
+    self::assertEquals('someRefundAddress', $refundWebhookArray['refundAddress']);
+    self::assertEquals('someType', $refundWebhookArray['type']);
+    self::assertEquals('someTxid', $refundWebhookArray['txid']);
+    self::assertEquals('someTransactionCurrency', $refundWebhookArray['transactionCurrency']);
+    self::assertEquals(12.34, $refundWebhookArray['transactionAmount']);
+    self::assertEquals(12.11, $refundWebhookArray['transactionRefundFee']);
   }
 
   private function createClassObject(): RefundWebhook
@@ -161,5 +177,13 @@ class RefundWebhookTest extends TestCase
     $refundWebhook->setImmediate(false);
     $refundWebhook->setBuyerPaysRefundFee(true);
     $refundWebhook->setRequestDate('2022-01-11T16:58:23.000Z');
+    $refundWebhook->setReference('someReference');
+    $refundWebhook->setGuid('someGuid');
+    $refundWebhook->setRefundAddress('someRefundAddress');
+    $refundWebhook->setType('someType');
+    $refundWebhook->setTxid('someTxid');
+    $refundWebhook->setTransactionCurrency('someTransactionCurrency');
+    $refundWebhook->setTransactionAmount(12.34);
+    $refundWebhook->setTransactionRefundFee(12.11);
   }
 }
