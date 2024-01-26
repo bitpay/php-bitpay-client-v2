@@ -21,7 +21,7 @@ class BitPayExceptionTest extends TestCase
   {
     $exception = $this->createClassObject();
     
-    self::assertEquals(null, $exception->getApiCode());
+    self::assertNull($exception->getApiCode());
   }
 
   public function testDefaultCode()

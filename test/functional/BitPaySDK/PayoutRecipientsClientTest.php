@@ -59,7 +59,7 @@ class PayoutRecipientsClientTest extends AbstractClientTestCase
         self::assertEquals('test@emaill1.com', $recipient->getEmail());
         self::assertEquals('recipient1', $recipient->getLabel());
         self::assertEquals('invited', $recipient->getStatus());
-        self::assertEquals(null, $recipient->getShopperId());
+        self::assertNull($recipient->getShopperId());
     }
 
     public function testPayoutRecipientShouldCatchRestCliException(): void
@@ -117,7 +117,7 @@ class PayoutRecipientsClientTest extends AbstractClientTestCase
 
         $result = $this->client->deletePayoutRecipient($payoutRecipientId);
 
-        self::assertEquals(true, $result);
+        self::assertTrue($result);
     }
 
     public function testPayoutRecipientRequestNotification(): void
@@ -135,6 +135,6 @@ class PayoutRecipientsClientTest extends AbstractClientTestCase
 
         $result = $this->client->requestPayoutRecipientNotification($payoutRecipientId);
 
-        self::assertEquals(true, $result);
+        self::assertTrue($result);
     }
 }
