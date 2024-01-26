@@ -26,6 +26,9 @@ class PayoutWebhook
     protected ?string $requestDate = null;
     protected ?string $status = null;
     protected ?array $transactions = null;
+    protected ?string $accountId = null;
+    protected ?string $dateExecuted = null;
+    protected ?string $groupId = null;
 
     public function getId(): ?string
     {
@@ -185,5 +188,44 @@ class PayoutWebhook
     public function setTransactions(?array $transactions): void
     {
         $this->transactions = $transactions;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAccountId(): ?string
+    {
+        return $this->accountId;
+    }
+
+    /**
+     * @param string|null $accountId
+     */
+    public function setAccountId(?string $accountId): void
+    {
+        $this->accountId = $accountId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDateExecuted(): ?string
+    {
+        return $this->dateExecuted;
+    }
+
+    public function setDateExecuted(?string $dateExecuted): void
+    {
+        $this->dateExecuted = $dateExecuted;
+    }
+
+    public function getGroupId(): ?string
+    {
+        return $this->groupId;
+    }
+
+    public function setGroupId(?string $groupId): void
+    {
+        $this->groupId = $groupId;
     }
 }

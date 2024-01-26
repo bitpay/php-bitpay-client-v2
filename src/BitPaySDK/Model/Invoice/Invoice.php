@@ -887,7 +887,7 @@ class Invoice
      * This field will be populated with the refund address
      * provided by the customer if you request a refund of the specific invoice.
      *
-     * @return array|null Refund address provided by the customer
+     * @return array|null [[string, InvoiceRefundAddress]] Refund address provided by the customer
      */
     public function getRefundAddresses(): ?array
     {
@@ -901,7 +901,7 @@ class Invoice
      * This field will be populated with the refund address
      * provided by the customer if you request a refund of the specific invoice.
      *
-     * @param array $refundAddresses Refund address provided by the customer
+     * @param array [[string, InvoiceRefundAddress]] $refundAddresses Refund address provided by the customer
      */
     public function setRefundAddresses(array $refundAddresses): void
     {

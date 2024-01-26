@@ -29,6 +29,14 @@ class RefundWebhook
     protected ?bool $immediate = null;
     protected ?bool $buyerPaysRefundFee = null;
     protected ?string $requestDate = null;
+    protected ?string $reference;
+    protected ?string $guid;
+    protected ?string $refundAddress;
+    protected ?string $type;
+    protected ?string $txid;
+    protected ?string $transactionCurrency;
+    protected ?float $transactionAmount;
+    protected ?float $transactionRefundFee;
 
     public function getId(): ?string
     {
@@ -140,6 +148,86 @@ class RefundWebhook
         $this->requestDate = $requestDate;
     }
 
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(?string $reference): void
+    {
+        $this->reference = $reference;
+    }
+
+    public function getGuid(): ?string
+    {
+        return $this->guid;
+    }
+
+    public function setGuid(?string $guid): void
+    {
+        $this->guid = $guid;
+    }
+
+    public function getRefundAddress(): ?string
+    {
+        return $this->refundAddress;
+    }
+
+    public function setRefundAddress(?string $refundAddress): void
+    {
+        $this->refundAddress = $refundAddress;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): void
+    {
+        $this->type = $type;
+    }
+
+    public function getTxid(): ?string
+    {
+        return $this->txid;
+    }
+
+    public function setTxid(?string $txid): void
+    {
+        $this->txid = $txid;
+    }
+
+    public function getTransactionCurrency(): ?string
+    {
+        return $this->transactionCurrency;
+    }
+
+    public function setTransactionCurrency(?string $transactionCurrency): void
+    {
+        $this->transactionCurrency = $transactionCurrency;
+    }
+
+    public function getTransactionAmount(): ?float
+    {
+        return $this->transactionAmount;
+    }
+
+    public function setTransactionAmount(?float $transactionAmount): void
+    {
+        $this->transactionAmount = $transactionAmount;
+    }
+
+    public function getTransactionRefundFee(): ?float
+    {
+        return $this->transactionRefundFee;
+    }
+
+    public function setTransactionRefundFee(?float $transactionRefundFee): void
+    {
+        $this->transactionRefundFee = $transactionRefundFee;
+    }
+
     public function toArray(): array
     {
         return [
@@ -153,7 +241,15 @@ class RefundWebhook
             'refundFee' => $this->getRefundFee(),
             'immediate' => $this->getImmediate(),
             'buyerPaysRefundFee' => $this->getBuyerPaysRefundFee(),
-            'requestDate' => $this->getRequestDate()
+            'requestDate' => $this->getRequestDate(),
+            'reference' => $this->getReference(),
+            'guid' => $this->getGuid(),
+            'refundAddress' => $this->getRefundAddress(),
+            'type' => $this->getType(),
+            'txid' => $this->getTxid(),
+            'transactionCurrency' => $this->getTransactionCurrency(),
+            'transactionAmount' => $this->getTransactionAmount(),
+            'transactionRefundFee' => $this->getTransactionRefundFee(),
         ];
     }
 }
