@@ -42,7 +42,7 @@ class SupportedTransactionCurrencyTest extends TestCase
     self::assertArrayHasKey('enabled', $supportedTransactionCurrencyArray);
     self::assertArrayHasKey('reason', $supportedTransactionCurrencyArray);
 
-    self::assertEquals(true, $supportedTransactionCurrencyArray['enabled']);
+    self::assertTrue($supportedTransactionCurrencyArray['enabled']);
     self::assertEquals("My reason", $supportedTransactionCurrencyArray['reason']);
   }
 

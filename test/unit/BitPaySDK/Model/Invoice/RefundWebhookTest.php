@@ -138,8 +138,8 @@ class RefundWebhookTest extends TestCase
     self::assertEquals('USD', $refundWebhookArray['currency']);
     self::assertEquals('2022-01-11T16:58:23.967Z', $refundWebhookArray['lastRefundNotification']);
     self::assertEquals(2.31, $refundWebhookArray['refundFee']);
-    self::assertEquals(false, $refundWebhookArray['immediate']);
-    self::assertEquals(true, $refundWebhookArray['buyerPaysRefundFee']);
+    self::assertFalse($refundWebhookArray['immediate']);
+    self::assertTrue($refundWebhookArray['buyerPaysRefundFee']);
     self::assertEquals('2022-01-11T16:58:23.000Z', $refundWebhookArray['requestDate']);
   }
 

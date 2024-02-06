@@ -259,7 +259,7 @@ class BillTest extends TestCase
         self::assertEquals([''], $billArray['cc']);
         self::assertEquals('123456789', $billArray['phone']);
         self::assertEquals('2022-01-01', $billArray['dueDate']);
-        self::assertEquals(true, $billArray['passProcessingFee']);
+        self::assertTrue($billArray['passProcessingFee']);
         self::assertEquals('status', $billArray['status']);
         self::assertEquals('http://test.com', $billArray['url']);
         self::assertEquals('2022-01-01', $billArray['createDate']);

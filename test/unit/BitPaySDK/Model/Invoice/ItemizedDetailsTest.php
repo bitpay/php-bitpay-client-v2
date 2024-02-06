@@ -53,7 +53,7 @@ class ItemizedDetailsTest extends TestCase
 
         self::assertEquals(15.5, $itemizedDetailsArray['amount']);
         self::assertEquals('Test description', $itemizedDetailsArray['description']);
-        self::assertEquals(true, $itemizedDetailsArray['isFee']);
+        self::assertTrue($itemizedDetailsArray['isFee']);
     }
 
     private function createClassObject(): ItemizedDetails
