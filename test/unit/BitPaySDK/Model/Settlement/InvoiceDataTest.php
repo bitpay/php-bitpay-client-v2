@@ -70,7 +70,7 @@ class InvoiceDataTest extends TestCase
 
     public function testGetPayoutPercentage()
     {
-        $expectedPayoutPercentage = 15;
+        $expectedPayoutPercentage = ['USD' => 15.12];
 
         $invoiceData = $this->createClassObject();
         $invoiceData->setPayoutPercentage($expectedPayoutPercentage);
@@ -108,7 +108,7 @@ class InvoiceDataTest extends TestCase
         self::assertEquals(12.9, $invoiceDataArray['price']);
         self::assertEquals('BTC', $invoiceDataArray['currency']);
         self::assertEquals('BTC', $invoiceDataArray['transactionCurrency']);
-        self::assertEquals(15, $invoiceDataArray['payoutPercentage']);
+        self::assertEquals(15.12, $invoiceDataArray['payoutPercentage']['USD']);
         self::assertEquals([], $invoiceDataArray['refundInfo']);
     }
 
@@ -124,7 +124,7 @@ class InvoiceDataTest extends TestCase
         $invoiceData->setPrice(12.9);
         $invoiceData->setCurrency('BTC');
         $invoiceData->setTransactionCurrency('BTC');
-        $invoiceData->setPayoutPercentage(15);
+        $invoiceData->setPayoutPercentage(['USD' => 15.12]);
         $invoiceData->setRefundInfo($this->getMockBuilder(RefundInfo::class)->getMock());
     }
 }

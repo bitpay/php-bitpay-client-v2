@@ -24,7 +24,7 @@ class InvoiceData
     protected ?string $currency = null;
     protected ?string $transactionCurrency = null;
     protected ?float $overPaidAmount = null;
-    protected ?float $payoutPercentage = null;
+    protected ?array $payoutPercentage = null;
     protected ?RefundInfo $refundInfo = null;
 
     public function __construct()
@@ -154,9 +154,9 @@ class InvoiceData
     /**
      * Gets The payout percentage defined by the merchant on his BitPay account settings
      *
-     * @return float|null the payout percentage
+     * @return array|null the payout percentage
      */
-    public function getPayoutPercentage(): ?float
+    public function getPayoutPercentage(): ?array
     {
         return $this->payoutPercentage;
     }
@@ -164,9 +164,9 @@ class InvoiceData
     /**
      * Sets The payout percentage defined by the merchant on his BitPay account settings
      *
-     * @param float $payoutPercentage the payout percentage
+     * @param array $payoutPercentage the payout percentage
      */
-    public function setPayoutPercentage(float $payoutPercentage): void
+    public function setPayoutPercentage(array $payoutPercentage): void
     {
         $this->payoutPercentage = $payoutPercentage;
     }
