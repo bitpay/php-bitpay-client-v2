@@ -111,7 +111,7 @@ class Client
             $config = $configData["BitPayConfiguration"]["EnvConfig"][$env];
 
             $key = self::initKeys($config['PrivateKeyPath'], $config['PrivateKeySecret']);
-            $proxy = $config['proxy'] ?? null;
+            $proxy = $config['Proxy'] ?? null;
 
             $restCli = new RESTcli($env, $key, $proxy);
             $tokenCache = new Tokens($config['ApiTokens']['merchant'], $config['ApiTokens']['payout']);
