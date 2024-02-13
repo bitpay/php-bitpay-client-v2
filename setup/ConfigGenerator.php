@@ -22,10 +22,10 @@ use Symfony\Component\Yaml\Yaml;
 function createConfigFile(
     string $env,
     bool $isProd,
-    $privateKeyLocation,
-    $password,
-    $merchantToken,
-    $payoutToken
+    string $privateKeyLocation,
+    string $password,
+    ?string $merchantToken,
+    ?string $payoutToken
 ): void {
     $config = [
         "BitPayConfiguration" => [
@@ -139,7 +139,7 @@ function getPrivateKeyLocation(QuestionHelper $helper, InputInterface $input, Ou
     return $privateKeyLocation;
 }
 
-function getKeys(string $privateKeyLocation, string $password): array {
+function getPublicKey(string $privateKeyLocation, string $password): PublicKey {
     $privateKey = new PrivateKey($privateKeyLocation);
     $storageEngine = new EncryptedFilesystemStorage($password);
     try {
@@ -157,9 +157,7 @@ function getKeys(string $privateKeyLocation, string $password): array {
     }
 
     // Generate the public key from the private key every time (no need to store the public key).
-    $publicKey = $privateKey->getPublicKey();
-
-    return [$privateKey, $publicKey];
+    return $privateKey->getPublicKey();
 }
 
 function getSin(PublicKey $publicKey): string
@@ -170,8 +168,6 @@ function getSin(PublicKey $publicKey): string
 function generateToken(
     OutputInterface $output,
     string $facade,
-    PrivateKey $privateKey,
-    PublicKey $publicKey,
     string $sin,
     string $apiUrl
 ): ?string {
@@ -183,12 +179,10 @@ function generateToken(
     ], JSON_THROW_ON_ERROR);
     $headers = [
         'Content-Type' => 'application/json',
-        0 => 'x-accept-version: ' . Env::BITPAY_API_VERSION,
-        1 => 'X-Identity: ' . $publicKey->__toString(),
-        2 => 'X-Signature: ' . $privateKey->sign($url . $postData),
-        3 => 'x-bitpay-plugin-info: ' . Env::BITPAY_PLUGIN_INFO,
-        4 => 'x-bitpay-api-frame: ' . Env::BITPAY_API_FRAME,
-        5 => 'x-bitpay-api-frame-version: ' . Env::BITPAY_API_FRAME_VERSION
+        'x-accept-version' => Env::BITPAY_API_VERSION,
+        'x-bitpay-plugin-info' => Env::BITPAY_PLUGIN_INFO,
+        'x-bitpay-api-frame' => Env::BITPAY_API_FRAME,
+        'x-bitpay-api-frame-version' => Env::BITPAY_API_FRAME_VERSION
     ];
 
     $client = new GuzzleHttpClient();
@@ -233,13 +227,11 @@ $help .= "WARNING: It is EXTREMELY IMPORTANT to place this key files in a very S
 function getMerchantToken(
     bool $shouldGenerateMerchant,
     OutputInterface $output,
-    mixed $privateKey,
-    mixed $publicKey,
-    mixed $sin,
+    string $sin,
     string $apiUrl
 ): ?string {
     if ($shouldGenerateMerchant) {
-        return generateToken($output, 'merchant', $privateKey, $publicKey, $sin, $apiUrl);
+        return generateToken($output, 'merchant', $sin, $apiUrl);
     }
 
     return null;
@@ -248,13 +240,11 @@ function getMerchantToken(
 function getPayoutToken(
     bool $shouldGeneratePayout,
     OutputInterface $output,
-    mixed $privateKey,
-    mixed $publicKey,
-    mixed $sin,
+    string $sin,
     string $apiUrl
 ): ?string {
     if ($shouldGeneratePayout) {
-        return generateToken($output, 'payout', $privateKey, $publicKey, $sin, $apiUrl);
+        return generateToken($output, 'payout', $sin, $apiUrl);
     }
     return null;
 }
@@ -273,11 +263,11 @@ function getPayoutToken(
             $privateKeyLocation = getPrivateKeyLocation($helper, $input, $output);
             
             [$shouldGenerateMerchant, $shouldGeneratePayout] = selectTokens($output, $helper, $input);
-            [$privateKey, $publicKey] = getKeys($privateKeyLocation, $password);
+            $publicKey = getPublicKey($privateKeyLocation, $password);
             $sin = getSin($publicKey);
 
-            $merchantToken = getMerchantToken($shouldGenerateMerchant, $output, $privateKey, $publicKey, $sin, $apiUrl);
-            $payoutToken = getPayoutToken($shouldGeneratePayout, $output, $privateKey, $publicKey, $sin, $apiUrl);
+            $merchantToken = getMerchantToken($shouldGenerateMerchant, $output, $sin, $apiUrl);
+            $payoutToken = getPayoutToken($shouldGeneratePayout, $output, $sin, $apiUrl);
 
             createConfigFile($env, $env === 'P', $privateKeyLocation, $password, $merchantToken, $payoutToken);
             successMessage($output, $apiUrl);
