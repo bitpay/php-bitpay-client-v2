@@ -17,7 +17,7 @@
     "ext-reflection": "*",
     "bitpay/key-utils": "^1.1",
     "guzzlehttp/guzzle": "^7.0",
-    "symfony/yaml": "^5.4 || ^6.0 || ^6.1 || ^6.2",
+    "symfony/yaml": "^5.4 || ^6.0 || ^6.1 || ^6.2 || ^7.0",
     "netresearch/jsonmapper": "^4.1"
   },
   "authors": [
