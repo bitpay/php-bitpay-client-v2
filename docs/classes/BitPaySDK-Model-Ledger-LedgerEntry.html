@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/bitpaysdk.html" class="">BitPaySDK</a>
@@ -69,6 +69,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/bitpaysdk-logger.html" class="">Logger</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/bitpaysdk-model.html" class="">Model</a>
                 
             </li>
@@ -79,7 +83,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/BitPaySDK.html" class="">BitPaySDK</a>
@@ -87,10 +91,6 @@
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="packages/BitPaySDK-Client.html" class="">Client</a>
-                
-            </li>
-                    <li>
-                <a href="packages/BitPaySDK-Exceptions.html" class="">Exceptions</a>
                 
             </li>
                     <li>
@@ -105,14 +105,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -219,7 +219,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_amount">$amount</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: float|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -231,7 +231,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_code">$code</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: int|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -273,7 +273,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#property_scale">$scale</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: int|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -323,7 +323,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getAmount">getAmount()</a>
     <span>
-                                &nbsp;: string|null    </span>
+                                &nbsp;: float|null    </span>
 </dt>
 <dd>Gets Ledger entry amount, relative to the scale.</dd>
 
@@ -337,7 +337,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getCode">getCode()</a>
     <span>
-                                &nbsp;: string|null    </span>
+                                &nbsp;: int|null    </span>
 </dt>
 <dd>Gets code</dd>
 
@@ -386,7 +386,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Ledger-LedgerEntry.html#method_getScale">getScale()</a>
     <span>
-                                &nbsp;: string|null    </span>
+                                &nbsp;: int|null    </span>
 </dt>
 <dd>Gets scale</dd>
 
@@ -545,6 +545,8 @@
         
 
         
+
+        
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
@@ -575,7 +577,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__type">float|null</span>
     <span class="phpdocumentor-signature__name">$amount</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -641,7 +643,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
     <span class="phpdocumentor-signature__name">$code</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -872,7 +874,7 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
     <span class="phpdocumentor-signature__name">$scale</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -1107,7 +1109,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+                    <span class="phpdocumentor-signature__name">getAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1119,7 +1121,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string|null</span>
+        <span class="phpdocumentor-signature__response_type">float|null</span>
             </section>
 
 </article>
@@ -1183,7 +1185,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+                    <span class="phpdocumentor-signature__name">getCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1196,7 +1198,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string|null</span>
+        <span class="phpdocumentor-signature__response_type">int|null</span>
                     &mdash;
                 <section class="phpdocumentor-description"><p>the code</p>
 </section>
@@ -1469,7 +1471,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getScale</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+                    <span class="phpdocumentor-signature__name">getScale</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1481,7 +1483,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string|null</span>
+        <span class="phpdocumentor-signature__response_type">int|null</span>
                     &mdash;
                 <section class="phpdocumentor-description"><p>the scale</p>
 </section>
@@ -1716,7 +1718,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1727,7 +1729,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$amount</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>the amount</p>
@@ -1806,7 +1808,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setCode</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setCode</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$code</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1818,7 +1820,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$code</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>the code</p>
@@ -2120,7 +2122,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setScale</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$scale</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setScale</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$scale</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -2131,7 +2133,7 @@ See the list of Ledger Entry Codes: https://bitpay.com/api/?php#ledger-entry-cod
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$scale</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>the scale</p>

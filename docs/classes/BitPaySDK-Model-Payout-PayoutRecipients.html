@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/bitpaysdk.html" class="">BitPaySDK</a>
@@ -69,6 +69,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/bitpaysdk-logger.html" class="">Logger</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/bitpaysdk-model.html" class="">Model</a>
                 
             </li>
@@ -79,7 +83,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/BitPaySDK.html" class="">BitPaySDK</a>
@@ -87,10 +91,6 @@
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="packages/BitPaySDK-Client.html" class="">Client</a>
-                
-            </li>
-                    <li>
-                <a href="packages/BitPaySDK-Exceptions.html" class="">Exceptions</a>
                 
             </li>
                     <li>
@@ -105,14 +105,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -151,7 +151,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
@@ -219,7 +219,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html#property_guid">$guid</a>
     <span>
-                        &nbsp;: string            </span>
+                        &nbsp;: string|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -231,7 +231,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html#property_token">$token</a>
     <span>
-                        &nbsp;: string            </span>
+                        &nbsp;: string|null            </span>
 </dt>
 
     </dl>
@@ -252,7 +252,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html#method_getGuid">getGuid()</a>
     <span>
-                                &nbsp;: string    </span>
+                                &nbsp;: string|null    </span>
 </dt>
 <dd>Gets guid.</dd>
 
@@ -266,7 +266,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html#method_getToken">getToken()</a>
     <span>
-                                &nbsp;: string    </span>
+                                &nbsp;: string|null    </span>
 </dt>
 <dd>Gets token.</dd>
 
@@ -306,6 +306,8 @@
         
 
         
+
+        
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
@@ -329,16 +331,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$guid</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span></code>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
     
@@ -362,7 +364,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -395,16 +397,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$token</span>
-     = <span class="phpdocumentor-signature__default-value">&#039;&#039;</span></code>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
     
@@ -433,7 +435,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -477,7 +479,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
@@ -485,7 +487,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getGuid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">getGuid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -495,7 +497,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
             </section>
 
 </article>
@@ -513,7 +515,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">91</span>
+    <span class="phpdocumentor-element-found-in__line">92</span>
 
     </aside>
 
@@ -549,7 +551,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
@@ -557,7 +559,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">getToken</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -567,7 +569,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string</span>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
             </section>
 
 </article>
@@ -585,7 +587,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 
     </aside>
 
@@ -627,7 +629,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">102</span>
+    <span class="phpdocumentor-element-found-in__line">103</span>
 
     </aside>
 
@@ -662,7 +664,7 @@
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-PayoutRecipientException.html"><abbr title="\BitPaySDK\Exceptions\PayoutRecipientException">PayoutRecipientException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayValidationException.html"><abbr title="\BitPaySDK\Exceptions\BitPayValidationException">BitPayValidationException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -684,7 +686,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -726,7 +728,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Payout/PayoutRecipients.php"><a href="files/src-bitpaysdk-model-payout-payoutrecipients.html"><abbr title="src/BitPaySDK/Model/Payout/PayoutRecipients.php">PayoutRecipients.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">118</span>
+    <span class="phpdocumentor-element-found-in__line">119</span>
 
     </aside>
 

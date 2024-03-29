@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/bitpaysdk.html" class="">BitPaySDK</a>
@@ -69,6 +69,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/bitpaysdk-logger.html" class="">Logger</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/bitpaysdk-model.html" class="">Model</a>
                 
             </li>
@@ -79,7 +83,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/BitPaySDK.html" class="">BitPaySDK</a>
@@ -87,10 +91,6 @@
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="packages/BitPaySDK-Client.html" class="">Client</a>
-                
-            </li>
-                    <li>
-                <a href="packages/BitPaySDK-Exceptions.html" class="">Exceptions</a>
                 
             </li>
                     <li>
@@ -105,14 +105,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -151,7 +151,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -219,13 +219,13 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#property_acceptanceWindow">$acceptanceWindow</a>
     <span>
-                        &nbsp;: float|null            </span>
+                        &nbsp;: int|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#property_amountPaid">$amountPaid</a>
     <span>
-                        &nbsp;: int|null            </span>
+                        &nbsp;: float|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -291,7 +291,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#property_currentTime">$currentTime</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: int|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -303,7 +303,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#property_exceptionStatus">$exceptionStatus</a>
     <span>
-                        &nbsp;: bool|null            </span>
+                        &nbsp;: string|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -315,7 +315,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#property_expirationTime">$expirationTime</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: int|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -435,7 +435,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#property_overpaidAmount">$overpaidAmount</a>
     <span>
-                        &nbsp;: int|null            </span>
+                        &nbsp;: float|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -573,7 +573,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#property_underpaidAmount">$underpaidAmount</a>
     <span>
-                        &nbsp;: int|null            </span>
+                        &nbsp;: float|null            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -606,14 +606,14 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#method_getAcceptanceWindow">getAcceptanceWindow()</a>
     <span>
-                                &nbsp;: float|null    </span>
+                                &nbsp;: int|null    </span>
 </dt>
 <dd>Gets acceptanceWindow</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#method_getAmountPaid">getAmountPaid()</a>
     <span>
-                                &nbsp;: int|null    </span>
+                                &nbsp;: float|null    </span>
 </dt>
 <dd>Gets amountPaid</dd>
 
@@ -690,7 +690,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#method_getCurrentTime">getCurrentTime()</a>
     <span>
-                                &nbsp;: string|null    </span>
+                                &nbsp;: int|null    </span>
 </dt>
 <dd>Gets currentTime - UNIX time of API call, in milliseconds</dd>
 
@@ -704,7 +704,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#method_getExceptionStatus">getExceptionStatus()</a>
     <span>
-                                &nbsp;: bool|null    </span>
+                                &nbsp;: string|null    </span>
 </dt>
 <dd>Gets exceptionStatus</dd>
 
@@ -718,7 +718,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#method_getExpirationTime">getExpirationTime()</a>
     <span>
-                                &nbsp;: string|null    </span>
+                                &nbsp;: int|null    </span>
 </dt>
 <dd>Gets expirationTime - UNIX time when invoice is last available to be paid, in milliseconds</dd>
 
@@ -858,7 +858,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#method_getOverpaidAmount">getOverpaidAmount()</a>
     <span>
-                                &nbsp;: int|null    </span>
+                                &nbsp;: float|null    </span>
 </dt>
 <dd>Gets overpaidAmount</dd>
 
@@ -1019,7 +1019,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Invoice-Invoice.html#method_getUnderpaidAmount">getUnderpaidAmount()</a>
     <span>
-                                &nbsp;: int|null    </span>
+                                &nbsp;: float|null    </span>
 </dt>
 <dd>Gets underpaidAmount</dd>
 
@@ -1486,6 +1486,8 @@
         
 
         
+
+        
     <section class="phpdocumentor-properties">
         <h3 class="phpdocumentor-elements__header" id="properties">
             Properties
@@ -1509,14 +1511,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">40</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">float|null</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
     <span class="phpdocumentor-signature__name">$acceptanceWindow</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -1542,14 +1544,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">81</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">int|null</span>
+        <span class="phpdocumentor-signature__type">float|null</span>
     <span class="phpdocumentor-signature__name">$amountPaid</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -1575,7 +1577,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">44</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
     </aside>
 
@@ -1608,7 +1610,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">74</span>
+    <span class="phpdocumentor-element-found-in__line">76</span>
 
     </aside>
 
@@ -1641,7 +1643,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
     </aside>
 
@@ -1674,7 +1676,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
@@ -1707,7 +1709,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">46</span>
+    <span class="phpdocumentor-element-found-in__line">48</span>
 
     </aside>
 
@@ -1740,7 +1742,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
@@ -1773,7 +1775,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 
@@ -1806,7 +1808,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">47</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
@@ -1839,7 +1841,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">43</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -1872,7 +1874,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
@@ -1905,14 +1907,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">62</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
     <span class="phpdocumentor-signature__name">$currentTime</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -1938,7 +1940,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">82</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
     </aside>
 
@@ -1971,14 +1973,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">bool|null</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$exceptionStatus</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -2004,7 +2006,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">83</span>
+    <span class="phpdocumentor-element-found-in__line">85</span>
 
     </aside>
 
@@ -2037,14 +2039,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">61</span>
+    <span class="phpdocumentor-element-found-in__line">63</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
     <span class="phpdocumentor-signature__name">$expirationTime</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -2070,7 +2072,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">78</span>
 
     </aside>
 
@@ -2103,7 +2105,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
@@ -2136,7 +2138,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">50</span>
+    <span class="phpdocumentor-element-found-in__line">52</span>
 
     </aside>
 
@@ -2169,7 +2171,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">31</span>
 
     </aside>
 
@@ -2202,7 +2204,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
@@ -2235,7 +2237,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
@@ -2268,7 +2270,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">62</span>
 
     </aside>
 
@@ -2301,7 +2303,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">77</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 
     </aside>
 
@@ -2334,7 +2336,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -2367,7 +2369,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">35</span>
 
     </aside>
 
@@ -2400,7 +2402,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
@@ -2433,7 +2435,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">45</span>
+    <span class="phpdocumentor-element-found-in__line">47</span>
 
     </aside>
 
@@ -2466,7 +2468,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">61</span>
 
     </aside>
 
@@ -2499,7 +2501,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">50</span>
 
     </aside>
 
@@ -2532,7 +2534,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">71</span>
+    <span class="phpdocumentor-element-found-in__line">73</span>
 
     </aside>
 
@@ -2565,7 +2567,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
@@ -2598,7 +2600,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -2631,7 +2633,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
@@ -2664,7 +2666,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -2697,14 +2699,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">int|null</span>
+        <span class="phpdocumentor-signature__type">float|null</span>
     <span class="phpdocumentor-signature__name">$overpaidAmount</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -2730,7 +2732,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
@@ -2763,7 +2765,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">38</span>
 
     </aside>
 
@@ -2796,7 +2798,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">86</span>
+    <span class="phpdocumentor-element-found-in__line">88</span>
 
     </aside>
 
@@ -2829,7 +2831,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">85</span>
+    <span class="phpdocumentor-element-found-in__line">87</span>
 
     </aside>
 
@@ -2862,7 +2864,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
     </aside>
 
@@ -2895,7 +2897,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
@@ -2928,7 +2930,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
@@ -2961,7 +2963,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">26</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -2994,7 +2996,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
@@ -3027,7 +3029,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -3060,7 +3062,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">42</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -3093,7 +3095,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -3126,7 +3128,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -3159,7 +3161,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">49</span>
+    <span class="phpdocumentor-element-found-in__line">51</span>
 
     </aside>
 
@@ -3192,7 +3194,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">73</span>
+    <span class="phpdocumentor-element-found-in__line">75</span>
 
     </aside>
 
@@ -3225,7 +3227,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">58</span>
+    <span class="phpdocumentor-element-found-in__line">60</span>
 
     </aside>
 
@@ -3258,7 +3260,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">70</span>
+    <span class="phpdocumentor-element-found-in__line">72</span>
 
     </aside>
 
@@ -3291,7 +3293,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
@@ -3324,7 +3326,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
@@ -3357,7 +3359,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">80</span>
 
     </aside>
 
@@ -3390,7 +3392,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">65</span>
 
     </aside>
 
@@ -3423,7 +3425,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -3456,14 +3458,14 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">79</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">int|null</span>
+        <span class="phpdocumentor-signature__type">float|null</span>
     <span class="phpdocumentor-signature__name">$underpaidAmount</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
@@ -3489,7 +3491,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
     </aside>
 
@@ -3522,7 +3524,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">59</span>
 
     </aside>
 
@@ -3560,7 +3562,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
     </aside>
 
@@ -3613,7 +3615,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">781</span>
+    <span class="phpdocumentor-element-found-in__line">783</span>
 
     </aside>
 
@@ -3621,7 +3623,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getAcceptanceWindow</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float|null</span></code>
+                    <span class="phpdocumentor-signature__name">getAcceptanceWindow</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3635,7 +3637,7 @@ If account acceptanceWindow is not set, invoice will default to 15 minutes (900,
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">float|null</span>
+        <span class="phpdocumentor-signature__response_type">int|null</span>
                     &mdash;
                 <section class="phpdocumentor-description"><p>the acceptance window</p>
 </section>
@@ -3657,7 +3659,7 @@ If account acceptanceWindow is not set, invoice will default to 15 minutes (900,
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1716</span>
+    <span class="phpdocumentor-element-found-in__line">1719</span>
 
     </aside>
 
@@ -3665,7 +3667,7 @@ If account acceptanceWindow is not set, invoice will default to 15 minutes (900,
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getAmountPaid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
+                    <span class="phpdocumentor-signature__name">getAmountPaid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -3678,7 +3680,7 @@ in the smallest possible unit for the corresponding transactionCurrency (e.g sat
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int|null</span>
+        <span class="phpdocumentor-signature__response_type">float|null</span>
             </section>
 
 </article>
@@ -3696,7 +3698,7 @@ in the smallest possible unit for the corresponding transactionCurrency (e.g sat
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">562</span>
+    <span class="phpdocumentor-element-found-in__line">564</span>
 
     </aside>
 
@@ -3739,7 +3741,7 @@ merchant can setup automatic redirect to their website by setting this parameter
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1604</span>
+    <span class="phpdocumentor-element-found-in__line">1607</span>
 
     </aside>
 
@@ -3794,7 +3796,7 @@ merchant can setup automatic redirect to their website by setting this parameter
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">619</span>
+    <span class="phpdocumentor-element-found-in__line">621</span>
 
     </aside>
 
@@ -3838,7 +3840,7 @@ This Boolean forces the invoice to require BitPay ID regardless of the price.</p
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">807</span>
+    <span class="phpdocumentor-element-found-in__line">809</span>
 
     </aside>
 
@@ -3880,7 +3882,7 @@ This Boolean forces the invoice to require BitPay ID regardless of the price.</p
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">832</span>
+    <span class="phpdocumentor-element-found-in__line">834</span>
 
     </aside>
 
@@ -3923,7 +3925,7 @@ If provided during invoice creation, this will bypass the email prompt for the c
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1200</span>
+    <span class="phpdocumentor-element-found-in__line">1203</span>
 
     </aside>
 
@@ -3969,7 +3971,7 @@ email address and this field will be populated with the email submitted.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1230</span>
+    <span class="phpdocumentor-element-found-in__line">1233</span>
 
     </aside>
 
@@ -4012,7 +4014,7 @@ Initially this object is empty.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">859</span>
+    <span class="phpdocumentor-element-found-in__line">861</span>
 
     </aside>
 
@@ -4056,7 +4058,7 @@ This is only used for instances where a buyers email
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">536</span>
+    <span class="phpdocumentor-element-found-in__line">538</span>
 
     </aside>
 
@@ -4098,7 +4100,7 @@ This is only used for instances where a buyers email
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">122</span>
 
     </aside>
 
@@ -4142,7 +4144,7 @@ supported currencies are available via the
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1054</span>
+    <span class="phpdocumentor-element-found-in__line">1057</span>
 
     </aside>
 
@@ -4150,7 +4152,7 @@ supported currencies are available via the
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCurrentTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+                    <span class="phpdocumentor-signature__name">getCurrentTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -4160,7 +4162,7 @@ supported currencies are available via the
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string|null</span>
+        <span class="phpdocumentor-signature__response_type">int|null</span>
                     &mdash;
                 <section class="phpdocumentor-description"><p>UNIX time</p>
 </section>
@@ -4182,7 +4184,7 @@ supported currencies are available via the
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1743</span>
+    <span class="phpdocumentor-element-found-in__line">1746</span>
 
     </aside>
 
@@ -4222,7 +4224,7 @@ indicated in the base unit for the corresponding transactionCurrency</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1104</span>
+    <span class="phpdocumentor-element-found-in__line">1107</span>
 
     </aside>
 
@@ -4230,13 +4232,13 @@ indicated in the base unit for the corresponding transactionCurrency</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getExceptionStatus</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|null</span></code>
+                    <span class="phpdocumentor-signature__name">getExceptionStatus</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
         <section class="phpdocumentor-description"><p>Initially a boolean false, this parameter will indicate if the purchaser sent too much (&quot;paidOver&quot;)
 or not enough funds (&quot;paidPartial&quot;) in the transaction to pay the BitPay invoice. Possible values are:
-false: default value (boolean) unless an exception is triggered.
+&quot;false&quot;: default value unless an exception is triggered.
 &quot;paidPartial&quot;: (string) if the consumer did not send enough funds when paying the invoice.
 &quot;paidOver&quot;: (string) if the consumer sent to much funds when paying the invoice.</p>
 </section>
@@ -4246,7 +4248,7 @@ false: default value (boolean) unless an exception is triggered.
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool|null</span>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
                     &mdash;
                 <section class="phpdocumentor-description"><p>the exception status</p>
 </section>
@@ -4268,7 +4270,7 @@ false: default value (boolean) unless an exception is triggered.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1769</span>
+    <span class="phpdocumentor-element-found-in__line">1772</span>
 
     </aside>
 
@@ -4306,7 +4308,7 @@ false: default value (boolean) unless an exception is triggered.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1034</span>
+    <span class="phpdocumentor-element-found-in__line">1037</span>
 
     </aside>
 
@@ -4314,7 +4316,7 @@ false: default value (boolean) unless an exception is triggered.
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getExpirationTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+                    <span class="phpdocumentor-signature__name">getExpirationTime</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -4324,7 +4326,7 @@ false: default value (boolean) unless an exception is triggered.
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">string|null</span>
+        <span class="phpdocumentor-signature__response_type">int|null</span>
                     &mdash;
                 <section class="phpdocumentor-description"><p>the UNIX time</p>
 </section>
@@ -4346,7 +4348,7 @@ false: default value (boolean) unless an exception is triggered.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1657</span>
+    <span class="phpdocumentor-element-found-in__line">1660</span>
 
     </aside>
 
@@ -4388,7 +4390,7 @@ the webhook also have a payload slightly different from the standard webhooks.</
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">724</span>
+    <span class="phpdocumentor-element-found-in__line">726</span>
 
     </aside>
 
@@ -4430,7 +4432,7 @@ the webhook also have a payload slightly different from the standard webhooks.</
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">700</span>
+    <span class="phpdocumentor-element-found-in__line">702</span>
 
     </aside>
 
@@ -4472,7 +4474,7 @@ the webhook also have a payload slightly different from the standard webhooks.</
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">324</span>
+    <span class="phpdocumentor-element-found-in__line">326</span>
 
     </aside>
 
@@ -4519,7 +4521,7 @@ depending on the transactionSpeed selected.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">157</span>
+    <span class="phpdocumentor-element-found-in__line">159</span>
 
     </aside>
 
@@ -4563,7 +4565,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">914</span>
+    <span class="phpdocumentor-element-found-in__line">916</span>
 
     </aside>
 
@@ -4603,7 +4605,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1014</span>
+    <span class="phpdocumentor-element-found-in__line">1017</span>
 
     </aside>
 
@@ -4643,7 +4645,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1793</span>
+    <span class="phpdocumentor-element-found-in__line">1796</span>
 
     </aside>
 
@@ -4681,7 +4683,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">456</span>
+    <span class="phpdocumentor-element-found-in__line">458</span>
 
     </aside>
 
@@ -4723,7 +4725,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">431</span>
+    <span class="phpdocumentor-element-found-in__line">433</span>
 
     </aside>
 
@@ -4765,7 +4767,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">748</span>
+    <span class="phpdocumentor-element-found-in__line">750</span>
 
     </aside>
 
@@ -4803,7 +4805,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">590</span>
+    <span class="phpdocumentor-element-found-in__line">592</span>
 
     </aside>
 
@@ -4848,7 +4850,7 @@ from wallets which have implemented the
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">991</span>
+    <span class="phpdocumentor-element-found-in__line">994</span>
 
     </aside>
 
@@ -4891,7 +4893,7 @@ Initially set to false when the invoice is created.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">645</span>
+    <span class="phpdocumentor-element-found-in__line">647</span>
 
     </aside>
 
@@ -4933,7 +4935,7 @@ Initially set to false when the invoice is created.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1520</span>
+    <span class="phpdocumentor-element-found-in__line">1523</span>
 
     </aside>
 
@@ -4977,7 +4979,7 @@ this support article
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1552</span>
+    <span class="phpdocumentor-element-found-in__line">1555</span>
 
     </aside>
 
@@ -5016,7 +5018,7 @@ and indicate if the transaction was made with a wallet using the payment protoco
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">353</span>
+    <span class="phpdocumentor-element-found-in__line">355</span>
 
     </aside>
 
@@ -5058,7 +5060,7 @@ and indicate if the transaction was made with a wallet using the payment protoco
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">263</span>
+    <span class="phpdocumentor-element-found-in__line">265</span>
 
     </aside>
 
@@ -5100,7 +5102,7 @@ and indicate if the transaction was made with a wallet using the payment protoco
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">405</span>
+    <span class="phpdocumentor-element-found-in__line">407</span>
 
     </aside>
 
@@ -5139,7 +5141,7 @@ If used, there should be a direct match between an orderId and an invoice id.</p
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1487</span>
+    <span class="phpdocumentor-element-found-in__line">1490</span>
 
     </aside>
 
@@ -5147,7 +5149,7 @@ If used, there should be a direct match between an orderId and an invoice id.</p
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getOverpaidAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
+                    <span class="phpdocumentor-signature__name">getOverpaidAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -5162,7 +5164,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int|null</span>
+        <span class="phpdocumentor-signature__response_type">float|null</span>
             </section>
 
 </article>
@@ -5180,7 +5182,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1425</span>
+    <span class="phpdocumentor-element-found-in__line">1428</span>
 
     </aside>
 
@@ -5223,7 +5225,7 @@ For &quot;XRP&quot; - RIP681, BIP72b and BIP73 is supported</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">508</span>
+    <span class="phpdocumentor-element-found-in__line">510</span>
 
     </aside>
 
@@ -5269,7 +5271,7 @@ thus bypassing the currency selection step on the invoice.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1364</span>
+    <span class="phpdocumentor-element-found-in__line">1367</span>
 
     </aside>
 
@@ -5313,7 +5315,7 @@ for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1393</span>
+    <span class="phpdocumentor-element-found-in__line">1396</span>
 
     </aside>
 
@@ -5358,7 +5360,7 @@ indicated in the base unit for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1338</span>
+    <span class="phpdocumentor-element-found-in__line">1341</span>
 
     </aside>
 
@@ -5400,7 +5402,7 @@ indicated in the base unit for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1314</span>
+    <span class="phpdocumentor-element-found-in__line">1317</span>
 
     </aside>
 
@@ -5442,7 +5444,7 @@ indicated in the base unit for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">480</span>
+    <span class="phpdocumentor-element-found-in__line">482</span>
 
     </aside>
 
@@ -5484,7 +5486,7 @@ indicated in the base unit for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">239</span>
+    <span class="phpdocumentor-element-found-in__line">241</span>
 
     </aside>
 
@@ -5528,7 +5530,7 @@ This passthru variable can be a serialized object.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">212</span>
+    <span class="phpdocumentor-element-found-in__line">214</span>
 
     </aside>
 
@@ -5570,7 +5572,7 @@ This passthru variable can be a serialized object.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">378</span>
+    <span class="phpdocumentor-element-found-in__line">380</span>
 
     </aside>
 
@@ -5613,7 +5615,7 @@ after a successful payment or when clicking on the Close button if a separate cl
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">890</span>
+    <span class="phpdocumentor-element-found-in__line">892</span>
 
     </aside>
 
@@ -5637,7 +5639,7 @@ provided by the customer if you request a refund of the specific invoice.</p>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|null</span>
                     &mdash;
-                <section class="phpdocumentor-description"><p>Refund address provided by the customer</p>
+                <section class="phpdocumentor-description"><p>[[string, InvoiceRefundAddress]] Refund address provided by the customer</p>
 </section>
 
             </section>
@@ -5657,7 +5659,7 @@ provided by the customer if you request a refund of the specific invoice.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1167</span>
+    <span class="phpdocumentor-element-found-in__line">1170</span>
 
     </aside>
 
@@ -5703,7 +5705,7 @@ via the secure link which has been automatically emailed to him.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1629</span>
+    <span class="phpdocumentor-element-found-in__line">1632</span>
 
     </aside>
 
@@ -5741,7 +5743,7 @@ via the secure link which has been automatically emailed to him.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">672</span>
+    <span class="phpdocumentor-element-found-in__line">674</span>
 
     </aside>
 
@@ -5786,7 +5788,7 @@ If not yet selected, this field will not be returned.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1578</span>
+    <span class="phpdocumentor-element-found-in__line">1581</span>
 
     </aside>
 
@@ -5845,7 +5847,7 @@ If not yet selected, this field will not be returned.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">963</span>
+    <span class="phpdocumentor-element-found-in__line">965</span>
 
     </aside>
 
@@ -5870,7 +5872,7 @@ Instant Payment Notification (IPN) section.
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
                     &mdash;
-                <section class="phpdocumentor-description"><p>Invoice status</p>
+                <section class="phpdocumentor-description"><p>InvoiceStatus const value</p>
 </section>
 
             </section>
@@ -5890,7 +5892,7 @@ Instant Payment Notification (IPN) section.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1283</span>
+    <span class="phpdocumentor-element-found-in__line">1286</span>
 
     </aside>
 
@@ -5937,7 +5939,7 @@ this parameter will be set to &quot;merchantDisabledByParam&quot;</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1135</span>
+    <span class="phpdocumentor-element-found-in__line">1138</span>
 
     </aside>
 
@@ -5982,7 +5984,7 @@ Currently, the value set is set to 6 by default for BTC/BCH/XRP,
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">184</span>
+    <span class="phpdocumentor-element-found-in__line">186</span>
 
     </aside>
 
@@ -6027,7 +6029,7 @@ to create the invoice and is tied to the specific resource id created.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1688</span>
+    <span class="phpdocumentor-element-found-in__line">1691</span>
 
     </aside>
 
@@ -6068,7 +6070,7 @@ Possible values are currently &quot;BTC&quot;, &quot;BCH&quot;, &quot;ETH&quot;,
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1076</span>
+    <span class="phpdocumentor-element-found-in__line">1079</span>
 
     </aside>
 
@@ -6110,7 +6112,7 @@ Possible values are currently &quot;BTC&quot;, &quot;BCH&quot;, &quot;ETH&quot;,
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">290</span>
+    <span class="phpdocumentor-element-found-in__line">292</span>
 
     </aside>
 
@@ -6157,7 +6159,7 @@ the invoice reaches the status &quot;complete&quot; (regardless of this setting)
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1457</span>
+    <span class="phpdocumentor-element-found-in__line">1460</span>
 
     </aside>
 
@@ -6165,7 +6167,7 @@ the invoice reaches the status &quot;complete&quot; (regardless of this setting)
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getUnderpaidAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
+                    <span class="phpdocumentor-signature__name">getUnderpaidAmount</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">float|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -6180,7 +6182,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">int|null</span>
+        <span class="phpdocumentor-signature__response_type">float|null</span>
             </section>
 
 </article>
@@ -6198,7 +6200,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1256</span>
+    <span class="phpdocumentor-element-found-in__line">1259</span>
 
     </aside>
 
@@ -6240,7 +6242,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">936</span>
+    <span class="phpdocumentor-element-found-in__line">938</span>
 
     </aside>
 
@@ -6282,7 +6284,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">795</span>
+    <span class="phpdocumentor-element-found-in__line">797</span>
 
     </aside>
 
@@ -6290,7 +6292,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setAcceptanceWindow</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$acceptanceWindow</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setAcceptanceWindow</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$acceptanceWindow</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -6303,7 +6305,7 @@ If account acceptanceWindow is not set, invoice will default to 15 minutes (900,
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$acceptanceWindow</span>
-                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Number of milliseconds that a user has to pay an invoice before it expire</p>
@@ -6330,7 +6332,7 @@ If account acceptanceWindow is not set, invoice will default to 15 minutes (900,
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1729</span>
+    <span class="phpdocumentor-element-found-in__line">1732</span>
 
     </aside>
 
@@ -6338,7 +6340,7 @@ If account acceptanceWindow is not set, invoice will default to 15 minutes (900,
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setAmountPaid</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amountPaid</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setAmountPaid</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$amountPaid</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -6350,7 +6352,7 @@ in the smallest possible unit for the corresponding transactionCurrency (e.g sat
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$amountPaid</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The total amount paid to the invoice</p>
@@ -6377,7 +6379,7 @@ in the smallest possible unit for the corresponding transactionCurrency (e.g sat
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">575</span>
+    <span class="phpdocumentor-element-found-in__line">577</span>
 
     </aside>
 
@@ -6424,7 +6426,7 @@ merchant can setup automatic redirect to their website by setting this parameter
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1617</span>
+    <span class="phpdocumentor-element-found-in__line">1620</span>
 
     </aside>
 
@@ -6487,7 +6489,7 @@ merchant can setup automatic redirect to their website by setting this parameter
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">633</span>
+    <span class="phpdocumentor-element-found-in__line">635</span>
 
     </aside>
 
@@ -6535,7 +6537,7 @@ This Boolean forces the invoice to require BitPay ID regardless of the price.</p
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">819</span>
+    <span class="phpdocumentor-element-found-in__line">821</span>
 
     </aside>
 
@@ -6581,7 +6583,7 @@ This Boolean forces the invoice to require BitPay ID regardless of the price.</p
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">845</span>
+    <span class="phpdocumentor-element-found-in__line">847</span>
 
     </aside>
 
@@ -6628,7 +6630,7 @@ If provided during invoice creation, this will bypass the email prompt for the c
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1217</span>
+    <span class="phpdocumentor-element-found-in__line">1220</span>
 
     </aside>
 
@@ -6679,7 +6681,7 @@ by the merchant</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1244</span>
+    <span class="phpdocumentor-element-found-in__line">1247</span>
 
     </aside>
 
@@ -6727,7 +6729,7 @@ during the process of paying an invoice</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">873</span>
+    <span class="phpdocumentor-element-found-in__line">875</span>
 
     </aside>
 
@@ -6775,7 +6777,7 @@ This is only used for instances where a buyers email
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">549</span>
+    <span class="phpdocumentor-element-found-in__line">551</span>
 
     </aside>
 
@@ -6822,7 +6824,7 @@ Be sure to include &quot;http://&quot; or &quot;https://&quot; in the url.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">139</span>
+    <span class="phpdocumentor-element-found-in__line">141</span>
 
     </aside>
 
@@ -6863,7 +6865,7 @@ supported currencies are available via the
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayValidationException.html"><abbr title="\BitPaySDK\Exceptions\BitPayValidationException">BitPayValidationException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -6885,7 +6887,7 @@ supported currencies are available via the
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1064</span>
+    <span class="phpdocumentor-element-found-in__line">1067</span>
 
     </aside>
 
@@ -6893,7 +6895,7 @@ supported currencies are available via the
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setCurrentTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$currentTime</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setCurrentTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$currentTime</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -6902,7 +6904,7 @@ supported currencies are available via the
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$currentTime</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>UNIX time of API call, in milliseconds</p>
@@ -6929,7 +6931,7 @@ supported currencies are available via the
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1757</span>
+    <span class="phpdocumentor-element-found-in__line">1760</span>
 
     </aside>
 
@@ -6977,7 +6979,7 @@ indicated in the base unit for the corresponding transactionCurrency</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1120</span>
+    <span class="phpdocumentor-element-found-in__line">1123</span>
 
     </aside>
 
@@ -6985,13 +6987,13 @@ indicated in the base unit for the corresponding transactionCurrency</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setExceptionStatus</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$exceptionStatus</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setExceptionStatus</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$exceptionStatus</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
         <section class="phpdocumentor-description"><p>Initially a boolean false, this parameter will indicate if the purchaser sent too much (&quot;paidOver&quot;)
 or not enough funds (&quot;paidPartial&quot;) in the transaction to pay the BitPay invoice. Possible values are:
-false: default value (boolean) unless an exception is triggered.
+&quot;false&quot;: default value (boolean) unless an exception is triggered.
 &quot;paidPartial&quot;: (string) if the consumer did not send enough funds when paying the invoice.
 &quot;paidOver&quot;: (string) if the consumer sent to much funds when paying the invoice.</p>
 </section>
@@ -7000,10 +7002,10 @@ false: default value (boolean) unless an exception is triggered.
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$exceptionStatus</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>this parameter will indicate if the purchaser sent too much or not enough funds</p>
+                    <section class="phpdocumentor-description"><p>parameter will indicate if the purchaser sent too much or not enough funds</p>
 </section>
 
             </dd>
@@ -7027,7 +7029,7 @@ false: default value (boolean) unless an exception is triggered.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1781</span>
+    <span class="phpdocumentor-element-found-in__line">1784</span>
 
     </aside>
 
@@ -7073,7 +7075,7 @@ false: default value (boolean) unless an exception is triggered.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1044</span>
+    <span class="phpdocumentor-element-found-in__line">1047</span>
 
     </aside>
 
@@ -7081,7 +7083,7 @@ false: default value (boolean) unless an exception is triggered.
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setExpirationTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expirationTime</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setExpirationTime</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$expirationTime</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -7090,7 +7092,7 @@ false: default value (boolean) unless an exception is triggered.
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$expirationTime</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>UNIX time when invoice is last available to be paid, in milliseconds</p>
@@ -7117,7 +7119,7 @@ false: default value (boolean) unless an exception is triggered.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1673</span>
+    <span class="phpdocumentor-element-found-in__line">1676</span>
 
     </aside>
 
@@ -7167,7 +7169,7 @@ the webhook also have a payload slightly different from the standard webhooks.</
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">736</span>
+    <span class="phpdocumentor-element-found-in__line">738</span>
 
     </aside>
 
@@ -7213,7 +7215,7 @@ the webhook also have a payload slightly different from the standard webhooks.</
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">712</span>
+    <span class="phpdocumentor-element-found-in__line">714</span>
 
     </aside>
 
@@ -7259,7 +7261,7 @@ the webhook also have a payload slightly different from the standard webhooks.</
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">341</span>
+    <span class="phpdocumentor-element-found-in__line">343</span>
 
     </aside>
 
@@ -7310,7 +7312,7 @@ depending on the transactionSpeed selected.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">171</span>
+    <span class="phpdocumentor-element-found-in__line">173</span>
 
     </aside>
 
@@ -7358,7 +7360,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">924</span>
+    <span class="phpdocumentor-element-found-in__line">926</span>
 
     </aside>
 
@@ -7402,7 +7404,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1024</span>
+    <span class="phpdocumentor-element-found-in__line">1027</span>
 
     </aside>
 
@@ -7446,7 +7448,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1805</span>
+    <span class="phpdocumentor-element-found-in__line">1808</span>
 
     </aside>
 
@@ -7492,7 +7494,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">468</span>
+    <span class="phpdocumentor-element-found-in__line">470</span>
 
     </aside>
 
@@ -7538,7 +7540,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">444</span>
+    <span class="phpdocumentor-element-found-in__line">446</span>
 
     </aside>
 
@@ -7584,7 +7586,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">761</span>
+    <span class="phpdocumentor-element-found-in__line">763</span>
 
     </aside>
 
@@ -7621,7 +7623,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -7643,7 +7645,7 @@ which can be used as a lookup variable in Retrieve Invoice by GUID.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">605</span>
+    <span class="phpdocumentor-element-found-in__line">607</span>
 
     </aside>
 
@@ -7692,7 +7694,7 @@ from wallets which have implemented the
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1004</span>
+    <span class="phpdocumentor-element-found-in__line">1007</span>
 
     </aside>
 
@@ -7739,7 +7741,7 @@ Initially set to false when the invoice is created.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">657</span>
+    <span class="phpdocumentor-element-found-in__line">659</span>
 
     </aside>
 
@@ -7785,7 +7787,7 @@ Initially set to false when the invoice is created.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1539</span>
+    <span class="phpdocumentor-element-found-in__line">1542</span>
 
     </aside>
 
@@ -7838,7 +7840,7 @@ to cover BitPay's UTXO sweep cost for an invoice</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1565</span>
+    <span class="phpdocumentor-element-found-in__line">1568</span>
 
     </aside>
 
@@ -7885,7 +7887,7 @@ and indicate if the transaction was made with a wallet using the payment protoco
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">365</span>
+    <span class="phpdocumentor-element-found-in__line">367</span>
 
     </aside>
 
@@ -7931,7 +7933,7 @@ and indicate if the transaction was made with a wallet using the payment protoco
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">273</span>
+    <span class="phpdocumentor-element-found-in__line">275</span>
 
     </aside>
 
@@ -7977,7 +7979,7 @@ and indicate if the transaction was made with a wallet using the payment protoco
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">418</span>
+    <span class="phpdocumentor-element-found-in__line">420</span>
 
     </aside>
 
@@ -8024,7 +8026,7 @@ If used, there should be a direct match between an orderId and an invoice id.</p
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1502</span>
+    <span class="phpdocumentor-element-found-in__line">1505</span>
 
     </aside>
 
@@ -8032,7 +8034,7 @@ If used, there should be a direct match between an orderId and an invoice id.</p
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setOverpaidAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$overpaidAmount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setOverpaidAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$overpaidAmount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -8046,7 +8048,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$overpaidAmount</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>the overpaid amount</p>
@@ -8073,7 +8075,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1442</span>
+    <span class="phpdocumentor-element-found-in__line">1445</span>
 
     </aside>
 
@@ -8122,7 +8124,7 @@ For &quot;XRP&quot; - RIP681, BIP72b and BIP73 is supported</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">524</span>
+    <span class="phpdocumentor-element-found-in__line">526</span>
 
     </aside>
 
@@ -8172,7 +8174,7 @@ thus bypassing the currency selection step on the invoice.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1378</span>
+    <span class="phpdocumentor-element-found-in__line">1381</span>
 
     </aside>
 
@@ -8220,7 +8222,7 @@ for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1408</span>
+    <span class="phpdocumentor-element-found-in__line">1411</span>
 
     </aside>
 
@@ -8269,7 +8271,7 @@ indicated in the base unit for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1350</span>
+    <span class="phpdocumentor-element-found-in__line">1353</span>
 
     </aside>
 
@@ -8315,7 +8317,7 @@ indicated in the base unit for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1326</span>
+    <span class="phpdocumentor-element-found-in__line">1329</span>
 
     </aside>
 
@@ -8361,7 +8363,7 @@ indicated in the base unit for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">492</span>
+    <span class="phpdocumentor-element-found-in__line">494</span>
 
     </aside>
 
@@ -8407,7 +8409,7 @@ indicated in the base unit for each supported transactionCurrency.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">253</span>
+    <span class="phpdocumentor-element-found-in__line">255</span>
 
     </aside>
 
@@ -8455,7 +8457,7 @@ This passthru variable can be a serialized object.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">225</span>
+    <span class="phpdocumentor-element-found-in__line">227</span>
 
     </aside>
 
@@ -8501,7 +8503,7 @@ This passthru variable can be a serialized object.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">392</span>
+    <span class="phpdocumentor-element-found-in__line">394</span>
 
     </aside>
 
@@ -8549,7 +8551,7 @@ Be sure to include &quot;http://&quot; or &quot;https://&quot; in the url.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">904</span>
+    <span class="phpdocumentor-element-found-in__line">906</span>
 
     </aside>
 
@@ -8573,9 +8575,7 @@ provided by the customer if you request a refund of the specific invoice.</p>
                 : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Refund address provided by the customer</p>
-</section>
-
+                
             </dd>
             </dl>
 
@@ -8597,7 +8597,7 @@ provided by the customer if you request a refund of the specific invoice.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1184</span>
+    <span class="phpdocumentor-element-found-in__line">1187</span>
 
     </aside>
 
@@ -8648,7 +8648,7 @@ request is pending action</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1641</span>
+    <span class="phpdocumentor-element-found-in__line">1644</span>
 
     </aside>
 
@@ -8692,7 +8692,7 @@ request is pending action</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">688</span>
+    <span class="phpdocumentor-element-found-in__line">690</span>
 
     </aside>
 
@@ -8742,7 +8742,7 @@ to pay the BitPay invoice</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1591</span>
+    <span class="phpdocumentor-element-found-in__line">1594</span>
 
     </aside>
 
@@ -8805,7 +8805,7 @@ to pay the BitPay invoice</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">978</span>
+    <span class="phpdocumentor-element-found-in__line">981</span>
 
     </aside>
 
@@ -8820,6 +8820,7 @@ to pay the BitPay invoice</p>
         <section class="phpdocumentor-description"><p>Detailed information about invoice status notifications can be found under the
 <a href="https://bitpay.com/api/#notifications-webhooks-instant-payment-notifications-handling">
 Instant Payment Notification (IPN) section.
+Use values from InvoiceStatus const.
 </a></p>
 </section>
 
@@ -8830,7 +8831,7 @@ Instant Payment Notification (IPN) section.
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Invoice status</p>
+                    <section class="phpdocumentor-description"><p>InvoiceStatus const value</p>
 </section>
 
             </dd>
@@ -8854,7 +8855,7 @@ Instant Payment Notification (IPN) section.
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1301</span>
+    <span class="phpdocumentor-element-found-in__line">1304</span>
 
     </aside>
 
@@ -8906,7 +8907,7 @@ to pay this invoice</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1151</span>
+    <span class="phpdocumentor-element-found-in__line">1154</span>
 
     </aside>
 
@@ -8957,7 +8958,7 @@ which are required to credit a paid invoice to the merchant account</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">200</span>
+    <span class="phpdocumentor-element-found-in__line">202</span>
 
     </aside>
 
@@ -9005,7 +9006,7 @@ invoice and is tied to the specific resource id created.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1703</span>
+    <span class="phpdocumentor-element-found-in__line">1706</span>
 
     </aside>
 
@@ -9054,7 +9055,7 @@ Possible values are currently &quot;BTC&quot;, &quot;BCH&quot;, &quot;ETH&quot;,
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1088</span>
+    <span class="phpdocumentor-element-found-in__line">1091</span>
 
     </aside>
 
@@ -9100,7 +9101,7 @@ Possible values are currently &quot;BTC&quot;, &quot;BCH&quot;, &quot;ETH&quot;,
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">307</span>
+    <span class="phpdocumentor-element-found-in__line">309</span>
 
     </aside>
 
@@ -9151,7 +9152,7 @@ the invoice reaches the status &quot;complete&quot; (regardless of this setting)
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1472</span>
+    <span class="phpdocumentor-element-found-in__line">1475</span>
 
     </aside>
 
@@ -9159,7 +9160,7 @@ the invoice reaches the status &quot;complete&quot; (regardless of this setting)
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setUnderpaidAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$underpaidAmount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setUnderpaidAmount</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$underpaidAmount</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -9173,7 +9174,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$underpaidAmount</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>the underpaid amount</p>
@@ -9200,7 +9201,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1266</span>
+    <span class="phpdocumentor-element-found-in__line">1269</span>
 
     </aside>
 
@@ -9244,7 +9245,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">948</span>
+    <span class="phpdocumentor-element-found-in__line">950</span>
 
     </aside>
 
@@ -9290,7 +9291,7 @@ and paymentTotals for the corresponding transactionCurrency used.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/Invoice.php"><a href="files/src-bitpaysdk-model-invoice-invoice.html"><abbr title="src/BitPaySDK/Model/Invoice/Invoice.php">Invoice.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">1815</span>
+    <span class="phpdocumentor-element-found-in__line">1818</span>
 
     </aside>
 

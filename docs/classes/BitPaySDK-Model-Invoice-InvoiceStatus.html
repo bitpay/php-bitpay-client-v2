@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/bitpaysdk.html" class="">BitPaySDK</a>
@@ -69,6 +69,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/bitpaysdk-logger.html" class="">Logger</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/bitpaysdk-model.html" class="">Model</a>
                 
             </li>
@@ -79,7 +83,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/BitPaySDK.html" class="">BitPaySDK</a>
@@ -87,10 +91,6 @@
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="packages/BitPaySDK-Client.html" class="">Client</a>
-                
-            </li>
-                    <li>
-                <a href="packages/BitPaySDK-Exceptions.html" class="">Exceptions</a>
                 
             </li>
                     <li>
@@ -105,14 +105,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -209,7 +209,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_COMPLETE">COMPLETE</a>
     <span>
-        &nbsp;= &quot;complete&quot;                            </span>
+        &nbsp;= &#039;complete&#039;                            </span>
 </dt>
 <dd>When an invoice has the status complete, it means that BitPay has credited the merchant account,
 in the currency indicated in the settlement settings. For instance, with invoices paid in Bitcoin (BTC),
@@ -219,21 +219,29 @@ this takes on average 1 hour.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_CONFIRMED">CONFIRMED</a>
     <span>
-        &nbsp;= &quot;confirmed&quot;                            </span>
+        &nbsp;= &#039;confirmed&#039;                            </span>
 </dt>
 <dd>This status can be used by merchants in order to fulfill orders placed by the consumer.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_DECLINED">DECLINED</a>
+    <span>
+        &nbsp;= &#039;declined&#039;                            </span>
+</dt>
+<dd>An invoice in the declined status is no longer eligible to be successfully completed,
+and the customer will be automatically contacted regarding a refund if needed.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_EXPIRED">EXPIRED</a>
     <span>
-        &nbsp;= &quot;expired&quot;                            </span>
+        &nbsp;= &#039;expired&#039;                            </span>
 </dt>
 <dd>An invoice reaches the expired status if no payment was received and the 15 minute payment window has elapsed.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_INVALID">INVALID</a>
     <span>
-        &nbsp;= &quot;invalid&quot;                            </span>
+        &nbsp;= &#039;invalid&#039;                            </span>
 </dt>
 <dd>An invoice is considered invalid when it was paid,
 but the corresponding cryptocurrency transaction was not confirmed within 1 hour on the corresponding blockchain.</dd>
@@ -241,7 +249,7 @@ but the corresponding cryptocurrency transaction was not confirmed within 1 hour
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_NEW">NEW</a>
     <span>
-        &nbsp;= &quot;new&quot;                            </span>
+        &nbsp;= &#039;new&#039;                            </span>
 </dt>
 <dd>An invoice starts in this state. When in this state and only in this state, payments broadcasted by purchasers
 be applied to the invoice (there is a 15 minute window for the purchaser to send a payment from
@@ -252,7 +260,7 @@ an invoice is either paid or not paid, partial payments are automatically refund
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_PAID">PAID</a>
     <span>
-        &nbsp;= &quot;paid&quot;                            </span>
+        &nbsp;= &#039;paid&#039;                            </span>
 </dt>
 <dd>As soon as payment is received it is evaluated against the invoice requested amount.</dd>
 
@@ -263,6 +271,8 @@ an invoice is either paid or not paid, partial payments are automatically refund
 
 
 
+
+        
 
         
     <section class="phpdocumentor-constants">
@@ -294,7 +304,7 @@ this takes on average 1 hour.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">COMPLETE</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;complete&quot;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;complete&#039;</span>
 </code>
 
 
@@ -323,7 +333,7 @@ this takes on average 1 hour.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">CONFIRMED</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;confirmed&quot;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;confirmed&#039;</span>
 </code>
 
 
@@ -331,6 +341,39 @@ this takes on average 1 hour.</p>
 depending on the number of confirmation achieved by the consumer's transaction in the selected cryptocurrency.
 This can be configured during invoice creation using the &quot;transactionSpeed&quot; parameter
 (section Create an invoice), or at account level via a dashboard setting.</p>
+</section>
+
+    
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_DECLINED">
+        DECLINED
+        <a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_DECLINED" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Invoice/InvoiceStatus.php"><a href="files/src-bitpaysdk-model-invoice-invoicestatus.html"><abbr title="src/BitPaySDK/Model/Invoice/InvoiceStatus.php">InvoiceStatus.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">73</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An invoice in the declined status is no longer eligible to be successfully completed,
+and the customer will be automatically contacted regarding a refund if needed.</p>
+
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">DECLINED</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;declined&#039;</span>
+</code>
+
+
+        <section class="phpdocumentor-description"><p>Reason for this status include cancelling an invoice before completion
+and the invoice remaining unconfirmed after a set time period - typically 24 hours.</p>
 </section>
 
     
@@ -357,7 +400,7 @@ This can be configured during invoice creation using the &quot;transactionSpeed&
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">EXPIRED</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;expired&quot;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;expired&#039;</span>
 </code>
 
 
@@ -387,7 +430,7 @@ but the corresponding cryptocurrency transaction was not confirmed within 1 hour
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">INVALID</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;invalid&quot;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;invalid&#039;</span>
 </code>
 
 
@@ -424,7 +467,7 @@ an invoice is either paid or not paid, partial payments are automatically refund
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">NEW</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;new&quot;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;new&#039;</span>
 </code>
 
 
@@ -453,7 +496,7 @@ an invoice is either paid or not paid, partial payments are automatically refund
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">PAID</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;paid&quot;</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;paid&#039;</span>
 </code>
 
 
@@ -582,6 +625,7 @@ The overpaid amount on an invoice is automatically refunded by BitPay to the con
                     <ul class="phpdocumentor-list -clean">
                                                     <li><a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_COMPLETE">COMPLETE</a></li>
                                                     <li><a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_CONFIRMED">CONFIRMED</a></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_DECLINED">DECLINED</a></li>
                                                     <li><a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_EXPIRED">EXPIRED</a></li>
                                                     <li><a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_INVALID">INVALID</a></li>
                                                     <li><a href="classes/BitPaySDK-Model-Invoice-InvoiceStatus.html#constant_NEW">NEW</a></li>
