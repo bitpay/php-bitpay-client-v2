@@ -13,11 +13,11 @@
   "homepage": "https://github.com/bitpay/php-bitpay-client-v2",
   "require": {
     "bitpay/key-utils": "^1.1",
-    "php": "^7.4 || ^8.0 || ^8.1",
+    "php": "^7.4 || ^8.0 || ^8.1 || ^8.2 || ^8.3",
     "guzzlehttp/guzzle": "^7.0",
     "ext-json": "*",
     "ext-reflection": "*",
-    "symfony/yaml": "^3.0 || ^4.3 || ^5.0 || ^6.0"
+    "symfony/yaml": "^3.0 || ^4.3 || ^5.0 || ^6.0 || ^7.0"
   },
   "authors": [
     {
