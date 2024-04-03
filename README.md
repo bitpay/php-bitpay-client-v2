@@ -9,7 +9,7 @@ Full implementation of the BitPay Payment Gateway. This library implements BitPa
 
 ## Getting Started
 
-To get up and running with our PHP library quickly, follow [the guide](https://bitpay.readme.io/reference/php-full-sdk-getting-started)
+To get up and running with our PHP library quickly, follow [the guide](https://developer.bitpay.com/reference/php-full-sdk-getting-started)
 
 ## Support
 
@@ -18,7 +18,7 @@ To get up and running with our PHP library quickly, follow [the guide](https://b
 
 ### Requirements
 
-- PHP version: 8.0 / 8.1 / 8.2
+- PHP version: 8.1 / 8.2 / 8.3
 - PHP extensions: json, reflection
 
 ## Unit Tests
