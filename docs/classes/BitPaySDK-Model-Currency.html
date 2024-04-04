@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/bitpaysdk.html" class="">BitPaySDK</a>
@@ -69,6 +69,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/bitpaysdk-logger.html" class="">Logger</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/bitpaysdk-model.html" class="">Model</a>
                 
             </li>
@@ -79,7 +83,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/BitPaySDK.html" class="">BitPaySDK</a>
@@ -87,10 +91,6 @@
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="packages/BitPaySDK-Client.html" class="">Client</a>
-                
-            </li>
-                    <li>
-                <a href="packages/BitPaySDK-Exceptions.html" class="">Exceptions</a>
                 
             </li>
                     <li>
@@ -105,14 +105,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -1293,7 +1293,19 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/BitPaySDK-Model-Currency.html#property_chain">$chain</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Currency.html#property_code">$code</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/BitPaySDK-Model-Currency.html#property_contractAddress">$contractAddress</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
@@ -1306,6 +1318,18 @@
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Currency.html#property_decimals">$decimals</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/BitPaySDK-Model-Currency.html#property_displayCode">$displayCode</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/BitPaySDK-Model-Currency.html#property_maxSupply">$maxSupply</a>
     <span>
                         &nbsp;: string|null            </span>
 </dt>
@@ -1320,12 +1344,6 @@
     <a href="classes/BitPaySDK-Model-Currency.html#property_name">$name</a>
     <span>
                         &nbsp;: string|null            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/BitPaySDK-Model-Currency.html#property_payoutFields">$payoutFields</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
@@ -1347,15 +1365,15 @@
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/BitPaySDK-Model-Currency.html#property_settlementMinimum">$settlementMinimum</a>
-    <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/BitPaySDK-Model-Currency.html#property_symbol">$symbol</a>
     <span>
                         &nbsp;: string|null            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a href="classes/BitPaySDK-Model-Currency.html#property_trancheDecimals">$trancheDecimals</a>
+    <span>
+                        &nbsp;: int|null            </span>
 </dt>
 
     </dl>
@@ -1380,11 +1398,23 @@
 <dd>Gets alternative currency name(s)</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_getChain">getChain()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_getCode">getCode()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
 <dd>Get ISO 4217 3-character currency code</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_getContractAddress">getContractAddress()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_getCurrentlySettled">getCurrentlySettled()</a>
@@ -1396,9 +1426,21 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_getDecimals">getDecimals()</a>
     <span>
-                                &nbsp;: string|null    </span>
+                                &nbsp;: int|null    </span>
 </dt>
 <dd>Gets decimal precision</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_getDisplayCode">getDisplayCode()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_getMaxSupply">getMaxSupply()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_getMinimum">getMinimum()</a>
@@ -1413,13 +1455,6 @@
                                 &nbsp;: string|null    </span>
 </dt>
 <dd>Gets currency name</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/BitPaySDK-Model-Currency.html#method_getPayoutFields">getPayoutFields()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Gets payout fields</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_getPlural">getPlural()</a>
@@ -1443,18 +1478,17 @@
 <dd>Gets if the currency is linked to a sanctionned country</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/BitPaySDK-Model-Currency.html#method_getSettlementMinimum">getSettlementMinimum()</a>
-    <span>
-                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
-</dt>
-<dd>Gets settlement minimum</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_getSymbol">getSymbol()</a>
     <span>
                                 &nbsp;: string|null    </span>
 </dt>
 <dd>Display symbol</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_getTrancheDecimals">getTrancheDecimals()</a>
+    <span>
+                                &nbsp;: int|null    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_isValid">isValid()</a>
@@ -1471,11 +1505,23 @@
 <dd>Sets alternative currency name(s)</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_setChain">setChain()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_setCode">setCode()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Sets ISO 4217 3-character currency code</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_setContractAddress">setContractAddress()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_setCurrentlySettled">setCurrentlySettled()</a>
@@ -1492,6 +1538,18 @@
 <dd>Sets decimal precision</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_setDisplayCode">setDisplayCode()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_setMaxSupply">setMaxSupply()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_setMinimum">setMinimum()</a>
     <span>
                                 &nbsp;: void    </span>
@@ -1504,13 +1562,6 @@
                                 &nbsp;: void    </span>
 </dt>
 <dd>Sets currency name</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/BitPaySDK-Model-Currency.html#method_setPayoutFields">setPayoutFields()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Sets payout fields</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_setPlural">setPlural()</a>
@@ -1534,18 +1585,17 @@
 <dd>Sets if the currency is linked to a sanctionned country</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/BitPaySDK-Model-Currency.html#method_setSettlementMinimum">setSettlementMinimum()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Sets settlement minimum</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_setSymbol">setSymbol()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
 <dd>Sets symbol</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/BitPaySDK-Model-Currency.html#method_setTrancheDecimals">setTrancheDecimals()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/BitPaySDK-Model-Currency.html#method_toArray">toArray()</a>
@@ -1558,6 +1608,8 @@
 
 
 
+
+        
 
         
     <section class="phpdocumentor-constants">
@@ -6627,6 +6679,39 @@
             -protected
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="property_chain">
+        $chain
+        <a href="classes/BitPaySDK-Model-Currency.html#property_chain" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">221</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$chain</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="property_code">
         $code
         <a href="classes/BitPaySDK-Model-Currency.html#property_code" class="headerlink"><i class="fas fa-link"></i></a>
@@ -6646,6 +6731,39 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$code</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_contractAddress">
+        $contractAddress
+        <a href="classes/BitPaySDK-Model-Currency.html#property_contractAddress" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">225</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$contractAddress</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
@@ -6710,8 +6828,74 @@
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
     <span class="phpdocumentor-signature__name">$decimals</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_displayCode">
+        $displayCode
+        <a href="classes/BitPaySDK-Model-Currency.html#property_displayCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">222</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$displayCode</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_maxSupply">
+        $maxSupply
+        <a href="classes/BitPaySDK-Model-Currency.html#property_maxSupply" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">223</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$maxSupply</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
@@ -6779,39 +6963,6 @@
         <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$name</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_payoutFields">
-        $payoutFields
-        <a href="classes/BitPaySDK-Model-Currency.html#property_payoutFields" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">221</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$payoutFields</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
 
     
     
@@ -6924,39 +7075,6 @@
             -protected
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_settlementMinimum">
-        $settlementMinimum
-        <a href="classes/BitPaySDK-Model-Currency.html#property_settlementMinimum" class="headerlink"><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">222</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-        <span class="phpdocumentor-signature__type">array&lt;string|int, mixed&gt;</span>
-    <span class="phpdocumentor-signature__name">$settlementMinimum</span>
-     = <span class="phpdocumentor-signature__default-value">[]</span></code>
-
-    
-    
-    
-
-</article>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="property_symbol">
         $symbol
         <a href="classes/BitPaySDK-Model-Currency.html#property_symbol" class="headerlink"><i class="fas fa-link"></i></a>
@@ -6976,6 +7094,39 @@
     <span class="phpdocumentor-signature__visibility">protected</span>
         <span class="phpdocumentor-signature__type">string|null</span>
     <span class="phpdocumentor-signature__name">$symbol</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_trancheDecimals">
+        $trancheDecimals
+        <a href="classes/BitPaySDK-Model-Currency.html#property_trancheDecimals" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">224</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+        <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$trancheDecimals</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
     
@@ -7005,7 +7156,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">241</span>
+    <span class="phpdocumentor-element-found-in__line">244</span>
 
     </aside>
 
@@ -7036,7 +7187,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">370</span>
+    <span class="phpdocumentor-element-found-in__line">373</span>
 
     </aside>
 
@@ -7068,6 +7219,41 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getChain">
+        getChain()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_getChain" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">448</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getChain</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getCode">
         getCode()
         <a href="classes/BitPaySDK-Model-Currency.html#method_getCode" class="headerlink"><i class="fas fa-link"></i></a>
@@ -7076,7 +7262,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">250</span>
+    <span class="phpdocumentor-element-found-in__line">253</span>
 
     </aside>
 
@@ -7108,6 +7294,41 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getContractAddress">
+        getContractAddress()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_getContractAddress" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">509</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getContractAddress</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getCurrentlySettled">
         getCurrentlySettled()
         <a href="classes/BitPaySDK-Model-Currency.html#method_getCurrentlySettled" class="headerlink"><i class="fas fa-link"></i></a>
@@ -7116,7 +7337,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">310</span>
+    <span class="phpdocumentor-element-found-in__line">313</span>
 
     </aside>
 
@@ -7152,7 +7373,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">430</span>
+    <span class="phpdocumentor-element-found-in__line">433</span>
 
     </aside>
 
@@ -7160,7 +7381,46 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getDecimals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+                    <span class="phpdocumentor-signature__name">getDecimals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>decimals</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getDisplayCode">
+        getDisplayCode()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_getDisplayCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">461</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getDisplayCode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -7171,10 +7431,41 @@
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
         <span class="phpdocumentor-signature__response_type">string|null</span>
-                    &mdash;
-                <section class="phpdocumentor-description"><p>decimals</p>
-</section>
+            </section>
 
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getMaxSupply">
+        getMaxSupply()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_getMaxSupply" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">477</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getMaxSupply</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
             </section>
 
 </article>
@@ -7192,7 +7483,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">390</span>
+    <span class="phpdocumentor-element-found-in__line">393</span>
 
     </aside>
 
@@ -7232,7 +7523,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">330</span>
+    <span class="phpdocumentor-element-found-in__line">333</span>
 
     </aside>
 
@@ -7264,46 +7555,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getPayoutFields">
-        getPayoutFields()
-        <a href="classes/BitPaySDK-Model-Currency.html#method_getPayoutFields" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">450</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Gets payout fields</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPayoutFields</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-                    &mdash;
-                <section class="phpdocumentor-description"><p>the payout fields</p>
-</section>
-
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getPlural">
         getPlural()
         <a href="classes/BitPaySDK-Model-Currency.html#method_getPlural" class="headerlink"><i class="fas fa-link"></i></a>
@@ -7312,7 +7563,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">350</span>
+    <span class="phpdocumentor-element-found-in__line">353</span>
 
     </aside>
 
@@ -7352,7 +7603,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">290</span>
+    <span class="phpdocumentor-element-found-in__line">293</span>
 
     </aside>
 
@@ -7392,7 +7643,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">410</span>
+    <span class="phpdocumentor-element-found-in__line">413</span>
 
     </aside>
 
@@ -7424,46 +7675,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getSettlementMinimum">
-        getSettlementMinimum()
-        <a href="classes/BitPaySDK-Model-Currency.html#method_getSettlementMinimum" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">470</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Gets settlement minimum</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getSettlementMinimum</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
-                    &mdash;
-                <section class="phpdocumentor-description"><p>the settlement minimum</p>
-</section>
-
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_getSymbol">
         getSymbol()
         <a href="classes/BitPaySDK-Model-Currency.html#method_getSymbol" class="headerlink"><i class="fas fa-link"></i></a>
@@ -7472,7 +7683,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">270</span>
+    <span class="phpdocumentor-element-found-in__line">273</span>
 
     </aside>
 
@@ -7502,6 +7713,41 @@
         class="phpdocumentor-element
             -method
             -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getTrancheDecimals">
+        getTrancheDecimals()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_getTrancheDecimals" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">493</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getTrancheDecimals</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
                                     -static                    "
 >
     <h4 class="phpdocumentor-element__name" id="method_isValid">
@@ -7512,7 +7758,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">230</span>
+    <span class="phpdocumentor-element-found-in__line">233</span>
 
     </aside>
 
@@ -7560,7 +7806,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">380</span>
+    <span class="phpdocumentor-element-found-in__line">383</span>
 
     </aside>
 
@@ -7596,6 +7842,47 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setChain">
+        setChain()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_setChain" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">453</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setChain</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chain</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$chain</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setCode">
         setCode()
         <a href="classes/BitPaySDK-Model-Currency.html#method_setCode" class="headerlink"><i class="fas fa-link"></i></a>
@@ -7604,7 +7891,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">260</span>
+    <span class="phpdocumentor-element-found-in__line">263</span>
 
     </aside>
 
@@ -7640,6 +7927,47 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setContractAddress">
+        setContractAddress()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_setContractAddress" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">517</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setContractAddress</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$contractAddress</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$contractAddress</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setCurrentlySettled">
         setCurrentlySettled()
         <a href="classes/BitPaySDK-Model-Currency.html#method_setCurrentlySettled" class="headerlink"><i class="fas fa-link"></i></a>
@@ -7648,7 +7976,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">320</span>
+    <span class="phpdocumentor-element-found-in__line">323</span>
 
     </aside>
 
@@ -7690,7 +8018,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">440</span>
+    <span class="phpdocumentor-element-found-in__line">443</span>
 
     </aside>
 
@@ -7698,7 +8026,7 @@
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setDecimals</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$decimals</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">setDecimals</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$decimals</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -7707,12 +8035,94 @@
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$decimals</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>decimals</p>
 </section>
 
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setDisplayCode">
+        setDisplayCode()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_setDisplayCode" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">469</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setDisplayCode</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$displayCode</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$displayCode</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setMaxSupply">
+        setMaxSupply()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_setMaxSupply" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">485</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setMaxSupply</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$maxSupply</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$maxSupply</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
             </dd>
             </dl>
 
@@ -7734,7 +8144,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">400</span>
+    <span class="phpdocumentor-element-found-in__line">403</span>
 
     </aside>
 
@@ -7778,7 +8188,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">340</span>
+    <span class="phpdocumentor-element-found-in__line">343</span>
 
     </aside>
 
@@ -7814,50 +8224,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setPayoutFields">
-        setPayoutFields()
-        <a href="classes/BitPaySDK-Model-Currency.html#method_setPayoutFields" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">460</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Sets payout fields</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setPayoutFields</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$payoutFields</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$payoutFields</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>the payout fields</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setPlural">
         setPlural()
         <a href="classes/BitPaySDK-Model-Currency.html#method_setPlural" class="headerlink"><i class="fas fa-link"></i></a>
@@ -7866,7 +8232,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">360</span>
+    <span class="phpdocumentor-element-found-in__line">363</span>
 
     </aside>
 
@@ -7910,7 +8276,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">300</span>
+    <span class="phpdocumentor-element-found-in__line">303</span>
 
     </aside>
 
@@ -7954,7 +8320,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">420</span>
+    <span class="phpdocumentor-element-found-in__line">423</span>
 
     </aside>
 
@@ -7990,50 +8356,6 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_setSettlementMinimum">
-        setSettlementMinimum()
-        <a href="classes/BitPaySDK-Model-Currency.html#method_setSettlementMinimum" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">480</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Sets settlement minimum</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">setSettlementMinimum</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$settlementMinimum</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$settlementMinimum</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>the settlement minimum</p>
-</section>
-
-            </dd>
-            </dl>
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_setSymbol">
         setSymbol()
         <a href="classes/BitPaySDK-Model-Currency.html#method_setSymbol" class="headerlink"><i class="fas fa-link"></i></a>
@@ -8042,7 +8364,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">280</span>
+    <span class="phpdocumentor-element-found-in__line">283</span>
 
     </aside>
 
@@ -8076,6 +8398,47 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setTrancheDecimals">
+        setTrancheDecimals()
+        <a href="classes/BitPaySDK-Model-Currency.html#method_setTrancheDecimals" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">501</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setTrancheDecimals</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$trancheDecimals</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$trancheDecimals</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_toArray">
         toArray()
         <a href="classes/BitPaySDK-Model-Currency.html#method_toArray" class="headerlink"><i class="fas fa-link"></i></a>
@@ -8084,7 +8447,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Currency.php"><a href="files/src-bitpaysdk-model-currency.html"><abbr title="src/BitPaySDK/Model/Currency.php">Currency.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">490</span>
+    <span class="phpdocumentor-element-found-in__line">527</span>
 
     </aside>
 
@@ -8409,17 +8772,20 @@
                 <li>
                     <ul class="phpdocumentor-list -clean">
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_alts">$alts<a href="classes/BitPaySDK-Model-Currency.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Currency.html#property_chain">$chain<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_code">$code<a href="classes/BitPaySDK-Model-Currency.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Currency.html#property_contractAddress">$contractAddress<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_currentlySettled">$currentlySettled<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_decimals">$decimals<a href="classes/BitPaySDK-Model-Currency.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Currency.html#property_displayCode">$displayCode<a href="classes/BitPaySDK-Model-Currency.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Currency.html#property_maxSupply">$maxSupply<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_minimum">$minimum<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_name">$name<a href="classes/BitPaySDK-Model-Currency.html"></li>
-                                                    <li><a href="classes/BitPaySDK-Model-Currency.html#property_payoutFields">$payoutFields<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_plural">$plural<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_precision">$precision<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_sanctioned">$sanctioned<a href="classes/BitPaySDK-Model-Currency.html"></li>
-                                                    <li><a href="classes/BitPaySDK-Model-Currency.html#property_settlementMinimum">$settlementMinimum<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                                     <li><a href="classes/BitPaySDK-Model-Currency.html#property_symbol">$symbol<a href="classes/BitPaySDK-Model-Currency.html"></li>
+                                                    <li><a href="classes/BitPaySDK-Model-Currency.html#property_trancheDecimals">$trancheDecimals<a href="classes/BitPaySDK-Model-Currency.html"></li>
                                             </ul>
                 </li>
             
@@ -8428,30 +8794,36 @@
                 <ul class="phpdocumentor-list -clean">
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method___construct">__construct()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getAlts">getAlts()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_getChain">getChain()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getCode">getCode()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_getContractAddress">getContractAddress()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getCurrentlySettled">getCurrentlySettled()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getDecimals">getDecimals()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_getDisplayCode">getDisplayCode()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_getMaxSupply">getMaxSupply()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getMinimum">getMinimum()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getName">getName()</a></li>
-                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_getPayoutFields">getPayoutFields()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getPlural">getPlural()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getPrecision">getPrecision()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getSanctioned">getSanctioned()</a></li>
-                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_getSettlementMinimum">getSettlementMinimum()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_getSymbol">getSymbol()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_getTrancheDecimals">getTrancheDecimals()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_isValid">isValid()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setAlts">setAlts()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_setChain">setChain()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setCode">setCode()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_setContractAddress">setContractAddress()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setCurrentlySettled">setCurrentlySettled()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setDecimals">setDecimals()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_setDisplayCode">setDisplayCode()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_setMaxSupply">setMaxSupply()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setMinimum">setMinimum()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setName">setName()</a></li>
-                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_setPayoutFields">setPayoutFields()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setPlural">setPlural()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setPrecision">setPrecision()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setSanctioned">setSanctioned()</a></li>
-                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_setSettlementMinimum">setSettlementMinimum()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_setSymbol">setSymbol()</a></li>
+                                            <li><a href="classes/BitPaySDK-Model-Currency.html#method_setTrancheDecimals">setTrancheDecimals()</a></li>
                                             <li><a href="classes/BitPaySDK-Model-Currency.html#method_toArray">toArray()</a></li>
                                     </ul>
             </li>

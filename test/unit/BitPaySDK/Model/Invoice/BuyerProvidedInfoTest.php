@@ -113,7 +113,7 @@ class BuyerProvidedInfoTest extends TestCase
         self::assertEquals('example@bitpay.com', $buyerProvidedInfoArray['emailAddress']);
         self::assertEquals('BTC', $buyerProvidedInfoArray['selectedTransactionCurrency']);
         self::assertEquals('4445556666', $buyerProvidedInfoArray['sms']);
-        self::assertEquals(true, $buyerProvidedInfoArray['smsVerified']);
+        self::assertTrue($buyerProvidedInfoArray['smsVerified']);
     }
 
     public function testToArrayEmptyKey()

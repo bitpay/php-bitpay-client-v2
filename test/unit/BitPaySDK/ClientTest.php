@@ -3056,7 +3056,7 @@ class ClientTest extends TestCase
 
         $result = $testedObject->cancelInvoice(self::TEST_INVOICE_ID, $params['forceCancel']);
         self::assertEquals(self::TEST_INVOICE_ID, $result->getId());
-        self::assertEquals(true, $result->getIsCancelled());
+        self::assertTrue($result->getIsCancelled());
     }
 
     /**
@@ -3114,7 +3114,7 @@ class ClientTest extends TestCase
         $result = $testedObject->cancelInvoiceByGuid(self::TEST_INVOICE_GUID, $params['forceCancel']);
         self::assertEquals(self::TEST_INVOICE_GUID, $result->getGuid());
         self::assertEquals(self::TEST_INVOICE_ID, $result->getId());
-        self::assertEquals(true, $result->getIsCancelled());
+        self::assertTrue($result->getIsCancelled());
     }
 
     /**

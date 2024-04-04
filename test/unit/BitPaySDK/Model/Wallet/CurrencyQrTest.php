@@ -42,7 +42,7 @@ class CurrencyQrTest extends TestCase
     self::assertArrayHasKey('collapsed', $currencyQrArray);
 
     self::assertEquals('BIP21', $currencyQrArray['type']);
-    self::assertEquals(false, $currencyQrArray['collapsed']);
+    self::assertFalse($currencyQrArray['collapsed']);
   }
 
   private function createClassObject(): CurrencyQr

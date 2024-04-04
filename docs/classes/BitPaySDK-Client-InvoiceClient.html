@@ -54,7 +54,7 @@
     Menu
 </label>
 <aside class="phpdocumentor-column -three phpdocumentor-sidebar">
-                    <section class="phpdocumentor-sidebar__category">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/bitpaysdk.html" class="">BitPaySDK</a>
@@ -69,6 +69,10 @@
                 
             </li>
                     <li>
+                <a href="namespaces/bitpaysdk-logger.html" class="">Logger</a>
+                
+            </li>
+                    <li>
                 <a href="namespaces/bitpaysdk-model.html" class="">Model</a>
                 
             </li>
@@ -79,7 +83,7 @@
             </ul>
 
                         </section>
-                <section class="phpdocumentor-sidebar__category">
+                <section class="phpdocumentor-sidebar__category -packages">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="packages/BitPaySDK.html" class="">BitPaySDK</a>
@@ -87,10 +91,6 @@
     <ul class="phpdocumentor-list">
                     <li>
                 <a href="packages/BitPaySDK-Client.html" class="">Client</a>
-                
-            </li>
-                    <li>
-                <a href="packages/BitPaySDK-Exceptions.html" class="">Exceptions</a>
                 
             </li>
                     <li>
@@ -105,14 +105,14 @@
 
                         </section>
             
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -reports">
         <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
                 <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
     </section>
 
-    <section class="phpdocumentor-sidebar__category">
+    <section class="phpdocumentor-sidebar__category -indices">
         <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
         <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
     </section>
@@ -149,7 +149,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
@@ -308,16 +308,16 @@ authorized for the specified facade (the public facade requires no authorization
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_buyerEmailOrSms">buyerEmailOrSms()</a>
+    <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_validateBuyerEmailAndSms">validateBuyerEmailAndSms()</a>
     <span>
-                                &nbsp;: bool    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Check if buyerEmail or buyerSms is present, and not both.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -private">
-    <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_isSmsCodeRequired">isSmsCodeRequired()</a>
+    <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_validateSmsCode">validateSmsCode()</a>
     <span>
-                                &nbsp;: bool    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>Check if smsCode is required.</dd>
 
@@ -325,6 +325,8 @@ authorized for the specified facade (the public facade requires no authorization
 
 
 
+
+        
 
         
 
@@ -352,7 +354,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">34</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
@@ -385,7 +387,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -418,7 +420,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">35</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
@@ -456,7 +458,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">369</span>
+    <span class="phpdocumentor-element-found-in__line">274</span>
 
     </aside>
 
@@ -500,7 +502,7 @@ authorized for the specified facade (the public facade requires no authorization
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-InvoiceCancellationException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceCancellationException">InvoiceCancellationException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayApiException.html"><abbr title="\BitPaySDK\Exceptions\BitPayApiException">BitPayApiException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -508,7 +510,7 @@ authorized for the specified facade (the public facade requires no authorization
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -538,7 +540,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">415</span>
+    <span class="phpdocumentor-element-found-in__line">306</span>
 
     </aside>
 
@@ -582,7 +584,7 @@ authorized for the specified facade (the public facade requires no authorization
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-InvoiceCancellationException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceCancellationException">InvoiceCancellationException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayApiException.html"><abbr title="\BitPaySDK\Exceptions\BitPayApiException">BitPayApiException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -590,7 +592,7 @@ authorized for the specified facade (the public facade requires no authorization
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -620,7 +622,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -675,7 +677,15 @@ authorized for the specified facade (the public facade requires no authorization
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayApiException.html"><abbr title="\BitPaySDK\Exceptions\BitPayApiException">BitPayApiException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -701,7 +711,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">180</span>
+    <span class="phpdocumentor-element-found-in__line">144</span>
 
     </aside>
 
@@ -757,7 +767,15 @@ authorized for the specified facade (the public facade requires no authorization
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-InvoiceQueryException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceQueryException">InvoiceQueryException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayApiException.html"><abbr title="\BitPaySDK\Exceptions\BitPayApiException">BitPayApiException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -783,7 +801,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">223</span>
+    <span class="phpdocumentor-element-found-in__line">174</span>
 
     </aside>
 
@@ -831,7 +849,15 @@ authorized for the specified facade (the public facade requires no authorization
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-InvoiceQueryException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceQueryException">InvoiceQueryException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayApiException.html"><abbr title="\BitPaySDK\Exceptions\BitPayApiException">BitPayApiException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -857,7 +883,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">49</span>
 
     </aside>
 
@@ -910,7 +936,7 @@ authorized for the specified facade (the public facade requires no authorization
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">272</span>
+    <span class="phpdocumentor-element-found-in__line">210</span>
 
     </aside>
 
@@ -993,7 +1019,15 @@ with the 11th result).</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayApiException.html"><abbr title="\BitPaySDK\Exceptions\BitPayApiException">BitPayApiException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -1019,7 +1053,7 @@ with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">462</span>
+    <span class="phpdocumentor-element-found-in__line">339</span>
 
     </aside>
 
@@ -1065,7 +1099,7 @@ with the 11th result).</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-InvoicePaymentException.html"><abbr title="\BitPaySDK\Exceptions\InvoicePaymentException">InvoicePaymentException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayApiException.html"><abbr title="\BitPaySDK\Exceptions\BitPayApiException">BitPayApiException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -1073,7 +1107,7 @@ with the 11th result).</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -1103,7 +1137,7 @@ with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">334</span>
+    <span class="phpdocumentor-element-found-in__line">258</span>
 
     </aside>
 
@@ -1140,7 +1174,7 @@ with the 11th result).</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-InvoiceQueryException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceQueryException">InvoiceQueryException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayApiException.html"><abbr title="\BitPaySDK\Exceptions\BitPayApiException">BitPayApiException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -1148,7 +1182,7 @@ with the 11th result).</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayException.html"><abbr title="\BitPaySDK\Exceptions\BitPayException">BitPayException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -1178,7 +1212,7 @@ with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">116</span>
+    <span class="phpdocumentor-element-found-in__line">102</span>
 
     </aside>
 
@@ -1198,7 +1232,7 @@ with the 11th result).</p>
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The id of the invoice to updated.</p>
+                    <section class="phpdocumentor-description"><p>The id of the invoice to update.</p>
 </section>
 
             </dd>
@@ -1251,7 +1285,15 @@ with the 11th result).</p>
                     <span class="phpdocumentor-tag__name">throws</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-InvoiceUpdateException.html"><abbr title="\BitPaySDK\Exceptions\InvoiceUpdateException">InvoiceUpdateException</abbr></a></span>
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayGenericException.html"><abbr title="\BitPaySDK\Exceptions\BitPayGenericException">BitPayGenericException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                            <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayApiException.html"><abbr title="\BitPaySDK\Exceptions\BitPayApiException">BitPayApiException</abbr></a></span>
                                                             
                                              
                                     </dd>
@@ -1277,7 +1319,7 @@ with the 11th result).</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">38</span>
+    <span class="phpdocumentor-element-found-in__line">36</span>
 
     </aside>
 
@@ -1317,15 +1359,15 @@ with the 11th result).</p>
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_buyerEmailOrSms">
-        buyerEmailOrSms()
-        <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_buyerEmailOrSms" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_validateBuyerEmailAndSms">
+        validateBuyerEmailAndSms()
+        <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_validateBuyerEmailAndSms" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">505</span>
+    <span class="phpdocumentor-element-found-in__line">369</span>
 
     </aside>
 
@@ -1333,11 +1375,13 @@ with the 11th result).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">buyerEmailOrSms</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$buyerEmail</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$buyerSms</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">validateBuyerEmailAndSms</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$buyerEmail</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$buyerSms</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>Updating the invoice will require EITHER SMS or E-mail, but not both.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1361,12 +1405,23 @@ with the 11th result).</p>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_validateBuyerEmailAndSms#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool</span>
-            </section>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayValidationException.html"><abbr title="\BitPaySDK\Exceptions\BitPayValidationException">BitPayValidationException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
 
+    
 </article>
                     <article
         class="phpdocumentor-element
@@ -1374,15 +1429,15 @@ with the 11th result).</p>
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_isSmsCodeRequired">
-        isSmsCodeRequired()
-        <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_isSmsCodeRequired" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_validateSmsCode">
+        validateSmsCode()
+        <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_validateSmsCode" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Client/InvoiceClient.php"><a href="files/src-bitpaysdk-client-invoiceclient.html"><abbr title="src/BitPaySDK/Client/InvoiceClient.php">InvoiceClient.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">518</span>
+    <span class="phpdocumentor-element-found-in__line">387</span>
 
     </aside>
 
@@ -1390,11 +1445,13 @@ with the 11th result).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">isSmsCodeRequired</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$autoVerify</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$buyerSms</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$smsCode</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">validateSmsCode</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$autoVerify</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$buyerSms</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$smsCode</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
-    
+        <section class="phpdocumentor-description"><p>smsCode required only when verifying SMS, except when autoVerify is true.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -1427,12 +1484,23 @@ with the 11th result).</p>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/BitPaySDK-Client-InvoiceClient.html#method_validateSmsCode#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">bool</span>
-            </section>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/BitPaySDK-Exceptions-BitPayValidationException.html"><abbr title="\BitPaySDK\Exceptions\BitPayValidationException">BitPayValidationException</abbr></a></span>
+                                                            
+                                             
+                                    </dd>
+                                            </dl>
 
+    
 </article>
             </section>
 
@@ -1567,8 +1635,8 @@ with the 11th result).</p>
                                             <li><a href="classes/BitPaySDK-Client-InvoiceClient.html#method_requestNotification">requestNotification()</a></li>
                                             <li><a href="classes/BitPaySDK-Client-InvoiceClient.html#method_update">update()</a></li>
                                             <li><a href="classes/BitPaySDK-Client-InvoiceClient.html#method___construct">__construct()</a></li>
-                                            <li><a href="classes/BitPaySDK-Client-InvoiceClient.html#method_buyerEmailOrSms">buyerEmailOrSms()</a></li>
-                                            <li><a href="classes/BitPaySDK-Client-InvoiceClient.html#method_isSmsCodeRequired">isSmsCodeRequired()</a></li>
+                                            <li><a href="classes/BitPaySDK-Client-InvoiceClient.html#method_validateBuyerEmailAndSms">validateBuyerEmailAndSms()</a></li>
+                                            <li><a href="classes/BitPaySDK-Client-InvoiceClient.html#method_validateSmsCode">validateSmsCode()</a></li>
                                     </ul>
             </li>
                     </ul>
