@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f909f5bbf62dc932b555af90c03df021",
+    "content-hash": "85a8f63fea9f82ef23028c3bfee37148",
     "packages": [
         {
             "name": "bitpay/key-utils",
-            "version": "1.1.4",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bitpay/bitpay-php-keyutils.git",
-                "reference": "61cc4a58f25e79b7f61ff4631152139f6b084cb1"
+                "reference": "ace3bd985ef18858ab848b45feab500100e006bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/61cc4a58f25e79b7f61ff4631152139f6b084cb1",
-                "reference": "61cc4a58f25e79b7f61ff4631152139f6b084cb1",
+                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/ace3bd985ef18858ab848b45feab500100e006bb",
+                "reference": "ace3bd985ef18858ab848b45feab500100e006bb",
                 "shasum": ""
             },
             "require": {
@@ -25,10 +25,11 @@
                 "ext-curl": "*",
                 "ext-iconv": "*",
                 "ext-json": "*",
-                "ext-openssl": "*"
+                "ext-openssl": "*",
+                "php": "^8.1 || ^8.2 || ^8.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^7.5 || ^9.0"
+                "phpunit/phpunit": "^10.0"
             },
             "suggest": {
                 "ext-gmp": "Required to use this package with GMP instead of BCMath"
@@ -52,9 +53,9 @@
             "description": "BitPay Utils pack for cryptography",
             "support": {
                 "issues": "https://github.com/bitpay/bitpay-php-keyutils/issues",
-                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/1.1.4"
+                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/2.0.1"
             },
-            "time": "2024-02-06T02:15:49+00:00"
+            "time": "2024-04-22T18:55:08+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
