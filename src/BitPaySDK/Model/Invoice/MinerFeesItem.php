@@ -18,7 +18,7 @@ namespace BitPaySDK\Model\Invoice;
  */
 class MinerFeesItem
 {
-    protected ?int $satoshisPerByte = null;
+    protected ?float $satoshisPerByte = null;
     protected ?int $totalFee = null;
     protected ?float $fiatAmount = null;
 
@@ -26,12 +26,12 @@ class MinerFeesItem
     {
     }
 
-    public function getSatoshisPerByte(): ?int
+    public function getSatoshisPerByte(): ?float
     {
         return $this->satoshisPerByte;
     }
 
-    public function setSatoshisPerByte(int $satoshisPerByte): void
+    public function setSatoshisPerByte(float $satoshisPerByte): void
     {
         $this->satoshisPerByte = $satoshisPerByte;
     }
