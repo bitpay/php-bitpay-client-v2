@@ -71,6 +71,7 @@ class Client
      * @param string|null      $privateKeySecret Private Key encryption password.
      * @param string|null      $proxy            The url of your proxy to forward requests through. Example:
      *                                           http://********.com:3128
+     * @param string|null      $platformInfo     Value for the X-BitPay-Platform header.
      * @return Client
      * @throws BitPayApiException
      * @throws BitPayGenericException
@@ -80,12 +81,13 @@ class Client
         string $privateKey,
         Tokens $tokens,
         ?string $privateKeySecret = null,
-        ?string $proxy = null
+        ?string $proxy = null,
+        ?string $platformInfo = null,
     ): Client {
         try {
             $key = self::initKeys($privateKey, $privateKeySecret);
 
-            $restCli = new RESTcli($environment, $key, $proxy);
+            $restCli = new RESTcli($environment, $key, $proxy, $platformInfo);
             $tokenCache = $tokens;
 
             return new Client($restCli, $tokenCache);
@@ -99,11 +101,12 @@ class Client
     /**
      * Constructor for use if the keys and SIN are managed by this library.
      *
-     * @param string $configFilePath  The path to the configuration file.
+     * @param string      $configFilePath  The path to the configuration file.
+     * @param string|null $platformInfo    Value for the X-BitPay-Platform header.
      * @return Client
      * @throws BitPayGenericException
      */
-    public static function createWithFile(string $configFilePath): Client
+    public static function createWithFile(string $configFilePath, ?string $platformInfo = null): Client
     {
         try {
             $configData = self::getConfigData($configFilePath);
@@ -113,7 +116,7 @@ class Client
             $key = self::initKeys($config['PrivateKeyPath'], $config['PrivateKeySecret']);
             $proxy = $config['Proxy'] ?? null;
 
-            $restCli = new RESTcli($env, $key, $proxy);
+            $restCli = new RESTcli($env, $key, $proxy, $platformInfo);
             $tokenCache = new Tokens($config['ApiTokens']['merchant'], $config['ApiTokens']['payout']);
 
             return new Client($restCli, $tokenCache);
