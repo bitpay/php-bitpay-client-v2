@@ -9251,6 +9251,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/BitPaySDK-PosClient.html#property_env"
         },                {
+            "fqsen": "\\BitPaySDK\\PosClient\u003A\u003A\u0024platformInfo",
+            "name": "platformInfo",
+            "summary": "Value\u0020for\u0020the\u0020X\u002DBitPay\u002DPlatform\u002DInfo\u0020header",
+            "url": "classes/BitPaySDK-PosClient.html#property_platformInfo"
+        },                {
             "fqsen": "\\BitPaySDK\\PosClient\u003A\u003A\u0024token",
             "name": "token",
             "summary": "",
@@ -9390,6 +9395,11 @@ Search.appendIndex(
             "name": "identity",
             "summary": "",
             "url": "classes/BitPaySDK-Util-RESTcli-RESTcli.html#property_identity"
+        },                {
+            "fqsen": "\\BitPaySDK\\Util\\RESTcli\\RESTcli\u003A\u003A\u0024platformInfo",
+            "name": "platformInfo",
+            "summary": "Value\u0020for\u0020the\u0020X\u002DBitPay\u002DPlatform\u002DInfo\u0020header.",
+            "url": "classes/BitPaySDK-Util-RESTcli-RESTcli.html#property_platformInfo"
         },                {
             "fqsen": "\\BitPaySDK\\Util\\RESTcli\\RESTcli\u003A\u003A\u0024proxy",
             "name": "proxy",
