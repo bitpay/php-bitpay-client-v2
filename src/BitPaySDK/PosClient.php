@@ -31,7 +31,6 @@ class PosClient extends Client
     /**
      * Value for the X-BitPay-Platform-Info header
      * @var string
-     * 
      */
     protected string $platformInfo;
     protected Tokens $token;

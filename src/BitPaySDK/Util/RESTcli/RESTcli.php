@@ -49,7 +49,7 @@ class RESTcli
      * @var string
      */
     protected string $platformInfo;
-    
+
     /**
      * @var string
      */
