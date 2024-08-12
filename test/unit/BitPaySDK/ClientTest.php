@@ -110,6 +110,24 @@ class ClientTest extends TestCase
         self::assertInstanceOf(Client::class, $result);
     }
 
+    /**
+     * @throws BitPayApiException
+     */
+    public function testWithDataAndXBitPayPlatformInfoHeader()
+    {
+        $tokens = $this->createMock(Tokens::class);
+        $result = $this->getTestedClassInstance()::createWithData(
+            Env::TEST,
+            __DIR__ . '/bitpay_private_test.key',
+            $tokens,
+            'YourMasterPassword',
+            null,
+            'MyPlatform_v1.0.0'
+        );
+
+        self::assertInstanceOf(Client::class, $result);
+    }
+
     public function testWithDataException()
     {
         $instance = $this->getTestedClassInstance();
@@ -136,12 +154,39 @@ class ClientTest extends TestCase
     }
 
     /**
+     * @throws BitPayApiException
+     */
+    public function testWithFileJsonConfigAndXBitPayPlatformInfoHeader(): Client
+    {
+        $instance = $this->getTestedClassInstance();
+        $result = $instance::createWithFile(
+            __DIR__ . '/BitPay.config-unit.json',
+            'MyPlatform_v1.0.0'
+        );
+        self::assertInstanceOf(Client::class, $result);
+        return $result;
+    }
+
+    /**
      * @throws BitPayGenericException
      */
     public function testWithFileYmlConfig()
     {
         $instance = $this->getTestedClassInstance();
         $result = $instance::createWithFile(__DIR__ . '/BitPay.config-unit.yml');
+        self::assertInstanceOf(Client::class, $result);
+    }
+
+    /**
+     * @throws BitPayGenericException
+     */
+    public function testWithFileYmlConfigAndXBitPayPlatformInfoHeader()
+    {
+        $instance = $this->getTestedClassInstance();
+        $result = $instance::createWithFile(
+            __DIR__ . '/BitPay.config-unit.yml',
+            'MyPlatform_v1.0.0'
+        );
         self::assertInstanceOf(Client::class, $result);
     }
 

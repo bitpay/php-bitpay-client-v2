@@ -31,14 +31,17 @@ class RESTcli
      * @var GuzzleHttpClient
      */
     protected GuzzleHttpClient $client;
+
     /**
      * @var string
      */
     protected string $baseUrl;
+
     /**
      * @var PrivateKey
      */
     protected PrivateKey $ecKey;
+
     /**
      * @var string
      */
