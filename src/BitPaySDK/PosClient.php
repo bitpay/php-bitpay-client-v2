@@ -27,22 +27,30 @@ use JsonMapper;
 class PosClient extends Client
 {
     protected string $env;
+
+    /**
+     * Value for the X-BitPay-Platform-Info header
+     * @var string
+     */
+    protected string $platformInfo;
     protected Tokens $token;
     protected RESTcli $RESTcli;
 
     /**
      * Constructor for the BitPay SDK to use with the POS facade.
      *
-     * @param $token       string The token generated on the BitPay account.
-     * @param string|null $environment string The target environment [Default: Production].
+     * @param string       $token        The token generated on the BitPay account.
+     * @param string|null  $environment  The target environment [Default: Production].
+     * @param string|null  $platformInfo Value for the X-BitPay-Platform-Info header.
      *
      * @throws BitPayGenericException
      */
-    public function __construct(string $token, string $environment = null)
+    public function __construct(string $token, string $environment = null, ?string $platformInfo = null)
     {
         try {
             $this->token = new Tokens(null, null, $token);
             $this->env = strtolower($environment) === "test" ? Env::TEST : Env::PROD;
+            $this->platformInfo = $platformInfo !== null ? trim($platformInfo) : '';
             $this->init();
             parent::__construct($this->RESTcli, new Tokens(null, null, $token));
         } catch (Exception $e) {
@@ -60,7 +68,7 @@ class PosClient extends Client
     private function init(): void
     {
         try {
-            $this->RESTcli = new RESTcli($this->env, new PrivateKey());
+            $this->RESTcli = new RESTcli($this->env, new PrivateKey(), null, $this->platformInfo);
         } catch (Exception $e) {
             BitPayExceptionProvider::throwGenericExceptionWithMessage(
                 'failed to build configuration : ' . $e->getMessage()
@@ -71,7 +79,7 @@ class PosClient extends Client
     /**
      * Fetch the supported currencies.
      *
-     * @return array     A list of BitPay Invoice objects.
+     * @return array A list of BitPay Invoice objects.
      * @throws BitPayGenericException
      * @throws BitPayApiException
      */

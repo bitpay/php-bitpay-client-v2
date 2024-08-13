@@ -31,23 +31,33 @@ class RESTcli
      * @var GuzzleHttpClient
      */
     protected GuzzleHttpClient $client;
+
     /**
      * @var string
      */
     protected string $baseUrl;
+
     /**
      * @var PrivateKey
      */
     protected PrivateKey $ecKey;
+
     /**
      * @var string
      */
     protected string $identity;
 
     /**
+     * Value for the X-BitPay-Platform-Info header.
+     * @var string
+     */
+    protected string $platformInfo;
+
+    /**
      * @var string
      */
     protected string $proxy;
+
 
     /**
      * RESTcli constructor.
@@ -56,11 +66,12 @@ class RESTcli
      * @param string|null $proxy
      * @throws BitPayApiException
      */
-    public function __construct(string $environment, PrivateKey $ecKey, ?string $proxy = null)
+    public function __construct(string $environment, PrivateKey $ecKey, ?string $proxy = null, ?string $platformInfo)
     {
         $this->ecKey = $ecKey;
         $this->baseUrl = $environment == Env::TEST ? Env::TEST_URL : Env::PROD_URL;
         $this->proxy = $proxy !== null ? trim($proxy) : '';
+        $this->platformInfo = $platformInfo !== null ? trim($platformInfo) : '';
         $this->init();
     }
 
@@ -87,6 +98,10 @@ class RESTcli
 
             if ($this->proxy !== '') {
                 $config['proxy'] = $this->proxy;
+            }
+
+            if ($this->platformInfo !== '') {
+                $config['defaults']['headers']['x-bitpay-platform-info'] = $this->platformInfo;
             }
 
             $this->client = new GuzzleHttpClient($config);
@@ -126,6 +141,10 @@ class RESTcli
                     BitPayExceptionProvider::throwGenericExceptionWithMessage('Wrong ecKey. ' . $e->getMessage());
                 }
                 $headers['x-identity'] = $this->identity;
+            }
+
+            if ($this->platformInfo !== '') {
+                $headers['x-bitpay-platform-info'] = $this->platformInfo;
             }
 
             $method = "POST";
@@ -190,6 +209,10 @@ class RESTcli
                 $headers['x-identity'] = $this->identity;
             }
 
+            if ($this->platformInfo !== '') {
+                $headers['x-bitpay-platform-info'] = $this->platformInfo;
+            }
+
             $method = 'GET';
 
             LoggerProvider::getLogger()->logRequest($method, $fullURL, null);
@@ -245,6 +268,10 @@ class RESTcli
                 $headers['x-signature'] = $this->ecKey->sign($fullURL);
             } catch (Exception $e) {
                 BitPayExceptionProvider::throwGenericExceptionWithMessage('Wrong ecKey. ' . $e->getMessage());
+            }
+
+            if ($this->platformInfo !== '') {
+                $headers['x-bitpay-platform-info'] = $this->platformInfo;
             }
 
             $method = 'DELETE';
@@ -303,6 +330,10 @@ class RESTcli
                 $headers['x-signature'] = $this->ecKey->sign($fullURL . $jsonRequestData);
             } catch (Exception $e) {
                 BitPayExceptionProvider::throwGenericExceptionWithMessage('Wrong ecKey. ' . $e->getMessage());
+            }
+
+            if ($this->platformInfo !== '') {
+                $headers['x-bitpay-platform-info'] = $this->platformInfo;
             }
 
             $method = 'PUT';
