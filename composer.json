@@ -15,7 +15,7 @@
     "php": "^8.1 || ^8.2 || ^8.3",
     "ext-json": "*",
     "ext-reflection": "*",
-    "bitpay/key-utils": "^1.1",
+    "bitpay/key-utils": "^2.0",
     "guzzlehttp/guzzle": "^7.0",
     "symfony/yaml": "^5.4 || ^6.0 || ^7.0",
     "netresearch/jsonmapper": "^4.1",
