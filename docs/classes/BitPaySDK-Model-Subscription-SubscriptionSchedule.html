@@ -122,34 +122,49 @@
                                 <section>
                                         <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk.html">BitPaySDK</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/bitpaysdk-model-subscription.html">Subscription</a></li>
     </ul>
 
     <article class="phpdocumentor-element -interface">
         <h2 class="phpdocumentor-content__title">
-    Env
+    SubscriptionSchedule
                 <div class="phpdocumentor-element__package">
             in
             <ul class="phpdocumentor-breadcrumbs">
                                     <li><a href="packages/BitPaySDK.html">BitPaySDK</a></li>
+                                    <li><a href="packages/BitPaySDK-Model.html">Model</a></li>
+                                    <li><a href="packages/BitPaySDK-Model-Subscription.html">Subscription</a></li>
                             </ul>
         </div>
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php"><a href="files/src-bitpaysdk-model-subscription-subscriptionschedule.html"><abbr title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php">SubscriptionSchedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">40</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Constants used throughout the SDK.</p>
+            <p class="phpdocumentor-summary">Schedule of repeat bill due dates. Can be `weekly`, `monthly`, `quarterly`, `yearly`, or a simple cron expression
+specifying seconds, minutes, hours, day of month, month, and day of week. BitPay maintains the difference between
+the due date and the delivery date in all subsequent, automatically-generated bills.</p>
 
 
+    <section class="phpdocumentor-description"><p>+-------------- second (0 - 59)</p>
+<p>| +------------ minute (0 - 59)</p>
+<p>| | +---------- hour (0 - 23)</p>
+<p>| | | +-------- day of month (1 - 31)</p>
+<p>| | | | +------ month (1 - 12)</p>
+<p>| | | | | +---- day of week (0 - 6) (Sunday=0 or 7)</p>
+<p>| | | | | |</p>
+<p>* * * * * Cron expression</p>
+</section>
 
 
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
-        <a href="classes/BitPaySDK-Env.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#tags" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h5>
     <dl class="phpdocumentor-tag-list">
@@ -171,6 +186,16 @@
 </section>
 
                                     </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://developer.bitpay.com/reference/subscriptions">https://developer.bitpay.com/reference/subscriptions</a></span>
+                                        
+                                                 <section class="phpdocumentor-description"><p>Subscriptions</p>
+</section>
+
+                                    </dd>
                                             </dl>
 
 
@@ -179,7 +204,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/BitPaySDK-Env.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -191,62 +216,32 @@
 
 <h4 id="toc-constants">
     Constants
-    <a href="classes/BitPaySDK-Env.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/BitPaySDK-Env.html#constant_BITPAY_API_FRAME">BITPAY_API_FRAME</a>
+    <a class="" href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_MONTHLY">MONTHLY</a>
     <span>
-        &nbsp;= &quot;std&quot;                            </span>
+        &nbsp;= &quot;monthly&quot;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/BitPaySDK-Env.html#constant_BITPAY_API_FRAME_VERSION">BITPAY_API_FRAME_VERSION</a>
+    <a class="" href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_QUARTERLY">QUARTERLY</a>
     <span>
-        &nbsp;= &quot;1.0.0&quot;                            </span>
+        &nbsp;= &quot;quarterly&quot;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/BitPaySDK-Env.html#constant_BITPAY_API_VERSION">BITPAY_API_VERSION</a>
+    <a class="" href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_WEEKLY">WEEKLY</a>
     <span>
-        &nbsp;= &quot;2.0.0&quot;                            </span>
+        &nbsp;= &quot;weekly&quot;                            </span>
 </dt>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/BitPaySDK-Env.html#constant_BITPAY_DATETIME_FORMAT">BITPAY_DATETIME_FORMAT</a>
+    <a class="" href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_YEARLY">YEARLY</a>
     <span>
-        &nbsp;= &#039;Y-m-d\TH:i:s\Z&#039;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/BitPaySDK-Env.html#constant_BITPAY_PLUGIN_INFO">BITPAY_PLUGIN_INFO</a>
-    <span>
-        &nbsp;= &quot;BitPay_PHP_Client_v9.2.2&quot;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/BitPaySDK-Env.html#constant_PROD">PROD</a>
-    <span>
-        &nbsp;= &quot;Prod&quot;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/BitPaySDK-Env.html#constant_PROD_URL">PROD_URL</a>
-    <span>
-        &nbsp;= &quot;https://bitpay.com/&quot;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/BitPaySDK-Env.html#constant_TEST">TEST</a>
-    <span>
-        &nbsp;= &quot;Test&quot;                            </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a class="" href="classes/BitPaySDK-Env.html#constant_TEST_URL">TEST_URL</a>
-    <span>
-        &nbsp;= &quot;https://test.bitpay.com/&quot;                            </span>
+        &nbsp;= &quot;yearly&quot;                            </span>
 </dt>
 
     </dl>
@@ -261,20 +256,20 @@
     <section class="phpdocumentor-constants">
         <h3 class="phpdocumentor-elements__header" id="constants">
             Constants
-            <a href="classes/BitPaySDK-Env.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
 
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_BITPAY_API_FRAME">
-        BITPAY_API_FRAME
-        <a href="classes/BitPaySDK-Env.html#constant_BITPAY_API_FRAME" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_MONTHLY">
+        MONTHLY
+        <a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_MONTHLY" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php"><a href="files/src-bitpaysdk-model-subscription-subscriptionschedule.html"><abbr title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php">SubscriptionSchedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">43</span>
 
     </aside>
 
@@ -283,8 +278,8 @@
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BITPAY_API_FRAME</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;std&quot;</span>
+    <span class="phpdocumentor-signature__name">MONTHLY</span>
+    = <span class="phpdocumentor-signature__default-value">&quot;monthly&quot;</span>
 </code>
 
 
@@ -296,16 +291,16 @@
 
 </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_BITPAY_API_FRAME_VERSION">
-        BITPAY_API_FRAME_VERSION
-        <a href="classes/BitPaySDK-Env.html#constant_BITPAY_API_FRAME_VERSION" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_QUARTERLY">
+        QUARTERLY
+        <a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_QUARTERLY" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php"><a href="files/src-bitpaysdk-model-subscription-subscriptionschedule.html"><abbr title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php">SubscriptionSchedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">44</span>
 
     </aside>
 
@@ -314,8 +309,8 @@
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BITPAY_API_FRAME_VERSION</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;1.0.0&quot;</span>
+    <span class="phpdocumentor-signature__name">QUARTERLY</span>
+    = <span class="phpdocumentor-signature__default-value">&quot;quarterly&quot;</span>
 </code>
 
 
@@ -327,16 +322,16 @@
 
 </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_BITPAY_API_VERSION">
-        BITPAY_API_VERSION
-        <a href="classes/BitPaySDK-Env.html#constant_BITPAY_API_VERSION" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_WEEKLY">
+        WEEKLY
+        <a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_WEEKLY" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php"><a href="files/src-bitpaysdk-model-subscription-subscriptionschedule.html"><abbr title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php">SubscriptionSchedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
@@ -345,8 +340,8 @@
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BITPAY_API_VERSION</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;2.0.0&quot;</span>
+    <span class="phpdocumentor-signature__name">WEEKLY</span>
+    = <span class="phpdocumentor-signature__default-value">&quot;weekly&quot;</span>
 </code>
 
 
@@ -358,16 +353,16 @@
 
 </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_BITPAY_DATETIME_FORMAT">
-        BITPAY_DATETIME_FORMAT
-        <a href="classes/BitPaySDK-Env.html#constant_BITPAY_DATETIME_FORMAT" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_YEARLY">
+        YEARLY
+        <a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_YEARLY" class="headerlink"><i class="fas fa-link"></i></a>
 
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php"><a href="files/src-bitpaysdk-model-subscription-subscriptionschedule.html"><abbr title="src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php">SubscriptionSchedule.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -376,163 +371,8 @@
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BITPAY_DATETIME_FORMAT</span>
-    = <span class="phpdocumentor-signature__default-value">&#039;Y-m-d\TH:i:s\Z&#039;</span>
-</code>
-
-
-    
-    
-    
-
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_BITPAY_PLUGIN_INFO">
-        BITPAY_PLUGIN_INFO
-        <a href="classes/BitPaySDK-Env.html#constant_BITPAY_PLUGIN_INFO" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">20</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">BITPAY_PLUGIN_INFO</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;BitPay_PHP_Client_v9.2.2&quot;</span>
-</code>
-
-
-    
-    
-    
-
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_PROD">
-        PROD
-        <a href="classes/BitPaySDK-Env.html#constant_PROD" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">16</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">PROD</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;Prod&quot;</span>
-</code>
-
-
-    
-    
-    
-
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_PROD_URL">
-        PROD_URL
-        <a href="classes/BitPaySDK-Env.html#constant_PROD_URL" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">18</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">PROD_URL</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;https://bitpay.com/&quot;</span>
-</code>
-
-
-    
-    
-    
-
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_TEST">
-        TEST
-        <a href="classes/BitPaySDK-Env.html#constant_TEST" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">15</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">TEST</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;Test&quot;</span>
-</code>
-
-
-    
-    
-    
-
-    
-
-</article>
-                    <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_TEST_URL">
-        TEST_URL
-        <a href="classes/BitPaySDK-Env.html#constant_TEST_URL" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/BitPaySDK/Env.php"><a href="files/src-bitpaysdk-env.html"><abbr title="src/BitPaySDK/Env.php">Env.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">17</span>
-
-    </aside>
-
-    
-    
-    <code class="phpdocumentor-signature phpdocumentor-code ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">TEST_URL</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;https://test.bitpay.com/&quot;</span>
+    <span class="phpdocumentor-signature__name">YEARLY</span>
+    = <span class="phpdocumentor-signature__default-value">&quot;yearly&quot;</span>
 </code>
 
 
@@ -550,7 +390,7 @@
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/BitPaySDK/Env.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/BitPaySDK/Model/Subscription/SubscriptionSchedule.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -651,23 +491,18 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                    <li><a href="classes/BitPaySDK-Env.html#toc-constants">Constants</a></li>
-                    <li><a href="classes/BitPaySDK-Env.html#toc-methods">Methods</a></li>
+                    <li><a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#toc-constants">Constants</a></li>
+                    <li><a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#toc-methods">Methods</a></li>
                 </ul>
             </li>
             
                             <li class="phpdocumentor-on-this-page-section__title">Constants</li>
                 <li>
                     <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/BitPaySDK-Env.html#constant_BITPAY_API_FRAME">BITPAY_API_FRAME</a></li>
-                                                    <li class=""><a href="classes/BitPaySDK-Env.html#constant_BITPAY_API_FRAME_VERSION">BITPAY_API_FRAME_VERSION</a></li>
-                                                    <li class=""><a href="classes/BitPaySDK-Env.html#constant_BITPAY_API_VERSION">BITPAY_API_VERSION</a></li>
-                                                    <li class=""><a href="classes/BitPaySDK-Env.html#constant_BITPAY_DATETIME_FORMAT">BITPAY_DATETIME_FORMAT</a></li>
-                                                    <li class=""><a href="classes/BitPaySDK-Env.html#constant_BITPAY_PLUGIN_INFO">BITPAY_PLUGIN_INFO</a></li>
-                                                    <li class=""><a href="classes/BitPaySDK-Env.html#constant_PROD">PROD</a></li>
-                                                    <li class=""><a href="classes/BitPaySDK-Env.html#constant_PROD_URL">PROD_URL</a></li>
-                                                    <li class=""><a href="classes/BitPaySDK-Env.html#constant_TEST">TEST</a></li>
-                                                    <li class=""><a href="classes/BitPaySDK-Env.html#constant_TEST_URL">TEST_URL</a></li>
+                                                    <li class=""><a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_MONTHLY">MONTHLY</a></li>
+                                                    <li class=""><a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_QUARTERLY">QUARTERLY</a></li>
+                                                    <li class=""><a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_WEEKLY">WEEKLY</a></li>
+                                                    <li class=""><a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_YEARLY">YEARLY</a></li>
                                             </ul>
                 </li>
                     </ul>
@@ -687,7 +522,7 @@
     </section>
 </section>
         </div>
-        <a href="classes/BitPaySDK-Env.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

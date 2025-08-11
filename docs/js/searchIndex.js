@@ -476,6 +476,61 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/BitPaySDK-Client-SettlementClient.html#property_restCli"
         },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient",
+            "name": "SubscriptionClient",
+            "summary": "Handles\u0020interactions\u0020with\u0020the\u0020subscriptions\u0020endpoints.",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#method___construct"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003AgetInstance\u0028\u0029",
+            "name": "getInstance",
+            "summary": "Factory\u0020method\u0020for\u0020Subscription\u0020Client.",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#method_getInstance"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003Acreate\u0028\u0029",
+            "name": "create",
+            "summary": "Create\u0020a\u0020BitPay\u0020Subscription.",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#method_create"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003Aget\u0028\u0029",
+            "name": "get",
+            "summary": "Retrieve\u0020a\u0020BitPay\u0020subscription\u0020by\u0020its\u0020resource\u0020ID.",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#method_get"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003AgetSubscriptions\u0028\u0029",
+            "name": "getSubscriptions",
+            "summary": "Retrieve\u0020a\u0020collection\u0020of\u0020BitPay\u0020subscriptions.",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#method_getSubscriptions"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003Aupdate\u0028\u0029",
+            "name": "update",
+            "summary": "Update\u0020a\u0020BitPay\u0020Subscription.",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#method_update"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003AmapJsonToSubscriptionClass\u0028\u0029",
+            "name": "mapJsonToSubscriptionClass",
+            "summary": "",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#method_mapJsonToSubscriptionClass"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003A\u0024instance",
+            "name": "instance",
+            "summary": "",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#property_instance"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003A\u0024tokenCache",
+            "name": "tokenCache",
+            "summary": "",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#property_tokenCache"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\\SubscriptionClient\u003A\u003A\u0024restCli",
+            "name": "restCli",
+            "summary": "",
+            "url": "classes/BitPaySDK-Client-SubscriptionClient.html#property_restCli"
+        },                {
             "fqsen": "\\BitPaySDK\\Client\\TokenClient",
             "name": "TokenClient",
             "summary": "Handles\u0020interactions\u0020with\u0020the\u0020token\u0020endpoints.",
@@ -681,6 +736,26 @@ Search.appendIndex(
             "summary": "Deliver\u0020a\u0020BitPay\u0020Bill.",
             "url": "classes/BitPaySDK-Client.html#method_deliverBill"
         },                {
+            "fqsen": "\\BitPaySDK\\Client\u003A\u003AcreateSubscription\u0028\u0029",
+            "name": "createSubscription",
+            "summary": "Create\u0020a\u0020BitPay\u0020Subscription.",
+            "url": "classes/BitPaySDK-Client.html#method_createSubscription"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\u003A\u003AgetSubscription\u0028\u0029",
+            "name": "getSubscription",
+            "summary": "Retrieve\u0020a\u0020BitPay\u0020subscription\u0020by\u0020its\u0020ID.",
+            "url": "classes/BitPaySDK-Client.html#method_getSubscription"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\u003A\u003AgetSubscriptions\u0028\u0029",
+            "name": "getSubscriptions",
+            "summary": "Retrieve\u0020a\u0020collection\u0020of\u0020BitPay\u0020subscriptions.",
+            "url": "classes/BitPaySDK-Client.html#method_getSubscriptions"
+        },                {
+            "fqsen": "\\BitPaySDK\\Client\u003A\u003AupdateSubscription\u0028\u0029",
+            "name": "updateSubscription",
+            "summary": "Update\u0020a\u0020BitPay\u0020Subscription.",
+            "url": "classes/BitPaySDK-Client.html#method_updateSubscription"
+        },                {
             "fqsen": "\\BitPaySDK\\Client\u003A\u003AgetRates\u0028\u0029",
             "name": "getRates",
             "summary": "Retrieve\u0020the\u0020exchange\u0020rate\u0020table\u0020maintained\u0020by\u0020BitPay.",
@@ -821,6 +896,11 @@ Search.appendIndex(
             "summary": "Gets\u0020bill\u0020client",
             "url": "classes/BitPaySDK-Client.html#method_getBillClient"
         },                {
+            "fqsen": "\\BitPaySDK\\Client\u003A\u003AgetSubscriptionClient\u0028\u0029",
+            "name": "getSubscriptionClient",
+            "summary": "Gets\u0020subscription\u0020client",
+            "url": "classes/BitPaySDK-Client.html#method_getSubscriptionClient"
+        },                {
             "fqsen": "\\BitPaySDK\\Client\u003A\u003AgetRateClient\u0028\u0029",
             "name": "getRateClient",
             "summary": "Gets\u0020rate\u0020client",
@@ -900,6 +980,11 @@ Search.appendIndex(
             "name": "BITPAY_API_FRAME_VERSION",
             "summary": "",
             "url": "classes/BitPaySDK-Env.html#constant_BITPAY_API_FRAME_VERSION"
+        },                {
+            "fqsen": "\\BitPaySDK\\Env\u003A\u003ABITPAY_DATETIME_FORMAT",
+            "name": "BITPAY_DATETIME_FORMAT",
+            "summary": "",
+            "url": "classes/BitPaySDK-Env.html#constant_BITPAY_DATETIME_FORMAT"
         },                {
             "fqsen": "\\BitPaySDK\\Exceptions\\BitPayApiException",
             "name": "BitPayApiException",
@@ -8791,6 +8876,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/BitPaySDK-Model-Settlement-SettlementLedgerEntry.html#property_invoiceData"
         },                {
+            "fqsen": "\\BitPaySDK\\Model\\Settlement\\SettlementStatus",
+            "name": "SettlementStatus",
+            "summary": "Status\u0020of\u0020the\u0020settlement.",
+            "url": "classes/BitPaySDK-Model-Settlement-SettlementStatus.html"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Settlement\\SettlementStatus\u003A\u003ANEW",
+            "name": "NEW",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Settlement-SettlementStatus.html#constant_NEW"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Settlement\\SettlementStatus\u003A\u003APROCESSING",
+            "name": "PROCESSING",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Settlement-SettlementStatus.html#constant_PROCESSING"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Settlement\\SettlementStatus\u003A\u003AREJECTED",
+            "name": "REJECTED",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Settlement-SettlementStatus.html#constant_REJECTED"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Settlement\\SettlementStatus\u003A\u003ACOMPLETED",
+            "name": "COMPLETED",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Settlement-SettlementStatus.html#constant_COMPLETED"
+        },                {
             "fqsen": "\\BitPaySDK\\Model\\Settlement\\WithHoldings",
             "name": "WithHoldings",
             "summary": "",
@@ -8895,6 +9005,186 @@ Search.appendIndex(
             "name": "bankCountry",
             "summary": "",
             "url": "classes/BitPaySDK-Model-Settlement-WithHoldings.html#property_bankCountry"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription",
+            "name": "Subscription",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor,\u0020create\u0020a\u0020minimal\u0020request\u0020Subscription\u0020object.",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method___construct"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Get\u0020subscription\u0020data\u0020as\u0020array",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_toArray"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AgetId\u0028\u0029",
+            "name": "getId",
+            "summary": "Get\u0020Subscription\u0020id",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_getId"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AsetId\u0028\u0029",
+            "name": "setId",
+            "summary": "Set\u0020Subscription\u0020id",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_setId"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AgetStatus\u0028\u0029",
+            "name": "getStatus",
+            "summary": "Get\u0020Subscription\u0020status",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_getStatus"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AsetStatus\u0028\u0029",
+            "name": "setStatus",
+            "summary": "Set\u0020Subscription\u0020status",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_setStatus"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AgetBillData\u0028\u0029",
+            "name": "getBillData",
+            "summary": "Get\u0020Subscription\u0020billData",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_getBillData"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AsetBillData\u0028\u0029",
+            "name": "setBillData",
+            "summary": "Set\u0020Subscription\u0020billData",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_setBillData"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AgetMerchant\u0028\u0029",
+            "name": "getMerchant",
+            "summary": "Get\u0020Subscription\u0020merchant",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_getMerchant"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AsetMerchant\u0028\u0029",
+            "name": "setMerchant",
+            "summary": "Set\u0020Subscription\u0020merchant",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_setMerchant"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AgetCreatedDate\u0028\u0029",
+            "name": "getCreatedDate",
+            "summary": "Get\u0020Subscription\u0020created\u0020date",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_getCreatedDate"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AsetCreatedDate\u0028\u0029",
+            "name": "setCreatedDate",
+            "summary": "Set\u0020Subscription\u0020created\u0020date",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_setCreatedDate"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AgetToken\u0028\u0029",
+            "name": "getToken",
+            "summary": "Gets\u0020token",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_getToken"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AsetToken\u0028\u0029",
+            "name": "setToken",
+            "summary": "Set\u0020Subscription\u0020token",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_setToken"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AgetSchedule\u0028\u0029",
+            "name": "getSchedule",
+            "summary": "Get\u0020Subscription\u0020schedule",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_getSchedule"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AsetSchedule\u0028\u0029",
+            "name": "setSchedule",
+            "summary": "Set\u0020Subscription\u0020schedule",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_setSchedule"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AgetNextDelivery\u0028\u0029",
+            "name": "getNextDelivery",
+            "summary": "Get\u0020Subscription\u0027s\u0020next\u0020delivery\u0020date",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_getNextDelivery"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003AsetNextDelivery\u0028\u0029",
+            "name": "setNextDelivery",
+            "summary": "Set\u0020Subscription\u0027s\u0020next\u0020delivery\u0020date",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#method_setNextDelivery"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003A\u0024id",
+            "name": "id",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#property_id"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003A\u0024status",
+            "name": "status",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#property_status"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003A\u0024billData",
+            "name": "billData",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#property_billData"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003A\u0024merchant",
+            "name": "merchant",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#property_merchant"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003A\u0024schedule",
+            "name": "schedule",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#property_schedule"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003A\u0024nextDelivery",
+            "name": "nextDelivery",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#property_nextDelivery"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003A\u0024createdDate",
+            "name": "createdDate",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#property_createdDate"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\Subscription\u003A\u003A\u0024token",
+            "name": "token",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-Subscription.html#property_token"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\SubscriptionSchedule",
+            "name": "SubscriptionSchedule",
+            "summary": "Schedule\u0020of\u0020repeat\u0020bill\u0020due\u0020dates.\u0020Can\u0020be\u0020\u0060weekly\u0060,\u0020\u0060monthly\u0060,\u0020\u0060quarterly\u0060,\u0020\u0060yearly\u0060,\u0020or\u0020a\u0020simple\u0020cron\u0020expression\nspecifying\u0020seconds,\u0020minutes,\u0020hours,\u0020day\u0020of\u0020month,\u0020month,\u0020and\u0020day\u0020of\u0020week.\u0020BitPay\u0020maintains\u0020the\u0020difference\u0020between\nthe\u0020due\u0020date\u0020and\u0020the\u0020delivery\u0020date\u0020in\u0020all\u0020subsequent,\u0020automatically\u002Dgenerated\u0020bills.",
+            "url": "classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\SubscriptionSchedule\u003A\u003AWEEKLY",
+            "name": "WEEKLY",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_WEEKLY"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\SubscriptionSchedule\u003A\u003AMONTHLY",
+            "name": "MONTHLY",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_MONTHLY"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\SubscriptionSchedule\u003A\u003AQUARTERLY",
+            "name": "QUARTERLY",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_QUARTERLY"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\SubscriptionSchedule\u003A\u003AYEARLY",
+            "name": "YEARLY",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-SubscriptionSchedule.html#constant_YEARLY"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\SubscriptionStatus",
+            "name": "SubscriptionStatus",
+            "summary": "Subscription\u0020object\u0020status.\u0020Can\u0020be\u0020\u0060draft\u0060,\u0020\u0060active\u0060\u0020or\u0020\u0060cancelled\u0060.",
+            "url": "classes/BitPaySDK-Model-Subscription-SubscriptionStatus.html"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\SubscriptionStatus\u003A\u003ADRAFT",
+            "name": "DRAFT",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-SubscriptionStatus.html#constant_DRAFT"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\SubscriptionStatus\u003A\u003AACTIVE",
+            "name": "ACTIVE",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-SubscriptionStatus.html#constant_ACTIVE"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription\\SubscriptionStatus\u003A\u003ACANCELLED",
+            "name": "CANCELLED",
+            "summary": "",
+            "url": "classes/BitPaySDK-Model-Subscription-SubscriptionStatus.html#constant_CANCELLED"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Wallet\\Currencies",
             "name": "Currencies",
@@ -9465,6 +9755,11 @@ Search.appendIndex(
             "name": "Settlement",
             "summary": "",
             "url": "namespaces/bitpaysdk-model-settlement.html"
+        },                {
+            "fqsen": "\\BitPaySDK\\Model\\Subscription",
+            "name": "Subscription",
+            "summary": "",
+            "url": "namespaces/bitpaysdk-model-subscription.html"
         },                {
             "fqsen": "\\BitPaySDK\\Model\\Wallet",
             "name": "Wallet",
