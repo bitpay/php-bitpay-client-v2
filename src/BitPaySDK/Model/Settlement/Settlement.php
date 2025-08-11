@@ -141,6 +141,7 @@ class Settlement
      * Gets Status of the settlement. Possible statuses are "new", "processing", "rejected" and "completed".
      *
      * @return string|null
+     * @see SettlementStatus
      */
     public function getStatus(): ?string
     {
@@ -151,6 +152,7 @@ class Settlement
      * Sets Status of the settlement. Possible statuses are "new", "processing", "rejected" and "completed".
      *
      * @param string $status
+     * @see SettlementStatus
      */
     public function setStatus(string $status): void
     {

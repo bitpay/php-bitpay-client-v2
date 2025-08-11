@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "196bfb0a01807670ed28b1127c96190d",
+    "content-hash": "5f183a3894282445a07d9c4734f79e25",
     "packages": [
         {
             "name": "bitpay/key-utils",

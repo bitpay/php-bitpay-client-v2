@@ -18,6 +18,7 @@ use BitPaySDK\Client\PayoutRecipientsClient;
 use BitPaySDK\Client\RateClient;
 use BitPaySDK\Client\RefundClient;
 use BitPaySDK\Client\SettlementClient;
+use BitPaySDK\Client\SubscriptionClient;
 use BitPaySDK\Client\TokenClient;
 use BitPaySDK\Client\WalletClient;
 use BitPaySDK\Exceptions\BitPayApiException;
@@ -36,6 +37,7 @@ use BitPaySDK\Model\Payout\PayoutRecipients;
 use BitPaySDK\Model\Rate\Rate;
 use BitPaySDK\Model\Rate\Rates;
 use BitPaySDK\Model\Settlement\Settlement;
+use BitPaySDK\Model\Subscription\Subscription;
 use BitPaySDK\Model\Wallet\Wallet;
 use BitPaySDK\Util\RESTcli\RESTcli;
 use Exception;
@@ -576,7 +578,7 @@ class Client
      *
      * @see https://developer.bitpay.com/reference/retrieve-bills-by-status Retrieve Bills by Status
      *
-     * @param string|null The status to filter the bills.
+     * @param string|null $status The status to filter the bills.
      * @return Bill[]
      * @throws BitPayApiException
      * @throws BitPayGenericException
@@ -623,6 +625,75 @@ class Client
         $billClient = $this->getBillClient();
 
         return $billClient->deliver($billId, $billToken, $signRequest);
+    }
+
+    /**
+     * Create a BitPay Subscription.
+     *
+     * @see https://developer.bitpay.com/reference/create-a-subscription Create a Subscription
+     *
+     * @param Subscription $subscription A Subscription object with request parameters defined.
+     * @return Subscription Created Subscription object
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
+     */
+    public function createSubscription(Subscription $subscription): Subscription
+    {
+        $subscriptionClient = $this->getSubscriptionClient();
+
+        return $subscriptionClient->create($subscription);
+    }
+
+    /**
+     * Retrieve a BitPay subscription by its ID.
+     *
+     * @see https://developer.bitpay.com/reference/retrieve-a-subscription Retrieve a Subscription
+     *
+     * @param string $subscriptionId The ID of the subscription to retrieve.
+     * @return Subscription
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
+     */
+    public function getSubscription(string $subscriptionId): Subscription
+    {
+        $subscriptionClient = $this->getSubscriptionClient();
+
+        return $subscriptionClient->get($subscriptionId);
+    }
+
+    /**
+     * Retrieve a collection of BitPay subscriptions.
+     *
+     * @see https://developer.bitpay.com/reference/retrieve-subscriptions-by-status Retrieve Subscriptions by Status
+     *
+     * @param string|null $status The status on which to filter the subscriptions.
+     * @return Subscription[] Filtered list of Subscription objects
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
+     */
+    public function getSubscriptions(?string $status = null): array
+    {
+        $subscriptionClient = $this->getSubscriptionClient();
+
+        return $subscriptionClient->getSubscriptions($status);
+    }
+
+    /**
+     * Update a BitPay Subscription.
+     *
+     * @see https://developer.bitpay.com/reference/update-a-subscription Update a Subscription
+     *
+     * @param Subscription $subscription A Subscription object with the parameters to update defined.
+     * @param string $subscriptionId The ID of the Subscription to update.
+     * @return Subscription Updated Subscription object
+     * @throws BitPayApiException
+     * @throws BitPayGenericException
+     */
+    public function updateSubscription(Subscription $subscription, string $subscriptionId): Subscription
+    {
+        $subscriptionClient = $this->getSubscriptionClient();
+
+        return $subscriptionClient->update($subscription, $subscriptionId);
     }
 
     /**
@@ -1111,6 +1182,16 @@ class Client
     protected function getBillClient(): BillClient
     {
         return BillClient::getInstance($this->tokenCache, $this->restCli);
+    }
+
+    /**
+     * Gets subscription client
+     *
+     * @return SubscriptionClient the subscription client
+     */
+    protected function getSubscriptionClient(): SubscriptionClient
+    {
+        return SubscriptionClient::getInstance($this->tokenCache, $this->restCli);
     }
 
     /**

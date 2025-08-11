@@ -20,4 +20,5 @@ interface Env
     public const BITPAY_PLUGIN_INFO = "BitPay_PHP_Client_v9.2.2";
     public const BITPAY_API_FRAME = "std";
     public const BITPAY_API_FRAME_VERSION = "1.0.0";
+    public const BITPAY_DATETIME_FORMAT = 'Y-m-d\TH:i:s\Z';
 }

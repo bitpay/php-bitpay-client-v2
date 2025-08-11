@@ -13,6 +13,10 @@ composer.phar
 test/unit/_html
 
 PrivateKey.key
+
+# Local development
+.lando.yml
+
 BitPay.config.json
 **/BitPay.config.json
 BitPay.config.yml
