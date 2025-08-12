@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bitpay/key-utils",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bitpay/bitpay-php-keyutils.git",
-                "reference": "fdf77f96b9269615b9223559d28ac6358a276c03"
+                "reference": "55a35e72e9a0faccde82b53866db26537f0a4c0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/fdf77f96b9269615b9223559d28ac6358a276c03",
-                "reference": "fdf77f96b9269615b9223559d28ac6358a276c03",
+                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/55a35e72e9a0faccde82b53866db26537f0a4c0b",
+                "reference": "55a35e72e9a0faccde82b53866db26537f0a4c0b",
                 "shasum": ""
             },
             "require": {
@@ -29,10 +29,10 @@
                 "php": "^8.1 || ^8.2 || ^8.3 || ^8.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "10.5.45"
+                "phpunit/phpunit": "^10.5.48"
             },
             "suggest": {
-                "ext-gmp": "Required to use this package with GMP instead of BCMath"
+                "ext-gmp": "GMP provides better performance than BCMath"
             },
             "type": "library",
             "autoload": {
@@ -53,9 +53,9 @@
             "description": "BitPay Utils pack for cryptography",
             "support": {
                 "issues": "https://github.com/bitpay/bitpay-php-keyutils/issues",
-                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/2.1.0"
+                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/2.1.1"
             },
-            "time": "2025-02-11T14:15:21+00:00"
+            "time": "2025-08-11T16:44:24+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
