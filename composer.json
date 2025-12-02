@@ -12,7 +12,7 @@
   ],
   "homepage": "https://github.com/bitpay/php-bitpay-client-v2",
   "require": {
-    "php": "^8.1 || ^8.2 || ^8.3 || ^8.4",
+    "php": "^8.2 || ^8.3 || ^8.4",
     "ext-json": "*",
     "ext-reflection": "*",
     "bitpay/key-utils": "^2.1",

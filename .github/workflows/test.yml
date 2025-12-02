@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        php-version: ["8.1", "8.2", "8.3", "8.4"]
+        php-version: ["8.2", "8.3", "8.4"]
 
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: php-actions/composer@v6
         with:
-          php_version: 8.1
+          php_version: 8.2
           php_extensions: bcmath gmp xdebug
       - name: Install PHP_CodeSniffer
         run: |
