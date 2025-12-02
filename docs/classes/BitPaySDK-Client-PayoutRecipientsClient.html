@@ -442,7 +442,7 @@ payout facade.</dd>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">delete</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipientId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">delete</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipientId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -451,8 +451,8 @@ payout facade.</dd>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$recipientId</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-argument-list__argument__name">$recipientId</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The recipient id for the recipient to be deleted.</p>
@@ -521,7 +521,7 @@ payout facade.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipientId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">get</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipientId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -530,8 +530,8 @@ payout facade.</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$recipientId</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-argument-list__argument__name">$recipientId</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The id of the recipient to retrieve.</p>
@@ -595,7 +595,7 @@ payout facade.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getInstance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Tokens.html"><abbr title="\BitPaySDK\Tokens">Tokens</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tokenCache</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Util-RESTcli-RESTcli.html"><abbr title="\BitPaySDK\Util\RESTcli\RESTcli">RESTcli</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$restCli</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">getInstance</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/BitPaySDK-Tokens.html"><abbr title="\BitPaySDK\Tokens">Tokens</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tokenCache</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/BitPaySDK-Util-RESTcli-RESTcli.html"><abbr title="\BitPaySDK\Util\RESTcli\RESTcli">RESTcli</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$restCli</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">static</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -604,15 +604,15 @@ payout facade.</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$tokenCache</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Tokens.html"><abbr title="\BitPaySDK\Tokens">Tokens</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$tokenCache</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/BitPaySDK-Tokens.html"><abbr title="\BitPaySDK\Tokens">Tokens</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$restCli</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Util-RESTcli-RESTcli.html"><abbr title="\BitPaySDK\Util\RESTcli\RESTcli">RESTcli</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$restCli</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/BitPaySDK-Util-RESTcli-RESTcli.html"><abbr title="\BitPaySDK\Util\RESTcli\RESTcli">RESTcli</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -651,7 +651,7 @@ payout facade.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPayoutRecipients</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span><span> = </span><span class="phpdocumentor-signature__argument__default-value"><abbr title="\BitPaySDK\Client\null">null</abbr></span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$limit</span><span> = </span><span class="phpdocumentor-signature__argument__default-value"><abbr title="\BitPaySDK\Client\null">null</abbr></span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span><span> = </span><span class="phpdocumentor-signature__argument__default-value"><abbr title="\BitPaySDK\Client\null">null</abbr></span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getPayoutRecipients</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$status</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$limit</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$offset</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a>&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -660,27 +660,27 @@ payout facade.</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$status</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value"><abbr title="\BitPaySDK\Client\null">null</abbr></span>            </dt>
+                <span class="phpdocumentor-argument-list__argument__name">$status</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The recipient status you want to query on.</p>
 </section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$limit</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value"><abbr title="\BitPaySDK\Client\null">null</abbr></span>            </dt>
+                <span class="phpdocumentor-argument-list__argument__name">$limit</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Maximum results that the query will return (useful for paging results).</p>
 </section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$offset</span>
-                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value"><abbr title="\BitPaySDK\Client\null">null</abbr></span>            </dt>
+                <span class="phpdocumentor-argument-list__argument__name">$offset</span>
+                : <span class="phpdocumentor-argument-list__argument__type">int|null</span>
+                 = <span class="phpdocumentor-argument-list__argument__default-value">null</span>            </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>Number of results to offset (ex. skip 10 will give you results
 starting with the 11th result).</p>
@@ -744,7 +744,7 @@ starting with the 11th result).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">requestNotification</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipientId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">requestNotification</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipientId</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -753,8 +753,8 @@ starting with the 11th result).</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$recipientId</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-argument-list__argument__name">$recipientId</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The id of the recipient to notify.</p>
@@ -822,7 +822,7 @@ starting with the 11th result).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">submit</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipients">PayoutRecipients</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipients</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipients">PayoutRecipients</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">submit</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipients">PayoutRecipients</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipients</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipients">PayoutRecipients</abbr></a>&gt;</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -831,8 +831,8 @@ starting with the 11th result).</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$recipients</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipients">PayoutRecipients</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$recipients</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipients.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipients">PayoutRecipients</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>A PayoutRecipients object with request parameters defined.</p>
@@ -900,7 +900,7 @@ starting with the 11th result).</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">update</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipientId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipient</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">update</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipientId</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$recipient</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -909,8 +909,8 @@ starting with the 11th result).</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$recipientId</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-argument-list__argument__name">$recipientId</span>
+                : <span class="phpdocumentor-argument-list__argument__type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>The recipient id for the recipient to be updated.</p>
@@ -918,8 +918,8 @@ starting with the 11th result).</p>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$recipient</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$recipient</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/BitPaySDK-Model-Payout-PayoutRecipient.html"><abbr title="\BitPaySDK\Model\Payout\PayoutRecipient">PayoutRecipient</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>A PayoutRecipient object with updated parameters defined.</p>
@@ -982,7 +982,7 @@ starting with the 11th result).</p>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Tokens.html"><abbr title="\BitPaySDK\Tokens">Tokens</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tokenCache</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Util-RESTcli-RESTcli.html"><abbr title="\BitPaySDK\Util\RESTcli\RESTcli">RESTcli</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$restCli</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__type"><a href="classes/BitPaySDK-Tokens.html"><abbr title="\BitPaySDK\Tokens">Tokens</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$tokenCache</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__type"><a href="classes/BitPaySDK-Util-RESTcli-RESTcli.html"><abbr title="\BitPaySDK\Util\RESTcli\RESTcli">RESTcli</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$restCli</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -991,15 +991,15 @@ starting with the 11th result).</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$tokenCache</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Tokens.html"><abbr title="\BitPaySDK\Tokens">Tokens</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$tokenCache</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/BitPaySDK-Tokens.html"><abbr title="\BitPaySDK\Tokens">Tokens</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$restCli</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/BitPaySDK-Util-RESTcli-RESTcli.html"><abbr title="\BitPaySDK\Util\RESTcli\RESTcli">RESTcli</abbr></a></span>
+                <span class="phpdocumentor-argument-list__argument__name">$restCli</span>
+                : <span class="phpdocumentor-argument-list__argument__type"><a href="classes/BitPaySDK-Util-RESTcli-RESTcli.html"><abbr title="\BitPaySDK\Util\RESTcli\RESTcli">RESTcli</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
