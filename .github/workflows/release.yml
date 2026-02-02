@@ -33,13 +33,14 @@ jobs:
 
       - name: Validate version format
         id: version
+        env:
+          VERSION_INPUT: ${{ inputs.version }}
         run: |
-          if [[ ! "${{ inputs.version }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ ! "$VERSION_INPUT" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Error: Version must be in format X.Y.Z (e.g., 9.3.3)"
             exit 1
           fi
-          version="${{ inputs.version }}"
-          echo "version=$version" >> $GITHUB_OUTPUT
+          echo "version=$VERSION_INPUT" >> $GITHUB_OUTPUT
 
       - name: Configure Git
         run: |
@@ -47,32 +48,44 @@ jobs:
           git config user.email "github-actions@github.com"
 
       - name: Update Env.php version
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          VERSION="${{ steps.version.outputs.version }}"
           sed -i "s/public const BITPAY_PLUGIN_INFO = \"BitPay_PHP_Client_v[0-9.]*\";/public const BITPAY_PLUGIN_INFO = \"BitPay_PHP_Client_v${VERSION}\";/" src/BitPaySDK/Env.php
           echo "Updated Env.php with version ${VERSION}"
           cat src/BitPaySDK/Env.php | grep BITPAY_PLUGIN_INFO
 
       - name: Update phpdoc.dist.xml version
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          VERSION="${{ steps.version.outputs.version }}"
           sed -i "s/<version number=\"[0-9.]*\">/<version number=\"${VERSION}\">/" phpdoc.dist.xml
           echo "Updated phpdoc.dist.xml with version ${VERSION}"
           cat phpdoc.dist.xml | grep -A 1 "<version number"
 
       - name: Commit version updates
+        env:
+          BRANCH: ${{ inputs.branch }}
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
           git add src/BitPaySDK/Env.php phpdoc.dist.xml
-          git commit -m "Bump version to ${{ steps.version.outputs.version }}"
-          git push origin ${{ inputs.branch }}
+          git commit -m "Bump version to $VERSION"
+          git push origin "$BRANCH"
 
       - name: Create and push tag
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          git tag "${{ steps.version.outputs.version }}"
-          git push origin "${{ steps.version.outputs.version }}"
+          git tag "$VERSION"
+          git push origin "$VERSION"
 
       - name: Get merged PR titles and format release notes
         id: changelog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OVERVIEW: ${{ inputs.overview }}
+          BRANCH: ${{ inputs.branch }}
+          REPOSITORY: ${{ github.repository }}
         run: |
           git fetch --tags
 
@@ -85,30 +98,30 @@ jobs:
             echo "Warning: No previous tag found. Skipping full changelog link."
             changelog=""
           else
-            changelog="**Full Changelog**: https://github.com/${{ github.repository }}/compare/$prev_tag...$new_tag"
+            changelog="**Full Changelog**: https://github.com/$REPOSITORY/compare/$prev_tag...$new_tag"
           fi
 
-          prs=$(gh pr list --state merged --base "${{ inputs.branch }}" --json title,mergedAt --jq '[.[] | select(.mergedAt != null) | .title]')
+          prs=$(gh pr list --state merged --base "$BRANCH" --json title,mergedAt --jq '[.[] | select(.mergedAt != null) | .title]')
           joined=$(echo "$prs" | jq -r '.[]' | sed 's/^/* /')
 
           echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
-          echo "${{ github.event.inputs.overview }}" >> $GITHUB_ENV
+          echo "$OVERVIEW" >> $GITHUB_ENV
           echo "" >> $GITHUB_ENV
           echo "## What's Changed" >> $GITHUB_ENV
           echo "$joined" >> $GITHUB_ENV
           echo "" >> $GITHUB_ENV
           echo "$changelog" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub Release
-        run: |
-          gh release create "${{ steps.version.outputs.version }}" \
-            --title "${{ steps.version.outputs.version }}" \
-            --notes "${{ env.RELEASE_NOTES }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTES: ${{ env.RELEASE_NOTES }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          gh release create "$VERSION" \
+            --title "$VERSION" \
+            --notes "$NOTES"
 
   readme-changelog:
     name: Publish changelog to Readme
@@ -121,9 +134,12 @@ jobs:
 
       - name: Extract release data
         id: release_data
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.release.outputs.version }}
         run: |
-          echo "title=${{ needs.release.outputs.version }}" >> $GITHUB_OUTPUT
-          body=$(gh release view ${{ needs.release.outputs.version }} --json body --jq .body)
+          echo "title=$VERSION" >> $GITHUB_OUTPUT
+          body=$(gh release view "$VERSION" --json body --jq .body)
           body_escaped=$(echo "$body" \
             | sed 's/&/\&#38;/g' \
             | sed 's/</\&#60;/g' \
@@ -135,15 +151,15 @@ jobs:
             echo "$body_escaped"
             echo "EOF"
           } >> $GITHUB_OUTPUT
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish changelog to Readme
         env:
           README_API_KEY: ${{ secrets.README_API_KEY }}
+          RELEASE_TITLE: ${{ steps.release_data.outputs.title }}
+          RELEASE_BODY: ${{ steps.release_data.outputs.body }}
         run: |
-          jq -n --arg title "BitPay PHP SDK v${{ steps.release_data.outputs.title }}" \
-                --arg body "${{ steps.release_data.outputs.body }}" \
+          jq -n --arg title "BitPay PHP SDK v$RELEASE_TITLE" \
+                --arg body "$RELEASE_BODY" \
                 '{
                   title: $title,
                   content: {
