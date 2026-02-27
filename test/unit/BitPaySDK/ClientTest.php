@@ -3638,7 +3638,6 @@ class ClientTest extends TestCase
 
         foreach ($listOfClientsToClear as $className) {
             $refProperty = new ReflectionProperty($className, 'instance');
-            $refProperty->setAccessible(true);
             $refProperty->setValue(null, null);
         }
     }

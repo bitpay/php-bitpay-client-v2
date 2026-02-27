@@ -18,7 +18,7 @@ To get up and running with our PHP library quickly, follow [the guide](https://d
 
 ### Requirements
 
-- PHP version: 8.2 / 8.3 / 8.4
+- PHP version: 8.2 / 8.3 / 8.4 / 8.5
 - PHP extensions: json, reflection
 
 ## Unit Tests
