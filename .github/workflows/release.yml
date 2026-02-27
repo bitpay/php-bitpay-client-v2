@@ -1,0 +1,174 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to release from"
+        required: true
+        default: "master"
+        type: string
+      version:
+        description: "Version number (e.g., 9.3.3)"
+        required: true
+        type: string
+      overview:
+        description: "Release overview (will be placed at top of notes)"
+        required: true
+        type: string
+
+jobs:
+  release:
+    name: Create tag and release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.branch }}
+          fetch-depth: 0
+
+      - name: Validate version format
+        id: version
+        env:
+          VERSION_INPUT: ${{ inputs.version }}
+        run: |
+          if [[ ! "$VERSION_INPUT" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Error: Version must be in format X.Y.Z (e.g., 9.3.3)"
+            exit 1
+          fi
+          echo "version=$VERSION_INPUT" >> $GITHUB_OUTPUT
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      - name: Update Env.php version
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          sed -i "s/public const BITPAY_PLUGIN_INFO = \"BitPay_PHP_Client_v[0-9.]*\";/public const BITPAY_PLUGIN_INFO = \"BitPay_PHP_Client_v${VERSION}\";/" src/BitPaySDK/Env.php
+          echo "Updated Env.php with version ${VERSION}"
+          cat src/BitPaySDK/Env.php | grep BITPAY_PLUGIN_INFO
+
+      - name: Update phpdoc.dist.xml version
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          sed -i "s/<version number=\"[0-9.]*\">/<version number=\"${VERSION}\">/" phpdoc.dist.xml
+          echo "Updated phpdoc.dist.xml with version ${VERSION}"
+          cat phpdoc.dist.xml | grep -A 1 "<version number"
+
+      - name: Commit version updates
+        env:
+          BRANCH: ${{ inputs.branch }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          git add src/BitPaySDK/Env.php phpdoc.dist.xml
+          git commit -m "Bump version to $VERSION"
+          git push origin "$BRANCH"
+
+      - name: Create and push tag
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          git tag "$VERSION"
+          git push origin "$VERSION"
+
+      - name: Get merged PR titles and format release notes
+        id: changelog
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OVERVIEW: ${{ inputs.overview }}
+          BRANCH: ${{ inputs.branch }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          git fetch --tags
+
+          # Get most recent and previous tags
+          tags=($(git tag --sort=-creatordate))
+          new_tag="${tags[0]}"
+          prev_tag="${tags[1]}"
+
+          if [ -z "$prev_tag" ]; then
+            echo "Warning: No previous tag found. Skipping full changelog link."
+            changelog=""
+          else
+            changelog="**Full Changelog**: https://github.com/$REPOSITORY/compare/$prev_tag...$new_tag"
+          fi
+
+          prs=$(gh pr list --state merged --base "$BRANCH" --json title,mergedAt --jq '[.[] | select(.mergedAt != null) | .title]')
+          joined=$(echo "$prs" | jq -r '.[]' | sed 's/^/* /')
+
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$OVERVIEW" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "## What's Changed" >> $GITHUB_ENV
+          echo "$joined" >> $GITHUB_ENV
+          echo "" >> $GITHUB_ENV
+          echo "$changelog" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTES: ${{ env.RELEASE_NOTES }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          gh release create "$VERSION" \
+            --title "$VERSION" \
+            --notes "$NOTES"
+
+  readme-changelog:
+    name: Publish changelog to Readme
+    needs: release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+
+      - name: Extract release data
+        id: release_data
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.release.outputs.version }}
+        run: |
+          echo "title=$VERSION" >> $GITHUB_OUTPUT
+          body=$(gh release view "$VERSION" --json body --jq .body)
+          body_escaped=$(echo "$body" \
+            | sed 's/&/\&#38;/g' \
+            | sed 's/</\&#60;/g' \
+            | sed 's/>/\&#62;/g' \
+            | sed 's/{/\&#123;/g' \
+            | sed 's/}/\&#125;/g')
+          {
+            echo "body<<EOF"
+            echo "$body_escaped"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
+
+      - name: Publish changelog to Readme
+        env:
+          README_API_KEY: ${{ secrets.README_API_KEY }}
+          RELEASE_TITLE: ${{ steps.release_data.outputs.title }}
+          RELEASE_BODY: ${{ steps.release_data.outputs.body }}
+        run: |
+          jq -n --arg title "BitPay PHP SDK v$RELEASE_TITLE" \
+                --arg body "$RELEASE_BODY" \
+                '{
+                  title: $title,
+                  content: {
+                    body: $body
+                  },
+                  privacy: { view: "public" }
+                }' > payload.json
+
+          curl --location 'https://api.readme.com/v2/changelogs' \
+            --header "Authorization: Bearer $README_API_KEY" \
+            --header 'Content-Type: application/json' \
+            --data @payload.json
