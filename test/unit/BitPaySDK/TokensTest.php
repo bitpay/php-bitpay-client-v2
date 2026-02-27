@@ -52,7 +52,6 @@ class TokensTest extends TestCase
     {
         $reflection = new ReflectionClass($obj);
         $property = $reflection->getProperty($prop);
-        $property->setAccessible(true);
 
         return $property->getValue($obj);
     }
