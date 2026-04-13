@@ -69,15 +69,23 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           git add src/BitPaySDK/Env.php phpdoc.dist.xml
-          git commit -m "Bump version to $VERSION"
-          git push origin "$BRANCH"
+          if git diff --cached --quiet; then
+            echo "No changes to commit - version already bumped"
+          else
+            git commit -m "Bump version to $VERSION"
+            git push origin "$BRANCH"
+          fi
 
       - name: Create and push tag
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          git tag "$VERSION"
-          git push origin "$VERSION"
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "Tag $VERSION already exists"
+          else
+            git tag "$VERSION"
+            git push origin "$VERSION"
+          fi
 
       - name: Get merged PR titles and format release notes
         id: changelog
@@ -86,13 +94,22 @@ jobs:
           OVERVIEW: ${{ inputs.overview }}
           BRANCH: ${{ inputs.branch }}
           REPOSITORY: ${{ github.repository }}
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
           git fetch --tags
 
-          # Get most recent and previous tags
+          # Get all tags sorted by creation date (newest first)
           tags=($(git tag --sort=-creatordate))
-          new_tag="${tags[0]}"
-          prev_tag="${tags[1]}"
+
+          # Find the current version tag and get the previous one
+          new_tag="$VERSION"
+          prev_tag=""
+          for i in "${!tags[@]}"; do
+            if [[ "${tags[$i]}" == "$VERSION" ]]; then
+              prev_tag="${tags[$((i+1))]}"
+              break
+            fi
+          done
 
           if [ -z "$prev_tag" ]; then
             echo "Warning: No previous tag found. Skipping full changelog link."
