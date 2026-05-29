@@ -37,7 +37,7 @@ class PosClient extends Client
      *
      * @throws BitPayException BitPayException class
      */
-    public function __construct(string $token, string $environment = null)
+    public function __construct(string $token, ?string $environment = null)
     {
         try {
             $this->token = new Tokens(null, null, $token);
