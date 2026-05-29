@@ -45,7 +45,7 @@ class PosClient extends Client
      *
      * @throws BitPayGenericException
      */
-    public function __construct(string $token, string $environment = null, ?string $platformInfo = null)
+    public function __construct(string $token, ?string $environment = null, ?string $platformInfo = null)
     {
         try {
             $this->token = new Tokens(null, null, $token);
