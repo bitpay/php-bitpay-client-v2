@@ -10,7 +10,7 @@
     <output>docs</output>
   </paths>
 
-  <version number="10.1.2">
+  <version number="10.1.4">
     <api format="php">
       <source dsn=".">
         <path>src</path>
