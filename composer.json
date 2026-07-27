@@ -16,7 +16,7 @@
     "ext-json": "*",
     "ext-reflection": "*",
     "bitpay/key-utils": "^2.1",
-    "guzzlehttp/guzzle": "^7.9",
+    "guzzlehttp/guzzle": "^8.0",
     "symfony/yaml": "^5.4 || ^6.4 || ^7.0",
     "netresearch/jsonmapper": "^6.0",
     "symfony/console": "^4.4 || ^5.4 || ^6.4 || ^7.3.1"
