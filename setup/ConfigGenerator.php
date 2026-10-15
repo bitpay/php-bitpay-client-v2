@@ -54,10 +54,36 @@ function createConfigFile(
     ];
 
     $json_data = json_encode($config, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT);
-    file_put_contents('BitPay.config.json', $json_data);
+    writeOwnerOnlyFile('BitPay.config.json', $json_data);
 
     $yml_data = Yaml::dump($config, 8, 4, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK);
-    file_put_contents('BitPay.config.yml', $yml_data);
+    writeOwnerOnlyFile('BitPay.config.yml', $yml_data);
+}
+
+/**
+ * Writes a config file so only its owner can read and write it (mode 0600), because it holds
+ * the API tokens and the password of the private key.
+ *
+ * The umask is set to 0077 while the file is created. If the file already exists, its mode is
+ * changed to 0600 before and after writing. On Windows, chmod only controls the read-only flag,
+ * so the file keeps the default permissions there.
+ */
+function writeOwnerOnlyFile(string $path, string $data): void
+{
+    if (is_file($path)) {
+        chmod($path, 0600);
+    }
+
+    $previousUmask = umask(0077);
+    try {
+        $written = file_put_contents($path, $data);
+    } finally {
+        umask($previousUmask);
+    }
+
+    if (false !== $written) {
+        chmod($path, 0600);
+    }
 }
 
 function selectTokens(OutputInterface $output, mixed $helper, InputInterface $input): array
