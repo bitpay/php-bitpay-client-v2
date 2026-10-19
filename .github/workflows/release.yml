@@ -175,7 +175,7 @@ jobs:
           RELEASE_TITLE: ${{ steps.release_data.outputs.title }}
           RELEASE_BODY: ${{ steps.release_data.outputs.body }}
         run: |
-          jq -n --arg title "BitPay PHP SDK v$RELEASE_TITLE" \
+          jq -n --arg title "PHP Unified SDK v$RELEASE_TITLE" \
                 --arg body "$RELEASE_BODY" \
                 '{
                   title: $title,
@@ -185,7 +185,7 @@ jobs:
                   privacy: { view: "public" }
                 }' > payload.json
 
-          curl --location 'https://api.readme.com/v2/changelogs' \
+          curl --fail-with-body --location 'https://api.readme.com/v2/changelogs' \
             --header "Authorization: Bearer $README_API_KEY" \
             --header 'Content-Type: application/json' \
             --data @payload.json
