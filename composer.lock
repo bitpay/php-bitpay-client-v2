@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b85ba408ab137db7ee8858d7597463dd",
+    "content-hash": "2189ba438ce996a0a46506108121a00e",
     "packages": [
         {
             "name": "bitpay/key-utils",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bitpay/bitpay-php-keyutils.git",
-                "reference": "3f99633532700a82b860f0304cc7d4b4038d1c69"
+                "reference": "7b6ecbe7b3410030b09c07b22c6e917b55330dbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/3f99633532700a82b860f0304cc7d4b4038d1c69",
-                "reference": "3f99633532700a82b860f0304cc7d4b4038d1c69",
+                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/7b6ecbe7b3410030b09c07b22c6e917b55330dbf",
+                "reference": "7b6ecbe7b3410030b09c07b22c6e917b55330dbf",
                 "shasum": ""
             },
             "require": {
@@ -53,9 +53,9 @@
             "description": "BitPay Utils pack for cryptography",
             "support": {
                 "issues": "https://github.com/bitpay/bitpay-php-keyutils/issues",
-                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/2.2.0"
+                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/2.2.1"
             },
-            "time": "2026-02-28T01:22:26+00:00"
+            "time": "2026-10-15T21:22:34+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
