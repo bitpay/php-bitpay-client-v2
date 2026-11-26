@@ -9,3 +9,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      # PHPUnit 12 and 13 need newer PHP than the 8.2 floor this SDK supports.
+      # Remove this when the next major version drops PHP 8.2 and 8.3.
+      - dependency-name: "phpunit/phpunit"
+        update-types: ["version-update:semver-major"]
